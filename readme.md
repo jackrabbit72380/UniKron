@@ -1,4 +1,6 @@
-# 🌌 UniKron Dashboard - Built For the Future!
+# 🌌 UniKron Dashboard 
+
+Built For the Future!
 
 ### A Unified, Cross‑Platform Interface Experience
 
