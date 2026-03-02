@@ -1,5 +1,5 @@
-# 🌌 UniKron  
-# Dashboard
+# 🌌 UniKron Dashboard
+# Built For the Future!
 
 ### A Unified, Cross‑Platform Interface Experience
 
