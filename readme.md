@@ -1,4 +1,4 @@
-# UniKron  
+# 🌌 UniKron  
 ### A Unified, Cross‑Platform Interface Experience
 
 UniKron is the modern evolution of a long‑running vision: a cinematic, customizable, controller‑first interface for browsing and launching games across PC, console‑style devices, and handheld systems. Built as a theme for the Pegasus Frontend, UniKron delivers a seamless, art‑driven experience powered by modern UI technologies.
