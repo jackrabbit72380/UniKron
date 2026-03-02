@@ -157,8 +157,9 @@ UniKron would not exist without the influence of:
 - WiiFlow  
 - The CoverFlow Project  
 - Freestyle Dashboard  
-- Aurora Dashboard  
-- Pegasus Frontend  
+- Aurora Dashboard
+- HexFlow Dashboard
+- & The Pegasus Frontend!  
 
 And the years of evolution from CEMUgui → UniFlow → UniKron.
 
