@@ -33,6 +33,22 @@ are recoverable, but element -> position attribution is NOT, because
 
 So this tool reports what is certain and refuses to emit a guessed layout.
 
+Hypotheses already tested and FALSIFIED, so they are not worth retrying:
+
+  1. STRN starts with a u16 string count            -> no count; it is a
+     repeated [u16 len][chars] run (a count read shifts every string).
+  2. The 161 \0XUIS records are scene trees         -> identical 12-byte
+     registration entries (01 01 00 00 00 0c 00), no element data.
+  3. DATA records are [u32 propertyId][f32 x][f32 y], with ids indexing the
+     88-name property enum recovered from the XEX (Position would be 62 in
+     that run). Scanned every bank at both endiannesses: zero legitimate
+     hits, only zero-valued coincidences in one bank.
+
+Also checked: the recompiled avatareditor.exe carries none of the property
+names (0 hits for Position/Opacity/BlendMode in UTF-16LE/BE and ASCII), so it
+is a thin loader; the runtime that consumes DATA is the PowerPC code inside
+the XEX itself.
+
 Usage:
     python xui_parse.py avatareditor.xex            # JSON summary
     python xui_parse.py avatareditor.xex --report   # human-readable analysis
