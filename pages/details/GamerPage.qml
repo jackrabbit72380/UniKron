@@ -262,6 +262,8 @@ Item {
   property int  customAvatarVersion: api.memory.get("profile.avatar.state") ? 1 : 0
   readonly property bool hasCustomAvatar: customAvatarVersion > 0
   property bool customPngSaved: false
+  property bool avatarLoaderFailed: false
+  readonly property bool avatarEditorOpen: avatarEditorLoader.item ? avatarEditorLoader.item.opened : false
 
   function storedAvatarState() {
     var s = api.memory.get("profile.avatar.state")
@@ -279,10 +281,12 @@ Item {
   }
 
   function openAvatarEditor() {
-    if (avatarEditorLoader.item)
-      avatarEditorLoader.item.open(root.storedAvatarState())
-    else
-      console.log("AVATAR: editor not loaded (" + avatarEditorLoader.status + ") — avatar/avatar_theme/avatar/AvatarEditorPage.qml missing?")
+    if (!avatarEditorLoader.item) {
+      console.log("AVATAR: editor not loaded (status " + avatarEditorLoader.status + ") — avatar/avatar_theme/avatar/AvatarEditorPage.qml missing?")
+      return
+    }
+    console.log("AVATAR: opening editor, item " + avatarEditorLoader.item.width + "x" + avatarEditorLoader.item.height)
+    avatarEditorLoader.item.open(root.storedAvatarState())
   }
 
   function saveCustomAvatarPng(grab) {
@@ -506,9 +510,11 @@ Item {
   function doCancel()  { navigate(pages.library) }
   function doLayout()  { panelsList.cycleLayout() }
 
-  Keys.onLeftPressed:  { if (!event.isAutoRepeat) panelsList.previousItem() }
-  Keys.onRightPressed: { if (!event.isAutoRepeat) panelsList.nextItem() }
+  Keys.onLeftPressed:  { if (root.avatarEditorOpen) return; if (!event.isAutoRepeat) panelsList.previousItem() }
+  Keys.onRightPressed: { if (root.avatarEditorOpen) return; if (!event.isAutoRepeat) panelsList.nextItem() }
   Keys.onPressed: {
+    // The avatar editor handles its own keys while it is open
+    if (root.avatarEditorOpen) return
     // Held Y (auto-repeat) → open Layout Editor, matching LibraryPage behaviour
     if (event.isAutoRepeat && (event.key === Qt.Key_Y || api.keys.isFilters(event))) {
       if (panelsList.layoutMode !== 0) {
@@ -546,8 +552,12 @@ Item {
     }
 
     onStatusChanged: {
-      if (status === Loader.Error)
-        console.log("AVATAR: could not load the avatar editor — check that avatar/avatar_theme/avatar/ is at the theme root")
+      if (status === Loader.Error) {
+        root.avatarLoaderFailed = true
+        console.log("AVATAR: could not load " + source)
+      } else if (status === Loader.Ready) {
+        root.avatarLoaderFailed = false
+      }
     }
   }
 
@@ -2079,6 +2089,13 @@ Item {
                     onClicked: root.openAvatarEditor()
                   }
                 }
+
+              StyledText {
+                visible: root.avatarLoaderFailed
+                text: "⚠ avatar editor missing — copy the avatar/ folder into the theme root"
+                font.pixelSize: vpx(11); color: "#FF9977"
+                width: parent.width; wrapMode: Text.WordWrap
+              }
               }
 
               // ── Save Profile ────────────────────────────────────
@@ -3281,6 +3298,13 @@ Item {
                     onClicked: root.openAvatarEditor()
                   }
                 }
+
+              StyledText {
+                visible: root.avatarLoaderFailed
+                text: "⚠ avatar editor missing — copy the avatar/ folder into the theme root"
+                font.pixelSize: vpx(11); color: "#FF9977"
+                width: parent.width; wrapMode: Text.WordWrap
+              }
               }
 
               // ── Create button moved to bottom of tab ──────────
