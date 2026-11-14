@@ -2126,7 +2126,7 @@ Item {
                   border.width: selected ? vpx(3) : vpx(1)
                   Image {
                     anchors.fill: parent; anchors.margins: vpx(3)
-                    source: root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion
+                    source: root.hasCustomAvatar ? root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion : ""
                     fillMode: Image.PreserveAspectFit; smooth: true
                   }
                   MouseArea {
@@ -3336,7 +3336,7 @@ Item {
                   border.color: selected ? createTab.newColor : "#30FFFFFF"; border.width: selected ? vpx(3) : vpx(1)
                   Image {
                     anchors.fill: parent; anchors.margins: vpx(3)
-                    source: root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion
+                    source: root.hasCustomAvatar ? root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion : ""
                     fillMode: Image.PreserveAspectFit; smooth: true
                   }
                   MouseArea {
