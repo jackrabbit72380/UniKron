@@ -368,6 +368,9 @@ Item {
         anchors.leftMargin: 26
         anchors.topMargin: 10
         anchors.bottomMargin: 10
+        // Fixed, not left to implicitWidth: an implicit width can collapse to
+        // the widest label and squeeze every pill on a small or odd host.
+        width: Math.max(168, Math.min(232, Math.round(root.width * 0.15)))
         categories: root.categories
         currentIndex: root.categoryIndex
         accentColor: root.accentColor
@@ -394,11 +397,14 @@ Item {
         anchors.horizontalCenter: stage.horizontalCenter
         anchors.bottom: strip.top
         anchors.bottomMargin: 2
-        text: "\u2190 \u2192 item    \u2191 \u2193 category    space randomize    S save    P portrait    R reset"
+        // Pegasus draws its own A Select / B Back footer right here, so this
+        // line stays single-line and short instead of listing every key.
+        text: "Space randomize \u00b7 S save \u00b7 R reset"
         color: style.inkDim
-        opacity: 0.65
+        opacity: 0.5
         font.family: style.titleFamily
         font.pixelSize: 11
+        visible: root.height >= 620
     }
 
     Component.onCompleted: rebuildCategories()
