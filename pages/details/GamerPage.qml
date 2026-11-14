@@ -283,6 +283,7 @@ Item {
   // TEMPORARY: on-screen trace of the "+" click, set avatarDebug:false to remove.
   property bool avatarDebug: true
   property string avatarDebugText: ""
+  property string avatarTriedSources: ""
 
   function loaderStatusName(st) {
     if (st === Loader.Null)    return "Null (no source)"
@@ -309,9 +310,8 @@ Item {
       lines.push("open():  opened = " + avatarEditorLoader.item.opened)
     } else {
       lines.push("")
-      lines.push("The editor file above was not loaded. If status is Error, the")
-      lines.push("folder/file is not where source says, or a QML import inside")
-      lines.push("it is missing from this build (the log names it).")
+      lines.push("Editor not loaded. Looked for:")
+      lines.push(root.avatarTriedSources !== "" ? root.avatarTriedSources : avatarEditorLoader.source)
     }
     root.avatarDebugText = lines.join("\n")
   }
@@ -568,7 +568,17 @@ Item {
     id: avatarEditorLoader
     anchors.fill: parent
     z: 5000
-    source: Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml")
+
+    // Whatever nesting the avatar folder ended up in on disk, the first of
+    // these that actually loads wins.
+    property var sources: [
+      Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/avatar_theme/AvatarEditorPage.qml")
+    ]
+    property int attempt: 0
+    source: sources[attempt]
 
     onLoaded: {
       item.accentColor    = root.accentHex
@@ -580,10 +590,17 @@ Item {
 
     onStatusChanged: {
       if (status === Loader.Error) {
+        if (attempt < sources.length - 1) {
+          attempt++
+          source = sources[attempt]
+          return
+        }
         root.avatarLoaderFailed = true
-        console.log("AVATAR: could not load " + source)
+        root.avatarTriedSources = sources.join("\n")
+        console.log("AVATAR: no editor at any of:\n" + root.avatarTriedSources)
       } else if (status === Loader.Ready) {
         root.avatarLoaderFailed = false
+        console.log("AVATAR: editor loaded from " + source)
       }
     }
   }
