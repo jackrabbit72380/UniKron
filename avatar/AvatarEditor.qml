@@ -147,20 +147,21 @@ Item {
         setItem(id, next < 0 ? "" : items.get(next).fileName)
     }
 
+    // The body is the base layer and is never optional, so pick one whenever
+    // there is none: on first open, and again when a host re-opens the editor
+    // with an empty state, which wipes whatever Component.onCompleted chose.
+    // It reads bodyCategory.files, not the strip's model, so it works whichever
+    // category happens to be showing.
     function fillBodyIfEmpty() {
         if (!bodyCategory || state[bodyCategory.id])
             return
-        if (!currentCategory || currentCategory.id !== bodyCategory.id || items.count === 0)
-            return
-        var first = ""
-        for (var i = 0; i < items.count; ++i) {
-            if (String(items.get(i).filePath) === "")
+        var files = bodyCategory.files || []
+        for (var i = 0; i < files.length; ++i) {
+            if (!files[i])
                 continue
-            first = items.get(i).fileName
-            break
+            setItem(bodyCategory.id, files[i])
+            return
         }
-        if (first)
-            setItem(bodyCategory.id, first)
     }
 
     function rebuildLayers() {
@@ -221,6 +222,7 @@ Item {
                 next[key] = saved[key]
         state = next
         categoryIndex = 0
+        fillBodyIfEmpty()
         rebuildLayers()
     }
 
