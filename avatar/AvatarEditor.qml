@@ -273,6 +273,16 @@ Item {
 
     // ---- chrome ----------------------------------------------------------
 
+    // Artwork taken out of the original avatareditor.xex: the closet's dark
+    // panel behind the avatar and the banner that sits under the item strip.
+    Image {
+        anchors.fill: parent
+        source: Qt.resolvedUrl("assets/_ui/xex/closet_panel.png")
+        fillMode: Image.PreserveAspectCrop
+        smooth: true
+        opacity: 0.5
+    }
+
     Item {
         id: header
         anchors.left: parent.left
@@ -330,6 +340,17 @@ Item {
                 onClicked: root.capturePortrait()
             }
         }
+    }
+
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: sourceSize.height * (width / sourceSize.width)
+        source: Qt.resolvedUrl("assets/_ui/xex/banner_bottom.png")
+        fillMode: Image.Stretch
+        smooth: true
+        opacity: 0.7
     }
 
     ItemStrip {

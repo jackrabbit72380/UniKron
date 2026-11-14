@@ -43,6 +43,17 @@ Item {
             width: frame.width
             height: frame.height
 
+            // The closet's own mirror frame, lifted from avatareditor.xex.
+            Image {
+                anchors.fill: parent
+                anchors.margins: -frame.width * 0.06
+                source: Qt.resolvedUrl("assets/_ui/xex/closet_frame.png")
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                opacity: 0.9
+                z: -1
+            }
+
             transform: [
                 Translate { y: stage.bob },
                 Scale {
