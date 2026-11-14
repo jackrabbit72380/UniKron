@@ -575,7 +575,13 @@ Item {
       Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar_theme/AvatarEditorPage.qml")
+      Qt.resolvedUrl("../../avatar/avatar_theme/AvatarEditorPage.qml"),
+      // capitalised spellings, in case the folder is Avatar/ on disk
+      Qt.resolvedUrl("../../Avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../Avatar/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/avatar_theme/Avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml")
     ]
     property int attempt: 0
     source: sources[attempt]
