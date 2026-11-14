@@ -32,12 +32,15 @@ Item {
 
             width: railList.width
             height: 40
-            radius: 20
+            radius: 8
+
+            // The closet's own selected/unselected button colours, sampled from
+            // its 512x128 plates in avatareditor.xex (#c6f473 / #38485e). The
+            // plates themselves are outline frames and look wrong stretched
+            // into a pill this shape, so only their palette is used here.
             color: index === rail.currentIndex
-                   ? style.cardActive
-                   : (pointer.containsMouse ? style.cardHover : style.card)
-            border.width: index === rail.currentIndex ? 0 : 1
-            border.color: "#33ffffff"
+                   ? "#c6f473"
+                   : (pointer.containsMouse ? "#43546e" : "#38485e")
 
             Behavior on color { ColorAnimation { duration: 120 } }
 
