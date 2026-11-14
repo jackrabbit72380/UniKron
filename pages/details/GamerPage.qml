@@ -570,13 +570,13 @@ Item {
     z: 5000
 
     // Whatever nesting the avatar folder ended up in on disk, the first of
-    // these that actually loads wins.
+    // these that actually loads wins. QML enforces file name case on every
+    // platform, so both spellings of the folder are listed.
     property var sources: [
       Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar_theme/AvatarEditorPage.qml"),
-      // capitalised spellings, in case the folder is Avatar/ on disk
       Qt.resolvedUrl("../../Avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../Avatar/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
@@ -584,7 +584,38 @@ Item {
       Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml")
     ]
     property int attempt: 0
-    source: sources[attempt]
+    property url chosenSource: sources[0]
+    source: chosenSource
+
+    // Error -> Error does not emit statusChanged, so the walk is driven by a
+    // timer that steps only when the current source has actually failed.
+    Timer {
+      id: avatarRetry
+      interval: 150
+      repeat: true
+      running: true
+      onTriggered: {
+        if (avatarEditorLoader.status === Loader.Ready) { stop(); return }
+        if (avatarEditorLoader.status !== Loader.Error) return
+        if (avatarEditorLoader.attempt < avatarEditorLoader.sources.length - 1) {
+          avatarEditorLoader.attempt++
+          avatarEditorLoader.chosenSource = avatarEditorLoader.sources[avatarEditorLoader.attempt]
+          restart()
+        } else {
+          stop()
+          root.avatarLoaderFailed = true
+          root.avatarTriedSources = avatarEditorLoader.sources.join("\n")
+          console.log("AVATAR: no editor at any of:\n" + root.avatarTriedSources)
+        }
+      }
+    }
+
+    onStatusChanged: {
+      if (status === Loader.Ready) {
+        root.avatarLoaderFailed = false
+        console.log("AVATAR: editor loaded from " + source)
+      }
+    }
 
     onLoaded: {
       item.accentColor    = root.accentHex
@@ -592,22 +623,6 @@ Item {
       item.gamerTag       = root.profileName
       item.portraitReady.connect(root.saveCustomAvatarPng)
       item.accepted.connect(root.applyCustomAvatar)
-    }
-
-    onStatusChanged: {
-      if (status === Loader.Error) {
-        if (attempt < sources.length - 1) {
-          attempt++
-          source = sources[attempt]
-          return
-        }
-        root.avatarLoaderFailed = true
-        root.avatarTriedSources = sources.join("\n")
-        console.log("AVATAR: no editor at any of:\n" + root.avatarTriedSources)
-      } else if (status === Loader.Ready) {
-        root.avatarLoaderFailed = false
-        console.log("AVATAR: editor loaded from " + source)
-      }
     }
   }
 
