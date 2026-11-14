@@ -283,14 +283,31 @@ Item {
   // The path is fixed, not searched: this page lives at <theme>/pages/details/,
   // so the editor folder sits exactly two levels up, next to theme.qml.
   readonly property url avatarEditorUrl: Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml")
+  property string avatarError: ""
+
+  // Qt.createComponent on a local file is synchronous, so the status is final
+  // by the next line: either there is a component, or errorString() says why.
+  function loadAvatarEditor() {
+    root.avatarError = ""
+    var comp = Qt.createComponent(root.avatarEditorUrl)
+    if (comp.status === Component.Error) {
+      root.avatarLoaderFailed = true
+      root.avatarError = comp.errorString()
+      console.log("AVATAR: " + root.avatarError)
+      return
+    }
+    root.avatarLoaderFailed = false
+    avatarEditorLoader.sourceComponent = comp
+    console.log("AVATAR: editor loaded from " + root.avatarEditorUrl)
+  }
 
   function openAvatarEditor() {
     if (avatarEditorLoader.item) {
       avatarEditorLoader.item.open(root.storedAvatarState())
       return
     }
-    root.avatarLoaderFailed = avatarEditorLoader.status === Loader.Error
-    console.log("AVATAR: editor not loaded (status " + avatarEditorLoader.status + "): " + root.avatarEditorUrl)
+    root.avatarLoaderFailed = true
+    console.log("AVATAR: no editor \u2014 " + (root.avatarError !== "" ? root.avatarError : root.avatarEditorUrl))
   }
 
   function saveCustomAvatarPng(grab) {
@@ -546,18 +563,11 @@ Item {
     anchors.fill: parent
     z: 5000
 
-    // One known location. See avatarEditorUrl above.
-    source: root.avatarEditorUrl
+    // Built by hand in loadAvatarEditor() rather than set through `source`,
+    // so that a failure can report Qt's own message about the file.
+    sourceComponent: null
 
-    onStatusChanged: {
-      if (status === Loader.Ready) {
-        root.avatarLoaderFailed = false
-        console.log("AVATAR: editor loaded from " + source)
-      } else if (status === Loader.Error) {
-        root.avatarLoaderFailed = true
-        console.log("AVATAR: cannot load " + source)
-      }
-    }
+    Component.onCompleted: root.loadAvatarEditor()
 
     onLoaded: {
       item.accentColor    = root.accentHex
@@ -2099,9 +2109,9 @@ Item {
 
               StyledText {
                 visible: root.avatarLoaderFailed
-                text: "⚠ avatar editor missing — copy the avatar/ folder into the theme root"
-                font.pixelSize: vpx(11); color: "#FF9977"
-                width: parent.width; wrapMode: Text.WordWrap
+                text: "⚠ avatar editor: " + (root.avatarError !== "" ? root.avatarError : root.avatarEditorUrl)
+                font.pixelSize: vpx(10); color: "#FF9977"
+                width: parent.width; wrapMode: Text.WrapAnywhere
               }
               }
 
@@ -3308,9 +3318,9 @@ Item {
 
               StyledText {
                 visible: root.avatarLoaderFailed
-                text: "⚠ avatar editor missing — copy the avatar/ folder into the theme root"
-                font.pixelSize: vpx(11); color: "#FF9977"
-                width: parent.width; wrapMode: Text.WordWrap
+                text: "⚠ avatar editor: " + (root.avatarError !== "" ? root.avatarError : root.avatarEditorUrl)
+                font.pixelSize: vpx(10); color: "#FF9977"
+                width: parent.width; wrapMode: Text.WrapAnywhere
               }
               }
 
