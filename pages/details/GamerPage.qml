@@ -581,7 +581,11 @@ Item {
       Qt.resolvedUrl("../../Avatar/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar_theme/Avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml")
+      Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml"),
+      // ...or dropped right next to this page, which always exists
+      Qt.resolvedUrl("./avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("./avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("./Avatar/AvatarEditorPage.qml")
     ]
     property int attempt: 0
     property url chosenSource: sources[0]
