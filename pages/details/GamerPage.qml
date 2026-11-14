@@ -280,65 +280,17 @@ Item {
     root.customPngSaved = false
   }
 
-  // TEMPORARY: on-screen trace of the "+" click, set avatarDebug:false to remove.
-  property bool avatarDebug: true
-  property string avatarDebugText: ""
-  property string avatarTriedSources: ""
-
-  function loaderStatusName(st) {
-    if (st === Loader.Null)    return "Null (no source)"
-    if (st === Loader.Loading) return "Loading"
-    if (st === Loader.Ready)   return "Ready"
-    if (st === Loader.Error)   return "Error (module failed to load)"
-    return String(st)
-  }
+  // The path is fixed, not searched: this page lives at <theme>/pages/details/,
+  // so the editor folder sits exactly two levels up, next to theme.qml.
+  readonly property url avatarEditorUrl: Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml")
 
   function openAvatarEditor() {
     if (avatarEditorLoader.item) {
       avatarEditorLoader.item.open(root.storedAvatarState())
-      root.tracePlusClick()
       return
     }
-    // Nothing loaded yet: walk the paths again, so files copied in while
-    // Pegasus was running are picked up without a restart.
-    avatarEditorLoader.attempt = 0
-    avatarEditorLoader.chosenSource = avatarEditorLoader.sources[0]
-    avatarRetry.restart()
-    openWhenReady.restart()
-  }
-
-  Timer {
-    id: openWhenReady
-    interval: 120
-    repeat: true
-    onTriggered: {
-      if (avatarEditorLoader.status === Loader.Ready && avatarEditorLoader.item) {
-        stop()
-        avatarEditorLoader.item.open(root.storedAvatarState())
-        root.tracePlusClick()
-      } else if (avatarEditorLoader.status === Loader.Error &&
-                 avatarEditorLoader.attempt >= avatarEditorLoader.sources.length - 1) {
-        stop()
-        root.tracePlusClick()
-      }
-    }
-  }
-
-  function tracePlusClick() {
-    if (!root.avatarDebug) return
-    var lines = []
-    lines.push("source:  " + avatarEditorLoader.source)
-    lines.push("status:  " + root.loaderStatusName(avatarEditorLoader.status))
-    lines.push("item:    " + (avatarEditorLoader.item ? "yes" : "null"))
-    if (avatarEditorLoader.item) {
-      lines.push("size:    " + Math.round(avatarEditorLoader.item.width) + " x " + Math.round(avatarEditorLoader.item.height))
-      lines.push("open():  opened = " + avatarEditorLoader.item.opened)
-    } else {
-      lines.push("")
-      lines.push("Editor not loaded. Looked for:")
-      lines.push(root.avatarTriedSources !== "" ? root.avatarTriedSources : avatarEditorLoader.source)
-    }
-    root.avatarDebugText = lines.join("\n")
+    root.avatarLoaderFailed = avatarEditorLoader.status === Loader.Error
+    console.log("AVATAR: editor not loaded (status " + avatarEditorLoader.status + "): " + root.avatarEditorUrl)
   }
 
   function saveCustomAvatarPng(grab) {
@@ -586,73 +538,24 @@ Item {
 
   // ════════════════════════════════════════════════════════════════
   // AVATAR EDITOR — opened by the "+" tile in Choose Avatar.
-  // Loaded at runtime: if avatar/ is not at the theme root this page still
-  // opens, the "+" just logs instead of doing anything.
+  // Loaded at runtime from one fixed path, so a missing folder can never take
+  // the whole page down; the "+" shows a warning and logs the path instead.
   // ════════════════════════════════════════════════════════════════
   Loader {
     id: avatarEditorLoader
     anchors.fill: parent
     z: 5000
 
-    // Whatever nesting the avatar folder ended up in on disk, the first of
-    // these that actually loads wins. QML enforces file name case on every
-    // platform, so both spellings of the folder are listed.
-    property var sources: [
-      Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("./avatar/AvatarEditorPage.qml"),
-      // older, deeper layouts, in case the folder predates the flattening
-      Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar_theme/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar_theme/Avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml"),
-      // ...or nested one level too deep (copying a folder into an existing
-      // folder of the same name gives avatar/avatar/)
-      Qt.resolvedUrl("../../avatar/avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar/avatar_theme/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("../../Avatar/avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
-      // ...or dropped right next to this page, which always exists
-      Qt.resolvedUrl("./avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("./avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
-      Qt.resolvedUrl("./Avatar/AvatarEditorPage.qml")
-    ]
-    property int attempt: 0
-    property url chosenSource: sources[0]
-    source: chosenSource
-
-    // Error -> Error does not emit statusChanged, so the walk is driven by a
-    // timer that steps only when the current source has actually failed.
-    Timer {
-      id: avatarRetry
-      interval: 150
-      repeat: true
-      running: true
-      onTriggered: {
-        if (avatarEditorLoader.status === Loader.Ready) { stop(); return }
-        if (avatarEditorLoader.status !== Loader.Error) return
-        if (avatarEditorLoader.attempt < avatarEditorLoader.sources.length - 1) {
-          avatarEditorLoader.attempt++
-          avatarEditorLoader.chosenSource = avatarEditorLoader.sources[avatarEditorLoader.attempt]
-          restart()
-        } else {
-          stop()
-          root.avatarLoaderFailed = true
-          root.avatarTriedSources = avatarEditorLoader.sources.join("\n")
-          console.log("AVATAR: no editor at any of:\n" + root.avatarTriedSources)
-        }
-      }
-    }
+    // One known location. See avatarEditorUrl above.
+    source: root.avatarEditorUrl
 
     onStatusChanged: {
       if (status === Loader.Ready) {
         root.avatarLoaderFailed = false
         console.log("AVATAR: editor loaded from " + source)
+      } else if (status === Loader.Error) {
+        root.avatarLoaderFailed = true
+        console.log("AVATAR: cannot load " + source)
       }
     }
 
@@ -663,38 +566,6 @@ Item {
       item.portraitReady.connect(root.saveCustomAvatarPng)
       item.accepted.connect(root.applyCustomAvatar)
     }
-  }
-
-  // TEMPORARY ─ trace of the "+" click, visible instead of log-only.
-  Rectangle {
-    visible: root.avatarDebugText !== ""
-    anchors.centerIn: parent
-    width: Math.min(root.width - vpx(80), vpx(680))
-    height: traceColumn.implicitHeight + vpx(20)
-    radius: vpx(6)
-    color: "#F2000000"
-    border.color: root.accentHex; border.width: vpx(2)
-    z: 9999
-
-    Column {
-      id: traceColumn
-      anchors.fill: parent
-      anchors.margins: vpx(10)
-      spacing: vpx(4)
-
-      Text {
-        text: "AVATAR + TRACE  (click to close)"
-        color: root.accentHex; font.pixelSize: vpx(13); font.bold: true
-      }
-      Text {
-        text: root.avatarDebugText
-        width: traceColumn.width
-        color: "#FFFFFF"; font.pixelSize: vpx(11)
-        wrapMode: Text.WrapAnywhere
-      }
-    }
-
-    MouseArea { anchors.fill: parent; onClicked: root.avatarDebugText = "" }
   }
 
   // ════════════════════════════════════════════════════════════════
