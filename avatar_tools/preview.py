@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Runs the avatar editor standalone and gives it somewhere to save to.
 
-    python tools/preview.py
+    python avatar_tools/preview.py
 
 Saved avatars go to saved/avatar.json, portraits to saved/portrait-<time>.png.
 The editor itself is pure QML: this file only provides the window and the two
 small file operations.  In Pegau, replace this with your own backend that
 answers `saveAvatar`, `loadAvatar` and `portraitPath`, or drop the editor in
-with `import "theme/avatar"` and wire `onSaveRequested` / `onPortraitReady`.
+with `import "avatar_theme/avatar"` and wire `onSaveRequested` / `onPortraitReady`.
 """
 import datetime
 import json
@@ -72,7 +72,7 @@ def main():
     backend = Backend()
     engine.rootContext().setContextProperty("backend", backend)
     engine.addImportPath(ROOT)
-    engine.load(QUrl.fromLocalFile(os.path.join(ROOT, "preview.qml")))
+    engine.load(QUrl.fromLocalFile(os.path.join(ROOT, "avatar.qml")))
     if not engine.rootObjects():
         sys.exit(1)
     sys.exit(app.exec())
