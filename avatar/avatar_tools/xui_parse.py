@@ -49,6 +49,15 @@ names (0 hits for Position/Opacity/BlendMode in UTF-16LE/BE and ASCII), so it
 is a thin loader; the runtime that consumes DATA is the PowerPC code inside
 the XEX itself.
 
+  4. Locating that PowerPC code by reference, so it could be disassembled:
+     blocked before the disassembler. The XEX only embeds a stub PE at 0x3000
+     (MZ with 0 sections), and its 13 optional headers are unresolved beyond
+     key 0x00010201, so there is no file->VA map. The enum strings are reached
+     by virtual address, not by file offset: searching for each string's file
+     offset as a BE or LE u32 pointer yields zero hits, and no consecutive
+     pointer run exists either. Without VAs the code cannot be found, which is
+     what stops the disassembly route (capstone 5.0.7 is available and ready).
+
 Usage:
     python xui_parse.py avatareditor.xex            # JSON summary
     python xui_parse.py avatareditor.xex --report   # human-readable analysis
