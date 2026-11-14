@@ -10,13 +10,14 @@ import QtQuick 2.15
 //   assets/20_pants/     jeans_indigo.png, shorts_khaki.png ...
 //   assets/40_shirt/     tee_blue.png ...
 //
-// The folder contents come from AssetIndex.qml, written by
-// avatar_tools/art_index.py: Qt.labs.folderlistmodel is not part of the
-// Pegasus builds, so nothing can list a directory at runtime. Add art, run
-// `python avatar_tools/art_index.py`, then restart Pegasus. Folders whose name
-// starts with _ or . are skipped, which is where the editor's own chrome
-// lives, and a numeric prefix on the folder name is the layer order. Every
-// drawing uses the same 512x768 canvas, so items never need position data.
+// The folder contents come from AssetIndex.qml, which avatar_tools/
+// watch_art.ps1 rewrites whenever the art folders change (install_watcher.bat
+// starts it at login): Qt.labs.folderlistmodel is not part of the Pegasus
+// builds, so nothing can list a directory at runtime. Add art, press F5.
+// Folders whose name starts with _ or . are skipped, which is where the
+// editor's own chrome lives, and a numeric prefix on the folder name is the
+// layer order. Every drawing uses the same 512x768 canvas, so items never need
+// position data.
 Item {
     id: root
 

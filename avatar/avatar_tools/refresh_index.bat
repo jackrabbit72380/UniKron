@@ -1,6 +1,6 @@
 @echo off
-rem Regenerates avatar\AssetIndex.qml from whatever is in the art folders.
-rem Double-click after adding or removing art, then restart Pegasus.
+rem Rewrites avatar\AssetIndex.qml from the art folders, once.
+rem Only needed if the background watcher (install_watcher.bat) is not running.
 cd /d "%~dp0"
-python art_index.py || py art_index.py
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0watch_art.ps1" -Once
 pause
