@@ -582,6 +582,12 @@ Item {
       Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar_theme/Avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../Avatar/AvatarTheme/Avatar/AvatarEditorPage.qml"),
+      // ...or nested one level too deep (copying a folder into an existing
+      // folder of the same name gives avatar/avatar/)
+      Qt.resolvedUrl("../../avatar/avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/avatar/avatar_theme/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../Avatar/avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
       // ...or dropped right next to this page, which always exists
       Qt.resolvedUrl("./avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("./avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
