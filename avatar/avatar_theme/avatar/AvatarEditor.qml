@@ -26,6 +26,11 @@ Item {
     property string title: "Avatar Editor"
     property var itemFilters: ["*.png", "*.jpg", "*.jpeg", "*.webp", "*.svg"]
 
+    // The one colour the chrome takes from its host, so the editor can sit in
+    // another theme's palette; items and the stage are unaffected.
+    property color accentColor: S.accent
+    property color accentInkColor: S.inkOnCard
+
     // category id -> chosen image file name, e.g. { "20_pants": "jeans_indigo.png" }
     property var state: ({})
 
@@ -326,10 +331,26 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 8
 
-            EditorButton { label: "Randomize"; onClicked: root.randomize() }
-            EditorButton { label: "Reset"; onClicked: root.clearAll() }
-            EditorButton { label: "Save"; onClicked: root.save() }
-            EditorButton { label: "Portrait"; primary: true; onClicked: root.capturePortrait() }
+            EditorButton {
+                label: "Randomize"
+                accentColor: root.accentColor; accentInkColor: root.accentInkColor
+                onClicked: root.randomize()
+            }
+            EditorButton {
+                label: "Reset"
+                accentColor: root.accentColor; accentInkColor: root.accentInkColor
+                onClicked: root.clearAll()
+            }
+            EditorButton {
+                label: "Save"
+                accentColor: root.accentColor; accentInkColor: root.accentInkColor
+                onClicked: root.save()
+            }
+            EditorButton {
+                label: "Portrait"; primary: true
+                accentColor: root.accentColor; accentInkColor: root.accentInkColor
+                onClicked: root.capturePortrait()
+            }
         }
     }
 
@@ -371,6 +392,7 @@ Item {
         anchors.bottomMargin: 10
         categories: root.categories
         currentIndex: root.categoryIndex
+        accentColor: root.accentColor
         onActivated: root.selectCategory(index)
     }
 

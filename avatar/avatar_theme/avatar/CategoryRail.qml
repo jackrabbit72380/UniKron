@@ -7,6 +7,7 @@ Item {
 
     property var categories: []
     property int currentIndex: 0
+    property color accentColor: S.accent
     signal activated(int index)
 
     implicitWidth: 208

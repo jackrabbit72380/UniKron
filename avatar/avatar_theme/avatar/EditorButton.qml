@@ -7,13 +7,15 @@ Rectangle {
 
     property string label: ""
     property bool primary: false
+    property color accentColor: S.accent
+    property color accentInkColor: S.inkOnCard
     signal clicked()
 
     implicitWidth: caption.implicitWidth + 40
     implicitHeight: 40
     radius: height / 2
     color: primary
-           ? (pointer.containsMouse ? Qt.lighter(S.accent, 1.12) : S.accent)
+           ? (pointer.containsMouse ? Qt.lighter(accentColor, 1.12) : accentColor)
            : (pointer.containsMouse ? S.cardHover : S.card)
     border.width: primary ? 0 : 1
     border.color: "#4dffffff"
@@ -24,7 +26,7 @@ Rectangle {
         id: caption
         anchors.centerIn: parent
         text: button.label
-        color: button.primary ? S.inkOnCard : S.ink
+        color: button.primary ? button.accentInkColor : S.ink
         font.family: S.titleFamily
         font.pixelSize: 15
         font.weight: Font.DemiBold
