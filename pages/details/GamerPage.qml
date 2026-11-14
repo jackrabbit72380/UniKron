@@ -10,6 +10,7 @@ import "../../js/styling.mjs" as Styling
 import "../../components"
 import "./components"
 import "../../Lists"
+import "../../avatar/avatar_theme/avatar"
 
 // ════════════════════════════════════════════════════════════════════
 // GamerPage.qml  —  Profile hub: Generals | Profile | Avatar Scene
@@ -254,6 +255,29 @@ Item {
   property string avatarThumbUrl: avatarBase + profileAvatar
   property string avatarFullUrl:  avatarBase + profileAvatar.replace(/\.png$/i, "") + "Full.png"
 
+  // ── Custom avatar built in the avatar editor (avatar/avatar_theme) ────────
+  // The editor hands back its state map (kept in memory) and one 512×768 grab,
+  // which is written as the two PNGs the rest of the theme already expects:
+  // avatars/Custom.png for tiles and avatars/CustomFull.png for the scene.
+  readonly property string customAvatarName: "Custom.png"
+  property int  customAvatarVersion: api.memory.get("profile.avatar.state") ? 1 : 0
+  readonly property bool hasCustomAvatar: customAvatarVersion > 0
+  property bool customPngSaved: false
+
+  function storedAvatarState() {
+    var s = api.memory.get("profile.avatar.state")
+    if (!s) return ({})
+    try { return JSON.parse(s) } catch (e) { return ({}) }
+  }
+
+  function saveCustomAvatarPng(grab) {
+    var ok = false
+    try { ok = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/Custom.png")) } catch (e) { ok = false }
+    try { ok = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/CustomFull.png")) && ok } catch (e) { ok = false }
+    root.customPngSaved = ok
+    if (ok) root.customAvatarVersion++
+  }
+
   // ── Signed-in slot ────────────────────────────────────────────────
   property int signedInSlot: parseInt(mem("profile.signedSlot", "1"))
 
@@ -484,6 +508,29 @@ Item {
       else if (event.key === Qt.Key_Y || api.keys.isFilters(event)) { doLayout(); event.accepted = true }
       else if (api.keys.isNextPage(event))    { panelsList.navigateForwardQuickly();   event.accepted = true }
       else if (api.keys.isPrevPage(event))    { panelsList.navigateBackwardsQuickly(); event.accepted = true }
+    }
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // AVATAR EDITOR — opened by the "+" tile in Choose Avatar
+  // ════════════════════════════════════════════════════════════════
+  AvatarEditorPage {
+    id: avatarEditorPage
+    anchors.fill: parent
+    z: 5000
+    gamerTag: root.profileName
+    accentColor: root.accentHex
+    accentInkColor: "#062033"
+
+    onPortraitReady: function (grab) { root.saveCustomAvatarPng(grab) }
+
+    onAccepted: function (state) {
+      api.memory.set("profile.avatar.state", JSON.stringify(state))
+      if (root.customPngSaved) {
+        root.profileAvatar = root.customAvatarName
+        api.memory.set("profile.avatar", root.customAvatarName)
+      }
+      root.customPngSaved = false
     }
   }
 
@@ -1982,6 +2029,39 @@ Item {
                     }
                   }
                 }
+
+                // the avatar made in the editor
+                Rectangle {
+                  visible: root.hasCustomAvatar
+                  property bool selected: root.profileAvatar === root.customAvatarName
+                  width: vpx(60); height: vpx(60); radius: vpx(4)
+                  color:        selected ? root.accentRgba(0.35) : "#22FFFFFF"
+                  border.color: selected ? root.accentHex        : "#30FFFFFF"
+                  border.width: selected ? vpx(3) : vpx(1)
+                  Image {
+                    anchors.fill: parent; anchors.margins: vpx(3)
+                    source: root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion
+                    fillMode: Image.PreserveAspectFit; smooth: true
+                  }
+                  MouseArea {
+                    anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                    onClicked: { root.profileAvatar = root.customAvatarName; api.memory.set("profile.avatar", root.customAvatarName) }
+                  }
+                }
+
+                // "+" — open the avatar editor
+                Rectangle {
+                  width: vpx(60); height: vpx(60); radius: vpx(4)
+                  color:        plusHoverEdit.containsMouse ? root.accentRgba(0.30) : "#22FFFFFF"
+                  border.color: root.accentRgba(0.75); border.width: vpx(2)
+                  Rectangle { width: vpx(24); height: vpx(3); radius: vpx(1.5); color: "#FFFFFF"; anchors.centerIn: parent }
+                  Rectangle { width: vpx(3); height: vpx(24); radius: vpx(1.5); color: "#FFFFFF"; anchors.centerIn: parent }
+                  MouseArea {
+                    id: plusHoverEdit
+                    anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
+                    onClicked: avatarEditorPage.open(root.storedAvatarState())
+                  }
+                }
               }
 
               // ── Save Profile ────────────────────────────────────
@@ -3152,6 +3232,36 @@ Item {
                     border.color: sel ? createTab.newColor : "#30FFFFFF"; border.width: sel ? vpx(3) : vpx(1)
                     Image { anchors.fill: parent; anchors.margins: vpx(3); source: root.avatarBase + "Avatar" + (index+1) + ".png"; fillMode: Image.PreserveAspectFit; smooth: true }
                     MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: createTab.newAvatar = av }
+                  }
+                }
+
+                Rectangle {
+                  visible: root.hasCustomAvatar
+                  property bool selected: createTab.newAvatar === root.customAvatarName
+                  width: vpx(60); height: vpx(60); radius: vpx(4)
+                  color:        selected ? Qt.rgba(parseInt(createTab.newColor.slice(1,3),16)/255,parseInt(createTab.newColor.slice(3,5),16)/255,parseInt(createTab.newColor.slice(5,7),16)/255,0.35) : "#22FFFFFF"
+                  border.color: selected ? createTab.newColor : "#30FFFFFF"; border.width: selected ? vpx(3) : vpx(1)
+                  Image {
+                    anchors.fill: parent; anchors.margins: vpx(3)
+                    source: root.avatarBase + root.customAvatarName + "?v=" + root.customAvatarVersion
+                    fillMode: Image.PreserveAspectFit; smooth: true
+                  }
+                  MouseArea {
+                    anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                    onClicked: createTab.newAvatar = root.customAvatarName
+                  }
+                }
+
+                Rectangle {
+                  width: vpx(60); height: vpx(60); radius: vpx(4)
+                  color:        plusHoverCreate.containsMouse ? root.accentRgba(0.30) : "#22FFFFFF"
+                  border.color: root.accentRgba(0.75); border.width: vpx(2)
+                  Rectangle { width: vpx(24); height: vpx(3); radius: vpx(1.5); color: "#FFFFFF"; anchors.centerIn: parent }
+                  Rectangle { width: vpx(3); height: vpx(24); radius: vpx(1.5); color: "#FFFFFF"; anchors.centerIn: parent }
+                  MouseArea {
+                    id: plusHoverCreate
+                    anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
+                    onClicked: avatarEditorPage.open(root.storedAvatarState())
                   }
                 }
               }

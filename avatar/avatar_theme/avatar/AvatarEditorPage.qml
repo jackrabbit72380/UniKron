@@ -49,10 +49,32 @@ Item {
         opened = false
     }
 
+    // Save grabs the stage once, so a host can keep the picture (a PNG for the
+    // profile) as well as the state map, then closes.
+    property var _pendingState: null
+
     function accept() {
-        var state = editor.currentState()
+        _pendingState = editor.currentState()
+        editor.capturePortrait()
+        acceptFallback.restart()
+    }
+
+    function finishAccept(grab) {
+        acceptFallback.stop()
+        if (grab)
+            page.portraitReady(grab)
+        if (_pendingState === null)
+            return
+        var state = _pendingState
+        _pendingState = null
         close()
         accepted(state)
+    }
+
+    Timer {
+        id: acceptFallback
+        interval: 1500
+        onTriggered: page.finishAccept(null)
     }
 
     function cancel() {
@@ -88,7 +110,7 @@ Item {
             accentInkColor: page.accentInkColor
             onBackRequested: page.cancel()
             onSaveRequested: page.accept()
-            onPortraitReady: function (grab) { page.portraitReady(grab) }
+            onPortraitReady: function (grab) { page.finishAccept(grab) }
         }
     }
 }
