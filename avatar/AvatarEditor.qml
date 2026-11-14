@@ -353,14 +353,53 @@ Item {
         opacity: 0.7
     }
 
+    // The closet's own legend row. The A/B/X/Y art is the original editor's
+    // (avatareditor.xex), and putting it down here also keeps our hints clear
+    // of the button bar Pegasus draws along the bottom of the screen.
+    Row {
+        id: legend
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 26
+        anchors.bottomMargin: 12
+        spacing: 22
+
+        Repeater {
+            model: [
+                { glyph: "assets/_ui/xex/legend_a.png", label: "Select" },
+                { glyph: "assets/_ui/xex/legend_b.png", label: "Back" },
+                { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize" },
+                { glyph: "assets/_ui/xex/legend_y.png", label: "Save" }
+            ]
+
+            Row {
+                spacing: 8
+                Image {
+                    source: Qt.resolvedUrl(modelData.glyph)
+                    height: 22
+                    width: height
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                }
+                Text {
+                    text: modelData.label
+                    color: style.ink
+                    font.family: style.titleFamily
+                    font.pixelSize: 13
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+    }
+
     ItemStrip {
         id: strip
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
         anchors.leftMargin: 26
         anchors.rightMargin: 26
-        anchors.bottomMargin: 16
+        anchors.bottom: legend.top
+        anchors.bottomMargin: 10
         height: 196
 
         model: items
@@ -414,19 +453,6 @@ Item {
                    : ""
     }
 
-    Text {
-        anchors.horizontalCenter: stage.horizontalCenter
-        anchors.bottom: strip.top
-        anchors.bottomMargin: 2
-        // Pegasus draws its own A Select / B Back footer right here, so this
-        // line stays single-line and short instead of listing every key.
-        text: "Space randomize \u00b7 S save \u00b7 R reset"
-        color: style.inkDim
-        opacity: 0.5
-        font.family: style.titleFamily
-        font.pixelSize: 11
-        visible: root.height >= 620
-    }
 
     Component.onCompleted: rebuildCategories()
 }
