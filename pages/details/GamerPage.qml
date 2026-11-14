@@ -254,7 +254,7 @@ Item {
   property string avatarThumbUrl: avatarBase + profileAvatar
   property string avatarFullUrl:  avatarBase + profileAvatar.replace(/\.png$/i, "") + "Full.png"
 
-  // ── Custom avatar built in the avatar editor (avatar/avatar_theme) ────────
+  // ── Custom avatar built in the avatar editor (avatar/) ─────────────────────
   // The editor hands back its state map (kept in memory) and one 512×768 grab,
   // which is written as the two PNGs the rest of the theme already expects:
   // avatars/Custom.png for tiles and avatars/CustomFull.png for the scene.
@@ -294,9 +294,34 @@ Item {
   }
 
   function openAvatarEditor() {
-    if (avatarEditorLoader.item)
+    if (avatarEditorLoader.item) {
       avatarEditorLoader.item.open(root.storedAvatarState())
-    root.tracePlusClick()
+      root.tracePlusClick()
+      return
+    }
+    // Nothing loaded yet: walk the paths again, so files copied in while
+    // Pegasus was running are picked up without a restart.
+    avatarEditorLoader.attempt = 0
+    avatarEditorLoader.chosenSource = avatarEditorLoader.sources[0]
+    avatarRetry.restart()
+    openWhenReady.restart()
+  }
+
+  Timer {
+    id: openWhenReady
+    interval: 120
+    repeat: true
+    onTriggered: {
+      if (avatarEditorLoader.status === Loader.Ready && avatarEditorLoader.item) {
+        stop()
+        avatarEditorLoader.item.open(root.storedAvatarState())
+        root.tracePlusClick()
+      } else if (avatarEditorLoader.status === Loader.Error &&
+                 avatarEditorLoader.attempt >= avatarEditorLoader.sources.length - 1) {
+        stop()
+        root.tracePlusClick()
+      }
+    }
   }
 
   function tracePlusClick() {
@@ -573,6 +598,10 @@ Item {
     // these that actually loads wins. QML enforces file name case on every
     // platform, so both spellings of the folder are listed.
     property var sources: [
+      Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("../../Avatar/AvatarEditorPage.qml"),
+      Qt.resolvedUrl("./avatar/AvatarEditorPage.qml"),
+      // older, deeper layouts, in case the folder predates the flattening
       Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/avatar/AvatarEditorPage.qml"),
       Qt.resolvedUrl("../../avatar/AvatarEditorPage.qml"),

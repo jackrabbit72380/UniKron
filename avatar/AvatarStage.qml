@@ -19,7 +19,7 @@ Item {
 
     // soft shadow on the floor
     Image {
-        source: Qt.resolvedUrl("../assets/avatar/_ui/shadow.png")
+        source: Qt.resolvedUrl("assets/_ui/shadow.png")
         anchors.horizontalCenter: frame.horizontalCenter
         width: frame.width * 0.95
         height: width * 0.30

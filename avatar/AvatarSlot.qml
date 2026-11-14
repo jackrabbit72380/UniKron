@@ -14,7 +14,7 @@ Item {
     property var state: ({})
     property bool addTile: false
     property bool selected: false
-    property url assetsFolder: Qt.resolvedUrl("../assets/avatar/")
+    property url assetsFolder: Qt.resolvedUrl("assets/")
 
     property color panelColor: "#2a0b1626"
     property color panelHoverColor: "#3d14283e"

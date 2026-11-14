@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates the sample avatar art in avatar_theme/assets/avatar/ (_ui/ holds the chrome).
+"""Generates the sample avatar art in avatar/assets/ (_ui/ holds the chrome).
 
 Every layer is drawn as SVG on one shared 512x768 canvas, so a dropped-in
 item lines up with the body without any offset data.  Run it after editing a
@@ -19,8 +19,8 @@ from PySide6.QtSvg import QSvgRenderer
 W, H = 512, 768
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-ASSETS = os.path.join(ROOT, "avatar_theme", "assets", "avatar")
-UI = os.path.join(ROOT, "avatar_theme", "assets", "avatar", "_ui")
+ASSETS = os.path.join(ROOT, "assets")
+UI = os.path.join(ROOT, "assets", "_ui")
 
 SKIN = {
     "pale": ("#f4d3bd", "#e0b89f"),

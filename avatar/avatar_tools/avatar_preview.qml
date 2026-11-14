@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import "avatar_theme/avatar"
+import ".."
 
 Window {
     id: window
@@ -15,7 +15,7 @@ Window {
 
     Image {
         anchors.fill: parent
-        source: "avatar_theme/assets/avatar/_ui/background.png"
+        source: "../assets/_ui/background.png"
         fillMode: Image.PreserveAspectCrop
         asynchronous: true
     }

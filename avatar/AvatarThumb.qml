@@ -12,7 +12,7 @@ Item {
     id: thumb
 
     property var state: ({})
-    property url assetsFolder: Qt.resolvedUrl("../assets/avatar/")
+    property url assetsFolder: Qt.resolvedUrl("assets/")
     property int sourceHeight: 420
 
     property var categories: []

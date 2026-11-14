@@ -21,7 +21,7 @@ Item {
     id: root
 
     // ---- what the host can set -------------------------------------------
-    property url assetsFolder: Qt.resolvedUrl("../assets/avatar/")
+    property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
     property string title: "Avatar Editor"
     property var itemFilters: ["*.png", "*.jpg", "*.jpeg", "*.webp", "*.svg"]

@@ -17,7 +17,7 @@ Item {
     id: page
 
     property bool opened: false
-    property url assetsFolder: Qt.resolvedUrl("../assets/avatar/")
+    property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
     property string title: "Avatar Editor"
 
