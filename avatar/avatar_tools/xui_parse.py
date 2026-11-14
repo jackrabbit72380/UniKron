@@ -147,7 +147,9 @@ def parse_property_enum(data):
     hit = data.find("Position".encode("utf-16-le"))
     if hit < 0:
         return []
-    window = data[max(0, hit - 0x300):hit + 0x300]
+    # +/-0x300 only reaches 40 of the names; the full ordered run is 88,
+    # from Value .. EndTransTo, so the window has to be wider.
+    window = data[max(0, hit - 0x600):hit + 0x600]
     names = []
     for m in re.finditer(rb"(?:[\x20-\x7e]\x00){2,}(?=\x00\x00)", window):
         text = m.group().decode("utf-16-le")
