@@ -1,5 +1,4 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // The avatar editor as a page the theme opens on top of itself.
 //

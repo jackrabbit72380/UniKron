@@ -1,14 +1,15 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // A rounded pill button used for the editor's actions.
 Rectangle {
     id: button
 
+    Style { id: style }
+
     property string label: ""
     property bool primary: false
-    property color accentColor: S.accent
-    property color accentInkColor: S.inkOnCard
+    property color accentColor: style.accent
+    property color accentInkColor: style.inkOnCard
     signal clicked()
 
     implicitWidth: caption.implicitWidth + 40
@@ -16,7 +17,7 @@ Rectangle {
     radius: height / 2
     color: primary
            ? (pointer.containsMouse ? Qt.lighter(accentColor, 1.12) : accentColor)
-           : (pointer.containsMouse ? S.cardHover : S.card)
+           : (pointer.containsMouse ? style.cardHover : style.card)
     border.width: primary ? 0 : 1
     border.color: "#4dffffff"
 
@@ -26,8 +27,8 @@ Rectangle {
         id: caption
         anchors.centerIn: parent
         text: button.label
-        color: button.primary ? button.accentInkColor : S.ink
-        font.family: S.titleFamily
+        color: button.primary ? button.accentInkColor : style.ink
+        font.family: style.titleFamily
         font.pixelSize: 15
         font.weight: Font.DemiBold
     }

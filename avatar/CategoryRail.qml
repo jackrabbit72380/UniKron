@@ -1,13 +1,14 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // Vertical list of the category folders found in assets/.
 Item {
     id: rail
 
+    Style { id: style }
+
     property var categories: []
     property int currentIndex: 0
-    property color accentColor: S.accent
+    property color accentColor: style.accent
     signal activated(int index)
 
     implicitWidth: 208
@@ -33,8 +34,8 @@ Item {
             height: 40
             radius: 20
             color: index === rail.currentIndex
-                   ? S.cardActive
-                   : (pointer.containsMouse ? S.cardHover : S.card)
+                   ? style.cardActive
+                   : (pointer.containsMouse ? style.cardHover : style.card)
             border.width: index === rail.currentIndex ? 0 : 1
             border.color: "#33ffffff"
 
@@ -47,7 +48,7 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
-                color: S.accent
+                color: style.accent
                 opacity: index === rail.currentIndex ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 120 } }
             }
@@ -59,8 +60,8 @@ Item {
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
                 text: pill.modelData.label
-                color: index === rail.currentIndex ? S.inkOnCard : S.ink
-                font.family: S.titleFamily
+                color: index === rail.currentIndex ? style.inkOnCard : style.ink
+                font.family: style.titleFamily
                 font.pixelSize: 15
                 font.weight: index === rail.currentIndex ? Font.DemiBold : Font.Normal
                 elide: Text.ElideRight

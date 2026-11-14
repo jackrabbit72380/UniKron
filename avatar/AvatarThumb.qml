@@ -1,6 +1,4 @@
 import QtQuick 2.15
-import "Style.js" as S
-import "assets/AssetIndex.js" as AssetIndex
 
 // A small layered preview of a saved avatar, for grids and profile cards.
 //
@@ -11,6 +9,10 @@ import "assets/AssetIndex.js" as AssetIndex
 Item {
     id: thumb
 
+    AssetIndex { id: assetIndex }
+
+    Style { id: style }
+
     property var state: ({})
     property url assetsFolder: Qt.resolvedUrl("assets/")
     property int sourceHeight: 420
@@ -18,14 +20,14 @@ Item {
     property var categories: []
     property var layers: []
 
-    // Same data the editor uses; see assets/AssetIndex.js.
+    // Same data the editor uses; see AssetIndex.qml.
     function rebuildCategories() {
         var list = []
-        for (var i = 0; i < AssetIndex.folders.length; ++i) {
-            var name = AssetIndex.folders[i].id
+        for (var i = 0; i < assetIndex.folders.length; ++i) {
+            var name = assetIndex.folders[i].id
             if (!name || name.charAt(0) === "." || name.charAt(0) === "_")
                 continue
-            list.push({ id: name, path: S.dirUrl(thumb.assetsFolder, name), z: S.layerOrder(name) })
+            list.push({ id: name, path: style.dirUrl(thumb.assetsFolder, name), z: style.layerOrder(name) })
         }
         list.sort(function (a, b) { return a.z - b.z })
         categories = list
@@ -41,7 +43,7 @@ Item {
             var name = state[c.id]
             if (!name)
                 continue
-            out.push({ url: S.itemUrl(c.path, name), z: c.z })
+            out.push({ url: style.itemUrl(c.path, name), z: c.z })
         }
         out.sort(function (a, b) { return a.z - b.z })
         layers = out

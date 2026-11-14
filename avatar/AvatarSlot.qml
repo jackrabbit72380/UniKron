@@ -1,5 +1,4 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // One tile in a profile manager's avatar grid. With addTile it is the "+" box
 // that opens the avatar editor.

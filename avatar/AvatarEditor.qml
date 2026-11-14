@@ -1,6 +1,4 @@
 import QtQuick 2.15
-import "Style.js" as S
-import "assets/AssetIndex.js" as AssetIndex
 
 // The avatar editor.
 //
@@ -12,7 +10,7 @@ import "assets/AssetIndex.js" as AssetIndex
 //   assets/20_pants/     jeans_indigo.png, shorts_khaki.png ...
 //   assets/40_shirt/     tee_blue.png ...
 //
-// The folder contents come from assets/AssetIndex.js, written by
+// The folder contents come from AssetIndex.qml, written by
 // avatar_tools/art_index.py: Qt.labs.folderlistmodel is not part of the
 // Pegasus builds, so nothing can list a directory at runtime. Add art, run
 // `python avatar_tools/art_index.py`, then restart Pegasus. Folders whose name
@@ -22,6 +20,10 @@ import "assets/AssetIndex.js" as AssetIndex
 Item {
     id: root
 
+    AssetIndex { id: assetIndex }
+
+    Style { id: style }
+
     // ---- what the host can set -------------------------------------------
     property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
@@ -29,8 +31,8 @@ Item {
 
     // The one colour the chrome takes from its host, so the editor can sit in
     // another theme's palette; items and the stage are unaffected.
-    property color accentColor: S.accent
-    property color accentInkColor: S.inkOnCard
+    property color accentColor: style.accent
+    property color accentInkColor: style.inkOnCard
 
     // category id -> chosen image file name, e.g. { "20_pants": "jeans_indigo.png" }
     property var state: ({})
@@ -57,22 +59,22 @@ Item {
     // ---- discovery -------------------------------------------------------
     // Nothing here reads a directory: Qt.labs.folderlistmodel is not part of
     // the Pegasus builds and QML has no other way to list a folder, so the
-    // contents of assets/ ship as data in assets/AssetIndex.js.
+    // contents of assets/ ship as data in AssetIndex.qml.
 
     ListModel { id: items }
 
     function rebuildCategories() {
         var list = []
-        for (var i = 0; i < AssetIndex.folders.length; ++i) {
-            var name = AssetIndex.folders[i].id
+        for (var i = 0; i < assetIndex.folders.length; ++i) {
+            var name = assetIndex.folders[i].id
             if (!name || name.charAt(0) === "." || name.charAt(0) === "_")
                 continue
             list.push({
                 id: name,
-                label: S.titleCase(S.cleanFolderName(name)),
-                path: S.dirUrl(root.assetsFolder, name),
-                files: AssetIndex.folders[i].files || [],
-                z: S.layerOrder(name)
+                label: style.titleCase(style.cleanFolderName(name)),
+                path: style.dirUrl(root.assetsFolder, name),
+                files: assetIndex.folders[i].files || [],
+                z: style.layerOrder(name)
             })
         }
         list.sort(function (a, b) { return a.z - b.z })
@@ -89,7 +91,7 @@ Item {
             return
         var files = cat.files || []
         for (var i = 0; i < files.length; ++i)
-            items.append({ fileName: files[i], filePath: S.itemUrl(cat.path, files[i]) })
+            items.append({ fileName: files[i], filePath: style.itemUrl(cat.path, files[i]) })
         fillBodyIfEmpty()
     }
 
@@ -100,7 +102,7 @@ Item {
         if (!bodyCategory)
             return ""
         var name = state[bodyCategory.id]
-        return name ? S.itemUrl(bodyCategory.path, name) : ""
+        return name ? style.itemUrl(bodyCategory.path, name) : ""
     }
 
     // ---- selection -------------------------------------------------------
@@ -167,7 +169,7 @@ Item {
             var name = state[c.id]
             if (!name)
                 continue
-            out.push({ url: S.itemUrl(c.path, name), z: c.z, id: c.id })
+            out.push({ url: style.itemUrl(c.path, name), z: c.z, id: c.id })
         }
         out.sort(function (a, b) { return a.z - b.z })
         _layers = out
@@ -281,8 +283,8 @@ Item {
         Text {
             id: headline
             text: root.title
-            color: S.ink
-            font.family: S.titleFamily
+            color: style.ink
+            font.family: style.titleFamily
             font.pixelSize: 27
             font.weight: Font.DemiBold
             style: Text.Raised
@@ -294,8 +296,8 @@ Item {
             anchors.top: headline.bottom
             anchors.topMargin: 2
             text: root.gamerTag + "  \u00b7  " + root.categories.length + " categories"
-            color: S.inkDim
-            font.family: S.titleFamily
+            color: style.inkDim
+            font.family: style.titleFamily
             font.pixelSize: 13
         }
 
@@ -390,9 +392,9 @@ Item {
         anchors.bottom: strip.top
         anchors.bottomMargin: 2
         text: "\u2190 \u2192 item    \u2191 \u2193 category    space randomize    S save    P portrait    R reset"
-        color: S.inkDim
+        color: style.inkDim
         opacity: 0.65
-        font.family: S.titleFamily
+        font.family: style.titleFamily
         font.pixelSize: 11
     }
 

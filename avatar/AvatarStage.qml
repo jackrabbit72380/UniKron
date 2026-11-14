@@ -1,9 +1,10 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // The avatar itself: every chosen item, stacked in layer order over a shadow.
 Item {
     id: stage
+
+    Style { id: style }
 
     property var layers: []          // [{ url: ..., z: ... }]
     property string emptyHint: ""
@@ -89,8 +90,8 @@ Item {
         anchors.centerIn: parent
         visible: stage.layers.length === 0 && stage.emptyHint !== ""
         text: stage.emptyHint
-        color: S.inkDim
-        font.family: S.titleFamily
+        color: style.inkDim
+        font.family: style.titleFamily
         font.pixelSize: 17
     }
 }

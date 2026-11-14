@@ -1,10 +1,11 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // One entry in the item strip: the item drawn over the current body so you can
 // see what it will look like, plus its name.
 Item {
     id: tile
+
+    Style { id: style }
 
     property url imageSource
     property url bodySource
@@ -21,8 +22,8 @@ Item {
         id: card
         anchors.fill: parent
         radius: 16
-        color: tile.selected ? S.cardActive
-                             : (pointer.containsMouse ? S.cardHover : S.card)
+        color: tile.selected ? style.cardActive
+                             : (pointer.containsMouse ? style.cardHover : style.card)
         border.width: tile.selected ? 0 : 1
         border.color: "#33ffffff"
         Behavior on color { ColorAnimation { duration: 120 } }
@@ -55,7 +56,7 @@ Item {
         anchors.centerIn: parent
         visible: tile.noneTile
         text: "\u2715"
-        color: S.ink
+        color: style.ink
         opacity: 0.55
         font.pixelSize: 34
     }
@@ -66,8 +67,8 @@ Item {
         anchors.bottomMargin: 6
         width: parent.width - 16
         text: tile.label
-        color: tile.selected ? S.inkOnCard : S.ink
-        font.family: S.titleFamily
+        color: tile.selected ? style.inkOnCard : style.ink
+        font.family: style.titleFamily
         font.pixelSize: 12
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter

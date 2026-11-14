@@ -1,9 +1,10 @@
 import QtQuick 2.15
-import "Style.js" as S
 
 // Horizontal strip of the items in one category folder.
 Item {
     id: strip
+
+    Style { id: style }
 
     property var model: null
     property string selectedName: ""
@@ -61,7 +62,7 @@ Item {
         }
 
         delegate: ItemTile {
-            label: S.itemLabel(fileName)
+            label: style.itemLabel(fileName)
             imageSource: filePath
             bodySource: strip.bodySource
             selected: strip.selectedName === fileName
@@ -73,8 +74,8 @@ Item {
         anchors.centerIn: parent
         visible: (!model || model.count === 0)
         text: strip.emptyHint
-        color: S.inkDim
-        font.family: S.titleFamily
+        color: style.inkDim
+        font.family: style.titleFamily
         font.pixelSize: 15
     }
 }
