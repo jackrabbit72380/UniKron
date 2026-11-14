@@ -20,7 +20,7 @@ Item {
             return
         if (selectedName !== "") {
             for (var i = 0; i < model.count; ++i) {
-                if (model.get(i, "fileName") === selectedName) {
+                if (model.get(i).fileName === selectedName) {
                     list.positionViewAtIndex(i, ListView.Center)
                     return
                 }
@@ -62,7 +62,7 @@ Item {
 
         delegate: ItemTile {
             label: S.itemLabel(fileName)
-            imageSource: S.fileUrl(filePath)
+            imageSource: filePath
             bodySource: strip.bodySource
             selected: strip.selectedName === fileName
             onPicked: strip.picked(fileName)

@@ -13,7 +13,7 @@ var inkOnCard = "#1f2b0a"
 
 var titleFamily = "Segoe UI"
 
-// A native path from FolderListModel turned into something an Image can load.
+// A filesystem path turned into something an Image can load.
 function fileUrl(path) {
     var p = String(path).replace(/\\/g, "/")
     var url = p
@@ -51,4 +51,14 @@ function layerOrder(folderName) {
 function cleanFolderName(folderName) {
     var m = /^(\d+)[\-_ ]+(.+)$/.exec(String(folderName))
     return m ? m[2] : String(folderName)
+}
+
+// Directory URL for one category folder, given the editor's assetsFolder.
+function dirUrl(assetsFolder, folderName) {
+    return String(assetsFolder).replace(/\/+$/, "") + "/" + encodeURIComponent(folderName)
+}
+
+// Full URL for one item inside a category folder.
+function itemUrl(dir, fileName) {
+    return String(dir).replace(/\/+$/, "") + "/" + encodeURI(fileName)
 }

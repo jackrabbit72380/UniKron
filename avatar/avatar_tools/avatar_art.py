@@ -11,6 +11,7 @@ Output is PNG at 2x (1024x1536) so it stays sharp on hi-dpi screens.
 """
 import os
 import sys
+from pathlib import Path
 
 from PySide6.QtCore import QRectF, Qt
 from PySide6.QtGui import QColor, QImage, QPainter
@@ -371,6 +372,10 @@ def main():
 
     count = sum(len(f) for _, _, f in os.walk(ASSETS))
     print(f"wrote {count} images under {ASSETS} (items and _ui/)")
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from art_index import write_index
+    write_index()
 
 
 if __name__ == "__main__":

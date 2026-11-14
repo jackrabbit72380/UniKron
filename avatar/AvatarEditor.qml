@@ -1,6 +1,6 @@
 import QtQuick 2.15
-import Qt.labs.folderlistmodel 2.15
 import "Style.js" as S
+import "assets/AssetIndex.js" as AssetIndex
 
 // The avatar editor.
 //
@@ -12,11 +12,13 @@ import "Style.js" as S
 //   assets/20_pants/     jeans_indigo.png, shorts_khaki.png ...
 //   assets/40_shirt/     tee_blue.png ...
 //
-// Drop a new PNG into a folder and it shows up the next time the folder is
-// read; add a folder and it becomes a new category. Folders whose name starts
-// with _ or . are skipped, which is where the editor's own chrome lives.
-// Every drawing uses the same 512x768 canvas, so items never need position
-// data.
+// The folder contents come from assets/AssetIndex.js, written by
+// avatar_tools/art_index.py: Qt.labs.folderlistmodel is not part of the
+// Pegasus builds, so nothing can list a directory at runtime. Add art, run
+// `python avatar_tools/art_index.py`, then restart Pegasus. Folders whose name
+// starts with _ or . are skipped, which is where the editor's own chrome
+// lives, and a numeric prefix on the folder name is the layer order. Every
+// drawing uses the same 512x768 canvas, so items never need position data.
 Item {
     id: root
 
@@ -24,7 +26,6 @@ Item {
     property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
     property string title: "Avatar Editor"
-    property var itemFilters: ["*.png", "*.jpg", "*.jpeg", "*.webp", "*.svg"]
 
     // The one colour the chrome takes from its host, so the editor can sit in
     // another theme's palette; items and the stage are unaffected.
@@ -51,83 +52,55 @@ Item {
     focus: true
 
     property var _layers: []
-    property var _catalog: ({})
-    property int _catalogVersion: 0
     property int _layerVersion: 0
 
     // ---- discovery -------------------------------------------------------
+    // Nothing here reads a directory: Qt.labs.folderlistmodel is not part of
+    // the Pegasus builds and QML has no other way to list a folder, so the
+    // contents of assets/ ship as data in assets/AssetIndex.js.
 
-    FolderListModel {
-        id: dirs
-        folder: root.assetsFolder
-        showDirs: true
-        showFiles: false
-        sortField: FolderListModel.Name
-        onCountChanged: root.rebuildCategories()
-        onStatusChanged: root.rebuildCategories()
-    }
-
-    // One listing per category, so randomize can reach items in folders the
-    // strip is not showing right now.
-    Component {
-        id: categoryScan
-        FolderListModel {
-            showDirs: false
-            showFiles: true
-            sortField: FolderListModel.Name
-        }
-    }
-
-    Repeater {
-        model: root.categories
-        delegate: Loader {
-            required property var modelData
-            sourceComponent: categoryScan
-            onLoaded: {
-                item.folder = S.fileUrl(modelData.path)
-                item.nameFilters = root.itemFilters
-                root._catalog[modelData.id] = item
-                root._catalogVersion++
-            }
-        }
-    }
-
-    // The category the strip is showing.
-    FolderListModel {
-        id: items
-        folder: root.currentCategory ? S.fileUrl(root.currentCategory.path) : ""
-        showDirs: false
-        showFiles: true
-        nameFilters: root.itemFilters
-        sortField: FolderListModel.Name
-        onCountChanged: root.fillBodyIfEmpty()
-        onStatusChanged: root.fillBodyIfEmpty()
-    }
+    ListModel { id: items }
 
     function rebuildCategories() {
         var list = []
-        for (var i = 0; i < dirs.count; ++i) {
-            var name = dirs.get(i, "fileName")
-            var path = dirs.get(i, "filePath")
-            if (!name || !path || name.charAt(0) === "." || name.charAt(0) === "_")
+        for (var i = 0; i < AssetIndex.folders.length; ++i) {
+            var name = AssetIndex.folders[i].id
+            if (!name || name.charAt(0) === "." || name.charAt(0) === "_")
                 continue
             list.push({
                 id: name,
                 label: S.titleCase(S.cleanFolderName(name)),
-                path: String(path),
+                path: S.dirUrl(root.assetsFolder, name),
+                files: AssetIndex.folders[i].files || [],
                 z: S.layerOrder(name)
             })
         }
         list.sort(function (a, b) { return a.z - b.z })
         categories = list
+        fillItems()
+    }
+
+    // The strip shows one category at a time. A ListModel keeps the tiles'
+    // fileName / filePath roles exactly as they were with a folder listing.
+    function fillItems() {
+        items.clear()
+        var cat = currentCategory
+        if (!cat)
+            return
+        var files = cat.files || []
+        for (var i = 0; i < files.length; ++i)
+            items.append({ fileName: files[i], filePath: S.itemUrl(cat.path, files[i]) })
         fillBodyIfEmpty()
     }
+
+    onCategoryIndexChanged: fillItems()
+    onAssetsFolderChanged: rebuildCategories()
 
     function bodySource() {
         if (!bodyCategory)
             return ""
         var name = state[bodyCategory.id]
-        return name ? S.fileUrl(bodyCategory.path + "/" + name) : ""
+        return name ? S.itemUrl(bodyCategory.path, name) : ""
     }
 
     // ---- selection -------------------------------------------------------
@@ -158,7 +131,7 @@ Item {
         var chosen = state[id] || ""
         var at = -1
         for (var i = 0; i < items.count; ++i) {
-            if (items.get(i, "fileName") === chosen) {
+            if (items.get(i).fileName === chosen) {
                 at = i
                 break
             }
@@ -168,7 +141,7 @@ Item {
             next = -1
         if (next > items.count - 1)
             next = items.count - 1
-        setItem(id, next < 0 ? "" : items.get(next, "fileName"))
+        setItem(id, next < 0 ? "" : items.get(next).fileName)
     }
 
     function fillBodyIfEmpty() {
@@ -178,9 +151,9 @@ Item {
             return
         var first = ""
         for (var i = 0; i < items.count; ++i) {
-            if (String(items.get(i, "filePath")) === "")
+            if (String(items.get(i).filePath) === "")
                 continue
-            first = items.get(i, "fileName")
+            first = items.get(i).fileName
             break
         }
         if (first)
@@ -194,7 +167,7 @@ Item {
             var name = state[c.id]
             if (!name)
                 continue
-            out.push({ url: S.fileUrl(c.path + "/" + name), z: c.z, id: c.id })
+            out.push({ url: S.itemUrl(c.path, name), z: c.z, id: c.id })
         }
         out.sort(function (a, b) { return a.z - b.z })
         _layers = out
@@ -222,10 +195,10 @@ Item {
                     next[c.id] = state[c.id]
                 continue
             }
-            var model = _catalog[c.id]
-            if (!model || model.count === 0)
+            var files = c.files || []
+            if (!files.length)
                 continue
-            next[c.id] = model.get(Math.floor(Math.random() * model.count), "fileName")
+            next[c.id] = files[Math.floor(Math.random() * files.length)]
         }
         state = next
         rebuildLayers()
