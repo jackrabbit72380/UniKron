@@ -49,14 +49,26 @@ names (0 hits for Position/Opacity/BlendMode in UTF-16LE/BE and ASCII), so it
 is a thin loader; the runtime that consumes DATA is the PowerPC code inside
 the XEX itself.
 
-  4. Locating that PowerPC code by reference, so it could be disassembled:
-     blocked before the disassembler. The XEX only embeds a stub PE at 0x3000
-     (MZ with 0 sections), and its 13 optional headers are unresolved beyond
-     key 0x00010201, so there is no file->VA map. The enum strings are reached
-     by virtual address, not by file offset: searching for each string's file
-     offset as a BE or LE u32 pointer yields zero hits, and no consecutive
-     pointer run exists either. Without VAs the code cannot be found, which is
-     what stops the disassembly route (capstone 5.0.7 is available and ready).
+  4. Disassembly: attempted properly, and it does not help. The real PE sits
+     at 0x30f0 (pe_data_offset only holds a DOS stub, which is why an earlier
+     attempt saw "0 sections"), image base 0x92000000, with .rdata, .pdata,
+     .text and .data mapped, so file->VA is solved: VA = 0x92000000 + RVA +
+     (file_off - rawptr - 0x3000). Raw pointers are PE-relative, proven by
+     .rdata's raw range overlapping the PE headers if they were not.
+     `Value` is at 0x920286ad.
+
+     .text is 1,053,184 bytes at VA 0x9203a000 and decodes cleanly as PowerPC
+     big-endian (2,963 stwu prologues, via capstone 5.0.7). Measured against
+     that text: zero references to the property-name strings
+     (0x920286ad..0x92028cad) - no lis+addi, no displacement-form loads, no
+     pointer words in .rdata or .data in either endianness; zero constructions
+     of the chunk tags (STRN/VECT/DATA/XUIB/XUIZ/QUAT), and zero raw
+     occurrences of those tags in .text. The module holds no `Xui*` symbol at
+     all, and .idata imports only Xbox LIVE, XBOXS and HTTP APIs.
+
+     Conclusion: the XUI interpreter that consumes DATA is not shipped in this
+     module - it is the dashboard's engine - so the element->position mapping
+     cannot be recovered from these files by any disassembly.
 
 Usage:
     python xui_parse.py avatareditor.xex            # JSON summary
