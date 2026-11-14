@@ -10,7 +10,6 @@ import "../../js/styling.mjs" as Styling
 import "../../components"
 import "./components"
 import "../../Lists"
-import "../../avatar/avatar_theme/avatar"
 
 // ════════════════════════════════════════════════════════════════════
 // GamerPage.qml  —  Profile hub: Generals | Profile | Avatar Scene
@@ -270,6 +269,22 @@ Item {
     try { return JSON.parse(s) } catch (e) { return ({}) }
   }
 
+  function applyCustomAvatar(state) {
+    api.memory.set("profile.avatar.state", JSON.stringify(state))
+    if (root.customPngSaved) {
+      root.profileAvatar = root.customAvatarName
+      api.memory.set("profile.avatar", root.customAvatarName)
+    }
+    root.customPngSaved = false
+  }
+
+  function openAvatarEditor() {
+    if (avatarEditorLoader.item)
+      avatarEditorLoader.item.open(root.storedAvatarState())
+    else
+      console.log("AVATAR: editor not loaded (" + avatarEditorLoader.status + ") — avatar/avatar_theme/avatar/AvatarEditorPage.qml missing?")
+  }
+
   function saveCustomAvatarPng(grab) {
     var ok = false
     try { ok = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/Custom.png")) } catch (e) { ok = false }
@@ -512,25 +527,27 @@ Item {
   }
 
   // ════════════════════════════════════════════════════════════════
-  // AVATAR EDITOR — opened by the "+" tile in Choose Avatar
+  // AVATAR EDITOR — opened by the "+" tile in Choose Avatar.
+  // Loaded at runtime: if avatar/ is not at the theme root this page still
+  // opens, the "+" just logs instead of doing anything.
   // ════════════════════════════════════════════════════════════════
-  AvatarEditorPage {
-    id: avatarEditorPage
+  Loader {
+    id: avatarEditorLoader
     anchors.fill: parent
     z: 5000
-    gamerTag: root.profileName
-    accentColor: root.accentHex
-    accentInkColor: "#062033"
+    source: Qt.resolvedUrl("../../avatar/avatar_theme/avatar/AvatarEditorPage.qml")
 
-    onPortraitReady: function (grab) { root.saveCustomAvatarPng(grab) }
+    onLoaded: {
+      item.accentColor    = root.accentHex
+      item.accentInkColor = "#062033"
+      item.gamerTag       = root.profileName
+      item.portraitReady.connect(root.saveCustomAvatarPng)
+      item.accepted.connect(root.applyCustomAvatar)
+    }
 
-    onAccepted: function (state) {
-      api.memory.set("profile.avatar.state", JSON.stringify(state))
-      if (root.customPngSaved) {
-        root.profileAvatar = root.customAvatarName
-        api.memory.set("profile.avatar", root.customAvatarName)
-      }
-      root.customPngSaved = false
+    onStatusChanged: {
+      if (status === Loader.Error)
+        console.log("AVATAR: could not load the avatar editor — check that avatar/avatar_theme/avatar/ is at the theme root")
     }
   }
 
@@ -2059,7 +2076,7 @@ Item {
                   MouseArea {
                     id: plusHoverEdit
                     anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
-                    onClicked: avatarEditorPage.open(root.storedAvatarState())
+                    onClicked: root.openAvatarEditor()
                   }
                 }
               }
@@ -3261,7 +3278,7 @@ Item {
                   MouseArea {
                     id: plusHoverCreate
                     anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
-                    onClicked: avatarEditorPage.open(root.storedAvatarState())
+                    onClicked: root.openAvatarEditor()
                   }
                 }
               }
