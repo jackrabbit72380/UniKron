@@ -280,13 +280,40 @@ Item {
     root.customPngSaved = false
   }
 
+  // TEMPORARY: on-screen trace of the "+" click, set avatarDebug:false to remove.
+  property bool avatarDebug: true
+  property string avatarDebugText: ""
+
+  function loaderStatusName(st) {
+    if (st === Loader.Null)    return "Null (no source)"
+    if (st === Loader.Loading) return "Loading"
+    if (st === Loader.Ready)   return "Ready"
+    if (st === Loader.Error)   return "Error (module failed to load)"
+    return String(st)
+  }
+
   function openAvatarEditor() {
-    if (!avatarEditorLoader.item) {
-      console.log("AVATAR: editor not loaded (status " + avatarEditorLoader.status + ") — avatar/avatar_theme/avatar/AvatarEditorPage.qml missing?")
-      return
+    if (avatarEditorLoader.item)
+      avatarEditorLoader.item.open(root.storedAvatarState())
+    root.tracePlusClick()
+  }
+
+  function tracePlusClick() {
+    if (!root.avatarDebug) return
+    var lines = []
+    lines.push("source:  " + avatarEditorLoader.source)
+    lines.push("status:  " + root.loaderStatusName(avatarEditorLoader.status))
+    lines.push("item:    " + (avatarEditorLoader.item ? "yes" : "null"))
+    if (avatarEditorLoader.item) {
+      lines.push("size:    " + Math.round(avatarEditorLoader.item.width) + " x " + Math.round(avatarEditorLoader.item.height))
+      lines.push("open():  opened = " + avatarEditorLoader.item.opened)
+    } else {
+      lines.push("")
+      lines.push("The editor file above was not loaded. If status is Error, the")
+      lines.push("folder/file is not where source says, or a QML import inside")
+      lines.push("it is missing from this build (the log names it).")
     }
-    console.log("AVATAR: opening editor, item " + avatarEditorLoader.item.width + "x" + avatarEditorLoader.item.height)
-    avatarEditorLoader.item.open(root.storedAvatarState())
+    root.avatarDebugText = lines.join("\n")
   }
 
   function saveCustomAvatarPng(grab) {
@@ -559,6 +586,38 @@ Item {
         root.avatarLoaderFailed = false
       }
     }
+  }
+
+  // TEMPORARY ─ trace of the "+" click, visible instead of log-only.
+  Rectangle {
+    visible: root.avatarDebugText !== ""
+    anchors.centerIn: parent
+    width: Math.min(root.width - vpx(80), vpx(680))
+    height: traceColumn.implicitHeight + vpx(20)
+    radius: vpx(6)
+    color: "#F2000000"
+    border.color: root.accentHex; border.width: vpx(2)
+    z: 9999
+
+    Column {
+      id: traceColumn
+      anchors.fill: parent
+      anchors.margins: vpx(10)
+      spacing: vpx(4)
+
+      Text {
+        text: "AVATAR + TRACE  (click to close)"
+        color: root.accentHex; font.pixelSize: vpx(13); font.bold: true
+      }
+      Text {
+        text: root.avatarDebugText
+        width: traceColumn.width
+        color: "#FFFFFF"; font.pixelSize: vpx(11)
+        wrapMode: Text.WrapAnywhere
+      }
+    }
+
+    MouseArea { anchors.fill: parent; onClicked: root.avatarDebugText = "" }
   }
 
   // ════════════════════════════════════════════════════════════════
