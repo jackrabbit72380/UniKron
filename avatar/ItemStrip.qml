@@ -47,13 +47,13 @@ Item {
         model: strip.model
 
         header: Item {
-            width: strip.allowNone ? 132 : 0
-            height: 186
+            width: strip.allowNone ? 112 : 0
+            height: 152
             visible: strip.allowNone
             ItemTile {
                 anchors.bottom: parent.bottom
-                width: 132
-                height: 186
+                width: 112
+                height: 152
                 label: "None"
                 noneTile: true
                 selected: strip.selectedName === ""

@@ -15,14 +15,16 @@ Item {
 
     signal picked()
 
-    implicitWidth: 132
-    implicitHeight: 186
+    implicitWidth: 112
+    implicitHeight: 152
 
     Rectangle {
         id: card
         anchors.fill: parent
-        radius: 16
-        color: tile.selected ? style.cardActive
+        radius: 12
+        // Same lime the closet uses for a chosen item (#c6f473, sampled from
+        // its 512x128 button plates in avatareditor.xex).
+        color: tile.selected ? "#c6f473"
                              : (pointer.containsMouse ? style.cardHover : style.card)
         border.width: tile.selected ? 0 : 1
         border.color: "#33ffffff"

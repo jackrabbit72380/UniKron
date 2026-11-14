@@ -86,10 +86,18 @@ Item {
         color: page.scrimColor
     }
 
+    // The original closet is authored on a 960x720 surface (read out of
+    // scnEditor's DATA in avatareditor.xex), so the editor is laid out at that
+    // size and scaled as one piece. Proportions then match the source at any
+    // window size instead of stretching with it.
+    readonly property real uiScale: Math.max(0.2, Math.min((page.width - 32) / 960,
+                                                          (page.height - 32) / 720))
+
     Rectangle {
         id: frame
-        anchors.fill: parent
-        anchors.margins: 16
+        width: 960 * page.uiScale
+        height: 720 * page.uiScale
+        anchors.centerIn: parent
         radius: 14
         color: page.panelColor
         border.width: 1
@@ -100,8 +108,10 @@ Item {
 
         AvatarEditor {
             id: editor
-            anchors.fill: parent
-            anchors.margins: 4
+            width: 960
+            height: 720
+            scale: page.uiScale
+            transformOrigin: Item.TopLeft
             assetsFolder: page.assetsFolder
             gamerTag: page.gamerTag
             title: page.title

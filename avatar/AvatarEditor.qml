@@ -50,8 +50,10 @@ Item {
     signal portraitReady(var grabResult)
     signal backRequested()
 
-    implicitWidth: 1180
-    implicitHeight: 700
+    // Authored size of the original closet (avatareditor.xex, scnEditor DATA
+    // stores 960x720); the page scales this whole item to the window.
+    implicitWidth: 960
+    implicitHeight: 720
     focus: true
 
     property var _layers: []
@@ -400,7 +402,7 @@ Item {
         anchors.rightMargin: 26
         anchors.bottom: legend.top
         anchors.bottomMargin: 10
-        height: 196
+        height: 172
 
         model: items
         bodySource: (root.bodyCategory && root.currentCategory
