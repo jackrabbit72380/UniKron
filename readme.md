@@ -6,7 +6,7 @@ Built For the Future!
 UniKron is the modern evolution of a long‑running vision: a cinematic, customizable, controller‑first interface for browsing and launching games across PC, console‑style devices, and handheld systems. Built as a theme for the Pegasus Frontend, UniKron delivers a seamless, art‑driven experience powered by modern UI technologies.
 
 ---
-## 🦄 UniKron is built using:
+## 📜 UniKron is built using:
 
 - **QML + QtQuick2**  
 - **Qt 5.15+**  
