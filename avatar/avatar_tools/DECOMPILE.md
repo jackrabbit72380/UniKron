@@ -58,6 +58,9 @@ JAVA_HOME=/tmp/jdk-25.0.5+8 ghidra_*/support/analyzeHeadless /tmp/proj uni2008 \
 # x86 XBE: same wrapper, different architecture
 python3 mkelf.py Toolbox.xip /tmp/Toolbox.elf --x86
 # ... -processor x86:LE:32:default
+# The -processor flag is what actually selects the architecture; an ELF wrapped
+# for the wrong machine still decompiles, and gives the same 2,144 functions, so
+# the container arch is a correctness detail rather than a result-changing one.
 ```
 
 ## Four traps worth writing down

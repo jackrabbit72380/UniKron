@@ -114,14 +114,16 @@ def build_elf(image, out_path, arch="ppc"):
 
 
 def main(argv):
-    if len(argv) != 2:
+    flags = [a for a in argv if a.startswith("--")]
+    paths = [a for a in argv if not a.startswith("--")]
+    if len(paths) != 2:
         print(__doc__)
         return 1
-    arch = "x86" if "--x86" in argv else "ppc"
-    image = ppc_disasm.load(argv[0])
-    base, span, count = build_elf(image, argv[1], arch)
+    arch = "x86" if "--x86" in flags else "ppc"
+    image = ppc_disasm.load(paths[0])
+    base, span, count = build_elf(image, paths[1], arch)
     print("%s -> %s  %s  base 0x%08x  %d sections  %d bytes of address space" % (
-        argv[0], argv[1], arch, base, count, span))
+        paths[0], paths[1], arch, base, count, span))
     return 0
 
 
