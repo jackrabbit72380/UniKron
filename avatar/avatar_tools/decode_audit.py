@@ -329,8 +329,8 @@ DEPTH = {
           "and is not disassembled.",
     "pak": "full resource table: counts, every entry's id and offset validated against "
            "the file.",
-    "xip0": "header, dimensions and payload size. The payload is dashboard UI data "
-            "whose semantics are not mapped.",
+    "xip0": "header, then the payload read as a VRML/X3D scene: xip_scene.py lists "
+            "every node, material and geometry reference and resolves them.",
     "xm": "header only; the float body is not parsed.",
     "wav": "fmt and data chunks: rate, channels, bit depth and audio length.",
     "png": "IHDR dimensions.",

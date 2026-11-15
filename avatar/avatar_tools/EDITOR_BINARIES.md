@@ -262,8 +262,27 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
   (vertices, keys or colours) is not established;
 * 4 `cellwall.xbx` - a 90112-byte file whose payload (43 sectors of 2048) fits no
   power-of-two DXT shape, so it is a texture plus extra data;
-* XIP0, XPR0, XET/PE and the fonts decode their headers and tables, not their
-  semantics - `DECODE_COVERAGE.md` says how deep each one goes.
+* PE and the fonts decode their headers and tables; `DECODE_COVERAGE.md` says how
+  deep each one goes.
+
+## The dashboard's screens are text
+
+An XIP0 is a 12-byte header and then **uncompressed scene text** in a VRML/X3D
+dialect - `DEF Music_Arm Transform { children [ Shape { appearance Appearance {
+material MaxMaterial { name "DarkenBacking" } } geometry DEF ...-FACES Mesh {
+url "...-FACES.xm" } } ] translation ... }`. `xip_scene.py` reads them:
+
+* 27 packages parse; the 3 other `.xip` files are XBE executables, not scenes;
+* 5659 node definitions, 2835 geometry references, 80-596 per screen;
+* the meshes are the `.xm` files, one per node, in a folder named after the
+  package (`music2.xip` + `music2/MU_backing_cd-FACES.xm`);
+* only **175 of 2835** references resolve - the archive ships a few meshes and
+  `.meta` sidecars for the rest, so most dashboard geometry simply was not
+  included. That is a gap in the source, not a decoder failure.
+
+So the dashboard screens are scene graphs referencing mesh files, and the
+material names (`PanelBacking_01`, `XBOXgreen`, `GameHilite`) are the palette the
+skin textures are painted with.
 
 ## The dashboard's own textures
 

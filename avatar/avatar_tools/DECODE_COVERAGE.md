@@ -51,7 +51,7 @@ extension, with the decoder that was run and what it read.
 - **wav** - fmt and data chunks: rate, channels, bit depth and audio length.
 - **xbe** - base address, image size and entry point; no code executed.
 - **xex** - header only: the body is LZX-compressed and title-encrypted.
-- **xip0** - header, dimensions and payload size. The payload is dashboard UI data whose semantics are not mapped.
+- **xip0** - header, then the payload read as a VRML/X3D scene: xip_scene.py lists every node, material and geometry reference and resolves them.
 - **xm** - header only; the float body is not parsed.
 - **xpr0** - pixels decoded: 131 of 135 export to PNG with xpr0_export.py, as DXT1, DXT5, or the first of two stacked DXT1 planes.
 - **xtf** - header and face name; the glyph tables are not rasterised.
