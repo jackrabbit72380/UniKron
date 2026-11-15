@@ -1,6 +1,15 @@
 import QtQuick 2.15
 
 // Vertical list of the category folders found in assets/.
+//
+// The rows are filled pills in the closet's own colours — #c6f473 selected,
+// #38485e / #43546e unselected, sampled from its 512x128 button plates in
+// avatareditor.xex.
+//
+// Using the plates themselves here was tried and is worse: border_long_nofill_*
+// is an outline frame with a baked drop shadow, so at a 168x42 row it reads as a
+// faint offset box with the label crossing its edge. The plates are drawn for a
+// 4:1 slot about three times this size.
 Item {
     id: rail
 
@@ -34,37 +43,24 @@ Item {
             height: 40
             radius: 8
 
-            // The closet's own selected/unselected button colours, sampled from
-            // its 512x128 plates in avatareditor.xex (#c6f473 / #38485e). The
-            // plates themselves are outline frames and look wrong stretched
-            // into a pill this shape, so only their palette is used here.
             color: index === rail.currentIndex
                    ? "#c6f473"
                    : (pointer.containsMouse ? "#43546e" : "#38485e")
 
             Behavior on color { ColorAnimation { duration: 120 } }
 
-            Rectangle {
-                width: 6
-                height: 20
-                radius: 3
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.verticalCenter: parent.verticalCenter
-                color: style.accent
-                opacity: index === rail.currentIndex ? 1 : 0
-                Behavior on opacity { NumberAnimation { duration: 120 } }
-            }
-
             Text {
                 anchors.left: parent.left
-                anchors.leftMargin: 26
+                anchors.leftMargin: 16
                 anchors.right: parent.right
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
-                text: pill.modelData.label
-                color: index === rail.currentIndex ? style.inkOnCard : style.ink
-                font.family: style.titleFamily
+                text: pill.modelData ? pill.modelData.label : ""
+                // Literals, not style.*: inside a ListView delegate the Style
+                // object of the root is not resolved when these first bind, and
+                // Qt then logs "Unable to assign [undefined]" once per row.
+                color: index === rail.currentIndex ? "#1f2b0a" : "#ffffff"
+                font.family: "Segoe UI"
                 font.pixelSize: 15
                 font.weight: index === rail.currentIndex ? Font.DemiBold : Font.Normal
                 elide: Text.ElideRight

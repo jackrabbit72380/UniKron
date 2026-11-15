@@ -565,8 +565,11 @@ Item {
                     }
                     Text {
                         text: modelData.label
-                        color: style.ink
-                        font.family: style.titleFamily
+                        // Literals: style.* is not resolved on a delegate's first
+                        // bind, which logs "Unable to assign [undefined]" for
+                        // every entry of the Repeater.
+                        color: "#ffffff"
+                        font.family: "Segoe UI"
                         font.pixelSize: 13
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -755,7 +758,7 @@ Item {
                         anchors.bottomMargin: 8
                         text: modelData.label
                         color: index === root.featureIndex ? "#20300a" : "#f4f7fa"
-                        font.family: style.titleFamily
+                        font.family: "Segoe UI"
                         font.pixelSize: 15
                         font.weight: Font.DemiBold
                     }
@@ -815,7 +818,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         text: modelData.label
                         color: index === root.menuIndex ? "#20300a" : "#f4f7fa"
-                        font.family: style.titleFamily
+                        font.family: "Segoe UI"
                         font.pixelSize: 19
                         font.weight: Font.DemiBold
                         elide: Text.ElideRight
