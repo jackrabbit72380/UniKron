@@ -26,6 +26,10 @@ INDEX = ROOT / "AssetIndex.qml"
 
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".svg"}
 
+# Folders under assets/ that are not clothing categories: _ui is chrome, and 3d
+# holds the baked turntables the stage loads by name.
+NOT_CATEGORIES = {"3d"}
+
 HEADER = """\
 import QtQuick 2.15
 
@@ -53,8 +57,8 @@ def collect() -> list[dict]:
         if not folder.is_dir():
             continue
         name = folder.name
-        if name.startswith("_") or name.startswith("."):
-            continue                                  # _ui and friends are chrome
+        if name.startswith("_") or name.startswith(".") or name.lower() in NOT_CATEGORIES:
+            continue                                  # _ui, 3d and friends
         files = sorted(
             (f.name for f in folder.iterdir()
              if f.is_file() and f.suffix.lower() in IMAGE_SUFFIXES),

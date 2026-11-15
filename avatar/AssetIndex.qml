@@ -6,13 +6,13 @@ import QtQuick 2.15
 // this file for you (install_watcher.bat runs it at login), then press F5.
 QtObject {
     readonly property var folders: [
-        { "id": "10_body", "files": ["body_brown.png", "body_deep.png", "body_light.png", "body_pale.png", "body_tan.png"] },
-        { "id": "20_pants", "files": ["cargo_olive.png", "jeans_indigo.png", "joggers_black.png", "shorts_khaki.png"] },
-        { "id": "30_shoes", "files": ["boots_brown.png", "sneakers_white.png", "trainers_red.png"] },
-        { "id": "40_shirt", "files": ["coat_navy.png", "hoodie_grey.png", "jersey_green.png", "tank_white.png", "tee_blue.png"] },
-        { "id": "45_facial-hair", "files": ["beard_brown.png", "mustache_brown.png"] },
-        { "id": "50_hair", "files": ["hair_bun_red.png", "hair_long_blond.png", "hair_short_brown.png", "hair_spiky_black.png"] },
-        { "id": "60_hat", "files": ["beanie_grey.png", "cap_blue.png"] },
-        { "id": "70_glasses", "files": ["glasses_round.png", "shades_dark.png"] },
+        { "id": "10_body", "files": ["body_amber.png", "body_brown.png", "body_deep.png", "body_light.png", "body_mahogany.png", "body_olive.png", "body_pale.png", "body_tan.png"] },
+        { "id": "20_pants", "files": ["cargo_brown.png", "cargo_grey.png", "cargo_olive.png", "jeans_black.png", "jeans_grey.png", "jeans_indigo.png", "joggers_black.png", "joggers_grey.png", "joggers_navy.png", "shorts_black.png", "shorts_denim.png", "shorts_khaki.png"] },
+        { "id": "30_shoes", "files": ["boots_black.png", "boots_brown.png", "boots_tan.png", "sneakers_black.png", "sneakers_green.png", "sneakers_navy.png", "sneakers_white.png", "trainers_red.png"] },
+        { "id": "40_shirt", "files": ["coat_brown.png", "coat_grey.png", "coat_navy.png", "coat_olive.png", "hoodie_grey.png", "hoodie_navy.png", "hoodie_olive.png", "hoodie_plum.png", "jersey_blue.png", "jersey_green.png", "jersey_red.png", "jersey_white.png", "tank_black.png", "tank_blue.png", "tank_pink.png", "tank_white.png", "tee_black.png", "tee_blue.png", "tee_red.png", "tee_white.png"] },
+        { "id": "45_facial-hair", "files": ["beard_black.png", "beard_brown.png", "beard_grey.png", "mustache_black.png", "mustache_brown.png", "mustache_grey.png"] },
+        { "id": "50_hair", "files": ["hair_bun_black.png", "hair_bun_blond.png", "hair_bun_brown.png", "hair_bun_grey.png", "hair_bun_red.png", "hair_long_black.png", "hair_long_blond.png", "hair_long_brown.png", "hair_long_grey.png", "hair_long_red.png", "hair_short_black.png", "hair_short_blond.png", "hair_short_brown.png", "hair_short_grey.png", "hair_short_red.png", "hair_spiky_black.png", "hair_spiky_blond.png", "hair_spiky_brown.png", "hair_spiky_grey.png", "hair_spiky_red.png"] },
+        { "id": "60_hat", "files": ["beanie_grey.png", "beanie_navy.png", "beanie_red.png", "beanie_white.png", "cap_black.png", "cap_blue.png", "cap_red.png", "cap_sand.png"] },
+        { "id": "70_glasses", "files": ["glasses_round.png", "round_blue.png", "round_gold.png", "shades_blue.png", "shades_dark.png", "shades_red.png"] },
     ]
 }

@@ -284,7 +284,12 @@ Item {
     // fileName / filePath roles exactly as they were with a folder listing.
     function fillItems() {
         items.clear()
-        var cat = currentCategory
+        // Read the category straight off the array, not through currentCategory:
+        // this runs from the categoryIndex change handler, where that binding has
+        // not been re-evaluated yet, so it would still hold the previous category
+        // and leave the strip showing the wrong items.
+        var cat = (categoryIndex >= 0 && categoryIndex < categories.length)
+                  ? categories[categoryIndex] : null
         if (!cat)
             return
         var files = cat.files || []

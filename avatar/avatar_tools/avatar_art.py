@@ -29,6 +29,9 @@ SKIN = {
     "tan": ("#d99a6c", "#be7f54"),
     "brown": ("#a86a42", "#8d5533"),
     "deep": ("#6f4229", "#5a3420"),
+    "olive": ("#c08f5e", "#a57546"),
+    "amber": ("#8d5433", "#74401f"),
+    "mahogany": ("#5a3320", "#472417"),
 }
 
 
@@ -201,19 +204,19 @@ def hat_svg(kind, colour, dark):
                f'<circle cx="256" cy="46" r="15" fill="{dark}"/>')
 
 
-def glasses_svg(kind):
+def glasses_svg(kind, colour="#20242b"):
     if kind == "shades":
-        return svg('<rect x="196" y="134" width="54" height="34" rx="10" fill="#20242b"/>'
-                   '<rect x="262" y="134" width="54" height="34" rx="10" fill="#20242b"/>'
-                   '<path d="M250,146 L262,146" stroke="#20242b" stroke-width="7"/>'
-                   '<path d="M196,146 L182,150 M316,146 L330,150" stroke="#20242b" '
+        return svg(f'<rect x="196" y="134" width="54" height="34" rx="10" fill="{colour}"/>'
+                   f'<rect x="262" y="134" width="54" height="34" rx="10" fill="{colour}"/>'
+                   f'<path d="M250,146 L262,146" stroke="{colour}" stroke-width="7"/>'
+                   f'<path d="M196,146 L182,150 M316,146 L330,150" stroke="{colour}" '
                    'stroke-width="6" stroke-linecap="round"/>')
-    return svg('<rect x="194" y="130" width="56" height="38" rx="18" fill="none" '
-               'stroke="#2b2b2b" stroke-width="6"/>'
-               '<rect x="262" y="130" width="56" height="38" rx="18" fill="none" '
-               'stroke="#2b2b2b" stroke-width="6"/>'
-               '<path d="M248,148 L264,148" stroke="#2b2b2b" stroke-width="6"/>'
-               '<path d="M198,146 L184,150 M314,146 L328,150" stroke="#2b2b2b" '
+    return svg(f'<rect x="194" y="130" width="56" height="38" rx="18" fill="none" '
+               f'stroke="{colour}" stroke-width="6"/>'
+               f'<rect x="262" y="130" width="56" height="38" rx="18" fill="none" '
+               f'stroke="{colour}" stroke-width="6"/>'
+               f'<path d="M248,148 L264,148" stroke="{colour}" stroke-width="6"/>'
+               f'<path d="M198,146 L184,150 M314,146 L328,150" stroke="{colour}" '
                'stroke-width="5" stroke-linecap="round"/>')
 
 
@@ -318,54 +321,117 @@ def shadow():
 
 
 def main():
-    skins = list(SKIN.items())
-    for name, (skin, shade) in skins:
+    for name, (skin, shade) in SKIN.items():
         add("10_body", "body_" + name, body_svg(skin, shade))
 
-    hair = {
-        "short_brown": ("short", "#4a3324"),
-        "spiky_black": ("spiky", "#23201e"),
-        "long_blond": ("long", "#c9963f"),
-        "bun_red": ("bun", "#8c3b23"),
+    # Hair: four shapes, five colours each. The original four names stay put so a
+    # saved avatar keeps resolving.
+    hair_colours = {
+        "brown": "#4a3324",
+        "black": "#23201e",
+        "blond": "#c9963f",
+        "red": "#8c3b23",
+        "grey": "#8d8d93",
     }
-    for name, (style, colour) in hair.items():
-        add("50_hair", "hair_" + name, hair_svg(style, colour))
+    for style in ("short", "spiky", "long", "bun"):
+        for tone, colour in hair_colours.items():
+            add("50_hair", "hair_%s_%s" % (style, tone), hair_svg(style, colour))
 
-    shirts = {
-        "tee_blue": ("tee", "#2f7fd4", "#1f5c9e"),
-        "hoodie_grey": ("hoodie", "#5c6470", "#464d57"),
-        "jersey_green": ("jersey", "#3fa34d", "#2b7a37"),
-        "tank_white": ("tank", "#eef1f4", "#c9ced6"),
-        "coat_navy": ("coat", "#2b3550", "#1d2438"),
-    }
-    for name, (kind, colour, dark) in shirts.items():
-        add("40_shirt", name, shirt_svg(kind, colour, dark))
+    shirts = [
+        ("tee",    "blue",  "#2f7fd4", "#1f5c9e"),
+        ("tee",    "white", "#eef1f4", "#c9ced6"),
+        ("tee",    "red",   "#c5443a", "#8f2c25"),
+        ("tee",    "black", "#2b2f36", "#1d2026"),
+        ("hoodie", "grey",  "#5c6470", "#464d57"),
+        ("hoodie", "navy",  "#2b3550", "#1d2438"),
+        ("hoodie", "olive", "#6b7048", "#4f5333"),
+        ("hoodie", "plum",  "#5a3355", "#3f2139"),
+        ("jersey", "green", "#3fa34d", "#2b7a37"),
+        ("jersey", "red",   "#bf3b39", "#8a2724"),
+        ("jersey", "blue",  "#2f5fa8", "#204278"),
+        ("jersey", "white", "#eef1f4", "#c9ced6"),
+        ("tank",   "white", "#eef1f4", "#c9ced6"),
+        ("tank",   "black", "#2b2f36", "#1d2026"),
+        ("tank",   "blue",  "#2f7fd4", "#1f5c9e"),
+        ("tank",   "pink",  "#d0708f", "#a44f6b"),
+        ("coat",   "navy",  "#2b3550", "#1d2438"),
+        ("coat",   "grey",  "#5c6470", "#464d57"),
+        ("coat",   "brown", "#6d4630", "#4a2d1e"),
+        ("coat",   "olive", "#6b7048", "#4f5333"),
+    ]
+    for kind, name, colour, dark in shirts:
+        add("40_shirt", "%s_%s" % (kind, name), shirt_svg(kind, colour, dark))
 
-    pants = {
-        "jeans_indigo": ("jeans", "#3f5b8b", "#2f4569"),
-        "joggers_black": ("joggers", "#2b2f36", "#1d2026"),
-        "shorts_khaki": ("shorts", "#b99a63", "#8f7546"),
-        "cargo_olive": ("cargo", "#6b7048", "#4f5333"),
-    }
-    for name, (kind, colour, dark) in pants.items():
-        add("20_pants", name, pants_svg(kind, colour, dark))
+    pants = [
+        ("jeans",  "indigo", "#3f5b8b", "#2f4569"),
+        ("jeans",  "black",  "#2b2f36", "#1d2026"),
+        ("jeans",  "grey",   "#5c6470", "#464d57"),
+        ("joggers", "black", "#2b2f36", "#1d2026"),
+        ("joggers", "grey",  "#5c6470", "#464d57"),
+        ("joggers", "navy",  "#2b3550", "#1d2438"),
+        ("shorts", "khaki",  "#b99a63", "#8f7546"),
+        ("shorts", "black",  "#2b2f36", "#1d2026"),
+        ("shorts", "denim",  "#3f5b8b", "#2f4569"),
+        ("cargo",  "olive",  "#6b7048", "#4f5333"),
+        ("cargo",  "brown",  "#6d4630", "#4a2d1e"),
+        ("cargo",  "grey",   "#5c6470", "#464d57"),
+    ]
+    for kind, name, colour, dark in pants:
+        add("20_pants", "%s_%s" % (kind, name), pants_svg(kind, colour, dark))
 
-    shoes = {
-        "sneakers_white": ("sneakers", "#e9edf1", "#b9c2cc"),
-        "boots_brown": ("boots", "#6d4630", "#4a2d1e"),
-        "trainers_red": ("sneakers", "#c5443a", "#8f2c25"),
-    }
-    for name, (kind, colour, dark) in shoes.items():
-        add("30_shoes", name, shoes_svg(kind, colour, dark))
+    shoes = [
+        ("sneakers", "white", "#e9edf1", "#b9c2cc"),
+        ("sneakers", "black", "#2b2f36", "#1d2026"),
+        ("sneakers", "navy",  "#2b3550", "#1d2438"),
+        ("sneakers", "red",   "#c5443a", "#8f2c25"),  # shipped as trainers_red
+        ("sneakers", "green", "#3fa34d", "#2b7a37"),
+        ("boots",    "brown", "#6d4630", "#4a2d1e"),
+        ("boots",    "black", "#2b2f36", "#1d2026"),
+        ("boots",    "tan",   "#b08150", "#8a6238"),
+    ]
+    for kind, name, colour, dark in shoes:
+        shipped = {("sneakers", "red"): "trainers_red"}
+        add("30_shoes", shipped.get((kind, name), "%s_%s" % (kind, name)),
+            shoes_svg(kind, colour, dark))
 
-    add("60_hat", "cap_blue", hat_svg("cap", "#2f6fd0", "#1f4f9c"))
-    add("60_hat", "beanie_grey", hat_svg("beanie", "#6c7480", "#4d545e"))
+    hats = [
+        ("cap",    "blue",  "#2f6fd0", "#1f4f9c"),
+        ("cap",    "red",   "#c5443a", "#8f2c25"),
+        ("cap",    "black", "#2b2f36", "#1d2026"),
+        ("cap",    "sand",  "#c9a882", "#a0825f"),
+        ("beanie", "grey",  "#6c7480", "#4d545e"),
+        ("beanie", "navy",  "#2b3550", "#1d2438"),
+        ("beanie", "red",   "#a83a33", "#82251f"),
+        ("beanie", "white", "#e9edf1", "#b9c2cc"),
+    ]
+    for kind, name, colour, dark in hats:
+        add("60_hat", "%s_%s" % (kind, name), hat_svg(kind, colour, dark))
 
-    add("70_glasses", "glasses_round", glasses_svg("round"))
-    add("70_glasses", "shades_dark", glasses_svg("shades"))
+    glasses = [
+        ("round",  "black", "#2b2b2b"),
+        ("round",  "gold",  "#b98b3c"),
+        ("round",  "blue",  "#2f5fa8"),
+        ("shades", "black", "#20242b"),
+        ("shades", "blue",  "#1d2f4d"),
+        ("shades", "red",   "#5a1f1c"),
+    ]
+    # Names shipped by the first catalogue are kept, so an avatar saved before
+    # this expansion still finds its glasses.
+    for kind, name, colour in glasses:
+        shipped = {"round_black": "glasses_round", "shades_black": "shades_dark"}
+        add("70_glasses", shipped.get("%s_%s" % (kind, name), "%s_%s" % (kind, name)),
+            glasses_svg(kind, colour))
 
-    add("45_facial-hair", "beard_brown", facial_svg("beard", "#4a3324"))
-    add("45_facial-hair", "mustache_brown", facial_svg("mustache", "#4a3324"))
+    facial = [
+        ("beard",    "brown", "#4a3324"),
+        ("beard",    "black", "#23201e"),
+        ("beard",    "grey",  "#8d8d93"),
+        ("mustache", "brown", "#4a3324"),
+        ("mustache", "black", "#23201e"),
+        ("mustache", "grey",  "#8d8d93"),
+    ]
+    for kind, name, colour in facial:
+        add("45_facial-hair", "%s_%s" % (kind, name), facial_svg(kind, colour))
 
     background()
     shadow()
