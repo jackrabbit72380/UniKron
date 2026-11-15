@@ -4,7 +4,7 @@ Built For the Future!
 ### A Unified, Cross‑Platform Interface Experience
 
 UniKron is the modern evolution of a long‑running vision: a cinematic, customizable, controller‑first interface for browsing and launching games across PC, console‑style devices, and handheld systems. Built as a theme for the Pegasus Frontend, UniKron delivers a seamless, art‑driven experience powered by modern UI technologies.
-UniKron works acrost all platforms to bridge the gap between users hardware alowing anyone to comunicate or play games together. no matter there device or software Os.
+UniKron works acrost all platforms to bridge the gap between users hardware allowing anyone to comunicate or play games together. no matter there device or software Os.
 
 Works on Android
 Works on Windows
