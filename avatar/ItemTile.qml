@@ -1,7 +1,11 @@
 import QtQuick 2.15
 
-// One entry in the item strip: the item drawn over the current body so you can
-// see what it will look like, plus its name.
+// One entry in the item strip: the closet's own 128x128 card art — lime when
+// chosen, grey when not, and a red/blue cross for "None" — with the item drawn
+// over the current body so you can see what it will look like, plus its name.
+//
+// The card art came out of avatareditor.xex as four 128x128 PNGs: the empty
+// selected/unselected slots and the selected/unselected None crosses.
 Item {
     id: tile
 
@@ -18,23 +22,25 @@ Item {
     implicitWidth: 112
     implicitHeight: 152
 
-    Rectangle {
+    readonly property url cardSource: Qt.resolvedUrl(
+        noneTile
+        ? "assets/_ui/xex/item_none_" + (selected ? "selected" : "unselected") + ".png"
+        : "assets/_ui/xex/item_slot_" + (selected ? "selected" : "unselected") + ".png")
+
+    Image {
         id: card
-        anchors.fill: parent
-        radius: 12
-        // Same lime the closet uses for a chosen item (#c6f473, sampled from
-        // its 512x128 button plates in avatareditor.xex).
-        color: tile.selected ? "#c6f473"
-                             : (pointer.containsMouse ? style.cardHover : style.card)
-        border.width: tile.selected ? 0 : 1
-        border.color: "#33ffffff"
-        Behavior on color { ColorAnimation { duration: 120 } }
+        width: parent.width
+        height: width
+        source: tile.cardSource
+        fillMode: Image.PreserveAspectFit
+        smooth: true
+        scale: pointer.containsMouse ? 1.03 : 1.0
+        Behavior on scale { NumberAnimation { duration: 90 } }
     }
 
     Image {
-        id: underlay
-        anchors.fill: parent
-        anchors.margins: 8
+        anchors.fill: card
+        anchors.margins: 12
         source: tile.noneTile ? "" : tile.bodySource
         fillMode: Image.PreserveAspectFit
         asynchronous: true
@@ -44,8 +50,8 @@ Item {
     }
 
     Image {
-        anchors.fill: parent
-        anchors.margins: 8
+        anchors.fill: card
+        anchors.margins: 12
         source: tile.noneTile ? "" : tile.imageSource
         fillMode: Image.PreserveAspectFit
         asynchronous: true
@@ -55,21 +61,12 @@ Item {
     }
 
     Text {
-        anchors.centerIn: parent
-        visible: tile.noneTile
-        text: "\u2715"
-        color: style.ink
-        opacity: 0.55
-        font.pixelSize: 34
-    }
-
-    Text {
+        anchors.top: card.bottom
+        anchors.topMargin: 4
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 6
-        width: parent.width - 16
-        text: tile.label
-        color: tile.selected ? style.inkOnCard : style.ink
+        width: parent.width
+        text: tile.noneTile ? "None" : tile.label
+        color: style.ink
         font.family: style.titleFamily
         font.pixelSize: 12
         elide: Text.ElideRight
