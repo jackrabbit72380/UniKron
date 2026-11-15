@@ -508,3 +508,14 @@ The geometry is solved; what remains is two smaller things.
 Earlier hypotheses that are now settled and wrong: a per-asset scale, a hidden
 float buffer, derived bone orientations, a stale clip and a broken serialiser.
 The meshes were being sheared by a signed read of an unsigned lattice count.
+
+## Decompilation
+
+Decoding the bytes was only half of it; the code itself is recoverable. See
+`DECOMPILE.md` for the Ghidra setup, the four format traps (no Xbox loader, a PE
+header that lies about its base by `0x06000000`, little-endian XBE integers, and
+`.xip` files that are Original Xbox x86 rather than 360 PowerPC), and the two
+places this stops: the encrypted 2010 `avatareditor.xex` and the third-party
+host binaries. The 2008 editor yields 1,986 functions of C; `ppc_disasm.py`
+still supplies the string-to-function map that the decompiler cannot see through
+the pointer tables.
