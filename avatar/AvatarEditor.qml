@@ -233,7 +233,36 @@ Item {
         }
         list.sort(function (a, b) { return a.z - b.z })
         categories = list
+        seedOutfit()
         fillItems()
+    }
+
+    // A fresh avatar wears a stock outfit, the way the dashboard's does: without
+    // this the first visit shows a player standing in nothing but a body layer
+    // until they pick every garment by hand. Only empty slots are filled, so a
+    // saved wardrobe is never overwritten.
+    function seedOutfit() {
+        var wanted = ["shirt", "pants", "shoes", "hair"]
+        var next = {}
+        var changed = false
+        for (var held in state)
+            next[held] = state[held]
+        for (var i = 0; i < categories.length; ++i) {
+            var c = categories[i]
+            if (!c || !c.files || !c.files.length)
+                continue
+            for (var w = 0; w < wanted.length; ++w) {
+                // 45_facial-hair is not the hairstyle category.
+                if (c.id.indexOf(wanted[w]) < 0 || c.id.indexOf("facial") >= 0)
+                    continue
+                if (!next[c.id]) {
+                    next[c.id] = c.files[0]
+                    changed = true
+                }
+            }
+        }
+        if (changed)
+            state = next
     }
 
     // The strip shows one category at a time. A ListModel keeps the tiles'
