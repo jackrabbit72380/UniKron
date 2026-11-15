@@ -9,8 +9,28 @@ with `world * inverse(bind_world)` - the same composition Avatar Aura's bake use
 
     python3 avatar_pose.py --pack <AvatarAssetPack.toc> --asset MaleBody \\
         --clip "Animation Generic Stand 1" --frame 1 --obj posed.obj
-"""
 
+Status after testing every convention this file supports (delta, delta2, local,
+world, with and without conjugated rotations, with the pose elements taken in
+stream order or reversed, and with the mesh mirrored across Z):
+
+  * The mesh and the skeleton are provably in one space. Each bone's weighted
+    vertices sit a median 0.095 from that bone's own joint position with no axis
+    permutation or sign flip, which is the alignment a correct match produces.
+  * The skeleton parse is exact: it consumes 4300 of the 538-byte array's 4304
+    bits, decodes 71 joints with a sane parent chain, every bind rotation is
+    identity, and positions are a 17/17/14-bit lattice.
+  * The bind pose is deliberately non-anatomical (HEAD at y=-0.37 while BASE is
+    at y=+0.76, one arm folded out at hip height), so it is not meant to be
+    displayed and cannot be checked by eye.
+  * No convention produced an anatomically correct figure, so the remaining error
+    is in how clip tracks are applied - which the original engine's pose code
+    would settle, and that code is not public (xenia's avatars module is not in
+    its public tree, and AvatarEditorRecomp ships binaries).
+
+For a correct posed avatar today, export the OBJ from Avatar Aura (Windows) and
+bake it; this pipeline stays as the decode/measurement tooling.
+"""
 import argparse
 import math
 
@@ -19,6 +39,9 @@ import skeleton_nxe
 
 MAX_POSE_ELEMENTS = 72
 MODE = "delta"
+CONJ = False
+MIRROR_Z = False
+BIND_CONJ = False
 
 
 # ---------------------------------------------------------------- small maths
@@ -158,11 +181,16 @@ def read_animation_poses(data, frame):
 
 # ---------------------------------------------------------------- skinning
 
+def conj(q):
+    return (-q[0], -q[1], -q[2], q[3])
+
+
 def posed_positions(batches, joints_rig, poses):
     """Joint world matrices, then linear blend skinning of every vertex."""
     bind = []
     for joint in joints_rig:
-        bind.append(mat_trs(joint["position"], joint["rotation"]))
+        rotation = conj(joint["rotation"]) if BIND_CONJ else joint["rotation"]
+        bind.append(mat_trs(joint["position"], rotation))
 
     # Parent-relative bind transforms, then the clip's per-joint delta on top:
     # with identity deltas this reproduces the bind pose exactly.
@@ -178,7 +206,7 @@ def posed_positions(batches, joints_rig, poses):
     for i in range(len(joints_rig)):
         if i < len(poses):
             p, q, sc = poses[i]
-            delta = mat_trs(p, q, sc)
+            delta = mat_trs(p, conj(q) if CONJ else q, sc)
             if MODE == "delta":
                 locals_.append(mat_mul(bind_local[i], delta))
             elif MODE == "delta2":
@@ -213,7 +241,7 @@ def posed_positions(batches, joints_rig, poses):
             for j, w in zip(names, weights):
                 if w <= 0.0 or j >= len(skin):
                     continue
-                p = mat_apply(skin[j], pos)
+                p = mat_apply(skin[j], (pos[0], pos[1], -pos[2]) if MIRROR_Z else pos)
                 for k in range(3):
                     acc[k] += p[k] * w
                 total += w
@@ -232,11 +260,17 @@ def main():
     parser.add_argument("--asset", default="MaleBody")
     parser.add_argument("--clip", default="Animation Generic Stand 1")
     parser.add_argument("--frame", type=int, default=1)
+    parser.add_argument("--conj", action="store_true", help="conjugate pose rotations")
+    parser.add_argument("--mirror-z", action="store_true", help="mirror the mesh across Z (INVERT)")
+    parser.add_argument("--bind-conj", action="store_true", help="conjugate bind rotations")
     parser.add_argument("--obj", required=True)
     parser.add_argument("--mode", default="delta", choices=("delta", "delta2", "local", "world"))
     args = parser.parse_args()
-    global MODE
+    global MODE, CONJ, MIRROR_Z, BIND_CONJ
     MODE = args.mode
+    CONJ = args.conj
+    MIRROR_Z = args.mirror_z
+    BIND_CONJ = args.bind_conj
 
     index = am.load_pack_index(args.pack)
     body = am.strb_blocks(am.asset_bytes(args.pack, index, args.asset))
