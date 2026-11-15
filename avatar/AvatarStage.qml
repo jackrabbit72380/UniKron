@@ -9,6 +9,8 @@ Item {
     property var layers: []          // [{ url: ..., z: ... }]
     property string emptyHint: ""
     property real bob: 0
+    // avatareditor.toml's model_shadows: whether the avatar casts a shadow.
+    property bool showShadow: true
 
     onLayersChanged: pop.restart()
 
@@ -20,6 +22,7 @@ Item {
 
     // soft shadow on the floor
     Image {
+        visible: stage.showShadow
         source: Qt.resolvedUrl("assets/_ui/shadow.png")
         anchors.horizontalCenter: frame.horizontalCenter
         width: frame.width * 0.95

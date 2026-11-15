@@ -176,6 +176,11 @@ Item {
     // real mesh (see AvatarStage3D and avatar_tools/bake_turntable.py).
     property string renderMode: "2d"
 
+    // avatareditor.toml's model_shadows, which the source ships switched on: the
+    // soft shadow the avatar stands on. Kept in api.memory so it survives a
+    // reopen, the way the original keeps its config between starts.
+    property bool modelShadows: true
+
     signal saveRequested(var state)
     signal portraitReady(var grabResult)
     signal backRequested()
@@ -675,6 +680,7 @@ Item {
         // visible 2D stage would show through them as a ghost avatar.
         visible: root.screen !== "choose" && root.renderMode !== "3d"
         layers: root.layers
+        showShadow: root.modelShadows
         emptyHint: root.categories.length === 0
                    ? "No item folders found in " + root.assetsFolder
                    : ""
@@ -688,6 +694,40 @@ Item {
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
         folder: root.assetsFolder + "3d/turntable/"
+    }
+
+    // model_shadows switch, beside the 2D/3D one. It is hidden in 3D, where the
+    // baked frames are transparent and there is no floor to shade.
+    Rectangle {
+        id: shadowSwitch
+        visible: root.screen !== "choose" && root.renderMode !== "3d"
+        anchors.right: modeSwitch.left
+        anchors.rightMargin: 8
+        y: modeSwitch.y
+        height: modeSwitch.height
+        width: shadowLabel.implicitWidth + 24
+        radius: height / 2
+        color: shadowHover.containsMouse ? "#2b3a4e" : "#1b2634"
+        border.width: 1
+        border.color: root.modelShadows ? root.accentColor : "#43546e"
+
+        Text {
+            id: shadowLabel
+            anchors.centerIn: parent
+            text: "Shadow"
+            color: root.modelShadows ? root.accentColor : "#ffffff"
+            font.family: "Segoe UI"
+            font.pixelSize: 13
+            font.weight: Font.DemiBold
+        }
+
+        MouseArea {
+            id: shadowHover
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.toggleShadows()
+        }
     }
 
     // 2D / 3D switch. It shows the live mode rather than an icon for the other
@@ -898,5 +938,23 @@ Item {
         }
     }
 
-    Component.onCompleted: rebuildCategories()
+    function toggleShadows() {
+        modelShadows = !modelShadows
+        saveShadows()
+    }
+
+    function saveShadows() {
+        if (typeof api === "undefined" || !api.memory)
+            return
+        api.memory.set("cfg.avatarShadows", modelShadows ? "1" : "0")
+    }
+
+    Component.onCompleted: {
+        if (typeof api !== "undefined" && api.memory) {
+            var saved = api.memory.get("cfg.avatarShadows")
+            if (saved === "0") modelShadows = false
+            else if (saved === "1") modelShadows = true
+        }
+        rebuildCategories()
+    }
 }
