@@ -1,0 +1,203 @@
+{
+  "_comment": "wardrobe stem -> real pack asset + the 2D colour it is drawn in; kind is the asset folder it bakes into (assets/3d/<kind>/<stem>)",
+  "tee_blue": {
+    "kind": "shirts",
+    "asset": "Male Power Tee",
+    "colour": "#2f7fd4"
+  },
+  "tee_white": {
+    "kind": "shirts",
+    "asset": "Male Power Tee",
+    "colour": "#eef1f4"
+  },
+  "tee_red": {
+    "kind": "shirts",
+    "asset": "Male Power Tee",
+    "colour": "#c5443a"
+  },
+  "tee_black": {
+    "kind": "shirts",
+    "asset": "Male Power Tee",
+    "colour": "#2b2f36"
+  },
+  "hoodie_grey": {
+    "kind": "shirts",
+    "asset": "Black Hoodie",
+    "colour": "#5c6470"
+  },
+  "hoodie_navy": {
+    "kind": "shirts",
+    "asset": "Black Hoodie",
+    "colour": "#2b3550"
+  },
+  "hoodie_olive": {
+    "kind": "shirts",
+    "asset": "Black Hoodie",
+    "colour": "#6b7048"
+  },
+  "hoodie_plum": {
+    "kind": "shirts",
+    "asset": "Black Hoodie",
+    "colour": "#5a3355"
+  },
+  "jersey_green": {
+    "kind": "shirts",
+    "asset": "Baseball Jersey",
+    "colour": "#3fa34d"
+  },
+  "jersey_red": {
+    "kind": "shirts",
+    "asset": "Baseball Jersey",
+    "colour": "#bf3b39"
+  },
+  "jersey_blue": {
+    "kind": "shirts",
+    "asset": "Baseball Jersey",
+    "colour": "#2f5fa8"
+  },
+  "jersey_white": {
+    "kind": "shirts",
+    "asset": "Baseball Jersey",
+    "colour": "#eef1f4"
+  },
+  "tank_white": {
+    "kind": "shirts",
+    "asset": "V Neck Tee",
+    "colour": "#eef1f4"
+  },
+  "tank_black": {
+    "kind": "shirts",
+    "asset": "V Neck Tee",
+    "colour": "#2b2f36"
+  },
+  "tank_blue": {
+    "kind": "shirts",
+    "asset": "V Neck Tee",
+    "colour": "#2f7fd4"
+  },
+  "tank_pink": {
+    "kind": "shirts",
+    "asset": "V Neck Tee",
+    "colour": "#d0708f"
+  },
+  "coat_navy": {
+    "kind": "shirts",
+    "asset": "Black Trench Coat",
+    "colour": "#2b3550"
+  },
+  "coat_grey": {
+    "kind": "shirts",
+    "asset": "Black Trench Coat",
+    "colour": "#5c6470"
+  },
+  "coat_brown": {
+    "kind": "shirts",
+    "asset": "Black Trench Coat",
+    "colour": "#6d4630"
+  },
+  "coat_olive": {
+    "kind": "shirts",
+    "asset": "Black Trench Coat",
+    "colour": "#6b7048"
+  },
+  "jeans_indigo": {
+    "kind": "pants",
+    "asset": "Jeans",
+    "colour": "#3f5b8b"
+  },
+  "jeans_black": {
+    "kind": "pants",
+    "asset": "Jeans",
+    "colour": "#2b2f36"
+  },
+  "jeans_grey": {
+    "kind": "pants",
+    "asset": "Jeans",
+    "colour": "#5c6470"
+  },
+  "joggers_black": {
+    "kind": "pants",
+    "asset": "Male Grunge Pants",
+    "colour": "#2b2f36"
+  },
+  "joggers_grey": {
+    "kind": "pants",
+    "asset": "Male Grunge Pants",
+    "colour": "#5c6470"
+  },
+  "joggers_navy": {
+    "kind": "pants",
+    "asset": "Male Grunge Pants",
+    "colour": "#2b3550"
+  },
+  "shorts_khaki": {
+    "kind": "pants",
+    "asset": "Cargo Shorts",
+    "colour": "#b99a63"
+  },
+  "shorts_black": {
+    "kind": "pants",
+    "asset": "Cargo Shorts",
+    "colour": "#2b2f36"
+  },
+  "shorts_denim": {
+    "kind": "pants",
+    "asset": "Cargo Shorts",
+    "colour": "#3f5b8b"
+  },
+  "cargo_olive": {
+    "kind": "pants",
+    "asset": "Male Cargo Pants",
+    "colour": "#6b7048"
+  },
+  "cargo_brown": {
+    "kind": "pants",
+    "asset": "Male Cargo Pants",
+    "colour": "#6d4630"
+  },
+  "cargo_grey": {
+    "kind": "pants",
+    "asset": "Male Cargo Pants",
+    "colour": "#5c6470"
+  },
+  "sneakers_white": {
+    "kind": "shoes",
+    "asset": "High Top Sneakers",
+    "colour": "#e9edf1"
+  },
+  "sneakers_black": {
+    "kind": "shoes",
+    "asset": "High Top Sneakers",
+    "colour": "#2b2f36"
+  },
+  "sneakers_navy": {
+    "kind": "shoes",
+    "asset": "High Top Sneakers",
+    "colour": "#2b3550"
+  },
+  "sneakers_green": {
+    "kind": "shoes",
+    "asset": "High Top Sneakers",
+    "colour": "#3fa34d"
+  },
+  "trainers_red": {
+    "kind": "shoes",
+    "asset": "Sports Trainers",
+    "colour": "#c5443a"
+  },
+  "boots_brown": {
+    "kind": "shoes",
+    "asset": "Male Boots",
+    "colour": "#6d4630"
+  },
+  "boots_black": {
+    "kind": "shoes",
+    "asset": "Male Boots",
+    "colour": "#2b2f36"
+  },
+  "boots_tan": {
+    "kind": "shoes",
+    "asset": "Male Boots",
+    "colour": "#b08150"
+  }
+}

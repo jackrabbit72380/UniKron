@@ -183,29 +183,53 @@ Item {
         return ""
     }
 
-    // The wardrobe shirts that have their own baked turntable (bake_shirts.py
-    // writes one folder per entry in avatar_tools/shirts_3d.json). Picking one
-    // swaps the 3D set, so the stage wears the shirt the closet strip shows.
-    readonly property var bakedShirts: ({
-        "tee_blue": true, "tee_white": true, "tee_red": true, "tee_black": true,
-        "hoodie_grey": true, "hoodie_navy": true, "hoodie_olive": true, "hoodie_plum": true,
-        "jersey_green": true, "jersey_red": true, "jersey_blue": true, "jersey_white": true,
-        "tank_white": true, "tank_black": true, "tank_blue": true, "tank_pink": true,
-        "coat_navy": true, "coat_grey": true, "coat_brown": true, "coat_olive": true
+    // Every wardrobe item that has its own baked turntable, and the folder its
+    // set lives in: bake_items.py writes one folder per entry in
+    // avatar_tools/items_3d.json as assets/3d/<kind>/<stem>.
+    readonly property var bakedItems: ({
+        "tee_blue": "shirts", "tee_white": "shirts", "tee_red": "shirts", "tee_black": "shirts",
+        "hoodie_grey": "shirts", "hoodie_navy": "shirts", "hoodie_olive": "shirts", "hoodie_plum": "shirts",
+        "jersey_green": "shirts", "jersey_red": "shirts", "jersey_blue": "shirts", "jersey_white": "shirts",
+        "tank_white": "shirts", "tank_black": "shirts", "tank_blue": "shirts", "tank_pink": "shirts",
+        "coat_navy": "shirts", "coat_grey": "shirts", "coat_brown": "shirts", "coat_olive": "shirts",
+        "jeans_indigo": "pants", "jeans_black": "pants", "jeans_grey": "pants",
+        "joggers_black": "pants", "joggers_grey": "pants", "joggers_navy": "pants",
+        "shorts_khaki": "pants", "shorts_black": "pants", "shorts_denim": "pants",
+        "cargo_olive": "pants", "cargo_brown": "pants", "cargo_grey": "pants",
+        "sneakers_white": "shoes", "sneakers_black": "shoes", "sneakers_navy": "shoes",
+        "sneakers_green": "shoes", "trainers_red": "shoes",
+        "boots_brown": "shoes", "boots_black": "shoes", "boots_tan": "shoes"
     })
 
-    readonly property string shirtVariant: {
+    // The category the player last changed in the closet, so 3D shows the set for
+    // the item they just picked rather than for whichever set sorts first.
+    property string lastItemCategory: ""
+
+    function categoryIdMatching(term) {
         for (var i = 0; i < categories.length; ++i) {
             var c = categories[i]
-            if (!c || !c.id || c.id.indexOf("shirt") < 0)
+            if (!c || !c.id || c.id.indexOf(term) < 0 || c.id.indexOf("facial") >= 0)
                 continue
-            var file = state[c.id] || ""
-            if (file === "")
-                return ""
-            var stem = file.replace(/\.png$/i, "")
-            return bakedShirts[stem] ? stem : ""
+            return c.id
         }
         return ""
+    }
+
+    // The baked set for whatever that category currently holds, or "" when there
+    // is none - including the seeded default, which the stock bake already shows.
+    function bakedSet(categoryId) {
+        if (!categoryId)
+            return ""
+        var file = state[categoryId] || ""
+        if (file === "")
+            return ""
+        for (var term in seedPicks) {
+            if (categoryId.indexOf(term) >= 0 && seedPicks[term] === file)
+                return ""
+        }
+        var stem = file.replace(/\.png$/i, "")
+        var kind = bakedItems[stem]
+        return kind ? kind + "/" + stem : ""
     }
 
     // Which baked folder the 3D stage plays, relative to assets/3d/. The item
@@ -213,9 +237,20 @@ Item {
     // that hair; any other hairstyle falls back to its own turntable.
     readonly property string stageVariant: {
         var keepHair = hairVariant === "" || hairVariant === defaultHairStem
-        if (shirtVariant !== "" && keepHair)
-            return "shirts/" + shirtVariant
-        return "turntable/" + hairVariant
+        if (keepHair) {
+            var picked = bakedSet(lastItemCategory)
+            if (picked !== "")
+                return picked
+            var order = ["shirt", "pants", "shoes"]
+            for (var i = 0; i < order.length; ++i) {
+                picked = bakedSet(categoryIdMatching(order[i]))
+                if (picked !== "")
+                    return picked
+            }
+        }
+        // No trailing slash: the stage appends one, and "turntable//frame_00"
+        // only works by luck of Qt normalising the path.
+        return hairVariant === "" ? "turntable" : "turntable/" + hairVariant
     }
 
     // The hairstyle seedOutfit fills in. bake_animated.py bakes the animated 3D
@@ -374,6 +409,9 @@ Item {
         } else if (categoryId !== (bodyCategory ? bodyCategory.id : "")) {
             delete next[categoryId]
         }
+        // Which set the 3D stage should show: the closet only has one baked
+        // turntable per item, so it follows the piece the player just changed.
+        lastItemCategory = categoryId
         state = next
         rebuildLayers()
     }
@@ -827,7 +865,7 @@ Item {
         animatedFolder: (root.stageVariant === "turntable/" + root.defaultHairStem)
                         ? root.assetsFolder + "3d/animated/" : ""
         variant: root.stageVariant
-        defaultVariant: "turntable/"
+        defaultVariant: "turntable"
     }
 
     // model_shadows switch, beside the 2D/3D one. Both stages draw the shadow

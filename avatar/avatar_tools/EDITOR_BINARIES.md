@@ -538,11 +538,18 @@ it settles:
 
 ## What the 3D stage wears
 
-`bake_shirts.py` gives every wardrobe shirt its own turntable: the 20 stems in
-`assets/40_shirt` are mapped in `shirts_3d.json` onto real pack garments (tees,
-hoodie, jersey, V neck, trench coat) and tinted with the colour `avatar_art.py`
-draws that item in. Pants, shoes and hair stay on the stock bake, so a shirt pick
-is honoured in 3D and anything else still shows the stock look.
+`bake_items.py` gives every wardrobe shirt, pair of pants and pair of shoes its
+own turntable: the 40 stems in `assets/20_pants`, `30_shoes` and `40_shirt` are
+mapped in `items_3d.json` onto real pack assets (tees, hoodie, jersey, V neck,
+trench coat, jeans, grunge pants, cargo shorts/pants, boots, high tops, sports
+trainers) and tinted with the colour `avatar_art.py` draws that item in.
+
+A baked turntable cannot mix two picks, so each set replaces exactly one piece
+over the stock outfit and the stage follows the piece the player last changed
+(`lastItemCategory`), falling back to the shirt, then pants, then shoes. The
+seeded default is skipped, because the stock bake already shows it. Anything with
+no set - hats, glasses, facial hair, a hand-picked hair colour - keeps the
+hairstyle turntable.
 
 `bake_avatar.py --tint=Asset=RRGGBB` is what allows one piece at a time to carry
 a colour; without it a garment falls back to `CLOTHING_TINTS`.
