@@ -108,8 +108,6 @@ This modern stack enables:
 - Smooth performance on all devices  
 
 ### UniKron is not a new project—  
-**it is the true form of what UniFlow always wanted to be.**
-
 ---
 
 ## 🔥 Why UniKron Exists
