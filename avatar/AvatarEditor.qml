@@ -43,6 +43,49 @@ Item {
     // ---- what the host can read ------------------------------------------
     property var categories: []          // [{ id, label, path, z }]
     property int categoryIndex: 0
+
+    // ---- screens ---------------------------------------------------------
+    // The original editor opens on a menu: the avatar on the left and five
+    // plates down the right — Change My Features, Change My Clothes, Gamer
+    // Picture, Start Over, Save and Exit — with the selected plate in lime.
+    // "Change My Clothes" opens the closet. The plate art is the editor's own,
+    // taken out of avatareditor.xex as selected/unselected pairs, with the
+    // icon already baked into the left side of each plate.
+    property string screen: "menu"
+
+    readonly property var menuItems: [
+        { key: "features", label: "Change My Features" },
+        { key: "clothes",  label: "Change My Clothes" },
+        { key: "picture",  label: "Gamer Picture" },
+        { key: "start",    label: "Start Over" },
+        { key: "exit",     label: "Save and Exit" }
+    ]
+    property int menuIndex: 1
+
+    // The source draws one legend per screen: the menu offers A Select (the
+    // preview screenshot shows exactly that), the closet needs its four.
+    readonly property var legendModel: screen === "menu"
+        ? [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
+            { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" } ]
+        : [ { glyph: "assets/_ui/xex/legend_a.png", label: "Save", action: "save" },
+            { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
+            { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize", action: "randomize" },
+            { glyph: "assets/_ui/xex/legend_y.png", label: "Portrait", action: "portrait" } ]
+
+    function setScreen(name) { screen = name }
+
+    function activateMenuItem(index) {
+        var item = menuItems[index]
+        if (!item)
+            return
+        switch (item.key) {
+        case "features":
+        case "clothes": setScreen("closet"); break
+        case "picture": capturePortrait(); break
+        case "start":   clearAll(); break
+        case "exit":    save(); break
+        }
+    }
     readonly property var currentCategory:
         categoryIndex >= 0 && categoryIndex < categories.length ? categories[categoryIndex] : null
     readonly property var layers: _layers
@@ -244,11 +287,34 @@ Item {
     // ---- input -----------------------------------------------------------
 
     Keys.onPressed: function (event) {
+        // The menu is its own screen: up/down move between the five plates and
+        // accept activates one. In the closet, cancel goes back to the menu.
+        if (screen === "menu") {
+            var hit = true
+            switch (event.key) {
+            case Qt.Key_Down:
+                menuIndex = Math.min(menuItems.length - 1, menuIndex + 1); break
+            case Qt.Key_Up:
+                menuIndex = Math.max(0, menuIndex - 1); break
+            case Qt.Key_Return:
+            case Qt.Key_Enter:
+            case Qt.Key_Space:
+                activateMenuItem(menuIndex); break
+            case Qt.Key_Escape:
+            case Qt.Key_Backspace:
+                backRequested(); break
+            default:
+                hit = false
+            }
+            event.accepted = hit
+            return
+        }
+
         // Inside Pegasus, controller and keyboard bindings are checked through
         // api.keys; outside it the raw keys below are used.
         if (typeof api !== "undefined" && api.keys) {
             if (api.keys.isCancel(event)) {
-                backRequested()
+                setScreen("menu")
                 event.accepted = true
                 return
             }
@@ -269,7 +335,7 @@ Item {
         case Qt.Key_P:       capturePortrait(); break
         case Qt.Key_R:       clearAll(); break
         case Qt.Key_Escape:
-        case Qt.Key_Backspace: backRequested(); break
+        case Qt.Key_Backspace: setScreen("menu"); break
         default:             handled = false
         }
         event.accepted = handled
@@ -299,7 +365,7 @@ Item {
 
         Text {
             id: headline
-            text: root.title
+            text: root.screen === "menu" ? root.gamerTag : root.title
             color: style.ink
             font.family: style.titleFamily
             font.pixelSize: 27
@@ -336,12 +402,7 @@ Item {
         // scene draws the A/B/X/Y glyphs. Each entry is also clickable, so a
         // mouse user keeps the same four actions.
         Repeater {
-            model: [
-                { glyph: "assets/_ui/xex/legend_a.png", label: "Save", action: "save" },
-                { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
-                { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize", action: "randomize" },
-                { glyph: "assets/_ui/xex/legend_y.png", label: "Portrait", action: "portrait" }
-            ]
+            model: root.legendModel
 
             Item {
                 width: entry.width
@@ -376,10 +437,12 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         switch (modelData.action) {
-                        case "save":      root.save(); break
-                        case "back":      root.backRequested(); break
-                        case "randomize": root.randomize(); break
-                        case "portrait":  root.capturePortrait(); break
+                        case "save":       root.save(); break
+                        case "back":       if (root.screen === "closet") root.setScreen("menu")
+                                           else root.backRequested(); break
+                        case "randomize":  root.randomize(); break
+                        case "portrait":   root.capturePortrait(); break
+                        case "menuSelect": root.activateMenuItem(root.menuIndex); break
                         }
                         root.forceActiveFocus()
                     }
@@ -390,6 +453,7 @@ Item {
 
     ItemStrip {
         id: strip
+        visible: root.screen === "closet"
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 26
@@ -418,6 +482,7 @@ Item {
 
     CategoryRail {
         id: rail
+        visible: root.screen === "closet"
         anchors.left: parent.left
         anchors.top: header.bottom
         anchors.bottom: strip.top
@@ -435,20 +500,79 @@ Item {
 
     AvatarStage {
         id: stage
-        anchors.left: rail.right
-        anchors.leftMargin: 14
-        anchors.right: parent.right
-        anchors.rightMargin: 26
-        anchors.top: header.bottom
-        anchors.bottom: strip.top
-        anchors.topMargin: 4
-        anchors.bottomMargin: 6
+        // The avatar keeps the left half on the menu and moves right of the
+        // rail in the closet, exactly where each screen puts it.
+        x: root.screen === "menu" ? 40 : rail.x + rail.width + 14
+        y: 64
+        width: root.screen === "menu" ? 470 : root.width - x - 26
+        height: root.screen === "menu" ? 592 : 430
         layers: root.layers
         emptyHint: root.categories.length === 0
                    ? "No item folders found in " + root.assetsFolder
                    : ""
     }
 
+
+    // The menu plates. 512x128 each, drawn at 400x100: the baked icon sits in
+    // the left fifth, which is where the label starts.
+    Item {
+        id: menu
+        visible: root.screen === "menu"
+        anchors.top: header.bottom
+        anchors.topMargin: 18
+        anchors.right: parent.right
+        anchors.rightMargin: 26
+        width: 400
+        height: menuColumn.height
+
+        Column {
+            id: menuColumn
+            spacing: 4
+
+            Repeater {
+                model: root.menuItems
+
+                Item {
+                    width: 400
+                    height: 100
+
+                    Image {
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("assets/_ui/xex/plate_" + modelData.key
+                                               + (index === root.menuIndex
+                                                  ? "_selected" : "_unselected") + ".png")
+                        fillMode: Image.Stretch
+                        smooth: true
+                    }
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 134
+                        anchors.right: parent.right
+                        anchors.rightMargin: 16
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: modelData.label
+                        color: index === root.menuIndex ? "#20300a" : "#f4f7fa"
+                        font.family: style.titleFamily
+                        font.pixelSize: 19
+                        font.weight: Font.DemiBold
+                        elide: Text.ElideRight
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.menuIndex = index
+                            root.activateMenuItem(index)
+                            root.forceActiveFocus()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     Component.onCompleted: rebuildCategories()
 }
