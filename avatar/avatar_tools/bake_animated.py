@@ -32,7 +32,9 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CLOTHES = ["Male Power Tee", "Worn Jeans", "Formal Shoes"]
+# The outfit Avatar6400.Avatar names: its slot entries point at pack records
+# 88, 144 and 49, which resolve to these three assets.
+CLOTHES = ["Jacket with Sweater", "Male Flower Print Flares", "Grunge Trainers"]
 
 
 def padded(value):

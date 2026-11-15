@@ -68,6 +68,9 @@ def read_description(path):
 # untinted is what made the 3D avatar look like a grey mannequin, so the stock
 # pieces get the palette the 2D wardrobe is drawn in.
 CLOTHING_TINTS = {
+    "jacket with sweater": (0x46, 0x51, 0x6b),
+    "male flower print flares": (0x46, 0x55, 0x7f),
+    "grunge trainers": (0x57, 0x5c, 0x63),
     "male power tee": (0x2f, 0x7f, 0xd4),
     "worn jeans": (0x3f, 0x5b, 0x8b),
     "formal shoes": (0x2b, 0x2f, 0x36),

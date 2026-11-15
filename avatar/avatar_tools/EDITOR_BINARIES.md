@@ -509,6 +509,33 @@ Earlier hypotheses that are now settled and wrong: a per-asset scale, a hidden
 float buffer, derived bone orientations, a stale clip and a broken serialiser.
 The meshes were being sheared by a signed read of an unsigned lattice count.
 
+## A second asset dump (avatar.zip)
+
+A separate dump of the same editor turned up alongside the theme archive. What
+it settles:
+
+- Its `AvatarAssetPack.toc` is byte-identical to ours
+  (`2b58915d809332b23ecff1669acdccee`), so our meshes and animations are the
+  right ones and nothing was lost.
+- It carries three more saved avatars, `Avatar6404` and `Avatar6411` besides
+  `Avatar6400`. Their colour slots are the same nine - still no garment colour.
+- Their slot tables *do* name the stock outfit. Entry masks `0x08 / 0x10 / 0x20`
+  held pack record indices, which resolve to `Jacket with Sweater` (88),
+  `Male Flower Print Flares` (144) and `Grunge Trainers` (49); `0x04` held
+  `Short with Left Curls (Hat)` (434) and `0x01 / 0x02` the head and body.
+  The 3D bake now wears that outfit instead of my earlier guess.
+- `default_uncompressed.xex` is the XTL avatar renderer from the 2008 SDK
+  (`...\flash-fall08\core\private\xtl\avatar\render\src\...`), decompressed
+  and ready for Ghidra - 6,618 functions. Corpus: `UniKron-decompiled-xtl-avatar.zip`.
+- Marketplace closet items (`avatar/closet/*.bin`) are `YTGR` wrappers around a
+  `STRB` stream; both samples (`Halo Spartan Armor - Steel`, `Baby Po
+  Animation`) decode with `avatar_mesh.py` into real geometry plus an animation
+  block. None of them carries `XPR0` textures either, which is consistent with
+  the pack: this editor's art never shipped textures.
+- The dump also contains the platform XUI furniture: `ctrlpack`, `mvctrlc1`,
+  `mvctrlc2`, `oscarui`, `wwwca`, `xplayrui`, `584807D5`, the Xenon Latin fonts
+  (`XenonCLatin.xtt`, `XenonJKLatin.xtt`) and a `theater/room.png` backdrop.
+
 ## Stock garment colour
 
 The pack embeds no textures at all (`XPR0` appears zero times in

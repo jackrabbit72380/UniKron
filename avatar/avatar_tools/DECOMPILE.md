@@ -154,3 +154,5 @@ debugging.
    and redistributables: ~300 MiB of other people's code whose decompilation
    would run for hours and say nothing about the avatar editor. Everything
    first-party is done.
+
+| `default_uncompressed.xex` (avatar.zip dump) | xtl avatar renderer, 2008 SDK | 6,618 |

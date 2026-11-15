@@ -26,7 +26,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FRAMES = ["--frames", "20", "--width", "448", "--height", "672"]
-CLOTHES = ["Male Power Tee", "Worn Jeans", "Formal Shoes"]
+# The outfit Avatar6400.Avatar names: its slot entries point at pack records
+# 88, 144 and 49, which resolve to these three assets.
+CLOTHES = ["Jacket with Sweater", "Male Flower Print Flares", "Grunge Trainers"]
 
 
 def main():
