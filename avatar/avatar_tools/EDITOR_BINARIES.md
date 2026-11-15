@@ -509,6 +509,21 @@ Earlier hypotheses that are now settled and wrong: a per-asset scale, a hidden
 float buffer, derived bone orientations, a stale clip and a broken serialiser.
 The meshes were being sheared by a signed read of an unsigned lattice count.
 
+## Stock garment colour
+
+The pack embeds no textures at all (`XPR0` appears zero times in
+`AvatarAssetPack.toc`), and `Avatar6400.Avatar`'s nine colour slots are skin,
+hair, mouth, eyes, eyebrows, eye shadow and facial hair - the last two are the
+same pink accessory tint. There is no garment colour anywhere in the data, which
+is why the baked 3D avatar used to come out as a grey mannequin: the baker's
+honest fallback for an unknown fabric.
+
+The theme now tints the three stock pieces to the palette the 2D wardrobe is
+drawn in (`CLOTHING_TINTS` in `bake_avatar.py`: blue tee, indigo jeans, black
+shoes) and seeds the 2D outfit to the same look, so both modes open as the same
+avatar. That palette is this port's choice, not a value recovered from the
+source - a console profile would carry its own.
+
 ## Decompilation
 
 Decoding the bytes was only half of it; the code itself is recoverable. See

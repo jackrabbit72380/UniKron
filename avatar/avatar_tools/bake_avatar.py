@@ -59,13 +59,31 @@ def read_description(path):
     return colours, slots
 
 
+# The garments a stock avatar wears, and the colours they are drawn in.
+#
+# The source cannot supply these: a stock asset embeds no texture, and the
+# .Avatar description carries skin, hair, mouth, eyes, brows, eye shadow and
+# facial hair but no garment slot at all (checked against Avatar6400.Avatar -
+# the last two slots are accessory tints, both the same pink). Rendering them
+# untinted is what made the 3D avatar look like a grey mannequin, so the stock
+# pieces get the palette the 2D wardrobe is drawn in.
+CLOTHING_TINTS = {
+    "male power tee": (0x2f, 0x7f, 0xd4),
+    "worn jeans": (0x3f, 0x5b, 0x8b),
+    "formal shoes": (0x2b, 0x2f, 0x36),
+}
+
+
 def asset_colour(name, record, colours, slots, clothing):
     """RGB in 0..1 for one asset: skin and hair from the description, else neutral.
 
-    Clothes stay neutral on purpose: a stock item's colour is not in its own
-    asset (models embed no textures) and the description only carries custom
-    colours, which this outfit leaves empty. See EDITOR_BINARIES.md.
+    A stock garment has no colour in the asset (models embed no textures) and no
+    slot in the description, so it takes its entry from CLOTHING_TINTS. Anything
+    unlisted still falls back to neutral.
     """
+    tint = CLOTHING_TINTS.get(name.lower())
+    if tint is not None:
+        return tuple(c / 255.0 for c in tint)
     mask = slots.get(record, 0)
     if not mask:
         # The description names the outfit this avatar was saved with, not the

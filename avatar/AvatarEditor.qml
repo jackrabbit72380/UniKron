@@ -193,6 +193,12 @@ Item {
                 continue
             if (c.id.indexOf("hair") < 0 || c.id.indexOf("facial") >= 0)
                 continue
+            // The stock hairstyle seedOutfit picks, which is also the one
+            // bake_animated.py bakes the animated set in. Falling back to the
+            // first file keeps this working if that art is ever removed.
+            var stem = seedPicks["hair"]
+            if (stem && c.files.indexOf(stem) >= 0)
+                return stem.replace(/\.png$/i, "")
             return c.files[0].replace(/\.png$/i, "")
         }
         return ""
@@ -256,6 +262,16 @@ Item {
     // this the first visit shows a player standing in nothing but a body layer
     // until they pick every garment by hand. Only empty slots are filled, so a
     // saved wardrobe is never overwritten.
+    // The stock look the 3D sets are baked in, so a fresh avatar reads the same
+    // in both modes instead of the 2D wardrobe opening on one outfit and the 3D
+    // turntable wearing another.
+    readonly property var seedPicks: ({
+        "shirt": "tee_blue.png",
+        "pants": "jeans_indigo.png",
+        "shoes": "sneakers_black.png",
+        "hair": "hair_short_brown.png"
+    })
+
     function seedOutfit() {
         var wanted = ["shirt", "pants", "shoes", "hair"]
         var next = {}
@@ -271,7 +287,8 @@ Item {
                 if (c.id.indexOf(wanted[w]) < 0 || c.id.indexOf("facial") >= 0)
                     continue
                 if (!next[c.id]) {
-                    next[c.id] = c.files[0]
+                    var pick = seedPicks[wanted[w]]
+                    next[c.id] = c.files.indexOf(pick) >= 0 ? pick : c.files[0]
                     changed = true
                 }
             }
