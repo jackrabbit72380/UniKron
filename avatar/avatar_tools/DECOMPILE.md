@@ -16,11 +16,16 @@ corpora live in the `UniKron-decompiled-*.zip` archives beside the theme zip.
 | `resources/ogxbox/uix/xboxfs/Q/Xips/Toolbox.xip` | Original Xbox | x86 | 2,144 |
 | `resources/ogxbox/uix/xboxfs/Q/Xips/settings_adoc.xip` | Original Xbox | x86 | 1,444 |
 | `resources/ogxbox/uix/xboxfs/Q/Xips/shutdown.xip` | Original Xbox | x86 | 0 (see below) |
+| `resources/editors/nxe2008/avatareditor.exe` | Windows host, 2008 | x86-64 | 11,957 |
+| `resources/editors/nxe2008/rexruntime.dll` | 360 runtime (rexglue) | x86-64 | 28,467 |
+| `resources/editors/nxe2008/rexgpu-xenos.dll` | Xenos GPU emulation | x86-64 | 4,866 |
+| `resources/padwatch.exe` | Steampad watcher | x86-64 | 4,768 |
+| `resources/ogxbox/uix/theseus.exe` | Original Xbox dashboard | x86-64 | 8,352 |
 | `resources/editors/metro2010/avatareditor.exe` | Windows host, 2010 | x86-64 | 20,381 |
 | `resources/editors/metro2010/assets/avatareditor.xex` | Xbox 360, 2010 dash | PowerPC BE | **encrypted, blocked** |
 
-Four of the five binaries gave up their code: 25,955 functions in total, written
-out as one C file each.
+Ten binaries gave up their code: 84,365 functions in total, written out as one C
+file each.
 
 The 2008 editor is the one this theme reproduces, so its corpus is the useful
 one: 1,986 functions of real C, dense across the whole `.text`
@@ -91,6 +96,12 @@ a few run past 255 bytes, which aborts the whole script with
 `File name too long` after 20,018 functions. `DecompileAll.java` now replaces
 anything outside `[A-Za-z0-9_.-]` and truncates to 110 characters plus a hash.
 
+**One `.xip` is not a program at all.** `shutdown.xip` has no x86 prologue
+anywhere in its 24 KB section, and its header's entry field points into a
+copyright notice (`Copyright (C) 2003 VulgusProfanum. Thanks to xbdev.net for
+the xbe header`). It is a data-only sample XBE someone dropped into the image
+set; there is nothing to decompile.
+
 **Those `.xip` files are not 360 binaries.** The three `Q/Xips` files carry
 `XBEH` headers and sit next to 360 content, but their code is x86
 (`81 ec 14 04 00 00` is `sub esp,0x414`). They are Original Xbox dashboard
@@ -108,6 +119,27 @@ through tables of pointers, so the C reads `*(char **)(table + 4)` rather than
 call count and first string reference taken straight from `lis`/`ori` pairs,
 and the literals the decompiler does resolve are already in the C.
 
+## What the runtime and the front-end expose
+
+Decompiling the host side answers a question the XEX could not: how the editor
+got its avatar data. `nxe2008/avatareditor.exe` imports the whole `XamAvatar`
+surface - `XamAvatarInitialize`/`Shutdown`, `BeginEnumAssets`/`EnumAssets`/
+`EndEnumAssets`, `GetAssets`/`GetAssetsResultSize`, `GetAssetBinary`,
+`GetAssetIcon`, `LoadAnimation`, `GenerateMipMaps`, `SetManifest`,
+`SetCustomAsset`, `GetManifestsByXuid`, `ManifestGetBodyType`,
+`GetInstalledAssetPackageDescription`, `SetMocks`, `CreateAvatarAssetEnumerator`
+and `GetInstrumentation` - and drives them from its own app class
+(`AvatareditorApp::MirrorDispatchTable`, `AvatareditorApp::OnPreLaunchModule`,
+`AvatareditorApp::MountFontDevice`). Its asset paths are visible as literals:
+`//avatar/u:`, `/avataritems/`, `/avatar-body.png`.
+
+`rexruntime.dll` is the other half: `rex::avatars::LoadAssetsToGuest` is what
+hands the enumerated assets to the guest title, which is why the XEX itself only
+ever names `.MsLiveAvatarAsset` files and never the bytes behind them. Its
+embedded source paths (`C:/Users/vigln/dev/rexglue-sdk/src/ui/rex_app.cpp`) mark
+the host as a rexglue build, and it answers on `http://127.0.0.1:8080` for
+debugging.
+
 ## The brick walls
 
 1. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
@@ -115,7 +147,10 @@ and the literals the decompiler does resolve are already in the C.
    and 4 MiB output) all fail with `bad aligned table` or `bad block type`.
    What this needs: the decrypted image, or the console's XEX keys. Nothing in
    the archive supplies either.
-2. **The host-side `XBOX HUB.exe` (238 MiB) and the third-party PE DLLs.**
-   `dxcompiler.dll`, the CEF binaries and the rest total 387 MiB of other
-   people's code. They are not the avatar editor and decompiling them would take
-   hours of CPU for gigabytes of output that says nothing about the editor.
+2. **The remaining 21 third-party PEs** - `XBOX HUB.exe` (238 MiB),
+   `dxcompiler.dll` x2, `dxil.dll`, `vk_swiftshader`, `vulkan-1`, `ffmpeg`,
+   `d3dcompiler_47`, `SDL2`, `iCUESDK`, the MSVC runtimes and
+   `xenia_canary_netplay.exe`. That is Chromium, DirectX tooling, an emulator
+   and redistributables: ~300 MiB of other people's code whose decompilation
+   would run for hours and say nothing about the avatar editor. Everything
+   first-party is done.
