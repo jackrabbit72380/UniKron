@@ -41,6 +41,7 @@ Item {
     property int pose: 0
     property bool available: false
     property bool spinning: true
+    property bool showShadow: true
 
     onFolderChanged: reload()
     onAnimatedFolderChanged: reload()
@@ -186,6 +187,20 @@ Item {
         smooth: true
         opacity: 0.9
         z: -1
+    }
+
+    // Soft shadow on the floor, the same one the 2D stage draws: the baked feet
+    // land at 93.5% of the frame, and this sits at 92.5% of the canvas like the
+    // 2D stage's does, so the avatar stands on the same line in both modes.
+    Image {
+        visible: stage.showShadow && stage.available
+        source: Qt.resolvedUrl("assets/_ui/shadow.png")
+        anchors.horizontalCenter: holder.horizontalCenter
+        width: holder.width * 0.95
+        height: width * 0.30
+        y: holder.y + holder.height * 0.925 - height / 2
+        fillMode: Image.PreserveAspectFit
+        opacity: 0.85
     }
 
     // 2:3, centred: the baked frames' own shape. It is also the shape a portrait

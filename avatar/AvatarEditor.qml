@@ -762,11 +762,11 @@ Item {
         variant: root.hairVariant
     }
 
-    // model_shadows switch, beside the 2D/3D one. It is hidden in 3D, where the
-    // baked frames are transparent and there is no floor to shade.
+    // model_shadows switch, beside the 2D/3D one. Both stages draw the shadow
+    // under the avatar's feet, so it stays available in either mode.
     Rectangle {
         id: shadowSwitch
-        visible: root.screen !== "choose" && root.renderMode !== "3d"
+        visible: root.screen !== "choose"
         anchors.right: modeSwitch.left
         anchors.rightMargin: 8
         y: modeSwitch.y

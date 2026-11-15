@@ -301,6 +301,11 @@ drawn 12% around the 2:3 canvas in 2D and around the baked frames in 3D, so
 switching modes changes the avatar, not the framing. The portrait grab takes the
 avatar alone, without the mirror.
 
+The floor shadow is shared too: the baked feet land at 93.5% of the frame and the
+shadow sits at 92.5% of the canvas, exactly where the 2D stage puts it, so the
+avatar stands on one line in both modes and the `model_shadows` switch stays
+usable in either.
+
 The closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
 slight head tilt, so there is nothing to gain from swapping it in.
 
