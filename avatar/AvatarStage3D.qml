@@ -189,16 +189,17 @@ Item {
         z: -1
     }
 
-    // Soft shadow on the floor, the same one the 2D stage draws: the baked feet
-    // land at 93.5% of the frame, and this sits at 92.5% of the canvas like the
-    // 2D stage's does, so the avatar stands on the same line in both modes.
+    // Soft shadow on the floor, the same one the 2D stage draws. The bake puts
+    // the soles at 93.5% of the frame (bake_turntable's 0.86 fit plus the feet at
+    // y = 0), so the shadow's centre has to sit on that line; at 92.5% the avatar
+    // hovered a few pixels above its own shadow.
     Image {
         visible: stage.showShadow && stage.available
         source: Qt.resolvedUrl("assets/_ui/shadow.png")
         anchors.horizontalCenter: holder.horizontalCenter
         width: holder.width * 0.95
         height: width * 0.30
-        y: holder.y + holder.height * 0.925 - height / 2
+        y: holder.y + holder.height * 0.935 - height / 2
         fillMode: Image.PreserveAspectFit
         opacity: 0.85
     }
@@ -220,13 +221,9 @@ Item {
         }
     }
 
-    // Same idle bob as the 2D stage, so the two modes read as one editor.
-    SequentialAnimation {
-        running: stage.available
-        loops: Animation.Infinite
-        NumberAnimation { target: holder; property: "anchors.verticalCenterOffset"; to: -6; duration: 1900; easing.type: Easing.InOutSine }
-        NumberAnimation { target: holder; property: "anchors.verticalCenterOffset"; to: 0; duration: 1900; easing.type: Easing.InOutSine }
-    }
+    // No bob here, unlike the 2D stage: these are frames of a real clip, so the
+    // idle already moves and sliding the whole image against a fixed shadow made
+    // the avatar look like it was floating over its own feet.
 
     Timer {
         // Fewer angles than the 20-frame turntable, so give each one longer.

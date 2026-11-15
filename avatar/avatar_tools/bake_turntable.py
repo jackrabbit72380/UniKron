@@ -115,6 +115,32 @@ def normalise(verts):
     return verts
 
 
+def vertex_normals(verts, tris):
+    """Smooth per-vertex normals from welded positions.
+
+    The rasteriser used to shade per face, which turned every curved surface into
+    facets - fingers read as spikes and the whole figure looked chiselled rather
+    than soft, the way the XTL renderer draws it. Welding by position first is
+    what makes shared vertices share one normal.
+    """
+    welded, inverse = np.unique(np.round(verts, 5), axis=0, return_inverse=True)
+    corner = inverse[tris]
+    face_n = np.cross(
+        verts[tris[:, 1]] - verts[tris[:, 0]],
+        verts[tris[:, 2]] - verts[tris[:, 0]],
+    )
+    length = np.linalg.norm(face_n, axis=1)
+    length[length == 0] = 1.0
+    face_n = face_n / length[:, None]
+    total = np.zeros((len(welded), 3), dtype=np.float64)
+    for k in range(3):
+        np.add.at(total, corner[:, k], face_n)
+    length = np.linalg.norm(total, axis=1)
+    length[length == 0] = 1.0
+    # Un-weld back to one normal per original vertex, so indices stay valid.
+    return (total / length[:, None])[inverse]
+
+
 def rotation_y(angle):
     c, s = math.cos(angle), math.sin(angle)
     return np.array([[c, 0.0, s], [0.0, 1.0, 0.0], [-s, 0.0, c]])
@@ -146,14 +172,38 @@ def write_png(path, rgba):
         fh.write(chunk(b"IEND", b""))
 
 
-def render(verts, tris, tri_colours, yaw, width, height, ss=2):
-    """One frame: yaw the model, project, rasterise with a z-buffer."""
+# Three-point studio rig: a warm key from the front left, a cool fill from the
+# right and a rim from behind. The XTL renderer lights avatars the same way -
+# soft, matte, no specular - and a single light plus a double-sided abs() is what
+# made the old frames read as flat cut-outs.
+KEY_DIR = np.array([-0.45, 0.62, -0.65])
+FILL_DIR = np.array([0.72, 0.18, -0.55])
+RIM_DIR = np.array([0.10, 0.30, 1.00])
+KEY_COLOUR = np.array([1.00, 0.97, 0.92])
+FILL_COLOUR = np.array([0.84, 0.90, 1.00])
+AMBIENT = 0.30
+KEY_POWER = 0.78
+FILL_POWER = 0.26
+RIM_POWER = 0.16
+
+
+def _unit(v):
+    return v / np.linalg.norm(v)
+
+
+def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2):
+    """One frame: yaw the model, project, rasterise with a z-buffer.
+
+    Normals are interpolated across each triangle and lit per pixel, so curved
+    surfaces stay smooth at any frame size.
+    """
     w, h = width * ss, height * ss
-    model = verts @ rotation_y(yaw).T
     # Normalised space has the feet at y = 0 and the head at y = 1. An
     # orthographic fit keeps the whole figure the same size in every frame and
     # cannot clip it the way a fixed focal length did.
-    model = model @ rotation_x(math.radians(-6.0)).T
+    rot = rotation_x(math.radians(-6.0)) @ rotation_y(yaw)
+    model = verts @ rot.T
+    normals = vnormals @ rot.T
     z = model[:, 2]
     k = 0.86 * h
     sx = model[:, 0] * k + w * 0.5
@@ -163,18 +213,14 @@ def render(verts, tris, tri_colours, yaw, width, height, ss=2):
     depth = np.full((h, w), np.inf)
     alpha = np.zeros((h, w), dtype=bool)
 
-    light = np.array([-0.35, 0.55, -0.75])
-    light /= np.linalg.norm(light)
+    key_dir = _unit(KEY_DIR)
+    fill_dir = _unit(FILL_DIR)
+    rim_dir = _unit(RIM_DIR)
+    view_dir = np.array([0.0, 0.0, -1.0])
 
-    p0 = model[tris[:, 0]]
-    p1 = model[tris[:, 1]]
-    p2 = model[tris[:, 2]]
-    face_n = np.cross(p1 - p0, p2 - p0)
-    lengths = np.linalg.norm(face_n, axis=1)
-    lengths[lengths == 0] = 1.0
-    face_n = face_n / lengths[:, None]
-    lambert = 0.34 + 0.66 * np.abs(face_n @ light)
-    colours = np.clip(tri_colours * lambert[:, None], 0.0, 1.0)
+    # Lighting happens in linear light: sRGB-encoded colours shaded directly come
+    # out chalky in the highlights and muddy in the folds.
+    linear = np.power(np.clip(tri_colours, 0.0, 1.0), 2.2)
 
     for t in range(len(tris)):
         x0, x1, x2 = sx[tris[t, 0]], sx[tris[t, 1]], sx[tris[t, 2]]
@@ -197,6 +243,32 @@ def render(verts, tris, tri_colours, yaw, width, height, ss=2):
         inside = (w0 >= -1e-6) & (w1 >= -1e-6) & (w2 >= -1e-6)
         if not inside.any():
             continue
+
+        # Barycentric interpolation of the vertex normals, then per-pixel light.
+        n = (
+            w0[..., None] * normals[tris[t, 0]]
+            + w1[..., None] * normals[tris[t, 1]]
+            + w2[..., None] * normals[tris[t, 2]]
+        )
+        length = np.linalg.norm(n, axis=2)
+        length[length == 0] = 1.0
+        n = n / length[..., None]
+        facing = n @ view_dir
+        flip = facing > 0.0
+        n[flip] *= -1.0
+        lambert_key = np.clip(n @ key_dir, 0.0, 1.0)[..., None]
+        lambert_fill = np.clip(n @ fill_dir, 0.0, 1.0)[..., None]
+        rim = np.power(np.clip(1.0 - np.abs(n @ view_dir), 0.0, 1.0), 3.0)[..., None]
+        light = (
+            AMBIENT
+            + KEY_POWER * lambert_key * KEY_COLOUR
+            + FILL_POWER * lambert_fill * FILL_COLOUR
+            + RIM_POWER * rim
+        )
+        shaded = np.power(
+            np.clip(linear[t] * light, 0.0, 1.0), 1.0 / 2.2
+        )
+
         zz = (
             w0 * (z[tris[t, 0]]) + w1 * (z[tris[t, 1]]) + w2 * (z[tris[t, 2]])
         )
@@ -205,7 +277,7 @@ def render(verts, tris, tri_colours, yaw, width, height, ss=2):
         sub_alpha = alpha[miny : maxy + 1, minx : maxx + 1]
         nearer = inside & (zz < sub_depth)
         sub_depth[nearer] = zz[nearer]
-        sub_colour[nearer] = colours[t]
+        sub_colour[nearer] = shaded[nearer]
         sub_alpha[nearer] = True
 
     if ss > 1:
@@ -234,11 +306,12 @@ def main():
     if args.flip_y:
         verts[:, 1] = -verts[:, 1]
     verts = normalise(verts)
+    vnormals = vertex_normals(verts, tris)
     os.makedirs(args.outdir, exist_ok=True)
 
     for i in range(args.frames):
         yaw = math.radians(args.start) + 2.0 * math.pi * i / args.frames
-        rgba = render(verts, tris, tri_colours, yaw, args.width, args.height)
+        rgba = render(verts, tris, tri_colours, vnormals, yaw, args.width, args.height)
         path = os.path.join(args.outdir, "frame_%02d.png" % i)
         write_png(path, rgba)
         print(path, rgba.shape[1], "x", rgba.shape[0])

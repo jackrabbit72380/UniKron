@@ -536,6 +536,25 @@ it settles:
   `mvctrlc2`, `oscarui`, `wwwca`, `xplayrui`, `584807D5`, the Xenon Latin fonts
   (`XenonCLatin.xtt`, `XenonJKLatin.xtt`) and a `theater/room.png` backdrop.
 
+## Why the 3D bake is not a photograph of the editor
+
+Three limits in the data, each checked rather than assumed:
+
+- **No textures.** `XPR0` appears zero times in the pack, so the meshes have no
+  diffuse maps, no face art and no masks. That is also why skin shows through at
+  the shoulders: garments hide body regions with `... Hiding Template` assets,
+  and those carry no model block at all - they are texture masks, so with no
+  textures there is nothing to hide with.
+- **The hands are modelled splayed.** `MaleBody` is 1,137 vertices and its hand
+  is a flat palm with straight, separated fingers in the bind pose. Forcing every
+  hand joint (36, 44, 45, 46, 57, 34) back to its bind delta changes nothing, so
+  the fan is in the mesh, not in the clip or the skinning.
+- **No material lighting model.** The renderer in this port shades the bake; the
+  XTL renderer's own constants are decompiled but its lighting is not public.
+  `bake_turntable.py` now welds vertices, lights per pixel through interpolated
+  vertex normals with a warm key, cool fill, rim and linear-light blending,
+  which is what stopped the figure looking like flat cut-out cardboard.
+
 ## Stock garment colour
 
 The pack embeds no textures at all (`XPR0` appears zero times in
