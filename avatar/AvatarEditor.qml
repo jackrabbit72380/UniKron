@@ -172,6 +172,10 @@ Item {
     readonly property var layers: _layers
     readonly property var bodyCategory: categories.length > 0 ? categories[0] : null
 
+    // 2D stacks the source's own art layers; 3D plays a baked turntable of the
+    // real mesh (see AvatarStage3D and avatar_tools/bake_turntable.py).
+    property string renderMode: "2d"
+
     signal saveRequested(var state)
     signal portraitReady(var grabResult)
     signal backRequested()
@@ -372,7 +376,10 @@ Item {
     }
 
     function capturePortrait() {
-        stage.capture(function (result) {
+        // Whichever view is live is the one worth saving; with no baked frames
+        // the 3D stage has nothing to grab, so 2D still answers.
+        var target = (renderMode === "3d" && stage3d.available) ? stage3d : stage
+        target.capture(function (result) {
             if (result)
                 portraitReady(result)
         })
@@ -381,6 +388,13 @@ Item {
     // ---- input -----------------------------------------------------------
 
     Keys.onPressed: function (event) {
+        // 3 toggles the render mode on every screen that shows the avatar.
+        if (event.key === Qt.Key_3 && screen !== "choose") {
+            renderMode = renderMode === "3d" ? "2d" : "3d"
+            event.accepted = true
+            return
+        }
+
         // The menu is its own screen: up/down move between the five plates and
         // accept activates one. In the closet, cancel goes back to the menu.
         if (screen === "choose") {
@@ -657,11 +671,56 @@ Item {
         width: root.screen === "closet" ? root.width - x - 26
              : (root.screen === "features" ? 286 : (root.screen === "choose" ? 0 : 470))
         height: root.screen === "closet" ? 430 : (root.screen === "choose" ? 0 : 592)
-        visible: root.screen !== "choose"
+        // Hidden in 3D: the baked frames have a transparent background, so a
+        // visible 2D stage would show through them as a ghost avatar.
+        visible: root.screen !== "choose" && root.renderMode !== "3d"
         layers: root.layers
         emptyHint: root.categories.length === 0
                    ? "No item folders found in " + root.assetsFolder
                    : ""
+    }
+
+    AvatarStage3D {
+        id: stage3d
+        x: stage.x
+        y: stage.y
+        width: stage.width
+        height: stage.height
+        visible: root.screen !== "choose" && root.renderMode === "3d"
+        folder: root.assetsFolder + "3d/turntable/"
+    }
+
+    // 2D / 3D switch. It shows the live mode rather than an icon for the other
+    // one, and stays hidden on the choose screen, which has no avatar.
+    Rectangle {
+        id: modeSwitch
+        visible: root.screen !== "choose"
+        anchors.right: parent.right
+        anchors.rightMargin: 18
+        y: 18
+        width: 74
+        height: 26
+        radius: 13
+        color: modeHover.containsMouse ? "#2b3a4e" : "#1b2634"
+        border.width: 1
+        border.color: root.renderMode === "3d" ? root.accentColor : "#43546e"
+
+        Text {
+            anchors.centerIn: parent
+            text: root.renderMode === "3d" ? "3D" : "2D"
+            color: root.renderMode === "3d" ? root.accentColor : "#ffffff"
+            font.family: "Segoe UI"
+            font.pixelSize: 13
+            font.weight: Font.DemiBold
+        }
+
+        MouseArea {
+            id: modeHover
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.renderMode = root.renderMode === "3d" ? "2d" : "3d"
+        }
     }
 
 
