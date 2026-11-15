@@ -161,6 +161,37 @@ pack are *item* animations (emotes such as Clap, Wave, Celebration); they carry
 The avatar itself is posed by the standalone `IdleOffScreen.AvatarAnimation`,
 which is a separate file beside the pack.
 
+## The width anomaly, in numbers
+
+Measuring by class over the whole pack puts the remaining 3D problem in one axis
+only. Medians of every model asset whose name falls in a class (extents in the
+pack's own units):
+
+| class | assets | width | height | depth |
+| --- | --- | --- | --- | --- |
+| body (Male, Female) | 2 | **1.80** | 1.51 | 0.39 |
+| top (tee/shirt/jacket/...) | 144 | 0.89 | 0.75 | 0.40 |
+| legs (pants/shorts/skirt) | 47 | 0.46 | 0.75 | 0.40 |
+| feet (shoes/boots) | 21 | 0.46 | 0.31 | 0.39 |
+| head | 1 | 0.38 | 0.37 | 0.39 |
+
+Depth is the same everywhere (0.39 to 0.40) and heights are consistent - a top
+0.75 tall over a torso, legs 0.75 on a 1.51 body - so nothing is uniformly
+collapsed and no axis is silently dropped. The body's *width* is the outlier:
+its arm span is 1.80, but its torso silhouette is only about 0.25 wide, while
+the tee that has to cover that torso is 0.89 wide. A factor of ~3.5 sits between
+the body's torso and its own clothing, and it appears on the width axis only.
+That is the same factor the posing work kept meeting from the other direction,
+now pinned to one axis and two asset classes instead of "the body looks flat".
+
+One correction worth recording, because it is easy to mis-read: `Head` has **two
+batches that are not duplicates**. Each is 324 verts / 423 tris with the same
+0.23 x 0.37 x 0.39 extent, but the second is the first *mirrored* - the winding
+runs `1,0,2` in the first and `1,2,0` in the second - and offset -0.176 in X, so
+the assembled head is 0.38 wide. The pack ships mirrored copies rather than two
+halves, and any per-batch analysis has to account for that offset or the head
+comes out either duplicated or half-width.
+
 ## What this rules out for the 3D avatar
 
 The flat-shell body cannot be explained by: a different pack version (identical
