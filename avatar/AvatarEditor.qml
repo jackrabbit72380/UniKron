@@ -183,6 +183,21 @@ Item {
         return ""
     }
 
+    // The hairstyle seedOutfit fills in. bake_animated.py bakes the animated 3D
+    // set for exactly this look, so those frames are only the right hair while
+    // the player wears it (or has no hair picked at all).
+    readonly property string defaultHairStem: {
+        for (var i = 0; i < categories.length; ++i) {
+            var c = categories[i]
+            if (!c || !c.files || !c.files.length)
+                continue
+            if (c.id.indexOf("hair") < 0 || c.id.indexOf("facial") >= 0)
+                continue
+            return c.files[0].replace(/\.png$/i, "")
+        }
+        return ""
+    }
+
     readonly property var currentCategory:
         categoryIndex >= 0 && categoryIndex < categories.length ? categories[categoryIndex] : null
     readonly property var layers: _layers
@@ -733,12 +748,17 @@ Item {
 
     AvatarStage3D {
         id: stage3d
+        objectName: "stage3d"
         x: stage.x
         y: stage.y
         width: stage.width
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
         baseFolder: root.assetsFolder + "3d/turntable/"
+        // Baked for the default hairstyle only, so a picked hairstyle keeps
+        // the turntable set that was baked for that hair.
+        animatedFolder: (root.hairVariant === "" || root.hairVariant === root.defaultHairStem)
+                        ? root.assetsFolder + "3d/animated/" : ""
         variant: root.hairVariant
     }
 

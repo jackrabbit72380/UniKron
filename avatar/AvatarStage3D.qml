@@ -1,58 +1,154 @@
 import QtQuick 2.15
 
-// The 3D view: a baked turntable of the avatar mesh, spun by dragging or left
-// to idle-turn the way the dashboard's avatar does.
+// The 3D view: a baked avatar, turned by dragging or left to idle-turn the way
+// the dashboard's avatar does.
 //
 // The theme cannot load a mesh — Pegasus has no 3D scene module, and the source
 // geometry is LZX-compressed STRB that only AvatarEditorRecomp decodes — so the
-// frames are baked ahead of time by avatar_tools/bake_turntable.py from the
-// model Avatar Aura exports. Everything here is plain Image, so it works on any
-// Qt the theme runs on.
+// frames are baked ahead of time by avatar_tools/bake_outfits.py (static) and
+// avatar_tools/bake_animated.py (animated). Everything here is plain Image, so
+// it works on any Qt the theme runs on.
+//
+// Two layouts are understood, and the animated one wins when it is present:
+//
+//   yaw_00_pose_00.png ...   angles crossed with poses from a real clip, so the
+//                            avatar keeps moving while it turns
+//   frame_00.png ...         one pose across many angles, used when no animated
+//                            set was baked for this look
 Item {
     id: stage
 
     Style { id: style }
 
-    property string baseFolder: ""    // .../assets/3d/turntable/
-    // Which baked set to play, from the hairstyle the player picked. Empty means
-    // the default set directly in baseFolder; a name that has no frames (or no
+    property string baseFolder: ""         // .../assets/3d/turntable/
+    // Where the animated set lives, if one was baked. It is baked for the default
+    // look only, so it does not follow the hairstyle the way the turntable does;
+    // leave it empty to always use the static set.
+    property string animatedFolder: ""     // .../assets/3d/animated/
+    // Which turntable to play, from the hairstyle the player picked. Empty means
+    // the default set directly under baseFolder; a name that has no frames (or no
     // bake for that hairstyle) falls back to it too.
     property string variant: ""
     readonly property string folder: baseFolder + (variant !== "" ? variant + "/" : "")
+    // The static turntable: one pose, frameCount angles.
     property int frameCount: 0
     property int frame: 0
+    // The animated set: yawCount angles crossed with poseCount poses.
+    property bool animated: false
+    property int yawCount: 0
+    property int poseCount: 0
+    property int yaw: 0
+    property int pose: 0
     property bool available: false
     property bool spinning: true
 
-    onFolderChanged: {
+    onFolderChanged: reload()
+    onAnimatedFolderChanged: reload()
+
+    function reload() {
         frameCount = 0
         frame = 0
+        animated = false
+        yawCount = 0
+        poseCount = 0
+        yaw = 0
+        pose = 0
         available = false
-        probe.loadNext()
+        animProbe.start()
     }
 
     // Same contract as AvatarStage: the portrait is grabbed from whatever the
     // player is actually looking at.
     function capture(callback) {
         // A portrait should face the player: the bake starts at the avatar's
-        // back, so half the turntable is the front. Snapping there first stops a
-        // grab that catches the spin side-on from saving a profile picture of
-        // the back of someone's head.
-        if (frameCount > 1)
+        // back, so half the turn is the front. Snapping there first stops a grab
+        // that catches the spin side-on from saving a picture of the back of
+        // someone's head.
+        if (animated && yawCount > 1) {
+            yaw = Math.floor(yawCount / 2)
+            pose = 0
+        } else if (frameCount > 1) {
             frame = Math.floor(frameCount / 2)
+        }
         holder.grabToImage(function (result) {
             callback(result)
         }, Qt.size(512, 768))
     }
 
-    function framePath(index) {
-        return stage.folder + "frame_" + (index < 10 ? "0" : "") + index + ".png"
+    function padded(index) {
+        return (index < 10 ? "0" : "") + index
     }
 
-    // Probe the folder one frame at a time: the frames are numbered from 00 with
-    // no gaps, so the first missing index is the count. Asking for each frame
-    // only once the last one loaded means a 24-frame set costs a single failed
-    // load instead of 24 warnings in the log.
+    function framePath(index) {
+        return folder + "frame_" + padded(index) + ".png"
+    }
+
+    function animPath(turn, step) {
+        return animatedFolder + "yaw_" + padded(turn) + "_pose_" + padded(step) + ".png"
+    }
+
+    readonly property string shown: animated
+        ? animPath(yawCount > 0 ? yaw % yawCount : 0, poseCount > 0 ? pose % poseCount : 0)
+        : (available ? framePath(frame) : "")
+
+    // Probe the animated set first: poses at turn 0, then turns at pose 0, one
+    // image at a time so a missing file costs a single failed load rather than a
+    // log full of warnings. If the very first one is missing, fall through to the
+    // static turntable.
+    Image {
+        id: animProbe
+        visible: false
+        cache: false
+        property int phase: 0     // 0 = counting poses, 1 = counting turns, 2 = done
+        property int seen: 0      // index currently being requested
+        function start() {
+            if (stage.animatedFolder === "") {
+                probe.loadNext()
+                return
+            }
+            phase = 0
+            seen = 0
+            source = stage.animPath(0, 0)
+        }
+        function step() {
+            source = phase === 0 ? stage.animPath(0, seen) : stage.animPath(seen, 0)
+        }
+        onStatusChanged: {
+            if (status === Image.Ready) {
+                stage.animated = true
+                stage.available = true
+                if (phase === 0) {
+                    stage.poseCount = seen + 1
+                    seen += 1
+                    step()
+                } else if (phase === 1) {
+                    stage.yawCount = seen + 1
+                    seen += 1
+                    step()
+                }
+            } else if (status === Image.Error) {
+                if (phase === 0 && seen === 0) {
+                    // No animated set for this look: use the turntable.
+                    stage.animated = false
+                    probe.loadNext()
+                } else if (phase === 0) {
+                    stage.poseCount = seen
+                    phase = 1
+                    seen = 1
+                    step()
+                } else if (phase === 1) {
+                    stage.yawCount = seen
+                    phase = 2
+                    // Open facing the player: the bake starts at the avatar's
+                    // back, so half a turn is the front.
+                    stage.yaw = Math.floor(stage.yawCount / 2)
+                }
+            }
+        }
+    }
+
+    // The static turntable: numbered from 00 with no gaps, so the first missing
+    // index is the count.
     Image {
         id: probe
         visible: false
@@ -63,7 +159,7 @@ Item {
             if (stage.frameCount < 512)
                 source = stage.framePath(stage.frameCount)
         }
-        Component.onCompleted: loadNext()
+        Component.onCompleted: if (stage.animatedFolder === "") loadNext()
         onStatusChanged: {
             if (status === Image.Ready) {
                 stage.available = true
@@ -86,7 +182,7 @@ Item {
 
         Image {
             anchors.fill: parent
-            source: stage.available ? stage.framePath(stage.frame) : ""
+            source: stage.shown
             fillMode: Image.PreserveAspectFit
             smooth: true
             cache: true
@@ -102,23 +198,53 @@ Item {
     }
 
     Timer {
-        interval: 90
+        // Fewer angles than the 20-frame turntable, so give each one longer.
+        interval: stage.animated ? 130 : 90
         running: stage.available && stage.spinning
         repeat: true
-        onTriggered: if (stage.frameCount > 1)
-                         stage.frame = (stage.frame + 1) % stage.frameCount
+        onTriggered: {
+            if (stage.animated) {
+                if (stage.yawCount > 1)
+                    stage.yaw = (stage.yaw + 1) % stage.yawCount
+            } else if (stage.frameCount > 1) {
+                stage.frame = (stage.frame + 1) % stage.frameCount
+            }
+        }
+    }
+
+    // The clip's own motion, at a walking pace: the poses are even samples across
+    // a standing clip, so this reads as weight shifting rather than an animation.
+    Timer {
+        interval: 200
+        running: stage.available && stage.animated && stage.poseCount > 1
+        repeat: true
+        onTriggered: stage.pose = (stage.pose + 1) % stage.poseCount
     }
 
     MouseArea {
         anchors.fill: parent
         enabled: stage.available
         property int pressFrame: 0
+        property int pressYaw: 0
         property real pressX: 0
-        onPressed: { pressFrame = stage.frame; pressX = mouse.x; stage.spinning = false }
+        onPressed: {
+            pressFrame = stage.frame
+            pressYaw = stage.yaw
+            pressX = mouse.x
+            stage.spinning = false
+        }
         onPositionChanged: {
-            var step = stage.width / Math.max(stage.frameCount, 1) * 1.4
-            var delta = Math.round((pressX - mouse.x) / Math.max(step, 1))
-            stage.frame = ((pressFrame + delta) % stage.frameCount + stage.frameCount) % stage.frameCount
+            if (stage.animated) {
+                if (stage.yawCount < 2)
+                    return
+                var yawStep = stage.width / stage.yawCount * 1.4
+                var turned = Math.round((pressX - mouse.x) / Math.max(yawStep, 1))
+                stage.yaw = ((pressYaw + turned) % stage.yawCount + stage.yawCount) % stage.yawCount
+            } else {
+                var step = stage.width / Math.max(stage.frameCount, 1) * 1.4
+                var delta = Math.round((pressX - mouse.x) / Math.max(step, 1))
+                stage.frame = ((pressFrame + delta) % stage.frameCount + stage.frameCount) % stage.frameCount
+            }
         }
         onReleased: stage.spinning = true
     }
@@ -139,8 +265,8 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             text: "No 3D frames yet\n"
-                  + "Export the avatar as OBJ from Avatar Aura, then bake it into "
-                  + "assets/3d/turntable with avatar_tools/bake_turntable.py."
+                  + "Bake them with avatar_tools/bake_outfits.py or "
+                  + "avatar_tools/bake_animated.py into assets/3d."
             color: "#f4f7fa"
             font.family: style.titleFamily
             font.pixelSize: 14

@@ -280,11 +280,20 @@ frames** - that is why 3D mode reads as a still picture while it turns. The pack
 real idles are far longer (`Male Idle Shifts Weight` 242, `Female Idle Looks
 Around` 101, `Generic Stand 1` 428).
 
-Baking an animated 3D mode would cost frames multiplicatively: 8 yaw angles
-against 12 animation poses is 96 images per outfit, about 2 MB each, so five
-outfits would add ~10 MB to a 7 MB theme. The turntable therefore bakes one pose
-across 20 yaws, and the animated idles stay in the pack for a future player. The
-closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
+So 3D mode has two bakes. `bake_outfits.py` makes the static turntable - one
+pose across 20 yaws, one set per hairstyle. `bake_animated.py` makes an animated
+set for the default look: **8 yaw angles crossed with 6 poses** sampled evenly
+across `Male Idle Shifts Weight` (clip frames 0, 40, 80, 120, 161, 201 of 242),
+48 images, 2.1 MB, written as `yaw_YY_pose_PP.png` in `assets/3d/animated/`.
+
+`AvatarStage3D` probes those names first and, if they are there, drives yaw from
+its spin timer and pose from a second 200 ms timer, opening at the front angle
+instead of the back. Because the set is baked for the default hairstyle, the
+editor only offers it while the player wears that hair (or none picked); picking
+another hairstyle falls back to that style's own static turntable. Baking all
+five would have been ~10 MB on top of a 7 MB theme, so this is the trade.
+
+The closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
 slight head tilt, so there is nothing to gain from swapping it in.
 
 Ten more clips ship as standalone files beside the pack - `RunIn`, `RunOutShort`,
