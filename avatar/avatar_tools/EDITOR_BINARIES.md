@@ -265,9 +265,12 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
 
 `avatareditor.xex` in each editor is an Xbox 360 executable: `XEX2`, big-endian
 header, PE image at 12288 (2008) and 28672 (2010), and 13 or 15 optional headers.
-The bodies are LZX-compressed and title-encrypted, so the code does not read
-without the console's keys - but the header's library list is plaintext, and it
-says what each editor is built on:
+The 2010 image encrypts its whole PE, so only its XEX2 header reads. The 2008
+image does **not**: its PE headers and section data are in the clear, so it gives
+up its section table (`.rdata`, `.pdata`, `.text`, `.data`, `.XBMOVIE`, `.idata`,
+`.XBLD`, `.reloc`) and the strings in them - see `XEX_NXE2008_STRINGS.txt`, made
+by `xex_strings.py`. Both builds' header library lists are plaintext, and say
+what each editor is built on:
 
 | 2008 (nxe2008) | 2010 (metro2010) |
 | --- | --- |
@@ -283,6 +286,24 @@ So both are dashboard UI-run applications drawing their avatar through the
 handle - which is why the archive also carries the Kinect Fun Labs packages. The
 binary's own description string is `AvatarEditor.exe`, and the 2010 image carries
 the path `$SEP\20312500\AvatarEditor.xex`.
+
+The 2008 build's strings also name the pieces it was made of:
+
+* **tone slots** - `SkinTone`, `EyeBrowTone`, `EyeShadowTone`, `IrisTone`,
+  `MouthTone`, `SkinFeature1Tone`, `SkinFeature2Tone`, which is the naming behind
+  the description's nine colours at 0xFC; `texSkinFeatures` is the texture those
+  last two paint from;
+* **shaders** - `shader_body_opaque`, `_shiny`, `_transparent`, `_shadow`,
+  `shader_head_opaque`, `shader_head_shadow`, `shader_simpleshadow`, and the
+  loading screen's `loading`, `loadingbact`, `loadingmist`, `loadingstars`;
+* **animations** - nineteen `*.MsLiveAvatarAsset` entries: `closet_spin`,
+  `closet_spin_mirrored`, `closet_examine_headgear`, `_upper_body`,
+  `_lower_body`, `_shoes`, `closet_balance_left` with its `_into`/`_outof`
+  transitions, and the `creator_*` set (`pick_me`, `run_on`-`run_on4`,
+  `run_off`, `float`, `floating_celebrate`). These are separate animated assets
+  and are not inside `AvatarAssetPack.toc`, which carries the idle and wardrobe
+  clips instead;
+* `AvatarPhotoBoothEnabled`, the flag behind the portrait capture.
 
 ## The orbs are plain meshes
 

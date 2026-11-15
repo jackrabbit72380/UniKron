@@ -83,18 +83,22 @@ def decode_xip0(head, size, path):
 
 
 def decode_xex2(head, size, path):
-    """Xbox 360 executable: 'XEX2', u32 header size, then the header fields.
+    """Xbox 360 executable: a big-endian header, then a little-endian PE image.
 
-    The body is LZX-compressed and title-encrypted: an unencrypted retail XEX is
-    not readable without the console's keys, so only the header decodes.
+    The header always reads. Whether the image does depends on the build: the
+    2008 editor ships its PE headers and section data in the clear, while the
+    2010 one encrypts the whole PE, so only its XEX2 header decodes.
     """
-    header_size = struct.unpack_from("<I", head, 8)[0]
-    # The body is LZX-compressed and title-encrypted; without the console's keys
-    # only this header is readable, so report the size and stop there.
-    note = "header %d bytes; body compressed and title-encrypted" % header_size
-    if header_size > size:
-        note += " (header size exceeds the file, unverified)"
-    return "partial", "XEX2 " + note
+    # The PE sits past the header buffer the audit passes in, so read the file.
+    with open(path, "rb") as fh:
+        data = fh.read()
+    _, pe_offset, _, _, count = struct.unpack_from(">5I", data, 4)
+    if pe_offset + 0x40 > len(data) or data[pe_offset:pe_offset + 2] != b"MZ":
+        return "partial", "XEX2, %d optional headers; PE at %d is encrypted" % (count, pe_offset)
+    lfanew = struct.unpack_from("<I", data, pe_offset + 0x3C)[0]
+    if data[pe_offset + lfanew:pe_offset + lfanew + 4] != b"PE\x00\x00":
+        return "partial", "XEX2, %d optional headers; no PE signature where e_lfanew points" % count
+    return "decoded", "XEX2, %d optional headers; PE image with its sections readable" % count
 
 
 def decode_strb(head, size, path):

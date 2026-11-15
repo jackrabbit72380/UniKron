@@ -12,7 +12,7 @@ extension, with the decoder that was run and what it read.
 | wav | 92 | 92 | 0 | 0 | 0 | 34.3 |
 | png | 55 | 55 | 0 | 0 | 0 | 31.8 |
 | xtf | 2 | 2 | 0 | 0 | 0 | 31.2 |
-| xex | 2 | 0 | 0 | 2 | 0 | 29.9 |
+| xex | 2 | 1 | 0 | 1 | 0 | 29.9 |
 | toc | 4 | 4 | 0 | 0 | 0 | 28.4 |
 | mp3 | 9 | 9 | 0 | 0 | 0 | 19.1 |
 | xpr0 | 136 | 136 | 0 | 0 | 0 | 16.1 |
@@ -59,7 +59,5 @@ extension, with the decoder that was run and what it read.
 
 ## Not fully decoded
 
-- **xex** (partial) - 1 file(s): XEX2 header 3145728 bytes; body compressed and title-encrypted
-  - `XBOX HUB/resources/editors/nxe2008/assets/avatareditor.xex`
-- **xex** (partial) - 1 file(s): XEX2 header 7340032 bytes; body compressed and title-encrypted
+- **xex** (partial) - 1 file(s): XEX2, 15 optional headers; PE at 28672 is encrypted
   - `XBOX HUB/resources/editors/metro2010/assets/avatareditor.xex`
