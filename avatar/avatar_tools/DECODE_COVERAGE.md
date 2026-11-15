@@ -15,7 +15,7 @@ extension, with the decoder that was run and what it read.
 | xex | 2 | 0 | 0 | 2 | 0 | 29.9 |
 | toc | 4 | 4 | 0 | 0 | 0 | 28.4 |
 | mp3 | 9 | 9 | 0 | 0 | 0 | 19.1 |
-| xpr0 | 136 | 132 | 0 | 4 | 0 | 16.1 |
+| xpr0 | 136 | 136 | 0 | 0 | 0 | 16.1 |
 | icu | 1 | 1 | 0 | 0 | 0 | 10.3 |
 | text | 1766 | 0 | 1766 | 0 | 0 | 9.3 |
 | mp4 | 1 | 1 | 0 | 0 | 0 | 6.7 |
@@ -59,10 +59,6 @@ extension, with the decoder that was run and what it read.
 
 ## Not fully decoded
 
-- **xpr0** (partial) - 4 file(s): XPR0 payload 88064 bytes: 43 sectors of 2048, 0 spare - no power-of-two DXT shape fits, so it is a texture plus extra data
-  - `XBOX HUB/resources/ogxbox/uix/xboxfs/Q/Xips/music_playedit2/Morbcellwall.xbx`
-  - `XBOX HUB/resources/ogxbox/uix/xboxfs/Q/Xips/skin/cellwall.xbx`
-  - `XBOX HUB/resources/ogxbox/uix/xboxfs/Q/Xips/default/cellwall.xbx`
 - **xex** (partial) - 1 file(s): XEX2 header 3145728 bytes; body compressed and title-encrypted
   - `XBOX HUB/resources/editors/nxe2008/assets/avatareditor.xex`
 - **xex** (partial) - 1 file(s): XEX2 header 7340032 bytes; body compressed and title-encrypted

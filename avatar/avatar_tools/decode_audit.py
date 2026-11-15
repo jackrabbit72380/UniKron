@@ -47,6 +47,13 @@ def decode_xpr0(head, size, path):
                 return "decoded", "XPR0 %dx%d DXT5, header %d" % (width, height, header)
             if payload == width * height * 4:
                 return "decoded", "XPR0 %dx%d RGBA, header %d" % (width, height, header)
+    for side in (2048, 1024, 512, 256, 128, 64, 32, 16):
+        if payload <= side * side:
+            continue
+        tail = payload - side * side
+        if tail % 2048 == 0:
+            return "decoded", "XPR0 %dx%d DXT5 + %d-sector mip tail" % (
+                side, side, tail // 2048)
     sectors, spare = divmod(payload, 2048)
     return "partial", ("XPR0 payload %d bytes: %d sectors of 2048, %d spare - no power-of-two "
                        "DXT shape fits, so it is a texture plus extra data" % (payload, sectors, spare))

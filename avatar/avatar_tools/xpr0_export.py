@@ -30,11 +30,20 @@ def decode(path):
         payload_bytes = size - header
         fh.seek(header)
         data = fh.read(payload_bytes)
-        for side in (16, 32, 64, 128, 256, 512, 1024, 2048, 4096):
+        for side in (4096, 2048, 1024, 512, 256, 128, 64, 32, 16):
             quarter = side * side // 2
             if payload_bytes == quarter:
                 return (mesh.decode_dxt(data, side, side, False, swap=False),
                         "%dx%d DXT1" % (side, side))
+            if payload_bytes > side * side:
+                # Base image plus a mip tail, every level allocated in whole
+                # 2048-byte sectors: cellwall.xbx is 256x256 DXT5 (32 sectors)
+                # with 16384 + 4096 + 1024 + 1024 of mips, 43 sectors in all.
+                tail = payload_bytes - side * side
+                if tail % 2048:
+                    continue
+                rgba = mesh.decode_dxt(data[:side * side], side, side, True, swap=False)
+                return rgba, "%dx%d DXT5 + %d-sector mip tail" % (side, side, tail // 2048)
             if payload_bytes != side * side:
                 continue
             # side * side fits both a DXT5 image and a pair of DXT1 planes. A

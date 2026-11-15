@@ -258,8 +258,6 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
 
 * the two `avatareditor.xex` files - the body is LZX-compressed and
   title-encrypted, so only the XEX2 header reads without the console's keys;
-* 4 `cellwall.xbx` - a 90112-byte file whose payload (43 sectors of 2048) fits no
-  power-of-two DXT shape, so it is a texture plus extra data;
 * PE and the fonts decode their headers and tables; `DECODE_COVERAGE.md` says how
   deep each one goes.
 
@@ -305,22 +303,24 @@ skin textures are painted with.
 
 ## The dashboard's own textures
 
-`xpr0_export.py` turns the `.xbx` skins into PNGs: 131 of the 135 export, and the
+`xpr0_export.py` turns the `.xbx` skins into PNGs: all 135 export, and the
 images are clean (a skin's `dvd_button` comes out as its rounded bevel, the
 `decept` background as its scanline graphic). Two layouts occur:
 
 * **DXT1** at 512x512 or 128x128 - payload is `side * side / 2` bytes;
 * **DXT5**, payload `side * side`;
+* **a base image plus a mip tail** - `cellwall.xbx` is 256x256 DXT5 with its
+  mip chain, every level allocated in whole 2048-byte sectors, so 32 + 8 + 2 + 1
+  = 43 sectors and a 90112-byte file;
 * **two stacked DXT1 planes**, also `side * side`. Guessing DXT5 for those
   decodes to block noise, and the first plane alone is a clean picture, so the
   exporter decodes both ways and keeps the smoother result (0.8 versus 14.7 for
   `decept.xbx`). The second plane is a separate layer, not an alpha mask: on
   `decept` it is a green scanline and spiderweb overlay.
 
-Nothing is per-pixel swizzled and no 8-in-16 swap is needed: the payload decodes
-with the same DXT decoder as the avatar pack, byte order untouched. The 4 files
-that do not export are `cellwall.xbx` (payload fits no shape) and the four `.xbx`
-playlists, which are INI text with a `.xbx` extension.
+All 135 textures now export. Nothing is per-pixel swizzled and no 8-in-16 swap is needed: the payload decodes
+with the same DXT decoder as the avatar pack, byte order untouched. The only `.xbx` files that are
+not textures are four INI playlists carrying that extension.
 
 ## The face: UVs are half floats, and the masks clamp
 
