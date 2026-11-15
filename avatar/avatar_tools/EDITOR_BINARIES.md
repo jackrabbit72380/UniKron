@@ -87,6 +87,43 @@ value. It says what an avatar *wears*; it contains no geometry.
     avatar_eye_whites = false     # eye rendering variant
     model_shadows = true          # avatar casts a shadow
 
+## The Hub's avatar system (`resources/app/avatars.js`)
+
+The Xbox 360 Hub app ships as **plain readable JavaScript**, and `avatars.js`
+documents the editor's data model in its header comment. This is the map that
+was missing:
+
+    <userData>/avatar editors/<nxe2008|metro2010>/
+        closet/    closet_index.tsv, closet_titles.tsv, closet_awards.tsv,
+                   <guid>.bin per item, icons/<guid>.png
+        saves/     what the editor writes: the avatar, outfits, gamer picture
+
+Before every launch the Hub rewrites four keys in `avatareditor.toml`:
+
+    avatar_closet_dir = <closet>      content_root = <saves>
+    user_name = <gamertag, 15 chars>  fullscreen = true
+
+So the editor's own item library is ordinary user data, not something in the
+pack; nothing of it ships, which is why the archive has no `closet/` folder.
+
+An item is a `<guid>.bin` whose first four bytes are `YTGR` - the same container
+family as the pack's assets, which is why a STRB scanner walks them. Rows are
+`guid<TAB>categories<TAB>bodies<TAB>name`, where `categories` is the first four
+bytes of the GUID read as a hex number. Icons are `<guid>.png` beside them, so a
+closet is enough to show a real catalogue of item art if one is ever imported.
+
+The Hub imports items from either an existing closet folder or from extracted
+Xbox LIVE items (`ID*.TXT` holding the GUID, `asset_v2.bin`, `ICON.PNG`,
+`<guid>.xml` with `reducedTitle` / `avatarBodyType`), verifying the `YTGR` header
+before copying.
+
+Finally, `apps.js` shows what a saved avatar is: the eighteen avatar games are
+started with `--avatar <path>`, where the path is
+`content/avatars/<xuid>/avatar_manifest.bin` and the file must be **exactly 1000
+bytes** - the same manifest decoded below. So the manifest is the complete
+portable definition of an avatar, and the item GUIDs in it are resolved against
+the closet, not against the asset pack.
+
 ## What this rules out for the 3D avatar
 
 The flat-shell body cannot be explained by: a different pack version (identical
