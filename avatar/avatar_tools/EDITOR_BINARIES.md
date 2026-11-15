@@ -68,15 +68,15 @@ which is a recomp authoring note, not game data.
 
 ## Saved avatar manifest
 
-`Avatar6400.Avatar` is 1,000 bytes of 16-byte records following a small header:
-`u32 flags, u32 191, u32 191, u32 4096`, then records of
+`Avatar6400.Avatar` is 1,000 bytes of records following a small header, with a
+fixed 8-byte marker `c1c8f109a19cb2e0` in every record. It says what an avatar
+*wears* and what colours it uses; it contains no geometry. See "The `.Avatar`
+manifest, read as big-endian" below for the field layout.
 
-    u32 value | u16 0x03xx | u16 0x0003 | u64 c1c8f109a19cb2e0
-
-with the trailing 8 bytes constant across every record. The `u32 value` field
-takes small powers-of-two-like numbers (0x10, 0x08, 0x20, ...) and the middle
-u32 varies per equipped item, so the manifest is a list of asset ids plus a
-value. It says what an avatar *wears*; it contains no geometry.
+The header's two `bf000000` words read as **191** little-endian or **-0.5f**
+big-endian, and the 360 itself is big-endian, so this file is quoted big-endian
+below - but the difference does not change the conclusion: no pair of floats in
+any plausible scale range exists anywhere in the three files.
 
 ## Editor config knobs worth keeping
 
@@ -123,6 +123,35 @@ started with `--avatar <path>`, where the path is
 bytes** - the same manifest decoded below. So the manifest is the complete
 portable definition of an avatar, and the item GUIDs in it are resolved against
 the closet, not against the asset pack.
+
+## The `.Avatar` manifest, read as big-endian
+
+`Avatar6400/6404/6411.Avatar` are 1000 bytes each and differ from one another in
+56 bytes, so they are three saved avatars, not a template. Read **big-endian**,
+the file is a small header followed by GUID-tagged records:
+
+    offset 0    u32 0
+    offset 4    f32 -0.5      (6400: -0.5, 6411: -1.0)
+    offset 8    f32 -0.5      (6411: -1.0)
+    ...         u32 value | u16 <group> | u16 0x0003, then
+                c1c8f109 a19cb2e0 (a fixed 8-byte marker)
+
+The marker repeats 16 times, each preceded by an 8-byte tag whose value takes
+forms like `0x00100000`, `0x00008000`, `0x031F0003`, `0x02EA0003` - the
+`0x03xx0003` family are item ids, the `0x0000____` ones are flags. Around offset
+240 sits a run of packed RGBA (`ffd7aa71`, `ff6e5326`, `ffb56157` ...), which
+reads as the avatar's colours: skin, hair, eyes and so on.
+
+The tail is the most informative part: a symmetric run of powers of two
+(`1, 2, 4, 8, 0x10, 0x20` then back down `0x20, 0x10, 8, 4`), each pair carrying
+an id. That is a set encoded as a bit path, i.e. which slots of the avatar are
+filled - not geometry and not a transform.
+
+**There is no height/weight pair in it.** Sweeping every 4-byte word of all three
+files for big-endian floats in 0.2 to 4.0 yields exactly three hits per file:
+the two header values at offsets 4 and 8 and a single `1.0f` in 6400. So the
+manifest cannot supply the width factor that the NXE body and clothing disagree
+by, and that earlier guess is now a checked, negative result.
 
 ## Every asset class in the pack, by STRB block id
 
