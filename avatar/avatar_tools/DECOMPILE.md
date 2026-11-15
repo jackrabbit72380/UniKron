@@ -16,14 +16,23 @@ corpora live in the `UniKron-decompiled-*.zip` archives beside the theme zip.
 | `resources/ogxbox/uix/xboxfs/Q/Xips/Toolbox.xip` | Original Xbox | x86 | 2,144 |
 | `resources/ogxbox/uix/xboxfs/Q/Xips/settings_adoc.xip` | Original Xbox | x86 | 1,444 |
 | `resources/ogxbox/uix/xboxfs/Q/Xips/shutdown.xip` | Original Xbox | x86 | 0 (see below) |
-| `resources/editors/metro2010/avatareditor.exe` | Windows host | x86 | see below |
+| `resources/editors/metro2010/avatareditor.exe` | Windows host, 2010 | x86-64 | 20,381 |
 | `resources/editors/metro2010/assets/avatareditor.xex` | Xbox 360, 2010 dash | PowerPC BE | **encrypted, blocked** |
+
+Four of the five binaries gave up their code: 25,955 functions in total, written
+out as one C file each.
 
 The 2008 editor is the one this theme reproduces, so its corpus is the useful
 one: 1,986 functions of real C, dense across the whole `.text`
 (`0x9803acc8`-`0x9813c058`), complete with the UI class names the strings
 section promised (`AuraControl`, `AuraScene`, `AvatarCategoryLabelOverride`,
 `AvatarBackButtonOverride`).
+
+The 2010 host binary is the largest single result at 20,381 functions, and it
+documents the direction that dash took: marketplace and telemetry strings such
+as `AE_MktCatFetch`, `AE_MktChannelValidate`, `AE_MktHoverTryOn` and
+`AE_MktDispatchKind` are inline in the C, so the 2010 editor was built around a
+catalogue/store pipeline that the 2008 one did not have.
 
 ## Toolchain
 
@@ -72,6 +81,12 @@ address, section count and section table address are little-endian words at
 `0x104`, `0x11C` and `0x120`, and the 256-byte signature occupies `0x04`-`0x104`.
 Reading them as big-endian - the obvious assumption on PowerPC hardware -
 produces section tables gigabytes away from the file.
+
+**MSVC mangled names overflow the filesystem.** The 2010 binary's names are
+Tera-flavoured C++ (`?AppendItem@XStaticUntypedEnumerator@system@rex@@...`), and
+a few run past 255 bytes, which aborts the whole script with
+`File name too long` after 20,018 functions. `DecompileAll.java` now replaces
+anything outside `[A-Za-z0-9_.-]` and truncates to 110 characters plus a hash.
 
 **Those `.xip` files are not 360 binaries.** The three `Q/Xips` files carry
 `XBEH` headers and sit next to 360 content, but their code is x86

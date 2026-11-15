@@ -27,7 +27,11 @@ public class DecompileAll extends GhidraScript {
                 continue;
             }
             if (res != null && res.decompileCompleted()) {
-                String name = String.format("%s_%08x.c", f.getName(), f.getEntryPoint().getOffset());
+                String base = f.getName().replaceAll("[^A-Za-z0-9_.-]", "_");
+                if (base.length() > 110) {
+                    base = base.substring(0, 100) + "_" + Integer.toHexString(f.getName().hashCode());
+                }
+                String name = String.format("%s_%08x.c", base, f.getEntryPoint().getOffset());
                 PrintWriter pw = new PrintWriter(new File(out, name));
                 pw.print(res.getDecompiledFunction().getC());
                 pw.close();
