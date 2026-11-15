@@ -282,9 +282,11 @@ Around` 101, `Generic Stand 1` 428).
 
 So 3D mode has two bakes. `bake_outfits.py` makes the static turntable - one
 pose across 20 yaws, one set per hairstyle. `bake_animated.py` makes an animated
-set for the default look: **8 yaw angles crossed with 6 poses** sampled evenly
+set for the default look: **12 yaw angles crossed with 6 poses** sampled evenly
 across `Male Idle Shifts Weight` (clip frames 0, 40, 80, 120, 161, 201 of 242),
-48 images, 2.1 MB, written as `yaw_YY_pose_PP.png` in `assets/3d/animated/`.
+72 images, 3.1 MB, written as `yaw_YY_pose_PP.png` in `assets/3d/animated/`.
+Twelve angles keep a turn at 30 degrees a step, close to the 20-frame
+turntable's 18; eight angles read as stepping.
 
 `AvatarStage3D` probes those names first and, if they are there, drives yaw from
 its spin timer and pose from a second 200 ms timer, opening at the front angle
@@ -295,6 +297,13 @@ five would have been ~10 MB on top of a 7 MB theme, so this is the trade.
 
 The closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
 slight head tilt, so there is nothing to gain from swapping it in.
+
+The four `RunOut` clips and `RunIn` carry root translation as well as limb
+motion: `RunIn` walks its root 1.75 units during its 40 frames and settles at
+about 0.02, which is an arrival rather than a loop. The theme does not play it,
+because the clip only says how far the avatar moves - the camera that turned
+that into the original's run-in shot is not in the file, and inventing one would
+be guessing at the screen.
 
 Ten more clips ship as standalone files beside the pack - `RunIn`, `RunOutShort`,
 `RunOutMedium`, `RunOutLong`, `RunOutStandard`, `Look`, `Cheer`, `Gift`, `Salute`
