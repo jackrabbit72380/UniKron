@@ -6,6 +6,44 @@ Built For the Future!
 UniKron is the modern evolution of a long‑running vision: a cinematic, customizable, controller‑first interface for browsing and launching games across PC, console‑style devices, and handheld systems. Built as a theme for the Pegasus Frontend, UniKron delivers a seamless, art‑driven experience powered by modern UI technologies.
 
 ---
+## 🦄 UniKron is built using:
+
+- **QML + QtQuick2**  
+- **Qt 5.15+**  
+- **C++11‑compatible compiler**  
+- **Multimedia, SVG, SQL (SQLite v3)**  
+- **SDL2 or Qt Gamepad**  
+
+This modern stack enables:
+
+- Declarative animations  
+- Reactive layouts  
+- Clean scaling across resolutions  
+- Unified input handling  
+- Smooth performance on all devices  
+
+### UniKron is not a new project—  
+---
+
+## 🔥 Why UniKron Exists
+
+UniKron represents:
+
+- The same mission: a cinematic, controller‑first interface  
+- The same design DNA: coverflows, transitions, art‑driven navigation  
+- The same creator: now with years of improved skill and experience  
+- The same vision: finally supported by the right technology  
+
+With modern tools and cross‑platform support, UniKron can now:
+
+- Target every major device  
+- Build faster and cleaner  
+- Scale larger  
+- Maintain long‑term stability  
+
+UniKron is the convergence of technological advancement and personal evolution.
+
+---
 
 ## 🌐 Project Uniflow: The Origin
 
@@ -89,46 +127,6 @@ This opened the door to a complete transformation of the project.
 
 ---
 
-## 🌌 UniKron: The Modern Evolution
-
-UniKron is built using:
-
-- **QML + QtQuick2**  
-- **Qt 5.15+**  
-- **C++11‑compatible compiler**  
-- **Multimedia, SVG, SQL (SQLite v3)**  
-- **SDL2 or Qt Gamepad**  
-
-This modern stack enables:
-
-- Declarative animations  
-- Reactive layouts  
-- Clean scaling across resolutions  
-- Unified input handling  
-- Smooth performance on all devices  
-
-### UniKron is not a new project—  
----
-
-## 🔥 Why UniKron Exists
-
-UniKron represents:
-
-- The same mission: a cinematic, controller‑first interface  
-- The same design DNA: coverflows, transitions, art‑driven navigation  
-- The same creator: now with years of improved skill and experience  
-- The same vision: finally supported by the right technology  
-
-With modern tools and cross‑platform support, UniKron can now:
-
-- Target every major device  
-- Build faster and cleaner  
-- Scale larger  
-- Maintain long‑term stability  
-
-UniKron is the convergence of technological advancement and personal evolution.
-
----
 
 ## 📁 Repository Structure (Coming Soon)
 
