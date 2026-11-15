@@ -28,7 +28,9 @@ Item {
     // ---- what the host can set -------------------------------------------
     property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
-    property string title: "Avatar Editor"
+    // The original editor's own wording for this screen: the string table of
+    // scnEditor in avatareditor.xex holds exactly this sentence.
+    property string title: "Choose an avatar as a starting point"
 
     // The one colour the chrome takes from its host, so the editor can sit in
     // another theme's palette; items and the stage are unaffected.
@@ -293,7 +295,7 @@ Item {
         anchors.leftMargin: 26
         anchors.rightMargin: 26
         anchors.topMargin: 16
-        height: 58
+        height: 40
 
         Text {
             id: headline
@@ -304,43 +306,6 @@ Item {
             font.weight: Font.DemiBold
             style: Text.Raised
             styleColor: "#40000000"
-        }
-
-        Text {
-            id: subline
-            anchors.top: headline.bottom
-            anchors.topMargin: 2
-            text: root.gamerTag + "  \u00b7  " + root.categories.length + " categories"
-            color: style.inkDim
-            font.family: style.titleFamily
-            font.pixelSize: 13
-        }
-
-        Row {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 8
-
-            EditorButton {
-                label: "Randomize"
-                accentColor: root.accentColor; accentInkColor: root.accentInkColor
-                onClicked: root.randomize()
-            }
-            EditorButton {
-                label: "Reset"
-                accentColor: root.accentColor; accentInkColor: root.accentInkColor
-                onClicked: root.clearAll()
-            }
-            EditorButton {
-                label: "Save"
-                accentColor: root.accentColor; accentInkColor: root.accentInkColor
-                onClicked: root.save()
-            }
-            EditorButton {
-                label: "Portrait"; primary: true
-                accentColor: root.accentColor; accentInkColor: root.accentInkColor
-                onClicked: root.capturePortrait()
-            }
         }
     }
 
@@ -366,29 +331,58 @@ Item {
         anchors.bottomMargin: 12
         spacing: 22
 
+        // The source's control scheme, not a button bar: scnEditor registers an
+        // A-button override and a refresh-random (X) override, and the legend
+        // scene draws the A/B/X/Y glyphs. Each entry is also clickable, so a
+        // mouse user keeps the same four actions.
         Repeater {
             model: [
-                { glyph: "assets/_ui/xex/legend_a.png", label: "Select" },
-                { glyph: "assets/_ui/xex/legend_b.png", label: "Back" },
-                { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize" },
-                { glyph: "assets/_ui/xex/legend_y.png", label: "Save" }
+                { glyph: "assets/_ui/xex/legend_a.png", label: "Save", action: "save" },
+                { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
+                { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize", action: "randomize" },
+                { glyph: "assets/_ui/xex/legend_y.png", label: "Portrait", action: "portrait" }
             ]
 
-            Row {
-                spacing: 8
-                Image {
-                    source: Qt.resolvedUrl(modelData.glyph)
-                    height: 22
-                    width: height
-                    fillMode: Image.PreserveAspectFit
-                    smooth: true
+            Item {
+                width: entry.width
+                height: entry.height
+
+                Row {
+                    id: entry
+                    spacing: 8
+                    opacity: hit.containsMouse ? 1.0 : 0.82
+                    Behavior on opacity { NumberAnimation { duration: 100 } }
+
+                    Image {
+                        source: Qt.resolvedUrl(modelData.glyph)
+                        height: 22
+                        width: height
+                        fillMode: Image.PreserveAspectFit
+                        smooth: true
+                    }
+                    Text {
+                        text: modelData.label
+                        color: style.ink
+                        font.family: style.titleFamily
+                        font.pixelSize: 13
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
-                Text {
-                    text: modelData.label
-                    color: style.ink
-                    font.family: style.titleFamily
-                    font.pixelSize: 13
-                    anchors.verticalCenter: parent.verticalCenter
+
+                MouseArea {
+                    id: hit
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        switch (modelData.action) {
+                        case "save":      root.save(); break
+                        case "back":      root.backRequested(); break
+                        case "randomize": root.randomize(); break
+                        case "portrait":  root.capturePortrait(); break
+                        }
+                        root.forceActiveFocus()
+                    }
                 }
             }
         }

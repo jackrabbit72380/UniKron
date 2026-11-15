@@ -18,7 +18,7 @@ Item {
     property bool opened: false
     property url assetsFolder: Qt.resolvedUrl("assets/")
     property string gamerTag: "Player"
-    property string title: "Avatar Editor"
+    property string title: "Choose an avatar as a starting point"
 
     property color accentColor: "#57c7f2"
     property color accentInkColor: "#062033"
