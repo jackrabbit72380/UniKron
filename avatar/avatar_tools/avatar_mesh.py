@@ -246,6 +246,103 @@ def strb_blocks(buffer):
 
 # ---------------------------------------------------------------- model
 
+def read_texture_header(header, stream):
+    """One texture entry: 33-byte header (xenos fetch constant style) and pixels.
+
+    byte 0: low 6 bits the data format (0x12 DXT1, 0x14 DXT5), high 2 bits the
+    endian mode (1 = 8-in-16, swap the bytes of every 16-bit word). Then a u16
+    0x1A20, u32 width, u32 height, u32 allocated bytes, u32 bytes a frame, u32
+    frame count, u32 flags (bit 0: empty slot), u32 height, u8 zero.
+    """
+    fmt = header[0] & 0x3F
+    endian = header[0] >> 6
+    width, height = struct.unpack_from("<II", header, 4)
+    _, per_frame, frames, flags, _ = struct.unpack_from("<IIIII", header, 12)
+    empty = bool(flags & 1)
+    data = b""
+    if not empty and per_frame and width and height:
+        data = bytes(stream.read(8 * per_frame))
+    return {"format": fmt, "width": width, "height": height, "frames": frames,
+            "per_frame": per_frame, "empty": empty, "endian": endian, "data": data}
+
+
+def _rgb565(v):
+    r = (v >> 11) & 0x1F
+    g = (v >> 5) & 0x3F
+    b = v & 0x1F
+    return ((r << 3) | (r >> 2), (g << 2) | (g >> 4), (b << 3) | (b >> 2))
+
+
+def decode_dxt(data, width, height, dxt5, swap=True):
+    """DXT1 (BC1) or DXT5 (BC3) to an (h, w, 4) uint8 array, linear, not tiled."""
+    import numpy as np
+    if not data:
+        return np.zeros((max(1, height), max(1, width), 4), np.uint8)
+    raw = np.frombuffer(data, dtype=np.uint8)
+    if swap:
+        raw = raw.reshape(-1, 2)[:, ::-1].reshape(-1)
+    block = 16 if dxt5 else 8
+    bw, bh = (width + 3) // 4, (height + 3) // 4
+    out = np.zeros((bh * 4, bw * 4, 4), np.uint8)
+    need = bw * bh * block
+    if len(raw) < need:
+        raw = np.concatenate([raw, np.zeros(need - len(raw), np.uint8)])
+    for by in range(bh):
+        for bx in range(bw):
+            off = (by * bw + bx) * block
+            blk = raw[off:off + block]
+            if dxt5:
+                a0, a1 = int(blk[0]), int(blk[1])
+                bits = int.from_bytes(bytes(blk[2:8]), "little")
+                alpha = [a0, a1]
+                if a0 > a1:
+                    alpha += [((7 - i) * a0 + i * a1) // 7 for i in range(1, 7)]
+                else:
+                    alpha += [((5 - i) * a0 + i * a1) // 5 for i in range(1, 5)] + [0, 255]
+                col = blk[8:16]
+            else:
+                alpha = None
+                bits = 0
+                col = blk[0:8]
+            c0 = int(col[0]) | (int(col[1]) << 8)
+            c1 = int(col[2]) | (int(col[3]) << 8)
+            idx = int.from_bytes(bytes(col[4:8]), "little")
+            p0, p1 = _rgb565(c0), _rgb565(c1)
+            palette = [[*p0, 255], [*p1, 255]]
+            if dxt5 or c0 > c1:
+                palette.append([(2 * p0[k] + p1[k]) // 3 for k in range(3)] + [255])
+                palette.append([(p0[k] + 2 * p1[k]) // 3 for k in range(3)] + [255])
+            else:
+                palette.append([(p0[k] + p1[k]) // 2 for k in range(3)] + [255])
+                palette.append([0, 0, 0, 0])
+            for py in range(4):
+                for px in range(4):
+                    n = py * 4 + px
+                    texel = palette[(idx >> (2 * n)) & 3]
+                    if alpha is not None:
+                        texel = [texel[0], texel[1], texel[2], alpha[(bits >> (3 * n)) & 7]]
+                    out[by * 4 + py, bx * 4 + px] = texel
+    return out[:height, :width]
+
+
+def sample_texture(texture, u, v):
+    """Nearest texel. Returns (r, g, b) in 0..1, or None when the slot is empty."""
+    if not texture or texture["empty"] or not texture["data"]:
+        return None
+    if not hasattr(texture, "_pixels") or texture.get("_pixels") is None:
+        texture["_pixels"] = decode_dxt(texture["data"], texture["width"], texture["height"],
+                                        texture["format"] == 0x14,
+                                        swap=texture["endian"] == 1)
+    pixels = texture["_pixels"]
+    h, w = pixels.shape[:2]
+    x = min(w - 1, max(0, int(u * w) % w))
+    y = min(h - 1, max(0, int(v * h) % h))
+    r, g, b, a = pixels[y, x]
+    if a < 8:
+        return None
+    return (r / 255.0, g / 255.0, b / 255.0)
+
+
 def read_model(data):
     """Triangle batches: vertices (lattice positions) and u16 indices."""
     s = BitStream(data)
@@ -282,16 +379,24 @@ def read_model(data):
         if vertex_size != expected:
             raise Malformed("vertex size %d does not match %d UVs (expected %d)"
                             % (vertex_size, uv_count, expected))
+        # Material records: u32 type, u32 parameter id, 16 bytes of value. Type 1
+        # is a texture binding: u16 texture index, u16 UV set, u32 address mode.
+        # Type 3 is a float4. Parameter id 1 is the base colour texture.
+        materials = []
         for _ in range(param_count):
             ptype = s.read_u32()
-            s.read_u32()  # usage
+            pid = s.read_u32()
             if ptype == 1:
-                s.read_u16()  # texture index
-                s.read_u16()  # uv layer
-                s.read_u32()  # flags
+                tex = s.read_u16()
+                uv_set = s.read_u16()
+                mode = s.read_u32()
                 s.advance(64)
+                materials.append({"kind": "texture", "id": pid, "texture": tex,
+                                  "uv_set": uv_set, "mode": mode})
             else:
                 s.advance(128)  # four floats
+                materials.append({"kind": "vector", "id": pid, "texture": None,
+                                  "uv_set": None, "mode": None})
             s.align_to_next_byte()
 
         local_count = s.read_u32()
@@ -304,6 +409,7 @@ def read_model(data):
         colour = ValueSerializer(s, 32)
 
         verts = []
+        uvs = []
         joints = []
         weights = []
         for _ in range(vertex_count):
@@ -312,9 +418,12 @@ def read_model(data):
             w = weight.read(s)
             b = blend.read(s)
             colour.read(s)
+            sets = []
             for _ in range(uv_count):
-                s.read_u16()
-                s.read_u16()
+                u = s.read_u16()
+                v = s.read_u16()
+                sets.append((u / 65535.0, v / 65535.0))
+            uvs.append(sets)
             verts.append(p)
             # Four bone indices and four weights, one byte each.
             joints.append(((b >> 0) & 0xFF, (b >> 8) & 0xFF, (b >> 16) & 0xFF, (b >> 24) & 0xFF))
@@ -332,10 +441,27 @@ def read_model(data):
         batches.append({
             "shader_id": shader_id,
             "vertices": verts,
+            "uvs": uvs,
+            "materials": materials,
             "joints": joints,
             "weights": weights,
             "indices": indices,
         })
+
+    # After the last mesh, texture_count entries of (offset, allocated size,
+    # 33-byte header, pixels) into the model's texture memory.
+    textures = []
+    for _ in range(texture_count):
+        try:
+            s.align_to_next_byte()
+            s.read_u32()  # offset into texture memory
+            s.read_u32()  # allocated size
+            header = bytes(s.read(8) for _ in range(33))
+            textures.append(read_texture_header(header, s))
+        except Exception:
+            break
+    if batches:
+        batches[0]["textures"] = textures
     return batches
 
 

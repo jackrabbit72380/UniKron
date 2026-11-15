@@ -228,6 +228,30 @@ into a cheer (y up to 1.481), which earlier notes mistook for the idle. And the
 `Head` is not a special case needing bone-local placement; it skins like every
 other mesh.
 
+## Colour: what decodes and what is missing
+
+`read_model` now keeps the two things it used to discard - each vertex's UV sets
+and the material records - and decodes textures:
+
+* **Materials** parse as documented: each mesh carries 24-byte records
+  (`u32 type, u32 id, 16 bytes`). Ids 22/23/24/27 are float4s, id 1 is the base
+  colour texture, id 2 the tint mask, each with its own UV set. `Male Power Tee`,
+  `MaleBody` and `Worn Jeans` all bind id 1 -> texture 0 / UV set 0 and id 2 ->
+  texture 1 / UV set 1.
+* **DXT** decoding works. The 187 texture assets (block id 2) decode to clean
+  pictures: `Straight Eyebrows` is a 128x64 DXT5, 5 frames, 8192 bytes a frame,
+  and comes out as the eyebrow mask shape on transparent - the red tint mask the
+  colour rule expects, not a scrambled mess.
+* **Item models embed no textures at all.** Their texture count is 0, and the
+  Head's six slots are all empty (`flags & 1`), which the reference also records.
+
+So an item's colour is not in its own asset: the base and tint mask come from
+the description's colours (the packed RGBA run in the `.Avatar` manifest) applied
+by the rule in open-avatar-lib's FORMATS.md 3.6 - `lerp(base, mask.r*C1 +
+mask.g*C2 + mask.b*C3, mask.a)`. Colouring the bake properly therefore needs the
+manifest colours wired to the material ids, not more geometry work. Until then
+the baked frames are deliberately one clay colour.
+
 ## What is still open for the 3D avatar
 
 The geometry is solved; what remains is two smaller things.
