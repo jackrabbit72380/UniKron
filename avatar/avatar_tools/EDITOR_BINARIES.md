@@ -124,6 +124,43 @@ bytes** - the same manifest decoded below. So the manifest is the complete
 portable definition of an avatar, and the item GUIDs in it are resolved against
 the closet, not against the asset pack.
 
+## Every asset class in the pack, by STRB block id
+
+All 1079 entries in `AvatarAssetPack.toc` were opened and classified by the block
+ids they carry. There are only four signatures, and the block ids are a complete
+class map:
+
+| blocks | assets | class | first payload bytes |
+| --- | --- | --- | --- |
+| 3, 8 | 546 | model (geometry) | model header, see `read_model` |
+| 4, 8 | 266 | blend shape / morph | `00000000 d4130000 01000000 02000300 c1c8f109…` |
+| 2, 8 | 187 | blend shape variant | `aa090000 …` then float-looking deltas |
+| 1, 8 | 41 | animation clip | `6c000000 0080a041 47000000 …` |
+| 3, 7, 8 | 39 | model + colour table | 109-byte type 7 table |
+
+Block 8 is always present and always 15 bytes - a fixed little header, not
+geometry: `02 <class> <subclass>` then a small count and zero padding
+(`02 01 01 00000002 … 02` for a model, `02 03 04 …` for an animation).
+
+Block 7 appears only on the 39 sport-top models and is a colour table of
+`u32` + RGBA pairs (`232323ff` grey, `b7630fb7…`), i.e. kit stripes.
+
+**There are no texture assets in the pack.** The block ids present anywhere are
+only `{1, 2, 3, 4, 7, 8}`, none of which carries image data, and no entry name
+is a texture (the two matches for "texture" are item names, `Female Tartan
+Skirt Re-textured` and a hiding template). What a model does carry is a
+per-vertex colour field - `read_model` calls a colour serialiser once per vertex
+and currently discards the result - plus, on the 39 sport tops, the type 7
+colour table. So the item artwork is expressed as colour rather than as images,
+which is why the theme's 2D art had to be drawn from the source's own UI art:
+there are no item textures in this build to lift.
+
+It also explains an earlier puzzle. The 41 `Animation Generic *` clips in the
+pack are *item* animations (emotes such as Clap, Wave, Celebration); they carry
+~0 translations and pose a different rig because they are not the body's idle.
+The avatar itself is posed by the standalone `IdleOffScreen.AvatarAnimation`,
+which is a separate file beside the pack.
+
 ## What this rules out for the 3D avatar
 
 The flat-shell body cannot be explained by: a different pack version (identical
