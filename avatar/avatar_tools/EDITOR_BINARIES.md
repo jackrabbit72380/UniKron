@@ -228,6 +228,43 @@ into a cheer (y up to 1.481), which earlier notes mistook for the idle. And the
 `Head` is not a special case needing bone-local placement; it skins like every
 other mesh.
 
+## Everything in the archive, audited
+
+`decode_audit.py` walks the whole source archive, identifies each file by magic
+rather than by extension, runs the matching decoder and writes
+`DECODE_COVERAGE.md`. Current state: **2298 files, 767 MiB, none unidentified.**
+
+| what it turned out to be | files |
+| --- | ---: |
+| text (meta, scripts, toml, ini, xap, json, xml, html) | 1766 |
+| XPR0 textures (the dashboard's skins, in `.xbx`) | 136 |
+| WAV | 92 |
+| dashboard orb containers (`.xm`) | 74 |
+| Chromium PAK resource bundles | 58 |
+| PNG | 55 |
+| PE images (`.dll`/`.exe`, PowerPC and x86) | 31 |
+| XIP0 dashboard packages | 27 |
+| STRB avatar assets | 20 |
+| MP3 | 9 |
+| avatar descriptions | 6 |
+| TOC, XEX2, XBE, XTF, XTT, TTF, ICO, JPG, BMP, MP4, ICU, V8 snapshot | 1-4 each |
+
+The archive is a CEF application wrapped around the original dashboard's file
+system (`resources/ogxbox/uix/xboxfs/Q/...`), with the two avatar editors beside
+it as `avatareditor.xex` plus their asset packs - which is why it holds Chromium
+formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
+
+**Still short of a full decode, with the reason:**
+
+* the two `avatareditor.xex` files - the body is LZX-compressed and
+  title-encrypted, so only the XEX2 header reads without the console's keys;
+* 74 `.xm` orb containers - the header's counts read, but the float body's layout
+  (vertices, keys or colours) is not established;
+* 4 `cellwall.xbx` - the payload is 43 sectors of 2048 bytes, which no
+  power-of-two DXT shape fits, so it is a texture plus extra data;
+* XIP0, XPR0, XET/PE and the fonts decode their headers and tables, not their
+  semantics - `DECODE_COVERAGE.md` says how deep each one goes.
+
 ## The face: UVs are half floats, and the masks clamp
 
 Two decode mistakes kept the head blank, both found while painting it:
