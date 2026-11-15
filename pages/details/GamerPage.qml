@@ -311,11 +311,20 @@ Item {
   }
 
   function saveCustomAvatarPng(grab) {
-    var ok = false
-    try { ok = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/Custom.png")) } catch (e) { ok = false }
-    try { ok = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/CustomFull.png")) && ok } catch (e) { ok = false }
-    root.customPngSaved = ok
-    if (ok) root.customAvatarVersion++
+    // The editor only reports a portrait when the grab succeeded, and a missing
+    // one must not look like a failed save.
+    if (!grab)
+      return
+    // One grab result can be written twice (verified: both calls succeed), and
+    // the two files are reported separately so a failure on the second cannot
+    // claim the first was not saved either.
+    var thumb = false
+    try { thumb = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/Custom.png")) } catch (e) { thumb = false }
+    var full = false
+    try { full = grab.saveToFile(Qt.resolvedUrl("../../assets/images/avatars/CustomFull.png")) } catch (e) { full = false }
+    root.customPngSaved = thumb && full
+    if (thumb || full)
+      root.customAvatarVersion++
   }
 
   // ── Signed-in slot ────────────────────────────────────────────────
