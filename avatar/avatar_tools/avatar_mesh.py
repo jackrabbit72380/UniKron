@@ -396,7 +396,8 @@ def write_obj(path, batches, up_axis="x"):
 def main():
     parser = argparse.ArgumentParser(description="Decode an avatar mesh from the asset pack.")
     parser.add_argument("--pack", required=True, help="AvatarAssetPack.toc")
-    parser.add_argument("--asset", default="MaleBody", help="asset name, e.g. MaleBody")
+    parser.add_argument("--asset", action="append",
+                        help="asset name, e.g. MaleBody (repeat to merge several)")
     parser.add_argument("--obj", help="write the mesh here")
     parser.add_argument("--up-axis", default="x", choices=("x", "y", "z"),
                         help="which pack axis is up (bodies are x)")
@@ -404,31 +405,34 @@ def main():
     args = parser.parse_args()
 
     index = load_pack_index(args.pack)
-    blob = asset_bytes(args.pack, index, args.asset)
-    print("%s: %d bytes, %d assets in pack" % (args.asset, len(blob), len(index)))
+    names = args.asset or ["MaleBody"]
+    print("%d assets in pack" % len(index))
 
-    blocks = strb_blocks(blob)
-    if args.blocks:
-        for id_raw, count, entry_size, payload in blocks:
-            print("  block %-3d %-26s count=%d entry=%d bytes=%d"
-                  % (id_raw, BLOCK_NAMES.get(id_raw, "Other"), count, entry_size, len(payload)))
+    all_batches = []
+    for name in names:
+        blob = asset_bytes(args.pack, index, name)
+        print("%s: %d bytes" % (name, len(blob)))
+        blocks = strb_blocks(blob)
+        if args.blocks:
+            for id_raw, count, entry_size, payload in blocks:
+                print("  block %-3d %-26s count=%d entry=%d bytes=%d"
+                      % (id_raw, BLOCK_NAMES.get(id_raw, "Other"), count, entry_size, len(payload)))
 
-    models = [b for b in blocks if b[0] == 3]
-    if not models:
-        raise SystemExit("no Model block in %s" % args.asset)
+        models = [b for b in blocks if b[0] == 3]
+        if not models:
+            raise SystemExit("no Model block in %s" % name)
 
-    total_verts = total_tris = 0
-    for _, _, _, payload in models:
-        raw = decompress(payload)
-        batches = read_model(raw)
-        for batch in batches:
-            total_verts += len(batch["vertices"])
-            total_tris += len(batch["indices"]) // 3
-        if args.obj:
-            write_obj(args.obj, batches, args.up_axis)
-    print("decoded %d model block(s): %d vertices, %d triangles"
-          % (len(models), total_verts, total_tris))
+        verts = tris = 0
+        for _, _, _, payload in models:
+            for batch in read_model(decompress(payload)):
+                verts += len(batch["vertices"])
+                tris += len(batch["indices"]) // 3
+                all_batches.append(batch)
+        print("  decoded %d model block(s): %d vertices, %d triangles"
+              % (len(models), verts, tris))
+
     if args.obj:
+        write_obj(args.obj, all_batches, args.up_axis)
         print("wrote", args.obj)
 
 

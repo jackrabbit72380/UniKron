@@ -90,15 +90,17 @@ def read_obj(path):
 
 
 def normalise(verts):
-    """Centre on x/z, feet at y=0, one unit tall: the frame is a fixed camera."""
+    """Centre on x/z, feet at y=0, one unit tall: the frame is a fixed camera.
+
+    x and z are centred on the median, not on the bounding box: an avatar in its
+    bind pose has one arm held out sideways, and box-centring that puts the body
+    itself hard against the edge of the frame.
+    """
     lo = verts.min(axis=0)
     hi = verts.max(axis=0)
-    centre = (lo + hi) * 0.5
-    verts = verts - np.array([centre[0], lo[1], centre[2]])
+    verts = verts - np.array([np.median(verts[:, 0]), lo[1], np.median(verts[:, 2])])
     height = max(hi[1] - lo[1], 1e-6)
     verts /= height
-    verts[:, 0] -= 0.0
-    verts[:, 2] -= 0.0
     return verts
 
 
@@ -137,16 +139,14 @@ def render(verts, tris, tri_colours, yaw, width, height, ss=2):
     """One frame: yaw the model, project, rasterise with a z-buffer."""
     w, h = width * ss, height * ss
     model = verts @ rotation_y(yaw).T
-    # Model space has the feet at y = 0 and the head at y = 1; lift it so the
-    # figure is centred on the camera's eye line and tip it slightly forward.
-    model = model + np.array([0.0, -0.52, 0.0])
+    # Normalised space has the feet at y = 0 and the head at y = 1. An
+    # orthographic fit keeps the whole figure the same size in every frame and
+    # cannot clip it the way a fixed focal length did.
     model = model @ rotation_x(math.radians(-6.0)).T
-
-    distance = 3.4
-    f = 2.35 * h  # focal length in pixels, tuned to the 512x768 mirror frame
-    z = model[:, 2] + distance
-    sx = model[:, 0] * f / z + w * 0.5
-    sy = -model[:, 1] * f / z + h * 0.52
+    z = model[:, 2]
+    k = 0.86 * h
+    sx = model[:, 0] * k + w * 0.5
+    sy = (0.5 - model[:, 1]) * k + h * 0.5
 
     colour = np.zeros((h, w, 3), dtype=np.float64)
     depth = np.full((h, w), np.inf)
@@ -215,9 +215,13 @@ def main():
     parser.add_argument("--width", type=int, default=512)
     parser.add_argument("--height", type=int, default=768)
     parser.add_argument("--start", type=float, default=0.0, help="starting yaw in degrees")
+    parser.add_argument("--flip-y", action="store_true",
+                        help="negate y first (the pack's bodies are Y-down)")
     args = parser.parse_args()
 
     verts, tris, tri_colours = read_obj(args.obj)
+    if args.flip_y:
+        verts[:, 1] = -verts[:, 1]
     verts = normalise(verts)
     os.makedirs(args.outdir, exist_ok=True)
 

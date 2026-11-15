@@ -28,6 +28,18 @@ stream order or reversed, and with the mesh mirrored across Z):
     would settle, and that code is not public (xenia's avatars module is not in
     its public tree, and AvatarEditorRecomp ships binaries).
 
+Later checks confirmed the decode itself is faithful: the vertex loop matches
+avatar-aura's model.rs statement for statement (five serialisers, per-vertex UVs),
+the mesh is a clean closed manifold (3392 of 3400 edges shared by exactly two
+triangles, 8 boundary edges), the skeleton parser consumes 4300 of 538 bytes'
+4304 bits, and consecutive clip frames differ by 0.0000 in position and 1.47
+degrees at most, so the frames are a real, smooth idle. What does not line up is
+the placement of parts: rendered from all six axis orientations, MaleBody draws
+as a pair of thin tubes with no torso volume, and the bind skeleton puts one
+three-joint chain 1.7 units away from the shoulder. The reference applies a
+per-model transform (its apply_scale / manifest height and weight factors) that
+this port does not reproduce, and that is the missing piece.
+
 For a correct posed avatar today, export the OBJ from Avatar Aura (Windows) and
 bake it; this pipeline stays as the decode/measurement tooling.
 """
