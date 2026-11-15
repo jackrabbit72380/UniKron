@@ -13,11 +13,23 @@ Item {
 
     Style { id: style }
 
-    property string folder: ""        // .../assets/3d/turntable/
+    property string baseFolder: ""    // .../assets/3d/turntable/
+    // Which baked set to play, from the hairstyle the player picked. Empty means
+    // the default set directly in baseFolder; a name that has no frames (or no
+    // bake for that hairstyle) falls back to it too.
+    property string variant: ""
+    readonly property string folder: baseFolder + (variant !== "" ? variant + "/" : "")
     property int frameCount: 0
     property int frame: 0
     property bool available: false
     property bool spinning: true
+
+    onFolderChanged: {
+        frameCount = 0
+        frame = 0
+        available = false
+        probe.loadNext()
+    }
 
     // Same contract as AvatarStage: the portrait is grabbed from whatever the
     // player is actually looking at.
@@ -51,6 +63,9 @@ Item {
                 stage.available = true
                 stage.frameCount += 1
                 loadNext()
+            } else if (status === Image.Error && stage.frameCount === 0 && stage.variant !== "") {
+                // Nothing baked for this hairstyle: show the default set.
+                stage.variant = ""
             }
         }
     }

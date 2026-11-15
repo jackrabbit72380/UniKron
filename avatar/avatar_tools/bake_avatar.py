@@ -85,6 +85,7 @@ def asset_colour(name, record, colours, slots, clothing):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     colour_args = [a for a in sys.argv if a.startswith("--colours=")]
+    hair_args = [a for a in sys.argv if a.startswith("--hair=")]
     if len(args) < 5:
         print(__doc__)
         return 1
@@ -94,6 +95,13 @@ def main():
     colours = slots = None
     if colour_args:
         colours, slots = read_description(colour_args[0].split("=", 1)[1])
+    if hair_args:
+        # A hairstyle can carry its own colour (blond, red, black): the
+        # description only knows the colour of the style it was saved with.
+        value = hair_args[0].split("=", 1)[1].lstrip("#")
+        colours = dict(colours or {})
+        colours.setdefault("skin", (215, 170, 113))
+        colours["hair"] = (int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16))
     # A neutral fabric: the honest colour for clothes whose colour is unknown.
     clothing = (0x8A, 0x8D, 0x93)
 

@@ -1,0 +1,8 @@
+{
+  "_comment": "One turntable per hairstyle the theme offers. Keys are the asset file stems in avatar/assets/50_hair; hair is the pack asset name, colour is that style's own colour (blond, red and black come from the art file names, brown from the avatar description). The default turntable in assets/3d/turntable is baked from the first entry.",
+
+  "hair_short_brown": { "hair": "Left Parting", "colour": "6e5326" },
+  "hair_long_blond": { "hair": "Long Flick", "colour": "d8b36a" },
+  "hair_bun_red": { "hair": "Bun", "colour": "a33b22" },
+  "hair_spiky_black": { "hair": "Spiky on Top", "colour": "241f1c" }
+}

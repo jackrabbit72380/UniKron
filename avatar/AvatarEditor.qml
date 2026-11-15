@@ -167,6 +167,22 @@ Item {
         case "exit":    save(); break
         }
     }
+    // The hairstyle picked in the closet picks the baked 3D set: bake_outfits.py
+    // writes one folder per file in assets/50_hair, named after that file.
+    readonly property string hairVariant: {
+        for (var i = 0; i < categories.length; ++i) {
+            var c = categories[i]
+            // 45_facial-hair also contains "hair": only the hairstyle category
+            // names a baked set.
+            if (!c || !c.id || c.id.indexOf("hair") < 0 || c.id.indexOf("facial") >= 0)
+                continue
+            var file = state[c.id] || ""
+            if (file !== "")
+                return file.replace(/\.png$/i, "")
+        }
+        return ""
+    }
+
     readonly property var currentCategory:
         categoryIndex >= 0 && categoryIndex < categories.length ? categories[categoryIndex] : null
     readonly property var layers: _layers
@@ -693,7 +709,8 @@ Item {
         width: stage.width
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
-        folder: root.assetsFolder + "3d/turntable/"
+        baseFolder: root.assetsFolder + "3d/turntable/"
+        variant: root.hairVariant
     }
 
     // model_shadows switch, beside the 2D/3D one. It is hidden in 3D, where the
