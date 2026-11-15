@@ -172,19 +172,60 @@ def write_png(path, rgba):
         fh.write(chunk(b"IEND", b""))
 
 
-# Three-point studio rig: a warm key from the front left, a cool fill from the
-# right and a rim from behind. The XTL renderer lights avatars the same way -
-# soft, matte, no specular - and a single light plus a double-sided abs() is what
-# made the old frames read as flat cut-outs.
-KEY_DIR = np.array([-0.45, 0.62, -0.65])
-FILL_DIR = np.array([0.72, 0.18, -0.55])
-RIM_DIR = np.array([0.10, 0.30, 1.00])
-KEY_COLOUR = np.array([1.00, 0.97, 0.92])
-FILL_COLOUR = np.array([0.84, 0.90, 1.00])
-AMBIENT = 0.30
-KEY_POWER = 0.78
-FILL_POWER = 0.26
-RIM_POWER = 0.16
+# The XTL avatar renderer's own light rig, taken from its shader parameter table.
+#
+# `xtl_constants.py strings` on the renderer's ELF prints the names it binds per
+# avatar draw call, packed in one blob at 0x92125f16:
+#
+#     ambientColour / enableShadows / jitterMap / lightColour1..3 /
+#     lightDirection1..3 / oneMinusShadowStrength / rimLightColour /
+#     shadowMap / shadowSizes
+#
+# so the model is: one ambient colour, THREE directional lights each with its own
+# colour and direction, plus a rim term and a shadow strength. That is the
+# structure below, and it is why this file no longer shades with one light.
+#
+# The numbers are this port's, not the binary's: the renderer is handed light
+# values by whatever scene drives it, and none are stored as constants in the
+# image (see LIGHTING_NOTES below). They are picked to read like the reference
+# avatars' matte, softly lit look: a warm key, a cool fill, a low back light and
+# a dim rim.
+XTL_AMBIENT_COLOUR = np.array([0.34, 0.34, 0.36])
+XTL_LIGHT_COLOUR = (
+    np.array([1.00, 0.96, 0.90]),     # lightColour1 - warm key, front left above
+    np.array([0.55, 0.62, 0.78]),     # lightColour2 - cool fill, front right
+    np.array([0.30, 0.30, 0.34]),     # lightColour3 - back light, fills the silhouette
+)
+# Recovered, not chosen. These three unit vectors are the first three of a run of
+# five that appears, byte for byte, in the effect blobs of all three avatar pixel
+# shaders in the editor (`shader_body_opaque_ps.updb` at 0x98019cdc,
+# `..._body_transparent_ps.updb` at 0x9801aacc, `..._head_opaque_ps.updb` at
+# 0x9801b990 - same values at the same offset inside each blob). They are the
+# shader's lightDirection1..3 defaults: an overhead key slightly toward camera, a
+# front-right fill and a back-left rim.
+XTL_LIGHT_DIRECTION = (
+    np.array([0.000, 1.000, -0.040]),     # lightDirection1
+    np.array([0.440, 0.528, -0.757]),     # lightDirection2
+    np.array([-0.670, -0.419, 0.575]),    # lightDirection3
+)
+XTL_RIM_COLOUR = np.array([0.16, 0.16, 0.18])
+# Every avatar shader in the pack multiplies its shadow term by this, so the rig
+# is not meant to be lit at full strength head-on; a little of it keeps the fold
+# shading from going flat.
+XTL_ONE_MINUS_SHADOW_STRENGTH = 0.85
+
+LIGHTING_NOTES = """
+Where the numbers are not
+-------------------------
+The renderer defines the rig but carries no default values for it, checked
+three ways: no pointer to the parameter-name blob exists anywhere in the image
+(every section searched for its address), .data holds only seven runs of three
+unit-length vectors and none is a light rig with colours, and the 2,320 float
+loads the code makes from .rdata land on matrices, zeros and NaN padding rather
+than a contiguous rig. The values arrive from the scene that drives the
+renderer, which is the editor, and the editor's own decompilation (1,986
+functions) contains no float literals either - it ships as code, not data.
+"""
 
 
 def _unit(v):
@@ -213,9 +254,8 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2):
     depth = np.full((h, w), np.inf)
     alpha = np.zeros((h, w), dtype=bool)
 
-    key_dir = _unit(KEY_DIR)
-    fill_dir = _unit(FILL_DIR)
-    rim_dir = _unit(RIM_DIR)
+    light_dirs = [_unit(d) for d in XTL_LIGHT_DIRECTION]
+    light_colours = [c * XTL_ONE_MINUS_SHADOW_STRENGTH for c in XTL_LIGHT_COLOUR]
     view_dir = np.array([0.0, 0.0, -1.0])
 
     # Lighting happens in linear light: sRGB-encoded colours shaded directly come
@@ -256,15 +296,14 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2):
         facing = n @ view_dir
         flip = facing > 0.0
         n[flip] *= -1.0
-        lambert_key = np.clip(n @ key_dir, 0.0, 1.0)[..., None]
-        lambert_fill = np.clip(n @ fill_dir, 0.0, 1.0)[..., None]
+        # Three directional lights plus ambient, exactly the terms the shader
+        # parameter table names, with the rim added on top of the albedo.
+        light = np.broadcast_to(XTL_AMBIENT_COLOUR, n.shape).copy()
+        for direction, light_colour in zip(light_dirs, light_colours):
+            lambert = np.clip(n @ direction, 0.0, 1.0)[..., None]
+            light += lambert * light_colour
         rim = np.power(np.clip(1.0 - np.abs(n @ view_dir), 0.0, 1.0), 3.0)[..., None]
-        light = (
-            AMBIENT
-            + KEY_POWER * lambert_key * KEY_COLOUR
-            + FILL_POWER * lambert_fill * FILL_COLOUR
-            + RIM_POWER * rim
-        )
+        light += rim * XTL_RIM_COLOUR
         shaded = np.power(
             np.clip(linear[t] * light, 0.0, 1.0), 1.0 / 2.2
         )
