@@ -62,25 +62,60 @@ Item {
     ]
     property int menuIndex: 1
 
+    // "Change My Features" is its own screen in the source: six 360x200 tiles,
+    // each a rendered close-up of the thing you are changing, lime when picked
+    // and grey-blue when not. The art is the editor's own out of the XEX.
+    readonly property var featureItems: [
+        { key: "earrings", label: "Earrings" },
+        { key: "eyes",     label: "Eyes" },
+        { key: "facial",   label: "Facial Hair" },
+        { key: "skin",     label: "Skin" },
+        { key: "glasses",  label: "Glasses" },
+        { key: "lips",     label: "Lips" }
+    ]
+    property int featureIndex: 0
+
     // The source draws one legend per screen: the menu offers A Select (the
     // preview screenshot shows exactly that), the closet needs its four.
-    readonly property var legendModel: screen === "menu"
-        ? [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
-            { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" } ]
-        : [ { glyph: "assets/_ui/xex/legend_a.png", label: "Save", action: "save" },
+    readonly property var legendModel: screen === "closet"
+        ? [ { glyph: "assets/_ui/xex/legend_a.png", label: "Save", action: "save" },
             { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
             { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize", action: "randomize" },
             { glyph: "assets/_ui/xex/legend_y.png", label: "Portrait", action: "portrait" } ]
+        : [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
+            { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" } ]
 
     function setScreen(name) { screen = name }
+
+    // A feature tile only opens something when a folder covers it; the rest are
+    // the source's tiles with no items to show, which is what it does too when
+    // the player owns nothing.
+    function categoryIndexFor(label) {
+        for (var i = 0; i < categories.length; ++i) {
+            if (String(categories[i].label).toLowerCase() === String(label).toLowerCase())
+                return i
+        }
+        return -1
+    }
+
+    function activateFeature(index) {
+        var item = featureItems[index]
+        if (!item)
+            return
+        var at = categoryIndexFor(item.label)
+        if (at < 0)
+            return
+        categoryIndex = at
+        setScreen("closet")
+    }
 
     function activateMenuItem(index) {
         var item = menuItems[index]
         if (!item)
             return
         switch (item.key) {
-        case "features":
-        case "clothes": setScreen("closet"); break
+        case "features": setScreen("features"); break
+        case "clothes":  setScreen("closet"); break
         case "picture": capturePortrait(); break
         case "start":   clearAll(); break
         case "exit":    save(); break
@@ -289,6 +324,24 @@ Item {
     Keys.onPressed: function (event) {
         // The menu is its own screen: up/down move between the five plates and
         // accept activates one. In the closet, cancel goes back to the menu.
+        if (screen === "features") {
+            var fhit = true
+            switch (event.key) {
+            case Qt.Key_Right: featureIndex = Math.min(featureItems.length - 1, featureIndex + 1); break
+            case Qt.Key_Left:  featureIndex = Math.max(0, featureIndex - 1); break
+            case Qt.Key_Down:  featureIndex = Math.min(featureItems.length - 1, featureIndex + 2); break
+            case Qt.Key_Up:    featureIndex = Math.max(0, featureIndex - 2); break
+            case Qt.Key_Return:
+            case Qt.Key_Enter:
+            case Qt.Key_Space: activateFeature(featureIndex); break
+            case Qt.Key_Escape:
+            case Qt.Key_Backspace: setScreen("menu"); break
+            default: fhit = false
+            }
+            event.accepted = fhit
+            return
+        }
+
         if (screen === "menu") {
             var hit = true
             switch (event.key) {
@@ -374,9 +427,10 @@ Item {
 
         Text {
             id: headline
-            // The menu shows whose avatar this is; the closet names the plate
-            // that opened it, which is what the original's own label says.
-            text: root.screen === "menu" ? root.gamerTag : "Change My Clothes"
+            // The menu shows whose avatar this is; each other screen names the
+            // plate that opened it, which is what the original's labels say.
+            text: root.screen === "menu" ? root.gamerTag
+                  : (root.screen === "features" ? "Change My Features" : "Change My Clothes")
             color: style.ink
             font.family: style.titleFamily
             font.pixelSize: 27
@@ -449,11 +503,14 @@ Item {
                     onClicked: {
                         switch (modelData.action) {
                         case "save":       root.save(); break
-                        case "back":       if (root.screen === "closet") root.setScreen("menu")
+                        case "back":       if (root.screen !== "menu") root.setScreen("menu")
                                            else root.backRequested(); break
                         case "randomize":  root.randomize(); break
                         case "portrait":   root.capturePortrait(); break
-                        case "menuSelect": root.activateMenuItem(root.menuIndex); break
+                        case "menuSelect":
+                            if (root.screen === "features") root.activateFeature(root.featureIndex)
+                            else root.activateMenuItem(root.menuIndex)
+                            break
                         }
                         root.forceActiveFocus()
                     }
@@ -513,16 +570,79 @@ Item {
         id: stage
         // The avatar keeps the left half on the menu and moves right of the
         // rail in the closet, exactly where each screen puts it.
-        x: root.screen === "menu" ? 40 : rail.x + rail.width + 14
+        x: root.screen === "closet" ? rail.x + rail.width + 14 : (root.screen === "features" ? 14 : 40)
         y: 64
-        width: root.screen === "menu" ? 470 : root.width - x - 26
-        height: root.screen === "menu" ? 592 : 430
+        width: root.screen === "closet" ? root.width - x - 26
+             : (root.screen === "features" ? 286 : 470)
+        height: root.screen === "closet" ? 430 : 592
         layers: root.layers
         emptyHint: root.categories.length === 0
                    ? "No item folders found in " + root.assetsFolder
                    : ""
     }
 
+
+    // Change My Features: the six tiles, two columns of three, on the right so
+    // the avatar stays visible while you change it.
+    Item {
+        id: features
+        visible: root.screen === "features"
+        anchors.top: header.bottom
+        anchors.topMargin: 18
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        width: 620
+        height: 510
+
+        Grid {
+            columns: 2
+            spacing: 10
+
+            Repeater {
+                model: root.featureItems
+
+                Item {
+                    width: 300
+                    height: 167
+
+                    Image {
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("assets/_ui/xex/feature_" + modelData.key
+                                               + (index === root.featureIndex
+                                                  ? "_selected" : "_unselected") + ".png")
+                        fillMode: Image.Stretch
+                        smooth: true
+                        // A tile with no folder behind it reads as unavailable,
+                        // the way the source greys out what you do not own.
+                        opacity: root.categoryIndexFor(modelData.label) >= 0 ? 1.0 : 0.55
+                    }
+
+                    Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 12
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 8
+                        text: modelData.label
+                        color: index === root.featureIndex ? "#20300a" : "#f4f7fa"
+                        font.family: style.titleFamily
+                        font.pixelSize: 15
+                        font.weight: Font.DemiBold
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.featureIndex = index
+                            root.activateFeature(index)
+                            root.forceActiveFocus()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     // The menu plates. 512x128 each, drawn at 400x100: the baked icon sits in
     // the left fifth, which is where the label starts.
