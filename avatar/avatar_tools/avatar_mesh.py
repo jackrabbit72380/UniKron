@@ -246,6 +246,18 @@ def strb_blocks(buffer):
 
 # ---------------------------------------------------------------- model
 
+def half_to_float(bits):
+    """IEEE 754 binary16 -> float, for the 16-bit UV halves."""
+    sign = -1.0 if bits & 0x8000 else 1.0
+    exponent = (bits >> 10) & 0x1F
+    mantissa = bits & 0x3FF
+    if exponent == 0:
+        return sign * mantissa * 2.0 ** -24
+    if exponent == 0x1F:
+        return sign * float("inf") if mantissa == 0 else float("nan")
+    return sign * (1.0 + mantissa / 1024.0) * 2.0 ** (exponent - 15)
+
+
 def read_texture_header(header, stream):
     """One texture entry: 33-byte header (xenos fetch constant style) and pixels.
 
@@ -325,8 +337,13 @@ def decode_dxt(data, width, height, dxt5, swap=True):
     return out[:height, :width]
 
 
-def sample_texture(texture, u, v):
-    """Nearest texel. Returns (r, g, b) in 0..1, or None when the slot is empty."""
+def sample_texture(texture, u, v, clamp=False):
+    """Nearest texel. Returns (r, g, b) in 0..1, or None when the slot is empty.
+
+    clamp=True clamps outside 0..1 instead of wrapping: the head's eyebrow, eye
+    and mouth slots are all clamp-addressed, and wrapping their masks copies the
+    mouth onto the cheeks.
+    """
     if not texture or texture["empty"] or not texture["data"]:
         return None
     if not hasattr(texture, "_pixels") or texture.get("_pixels") is None:
@@ -335,8 +352,12 @@ def sample_texture(texture, u, v):
                                         swap=texture["endian"] == 1)
     pixels = texture["_pixels"]
     h, w = pixels.shape[:2]
-    x = min(w - 1, max(0, int(u * w) % w))
-    y = min(h - 1, max(0, int(v * h) % h))
+    if clamp:
+        x = min(w - 1, max(0, int(min(max(u, 0.0), 1.0) * w)))
+        y = min(h - 1, max(0, int(min(max(v, 0.0), 1.0) * h)))
+    else:
+        x = min(w - 1, max(0, int(u * w) % w))
+        y = min(h - 1, max(0, int(v * h) % h))
     r, g, b, a = pixels[y, x]
     if a < 8:
         return None
@@ -420,9 +441,12 @@ def read_model(data):
             colour.read(s)
             sets = []
             for _ in range(uv_count):
+                # Texture coordinates are half floats, not fixed point: read as
+                # u16 and reinterpret. Treating them as u16/65535 squeezes the
+                # whole head into u 0.11..0.24, where no face texture reaches.
                 u = s.read_u16()
                 v = s.read_u16()
-                sets.append((u / 65535.0, v / 65535.0))
+                sets.append((half_to_float(u), half_to_float(v)))
             uvs.append(sets)
             verts.append(p)
             # Four bone indices and four weights, one byte each.

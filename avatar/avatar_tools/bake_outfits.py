@@ -40,7 +40,7 @@ def main():
     for position, (key, entry) in enumerate(spec.items()):
         obj = os.path.join("/tmp", "outfit_%s.obj" % key)
         cmd = [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
-               "--colours=" + description, "--hair=" + entry["colour"],
+               "--colours=" + description, "--hair=" + entry["colour"], "--face",
                "MaleBody", "Head", entry["hair"]] + CLOTHES
         subprocess.run(cmd, check=True)
         # The first entry doubles as the default set.

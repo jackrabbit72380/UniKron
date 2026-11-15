@@ -228,6 +228,31 @@ into a cheer (y up to 1.481), which earlier notes mistook for the idle. And the
 `Head` is not a special case needing bone-local placement; it skins like every
 other mesh.
 
+## The face: UVs are half floats, and the masks clamp
+
+Two decode mistakes kept the head blank, both found while painting it:
+
+* **Texture coordinates are IEEE binary16, not fixed point.** Reading the two
+  halves of each coordinate as `u16 / 65535` squeezes the whole head into
+  u 0.11..0.24, v 0.10..0.24 - a corner of the texture no face mask reaches, so
+  every triangle sampled empty. Reinterpreting the same bits as half floats
+  gives the ranges the reference describes: eyebrows and eyes in UV sets 2 and 3
+  mirrored across the nose (u 0.01..1.30), the mouth in set 4 starting at u 0.50
+  on the middle line. `avatar_mesh.half_to_float` is the conversion.
+* **The head's eyebrow, eye and mouth slots clamp.** Sampling them with wrap
+  copies the mouth mask onto both cheeks - the reference records these slots as
+  address mode 0 for exactly this reason. `sample_texture(..., clamp=True)`.
+
+With both fixed, the masks land where they should: brows at y 1.29..1.33, eyes
+just below, the mouth at y 1.19. Swapping the first two sets puts the eyes above
+the brows, which is how that mapping was ruled out.
+
+The bake paints one colour per triangle from the masks: any triangle whose
+centroid falls inside a mask takes that feature's description colour (eyebrows,
+eyes, mouth) and the rest stay skin. Giving a triangle to a feature when only
+one of its corners touched the mask smeared the brows and eyes across half the
+face, so the centroid decides alone.
+
 ## Colour: what decodes and what is missing
 
 `read_model` now keeps the two things it used to discard - each vertex's UV sets
