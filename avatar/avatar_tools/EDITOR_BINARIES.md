@@ -261,6 +261,38 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
 * PE and the fonts decode their headers and tables; `DECODE_COVERAGE.md` says how
   deep each one goes.
 
+## The animation library
+
+The asset pack carries **41 animation clips, 5500 frames in total**, every one
+decoded by `avatar_pose.py` at 71 joints. They are the editor's whole repertoire:
+
+| group | clips | frames each |
+| --- | --- | --- |
+| `Closet Sleep` | 1 | 68 |
+| `Creator Look *` (9 directions) | 9 | 108 |
+| `Generic Stand 0`-`7` | 8 | 98 - 428 |
+| `Generic Wave`, `Celebration`, `Clap` | 3 | 68 - 108 |
+| `Male` / `Female` idles | 7 | 101 - 254 |
+| emotes (`Angry`, `Laugh`, `Yawn`, `Confused`, `Sad Cry`, `Shocked Surprised`) | 12 | 64 - 128 |
+
+The standing idle the theme bakes from is `IdleOffScreen`, which is **only 2
+frames** - that is why 3D mode reads as a still picture while it turns. The pack's
+real idles are far longer (`Male Idle Shifts Weight` 242, `Female Idle Looks
+Around` 101, `Generic Stand 1` 428).
+
+Baking an animated 3D mode would cost frames multiplicatively: 8 yaw angles
+against 12 animation poses is 96 images per outfit, about 2 MB each, so five
+outfits would add ~10 MB to a 7 MB theme. The turntable therefore bakes one pose
+across 20 yaws, and the animated idles stay in the pack for a future player. The
+closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
+slight head tilt, so there is nothing to gain from swapping it in.
+
+Ten more clips ship as standalone files beside the pack - `RunIn`, `RunOutShort`,
+`RunOutMedium`, `RunOutLong`, `RunOutStandard`, `Look`, `Cheer`, `Gift`, `Salute`
+and `IdleOffScreen`. Those are the editor's entry and exit business: the avatar
+runs in when the editor opens and runs out when it closes, which is why the four
+`RunOut` variants exist at 33-40 frames apiece.
+
 ## The two editors' XEX headers
 
 `avatareditor.xex` in each editor is an Xbox 360 executable: `XEX2`, big-endian
