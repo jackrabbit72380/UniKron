@@ -40,6 +40,15 @@ three-joint chain 1.7 units away from the shoulder. The reference applies a
 per-model transform (its apply_scale / manifest height and weight factors) that
 this port does not reproduce, and that is the missing piece.
 
+What the pack's own numbers rule out (each checked, not assumed): the clip's
+scale is exactly 1.0 on all 71 controls and its translations are ~0, so the pose
+is pure rotation and needs no scaling; the bind skeleton's chain 20 -> 25 -> 33
+is 1.7 units long on a 1.8-unit body, so those joints cannot be a shoulder,
+elbow and wrist and the joint names in this file are guesses, not facts; and a
+survey of all 583 mesh assets in the pack found the same proportions everywhere
+(about 1.8 x 1.5 x 0.4) with zero decode failures, so no "real body" asset is
+being missed.
+
 For a correct posed avatar today, export the OBJ from Avatar Aura (Windows) and
 bake it; this pipeline stays as the decode/measurement tooling.
 """
