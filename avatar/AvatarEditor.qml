@@ -265,8 +265,11 @@ Item {
     // The stock look the 3D sets are baked in, so a fresh avatar reads the same
     // in both modes instead of the 2D wardrobe opening on one outfit and the 3D
     // turntable wearing another.
+    // The stock look the 3D bake wears, so both modes open as the same avatar:
+    // Avatar6400's outfit (jacket, flares, trainers), tinted as in
+    // avatar_tools/bake_avatar.py.
     readonly property var seedPicks: ({
-        "shirt": "tee_blue.png",
+        "shirt": "coat_navy.png",
         "pants": "jeans_indigo.png",
         "shoes": "sneakers_black.png",
         "hair": "hair_short_brown.png"
@@ -445,6 +448,13 @@ Item {
                 hadAvatar = true
         state = next
         categoryIndex = 0
+        // loadState runs after rebuildCategories, so seedOutfit has already done
+        // its pass - but this assignment may have just wiped it with a host's
+        // empty state. Re-seed only in that case, so a fresh avatar opens on the
+        // choose screen already dressed like the 3D turntable, and a saved
+        // wardrobe is never touched.
+        if (!hadAvatar)
+            seedOutfit()
         fillBodyIfEmpty()
         rebuildLayers()
         // A player with nothing saved is choosing a starting point, which is
