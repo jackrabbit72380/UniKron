@@ -27,20 +27,30 @@ Item {
         }, Qt.size(512, 768))
     }
 
-    // Probe the folder: the frames are numbered from 00 with no gaps, so the
-    // first missing index is the count.
-    Repeater {
-        model: 48
-        Image {
-            visible: false
-            source: stage.folder + "frame_" + (index < 10 ? "0" : "") + index + ".png"
-            onStatusChanged: {
-                if (status === Image.Ready) {
-                    stage.available = true
-                    stage.frameCount = Math.max(stage.frameCount, index + 1)
-                } else if (status === Image.Error && stage.frameCount === index) {
-                    stage.frameCount = index
-                }
+    function framePath(index) {
+        return stage.folder + "frame_" + (index < 10 ? "0" : "") + index + ".png"
+    }
+
+    // Probe the folder one frame at a time: the frames are numbered from 00 with
+    // no gaps, so the first missing index is the count. Asking for each frame
+    // only once the last one loaded means a 24-frame set costs a single failed
+    // load instead of 24 warnings in the log.
+    Image {
+        id: probe
+        visible: false
+        cache: false
+        // Set by hand, not bound: assigning a bound source from its own status
+        // handler is a binding loop.
+        function loadNext() {
+            if (stage.frameCount < 512)
+                source = stage.framePath(stage.frameCount)
+        }
+        Component.onCompleted: loadNext()
+        onStatusChanged: {
+            if (status === Image.Ready) {
+                stage.available = true
+                stage.frameCount += 1
+                loadNext()
             }
         }
     }
@@ -51,9 +61,7 @@ Item {
 
         Image {
             anchors.fill: parent
-            source: stage.available
-                    ? stage.folder + "frame_" + (stage.frame < 10 ? "0" : "") + stage.frame + ".png"
-                    : ""
+            source: stage.available ? stage.framePath(stage.frame) : ""
             fillMode: Image.PreserveAspectFit
             smooth: true
             cache: true
