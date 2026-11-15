@@ -75,6 +75,48 @@ Item {
     ]
     property int featureIndex: 0
 
+    // "Choose an avatar as a starting point": scnEditor registers ten avatar
+    // buttons (AvatarButton1..10) and a refresh-random override, and its VECT
+    // chunk puts nine of them on one row at 62.39, 152.28, 242.17, 332.06,
+    // 420.94, 510.83, 600.72, 690.61 and 780.50 — 89.89 apart on the 960-wide
+    // surface, with the tenth slot at the end. That row is what this screen is.
+    property var presets: []
+    property int chooseIndex: 0
+
+    readonly property var chooseSlots: [
+        62.39, 152.28, 242.17, 332.06, 420.94, 510.83, 600.72, 690.61, 780.50, 870.39
+    ]
+
+    function rebuildPresets() {
+        var out = []
+        var body = bodyCategory ? (bodyCategory.files || []) : []
+        for (var i = 0; i < chooseSlots.length; ++i) {
+            var preset = {}
+            if (body.length)
+                preset[bodyCategory.id] = body[i % body.length]
+            // A few extra layers so the ten do not read as the same avatar.
+            for (var c = 1; c < categories.length; ++c) {
+                var files = categories[c].files || []
+                if (files.length && Math.random() < 0.45)
+                    preset[categories[c].id] = files[Math.floor(Math.random() * files.length)]
+            }
+            out.push(preset)
+        }
+        presets = out
+    }
+
+    function applyPreset(index) {
+        var preset = presets[index]
+        if (!preset)
+            return
+        var next = {}
+        for (var key in preset)
+            next[key] = preset[key]
+        state = next
+        rebuildLayers()
+        setScreen("menu")
+    }
+
     // The source draws one legend per screen: the menu offers A Select (the
     // preview screenshot shows exactly that), the closet needs its four.
     readonly property var legendModel: screen === "closet"
@@ -82,8 +124,12 @@ Item {
             { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
             { glyph: "assets/_ui/xex/legend_x.png", label: "Randomize", action: "randomize" },
             { glyph: "assets/_ui/xex/legend_y.png", label: "Portrait", action: "portrait" } ]
-        : [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
-            { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" } ]
+        : (screen === "choose"
+           ? [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
+               { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" },
+               { glyph: "assets/_ui/xex/legend_x.png", label: "Refresh", action: "presets" } ]
+           : [ { glyph: "assets/_ui/xex/legend_a.png", label: "Select", action: "menuSelect" },
+               { glyph: "assets/_ui/xex/legend_b.png", label: "Back", action: "back" } ])
 
     function setScreen(name) { screen = name }
 
@@ -302,10 +348,23 @@ Item {
         for (var key in saved)
             if (saved[key])
                 next[key] = saved[key]
+        var hadAvatar = false
+        for (var k in next)
+            if (next[k])
+                hadAvatar = true
         state = next
         categoryIndex = 0
         fillBodyIfEmpty()
         rebuildLayers()
+        // A player with nothing saved is choosing a starting point, which is
+        // the screen the original opens on the first time.
+        if (hadAvatar) {
+            screen = "menu"
+        } else {
+            rebuildPresets()
+            chooseIndex = 0
+            screen = "choose"
+        }
     }
 
     function save() {
@@ -324,6 +383,23 @@ Item {
     Keys.onPressed: function (event) {
         // The menu is its own screen: up/down move between the five plates and
         // accept activates one. In the closet, cancel goes back to the menu.
+        if (screen === "choose") {
+            var chit = true
+            switch (event.key) {
+            case Qt.Key_Right: chooseIndex = Math.min(presets.length - 1, chooseIndex + 1); break
+            case Qt.Key_Left:  chooseIndex = Math.max(0, chooseIndex - 1); break
+            case Qt.Key_Return:
+            case Qt.Key_Enter:
+            case Qt.Key_Space: applyPreset(chooseIndex); break
+            case Qt.Key_X:     rebuildPresets(); break
+            case Qt.Key_Escape:
+            case Qt.Key_Backspace: setScreen("menu"); break
+            default: chit = false
+            }
+            event.accepted = chit
+            return
+        }
+
         if (screen === "features") {
             var fhit = true
             switch (event.key) {
@@ -430,7 +506,8 @@ Item {
             // The menu shows whose avatar this is; each other screen names the
             // plate that opened it, which is what the original's labels say.
             text: root.screen === "menu" ? root.gamerTag
-                  : (root.screen === "features" ? "Change My Features" : "Change My Clothes")
+                  : (root.screen === "features" ? "Change My Features"
+                  : (root.screen === "choose" ? root.title : "Change My Clothes"))
             color: style.ink
             font.family: style.titleFamily
             font.pixelSize: 27
@@ -508,9 +585,11 @@ Item {
                         case "randomize":  root.randomize(); break
                         case "portrait":   root.capturePortrait(); break
                         case "menuSelect":
-                            if (root.screen === "features") root.activateFeature(root.featureIndex)
+                            if (root.screen === "choose") root.applyPreset(root.chooseIndex)
+                            else if (root.screen === "features") root.activateFeature(root.featureIndex)
                             else root.activateMenuItem(root.menuIndex)
                             break
+                        case "presets":    root.rebuildPresets(); break
                         }
                         root.forceActiveFocus()
                     }
@@ -573,14 +652,66 @@ Item {
         x: root.screen === "closet" ? rail.x + rail.width + 14 : (root.screen === "features" ? 14 : 40)
         y: 64
         width: root.screen === "closet" ? root.width - x - 26
-             : (root.screen === "features" ? 286 : 470)
-        height: root.screen === "closet" ? 430 : 592
+             : (root.screen === "features" ? 286 : (root.screen === "choose" ? 0 : 470))
+        height: root.screen === "closet" ? 430 : (root.screen === "choose" ? 0 : 592)
+        visible: root.screen !== "choose"
         layers: root.layers
         emptyHint: root.categories.length === 0
                    ? "No item folders found in " + root.assetsFolder
                    : ""
     }
 
+
+    // The ten starting avatars, on the row the source's VECT chunk lays out.
+    Item {
+        id: choose
+        visible: root.screen === "choose"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 220
+        y: 150
+
+        Item {
+            anchors.fill: parent
+
+            Repeater {
+                model: root.presets
+
+                Item {
+                    x: root.chooseSlots[index]
+                    y: 0
+                    width: 86
+                    height: 168
+
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: 8
+                        color: index === root.chooseIndex ? "#c6f473" : "#38485e"
+                        border.width: index === root.chooseIndex ? 2 : 1
+                        border.color: index === root.chooseIndex ? "#c6f473" : "#43546e"
+                    }
+
+                    AvatarThumb {
+                        anchors.fill: parent
+                        anchors.margins: 4
+                        state: modelData
+                        assetsFolder: root.assetsFolder
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.chooseIndex = index
+                            root.applyPreset(index)
+                            root.forceActiveFocus()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     // Change My Features: the six tiles, two columns of three, on the right so
     // the avatar stays visible while you change it.
