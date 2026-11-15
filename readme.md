@@ -11,7 +11,7 @@ Works on Windows
 Works on IOS
 WORKS ON MAC
 
-& launches all games Music Movies and other media including decomps and apps or even any Emulator.
+& launches all games Music Movies and other media including decomps and apps even if they require any Emulator.
 ---
 ## 📜 UniKron is built using:
 
