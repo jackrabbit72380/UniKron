@@ -174,10 +174,12 @@ geometry: `02 <class> <subclass>` then a small count and zero padding
 Block 7 appears only on the 39 sport-top models and is a colour table of
 `u32` + RGBA pairs (`232323ff` grey, `b7630fb7…`), i.e. kit stripes.
 
-**There are no texture assets in the pack.** The block ids present anywhere are
-only `{1, 2, 3, 4, 7, 8}`, none of which carries image data, and no entry name
-is a texture (the two matches for "texture" are item names, `Female Tartan
-Skirt Re-textured` and a hiding template). What a model does carry is a
+**There are no texture assets for clothing in the pack.** Block id 2 *is* a
+Texture block and 187 assets carry one — but all 187 are face features
+(eyebrows, eyes and their shadows, mouths, facial hair, facepaint, moles,
+wrinkles), decoded in TEXTURES.md. No garment, hat, glasses or shoe asset has a
+Texture block, and 581 of the 583 models declare no texture slot at all. What a
+model does carry is a
 per-vertex colour field - `read_model` calls a colour serialiser once per vertex
 and currently discards the result - plus, on the 39 sport tops, the type 7
 colour table. So the item artwork is expressed as colour rather than as images,
