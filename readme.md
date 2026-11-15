@@ -1,4 +1,4 @@
-# 🌌 UniKron
+# 🦄 UniKron
 Built For the Future!
 
 ### A Unified, Cross‑Platform Interface Experience
