@@ -454,11 +454,22 @@ With both fixed, the masks land where they should: brows at y 1.29..1.33, eyes
 just below, the mouth at y 1.19. Swapping the first two sets puts the eyes above
 the brows, which is how that mapping was ruled out.
 
-The bake paints one colour per triangle from the masks: any triangle whose
-centroid falls inside a mask takes that feature's description colour (eyebrows,
-eyes, mouth) and the rest stay skin. Giving a triangle to a feature when only
-one of its corners touched the mask smeared the brows and eyes across half the
-face, so the centroid decides alone.
+**The bake now textures the face per pixel.** `bake_avatar.py` writes the three
+mask sheets beside the OBJ plus a `.face.npz` holding, for every head triangle,
+the three masks' UVs per corner, each mask's role and its description tint. The
+rasteriser in `bake_turntable.py` interpolates those UVs, bilinearly samples the
+sheet and composites it over skin before lighting.
+
+The sheets are **channel masks, not finished art**: green is always zero, R marks
+the tinted zone (brow hair, iris) and B the secondary one (sclera, lip line). So
+brow and mouth take their description colour through R/B, and the eye draws a
+near-white sclera under an iris tinted by the `eyes` colour. Drawing the masks'
+raw RGB instead produced red brows and a red iris - which is exactly how the
+face looked wrong at first.
+
+Before this the bake painted one flat colour per triangle from a centroid
+lookup, which turned the smirk into a red slab and the brows and eyes into
+zig-zag blocks along the triangle edges.
 
 ## Colour: what decodes and what is missing
 
@@ -577,6 +588,13 @@ Three limits in the data, each checked rather than assumed:
   Measured effect: fingertip fan 14.4 cm to 9.2 cm, wrist-to-tip 17.9 cm to
   17.3 cm. Nothing in the archive asks for this - it exists so the hand reads
   like the reference avatar instead of a rake.
+
+  Rotating the knuckles alone left a notch where each finger met the palm: the
+  pack weights a finger's base ring entirely to the finger, with no blend into
+  the hand, so a bend pulls the ring off the palm. `hand_weight_blend` moves 35%
+  of that ring's weight onto the wrist, which closes the notch and makes the
+  fingers read as one hand. It has no effect in the bind pose - the blend only
+  matters once a finger rotates - so nothing else in the bake changes.
 - **Lighting follows XTL's model, with this port's colours.** `bake_turntable.py`
   welds vertices, lights per pixel through interpolated vertex normals with
   ambient plus three directional lights and a rim, in linear light - the rig the

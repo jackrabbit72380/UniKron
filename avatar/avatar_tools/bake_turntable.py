@@ -151,6 +151,101 @@ def rotation_x(angle):
     return np.array([[1.0, 0.0, 0.0], [0.0, c, -s], [0.0, s, c]])
 
 
+def read_png(path):
+    """RGBA 8-bit, non-interlaced PNG as a float array (h, w, 4) in 0..1.
+
+    Only the files this toolchain writes (bake_avatar's mask sheets), so this
+    implements exactly that subset: no palette, no 16-bit, no interlacing.
+    """
+    with open(path, "rb") as fh:
+        data = fh.read()
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise SystemExit("not a PNG: " + path)
+    pos, width, height, channels = 8, 0, 0, 4
+    payload = b""
+    while pos + 8 <= len(data):
+        length = struct.unpack(">I", data[pos:pos + 4])[0]
+        tag = data[pos + 4:pos + 8]
+        body = data[pos + 8:pos + 8 + length]
+        pos += 12 + length
+        if tag == b"IHDR":
+            width, height, depth, colour, _, _, interlace = struct.unpack(">IIBBBBB", body)
+            if depth != 8 or colour != 6 or interlace:
+                raise SystemExit("unsupported PNG: " + path)
+        elif tag == b"IDAT":
+            payload += body
+        elif tag == b"IEND":
+            break
+    raw = zlib.decompress(payload)
+    stride = width * channels
+    out = np.zeros((height, stride), dtype=np.uint8)
+    prev = np.zeros(stride, dtype=np.uint8)
+    offset = 0
+    for row in range(height):
+        kind = raw[offset]
+        line = np.frombuffer(raw[offset + 1:offset + 1 + stride], dtype=np.uint8).astype(np.int16)
+        offset += 1 + stride
+        if kind == 0:
+            fixed = line
+        elif kind == 2:
+            fixed = (line + prev.astype(np.int16)) & 0xFF
+        else:
+            # Sub, Average and Paeth all need the reconstructed left pixel.
+            fixed = line.copy()
+            for i in range(stride):
+                left = int(fixed[i - channels]) if i >= channels else 0
+                up = int(prev[i])
+                corner = int(prev[i - channels]) if i >= channels else 0
+                if kind == 1:
+                    value = line[i] + left
+                elif kind == 3:
+                    value = line[i] + ((left + up) >> 1)
+                else:
+                    p = left + up - corner
+                    pa, pb, pc = abs(p - left), abs(p - up), abs(p - corner)
+                    predictor = left if (pa <= pb and pa <= pc) else (up if pb <= pc else corner)
+                    value = line[i] + predictor
+                fixed[i] = value & 0xFF
+        out[row] = fixed.astype(np.uint8)
+        prev = out[row]
+    return (out.reshape(height, width, channels).astype(np.float64) / 255.0)
+
+
+def load_face(obj_path):
+    """The head's mask sheets and per-corner UVs, if bake_avatar wrote them."""
+    stem = obj_path[:-4] if obj_path.endswith(".obj") else obj_path
+    path = stem + ".face.npz"
+    if not os.path.exists(path):
+        return None
+    data = np.load(path, allow_pickle=False)
+    base = os.path.dirname(os.path.abspath(obj_path))
+    layers = []
+    for i, name in enumerate(data["masks"]):
+        layers.append({
+            "mask": read_png(os.path.join(base, str(name))),
+            "role": str(data["roles"][i]) if "roles" in data else "brow",
+            "tint": np.power(np.clip(data["tints"][i], 0.0, 1.0), 2.2) if "tints" in data
+                    else np.array([0.2, 0.12, 0.08]),
+        })
+    return {"start": int(data["start"][0]), "uvs": data["uvs"], "layers": layers}
+
+
+def sample_mask(mask, u, v):
+    """Bilinear sample of an RGBA sheet, clamped to its edge."""
+    height, width = mask.shape[:2]
+    x = np.clip(u, 0.0, 1.0) * (width - 1)
+    y = np.clip(v, 0.0, 1.0) * (height - 1)
+    x0 = np.floor(x).astype(np.int64)
+    y0 = np.floor(y).astype(np.int64)
+    x1 = np.minimum(x0 + 1, width - 1)
+    y1 = np.minimum(y0 + 1, height - 1)
+    fx = (x - x0)[..., None]
+    fy = (y - y0)[..., None]
+    top = mask[y0, x0] * (1 - fx) + mask[y0, x1] * fx
+    bottom = mask[y1, x0] * (1 - fx) + mask[y1, x1] * fx
+    return top * (1 - fy) + bottom * fy
+
+
 def write_png(path, rgba):
     """Minimal RGBA PNG writer: 8-bit, no interlacing, one IDAT."""
     height, width, _ = rgba.shape
@@ -232,7 +327,7 @@ def _unit(v):
     return v / np.linalg.norm(v)
 
 
-def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2):
+def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=None):
     """One frame: yaw the model, project, rasterise with a z-buffer.
 
     Normals are interpolated across each triangle and lit per pixel, so curved
@@ -304,16 +399,45 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2):
             light += lambert * light_colour
         rim = np.power(np.clip(1.0 - np.abs(n @ view_dir), 0.0, 1.0), 3.0)[..., None]
         light += rim * XTL_RIM_COLOUR
+        # The head composites its brow, eye and mouth sheets per pixel. Mask
+        # alpha over skin, then the same light rig as everything else: sampling
+        # per triangle instead turned the smirk line and the eye art into a
+        # mosaic of blocks, which is what made the face look wrong.
+        albedo = linear[t]
+        if face is not None and face["start"] <= t < face["start"] + len(face["uvs"]):
+            corners = face["uvs"][t - face["start"]]
+            albedo = np.broadcast_to(linear[t], (w0.shape[0], w0.shape[1], 3)).copy()
+            for m, layer in enumerate(face["layers"]):
+                u = w0 * corners[m][0][0] + w1 * corners[m][1][0] + w2 * corners[m][2][0]
+                v = w0 * corners[m][0][1] + w1 * corners[m][1][1] + w2 * corners[m][2][1]
+                texel = sample_mask(layer["mask"], u, v)
+                # The sheets are tint masks: alpha is the shape, R the tinted
+                # zone (brow hair, iris) and B the secondary one (sclera, lip
+                # line). Painting the raw channels drew red brows and a red
+                # iris, which is what made the face look wrong.
+                coverage = texel[..., 3:4]
+                if layer["role"] == "eye":
+                    sclera = np.array([0.90, 0.90, 0.93]) ** 2.2
+                    albedo = sclera * (coverage * texel[..., 2:3]) + albedo * (1.0 - coverage * texel[..., 2:3])
+                    iris = coverage * texel[..., 0:1]
+                    albedo = layer["tint"] * iris + albedo * (1.0 - iris)
+                else:
+                    albedo = layer["tint"] * coverage + albedo * (1.0 - coverage)
         shaded = np.power(
-            np.clip(linear[t] * light, 0.0, 1.0), 1.0 / 2.2
+            np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
         )
 
         zz = (
             w0 * (z[tris[t, 0]]) + w1 * (z[tris[t, 1]]) + w2 * (z[tris[t, 2]])
         )
+        if miny > maxy or minx > maxx:
+            continue
         sub_depth = depth[miny : maxy + 1, minx : maxx + 1]
         sub_colour = colour[miny : maxy + 1, minx : maxx + 1]
         sub_alpha = alpha[miny : maxy + 1, minx : maxx + 1]
+        if sub_depth.shape != inside.shape:
+            # A sliver clipped at the frame edge can leave an empty window.
+            continue
         nearer = inside & (zz < sub_depth)
         sub_depth[nearer] = zz[nearer]
         sub_colour[nearer] = shaded[nearer]
@@ -342,6 +466,7 @@ def main():
     args = parser.parse_args()
 
     verts, tris, tri_colours = read_obj(args.obj)
+    face = load_face(args.obj)
     if args.flip_y:
         verts[:, 1] = -verts[:, 1]
     verts = normalise(verts)
@@ -350,7 +475,7 @@ def main():
 
     for i in range(args.frames):
         yaw = math.radians(args.start) + 2.0 * math.pi * i / args.frames
-        rgba = render(verts, tris, tri_colours, vnormals, yaw, args.width, args.height)
+        rgba = render(verts, tris, tri_colours, vnormals, yaw, args.width, args.height, face=face)
         path = os.path.join(args.outdir, "frame_%02d.png" % i)
         write_png(path, rgba)
         print(path, rgba.shape[1], "x", rgba.shape[0])

@@ -289,6 +289,49 @@ def finger_bones(joints_rig, bind):
     return out
 
 
+HAND_WRIST_SHARE = 0.35
+
+
+def _share_hand_weight(names, weights, blend):
+    """Move HAND_WRIST_SHARE of a finger-base weight onto the wrist, if present."""
+    wrists = set(blend.values())
+    moved = 0.0
+    names = list(names)
+    weights = list(weights)
+    for i, joint in enumerate(names):
+        if joint in blend and weights[i] > 0.0:
+            give = weights[i] * HAND_WRIST_SHARE
+            weights[i] -= give
+            moved += give
+    if moved <= 0.0:
+        return names, weights
+    targets = [i for i, joint in enumerate(names) if joint in wrists]
+    if not targets:
+        return names, weights  # no wrist influence on this vertex: leave it alone
+    share = moved / len(targets)
+    for i in targets:
+        weights[i] += share
+    return names, weights
+
+
+def hand_weight_blend(joints_rig):
+    """{finger root: wrist} for the joints whose base ring meets the palm.
+
+    The pack weights each finger's base ring entirely to the finger, with no
+    blend into the hand, so rotating a knuckle tears the finger off the palm and
+    leaves a visible notch - the "separated prongs" the hand showed at close
+    range. Sharing a little of the wrist's weight with the base ring closes the
+    notch without changing the bind pose (the blend only matters once the finger
+    rotates).
+    """
+    blend = {}
+    for wrist in WRIST_JOINTS:
+        for joint, info in enumerate(joints_rig):
+            if info["parent"] == wrist:
+                blend[joint] = wrist
+    return blend
+
+
 def apply_finger_pose(joints_rig, bind, locals_):
     """Add the art-choice finger curl on top of the clip's pose, in place."""
     for joint, bend, swing, depth, thumb, sign, swing_sign in finger_bones(joints_rig, bind):
@@ -441,12 +484,15 @@ def posed_positions(batches, joints_rig, poses):
 
     skin = [mat_mul(worlds[i], mat_inverse_rigid(bind[i])) for i in range(len(joints_rig))]
 
+    hand_blend = hand_weight_blend(joints_rig)
     out = []
     for batch in batches:
         verts = []
         for index, pos in enumerate(batch["vertices"]):
             names = batch["joints"][index]
             weights = batch["weights"][index]
+            if hand_blend:
+                names, weights = _share_hand_weight(names, weights, hand_blend)
             acc = [0.0, 0.0, 0.0]
             total = 0.0
             for j, w in zip(names, weights):

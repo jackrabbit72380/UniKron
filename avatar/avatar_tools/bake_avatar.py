@@ -22,7 +22,10 @@ import os
 import struct
 import sys
 
+import numpy as np
+
 import avatar_mesh as am
+import xpr0_export as xpr
 import avatar_pose as ap
 import skeleton_nxe as sk
 
@@ -143,44 +146,26 @@ def load_face_textures(pack, index, names):
     return out
 
 
-def face_triangle_colours(batch, textures, colours):
-    """One colour per triangle: skin, or the brow/eye/mouth mask that covers it.
+def face_triangle_uvs(batch):
+    """Per triangle, the UV triple of every face mask, one entry per corner.
 
-    The head's UV sets 2 and 3 are the eyebrows and eyes (mirrored across the
-    nose) and set 4 is the mouth. Sampling all four corners of each triangle
-    keeps a mask that lands on a vertex from being missed by its centroid.
+    The masks are drawn art, not flat tint regions: the mouth sheet is a thin
+    smirk line, the eye sheet carries a lash line, sclera and iris, the brow
+    sheet its own hair colour. Painting a triangle with one colour from a mask
+    lookup turned all three into blocks with zig-zag edges, so the OBJ now
+    carries the UVs and `bake_turntable.py` samples the sheets per pixel.
     """
-    order = [(0, "eyebrows"), (1, "eyes"), (2, "mouth")]
-    sets = FACE_SETS
     uvs = batch["uvs"]
-    per_triangle = []
     indices = batch["indices"]
-    skin = colours["skin"]
+    out = []
     for k in range(0, len(indices), 3):
         tri = indices[k:k + 3]
-        points = [(0, 0, 0)] * 4
-        for corner in tri:
-            for j, si in enumerate(sets):
-                u, v = uvs[corner][si] if si < len(uvs[corner]) else (0.0, 0.0)
-                points[j] = (points[j][0] + u / 3.0, points[j][1] + v / 3.0, 0)
-        best = skin
-        for j, si in enumerate(sets):
-            u, v = points[j][0], points[j][1]
-            # Centroid only: letting one covered corner claim the whole
-            # triangle smeared the brow and eye masks across half the face.
-            if am.sample_texture(textures[j], u, v, clamp=True) is not None:
-                best = colours[order[j][1]]
-                break
-        per_triangle.append(best)
-    return per_triangle
-
-
-def face_material(colour, colours):
-    """A material name for one description colour, so the OBJ can name them."""
-    for key in ("skin", "eyebrows", "eyes", "mouth"):
-        if key in colours and tuple(colours[key]) == tuple(colour):
-            return key
-    return "face"
+        per_mask = []
+        for si in FACE_SETS:
+            per_mask.append([uvs[corner][si] if si < len(uvs[corner]) else (0.0, 0.0)
+                             for corner in tri])
+        out.append(per_mask)
+    return out
 
 
 def main():
@@ -227,6 +212,9 @@ def main():
     lines = []
     written = 0
     materials = {}
+    face_start = 0
+    face_uvs = []
+    face_total = 0
     face_names = FACE_DEFAULT
     if face_args and "=" in face_args[0]:
         face_names = tuple(face_args[0].split("=", 1)[1].split(","))
@@ -243,17 +231,15 @@ def main():
             rgb = asset_colour(name, records.get(name, -1), colours, slots, clothing)
         # The head gets its eyes, brows and mouth from the feature masks, one
         # colour per triangle; every other asset keeps one colour per vertex.
-        face_tris = []
-        if face_textures and colours is not None and name == "Head":
+        # The head is textured with the face sheets by the renderer, so its
+        # geometry stays flat-coloured and carries UVs in a sidecar instead.
+        if face_textures and name == "Head":
+            face_start = face_total
             for batch in batches:
-                face_tris.extend(face_triangle_colours(batch, face_textures, colours))
-            for colour in face_tris:
-                materials[face_material(colour, colours)] = colour
-        tri_cursor = 0
-        last_face = None
+                face_uvs.extend(face_triangle_uvs(batch))
         for batch in ap.posed_positions(batches, joints, poses):
             base = written
-            plain = rgb is None or face_tris
+            plain = rgb is None
             for v in batch["vertices"]:
                 if plain:
                     lines.append("v %.6f %.6f %.6f" % tuple(v))
@@ -262,14 +248,9 @@ def main():
                 written += 1
             indices = batch["indices"]
             for t in range(0, len(indices), 3):
-                if face_tris and tri_cursor < len(face_tris):
-                    colour = face_tris[tri_cursor]
-                    tri_cursor += 1
-                    if colour != last_face:
-                        lines.append("usemtl %s" % face_material(colour, colours))
-                        last_face = colour
                 lines.append("f %d %d %d" % (
                     indices[t] + base + 1, indices[t + 1] + base + 1, indices[t + 2] + base + 1))
+                face_total += 1
         print("  posed %s" % name)
 
     if materials:
@@ -282,6 +263,29 @@ def main():
         lines.insert(0, "mtllib %s" % os.path.basename(mtl))
     open(out, "w").write("\n".join(lines) + "\n")
     print("wrote %s, %d vertices" % (out, written))
+
+    if face_uvs:
+        # Mask sheets plus the per-corner UVs the renderer samples them with.
+        # A separate file keeps the OBJ a plain OBJ and keeps this optional.
+        stem = out[:-4] if out.endswith(".obj") else out
+        names = []
+        for i, texture in enumerate(face_textures):
+            path = "%s.mask%d.png" % (stem, i)
+            xpr.write_png(path, texture["_pixels"])
+            names.append(os.path.basename(path))
+        # Roles and tints: the sheets are channel masks, not final art. Green
+        # is unused; R marks the tinted zone (brow hair, iris), B the secondary
+        # one (sclera, lip line). The colours come from the .Avatar description,
+        # which is where the editor keeps brow, eye and mouth tone.
+        roles = np.array(["brow", "eye", "mouth"])
+        tints = np.array([colours["eyebrows"], colours["eyes"], colours["mouth"]],
+                         dtype=np.float32) / 255.0
+        np.savez(stem + ".face.npz",
+                 start=np.array([face_start], dtype=np.int64),
+                 uvs=np.array(face_uvs, dtype=np.float32),
+                 masks=np.array(names), roles=roles, tints=tints)
+        print("wrote %s (%d face triangles, %d mask sheets)"
+              % (stem + ".face.npz", len(face_uvs), len(names)))
     return 0
 
 
