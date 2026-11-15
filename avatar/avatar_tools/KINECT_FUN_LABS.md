@@ -62,3 +62,22 @@ one exists in this build.
 Until such a mesh is extracted, this archive cannot calibrate the NXE width
 anomaly: it has no body, and its head is not authored in the pack's coordinate
 space.
+
+### How far the UE3 attempt got
+
+One package is *not* compressed and its header parses as a big-endian UE3
+package: `kme_hub_l_main.xxx` gives signature `0x9E2A83C1`, version 20, licensee
+805, header size 96995, folder name `None`, then `NameCount` 1218, `NameOffset`
+1502, `ExportCount` 747, `ExportOffset` 43083, `ImportCount` 148. The other
+packages (`MiniMe`, `GooglyEyes`, `FlintGame`) carry `0x00020000` at offset 4 -
+the compressed wrapper's 128 KiB block size - so they are a different case.
+
+Reading the name table is where it stops. Entries at `NameOffset` are not the
+standard `FString` + flags pairs (offset 1502 begins `000002be 000002d9
+000002da ...`, a run of indices, not lengths), and the export table at 43083 is
+high entropy. Searching the whole file for `SkeletalMesh`, `StaticMesh`,
+`Material` and even `Mesh` returns **zero** hits, while `kme_...` package names do
+appear near the header. So the bulk data is compressed or encoded behind a
+format this build does not use the textbook layout for, and getting a mesh out
+needs a working Xenon decompressor plus a version-20 name/export reader - a
+substantial job whose payoff is still a mesh from a different art system.
