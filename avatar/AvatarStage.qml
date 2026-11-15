@@ -47,8 +47,10 @@ Item {
             Image {
                 anchors.fill: parent
                 anchors.margins: -frame.width * 0.06
-                source: Qt.resolvedUrl("assets/_ui/xex/closet_frame.png")
-                fillMode: Image.PreserveAspectFit
+                source: Qt.resolvedUrl("assets/_ui/xex/closet_mirror_border.png")
+                // Cropped, not fitted: the frame art is square but a standing
+                // avatar is taller, so the mirror has to stretch with it.
+                fillMode: Image.PreserveAspectCrop
                 smooth: true
                 opacity: 0.9
                 z: -1

@@ -345,12 +345,21 @@ Item {
 
     // Artwork taken out of the original avatareditor.xex: the closet's dark
     // panel behind the avatar and the banner that sits under the item strip.
+    // The editor's own studio backdrops: the menu's plain one and the closet's
+    // with the halo pattern, both 1280x720 out of avatareditor.xex.
     Image {
         anchors.fill: parent
-        source: Qt.resolvedUrl("assets/_ui/xex/closet_panel.png")
+        source: Qt.resolvedUrl(root.screen === "menu"
+                               ? "assets/_ui/xex/background_menu.png"
+                               : "assets/_ui/xex/background_closet.png")
         fillMode: Image.PreserveAspectCrop
         smooth: true
-        opacity: 0.5
+    }
+
+    // Keeps the pale backdrop from washing out the plates and the legend.
+    Rectangle {
+        anchors.fill: parent
+        color: root.screen === "menu" ? "#400b1320" : "#330b1320"
     }
 
     Item {
@@ -365,7 +374,9 @@ Item {
 
         Text {
             id: headline
-            text: root.screen === "menu" ? root.gamerTag : root.title
+            // The menu shows whose avatar this is; the closet names the plate
+            // that opened it, which is what the original's own label says.
+            text: root.screen === "menu" ? root.gamerTag : "Change My Clothes"
             color: style.ink
             font.family: style.titleFamily
             font.pixelSize: 27
