@@ -137,9 +137,14 @@ class VectorSerializer:
         self.delta_z = self.quant_radius * (3.0 ** 0.5)
 
     def read(self, stream):
-        x = stream.read_i64_bits(self.bit_count_x)
-        y = stream.read_i64_bits(self.bit_count_y)
-        z = stream.read_i64_bits(self.bit_count_z)
+        # The lattice counts are unsigned: position = min + q * step * k with
+        # q in 0..2^width-1. Sign-extending q shears every mesh (MaleBody came
+        # out 1.79 wide and asymmetric instead of +-0.711); open-avatar-lib's
+        # docs/FORMATS.md 3.3 states the formula and its MaleBody bounds, and
+        # decoding these as unsigned reproduces them exactly.
+        x = stream.read(self.bit_count_x) if self.bit_count_x else 0
+        y = stream.read(self.bit_count_y) if self.bit_count_y else 0
+        z = stream.read(self.bit_count_z) if self.bit_count_z else 0
         out_y = self.base_y + self.delta_y * y
         out_z = self.base_z + self.delta_z * z
         if y & 1:

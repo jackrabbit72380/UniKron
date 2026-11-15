@@ -56,8 +56,13 @@ survey of all 583 mesh assets in the pack found the same proportions everywhere
 (about 1.8 x 1.5 x 0.4) with zero decode failures, so no "real body" asset is
 being missed.
 
-For a correct posed avatar today, export the OBJ from Avatar Aura (Windows) and
-bake it; this pipeline stays as the decode/measurement tooling.
+That conclusion was wrong, and the fix was not in this file: `avatar_mesh`
+read the quantised lattice counts signed, which sheared every mesh. Reading them
+unsigned (position = min + q * step * k, q in 0..2^width-1) puts `MaleBody` on
+the reference's own bounds (x +-0.711, y 0.005..1.167, z -0.103..0.149) and this
+file then poses a correct figure. Frame 0 of `IdleOffScreen.AvatarAnimation`
+with **no** conjugation is the standing idle; `--conj` raises the arms into a
+cheer. `bake_avatar.py` uses that to assemble whole avatars.
 """
 import argparse
 import math

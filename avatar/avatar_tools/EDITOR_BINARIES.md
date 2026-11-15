@@ -189,59 +189,60 @@ pack are *item* animations (emotes such as Clap, Wave, Celebration); they carry
 ~0 translations and pose a different rig because they are not the body's idle.
 The avatar itself is posed by the standalone `IdleOffScreen.AvatarAnimation`,
 which is a separate file beside the pack.
+## The decode bug that made every mesh a sheet - solved
 
-## The width anomaly, in numbers
+Every earlier note in this file that called the body "flat", "a pair of thin
+tubes" or "authored at a different width from its clothing" described corrupted
+data, not the pack. The cause was one line: the quantised lattice values were
+read **signed**.
 
-Measuring by class over the whole pack puts the remaining 3D problem in one axis
-only. Medians of every model asset whose name falls in a class (extents in the
-pack's own units):
+`open-avatar-lib`'s `docs/FORMATS.md` 3.3 states the rule - position is
+`min + q * step * k` with `k = (2, 2/sqrt(1.5), sqrt(3))` and `q` an **unsigned**
+count - and gives `MaleBody`'s bounds as x +-0.711, y 0.005..1.167,
+z -0.103..0.149. Sign-extending `q` shifted every mesh by half its quantisation
+range, shearing each one into sheets and making it asymmetric.
 
-| class | assets | width | height | depth |
-| --- | --- | --- | --- | --- |
-| body (Male, Female) | 2 | **1.80** | 1.51 | 0.39 |
-| top (tee/shirt/jacket/...) | 144 | 0.89 | 0.75 | 0.40 |
-| legs (pants/shorts/skirt) | 47 | 0.46 | 0.75 | 0.40 |
-| feet (shoes/boots) | 21 | 0.46 | 0.31 | 0.39 |
-| head | 1 | 0.38 | 0.37 | 0.39 |
+With `VectorSerializer.read` reading unsigned:
 
-Depth is the same everywhere (0.39 to 0.40) and heights are consistent - a top
-0.75 tall over a torso, legs 0.75 on a 1.51 body - so nothing is uniformly
-collapsed and no axis is silently dropped. What does not fit is *width*: the
-body's arm span is 1.80 but its torso silhouette is only about 0.25 wide, while
-the tee that has to cover that torso is 0.89. A factor of ~3.5 sits between the
-body and its own clothing, and it appears on the width axis only - the same
-factor the posing work kept meeting from the other direction, now pinned to one
-axis and two asset classes instead of "the body looks flat". Which of the two is
-the odd one out is settled by the rig, below.
+| asset | before (signed) | after (unsigned) |
+| --- | --- | --- |
+| `MaleBody` | x -1.599..0.188, y -0.751..0.761, z -0.285..0.086 | **x -0.711..0.711, y 0.005..1.167, z -0.103..0.149** |
+| `FemaleBody` | - | x -0.708..0.708, y 0.006..1.163, z -0.091..0.117 |
+| `Head` | x -0.114..0.115, y 0.946..1.316 | x -0.147..0.147, y 1.131..1.497, z -0.167..0.167 |
+| `Peak (Hat)` | x -0.363..0.089 | x -0.138..0.138, y 1.176..1.331 |
 
-### Which side is the outlier: the rig agrees with the body
+`MaleBody` now matches the reference exactly, and all 585 model blocks in the
+pack still decode with zero failures. The head sits at y 1.13-1.50 above a body
+0.005-1.167 tall, and the hat lands on the head, so the parts agree with each
+other without any per-asset scale.
 
-The bind skeleton settles the direction of that gap. Its own joint positions give
-a shoulder pair spanning **0.180** in X and a hip pair 0.207, and its real width
-is about 0.22 - the 1.769 extent it reports is an artefact of joint 25, the
-helper bone at x = -1.559 that skins no vertices. Excluding that phantom, the rig
-agrees with the body's ~0.25 torso, not with the clothing: the tee is 4 to 5
-times the shoulder spacing of the rig it has to cover.
+The 3D avatar therefore works end to end: skinned through the 71-joint rig with
+frame 0 of `IdleOffScreen.AvatarAnimation` (standing, arms down), body, head,
+hair, tee, jeans and shoes assemble into one figure, and `bake_turntable.py`
+writes the 24 frames `AvatarStage3D` plays - they are in
+`avatar/assets/3d/turntable/`.
 
-That also disposes of a long-standing mis-reading. "The bind skeleton puts a
-three-joint chain 1.7 units away from the shoulder" was true of the joint table
-but never of the figure: one helper bone inflates the extent, and the skeleton's
-usable width is 0.22 against the body's 0.25. Body and rig are consistent with
-each other; the clothing is the side that does not fit, which reverses the
-earlier guess that the body was compressed.
+Two conventions worth carrying forward. The clip must be passed with **no**
+conjugate flag for the standing pose: conjugating the rotations raises the arms
+into a cheer (y up to 1.481), which earlier notes mistook for the idle. And the
+`Head` is not a special case needing bone-local placement; it skins like every
+other mesh.
 
-One correction worth recording, because it is easy to mis-read: `Head` has **two
-batches that are not duplicates**. Each is 324 verts / 423 tris with the same
-0.23 x 0.37 x 0.39 extent, but the second is the first *mirrored* - the winding
-runs `1,0,2` in the first and `1,2,0` in the second - and offset -0.176 in X, so
-the assembled head is 0.38 wide. The pack ships mirrored copies rather than two
-halves, and any per-batch analysis has to account for that offset or the head
-comes out either duplicated or half-width.
+## What is still open for the 3D avatar
 
-## What this rules out for the 3D avatar
+The geometry is solved; what remains is two smaller things.
 
-The flat-shell body cannot be explained by: a different pack version (identical
-SHA-1), a hidden float buffer (none exists), derived bone orientations (tested,
-no change), a stale clip (the idle's joints move ~0.00 from bind), a missing
-limb asset (all 583 meshes share the same proportions), or a wrong serialiser
-(verified term-by-term against `serializers.rs`).
+* **The theme's items have no 3D counterpart yet.** The closet's clothes are the
+  theme's own 2D art, not pack assets, so a chosen tee cannot change the baked
+  figure. Mapping each theme item to a pack asset id is the missing piece; the
+  tunable path is `avatar_tools/bake_avatar.py`.
+* **Joint names.** The rig is now known from the XNA Game Studio 4.1 reference
+  (`AvatarBone`): Root 0, BackLower 1, HipLeft 2, HipRight 3, Head 19,
+  ShoulderLeft 20, ElbowLeft 25, WristLeft 33, fingers 37-70, with the unnamed
+  indices being helper bones that carry the skin. This port's hand-written names
+  predate that and should be replaced by the published list before any bone-level
+  claim is made again.
+
+Earlier hypotheses that are now settled and wrong: a per-asset scale, a hidden
+float buffer, derived bone orientations, a stale clip and a broken serialiser.
+The meshes were being sheared by a signed read of an unsigned lattice count.
