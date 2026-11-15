@@ -1,0 +1,83 @@
+{
+  "_comment": "wardrobe shirt stem -> real pack garment and the 2D colour it is drawn in",
+  "tee_blue": {
+    "asset": "Male Power Tee",
+    "colour": "#2f7fd4"
+  },
+  "tee_white": {
+    "asset": "Male Power Tee",
+    "colour": "#eef1f4"
+  },
+  "tee_red": {
+    "asset": "Male Power Tee",
+    "colour": "#c5443a"
+  },
+  "tee_black": {
+    "asset": "Male Power Tee",
+    "colour": "#2b2f36"
+  },
+  "hoodie_grey": {
+    "asset": "Black Hoodie",
+    "colour": "#5c6470"
+  },
+  "hoodie_navy": {
+    "asset": "Black Hoodie",
+    "colour": "#2b3550"
+  },
+  "hoodie_olive": {
+    "asset": "Black Hoodie",
+    "colour": "#6b7048"
+  },
+  "hoodie_plum": {
+    "asset": "Black Hoodie",
+    "colour": "#5a3355"
+  },
+  "jersey_green": {
+    "asset": "Baseball Jersey",
+    "colour": "#3fa34d"
+  },
+  "jersey_red": {
+    "asset": "Baseball Jersey",
+    "colour": "#bf3b39"
+  },
+  "jersey_blue": {
+    "asset": "Baseball Jersey",
+    "colour": "#2f5fa8"
+  },
+  "jersey_white": {
+    "asset": "Baseball Jersey",
+    "colour": "#eef1f4"
+  },
+  "tank_white": {
+    "asset": "V Neck Tee",
+    "colour": "#eef1f4"
+  },
+  "tank_black": {
+    "asset": "V Neck Tee",
+    "colour": "#2b2f36"
+  },
+  "tank_blue": {
+    "asset": "V Neck Tee",
+    "colour": "#2f7fd4"
+  },
+  "tank_pink": {
+    "asset": "V Neck Tee",
+    "colour": "#d0708f"
+  },
+  "coat_navy": {
+    "asset": "Black Trench Coat",
+    "colour": "#2b3550"
+  },
+  "coat_grey": {
+    "asset": "Black Trench Coat",
+    "colour": "#5c6470"
+  },
+  "coat_brown": {
+    "asset": "Black Trench Coat",
+    "colour": "#6d4630"
+  },
+  "coat_olive": {
+    "asset": "Black Trench Coat",
+    "colour": "#6b7048"
+  }
+}

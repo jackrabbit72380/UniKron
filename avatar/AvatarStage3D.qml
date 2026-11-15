@@ -25,10 +25,12 @@ Item {
     // look only, so it does not follow the hairstyle the way the turntable does;
     // leave it empty to always use the static set.
     property string animatedFolder: ""     // .../assets/3d/animated/
-    // Which turntable to play, from the hairstyle the player picked. Empty means
-    // the default set directly under baseFolder; a name that has no frames (or no
-    // bake for that hairstyle) falls back to it too.
+    // Which turntable to play, from the hairstyle or wardrobe item the player
+    // picked: "turntable/<stem>" or "shirts/<stem>", appended to baseFolder.
     property string variant: ""
+    // What to play when variant has no frames at all - normally "turntable/",
+    // the stock set, so a missing item bake never leaves an empty stage.
+    property string defaultVariant: ""
     readonly property string folder: baseFolder + (variant !== "" ? variant + "/" : "")
     // The static turntable: one pose, frameCount angles.
     property int frameCount: 0
@@ -166,9 +168,15 @@ Item {
                 stage.available = true
                 stage.frameCount += 1
                 loadNext()
-            } else if (status === Image.Error && stage.frameCount === 0 && stage.variant !== "") {
-                // Nothing baked for this hairstyle: show the default set.
-                stage.variant = ""
+            } else if (status === Image.Error && stage.frameCount > 0) {
+                // Half a turn is the front: the bake starts at the avatar's back,
+                // the same convention the animated branch uses for its yaw.
+                stage.frame = Math.floor(stage.frameCount / 2)
+            } else if (status === Image.Error && stage.frameCount === 0
+                       && stage.variant !== stage.defaultVariant) {
+                // Nothing baked for this look: show the stock set rather than
+                // an empty stage.
+                stage.variant = stage.defaultVariant
             }
         }
     }

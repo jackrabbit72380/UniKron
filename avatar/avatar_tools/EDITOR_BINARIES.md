@@ -536,6 +536,17 @@ it settles:
   `mvctrlc2`, `oscarui`, `wwwca`, `xplayrui`, `584807D5`, the Xenon Latin fonts
   (`XenonCLatin.xtt`, `XenonJKLatin.xtt`) and a `theater/room.png` backdrop.
 
+## What the 3D stage wears
+
+`bake_shirts.py` gives every wardrobe shirt its own turntable: the 20 stems in
+`assets/40_shirt` are mapped in `shirts_3d.json` onto real pack garments (tees,
+hoodie, jersey, V neck, trench coat) and tinted with the colour `avatar_art.py`
+draws that item in. Pants, shoes and hair stay on the stock bake, so a shirt pick
+is honoured in 3D and anything else still shows the stock look.
+
+`bake_avatar.py --tint=Asset=RRGGBB` is what allows one piece at a time to carry
+a colour; without it a garment falls back to `CLOTHING_TINTS`.
+
 ## Why the 3D bake is not a photograph of the editor
 
 Three limits in the data, each checked rather than assumed:

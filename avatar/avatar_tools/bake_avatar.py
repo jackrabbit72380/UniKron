@@ -77,6 +77,11 @@ CLOTHING_TINTS = {
 }
 
 
+# Per-item colour overrides from --tint=Asset=RRGGBB. bake_shirts.py uses these
+# to bake one wardrobe piece at a time in the colour the 2D wardrobe draws it.
+TINT_OVERRIDES = {}
+
+
 def asset_colour(name, record, colours, slots, clothing):
     """RGB in 0..1 for one asset: skin and hair from the description, else neutral.
 
@@ -84,7 +89,7 @@ def asset_colour(name, record, colours, slots, clothing):
     slot in the description, so it takes its entry from CLOTHING_TINTS. Anything
     unlisted still falls back to neutral.
     """
-    tint = CLOTHING_TINTS.get(name.lower())
+    tint = TINT_OVERRIDES.get(name.lower()) or CLOTHING_TINTS.get(name.lower())
     if tint is not None:
         return tuple(c / 255.0 for c in tint)
     mask = slots.get(record, 0)
@@ -183,6 +188,7 @@ def main():
     colour_args = [a for a in sys.argv if a.startswith("--colours=")]
     hair_args = [a for a in sys.argv if a.startswith("--hair=")]
     face_args = [a for a in sys.argv if a.startswith("--face")]
+    tint_args = [a for a in sys.argv if a.startswith("--tint=")]
     if len(args) < 5:
         print(__doc__)
         return 1
@@ -202,6 +208,12 @@ def main():
         colours["hair"] = (int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16))
     # A neutral fabric: the honest colour for clothes whose colour is unknown.
     clothing = (0x8A, 0x8D, 0x93)
+
+    for value in tint_args:
+        asset, _, hexv = value.split("=", 1)[1].rpartition("=")
+        hexv = hexv.lstrip("#")
+        TINT_OVERRIDES[asset.lower()] = (int(hexv[0:2], 16), int(hexv[2:4], 16),
+                                        int(hexv[4:6], 16))
 
     index = am.load_pack_index(pack)
     records = am.record_indices(pack)

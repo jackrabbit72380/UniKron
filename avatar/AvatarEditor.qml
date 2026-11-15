@@ -183,6 +183,41 @@ Item {
         return ""
     }
 
+    // The wardrobe shirts that have their own baked turntable (bake_shirts.py
+    // writes one folder per entry in avatar_tools/shirts_3d.json). Picking one
+    // swaps the 3D set, so the stage wears the shirt the closet strip shows.
+    readonly property var bakedShirts: ({
+        "tee_blue": true, "tee_white": true, "tee_red": true, "tee_black": true,
+        "hoodie_grey": true, "hoodie_navy": true, "hoodie_olive": true, "hoodie_plum": true,
+        "jersey_green": true, "jersey_red": true, "jersey_blue": true, "jersey_white": true,
+        "tank_white": true, "tank_black": true, "tank_blue": true, "tank_pink": true,
+        "coat_navy": true, "coat_grey": true, "coat_brown": true, "coat_olive": true
+    })
+
+    readonly property string shirtVariant: {
+        for (var i = 0; i < categories.length; ++i) {
+            var c = categories[i]
+            if (!c || !c.id || c.id.indexOf("shirt") < 0)
+                continue
+            var file = state[c.id] || ""
+            if (file === "")
+                return ""
+            var stem = file.replace(/\.png$/i, "")
+            return bakedShirts[stem] ? stem : ""
+        }
+        return ""
+    }
+
+    // Which baked folder the 3D stage plays, relative to assets/3d/. The item
+    // sets carry the default hairstyle, so they only apply while the player keeps
+    // that hair; any other hairstyle falls back to its own turntable.
+    readonly property string stageVariant: {
+        var keepHair = hairVariant === "" || hairVariant === defaultHairStem
+        if (shirtVariant !== "" && keepHair)
+            return "shirts/" + shirtVariant
+        return "turntable/" + hairVariant
+    }
+
     // The hairstyle seedOutfit fills in. bake_animated.py bakes the animated 3D
     // set for exactly this look, so those frames are only the right hair while
     // the player wears it (or has no hair picked at all).
@@ -786,12 +821,13 @@ Item {
         width: stage.width
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
-        baseFolder: root.assetsFolder + "3d/turntable/"
-        // Baked for the default hairstyle only, so a picked hairstyle keeps
-        // the turntable set that was baked for that hair.
-        animatedFolder: (root.hairVariant === "" || root.hairVariant === root.defaultHairStem)
+        baseFolder: root.assetsFolder + "3d/"
+        // Baked for the stock outfit and default hairstyle only, so the animated
+        // set is only the right picture while both of those still match.
+        animatedFolder: (root.stageVariant === "turntable/" + root.defaultHairStem)
                         ? root.assetsFolder + "3d/animated/" : ""
-        variant: root.hairVariant
+        variant: root.stageVariant
+        defaultVariant: "turntable/"
     }
 
     // model_shadows switch, beside the 2D/3D one. Both stages draw the shadow
