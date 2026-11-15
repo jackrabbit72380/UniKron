@@ -51,6 +51,7 @@ def parse_mtl(path):
 def read_obj(path):
     """Vertices, triangles and a per-triangle colour, from an .obj file."""
     verts = []
+    vert_colours = []
     tris = []
     tri_colours = []
     mtl_colours = {}
@@ -65,6 +66,9 @@ def read_obj(path):
             tag = parts[0]
             if tag == "v" and len(parts) >= 4:
                 verts.append(tuple(float(v) for v in parts[1:4]))
+                # Extended form "v x y z r g b": baked vertex colours.
+                vert_colours.append(tuple(float(v) for v in parts[4:7])
+                                    if len(parts) >= 7 else None)
             elif tag == "mtllib" and len(parts) > 1:
                 mtl_colours.update(parse_mtl(os.path.join(base, parts[1])))
             elif tag == "usemtl" and len(parts) > 1:
@@ -80,7 +84,14 @@ def read_obj(path):
                 # Fan triangulation: quads are common in exported models.
                 for k in range(1, len(idx) - 1):
                     tris.append((idx[0], idx[k], idx[k + 1]))
-                    tri_colours.append(current)
+                    # Per-vertex colours win over the material: a baked avatar
+                    # carries its skin and hair tone in the OBJ itself.
+                    corner = [vert_colours[i] for i in idx[k - 1:k + 2]]
+                    if all(c is not None for c in corner):
+                        tri_colours.append(tuple(sum(c[j] for c in corner) / 3.0
+                                                 for j in range(3)))
+                    else:
+                        tri_colours.append(current)
 
     if not tris:
         raise SystemExit("no faces in " + path)

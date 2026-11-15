@@ -467,6 +467,19 @@ def read_model(data):
 
 # ---------------------------------------------------------------- pack access
 
+def record_indices(pack_path):
+    """Asset name -> its record index in the pack: the value descriptions store."""
+    here = os.path.dirname(os.path.abspath(pack_path))
+    for candidate in (os.path.join(here, "avatar-assets.json"),
+                      os.path.join(os.path.dirname(os.path.abspath(__file__)), "avatar-assets.json")):
+        if os.path.exists(candidate):
+            with open(candidate, "r", encoding="utf-8") as fh:
+                doc = json.load(fh)
+            assets = doc.get("assets", doc)
+            return {entry["name"]: i for i, entry in enumerate(assets)}
+    raise SystemExit("no avatar-assets.json next to the pack; run toc_parse.py first")
+
+
 def load_pack_index(pack_path):
     """Asset name -> (offset, size), from the JSON toc_parse.py writes."""
     here = os.path.dirname(os.path.abspath(pack_path))

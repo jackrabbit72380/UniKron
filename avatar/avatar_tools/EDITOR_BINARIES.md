@@ -245,6 +245,14 @@ and the material records - and decodes textures:
 * **Item models embed no textures at all.** Their texture count is 0, and the
   Head's six slots are all empty (`flags & 1`), which the reference also records.
 
+* **Block id 7 is a per-item colour table**, and it is stored uncompressed, so
+  `decompress` on it fails by design. `Male Power Tee` holds 109 bytes that read
+  as a small count followed by RGB triples - charcoal `232323`, orange `b7630f`,
+  pink `dd1c5d`, `dcdcdc`, `5d5d5d`, `f969dc`, `e605b4`, `ea6238` - most of them
+  repeated three times, which matches the description's three custom-colour
+  slots per item. The exact framing (where the first triple starts, what the
+  leading word counts) is not pinned yet, so the bake does not use it.
+
 So an item's colour is not in its own asset: the base and tint mask come from
 the description's colours (the packed RGBA run in the `.Avatar` manifest) applied
 by the rule in open-avatar-lib's FORMATS.md 3.6 - `lerp(base, mask.r*C1 +
