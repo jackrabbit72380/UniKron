@@ -299,16 +299,22 @@ def read_model(data):
         colour = ValueSerializer(s, 32)
 
         verts = []
+        joints = []
+        weights = []
         for _ in range(vertex_count):
             p = position.read(s)
             normal.read(s)
-            weight.read(s)
-            blend.read(s)
+            w = weight.read(s)
+            b = blend.read(s)
             colour.read(s)
             for _ in range(uv_count):
                 s.read_u16()
                 s.read_u16()
             verts.append(p)
+            # Four bone indices and four weights, one byte each.
+            joints.append(((b >> 0) & 0xFF, (b >> 8) & 0xFF, (b >> 16) & 0xFF, (b >> 24) & 0xFF))
+            weights.append((((w >> 0) & 0xFF) / 255.0, ((w >> 8) & 0xFF) / 255.0,
+                            ((w >> 16) & 0xFF) / 255.0, ((w >> 24) & 0xFF) / 255.0))
         s.align_to_next_byte()
 
         index_count = s.read_u32()
@@ -321,6 +327,8 @@ def read_model(data):
         batches.append({
             "shader_id": shader_id,
             "vertices": verts,
+            "joints": joints,
+            "weights": weights,
             "indices": indices,
         })
     return batches
