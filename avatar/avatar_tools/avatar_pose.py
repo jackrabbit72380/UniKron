@@ -10,6 +10,13 @@ with `world * inverse(bind_world)` - the same composition Avatar Aura's bake use
     python3 avatar_pose.py --pack <AvatarAssetPack.toc> --asset MaleBody \\
         --clip "Animation Generic Stand 1" --frame 1 --obj posed.obj
 
+The clips that actually work are the standalone .AvatarAnimation files shipped
+next to the pack (IdleOffScreen, Cheer, Look, Salute, RunIn/Out*, Gift). Pass one
+with --anim, and use --conj: that pairing puts the wrist 1.45 below the shoulder
+(arms hanging) and the ankle 0.52 below the hip (legs descending), which no
+combination of the pack's own clips ever did. The pack's clips carry near-zero
+translations and pose a different rig, which is why they skin into a heap.
+
 Status after testing every convention this file supports (delta, delta2, local,
 world, with and without conjugated rotations, with the pose elements taken in
 stream order or reversed, and with the mesh mirrored across Z):
@@ -280,6 +287,10 @@ def main():
     parser.add_argument("--pack", required=True)
     parser.add_argument("--asset", default="MaleBody")
     parser.add_argument("--clip", default="Animation Generic Stand 1")
+    parser.add_argument("--anim",
+                        help="standalone .AvatarAnimation file (IdleOffScreen, Cheer, Look, ...). "
+                             "These are the clips the editor really plays; the pack's own clips are "
+                             "pose data for a different rig and skin into a heap.")
     parser.add_argument("--frame", type=int, default=1)
     parser.add_argument("--conj", action="store_true", help="conjugate pose rotations")
     parser.add_argument("--mirror-z", action="store_true", help="mirror the mesh across Z (INVERT)")
@@ -298,6 +309,10 @@ def main():
     model = am.read_model(am.decompress([b for b in body if b[0] == 3][0][3]))
 
     clip_blocks = am.strb_blocks(am.asset_bytes(args.pack, index, args.clip))
+    if args.anim:
+        with open(args.anim, "rb") as fh:
+            clip_blocks = am.strb_blocks(fh.read())
+        args.clip = args.anim.split("/")[-1]
     anim_blocks = [b for b in clip_blocks if b[0] == 1]
     if not anim_blocks:
         raise SystemExit("no Animation block in " + args.clip)
