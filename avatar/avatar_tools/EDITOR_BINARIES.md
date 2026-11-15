@@ -258,12 +258,31 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
 
 * the two `avatareditor.xex` files - the body is LZX-compressed and
   title-encrypted, so only the XEX2 header reads without the console's keys;
-* 74 `.xm` orb containers - the header's counts read, but the float body's layout
-  (vertices, keys or colours) is not established;
 * 4 `cellwall.xbx` - a 90112-byte file whose payload (43 sectors of 2048) fits no
   power-of-two DXT shape, so it is a texture plus extra data;
 * PE and the fonts decode their headers and tables; `DECODE_COVERAGE.md` says how
   deep each one goes.
+
+## The orbs are plain meshes
+
+An `.xm` holds no parts or animations, only geometry, and its layout closes
+exactly on all 74 files in the archive:
+
+    u32 version = 4
+    u32 triangle count
+    u32 unknown (a float bit pattern on some, a small integer on others)
+    u32 vertex stride (24 or 32 bytes)
+    u32 vertex count
+    u32 index count
+    vertices: position (3 floats), normal (3), and for the 32-byte stride a uv pair
+    indices:  u16, values 0..count-1
+
+The check that settles it is arithmetic: `24 + vertices * stride + indices * 2`
+equals the file size for every mesh, header triangle count equals indices / 3,
+and the largest index is always vertexCount - 1. `Deathstar.xm` decodes to 4338
+vertices and 8334 triangles inside a unit sphere and renders as the orb sphere
+with its dish, which is what an orb is: `xm_mesh.py` exports OBJ or a PNG
+preview.
 
 ## The dashboard's screens are text
 

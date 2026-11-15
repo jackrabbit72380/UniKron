@@ -146,8 +146,13 @@ def decode_xm(head, size, path):
     the floats are vertices, keys or colours) has not been established, so this
     is reported as partial rather than claiming a decode it does not have.
     """
-    version, a, b, c = struct.unpack_from("<4I", head, 0)
-    return "partial", "XM v%d, counts %d/%d/%d; body is unparsed float data" % (version, a, b, c)
+    version, tris, _, stride, vcount, icount = struct.unpack_from("<6I", head, 0)
+    if version != 4 or stride % 4 or 24 + vcount * stride + icount * 2 != size:
+        return "partial", "XM v%d header only; layout does not close" % version
+    if icount != tris * 3:
+        return "partial", "XM v%d counts disagree (%d tris, %d indices)" % (version, tris, icount)
+    return "decoded", "XM v%d: %d vertices at stride %d, %d triangles" % (
+        version, vcount, stride, tris)
 
 
 def decode_pe(head, size, path):
@@ -331,7 +336,8 @@ DEPTH = {
            "the file.",
     "xip0": "header, then the payload read as a VRML/X3D scene: xip_scene.py lists "
             "every node, material and geometry reference and resolves them.",
-    "xm": "header only; the float body is not parsed.",
+    "xm": "header validated against the file size, then the vertex and index "
+          "buffers read; xm_mesh.py exports them as OBJ and can render a preview.",
     "wav": "fmt and data chunks: rate, channels, bit depth and audio length.",
     "png": "IHDR dimensions.",
     "xtf": "header and face name; the glyph tables are not rasterised.",
