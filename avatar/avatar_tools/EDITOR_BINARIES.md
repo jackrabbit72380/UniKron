@@ -260,10 +260,29 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
   title-encrypted, so only the XEX2 header reads without the console's keys;
 * 74 `.xm` orb containers - the header's counts read, but the float body's layout
   (vertices, keys or colours) is not established;
-* 4 `cellwall.xbx` - the payload is 43 sectors of 2048 bytes, which no
-  power-of-two DXT shape fits, so it is a texture plus extra data;
+* 4 `cellwall.xbx` - a 90112-byte file whose payload (43 sectors of 2048) fits no
+  power-of-two DXT shape, so it is a texture plus extra data;
 * XIP0, XPR0, XET/PE and the fonts decode their headers and tables, not their
   semantics - `DECODE_COVERAGE.md` says how deep each one goes.
+
+## The dashboard's own textures
+
+`xpr0_export.py` turns the `.xbx` skins into PNGs: 131 of the 135 export, and the
+images are clean (a skin's `dvd_button` comes out as its rounded bevel, the
+`decept` background as its scanline graphic). Two layouts occur:
+
+* **DXT1** at 512x512 or 128x128 - payload is `side * side / 2` bytes;
+* **DXT5**, payload `side * side`;
+* **two stacked DXT1 planes**, also `side * side`. Guessing DXT5 for those
+  decodes to block noise, and the first plane alone is a clean picture, so the
+  exporter decodes both ways and keeps the smoother result (0.8 versus 14.7 for
+  `decept.xbx`). The second plane is a separate layer, not an alpha mask: on
+  `decept` it is a green scanline and spiderweb overlay.
+
+Nothing is per-pixel swizzled and no 8-in-16 swap is needed: the payload decodes
+with the same DXT decoder as the avatar pack, byte order untouched. The 4 files
+that do not export are `cellwall.xbx` (payload fits no shape) and the four `.xbx`
+playlists, which are INI text with a `.xbx` extension.
 
 ## The face: UVs are half floats, and the masks clamp
 

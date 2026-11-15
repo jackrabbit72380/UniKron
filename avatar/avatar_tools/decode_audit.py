@@ -338,8 +338,8 @@ DEPTH = {
     "xex": "header only: the body is LZX-compressed and title-encrypted.",
     "toc": "the avatar pack's record table (offsets and sizes per asset).",
     "mp3": "container only.",
-    "xpr0": "size field validated, header bytes, and the DXT shape derived from the "
-            "payload length.",
+    "xpr0": "pixels decoded: 131 of 135 export to PNG with xpr0_export.py, as DXT1, "
+            "DXT5, or the first of two stacked DXT1 planes.",
     "text": "read as UTF-8/UTF-16/latin-1 and line counted.",
     "mp4": "container only.",
     "xbe": "base address, image size and entry point; no code executed.",
