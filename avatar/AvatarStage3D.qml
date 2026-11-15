@@ -172,6 +172,22 @@ Item {
         }
     }
 
+    // The same mirror the 2D stage frames the avatar in, so the two modes sit in
+    // one editor rather than two: the art is the closet's own frame, lifted from
+    // avatareditor.xex, and the baked frames are 2:3 like the 2D stage's canvas.
+    Image {
+        anchors.centerIn: holder
+        width: holder.width * 1.12
+        height: holder.height * 1.12
+        source: Qt.resolvedUrl("assets/_ui/xex/closet_mirror_border.png")
+        // Cropped, not fitted, for the same reason as the 2D stage: the art is
+        // square, a standing avatar is taller.
+        fillMode: Image.PreserveAspectCrop
+        smooth: true
+        opacity: 0.9
+        z: -1
+    }
+
     // 2:3, centred: the baked frames' own shape. It is also the shape a portrait
     // wants, so a grab of this item needs no stretching either way.
     Item {

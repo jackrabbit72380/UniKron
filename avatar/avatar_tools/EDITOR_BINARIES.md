@@ -295,6 +295,12 @@ editor only offers it while the player wears that hair (or none picked); picking
 another hairstyle falls back to that style's own static turntable. Baking all
 five would have been ~10 MB on top of a 7 MB theme, so this is the trade.
 
+Both stages frame the avatar the same way: the editor's own mirror border
+(`assets/_ui/xex/closet_mirror_border.png`, lifted from `avatareditor.xex`) is
+drawn 12% around the 2:3 canvas in 2D and around the baked frames in 3D, so
+switching modes changes the avatar, not the framing. The portrait grab takes the
+avatar alone, without the mirror.
+
 The closet pose (`Closet Sleep` frame 0) turns out to be an ordinary stand with a
 slight head tilt, so there is nothing to gain from swapping it in.
 
