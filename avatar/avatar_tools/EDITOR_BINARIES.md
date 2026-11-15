@@ -282,11 +282,17 @@ Around` 101, `Generic Stand 1` 428).
 
 So 3D mode has two bakes. `bake_outfits.py` makes the static turntable - one
 pose across 20 yaws, one set per hairstyle. `bake_animated.py` makes an animated
-set for the default look: **12 yaw angles crossed with 6 poses** sampled evenly
-across `Male Idle Shifts Weight` (clip frames 0, 40, 80, 120, 161, 201 of 242),
-72 images, 3.1 MB, written as `yaw_YY_pose_PP.png` in `assets/3d/animated/`.
-Twelve angles keep a turn at 30 degrees a step, close to the 20-frame
-turntable's 18; eight angles read as stepping.
+set for the default look: **12 yaw angles crossed with 10 poses** sampled evenly
+across `Male Idle Shifts Weight` (clip frames 0, 24, 48, 72, 97, 121, 145, 169,
+193, 217 of 242), 120 images, 5.2 MB, written as `yaw_YY_pose_PP.png` in
+`assets/3d/animated/`. Twelve angles keep a turn at 30 degrees a step, close to
+the 20-frame turntable's 18; eight read as stepping. Ten poses make the motion
+loop two seconds long instead of one, which is what it takes for a weight shift
+to read as one.
+
+The frames cost less to run than their file size suggests: cycling the whole set
+twice leaves the process within 2 MB of where it started (133.9 MB to 135.7 MB),
+so Qt is not holding 120 decoded canvases.
 
 `AvatarStage3D` probes those names first and, if they are there, drives yaw from
 its spin timer and pose from a second 200 ms timer, opening at the front angle
