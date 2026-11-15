@@ -177,12 +177,29 @@ pack's own units):
 
 Depth is the same everywhere (0.39 to 0.40) and heights are consistent - a top
 0.75 tall over a torso, legs 0.75 on a 1.51 body - so nothing is uniformly
-collapsed and no axis is silently dropped. The body's *width* is the outlier:
-its arm span is 1.80, but its torso silhouette is only about 0.25 wide, while
-the tee that has to cover that torso is 0.89 wide. A factor of ~3.5 sits between
-the body's torso and its own clothing, and it appears on the width axis only.
-That is the same factor the posing work kept meeting from the other direction,
-now pinned to one axis and two asset classes instead of "the body looks flat".
+collapsed and no axis is silently dropped. What does not fit is *width*: the
+body's arm span is 1.80 but its torso silhouette is only about 0.25 wide, while
+the tee that has to cover that torso is 0.89. A factor of ~3.5 sits between the
+body and its own clothing, and it appears on the width axis only - the same
+factor the posing work kept meeting from the other direction, now pinned to one
+axis and two asset classes instead of "the body looks flat". Which of the two is
+the odd one out is settled by the rig, below.
+
+### Which side is the outlier: the rig agrees with the body
+
+The bind skeleton settles the direction of that gap. Its own joint positions give
+a shoulder pair spanning **0.180** in X and a hip pair 0.207, and its real width
+is about 0.22 - the 1.769 extent it reports is an artefact of joint 25, the
+helper bone at x = -1.559 that skins no vertices. Excluding that phantom, the rig
+agrees with the body's ~0.25 torso, not with the clothing: the tee is 4 to 5
+times the shoulder spacing of the rig it has to cover.
+
+That also disposes of a long-standing mis-reading. "The bind skeleton puts a
+three-joint chain 1.7 units away from the shoulder" was true of the joint table
+but never of the figure: one helper bone inflates the extent, and the skeleton's
+usable width is 0.22 against the body's 0.25. Body and rig are consistent with
+each other; the clothing is the side that does not fit, which reverses the
+earlier guess that the body was compressed.
 
 One correction worth recording, because it is easy to mis-read: `Head` has **two
 batches that are not duplicates**. Each is 324 verts / 423 tris with the same
