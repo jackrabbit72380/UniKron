@@ -261,6 +261,29 @@ formats (PAK, ICU data, V8 snapshots) next to Xbox ones.
 * PE and the fonts decode their headers and tables; `DECODE_COVERAGE.md` says how
   deep each one goes.
 
+## The two editors' XEX headers
+
+`avatareditor.xex` in each editor is an Xbox 360 executable: `XEX2`, big-endian
+header, PE image at 12288 (2008) and 28672 (2010), and 13 or 15 optional headers.
+The bodies are LZX-compressed and title-encrypted, so the code does not read
+without the console's keys - but the header's library list is plaintext, and it
+says what each editor is built on:
+
+| 2008 (nxe2008) | 2010 (metro2010) |
+| --- | --- |
+| XAPILIB, XBOXKRNL, LIBCMT | XAPILIB, XBOXKRNL, LIBCMT |
+| **XAVATAR** | **XAVATAR** |
+| XUIRUN, XUIRNDR (dashboard UI runtime + renderer) | XUIRUN, XUIRNDR |
+| XGRAPHC, D3D9, D3DX9 | XGRAPHC, D3D9, D3DX9 |
+| XAUD, XNETY, XONLINEP | XAUD, XNET, XHTTP, XONLINEP |
+| | **NUIHNDL** (Kinect) |
+
+So both are dashboard UI-run applications drawing their avatar through the
+`XAVATAR` library on D3D9, and the 2010 build adds networking and the Kinect NUI
+handle - which is why the archive also carries the Kinect Fun Labs packages. The
+binary's own description string is `AvatarEditor.exe`, and the 2010 image carries
+the path `$SEP\20312500\AvatarEditor.xex`.
+
 ## The orbs are plain meshes
 
 An `.xm` holds no parts or animations, only geometry, and its layout closes
