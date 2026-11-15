@@ -560,20 +560,28 @@ a colour; without it a garment falls back to `CLOTHING_TINTS`.
 
 Three limits in the data, each checked rather than assumed:
 
-- **No textures.** `XPR0` appears zero times in the pack, so the meshes have no
-  diffuse maps, no face art and no masks. That is also why skin shows through at
-  the shoulders: garments hide body regions with `... Hiding Template` assets,
-  and those carry no model block at all - they are texture masks, so with no
-  textures there is nothing to hide with.
-- **The hands are modelled splayed.** `MaleBody` is 1,137 vertices and its hand
-  is a flat palm with straight, separated fingers in the bind pose. Forcing every
-  hand joint (36, 44, 45, 46, 57, 34) back to its bind delta changes nothing, so
-  the fan is in the mesh, not in the clip or the skinning.
-- **No material lighting model.** The renderer in this port shades the bake; the
-  XTL renderer's own constants are decompiled but its lighting is not public.
-  `bake_turntable.py` now welds vertices, lights per pixel through interpolated
-  vertex normals with a warm key, cool fill, rim and linear-light blending,
-  which is what stopped the figure looking like flat cut-out cardboard.
+- **No garment textures.** There are no `XPR0` payloads, no diffuse maps and no
+  clothing maps anywhere: the 187 Texture blocks in the pack are all face
+  features, and 581 of 583 models declare no texture slot at all (the full
+  search is in TEXTURES.md). That is also why skin shows through at the
+  shoulders: garments hide body regions with `... Hiding Template` assets, and
+  those carry no model block at all.
+- **The hands are modelled splayed - and are now posed shut.** `MaleBody` is
+  1,137 vertices and its hand is a flat palm with straight, separated fingers in
+  the bind pose. Forcing every hand joint (36, 44, 45, 46, 57, 34) back to its
+  bind delta changes nothing, so the fan is in the mesh, not in the clip or the
+  skinning. `avatar_pose.apply_finger_pose` therefore adds a **deliberate art
+  choice**: 11/14/9 degrees of curl per phalanx, a 14-degree inward swing at each
+  knuckle toward the hand's centreline, and the thumb at 22% curl, with bend and
+  swing directions and signs derived per hand from the palm plane and the thumb.
+  Measured effect: fingertip fan 14.4 cm to 9.2 cm, wrist-to-tip 17.9 cm to
+  17.3 cm. Nothing in the archive asks for this - it exists so the hand reads
+  like the reference avatar instead of a rake.
+- **Lighting follows XTL's model, with this port's colours.** `bake_turntable.py`
+  welds vertices, lights per pixel through interpolated vertex normals with
+  ambient plus three directional lights and a rim, in linear light - the rig the
+  renderer's own shader parameter table names. The light *values* are chosen,
+  not extracted; that distinction is in LIGHTING.md.
 
 ## Stock garment colour
 
