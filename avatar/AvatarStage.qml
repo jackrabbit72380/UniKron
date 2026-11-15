@@ -14,10 +14,20 @@ Item {
 
     onLayersChanged: pop.restart()
 
+    // grabToImage scales the item to whatever size it is given, so asking for a
+    // fixed 512x768 stretched the avatar to the stage's aspect - badly so in the
+    // closet, where the stage is wider than it is tall. Fit the item's own shape
+    // inside 512x768 instead.
+    function portraitSize(item) {
+        var scale = Math.min(512 / Math.max(item.width, 1), 768 / Math.max(item.height, 1))
+        return Qt.size(Math.max(1, Math.round(item.width * scale)),
+                       Math.max(1, Math.round(item.height * scale)))
+    }
+
     function capture(callback) {
         frame.grabToImage(function (result) {
             callback(result)
-        }, Qt.size(512, 768))
+        }, portraitSize(frame))
     }
 
     // soft shadow on the floor

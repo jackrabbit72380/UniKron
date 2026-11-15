@@ -34,6 +34,12 @@ Item {
     // Same contract as AvatarStage: the portrait is grabbed from whatever the
     // player is actually looking at.
     function capture(callback) {
+        // A portrait should face the player: the bake starts at the avatar's
+        // back, so half the turntable is the front. Snapping there first stops a
+        // grab that catches the spin side-on from saving a profile picture of
+        // the back of someone's head.
+        if (frameCount > 1)
+            frame = Math.floor(frameCount / 2)
         holder.grabToImage(function (result) {
             callback(result)
         }, Qt.size(512, 768))
@@ -70,9 +76,13 @@ Item {
         }
     }
 
+    // 2:3, centred: the baked frames' own shape. It is also the shape a portrait
+    // wants, so a grab of this item needs no stretching either way.
     Item {
         id: holder
-        anchors.fill: parent
+        anchors.centerIn: parent
+        width: Math.min(stage.width, stage.height * 2 / 3)
+        height: width * 3 / 2
 
         Image {
             anchors.fill: parent
@@ -87,8 +97,8 @@ Item {
     SequentialAnimation {
         running: stage.available
         loops: Animation.Infinite
-        NumberAnimation { target: holder; property: "y"; to: -6; duration: 1900; easing.type: Easing.InOutSine }
-        NumberAnimation { target: holder; property: "y"; to: 0; duration: 1900; easing.type: Easing.InOutSine }
+        NumberAnimation { target: holder; property: "anchors.verticalCenterOffset"; to: -6; duration: 1900; easing.type: Easing.InOutSine }
+        NumberAnimation { target: holder; property: "anchors.verticalCenterOffset"; to: 0; duration: 1900; easing.type: Easing.InOutSine }
     }
 
     Timer {
