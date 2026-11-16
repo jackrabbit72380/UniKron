@@ -81,3 +81,27 @@ not a file it reads.
 
 Conclusion: the theme's garment colours are not a stand-in for missing maps —
 they are the same mechanism the source uses.
+
+## The retail closet confirms it: 1,454 items, no textures
+
+A full retail closet dump (`Clean Slate NXE`, dashboard 2.0.9199) carries
+**20,349 item assets** under `assets/closet/`, each a `YTGR` wrapper around a
+`STRB` container - the format `avatar_mesh.strb_blocks()` already reads, with
+zero parse failures across every item sampled.
+
+Block ids across a 1,454-item sample:
+
+| id | items | size | what it is |
+| --- | ---: | --- | --- |
+| 3 | 1,454 | 17.7-48.4 KB | the mesh |
+| 4 | 1,274 | 0.7-3.4 KB | per-item extras |
+| 7 | 1,171 | 28-109 B | the colour table |
+| 8 | 1,454 | 15 B | header/footer |
+| 1 | 188 | 95-163 KB | animation (a float 15.0 duration sits at +4) |
+| 5 | 188 | 144-276 B | animation header |
+
+**No id 2 anywhere, and not one block of 8/16/32/64 KiB** - the sizes a DXT5
+sheet would take. So the retail item set carries no garment maps either: what a
+garment looks like is geometry plus the colour table, exactly as in the editor's
+own pack. The theme's vertex-colour clothing is not a substitute for missing
+art; it is the mechanism.
