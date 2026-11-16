@@ -162,6 +162,24 @@ through tables of pointers, so the C reads `*(char **)(table + 4)` rather than
 call count and first string reference taken straight from `lis`/`ori` pairs,
 and the literals the decompiler does resolve are already in the C.
 
+## The corpus is the retail editor, byte for byte
+
+The `Clean Slate NXE` dump (dashboard 2.0.9199) carries
+`gamedir/avatareditor.xex` at 15,826,944 bytes. Its MD5 is
+`39432fadd9a1866d94a859974ae8e616`, identical to the copy under
+`resources/editors/nxe2008/assets/`. So the 3,095-function corpus above is the
+retail editor's code, not a companion build - anything read out of it applies to
+what the dump ships. The same dump's `AvatarAssetPack.toc` is also the same
+13,648,884 bytes as the editor's own pack.
+
+What the dump adds is elsewhere: `assets/closet/` holds **20,349** retail item
+assets with names (`closet_index.tsv`) and PNG icons. `closet_import.py` reads
+that folder in place and writes a catalogue JSON; the items are the same
+`YTGR`/`STRB` containers as the editor's pack, and they carry no textures either
+(see `TEXTURES.md`). Their model block is a newer layout than the pack's, so it
+does not parse with `read_model` - recorded as `model_parses: false` rather than
+guessed at.
+
 ## The XTL effects, and where the shaders stop
 
 `xtl_effects.py` pulls the editor's 21 `.updb` effect blobs out of the XEX.
