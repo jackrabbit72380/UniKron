@@ -290,9 +290,11 @@ Item {
             if (c.id.indexOf("hair") < 0 || c.id.indexOf("facial") >= 0)
                 continue
             // The stock hairstyle seedOutfit picks, which is also the one
-            // bake_animated.py bakes the animated set in. Falling back to the
+            // bake_animated.py bakes the animated set in. It has to be the seed
+            // for the mode in use, or pack mode would compare the hair it seeded
+            // against a drawn hairstyle and never match. Falling back to the
             // first file keeps this working if that art is ever removed.
-            var stem = seedPicks["hair"]
+            var stem = (usePackArt ? packSeedPicks : seedPicks)["hair"]
             if (stem && c.files.indexOf(stem) >= 0)
                 return stem.replace(/\.png$/i, "")
             return c.files[0].replace(/\.png$/i, "")

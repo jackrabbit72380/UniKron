@@ -40,24 +40,37 @@ The Male and Female Power Tee tables are byte-identical.
 
 `Avatar Games.zip` (the avatar-games collection) ships `Avatar6400.Avatar`,
 `Avatar6404.Avatar` and `Avatar6411.Avatar` - the 1,000-byte descriptions the
-console hands the avatar system. Each holds **eight colour slots at 0x100**,
-stored as A, R, G, B with alpha always 0xff:
+console hands the avatar system. Each holds **nine colour slots at 0x0fc**,
+stored as A, R, G, B with alpha always 0xff. (Earlier notes said eight at 0x100;
+reading the files byte by byte fixes both numbers, and finds a ninth colour that
+was being dropped.)
 
-| file | colours |
+| file | nine colours in order |
 | --- | --- |
-| Avatar6400 | `#6e5326` `#b56157` `#6381a7` `#493421` `#5395ca` `#493421` `#cf5969` `#cf5969` |
-| Avatar6404 | `#553921` `#875741` `#727f35` `#553921` `#a2a89b` `#0d0d0d` `#81271f` `#81271f` |
-| Avatar6411 | `#1f120b` `#cf8562` `#5b351e` `#1f120b` `#904f33` `#1f120b` `#ad5f47` `#ad5f47` |
+| Avatar6400 | `#d7aa71` `#6e5326` `#b56157` `#6381a7` `#493421` `#5395ca` `#493421` `#cf5969` `#cf5969` |
+| Avatar6404 | `#98652f` `#553921` `#875741` `#727f35` `#553921` `#a2a89b` `#0d0d0d` `#81271f` `#81271f` |
+| Avatar6411 | `#d7aa71` `#1f120b` `#cf8562` `#5b351e` `#1f120b` `#904f33` `#1f120b` `#ad5f47` `#ad5f47` |
 
-`#6e5326` in Avatar6400 is the brown the bake scripts had been passing as
-`HAIR_COLOUR`, so these are the same colours the retail avatar actually wears -
-the per-avatar answer to the tint values the pack does not carry.
+Two of the nine can be named from evidence:
 
-The rest of the file is fifteen 16-byte entries (two u16, an 8-byte id that
-repeats everywhere, then a word) followed by two more words. The entries name
-the equipped items; their word reads as slot bits in little-endian for some
-entries (`0x0800` torso, `0x2000` feet) and only fits big-endian for others, so
-`avatar_desc.py` prints them verbatim rather than pretending to know.
+* **index 1 is hair.** `#6e5326` in Avatar6400 is the brown the bake scripts had
+  been passing as `HAIR_COLOUR`, so these are the colours the retail avatar
+  actually wears - the per-avatar answer to the tint values the pack omits.
+* **index 0 is the skin tone.** Avatar6400 and Avatar6411 share `#d7aa71` while
+  their hair differs, which is what a skin slot does and a garment slot does not.
+
+The other seven are not named. They are recorded in order rather than guessed at.
+
+## The skin the bakes actually use
+
+This matters for fidelity and is currently a known difference. The pack's body
+meshes carry a flat material colour, and a baked body plate converts to about
+`#a7845b` under the baker's lighting; the retail avatars above wear `#d7aa71`.
+The pack has no body texture to tint, so the game must be replacing or
+multiplying that material colour with the descriptor's index 0 - and which of the
+two it does is not established. Nothing is rebaked on that guess: the bodies are
+rendered with the pack's own material colour, and this note is the record that the
+retail skin tone is a different, known value.
 
 ## Reproducing
 
