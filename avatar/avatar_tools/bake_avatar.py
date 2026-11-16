@@ -168,6 +168,28 @@ def face_triangle_uvs(batch):
     return out
 
 
+def all_uv_sets(batch):
+    """Per triangle, every UV set of every corner.
+
+    The face masks use sets 2, 3 and 4, but the head carries six. The rest are
+    the ones a beard or face-paint sheet would be painted through, and which is
+    which is a question for `probe_decal_render.py`, not for a guess.
+    """
+    uvs = batch["uvs"]
+    indices = batch["indices"]
+    sets = max(len(v) for v in uvs) if uvs else 0
+    out = []
+    for k in range(0, len(indices), 3):
+        tri = indices[k:k + 3]
+        corners = []
+        for corner in tri:
+            per_vertex = [uvs[corner][si] if si < len(uvs[corner]) else (0.0, 0.0)
+                          for si in range(sets)]
+            corners.append(per_vertex)
+        out.append(corners)
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     colour_args = [a for a in sys.argv if a.startswith("--colours=")]
@@ -214,6 +236,7 @@ def main():
     materials = {}
     face_start = 0
     face_uvs = []
+    face_uvex = []
     face_total = 0
     face_names = FACE_DEFAULT
     if face_args and "=" in face_args[0]:
@@ -237,6 +260,7 @@ def main():
             face_start = face_total
             for batch in batches:
                 face_uvs.extend(face_triangle_uvs(batch))
+                face_uvex.extend(all_uv_sets(batch))
         for batch in ap.posed_positions(batches, joints, poses):
             base = written
             plain = rgb is None
@@ -283,7 +307,9 @@ def main():
         np.savez(stem + ".face.npz",
                  start=np.array([face_start], dtype=np.int64),
                  uvs=np.array(face_uvs, dtype=np.float32),
-                 masks=np.array(names), roles=roles, tints=tints)
+                 masks=np.array(names), roles=roles, tints=tints,
+                 uvsets=np.array(face_uvex, dtype=np.float32) if face_uvex else
+                 np.zeros((0, 3, 0, 2), dtype=np.float32))
         print("wrote %s (%d face triangles, %d mask sheets)"
               % (stem + ".face.npz", len(face_uvs), len(names)))
     return 0

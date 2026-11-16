@@ -227,7 +227,10 @@ def load_face(obj_path):
             "tint": np.power(np.clip(data["tints"][i], 0.0, 1.0), 2.2) if "tints" in data
                     else np.array([0.2, 0.12, 0.08]),
         })
-    return {"start": int(data["start"][0]), "uvs": data["uvs"], "layers": layers}
+    out = {"start": int(data["start"][0]), "uvs": data["uvs"], "layers": layers}
+    if "uvsets" in data:
+        out["uvsets"] = data["uvsets"]
+    return out
 
 
 def sample_mask(mask, u, v):
@@ -423,6 +426,18 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                     albedo = layer["tint"] * iris + albedo * (1.0 - iris)
                 else:
                     albedo = layer["tint"] * coverage + albedo * (1.0 - coverage)
+            # Decal sheets (beard, face paint) are painted art rather than tint
+            # masks: composite their colour over the skin by their own alpha.
+            for decal in face.get("decals") or []:
+                corners_d = decal["uvs"][t - face["start"]]
+                u = (w0 * corners_d[0][0] + w1 * corners_d[1][0]
+                     + w2 * corners_d[2][0])
+                v = (w0 * corners_d[0][1] + w1 * corners_d[1][1]
+                     + w2 * corners_d[2][1])
+                texel = sample_mask(decal["texture"], u, v)
+                art = np.power(np.clip(texel[..., :3], 0.0, 1.0), 2.2)
+                cover = texel[..., 3:4] * decal.get("gain", 1.0)
+                albedo = art + albedo * (1.0 - cover)
         shaded = np.power(
             np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
         )
