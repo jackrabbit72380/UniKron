@@ -163,39 +163,41 @@ The order is the pack's own: `MaleBody`, `FemaleBody`, `Head`, then the 41
 animations by name, then clothing - the last record is
 `Female Right Feather Earring`.
 
-## What is still missing here
+## The mapping, resolved
 
-The mapping, not the data:
+Nothing was missing from the toc: the record for each asset points straight at
+its data, and no chunk scanning is needed at all.
 
-- Chunks are stored out of order and only 96 of them carry a non-zero
-  `output_offset` (0x8000, 0x10000, 0x18000). Grouping "a new asset starts at
-every offset 0" gives 327 assets but truncates the large ones, so the real
-  per-asset chunk list lives in the toc's record table, which is not decoded.
-- The 5,304 names are not tied to assets yet. They come in about nine
-  languages per item, so asset order and name order can only be matched once
-  that record table is read.
-- Textures are still empty in every parsed model (`textures: []`), same as the
-  NXE closet, so the colour question is unchanged by this pack.
+A record is 0xF8 bytes. The field at **+0x34** is the absolute offset of the
+asset's `STRB` blob and the field at **+0x38** is its exact size, so the blobs
+can be read one by one. Each blob is a `STRB` container (`avatar_mesh.strb_blocks`)
+holding `AssetMetadataVersioned` (block 8) plus, per asset class, `Model` (3),
+`CustomColorTable` (7), `ShapeOverrides` (4), `Texture` (2) or `Animation` (1).
 
-The chunk count and the record sizes now agree on the whole: the 930 records
-need 1,030 chunks at 0x8000, and the file carries **1,031** once short tail
-chunks count as chunks too (a filter that demanded exactly 0x8000 found only
-423 and truncated every asset whose size is not a multiple of 0x8000).
+Two earlier detours came from losing sight of this:
 
-With the tails counted, `pack_toc.py` rebuilds **767 assets**, 544 of which
-parse into models - a big jump from 327 / 162.
+- Blind-scanning the file for 12-byte chunk headers and grouping "a new asset
+  starts at every output offset 0" rebuilt 767 groups, none of which was a
+  body, because the boundary between one asset's chunks and the next is not
+  marked in the data - only the record table knows it.
+- The committed `avatar-assets.json` was stale: its sizes were 4 bytes larger
+  than the records', so its offsets drifted by 4 bytes per asset. Only the first
+  asset (`MaleBody`) still opened, which is why every other name "failed" with
+  "not a STRB container". Regenerating it with `toc_parse.py` fixes the drift.
 
-What is still not exact is the *pairing*: consuming chunks in file order by
-record size drifts, so `MaleBody` picks up a mesh with y 0.001-0.099 (a shoe)
-and `Head` overruns by 10 bits. Where a size is unique in the record table the
-pairing is demonstrably right:
+With the manifest regenerated, `asset_catalog.py` decodes **585 models out of
+1,079 assets with zero failures**:
 
-| asset | length | record it matches | bounds |
-| --- | --- | --- | --- |
-| 443 | 8,660 | `Bob with Curls (Hat)` | y 1.176-1.358 |
-| 503 | 11,924 | `Crimped` | y 1.089-1.362 |
+| asset | vertices | triangles |
+| --- | --- | --- |
+| `MaleBody` | 1,137 | 2,264 |
+| `FemaleBody` | 1,232 | 2,454 |
+| `Head` | 648 | 846 |
 
-- a hat and a hairstyle, each at exactly the height it should be. So the
-records and the chunks describe the same assets; only the per-record chunk list
-is unresolved, and 7 of 767 assets match a record by exact length, meaning the
-assembled lengths usually include padding the record size does not count.
+The other 494 assets are the 41 animations plus items with no geometry block.
+`avatar_mesh.py --pack AvatarAssetPack.toc --asset MaleBody --obj body.obj`
+writes any of them out as OBJ.
+
+Still true, and not a mapping problem: **textures are empty in every decoded
+model** (`with_pixels: 0` across all 585), same as the NXE closet. Item colours
+are a separate block - see `COLOURS.md`.

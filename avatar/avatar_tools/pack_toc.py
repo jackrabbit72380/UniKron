@@ -1,5 +1,13 @@
 """Read the retail AvatarAssetPack.toc (the console's own avatar pack).
 
+SUPERSEDED for asset extraction. The toc's records already point at each
+asset's `STRB` blob (offset at +0x34, size at +0x38), so use `toc_parse.py` for
+the manifest and `avatar_mesh.py` to decode a blob. This script scans the file
+for 12-byte chunk headers instead, and "a new asset starts wherever
+output_offset is 0" cannot tell one asset's chunks from the next - it recovers
+no bodies at all. Kept for the chunk-format notes and as a checksum on the
+count of LZX chunks in the file.
+
 The toc is ASCII/UTF-16 names followed by LZX-compressed chunks. Each chunk is
 the same 12-byte headered block the NXE closet uses:
 
