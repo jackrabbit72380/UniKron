@@ -105,3 +105,29 @@ sheet would take. So the retail item set carries no garment maps either: what a
 garment looks like is geometry plus the colour table, exactly as in the editor's
 own pack. The theme's vertex-colour clothing is not a substitute for missing
 art; it is the mechanism.
+
+## Where a garment's colour actually lives (it is not in the asset)
+
+Each of these was checked against real items rather than assumed:
+
+- **Per-vertex colour is a mask, not the colour.** `read_model` now keeps it.
+  A jersey's 881 vertices carry 36 distinct values, all inside #fa..ff per
+  channel; the Panda Helmet is one value, #ffffffff, on all 894 vertices. This is
+  a shading/occlusion mask.
+- **The material vectors are empty.** Type 3 records (ids 22, 23, 24, 27; 25 on
+  some helmets) all read (0, 0, 0, 1).
+- **Texture slots are declared but empty.** The jersey's model header says five
+  textures, the helmet three, and not one has an offset, a size or a name - they
+  are indices into a bank the item does not carry.
+- **The block 7 table is a default.** 268 of 269 sampled items hold the same
+  seven words: `count=1` then red, green and blue ARGB pairs with a zero second
+  word (the Leprechaun tee holds black instead). A placeholder, not artwork.
+- **The shader is where a colour would go.** `shader_body_opaque_ps.updb`
+  (19 parameters) lists `CustomColor1`, `CustomColor2`, `CustomColor3` alongside
+  `ambientColour`, `lightColour1/2` and `jitterMap`. Nothing in the file
+  populates them.
+
+So the colour arrives at runtime. The dashboard's own strings name the channel:
+`/live/{:08x}/avataritems/{}.acp`, plus `AvatarMarketplaceManifest`, whose body
+is `manifestVersion="1.0"` XML. Item colour and item category both come from
+that per-item marketplace manifest, and the dump ships the assets without it.

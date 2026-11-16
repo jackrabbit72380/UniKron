@@ -443,12 +443,15 @@ def read_model(data):
         uvs = []
         joints = []
         weights = []
+        colours = []
         for _ in range(vertex_count):
             p = position.read(s)
             normal.read(s)
             w = weight.read(s)
             b = blend.read(s)
-            colour.read(s)
+            # The per-vertex colour is the garment's own colouring: it is the
+            # only colour a clothing asset carries, since none has a texture.
+            colours.append(colour.read(s))
             sets = []
             for _ in range(uv_count):
                 # Texture coordinates are half floats, not fixed point: read as
@@ -479,6 +482,7 @@ def read_model(data):
             "materials": materials,
             "joints": joints,
             "weights": weights,
+            "colours": colours,
             "indices": indices,
         })
 
