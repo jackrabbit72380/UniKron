@@ -316,6 +316,17 @@ Item {
 
     ListModel { id: items }
 
+    // The pack holds no body textures and no skin tones, so the body layer always
+    // comes from the drawn plates even when the wardrobe browses the pack.
+    function drawnBodyFolder() {
+        for (var i = 0; i < assetIndex.folders.length; ++i) {
+            if (assetIndex.folders[i].id === "10_body")
+                return { path: style.dirUrl(root.assetsFolder, "10_body"),
+                         files: assetIndex.folders[i].files || [] }
+        }
+        return null
+    }
+
     function rebuildCategories() {
         var list = []
         var source = root.usePackArt ? packIndex.folders : assetIndex.folders
@@ -324,11 +335,20 @@ Item {
             var name = source[i].id
             if (!name || name.charAt(0) === "." || name.charAt(0) === "_")
                 continue
+            var folderPath = style.dirUrl(base, name)
+            var folderFiles = source[i].files || []
+            if (root.usePackArt && name === "10_body") {
+                var drawn = drawnBodyFolder()
+                if (drawn) {
+                    folderPath = drawn.path
+                    folderFiles = drawn.files
+                }
+            }
             list.push({
                 id: name,
                 label: style.titleCase(style.cleanFolderName(name)),
-                path: style.dirUrl(base, name),
-                files: source[i].files || [],
+                path: folderPath,
+                files: folderFiles,
                 z: style.layerOrder(name)
             })
         }
