@@ -73,4 +73,22 @@ if obj.property("usePackArt") is not None:
         app.exec_()
         print("  pack mode, 45_facial-hair chosen -> layers %s" % (layer_ids(),))
 
+    # A pack item with a baked set must name it, and the folder must exist.
+    shirt = next((c for c in v if c.get("id") == "40_shirt"), None)
+    root3d = os.path.join(os.path.dirname(path), "assets", "3d")
+    picked = next((f for f in ((shirt or {}).get("files") or [])
+                   if os.path.isdir(os.path.join(root3d, "turntable", f[:-4]))), None)
+    if picked:
+        obj.setProperty("usePackArt", True)
+        obj.setProperty("state", dict(obj.property("state").toVariant(),
+                                      **{"40_shirt": picked}))
+        QTimer.singleShot(0, app.quit)
+        app.exec_()
+        variant = obj.property("stageVariant")
+        frames = os.path.join(root3d, str(variant), "frame_00.png")
+        print("  pack mode, 40_shirt=%s -> stageVariant %r, frames %s"
+              % (picked, variant, os.path.exists(frames)))
+        for name in ("hairVariant", "defaultHairStem", "lastItemCategory"):
+            print("    %s = %r" % (name, obj.property(name)))
+
 sys.exit(1 if problems else 0)

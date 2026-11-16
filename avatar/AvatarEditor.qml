@@ -228,6 +228,11 @@ Item {
     function bakedSet(categoryId) {
         if (!categoryId)
             return ""
+        // The body plates and face decals are the base layer and the skin, not
+        // items: no set is baked for them, and picking one here would send the
+        // stage to a folder that does not exist while a real garment is worn.
+        if (categoryId.indexOf("body") >= 0 || categoryId.indexOf("face") >= 0)
+            return ""
         var file = state[categoryId] || ""
         if (file === "")
             return ""
@@ -237,7 +242,15 @@ Item {
         }
         var stem = file.replace(/\.png$/i, "")
         var kind = bakedItems[stem]
-        return kind ? kind + "/" + stem : ""
+        if (kind)
+            return kind + "/" + stem
+        // The pack's own items are baked as plain turntables under their slug
+        // (bake_pack_turntables.py), not in items_3d.json. The stage probes for
+        // frame_00 and falls back to the default set when a folder is missing,
+        // so naming one here is safe even for the categories not baked yet.
+        if (usePackArt)
+            return "turntable/" + stem
+        return ""
     }
 
     // Which baked folder the 3D stage plays, relative to assets/3d/. The item
