@@ -1,0 +1,180 @@
+[
+ {
+  "file": "00000008-0008-1192-c4df-c23c5841125e.a",
+  "guid": "00000008-0008-1192-c4df-c23c5841125e",
+  "size": 102400,
+  "strings": [
+   "JR Turbo T",
+   "Joy Ride Turbo T",
+   "T-shirt JR Turbo",
+   "Camiseta de JR Turbo",
+   "JR Turbo T-shirt",
+   "Wear the official T shirt of the unofficial Joy Ride Turbo fan club",
+   "Joy Ride Turbo",
+   "Trage das offizielle T-Shirt des inoffiziellen \"Joy Ride Turbo\"-Fanclubs.",
+   "Arborez le T-shirt officiel du fan-club officieux Joy Ride Turbo",
+   "Lleva la camiste oficial del club de fans no oficial de Joy Ride Turbo.",
+   "Indossa la t-shirt ufficiale dell'ufficioso fan club di Joy Ride Turbo"
+  ],
+  "chunks": 2,
+  "model": {
+   "verts": 803,
+   "indices": 2946,
+   "materials": 7,
+   "textures": [
+    {
+     "format": 18,
+     "width": 32,
+     "height": 32,
+     "bytes": 0,
+     "empty": true
+    }
+   ],
+   "ymin": 0.709,
+   "ymax": 1.124
+  }
+ },
+ {
+  "file": "00000008-0008-11f1-c274-919f5841125e.a",
+  "guid": "00000008-0008-11f1-c274-919f5841125e",
+  "size": 110592,
+  "strings": [
+   "JR Turbo T",
+   "Joy Ride Turbo T",
+   "T-shirt JR Turbo",
+   "Camiseta de JR Turbo",
+   "JR Turbo T-shirt",
+   "Wear the official T shirt of the unofficial Joy Ride Turbo fan club",
+   "Joy Ride Turbo",
+   "Trage das offizielle T-Shirt des inoffiziellen \"Joy Ride Turbo\"-Fanclubs.",
+   "Arborez le T-shirt officiel du fan-club officieux Joy Ride Turbo",
+   "Lleva la camiste oficial del club de fans no oficial de Joy Ride Turbo.",
+   "Indossa la t-shirt ufficiale dell'ufficioso fan club di Joy Ride Turbo"
+  ],
+  "chunks": 2,
+  "model": {
+   "verts": 765,
+   "indices": 2838,
+   "materials": 7,
+   "textures": [
+    {
+     "format": 18,
+     "width": 32,
+     "height": 32,
+     "bytes": 0,
+     "empty": true
+    }
+   ],
+   "ymin": 0.678,
+   "ymax": 1.134
+  }
+ },
+ {
+  "file": "00000010-0007-01f2-cf00-85285841125e.a",
+  "guid": "00000010-0007-01f2-cf00-85285841125e",
+  "size": 98304,
+  "strings": [
+   "JR Victory Pants",
+   "Joy Ride",
+   "JR-Siegeshose",
+   "Pantalon de winner JR",
+   "Pantalones de la victoria de JR",
+   "Pantaloni vittoria JR",
+   "Strut across the finish line in these victorious slacks",
+   "Stolziere in dieser siegessicheren Hose",
+   "ber die Ziellinie.",
+   "Le pantalon des pilotes qui ont la classe des vainqueurs",
+   "Cruza la l",
+   "nea de meta con estos pantalones victoriosos.",
+   "Taglia il traguardo pavoneggiandoti in questi pantaloni"
+  ],
+  "chunks": 2,
+  "model": {
+   "verts": 844,
+   "indices": 2748,
+   "materials": 7,
+   "textures": [
+    {
+     "format": 18,
+     "width": 32,
+     "height": 32,
+     "bytes": 0,
+     "empty": true
+    }
+   ],
+   "ymin": 0.025,
+   "ymax": 0.812
+  }
+ },
+ {
+  "file": "00000010-0007-91b1-c785-72955841125e.a",
+  "guid": "00000010-0007-91b1-c785-72955841125e",
+  "size": 98304,
+  "strings": [
+   "JR Victory Pants",
+   "Joy Ride",
+   "JR-Siegeshose",
+   "Pantalon de winner JR",
+   "Pantalones de la victoria de JR",
+   "Pantaloni vittoria JR",
+   "Strut across the finish line in these victorious slacks",
+   "Stolziere in dieser siegessicheren Hose",
+   "ber die Ziellinie.",
+   "Le pantalon des pilotes qui ont la classe des vainqueurs",
+   "Cruza la l",
+   "nea de meta con estos pantalones victoriosos.",
+   "Taglia il traguardo pavoneggiandoti in questi pantaloni"
+  ],
+  "chunks": 2,
+  "model": {
+   "verts": 767,
+   "indices": 2562,
+   "materials": 7,
+   "textures": [
+    {
+     "format": 18,
+     "width": 32,
+     "height": 32,
+     "bytes": 0,
+     "empty": true
+    }
+   ],
+   "ymin": 0.061,
+   "ymax": 0.789
+  }
+ },
+ {
+  "file": "00000544-0006-9113-c2d6-99055841125e.a",
+  "guid": "00000544-0006-9113-c2d6-99055841125e",
+  "size": 110592,
+  "strings": [
+   "Cacti Cap",
+   "Kaktik",
+   "Casquette cactus",
+   "Gorra de cactus",
+   "Cappello cactus",
+   "This cap is surprisingly comfortable, seriously!",
+   "Dieses K",
+   "ppi ist wirklich",
+   "berraschend bequem!",
+   "Cette casquette est tr",
+   "s agr",
+   "able",
+   "porter. Si si",
+   "Esta gorra es sorprendentemente c",
+   "moda,",
+   "en serio!",
+   "Questo cappello",
+   "sorprendentement comodo. Sul serio!"
+  ],
+  "chunks": 2,
+  "model": {
+   "verts": 1282,
+   "indices": 4794,
+   "materials": 7,
+   "textures": [],
+   "ymin": 1.15,
+   "ymax": 1.607
+  }
+ }
+]
