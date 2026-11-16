@@ -143,6 +143,26 @@ tallest single-chunk asset spans y 1.107-1.360, a hat.
 The other 165 assets fail with `bit overrun at 262144`, i.e. they need 256 KB -
 eight chunks - and one chunk each is all the grouping below gives them.
 
+## The record table
+
+Just after the header at `0xe4` the toc holds **930 records of 0xf8 bytes**, one
+per asset, in asset order. `pack_records.tsv` is the dump.
+
+Each record:
+
+- `+0x00..+0x37` - **14 big-endian u32 name offsets**, one per language. The
+offset points one byte before the string, so `0x4da18` is `MaleBody` at
+  `0x4da19`. Locales that spell the name the same way share an offset.
+- `+0x38` - the asset's data size (`MaleBody` 33,084; `FemaleBody` 38,560;
+  `Head` 18,628).
+- `+0x3c`, `+0x40` - two flag words (`0x00400000` on every animation,
+  `0x01000000` on short accessory entries, `0x02020100` / `0x03031100` and
+  similar elsewhere).
+
+The order is the pack's own: `MaleBody`, `FemaleBody`, `Head`, then the 41
+animations by name, then clothing - the last record is
+`Female Right Feather Earring`.
+
 ## What is still missing here
 
 The mapping, not the data:
@@ -156,3 +176,11 @@ every offset 0" gives 327 assets but truncates the large ones, so the real
   that record table is read.
 - Textures are still empty in every parsed model (`textures: []`), same as the
   NXE closet, so the colour question is unchanged by this pack.
+
+The chunk count and the record sizes do not agree yet: the 930 records need
+1,030 chunks at 0x8000 each, but the file only carries 423. Consuming chunks in
+file order by record size therefore starts out plausible and drifts -
+`MaleBody` picks up a mesh with y 0.000-0.188 (a shoe's bounds), not a body -
+so the data chunks are not stored in record order and part of the list has no
+inline data at all. That last step - which 423 chunks belong to which of the
+930 records - is what is still open.
