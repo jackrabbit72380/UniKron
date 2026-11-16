@@ -94,5 +94,30 @@ if obj.property("usePackArt") is not None:
               % (picked, variant, os.path.exists(frames)))
         for name in ("hairVariant", "defaultHairStem", "lastItemCategory"):
             print("    %s = %r" % (name, obj.property(name)))
+        rows = obj.property("_layers")
+        rows = rows.toVariant() if hasattr(rows, "toVariant") else rows
+        for row in (rows or [])[:6]:
+            if row.get("id") == "40_shirt":
+                print("    shirt layer url: %s" % row.get("url"))
+
+    # A real pack item, so the plate path is exercised rather than the fallback.
+    plate_dir = os.path.join(os.path.dirname(path), "pack_plates", "40_shirt")
+    if os.path.isdir(plate_dir):
+        plate = sorted(f for f in os.listdir(plate_dir) if f.endswith(".png"))
+        if plate:
+            obj.setProperty("usePackArt", True)
+            # setItem is the editor's own path: it updates state *and* rebuilds
+            # the layer stack, which a property poke does not.
+            from PyQt5.QtCore import QMetaObject, Q_ARG, Qt
+            QMetaObject.invokeMethod(obj, "setItem", Qt.DirectConnection,
+                                     Q_ARG("QVariant", "40_shirt"),
+                                     Q_ARG("QVariant", plate[0]))
+            QTimer.singleShot(0, app.quit)
+            app.exec_()
+            rows = obj.property("_layers")
+            rows = rows.toVariant() if hasattr(rows, "toVariant") else rows
+            for row in (rows or []):
+                if row.get("id") == "40_shirt":
+                    print("  pack item %s -> plate url %s" % (plate[0], row.get("url")))
 
 sys.exit(1 if problems else 0)

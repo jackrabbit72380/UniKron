@@ -25,6 +25,7 @@ Item {
     // The pack's own items: one render per real AvatarAssetPack asset, written by
     // avatar_tools/bake_pack_thumbs.py together with this index.
     PackIndex { id: packIndex }
+    PackPlates { id: packPlates }
 
     Style { id: style }
 
@@ -34,6 +35,10 @@ Item {
     // them instead of the hand-drawn art in assets/. Off by default: the drawn art
     // is what the 3D wardrobe is keyed against.
     property url packArtFolder: Qt.resolvedUrl("pack_art/")
+    // Aligned 2D plates for the pack's items, baked by bake_pack_plates.py: one
+    // render per item through the body's own frame, so layers stack into a single
+    // avatar instead of each item being framed on its own.
+    property url packPlateFolder: Qt.resolvedUrl("pack_plates/")
     property bool usePackArt: false
     property string gamerTag: "Player"
     // The original editor's own wording for this screen: the string table of
@@ -540,6 +545,19 @@ Item {
         return id === "15_face" || id === "16_face-paint" || id === "45_facial-hair"
     }
 
+    // A plate for this item, if one was baked. Empty means there is none, and the
+    // strip's own art has to serve.
+    function plateUrl(categoryId, name) {
+        for (var i = 0; i < packPlates.folders.length; ++i) {
+            if (packPlates.folders[i].id !== categoryId)
+                continue
+            if ((packPlates.folders[i].files || []).indexOf(name) >= 0)
+                return style.itemUrl(style.dirUrl(root.packPlateFolder, categoryId), name)
+            return ""
+        }
+        return ""
+    }
+
     function rebuildLayers() {
         var out = []
         for (var i = 0; i < categories.length; ++i) {
@@ -549,7 +567,13 @@ Item {
                 continue
             if (usePackArt && isPackDecal(c.id))
                 continue
-            out.push({ url: style.itemUrl(c.path, name), z: c.z, id: c.id })
+            var url = style.itemUrl(c.path, name)
+            if (usePackArt) {
+                var plate = plateUrl(c.id, name)
+                if (plate !== "")
+                    url = plate
+            }
+            out.push({ url: url, z: c.z, id: c.id })
         }
         out.sort(function (a, b) { return a.z - b.z })
         _layers = out
