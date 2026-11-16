@@ -157,5 +157,11 @@ What has been ruled out, by test rather than by eye:
 
 The header repeats: `u32 0, u32 0x13d4, u32 1, u16 2, u16 3`, the same 8-byte id
 (`c1c8f109 a19cb2e0`) that every `.Avatar` entry repeats, then a second copy of that
-header 32 bytes in. That id is the one thing to chase: whatever table it names is
-the same table the avatar descriptions use.
+header 32 bytes in.
+
+That id is **constant** - `Defined Nose`, `Curved Nose`, `Large Chin`, `Thin Chin`
+and `Chiseled Chin` all carry it, and so does every 16-byte `.Avatar` entry
+(`031f 0003 c1c8f109 a19cb2e0 00080000`). So it is a type GUID shared by the shape
+objects and the description entries, not a per-item id, and it cannot be used to
+match a shape to an item. The `u16 3` inside both headers does line up with the
+class byte (3 = ShapeOverrides).
