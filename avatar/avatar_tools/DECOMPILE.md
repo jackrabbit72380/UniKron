@@ -348,6 +348,29 @@ So the retail assets and the port agree: an item carries no category. The
 division is: bits and labels in the guest UI, geometry and names in the
 closet, and the port only matching one against the other.
 
+## The avatar manifest, from `XamAvatarSetManifest_entry`
+
+The editor does not save a settings file; it hands the port a manifest, and the
+port writes it. `XamAvatarSetManifest_entry` (0x18062c4b0, 70 lines) shows the
+shape of that buffer:
+
+- The **body component sits at +0x120** - a u32, two u16s at +0x124 and +0x126,
+  and a u64 at +0x128. If all of them are zero the manifest is rejected with
+  "buffer at {:#x} has a zero body component; not persisting (unexpected
+  layout?)", which is the port telling us it knows the layout and this was not
+  it.
+- Otherwise the port **copies exactly 1000 bytes** (0x3E8) into its cached
+  manifest, sets a loaded flag, and persists it. The file it writes is
+  `avatar_manifest.bin` in `<user_data_root>\\avatar`, described as "the manifest
+  the Avatar Editor saves and every game then loads as the local user's avatar".
+- Worn assets inside it are keyed by the same GUID the closet is keyed by - a
+  u32, two u16s and eight bytes - and the enumerator looks each one up in the
+  closet, fetching it from the marketplace when it is missing: "worn item {} is
+  not in the closet, fetching it: {}".
+
+The 1000-byte size and the +0x120 body component are the two numbers a theme
+needs to write a manifest the port would accept.
+
 `rexgpu-xenos.dll` (2.7 MB) is decompiled as well: **4,848 functions**, in
 `UniKron-decompiled-rexgpu-xenos.zip`. It is the part that patches the guest per
 title, and its own notes name the editor's values - "the Metro dashboard uses
