@@ -47,9 +47,13 @@ HAIR_COLOUR = "6e5326"
 DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False)}
 HAIR_TINT = (0x6E / 255.0, 0x53 / 255.0, 0x26 / 255.0)
 ART = os.path.join(os.path.dirname(HERE), "pack_art")
+BASE_ASSETS = {"MaleBody", "FemaleBody", "Head"}
 
 CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  "45_facial-hair": "decal", "16_face-paint": "decal",
+                 # The pack's eye sheets replace the middle mask of the three
+                 # bake_avatar builds (brow, eye, mouth), keeping the other two.
+                 "15_face": "eyes",
                  # A dress or a suit covers the torso and legs at once, so only the
                  # shoes are kept underneath.
                  "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress",
@@ -71,9 +75,12 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
         worn = [STOCK[k] for k in ("shirts", "pants", "shoes") if k != kind]
     head = ["MaleBody", "Head"] + ([] if kind == "hair" else [HAIR])
     parts = head + [asset] + worn
+    face_arg = "--face"
+    if kind == "eyes":
+        face_arg = "--face=Straight Eyebrows,%s,Smirk Mouth" % asset
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
-         "--colours=" + description, "--hair=" + HAIR_COLOUR, "--face"] + parts,
+         "--colours=" + description, "--hair=" + HAIR_COLOUR, face_arg] + parts,
         capture_output=True, text=True)
     if result.returncode != 0 or not os.path.exists(obj):
         return "bake_avatar: " + (result.stderr.strip().splitlines() or ["failed"])[-1]
@@ -128,9 +135,17 @@ def main():
     items = []
     for record in catalog:
         category = (record.get("metadata") or {}).get("category")
-        # Decal categories have a texture and no mesh, so they pass on their own.
+        # Decal and eye categories have a texture and no mesh, so they pass on
+        # their own; the base body and head are never stage variants.
         has_mesh = bool(record.get("vertices"))
-        if category in wanted and (has_mesh or category in DECAL_SETS):
+        if record["name"] in BASE_ASSETS:
+            continue
+        if category == "15_face" and "nose" in record["name"].lower():
+            # The nose sheets go somewhere else entirely; dropping one into the
+            # eye slot would put a nose on each eyeball.
+            continue
+        if category in wanted and (has_mesh or category in DECAL_SETS
+                                   or category == "15_face"):
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
             items.append((record["name"], CATEGORY_KIND.get(category), category))

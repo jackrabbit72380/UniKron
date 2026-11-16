@@ -117,3 +117,14 @@ Caveat: `80_dress`, `81_formal` and `83_dress-formal` are female-only items bake
 on the male stock body, because the descriptor fixes gender and the female seed
 outfit is not established anywhere in the data. They render, but the body under
 the garment is the wrong one.
+
+## Blocks the tools still ignore
+
+* **Block 4, `ShapeOverrides`.** All 18 nose items (`Boxer's Nose`, `Curved Nose`,
+  …) carry one and nothing else: no model, no texture. `Defined Nose`'s payload is
+  1,505 bytes starting `00000000 d4130000 01000000 0200 0300 <8-byte id>` — a
+  serialised object with a small header and a type id, not a delta buffer in any
+  layout the project has decoded. So a nose is a **head shape override**, not art,
+  and no set is baked for those 18.
+* `45_facial-hair` and `16_face-paint` are textures only (block 2), which is why
+  they bake as decals; `15_face` is 43 eye sheets (block 2) plus those 18 noses.

@@ -49,11 +49,12 @@ placement would not be.
 `45_facial-hair` and `16_face-paint` item has a six-frame set with the decal on the
 avatar's face.
 
-**Not done:** the `15_face` eye sheets are still applied only through the three
-built-in masks (`FACE_DEFAULT`), so choosing a different eye colour or shape from
-the pack does not yet change the baked face. The mapping for that is known — set 3
-— but swapping the mask per item needs the eye roles (sclera/iris) split, which
-the current three-sheet pipeline already does for one fixed set.
+The 43 `15_face` eye sheets are baked the same way: `bake_pack_turntables.py`
+passes each one as the middle of `bake_avatar.py`'s three-mask triple
+(`--face=Straight Eyebrows,<item>,Smirk Mouth`), so the pack's eye art replaces the
+built-in sheet and the brow and mouth stay. `Soft Lashes` and `Soothing` go
+through the same path. **Not done:** the 18 noses, which are not art at all - they
+carry a `ShapeOverrides` blob and are head shape morphs (see CATALOG.md).
 
 ## Re-running the probes
 
