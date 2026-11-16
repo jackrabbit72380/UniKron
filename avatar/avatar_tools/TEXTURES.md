@@ -143,14 +143,20 @@ and that block holds real compressed image data:
   (45), `50_hair` (45), `10_body` (27), `16_face-paint` (26) and
   `45_facial-hair` (17) - the skin, eye, hair-detail and decal art.
 
-What is *not* cracked is the storage order. Reading the bytes as plain linear
-DXT1 and decoding with `avatar_mesh.decode_dxt` produces vertical stripes, not a
-face or a beard. Five reorderings were tried against the smoothness of the
-result (linear, 32x32 tiles row-major, column-major, and Morton order at both
-the tile and the block level, each with and without the 8-in-16 byte swap): all
-landed within 3% of each other, which means none of them is the real layout. So
-the art genuinely exists in this file, and decoding it needs the console's
-tiling worked out properly rather than guessed.
+The pixels are **DXT5 (BC3), stored linearly - not tiled at all**. DXT1 was the
+first guess and is wrong: it decodes to vertical stripes. Five tiling orders were
+tested against that stripe output before the format was suspected, and all of
+them scored within 3% of each other, which should have been the clue that the
+*tiling* was never the problem.
+
+Decoding as DXT5 gives recognisable art, checked by eye:
+
+- `Camo Facepaint` - two camo streaks on a transparent 128x128 field
+- `Beard` - the beard mask at 128x64
+- `Calm Eyes` - an eye decal with blue iris and lashes
+
+`bake_pack_tex.py` writes all of them out (160 PNGs) into `pack_art/`, which is
+where the skin, eye, hair-detail and decal items get their art from.
 
 So the colour arrives at runtime. The dashboard's own strings name the channel:
 `/live/{:08x}/avataritems/{}.acp`, plus `AvatarMarketplaceManifest`, whose body

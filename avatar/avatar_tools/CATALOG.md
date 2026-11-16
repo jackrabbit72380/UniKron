@@ -83,9 +83,12 @@ then comes from `PackIndex.qml` and each row points at `pack_art/`, so the
 hand-drawn `assets/` tree stays the default. The 3D wardrobe is keyed on the
 drawn art's file names, so it is the drawn mode that keeps 3D in step.
 
-Two categories have no renders because those items carry no Model block:
-`16_face-paint` and `45_facial-hair` (they ship a Texture block instead), and 47
-of the 223 hairstyles are the same. Everything else renders.
+Items with no Model block carry a `Texture` block instead, and `bake_pack_tex.py`
+extracts those as PNGs (`DXT5`, linear - see `TEXTURES.md`), so they are not
+missing either. `pack_art/` now holds **743 images**: 583 mesh renders plus 160
+textures, covering 18 categories. `16_face-paint` (26) and `45_facial-hair` (17)
+are art-only and get their pictures from the textures; 27 texture-bearing assets
+have no slot category in their metadata, so they are extracted but not filed.
 
 ## What the pack does not carry
 
