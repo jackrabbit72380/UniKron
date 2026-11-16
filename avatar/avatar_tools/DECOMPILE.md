@@ -316,3 +316,29 @@ debugging.
    first-party is done.
 
 | `default_uncompressed.xex` (avatar.zip dump) | xtl avatar renderer, 2008 SDK | 6,618 |
+
+## The port's own runtime, and where the categories live
+
+`rexruntime.dll` from the `Clean Slate NXE` build is decompiled too: **28,447
+functions**, shipped as `UniKron-decompiled-rexruntime.zip`. It holds the
+`XamAvatar*` entry points the editor calls, and a string in it spells out what
+they are worth: `XamAvatarGetAssetsResultSize`, `XamAvatarGetAssets` and
+`XamAvatarManifestGetBodyType` are bare stubs that return success without
+filling their out-parameters. `XamAvatarGetAssets_entry` confirms it - it
+returns 0 or 0x8007065b from one flag and writes nothing else.
+
+The real enumeration is on the editor side. **`BeginEnumAssetsV1`**
+(0x180637410 in `nxe_dash_avatareditor.dll`, 977 lines) is what builds the list
+the editor browses, and it logs
+
+    [avatar] v1 enum cats={:#x} bodies={:#x}: {} stock + {} closet item(s), {} as outfits
+
+So the port computes a **category bitmask** and a **body bitmask** across
+`stock + closet` items, and counts some of them "as outfits". That is the
+category logic the retail item files do not carry: it belongs to the port's
+enumeration, not to the asset. The bit values and the per-item test are the
+next thing to pull out of `FUN_180637410`.
+
+`rexgpu-xenos.dll` (2.7 MB) is the last first-party binary not yet decompiled;
+its strings already show it patches the guest per title ("the Metro dashboard
+uses 11028, the Avatar Editor 10900").
