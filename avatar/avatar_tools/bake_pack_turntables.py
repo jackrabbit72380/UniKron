@@ -41,7 +41,15 @@ STOCK = {"shirts": "Jacket with Sweater",
          "shoes": "Grunge Trainers"}
 HAIR = "Left Parting"
 HAIR_COLOUR = "6e5326"
+# Which head UV set a decal sheet is painted through, established by
+# probe_decal_render.py: facial hair on set 1 (and it is a tint mask, red marks
+# the hair), face paint on set 0 (its own colours). See DECALS.md.
+DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False)}
+HAIR_TINT = (0x6E / 255.0, 0x53 / 255.0, 0x26 / 255.0)
+ART = os.path.join(os.path.dirname(HERE), "pack_art")
+
 CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
+                 "45_facial-hair": "decal", "16_face-paint": "decal",
                  # A dress or a suit covers the torso and legs at once, so only the
                  # shoes are kept underneath.
                  "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress",
@@ -49,7 +57,13 @@ CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  "50_hair": "hair"}
 
 
-def bake_one(pack, clip, description, asset, kind, folder, frames, width, height):
+def read_rgba(path):
+    from PIL import Image
+    return np.asarray(Image.open(path).convert("RGBA"), dtype=np.float64) / 255.0
+
+
+def bake_one(pack, clip, description, asset, kind, folder, frames, width, height,
+             category=None):
     obj = "/tmp/pack_tt_%s.obj" % slug(asset)
     if kind == "dress":
         worn = [STOCK["shoes"]]
@@ -66,6 +80,20 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
 
     verts, tris, colours = bt.read_obj(obj)
     face = bt.load_face(obj)
+    if kind == "decal" and face is not None and "uvsets" in face:
+        decal_set, is_mask = DECAL_SETS[category]
+        sheet = os.path.join(ART, category, slug(asset) + ".png")
+        if not os.path.exists(sheet):
+            return "no decal sheet for " + asset
+        spec = {"uvs": face["uvsets"][:, :, decal_set, :], "texture": read_rgba(sheet)}
+        if is_mask:
+            spec["tint"] = np.power(np.array(HAIR_TINT, dtype=np.float64), 2.2)
+        else:
+            spec["tint"] = None
+        if spec["tint"] is None:
+            del spec["tint"]
+        face = dict(face)
+        face["decals"] = [spec]
     verts = bt.normalise(verts)
     vnormals = bt.vertex_normals(verts, tris)
     os.makedirs(folder, exist_ok=True)
@@ -100,22 +128,24 @@ def main():
     items = []
     for record in catalog:
         category = (record.get("metadata") or {}).get("category")
-        if category in wanted and record.get("vertices"):
+        # Decal categories have a texture and no mesh, so they pass on their own.
+        has_mesh = bool(record.get("vertices"))
+        if category in wanted and (has_mesh or category in DECAL_SETS):
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
-            items.append((record["name"], CATEGORY_KIND.get(category)))
+            items.append((record["name"], CATEGORY_KIND.get(category), category))
     if args.limit:
         items = items[:args.limit]
     print("%d items to bake" % len(items))
 
     done = skipped = failed = 0
-    for name, kind in items:
+    for name, kind, category in items:
         folder = os.path.join(args.outdir, slug(name))
         if os.path.isdir(folder) and any(f.startswith("frame_") for f in os.listdir(folder)):
             skipped += 1
             continue
         error = bake_one(args.pack, args.clip, args.description, name, kind, folder,
-                         args.frames, args.width, args.height)
+                         args.frames, args.width, args.height, category=category)
         if error:
             failed += 1
             print("  failed %s: %s" % (name, error))

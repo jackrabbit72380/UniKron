@@ -435,9 +435,18 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                 v = (w0 * corners_d[0][1] + w1 * corners_d[1][1]
                      + w2 * corners_d[2][1])
                 texel = sample_mask(decal["texture"], u, v)
-                art = np.power(np.clip(texel[..., :3], 0.0, 1.0), 2.2)
-                cover = texel[..., 3:4] * decal.get("gain", 1.0)
-                albedo = art + albedo * (1.0 - cover)
+                if "tint" in decal:
+                    # The facial-hair sheets are masks: red marks the hair zone,
+                    # black leaves the skin alone, so they take a tint the same
+                    # way the brow sheet does rather than carrying their own
+                    # colour.
+                    zone = texel[..., 0:1] * texel[..., 3:4]
+                    cover = zone * decal.get("gain", 1.0)
+                    albedo = decal["tint"] * cover + albedo * (1.0 - cover)
+                else:
+                    art = np.power(np.clip(texel[..., :3], 0.0, 1.0), 2.2)
+                    cover = texel[..., 3:4] * decal.get("gain", 1.0)
+                    albedo = art + albedo * (1.0 - cover)
         shaded = np.power(
             np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
         )

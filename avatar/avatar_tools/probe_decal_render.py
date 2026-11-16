@@ -33,14 +33,24 @@ def head_obj():
     return OBJ
 
 
+def load_rgba(path):
+    from PIL import Image
+    return np.asarray(Image.open(path).convert("RGBA"), dtype=np.float64) / 255.0
+
+
 def main():
-    decal, out_path = sys.argv[1], sys.argv[2]
-    decal_rgba = bt.read_png(decal) if hasattr(bt, "read_png") else None
-    if decal_rgba is None:
-        from PIL import Image
-        decal_rgba = np.asarray(Image.open(decal).convert("RGBA"), dtype=np.float64) / 255.0
-    if decal_rgba.dtype != np.float64:
-        decal_rgba = decal_rgba.astype(np.float64)
+    """Either one sheet on every set, or explicit PATH:SET pairs."""
+    args = sys.argv[1:]
+    pairs = []
+    if all(":" in a for a in args[:-1]) and args:
+        out_path = args[-1]
+        for a in args[:-1]:
+            path, _, set_index = a.rpartition(":")
+            pairs.append((path, int(set_index)))
+        decal_rgba = None
+    else:
+        decal, out_path = args[0], args[1]
+        decal_rgba = load_rgba(decal)
 
     obj = head_obj()
     verts, tris, colours = bt.read_obj(obj)
@@ -57,22 +67,29 @@ def main():
 
     # The head alone, so a set that paints the whole skull is obvious.
     verts = verts_n
-    tiles = [("plain", bt.render(verts, tris, colours, vnormals, 3.14159, 200, 200))]
-    for si in range(sets):
+    tiles = [("plain", bt.render(verts, tris, colours, vnormals, 3.14159, 320, 320))]
+    jobs = ([(decal_rgba, si, "set %d" % si) for si in range(sets)] if not pairs else
+            [(load_rgba(path), si, "%s@%d" % (os.path.basename(path)[:12], si))
+             for path, si in pairs])
+    # The hair colour from the description, which is what these masks are tinted
+    # with; 6e5326 is that description's hair slot.
+    hair_tint = np.power(np.array([0x6e, 0x53, 0x26], dtype=np.float64) / 255.0, 2.2)
+    for texture, si, label in jobs:
         shaped = dict(face)
         # Only the decal: leaving the eye and mouth masks on buried it in tint.
         shaped["layers"] = []
-        shaped["decals"] = [{"uvs": uvsets[:, :, si, :], "texture": decal_rgba}]
-        tiles.append(("set %d" % si,
-                      bt.render(verts, tris, colours, vnormals, 3.14159, 200, 200,
+        shaped["decals"] = [{"uvs": uvsets[:, :, si, :], "texture": texture,
+                             "tint": hair_tint}]
+        tiles.append((label,
+                      bt.render(verts, tris, colours, vnormals, 3.14159, 320, 320,
                                 face=shaped)))
 
-    width = 200 * len(tiles)
-    sheet = np.zeros((200, width, 4), dtype=np.uint8)
+    width = 320 * len(tiles)
+    sheet = np.zeros((320, width, 4), dtype=np.uint8)
     sheet[..., :3] = 32
     sheet[..., 3] = 255
     for i, (label, rgba) in enumerate(tiles):
-        sub = sheet[:, i * 200:(i + 1) * 200]
+        sub = sheet[:, i * 320:(i + 1) * 320]
         mask = rgba[..., 3] > 0
         sub[mask] = rgba[mask]
     bt.write_png(out_path, sheet)

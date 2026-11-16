@@ -1,77 +1,67 @@
-# Face decals: what is established, what is not
+# The face, and the decals that sit on it
 
-The head's eyes, brows and mouth are done: `bake_avatar.py` bundles the three tint
-sheets and the renderer composites them per pixel, so a baked face has real eyes
-and a mouth. The **painted decals** — the `45_facial-hair` beards and
-`16_face-paint` sheets — are still unresolved, and nothing in the project should
-pretend otherwise.
+The head is a single mesh with **six UV sets**, and its material list binds one
+texture slot to each of them. That list is what settled which sheet goes where:
 
-## Established
+| UV set | texture slot | size | role |
+| --- | --- | --- | --- |
+| 0 | 5 | 128×128 | skin, and **face paint** |
+| 1 | 6 | 128×64 | **facial hair** |
+| 2 | 7 / 8 | 64×64 | brow tint mask |
+| 3 | 9 / 10 | 64×64 | eye tint mask |
+| 4 | 12 | 64×64 | mouth tint mask |
+| 5 | 11 | 128×64 | not used by anything tested |
 
-* The head mesh carries **six UV sets** (`uvs[vertex][0..5]`).
-* Sets **2, 3 and 4** are the brow, eye and mouth tint sheets (`FACE_SETS` in
-  `bake_avatar.py`).
-* The decal sheets are RGBA art at the pack's own sizes: facial hair is 128×64,
-  face paint 128×128. They are not tint masks — their colour is the art.
-* Set 0 is the skin layout (it covers a single corner of the sheet, u 0.50–0.99).
-* Set 1 and set 5 each span nearly the whole sheet (u 0.01–0.99, v 0.01–0.99),
-  which is the shape a full-face decal sheet would need.
+(Batches 0 and 1 both bind six slots; they differ in ids 7/8 and 9/10, so the head
+carries two passes.)
 
-## Not established
+## Established by rendering
 
-**Which UV set the beard and face-paint sheets are painted through.** Two attempts
-failed to decide it:
+`probe_decal_render.py` applies a sheet on one set at a time and renders the head.
+Three independent checks agree:
 
-* `probe_decal_uv.py` reports what fraction of a decal's painted pixels fall
-  inside each set's covered region. It does not discriminate: for `calm-eyes.png`
-  — a sheet whose set is *known* to be 3 — sets 2 and 5 both score 100% and set 3
-  scores 88.9%, so a high score proves nothing.
-* `probe_decal_render.py` renders the head with the beard applied on each set in
-  turn. Looking at all seven images, none puts the beard on a jaw: each set
-  smears the art across the skull or the cheeks. There is no set that is
-  obviously right, and choosing the least-wrong one would be inventing placement.
+* `calm-eyes.png` on **set 3** draws two eyes in the eye sockets — the control, and
+  it matches `FACE_SETS` (2, 3, 4 = brow, eye, mouth).
+* `beard.png` on **set 1** covers the jaw and chin and leaves the lips clear.
+* `comb-moustache.png` on **set 1** draws a bar exactly above the lip.
+* `butterfly-facepaint.png` on **set 0** spreads across the cheeks and brow.
 
-The `16_face-paint` sheets also render with **no alpha at all** (`camo-facepaint`
-has zero texels below 0.5 alpha), so their shape has to come from something other
-than transparency — possibly a second texture in the item, or a channel.
+Two sheets of the same kind landing correctly is the evidence; a single lucky
+placement would not be.
 
-## Which pack art is a sheet and which is a render
+## The two kinds of sheet
 
-`pack_art/<category>/` holds two different things, which is easy to miss:
+* **Facial hair is a tint mask, not colour art.** `beard.png` is red where the hair
+  goes, black elsewhere. Compositing it as colour painted the face red; tinting it
+  with the hair colour from the description is what makes it a beard.
+* **Face paint composites by alpha, and its colour is red.**
+  `butterfly-facepaint.png` is red line art on a transparent background, and it
+  renders red across the cheeks and brow. Whether that red is meant to be tinted
+  by a per-item colour slot is **not established**: the pack carries palettes for
+  three items only (`Male Power Tee`, `Female Power Tee`, `Tight Tee`), so nothing
+  names a paint colour. It is drawn as authored rather than recoloured.
+* `camo-facepaint` is fully opaque — zero texels under 0.5 alpha — so its shape
+  comes from the RGB, not from transparency.
 
-* Items **with a mesh** got a mesh render from `bake_pack_thumbs.py` — the whole
-  garment on a transparent background, which works as a layer because a whole
-  garment really is body-shaped.
-* Items **without a mesh** only have their texture block, written by
-  `bake_pack_tex.py` at its native 128×64 or 128×128. Stretching one of those to
-  the frame draws a decal over the entire avatar.
+## What is baked and what is not
 
-Measured sizes per folder: `15_face` 45 × 128×64 + 1 × 128×128, `16_face-paint`
-26 × 128×128, `45_facial-hair` 17 × 128×64 — all sheets, no renders. Every other
-category is either all renders (`40_shirt` 137 × 128×128) or a mix where the mesh
-items carry the art (`50_hair` 176 renders + 45 sheets).
+`bake_pack_turntables.py` applies both kinds while baking (`DECAL_SETS`), so every
+`45_facial-hair` and `16_face-paint` item has a six-frame set with the decal on the
+avatar's face.
 
-## Consequence
-
-* No 3D set is baked for these categories, and the 2D strip must not draw them:
-  `AvatarStage.qml` fits every layer to the whole 512×768 frame, so a 128×64
-  sheet shown as a layer becomes a blurry decal over the entire body. `15_face`
-  is in the same position as the other two and is excluded in pack mode for the
-  same reason.
-* What would settle it: the retail editor's own face art for a bearded avatar
-  (which would show where the beard sits), or any dump naming the per-slot
-  texture a facial-hair item binds.
+**Not done:** the `15_face` eye sheets are still applied only through the three
+built-in masks (`FACE_DEFAULT`), so choosing a different eye colour or shape from
+the pack does not yet change the baked face. The mapping for that is known — set 3
+— but swapping the mask per item needs the eye roles (sclera/iris) split, which
+the current three-sheet pipeline already does for one fixed set.
 
 ## Re-running the probes
 
-The committed catalogues now describe the pack that ships in `src_archive`, so
-both probes run as they are:
-
 ```
 python3 probe_decal_uv.py ../pack_art/45_facial-hair/beard.png
-python3 probe_decal_render.py ../pack_art/45_facial-hair/beard.png /tmp/head.png
+python3 probe_decal_render.py ../pack_art/45_facial-hair/beard.png:1 /tmp/head.png
+python3 probe_decal_render.py ../pack_art/45_facial-hair/beard.png /tmp/all.png
 ```
 
-If a different pack revision ever needs testing, re-derive the catalogues from it
-first - `toc_parse.py`, then `asset_catalog.py`, both pointed at that pack - rather
-than editing offsets by hand.
+Passing `PATH:SET` pairs picks sets explicitly; passing a bare sheet tries every
+set in turn.
