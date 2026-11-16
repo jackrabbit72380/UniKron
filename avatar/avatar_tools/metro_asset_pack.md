@@ -89,3 +89,31 @@ colour values in readable form.
 
 The 2008 editor pack (`AvatarAssetPack.toc` in the NXE dump, 1,079 assets) is a
 different, older pack; this one is the 2010+ retail set.
+
+## The signed package (`AvatarAssetPack`, 13,799,424 bytes)
+
+A second copy arrived as `AvatarAssetPack.zip` containing one file,
+`AvatarAssetPack`, 13,799,424 bytes. It is not the toc: it starts with `PIRS`
+and holds the toc **inside** it.
+
+- `0x0000` `PIRS` - the Microsoft-signed XContent magic.
+- `0x32c` a 20-byte SHA-1, then the header block; `0x360` carries the title ID
+  `0xFFFE07DF` - the avatar content family, the same `FFFE07DF...` id that
+  appears as a Metro gamedir file.
+- `0xc000` the STFS file table. Entry 0: name `AvatarAssetPack.toc`, and the
+  length field reads **135,069,697** bytes, which is 2,061 x 0x10000. The
+  package on disk is 13.8 MB, so the toc inside is block-compressed roughly
+  10:1.
+- `0x5aa19` the same name pool as before - `MaleBody`, `FemaleBody`, `Head`,
+  `Animation Generic Stand 0` and on - visible in the clear because those
+  blocks are stored uncompressed.
+
+So the retail payload is real and it is large: the 135 MB toc is the full pack,
+not the 14.6 MB index that Metro ships. What is still missing is the STFS block
+table - which blocks are LZX and where each one starts - so the 135 MB can be
+rebuilt. The block bytes themselves are in this package; nothing else needs to
+be found.
+
+Two things would finish it: the extracted 135 MB `AvatarAssetPack.toc` (any tool
+that unpacks STFS content can produce it), or the block table layout for this
+package so it can be rebuilt here.
