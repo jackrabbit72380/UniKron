@@ -46,13 +46,14 @@ than transparency — possibly a second texture in the item, or a channel.
 
 ## Re-running the probes
 
-Both need the pack's own record offsets, so point `avatar-assets.json` at the
-manifest parsed from that pack first:
+The committed catalogues now describe the pack that ships in `src_archive`, so
+both probes run as they are:
 
 ```
-cp avatar-assets.json /tmp/keep.json
-python3 toc_parse.py "$PACK" --json avatar-assets.json
 python3 probe_decal_uv.py ../pack_art/45_facial-hair/beard.png
 python3 probe_decal_render.py ../pack_art/45_facial-hair/beard.png /tmp/head.png
-cp /tmp/keep.json avatar-assets.json
 ```
+
+If a different pack revision ever needs testing, re-derive the catalogues from it
+first - `toc_parse.py`, then `asset_catalog.py`, both pointed at that pack - rather
+than editing offsets by hand.
