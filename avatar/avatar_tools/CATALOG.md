@@ -136,3 +136,26 @@ the garment is the wrong one.
   is done the 18 noses have no 3D set.
 * `45_facial-hair` and `16_face-paint` are textures only (block 2), which is why
   they bake as decals; `15_face` is 43 eye sheets (block 2) plus those 18 noses.
+
+## Shape overrides: the biggest undecoded block
+
+`inspect_pack.py` counts **266 assets whose only payload is block 4,
+`ShapeOverrides`** — chins, noses and their relatives (`Large Chin`, `Boxer's
+Nose`, `Chiseled Chin`, …). They are not art and not meshes; they are morphs, and
+without them the pack's body and face shapes cannot be shown.
+
+What has been ruled out, by test rather than by eye:
+
+* **Not an LZX chain.** Exhaustive search over the first 96 bytes of `Defined Nose`,
+  all six field orderings of the 12-byte header and three readings of the output
+  size produced 0 successful decompressions; every model block decodes on the same
+  call.
+* **Not a flat float array.** Reading from +64 as little-endian float triples gives
+  `2053219840.0` and `nan` where vertex deltas should be.
+* **Not fixed-stride.** Payload lengths are irregular (`length % 12` spreads across
+  every residue), so it is not `count + n × entry`.
+
+The header repeats: `u32 0, u32 0x13d4, u32 1, u16 2, u16 3`, the same 8-byte id
+(`c1c8f109 a19cb2e0`) that every `.Avatar` entry repeats, then a second copy of that
+header 32 bytes in. That id is the one thing to chase: whatever table it names is
+the same table the avatar descriptions use.
