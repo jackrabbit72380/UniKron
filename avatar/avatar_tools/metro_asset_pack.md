@@ -177,10 +177,25 @@ every offset 0" gives 327 assets but truncates the large ones, so the real
 - Textures are still empty in every parsed model (`textures: []`), same as the
   NXE closet, so the colour question is unchanged by this pack.
 
-The chunk count and the record sizes do not agree yet: the 930 records need
-1,030 chunks at 0x8000 each, but the file only carries 423. Consuming chunks in
-file order by record size therefore starts out plausible and drifts -
-`MaleBody` picks up a mesh with y 0.000-0.188 (a shoe's bounds), not a body -
-so the data chunks are not stored in record order and part of the list has no
-inline data at all. That last step - which 423 chunks belong to which of the
-930 records - is what is still open.
+The chunk count and the record sizes now agree on the whole: the 930 records
+need 1,030 chunks at 0x8000, and the file carries **1,031** once short tail
+chunks count as chunks too (a filter that demanded exactly 0x8000 found only
+423 and truncated every asset whose size is not a multiple of 0x8000).
+
+With the tails counted, `pack_toc.py` rebuilds **767 assets**, 544 of which
+parse into models - a big jump from 327 / 162.
+
+What is still not exact is the *pairing*: consuming chunks in file order by
+record size drifts, so `MaleBody` picks up a mesh with y 0.001-0.099 (a shoe)
+and `Head` overruns by 10 bits. Where a size is unique in the record table the
+pairing is demonstrably right:
+
+| asset | length | record it matches | bounds |
+| --- | --- | --- | --- |
+| 443 | 8,660 | `Bob with Curls (Hat)` | y 1.176-1.358 |
+| 503 | 11,924 | `Crimped` | y 1.089-1.362 |
+
+- a hat and a hairstyle, each at exactly the height it should be. So the
+records and the chunks describe the same assets; only the per-record chunk list
+is unresolved, and 7 of 767 assets match a record by exact length, meaning the
+assembled lengths usually include padding the record size does not count.

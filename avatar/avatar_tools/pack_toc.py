@@ -36,11 +36,14 @@ def blocks(data):
     pos = SCAN_FROM
     while pos + HEADER <= len(data):
         comp, out_off, out_size = struct.unpack_from("<III", data, pos)
+        # The last chunk of an asset is short, so sizes below 0x8000 count too.
+        # Dropping them truncates every asset whose size is not a multiple of
+        # the chunk size, which is most of them.
         if (
-            out_size == CHUNK
-            and 0x100 <= comp < 0x40000
+            0x40 <= out_size <= CHUNK
+            and 0x40 <= comp < 0x40000
             and out_off % CHUNK == 0
-            and out_off < 0x4000000
+            and out_off < 0x200000
         ):
             found.append((pos, comp, out_off, out_size))
         pos += 4
