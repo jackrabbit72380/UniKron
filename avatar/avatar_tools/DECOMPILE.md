@@ -339,6 +339,11 @@ category logic the retail item files do not carry: it belongs to the port's
 enumeration, not to the asset. The bit values and the per-item test are the
 next thing to pull out of `FUN_180637410`.
 
-`rexgpu-xenos.dll` (2.7 MB) is the last first-party binary not yet decompiled;
-its strings already show it patches the guest per title ("the Metro dashboard
-uses 11028, the Avatar Editor 10900").
+`rexgpu-xenos.dll` (2.7 MB) is decompiled as well: **4,848 functions**, in
+`UniKron-decompiled-rexgpu-xenos.zip`. It is the part that patches the guest per
+title, and its own notes name the editor's values - "the Metro dashboard uses
+11028, the Avatar Editor 10900" for the D3D work-retired handler offset.
+
+That closes every first-party binary in the dump: dashboard 39,611, runtime
+28,447, GPU 4,848, editor DLL 10,550, editor XEX 3,095. What remains encrypted
+is the flash XUI (18 files) and the 2010 editor XEX.
