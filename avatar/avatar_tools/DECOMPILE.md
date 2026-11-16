@@ -189,6 +189,14 @@ as an oversized header, and `read_model` refused any batch over 8,192 vertices
 while a full costume reaches 8,719. The reader now skips the tail and bounds a
 batch by the u16 index range instead.
 
+**The retail items are pre-placed in a body space of their own**, which is how
+the dashboard can drop one on an avatar with no rig work. Feet sit at y = 0 and
+the head tops out near 1.6, and the per-item bounds separate the garments:
+shoes span 0.00-0.21, trousers and shorts 0.10-0.79, tops 0.68-1.13, hats and
+helmets 1.13-1.60. Up is **y**, where the shipped pack's bodies are x, so a
+retail item needs that axis remap and no other transform. `closet_import.py`
+records each item's bounds so the theme can place it from measurement.
+
 **No field states a garment category.** The item id does not carry one (no
 GUID nibble separates caps from shirts beyond the index's source code), the
 `closet_index.tsv` code is an item source class, every garment binds to the same

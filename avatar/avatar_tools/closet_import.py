@@ -65,11 +65,17 @@ def describe(folder, item):
         except avatar_mesh.Malformed:
             batches = None
         if batches:
+            points = [point for batch in batches for point in batch["vertices"]]
+            bounds = [
+                [round(min(p[axis] for p in points), 4), round(max(p[axis] for p in points), 4)]
+                for axis in range(3)
+            ]
             model = {
                 "parses": True,
                 "batches": len(batches),
-                "vertices": sum(len(batch["vertices"]) for batch in batches),
+                "vertices": len(points),
                 "triangles": sum(len(batch["indices"]) // 3 for batch in batches),
+                "bounds": bounds,
             }
     summary = [{"id": block[0], "size": block[1]} for block in blocks]
     return {"size": len(data), "blocks": summary, "model": model}
