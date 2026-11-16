@@ -177,20 +177,27 @@ class ValueSerializer:
 # ---------------------------------------------------------------- compression
 
 def decompress(data):
-    """Chain of 12-byte-headered LZX blocks: (compressed, out_off, out_size)."""
+    """Chain of 12-byte-headered LZX blocks: (compressed, out_off, out_size).
+
+    A retail closet model stops its chain and leaves a few trailing bytes that
+    read as an oversized header; that tail is skipped so the model still decodes.
+    """
+    chunks = []
     size = 0
     offset = 0
     while offset + BLOCK_HEADER_SIZE <= len(data):
         comp, out_off, out_size = struct.unpack_from("<III", data, offset)
         offset += BLOCK_HEADER_SIZE
         if comp > len(data) - offset:
-            raise Malformed("compressed block past end")
+            if not chunks:
+                raise Malformed("compressed block past end")
+            break
+        chunks.append((comp, out_off, out_size))
         size = max(size, out_off + out_size)
         offset += comp
     out = bytearray(size)
     offset = 0
-    while offset + BLOCK_HEADER_SIZE <= len(data):
-        comp, out_off, out_size = struct.unpack_from("<III", data, offset)
+    for comp, out_off, out_size in chunks:
         offset += BLOCK_HEADER_SIZE
         chunk = lzx.decompress(data[offset:offset + comp], out_size, WINDOW_SIZE)
         out[out_off:out_off + out_size] = chunk
@@ -394,7 +401,10 @@ def read_model(data):
         s.read_u32()  # vertex array offset
         s.read_u32()  # index array offset
         s.align_to_next_byte()
-        if triangle_count > 8192 or vertex_count > 8192 or uv_count > 6:
+        # A retail costume can carry more than eight thousand vertices in one
+        # batch, so the bound is the u16 index range rather than the editor's
+        # smaller assets; the buffer size catches anything that is really junk.
+        if triangle_count > 65536 or vertex_count > 65536 or uv_count > 6:
             raise Malformed("batch counts out of range")
         expected = (32 + 4 * (uv_count - 1)) & 0xFFFFFFFF
         if vertex_size != expected:

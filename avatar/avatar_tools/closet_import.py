@@ -9,8 +9,14 @@ The `Clean Slate NXE` build ships the dashboard's whole closet as
 This reads that folder without copying it and writes one JSON file the theme
 can consume, so a real 20,349-item closet can be addressed by name. It records
 what each item actually contains (block ids and sizes) rather than assuming a
-garment type, and flags the ones whose model block does not parse with the
-pack's reader - the retail model layout is newer than the editor's pack.
+garment type.
+
+The model block in a retail item is LZX-framed inside the STRB, where the
+editor's own pack stores its blocks plain; `avatar_mesh.decompress` handles
+the frame and then `read_model` reads it normally, giving batches, vertices,
+triangles, UVs, materials, joints and weights. Neither the item id, the index
+code, the joint binding nor the mesh position states a garment category, so
+this catalogue does not claim one.
 
     python3 closet_import.py <closet_dir> <out.json>
 """
@@ -50,15 +56,23 @@ def describe(folder, item):
     except avatar_mesh.Malformed:
         return {"size": len(data), "blocks": [], "model": False}
     payload = next((block[3] for block in blocks if block[0] == 3), None)
-    parses = False
+    model = {"parses": False}
     if payload is not None:
+        # Retail blocks are LZX-framed inside the STRB; the editor's pack stores
+        # theirs plain, so this step is what makes a retail item readable.
         try:
-            avatar_mesh.read_model(payload)
-            parses = True
+            batches = avatar_mesh.read_model(avatar_mesh.decompress(payload))
         except avatar_mesh.Malformed:
-            parses = False
+            batches = None
+        if batches:
+            model = {
+                "parses": True,
+                "batches": len(batches),
+                "vertices": sum(len(batch["vertices"]) for batch in batches),
+                "triangles": sum(len(batch["indices"]) // 3 for batch in batches),
+            }
     summary = [{"id": block[0], "size": block[1]} for block in blocks]
-    return {"size": len(data), "blocks": summary, "model": parses}
+    return {"size": len(data), "blocks": summary, "model": model}
 
 
 def main(argv):
@@ -84,13 +98,13 @@ def main(argv):
             "icon": icon if os.path.exists(os.path.join(folder, "icons", icon)) else None,
             "bytes": facts["size"],
             "blocks": facts["blocks"],
-            "model_parses": facts["model"],
+            "model": facts["model"],
         })
     with open(target, "w", encoding="utf-8") as handle:
         json.dump({"folder": os.path.abspath(folder), "items": items}, handle, indent=1)
     named = sum(1 for item in items if item["name"])
     icons = sum(1 for item in items if item["icon"])
-    parsed = sum(1 for item in items if item["model_parses"])
+    parsed = sum(1 for item in items if item["model"]["parses"])
     print(f"{len(items)} items, {named} named, {icons} with icons, {parsed} models parse")
     return 0
 

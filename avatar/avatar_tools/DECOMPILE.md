@@ -176,9 +176,27 @@ What the dump adds is elsewhere: `assets/closet/` holds **20,349** retail item
 assets with names (`closet_index.tsv`) and PNG icons. `closet_import.py` reads
 that folder in place and writes a catalogue JSON; the items are the same
 `YTGR`/`STRB` containers as the editor's pack, and they carry no textures either
-(see `TEXTURES.md`). Their model block is a newer layout than the pack's, so it
-does not parse with `read_model` - recorded as `model_parses: false` rather than
-guessed at.
+(see `TEXTURES.md`).
+
+Their blocks are different in one way that matters: the payload is LZX-framed
+*inside* the STRB, where the editor's pack stores its blocks plain. Passing the
+block through `avatar_mesh.decompress` first makes it an ordinary model, so
+`read_model` reads it and every item yields batches, vertices, triangles, UVs,
+7-entry material lists, joints (3 per vertex) and normalised weights. All 340
+items sampled decode. Two fixes were needed and both were in this repo, not in
+the data: a retail model ends its LZX chain with a few trailing bytes that read
+as an oversized header, and `read_model` refused any batch over 8,192 vertices
+while a full costume reaches 8,719. The reader now skips the tail and bounds a
+batch by the u16 index range instead.
+
+**No field states a garment category.** The item id does not carry one (no
+GUID nibble separates caps from shirts beyond the index's source code), the
+`closet_index.tsv` code is an item source class, every garment binds to the same
+joints (4, 18, 30, 27 dominate caps, pants and shirts alike), and vertex
+positions are normalised so a cap and a pair of pants both centre at y = 0.94.
+The dashboard editor's categories come from the guest's asset metadata, not from
+the file, so the catalogue records block ids and geometry only and claims no
+category.
 
 ## The XTL effects, and where the shaders stop
 
