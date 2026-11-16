@@ -78,6 +78,11 @@ painter the 3D stage uses. Output is `avatar/pack_art/<category>/<slug>.png`
 the same shape as `AssetIndex.qml`. They live outside `assets/` so the hand-drawn
 index is untouched.
 
+The editor browses them when its `usePackArt` property is true; the category list
+then comes from `PackIndex.qml` and each row points at `pack_art/`, so the
+hand-drawn `assets/` tree stays the default. The 3D wardrobe is keyed on the
+drawn art's file names, so it is the drawn mode that keeps 3D in step.
+
 Two categories have no renders because those items carry no Model block:
 `16_face-paint` and `45_facial-hair` (they ship a Texture block instead), and 47
 of the 223 hairstyles are the same. Everything else renders.

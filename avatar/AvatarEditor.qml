@@ -22,11 +22,19 @@ Item {
     id: root
 
     AssetIndex { id: assetIndex }
+    // The pack's own items: one render per real AvatarAssetPack asset, written by
+    // avatar_tools/bake_pack_thumbs.py together with this index.
+    PackIndex { id: packIndex }
 
     Style { id: style }
 
     // ---- what the host can set -------------------------------------------
     property url assetsFolder: Qt.resolvedUrl("assets/")
+    // Where the pack-derived thumbnails live, and whether the wardrobe browses
+    // them instead of the hand-drawn art in assets/. Off by default: the drawn art
+    // is what the 3D wardrobe is keyed against.
+    property url packArtFolder: Qt.resolvedUrl("pack_art/")
+    property bool usePackArt: false
     property string gamerTag: "Player"
     // The original editor's own wording for this screen: the string table of
     // scnEditor in avatareditor.xex holds exactly this sentence.
@@ -310,15 +318,17 @@ Item {
 
     function rebuildCategories() {
         var list = []
-        for (var i = 0; i < assetIndex.folders.length; ++i) {
-            var name = assetIndex.folders[i].id
+        var source = root.usePackArt ? packIndex.folders : assetIndex.folders
+        var base = root.usePackArt ? root.packArtFolder : root.assetsFolder
+        for (var i = 0; i < source.length; ++i) {
+            var name = source[i].id
             if (!name || name.charAt(0) === "." || name.charAt(0) === "_")
                 continue
             list.push({
                 id: name,
                 label: style.titleCase(style.cleanFolderName(name)),
-                path: style.dirUrl(root.assetsFolder, name),
-                files: assetIndex.folders[i].files || [],
+                path: style.dirUrl(base, name),
+                files: source[i].files || [],
                 z: style.layerOrder(name)
             })
         }
@@ -390,6 +400,8 @@ Item {
 
     onCategoryIndexChanged: fillItems()
     onAssetsFolderChanged: rebuildCategories()
+    onPackArtFolderChanged: rebuildCategories()
+    onUsePackArtChanged: rebuildCategories()
 
     function bodySource() {
         if (!bodyCategory)
