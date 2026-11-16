@@ -69,6 +69,19 @@ one for one, which is why the categories below reuse their names.
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.
 
+## Thumbnails are renders, not restored art
+
+Because there is no texture art to extract, `bake_pack_thumbs.py` renders one
+thumbnail per item straight from that item's own mesh, using the same flat-shaded
+painter the 3D stage uses. Output is `avatar/pack_art/<category>/<slug>.png`
+(**583 items**, 16 categories) plus `avatar/PackIndex.qml`, which lists them in
+the same shape as `AssetIndex.qml`. They live outside `assets/` so the hand-drawn
+index is untouched.
+
+Two categories have no renders because those items carry no Model block:
+`16_face-paint` and `45_facial-hair` (they ship a Texture block instead), and 47
+of the 223 hairstyles are the same. Everything else renders.
+
 ## What the pack does not carry
 
 - **No texture pixels.** All 585 decoded models report empty texture slots, so
