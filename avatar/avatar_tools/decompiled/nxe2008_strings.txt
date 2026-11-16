@@ -1,0 +1,112 @@
+# 111 literals from the 3,095-function 2008 corpus
+ImagePath	3	FUN_980b37b0_980b37b0.c FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+PointSize	3	FUN_980b2670_980b2670.c FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+Direction	2	FUN_980afe20_980afe20.c FUN_980aff98_980aff98.c
+Enabled	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+LineSpacingAdjust	2	FUN_980b1bf8_980b1bf8.c FUN_980b2670_980b2670.c
+NavDown	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+NavLeft	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+NavRight	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+NavTabBackward	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+NavTabForward	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+NavUp	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+Pivot	2	FUN_980b3e48_980b3e48.c FUN_980b7628_980b7628.c
+RangeMax	2	FUN_980b3120_980b3120.c FUN_980b3278_980b3278.c
+RangeMin	2	FUN_980b3120_980b3120.c FUN_980b3278_980b3278.c
+Rotation	2	FUN_980b3e48_980b3e48.c FUN_980b7628_980b7628.c
+Scale	2	FUN_980b3e48_980b3e48.c FUN_980b7628_980b7628.c
+SmoothScroll	2	FUN_980b2ba8_980b2ba8.c FUN_980b3538_980b3538.c
+Text	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+TextStyle	2	FUN_980b1bf8_980b1bf8.c FUN_980b2670_980b2670.c
+UnfocusedInput	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+Value	2	FUN_980b3120_980b3120.c FUN_980b3278_980b3278.c
+Visual	2	FUN_980b7c80_980b7c80.c FUN_980b7cd0_980b7cd0.c
+Wrap	2	FUN_980b2ee0_980b2ee0.c FUN_980b3960_980b3960.c
+AccelInc	1	FUN_980b3278_980b3278.c
+AccelTime	1	FUN_980b3278_980b3278.c
+AllowedChars	1	FUN_980b3538_980b3538.c
+AmbientLight	1	FUN_980b3c40_980b3c40.c
+Anchor	1	FUN_980b7628_980b7628.c
+AvatarFadeSceneOverride	1	FUN_98055cd8_98055cd8.c
+BackgroundImage	1	FUN_98109bd8_98109bd8.c
+BannerImage	1	FUN_98109bd8_98109bd8.c
+BlendMode	1	FUN_980b7628_980b7628.c
+BrushFlags	1	FUN_980b37b0_980b37b0.c
+CameraElement	1	FUN_980b3c40_980b3c40.c
+Checkable	1	FUN_980b2ba8_980b2ba8.c
+ClassOverride	1	FUN_980b7c80_980b7c80.c
+ClipChildren	1	FUN_980b7628_980b7628.c
+ColorWriteFlags	1	FUN_980b7628_980b7628.c
+DataAssociation	1	FUN_980b2670_980b2670.c
+DefaultFocus	1	FUN_980b1ff8_980b1ff8.c
+DefaultTab	1	FUN_980b3960_980b3960.c
+DesignTime	1	FUN_980b7628_980b7628.c
+DestTransIndex	1	FUN_980b24f0_980b24f0.c
+DisableFocusRecursion	1	FUN_980b7628_980b7628.c
+DisableTimelineRecursion	1	FUN_980b7628_980b7628.c
+DropShadowColor	1	FUN_980b2670_980b2670.c
+EnableEffects	1	FUN_980b7628_980b7628.c
+Finish	1	FUN_980b2988_980b2988.c
+Font	1	FUN_980b2670_980b2670.c
+Height	1	FUN_980b7628_980b7628.c
+HorizontalFOV	1	FUN_980b40a8_980b40a8.c
+IgnorePresses	1	FUN_980b1ff8_980b1ff8.c
+InterItemSpacing	1	FUN_980b2ba8_980b2ba8.c
+InterruptTransitions	1	FUN_980b1ff8_980b1ff8.c
+ItemsImage	1	FUN_980b2fc8_980b2fc8.c
+ItemsNavPath	1	FUN_980b2fc8_980b2fc8.c
+ItemsText	1	FUN_980b2fc8_980b2fc8.c
+KeepSizeUnfocused	1	FUN_980b2ba8_980b2ba8.c
+Layout	1	FUN_980b2ba8_980b2ba8.c
+Loop	1	FUN_980b2988_980b2988.c
+MaxVisibleVertItems	1	FUN_980abf68_980abf68.c
+MaxZ	1	FUN_980b40a8_980b40a8.c
+MinThumbSize	1	FUN_980aff98_980aff98.c
+MinZ	1	FUN_980b40a8_980b40a8.c
+Multiline	1	FUN_980b3538_980b3538.c
+NoAutoHide	1	FUN_980b3960_980b3960.c
+NumStops	1	FUN_980aee98_980aee98.c
+Opacity	1	FUN_980b7628_980b7628.c
+OrthogonalFOV	1	FUN_980b40a8_980b40a8.c
+PasswordChar	1	FUN_980b3538_980b3538.c
+Position	1	FUN_980b7628_980b7628.c
+PressKey	1	FUN_980a9c28_980a9c28.c
+PressPath	1	FUN_980b24f0_980b24f0.c
+Radial	1	FUN_980aee98_980aee98.c
+ReadOnly	1	FUN_980b3538_980b3538.c
+SelectedSize	1	FUN_980b2ba8_980b2ba8.c
+Show	1	FUN_980b7628_980b7628.c
+SizeMode	1	FUN_980b37b0_980b37b0.c
+SmoothScrollAcceleration	1	FUN_980b2ba8_980b2ba8.c
+SmoothScrollBaseSpeed	1	FUN_980b2ba8_980b2ba8.c
+SmoothScrollMaxSpeed	1	FUN_980b2ba8_980b2ba8.c
+SrcTransIndex	1	FUN_980b24f0_980b24f0.c
+State	1	FUN_980b2988_980b2988.c
+StayVisible	1	FUN_980b24f0_980b24f0.c
+Step	1	FUN_980b3278_980b3278.c
+StopColor	1	FUN_980aee98_980aee98.c
+StopPos	1	FUN_980aee98_980aee98.c
+StrokeColor	1	FUN_980aec80_980aec80.c
+StrokeWidth	1	FUN_980aec80_980aec80.c
+SunLightColor	1	FUN_980b3c40_980b3c40.c
+SunLightDirection	1	FUN_980b3c40_980b3c40.c
+SurfaceSphere	1	FUN_98109bd8_98109bd8.c
+TabCount	1	FUN_980b3960_980b3960.c
+TextColor	1	FUN_980b2670_980b2670.c
+TextLimit	1	FUN_980b3538_980b3538.c
+TextureSurfaceElement	1	FUN_980b37b0_980b37b0.c
+ThemeImageIndex	1	FUN_98109bd8_98109bd8.c
+TransBackFrom	1	FUN_980b1ff8_980b1ff8.c
+TransBackTo	1	FUN_980b1ff8_980b1ff8.c
+TransFrom	1	FUN_980b1ff8_980b1ff8.c
+TransTo	1	FUN_980b1ff8_980b1ff8.c
+Translation	1	FUN_980b3e48_980b3e48.c
+UserInterrupt	1	FUN_980b3960_980b3960.c
+Vertical	1	FUN_980b3278_980b3278.c
+VerticalTabs	1	FUN_980b3960_980b3960.c
+Volume	1	FUN_980b2988_980b2988.c
+Width	1	FUN_980b7628_980b7628.c
+WrapBump	1	FUN_980b2ee0_980b2ee0.c
+XuiFigure	1	FUN_980b9b20_980b9b20.c
+XuiScene	1	FUN_98055ef8_98055ef8.c
+XuiScrollBar	1	FUN_980b6440_980b6440.c

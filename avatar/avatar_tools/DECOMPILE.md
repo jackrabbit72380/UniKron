@@ -222,12 +222,21 @@ debugging.
 
 ## The brick walls
 
-1. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
+1. **The XTL renderer's corpus has the same defect and its input is gone.**
+   `UniKron-decompiled-xtl-avatar.zip` (6,618 functions for
+   `default_uncompressed.xex`, the avatar renderer itself) holds 2,602
+   `halt_baddata` stubs - 39% - because it too was imported as 32-bit PowerPC.
+   Re-running it needs the image, and `default_uncompressed.xex` is not in
+   `src_archive`: it came from the gift `avatar.zip`, which is no longer on this
+   machine. With that file the same recipe applies (base from `mkelf.py`,
+   `PowerPC:BE:64:64-32addr`, then `patch_vmx128.py`), and it is the corpus that
+   would answer the shader questions the editor cannot.
+2. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
    `28672` as ciphertext. Six LZX attempts (offsets 28672/28696/28720 at 1 MiB
    and 4 MiB output) all fail with `bad aligned table` or `bad block type`.
    What this needs: the decrypted image, or the console's XEX keys. Nothing in
    the archive supplies either.
-2. **The remaining 21 third-party PEs** - `XBOX HUB.exe` (238 MiB),
+3. **The remaining 21 third-party PEs** - `XBOX HUB.exe` (238 MiB),
    `dxcompiler.dll` x2, `dxil.dll`, `vk_swiftshader`, `vulkan-1`, `ffmpeg`,
    `d3dcompiler_47`, `SDL2`, `iCUESDK`, the MSVC runtimes and
    `xenia_canary_netplay.exe`. That is Chromium, DirectX tooling, an emulator
