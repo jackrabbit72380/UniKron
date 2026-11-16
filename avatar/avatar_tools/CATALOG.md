@@ -101,3 +101,19 @@ have no slot category in their metadata, so they are extracted but not filed.
 So the pack gives real names, real geometry, real categories, real genders and
 real slot assignment - but the editor's 2D item art and per-item colours cannot
 be recovered from it.
+
+## Which items have a 3D set
+
+`bake_pack_turntables.py` writes `assets/3d/turntable/<slug>/`, six frames each,
+opens facing the player, stock avatar wearing that one item. Audited against this
+catalogue: **583 of 1,079 records carry a mesh, and 580 of those have a set**. The
+three without are `MaleBody`, `FemaleBody` and `Head` — the base layer and the
+skin, which are not items and never appear as a stage variant.
+
+Categories with no sets and no meshes: `15_face`, `16_face-paint`,
+`45_facial-hair`. Those records are texture sheets only; see `DECALS.md`.
+
+Caveat: `80_dress`, `81_formal` and `83_dress-formal` are female-only items baked
+on the male stock body, because the descriptor fixes gender and the female seed
+outfit is not established anywhere in the data. They render, but the body under
+the garment is the wrong one.

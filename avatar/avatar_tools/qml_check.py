@@ -64,14 +64,18 @@ if obj.property("usePackArt") is not None:
         ids = ids.toVariant() if hasattr(ids, "toVariant") else ids
         return [row.get("id") for row in (ids or [])]
 
-    decal = next((c for c in v if c.get("id") == "45_facial-hair"), None)
-    files = (decal or {}).get("files") or []
-    if files:
+    for decal_id in ("15_face", "16_face-paint", "45_facial-hair"):
+        decal = next((c for c in v if c.get("id") == decal_id), None)
+        files = (decal or {}).get("files") or []
+        if not files:
+            continue
         obj.setProperty("usePackArt", True)
-        obj.setProperty("state", dict(obj.property("state").toVariant(), **{"45_facial-hair": files[0]}))
+        obj.setProperty("state", dict(obj.property("state").toVariant(), **{decal_id: files[0]}))
         QTimer.singleShot(0, app.quit)
         app.exec_()
-        print("  pack mode, 45_facial-hair chosen -> layers %s" % (layer_ids(),))
+        leaked = [i for i in layer_ids() if i == decal_id]
+        print("  pack mode, %s chosen -> layers %s%s"
+              % (decal_id, layer_ids(), "  LEAKED" if leaked else ""))
 
     # A pack item with a baked set must name it, and the folder must exist.
     shirt = next((c for c in v if c.get("id") == "40_shirt"), None)

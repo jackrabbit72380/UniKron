@@ -537,7 +537,7 @@ Item {
     // applies to pack mode. Where the sheets sit on the face is still unknown -
     // see avatar_tools/DECALS.md.
     function isPackDecal(id) {
-        return id === "16_face-paint" || id === "45_facial-hair"
+        return id === "15_face" || id === "16_face-paint" || id === "45_facial-hair"
     }
 
     function rebuildLayers() {

@@ -35,11 +35,29 @@ The `16_face-paint` sheets also render with **no alpha at all** (`camo-facepaint
 has zero texels below 0.5 alpha), so their shape has to come from something other
 than transparency — possibly a second texture in the item, or a channel.
 
+## Which pack art is a sheet and which is a render
+
+`pack_art/<category>/` holds two different things, which is easy to miss:
+
+* Items **with a mesh** got a mesh render from `bake_pack_thumbs.py` — the whole
+  garment on a transparent background, which works as a layer because a whole
+  garment really is body-shaped.
+* Items **without a mesh** only have their texture block, written by
+  `bake_pack_tex.py` at its native 128×64 or 128×128. Stretching one of those to
+  the frame draws a decal over the entire avatar.
+
+Measured sizes per folder: `15_face` 45 × 128×64 + 1 × 128×128, `16_face-paint`
+26 × 128×128, `45_facial-hair` 17 × 128×64 — all sheets, no renders. Every other
+category is either all renders (`40_shirt` 137 × 128×128) or a mix where the mesh
+items carry the art (`50_hair` 176 renders + 45 sheets).
+
 ## Consequence
 
 * No 3D set is baked for these categories, and the 2D strip must not draw them:
   `AvatarStage.qml` fits every layer to the whole 512×768 frame, so a 128×64
-  sheet shown as a layer becomes a blurry decal over the entire body.
+  sheet shown as a layer becomes a blurry decal over the entire body. `15_face`
+  is in the same position as the other two and is excluded in pack mode for the
+  same reason.
 * What would settle it: the retail editor's own face art for a bearded avatar
   (which would show where the beard sits), or any dump naming the per-slot
   texture a facial-hair item binds.
