@@ -58,4 +58,19 @@ if obj.property("usePackArt") is not None:
             missing.append((key, name))
     print("  picks that do not exist under pack_art/: %d %s" % (len(missing), missing[:4]))
 
+    # A pack decal sheet must not become a full-frame layer; a drawn beard must.
+    def layer_ids():
+        ids = obj.property("_layers")
+        ids = ids.toVariant() if hasattr(ids, "toVariant") else ids
+        return [row.get("id") for row in (ids or [])]
+
+    decal = next((c for c in v if c.get("id") == "45_facial-hair"), None)
+    files = (decal or {}).get("files") or []
+    if files:
+        obj.setProperty("usePackArt", True)
+        obj.setProperty("state", dict(obj.property("state").toVariant(), **{"45_facial-hair": files[0]}))
+        QTimer.singleShot(0, app.quit)
+        app.exec_()
+        print("  pack mode, 45_facial-hair chosen -> layers %s" % (layer_ids(),))
+
 sys.exit(1 if problems else 0)

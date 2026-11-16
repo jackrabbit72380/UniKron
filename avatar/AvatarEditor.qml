@@ -517,12 +517,24 @@ Item {
         }
     }
 
+    // The pack's facial hair and face paint are UV sheets (128x64, 128x128), not
+    // body plates: the stage fits every layer to the whole frame, so one of these
+    // would stretch into a blurry decal over the entire avatar. The drawn art
+    // for the same categories is real plate art (1024x1536), so this only
+    // applies to pack mode. Where the sheets sit on the face is still unknown -
+    // see avatar_tools/DECALS.md.
+    function isPackDecal(id) {
+        return id === "16_face-paint" || id === "45_facial-hair"
+    }
+
     function rebuildLayers() {
         var out = []
         for (var i = 0; i < categories.length; ++i) {
             var c = categories[i]
             var name = state[c.id]
             if (!name)
+                continue
+            if (usePackArt && isPackDecal(c.id))
                 continue
             out.push({ url: style.itemUrl(c.path, name), z: c.z, id: c.id })
         }
