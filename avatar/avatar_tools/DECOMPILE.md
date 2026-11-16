@@ -27,11 +27,32 @@ corpora live in the `UniKron-decompiled-*.zip` archives beside the theme zip.
 Ten binaries gave up their code: 84,365 functions in total, written out as one C
 file each.
 
-The 2008 editor is the one this theme reproduces, so its corpus is the useful
-one: 1,986 functions of real C, dense across the whole `.text`
-(`0x9803acc8`-`0x9813c058`), complete with the UI class names the strings
-section promised (`AuraControl`, `AuraScene`, `AvatarCategoryLabelOverride`,
-`AvatarBackButtonOverride`).
+The 2008 editor is the one this theme reproduces, so its corpus is the useful one: 1,986 functions of real C, dense across the whole `.text` (`0x9803acc8`-`0x9813c058`), complete with the UI class names the strings section promised (`AuraControl`, `AuraScene`, `AvatarCategoryLabelOverride`, `AvatarBackButtonOverride`).
+
+**Correction: the corpus that was shipped the first time was not real C.** Every
+file in the original `UniKron-decompiled-xbox360-2008.zip` was a three-line
+`halt_baddata()` stub - the import had been made at the base the PE header
+claims (`0x92000000`) rather than the one the code builds (`0x98000000`), so
+the whole image decoded as garbage. The numbers in the table above describe the
+re-run, not that archive. The re-run imports at `0x98000400` (`mkelf.py` reports
+it), and the result is:
+
+| | functions |
+| --- | ---: |
+| in the image | 1,986 |
+| with a decompiled body | 1,093 |
+| still `halt_baddata` | 893 |
+
+The 893 are not a bad import. They are the functions whose first block contains
+a Xenon `vmx128` instruction - the 360's 128-bit vector extension, which
+Ghidra's PowerPC module does not model, so decoding stops at the first one.
+Nothing in Ghidra 12.2's language list covers it (`4xx`, `e500`, `QUICC`,
+`default`), which means the vector maths and most of the rendering path are
+still unreadable as C. Everything that gates on it - the light rig's numbers,
+the stage camera - is plausibly in that 45%.
+
+`decompiled/nxe2008_index.txt` is regenerated from this corpus (address, body
+length, first literal), and `decompiled/samples/` holds a real function from it.
 
 The 2010 host binary is the largest single result at 20,381 functions, and it
 documents the direction that dash took: marketplace and telemetry strings such
@@ -118,6 +139,43 @@ through tables of pointers, so the C reads `*(char **)(table + 4)` rather than
 `decompiled/nxe2008_index.txt` lists every function with its instruction count,
 call count and first string reference taken straight from `lis`/`ori` pairs,
 and the literals the decompiler does resolve are already in the C.
+
+## The XTL effects, and where the shaders stop
+
+`xtl_effects.py` pulls the editor's 21 `.updb` effect blobs out of the XEX.
+Each is the shader's build path, a big-endian parameter table, then the
+compiled shader. The tables are the useful part, because they name what the
+editor binds:
+
+| effect | parameters |
+| --- | --- |
+| `shader_body_opaque_ps` | `CustomColor1-3`, `ambientColour`, `enableShadows`, `jitterMap`, `lightColour1-3`, `lightDirection1-3`, `oneMinusShadowStrength`, `rimLightColour`, `s_colourTex`, `s_decalTex`, `s_intensityTex`, `shadowMap`, `shadowSizes` |
+| `shader_body_transparent_ps` | the same plus `Transparency` |
+| `shader_body_shiny_opaque_ps` | the same as opaque, with `Reflectivity` and `s_envmap` |
+| `shader_head_opaque_ps` | `EyeBrowTone`, `EyeShadowTone`, `FacialHair`, `IrisTone`, `MouthTone`, `SkinFeature1Tone`, `SkinFeature2Tone`, `SkinTone`, the same light rig and shadow pair, `texEye`, `texEyeBrow`, `texEyeShadow`, `texFacialHair`, `texMouth`, `texSkinFeatures` |
+| `shader_body_*_vs` | `c_modelview`, `c_projection`, `c_shadow` |
+| `loading_*` | `fade`, `loadingTexture`, particle setup |
+
+Two things follow from that table, and they override guesses made elsewhere in
+these notes:
+
+- The head is **six separate texture slots** with **eight tones**, not one
+  combined mask. `texEye`, `texEyeBrow`, `texEyeShadow`, `texFacialHair`,
+  `texMouth` and `texSkinFeatures` are named individually, and the head asset's
+  six empty 128x128 / 64x64 slots are exactly those six. Whatever paints them
+  must supply all six, or the head is painted with fewer layers than the editor
+  binds.
+- There is **no** `s_colourTex` on the head. The body takes a colour texture, a
+  decal texture and an intensity texture; the head takes the six face sheets and
+  none of those.
+
+The bodies themselves are Xbox 360 GPU microcode: the blob ends with the Xenos
+footer `0x102A1101` followed by section sizes (`0x208 0x388 0x24 0x90 0x130
+0x158` on the body shader). There is no D3D9 token stream in them - the `ps_3_0`
+string is the XTL compile target, not an instruction set - so `xtl_effects.py`
+writes each blob out verbatim (`.updb` beside `effects.json`) and disassembles
+nothing. Reading the bodies needs a Xenon `vmx128`/clause decoder, the same gap
+that blocks 893 of the C functions.
 
 ## What the runtime and the front-end expose
 

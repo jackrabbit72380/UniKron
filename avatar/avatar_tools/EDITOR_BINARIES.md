@@ -471,6 +471,18 @@ Before this the bake painted one flat colour per triangle from a centroid
 lookup, which turned the smirk into a red slab and the brows and eyes into
 zig-zag blocks along the triangle edges.
 
+**The six-slot reading is the shader's, not the bake's.** Extracting the effect
+tables (`xtl_effects.py`, see `DECOMPILE.md`) shows `shader_head_opaque_ps` binds
+six separate sheets - `texEye`, `texEyeBrow`, `texEyeShadow`, `texFacialHair`,
+`texMouth`, `texSkinFeatures` - each with its own tone (`IrisTone`, `EyeBrowTone`,
+`EyeShadowTone`, `FacialHair`, `MouthTone`, `SkinFeature1Tone`,
+`SkinFeature2Tone`, plus `SkinTone`). The bake's single sheet with R/B zones is a
+compression of that: it is correct in placement and colour, but the editor paints
+six layers, and three of them - eye shadow, facial hair, skin features - have no
+pixels anywhere in this pack, so their slots stay empty by data, not by choice.
+The R/B channel meaning itself is still an inference; nothing in the binaries
+documents it, and the shader bodies that would settle it are Xenon microcode.
+
 ## Colour: what decodes and what is missing
 
 `read_model` now keeps the two things it used to discard - each vertex's UV sets

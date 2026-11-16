@@ -1,0 +1,434 @@
+[
+ {
+  "path": "TE:\\Xenon\\flash-fall08\\core\\private\\apps\\avatareditor\\src\\shader_simpleshadow_ps.updb",
+  "name": "shader_simpleshadow_ps.updb",
+  "offset": 20115,
+  "size": 312,
+  "parameters": [
+   "detail"
+  ],
+  "footer": [
+   271192321,
+   280,
+   132,
+   36,
+   128,
+   0,
+   224,
+   0
+  ]
+ },
+ {
+  "path": "TE:\\Xenon\\flash-fall08\\core\\private\\apps\\avatareditor\\src\\shader_simpleshadow_vs.updb",
+  "name": "shader_simpleshadow_vs.updb",
+  "offset": 20427,
+  "size": 23752,
+  "parameters": [
+   "matWVP"
+  ],
+  "footer": []
+ },
+ {
+  "path": "YE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loading_vs.updb",
+  "name": "loading_vs.updb",
+  "offset": 44179,
+  "size": 1240,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "effect_scale",
+   "origin_offset",
+   "particleSetupData"
+  ],
+  "footer": []
+ },
+ {
+  "path": "YE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loading_ps.updb",
+  "name": "loading_ps.updb",
+  "offset": 45419,
+  "size": 505,
+  "parameters": [
+   "fade",
+   "loadingTexture"
+  ],
+  "footer": [
+   271192321,
+   516,
+   676,
+   36,
+   140,
+   412,
+   452,
+   0
+  ]
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingmist_vs.updb",
+  "name": "loadingmist_vs.updb",
+  "offset": 45924,
+  "size": 1192,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "effect_scale",
+   "origin_offset",
+   "particleSetupData"
+  ],
+  "footer": []
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingmist_ps.updb",
+  "name": "loadingmist_ps.updb",
+  "offset": 47116,
+  "size": 432,
+  "parameters": [
+   "fade",
+   "loadingTexture"
+  ],
+  "footer": [
+   271192321,
+   508,
+   580,
+   36,
+   140,
+   412,
+   452,
+   0
+  ]
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingbact_vs.updb",
+  "name": "loadingbact_vs.updb",
+  "offset": 47548,
+  "size": 1088,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "effect_scale",
+   "origin_offset",
+   "particleSetupData"
+  ],
+  "footer": []
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingbact_ps.updb",
+  "name": "loadingbact_ps.updb",
+  "offset": 48636,
+  "size": 504,
+  "parameters": [
+   "fade",
+   "loadingTexture"
+  ],
+  "footer": [
+   271192321,
+   512,
+   972,
+   36,
+   140,
+   412,
+   452,
+   0
+  ]
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingstars_vs.updb",
+  "name": "loadingstars_vs.updb",
+  "offset": 49140,
+  "size": 1488,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "effect_scale",
+   "origin_offset",
+   "particleSetupData"
+  ],
+  "footer": []
+ },
+ {
+  "path": "E:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\loadingstars_ps.updb",
+  "name": "loadingstars_ps.updb",
+  "offset": 50628,
+  "size": 66319,
+  "parameters": [
+   "fade",
+   "loadingTexture"
+  ],
+  "footer": []
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_opaque_ps.updb",
+  "name": "shader_body_opaque_ps.updb",
+  "offset": 116947,
+  "size": 2104,
+  "parameters": [
+   "CustomColor1",
+   "CustomColor2",
+   "CustomColor3",
+   "ambientColour",
+   "enableShadows",
+   "jitterMap",
+   "lightColour1",
+   "lightColour2",
+   "lightColour3",
+   "lightDirection1",
+   "lightDirection2",
+   "lightDirection3",
+   "oneMinusShadowStrength",
+   "rimLightColour",
+   "s_colourTex",
+   "s_decalTex",
+   "s_intensityTex",
+   "shadowMap",
+   "shadowSizes"
+  ],
+  "footer": [
+   271192321,
+   520,
+   904,
+   36,
+   144,
+   304,
+   344,
+   0
+  ]
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_opaque_vs.updb",
+  "name": "shader_body_opaque_vs.updb",
+  "offset": 119051,
+  "size": 1424,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "c_shadow"
+  ],
+  "footer": []
+ },
+ {
+  "path": "iE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_transparent_ps.updb",
+  "name": "shader_body_transparent_ps.updb",
+  "offset": 120475,
+  "size": 2128,
+  "parameters": [
+   "CustomColor1",
+   "CustomColor2",
+   "CustomColor3",
+   "Transparency",
+   "ambientColour",
+   "enableShadows",
+   "jitterMap",
+   "lightColour1",
+   "lightColour2",
+   "lightColour3",
+   "lightDirection1",
+   "lightDirection2",
+   "lightDirection3",
+   "oneMinusShadowStrength",
+   "rimLightColour",
+   "s_colourTex",
+   "s_decalTex",
+   "s_intensityTex",
+   "shadowMap",
+   "shadowSizes"
+  ],
+  "footer": [
+   271192321,
+   528,
+   904,
+   36,
+   152,
+   312,
+   352,
+   0
+  ]
+ },
+ {
+  "path": "iE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_transparent_vs.updb",
+  "name": "shader_body_transparent_vs.updb",
+  "offset": 122603,
+  "size": 1432,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "c_shadow"
+  ],
+  "footer": []
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_head_opaque_ps.updb",
+  "name": "shader_head_opaque_ps.updb",
+  "offset": 124035,
+  "size": 2576,
+  "parameters": [
+   "EyeBrowTone",
+   "EyeShadowTone",
+   "FacialHair",
+   "IrisTone",
+   "MouthTone",
+   "SkinFeature1Tone",
+   "SkinFeature2Tone",
+   "SkinTone",
+   "ambientColour",
+   "enableShadows",
+   "jitterMap",
+   "lightColour1",
+   "lightColour2",
+   "lightColour3",
+   "lightDirection1",
+   "lightDirection2",
+   "lightDirection3",
+   "oneMinusShadowStrength",
+   "rimLightColour",
+   "shadowMap",
+   "shadowSizes",
+   "texEye",
+   "texEyeBrow",
+   "texEyeShadow",
+   "texFacialHair",
+   "texMouth",
+   "texSkinFeatures"
+  ],
+  "footer": [
+   271192321,
+   556,
+   976,
+   36,
+   144,
+   304,
+   344,
+   0
+  ]
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_head_opaque_vs.updb",
+  "name": "shader_head_opaque_vs.updb",
+  "offset": 126611,
+  "size": 1536,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "c_shadow"
+  ],
+  "footer": []
+ },
+ {
+  "path": "jE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_shiny_opaque_ps.updb",
+  "name": "shader_body_shiny_opaque_ps.updb",
+  "offset": 128147,
+  "size": 2144,
+  "parameters": [
+   "CustomColor1",
+   "CustomColor2",
+   "CustomColor3",
+   "Reflectivity",
+   "ambientColour",
+   "enableShadows",
+   "jitterMap",
+   "lightColour1",
+   "lightColour2",
+   "lightColour3",
+   "lightDirection1",
+   "lightDirection2",
+   "lightDirection3",
+   "oneMinusShadowStrength",
+   "rimLightColour",
+   "s_colourTex",
+   "s_envmap",
+   "s_intensityTex",
+   "shadowMap",
+   "shadowSizes"
+  ],
+  "footer": []
+ },
+ {
+  "path": "oE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_shiny_transparent_ps.updb",
+  "name": "shader_body_shiny_transparent_ps.updb",
+  "offset": 130291,
+  "size": 2184,
+  "parameters": [
+   "CustomColor1",
+   "CustomColor2",
+   "CustomColor3",
+   "Reflectivity",
+   "Transparency",
+   "ambientColour",
+   "enableShadows",
+   "jitterMap",
+   "lightColour1",
+   "lightColour2",
+   "lightColour3",
+   "lightDirection1",
+   "lightDirection2",
+   "lightDirection3",
+   "oneMinusShadowStrength",
+   "rimLightColour",
+   "s_colourTex",
+   "s_envmap",
+   "s_intensityTex",
+   "shadowMap",
+   "shadowSizes"
+  ],
+  "footer": [
+   271192321,
+   416,
+   664,
+   36,
+   144,
+   276,
+   316,
+   0
+  ]
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_shadow_vs.updb",
+  "name": "shader_body_shadow_vs.updb",
+  "offset": 132475,
+  "size": 1080,
+  "parameters": [
+   "c_modelview",
+   "c_projection"
+  ],
+  "footer": [
+   271192321,
+   416,
+   664,
+   36,
+   144,
+   276,
+   316,
+   0
+  ]
+ },
+ {
+  "path": "dE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_head_shadow_vs.updb",
+  "name": "shader_head_shadow_vs.updb",
+  "offset": 133555,
+  "size": 1080,
+  "parameters": [
+   "c_modelview",
+   "c_projection"
+  ],
+  "footer": [
+   271192321,
+   508,
+   880,
+   36,
+   144,
+   304,
+   344,
+   0
+  ]
+ },
+ {
+  "path": "cE:\\Xenon\\flash-fall08\\core\\private\\xtl\\avatar\\render\\src\\libdash\\obj\\xbox\\shader_body_shiny_vs.updb",
+  "name": "shader_body_shiny_vs.updb",
+  "offset": 134635,
+  "size": 15692309,
+  "parameters": [
+   "c_modelview",
+   "c_projection",
+   "c_shadow"
+  ],
+  "footer": []
+ }
+]
