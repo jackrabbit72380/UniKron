@@ -66,6 +66,9 @@ def main():
     ap.add_argument("--width", type=int, default=256)
     ap.add_argument("--height", type=int, default=384)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--include-base", action="store_true",
+                    help="also plate MaleBody/FemaleBody/Head, for a base layer "
+                         "drawn in the same frame as the items")
     args = ap.parse_args()
 
     wanted = set(args.categories.split(","))
@@ -76,7 +79,7 @@ def main():
         category = (record.get("metadata") or {}).get("category")
         if category not in wanted or not record.get("vertices"):
             continue
-        if record["name"] in BASE:
+        if record["name"] in BASE and not args.include_base:
             continue
         items.append((record["name"], category))
     if args.limit:

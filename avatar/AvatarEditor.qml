@@ -355,11 +355,21 @@ Item {
                 continue
             var folderPath = style.dirUrl(base, name)
             var folderFiles = source[i].files || []
+            // The drawn body plates stand in for the pack's missing body art. Once
+            // the pack has its own plates they win, because those are rendered
+            // through the same frame as every item plate.
             if (root.usePackArt && name === "10_body") {
-                var drawn = drawnBodyFolder()
-                if (drawn) {
-                    folderPath = drawn.path
-                    folderFiles = drawn.files
+                if (hasPlates("10_body")) {
+                    // Plate names have to be the ones the strip offers, or the
+                    // chosen body is not in its own model and nothing highlights.
+                    folderPath = style.dirUrl(root.packPlateFolder, name)
+                    folderFiles = plateFiles(name)
+                } else {
+                    var drawn = drawnBodyFolder()
+                    if (drawn) {
+                        folderPath = drawn.path
+                        folderFiles = drawn.files
+                    }
                 }
             }
             list.push({
@@ -527,6 +537,12 @@ Item {
         if (!bodyCategory || state[bodyCategory.id])
             return
         var files = bodyCategory.files || []
+        // Every baked plate and set is posed on the male body, so that is the one
+        // to open with when the body itself comes from a plate.
+        if (usePackArt && files.indexOf("malebody.png") >= 0) {
+            setItem(bodyCategory.id, "malebody.png")
+            return
+        }
         for (var i = 0; i < files.length; ++i) {
             if (!files[i])
                 continue
@@ -543,6 +559,23 @@ Item {
     // see avatar_tools/DECALS.md.
     function isPackDecal(id) {
         return id === "15_face" || id === "16_face-paint" || id === "45_facial-hair"
+    }
+
+    function plateFiles(categoryId) {
+        for (var i = 0; i < packPlates.folders.length; ++i) {
+            if (packPlates.folders[i].id === categoryId)
+                return packPlates.folders[i].files || []
+        }
+        return []
+    }
+
+    function hasPlates(categoryId) {
+        for (var i = 0; i < packPlates.folders.length; ++i) {
+            var f = packPlates.folders[i]
+            if (f.id === categoryId && (f.files || []).length > 0)
+                return true
+        }
+        return false
     }
 
     // A plate for this item, if one was baked. Empty means there is none, and the
