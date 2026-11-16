@@ -429,7 +429,20 @@ Item {
         "hair": "hair_short_brown.png"
     })
 
+    // The same look in the pack's own items: Avatar6400's descriptor, read by
+    // avatar_tools/avatar_desc.py. Its look block names MaleBody, Head, Short
+    // with Left Curls (Hat), Jacket with Sweater, Male Flower Print Flares and
+    // Grunge Trainers - so a fresh pack avatar dresses the way the console's
+    // sample avatar is dressed rather than in the first file of each category.
+    readonly property var packSeedPicks: ({
+        "shirt": "jacket-with-sweater.png",
+        "pants": "male-flower-print-flares.png",
+        "shoes": "grunge-trainers.png",
+        "hair": "short-with-left-curls-hat.png"
+    })
+
     function seedOutfit() {
+        var picks = usePackArt ? packSeedPicks : seedPicks
         var wanted = ["shirt", "pants", "shoes", "hair"]
         var next = {}
         var changed = false
@@ -444,7 +457,7 @@ Item {
                 if (c.id.indexOf(wanted[w]) < 0 || c.id.indexOf("facial") >= 0)
                     continue
                 if (!next[c.id]) {
-                    var pick = seedPicks[wanted[w]]
+                    var pick = picks[wanted[w]]
                     next[c.id] = c.files.indexOf(pick) >= 0 ? pick : c.files[0]
                     changed = true
                 }

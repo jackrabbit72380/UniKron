@@ -165,3 +165,45 @@ and `Chiseled Chin` all carry it, and so does every 16-byte `.Avatar` entry
 objects and the description entries, not a per-item id, and it cannot be used to
 match a shape to an item. The `u16 3` inside both headers does line up with the
 class byte (3 = ShapeOverrides).
+
+## `.Avatar` descriptors: the avatars' own outfits
+
+The `descriptors/Avatar####.Avatar` files are 1,000-byte descriptions the games
+hand the avatar system. All three in the repo decode the same way, and
+`avatar_desc.py` reads them:
+
+    +0x000  4 x u32       header (as float32 the first two are -0.5)
+    +0x010  n x record    shape overrides, variable length
+    +0x0fc  9 x ARGB      colours
+    +0x120  6 x record    look 1
+    +0x300  6 x record    look 2 (cut short in these samples)
+
+An override record is `u16 id, u16 class, 8-byte GUID`, plus a word or two; a look
+record is `u32 slot, u16 id, u16 class, 8-byte GUID, u32 slot`. Both ids are
+**big-endian** and index the asset catalog, so every entry has a name.
+
+`MaleBody` in slot 2 is `MaleBody`, `Short with Left Curls (Hat)` in slot 4 is a
+hair-with-hat, `Jacket with Sweater` in slot 8 is a shirt, `Male Flower Print
+Flares` in slot 16 is trousers, `Grunge Trainers` in slot 32 is footwear. The six
+slot values are the same in all three files, in the same order, so they are a
+fixed mask and the position is what names the slot:
+
+    2 body, 1 head, 4 hair/hat, 8 torso, 16 legs, 32 feet
+
+Avatar6400's look, in full, is therefore **MaleBody, Head, Short with Left Curls
+(Hat), Jacket with Sweater, Male Flower Print Flares, Grunge Trainers**, with
+Elven Ears, two hiding templates, Skull Facepaint and two eye shadows applied as
+shape overrides, and nine colours (hair `#6e5326`, as the bake scripts use).
+Avatar6404 is the female equivalent: **FemaleBody, Head, Shaved Pattern (Hat),
+Sweater with Shirt, Formal Trouser Suit, Female Jelly Clogs** with Round Ears,
+Rosy Cheeks and a Comb Moustache.
+
+The editor seeds a fresh pack avatar from Avatar6400's outfit for that reason -
+it is the one look the console's own sample avatar wears, not a choice of ours.
+
+**Unresolved:** Avatar6411 puts `Blue Fingerless Gloves` (46_gloves) in slot 16
+and `Snowboarding Jacket` (82_coat) in slot 32, which no wardrobe allows. The
+records parse cleanly and the other four slots of that file are ordinary
+(`FemaleBody`, `Head`, `Combed Right`, `V Neck Top`), so this is not an alignment
+error we can see - it may be a deliberately random or corrupt test fixture. Its
+data is noted here but not used for anything.
