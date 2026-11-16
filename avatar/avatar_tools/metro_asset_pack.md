@@ -117,3 +117,42 @@ be found.
 Two things would finish it: the extracted 135 MB `AvatarAssetPack.toc` (any tool
 that unpacks STFS content can produce it), or the block table layout for this
 package so it can be rebuilt here.
+
+## The toc decompresses (13,661,900-byte copy)
+
+The extracted `AvatarAssetPack.toc` arrived as 13,661,900 bytes - not 135 MB, so
+the 135,069,697 in the package was a field I mis-read, not a length. Its header
+starts `8a 76 2d f4 ... 00 00 00 02 00 00 05 02` and its name pool is at
+`0x4da19`.
+
+The 12.5 MB after the names is **LZX, in the same 12-byte-headered chunks the
+NXE closet uses** - `u32 compressed, u32 output_offset, u32 output_size` - with
+0x8000 output per chunk and a 0x8000 window. 423 chunks, every one of which
+decompresses cleanly:
+
+```
+python3 pack_toc.py AvatarAssetPack.toc        # 327 assets out
+```
+
+327 assets, 162 of which parse straight through `avatar_mesh.read_model` into
+vertices, indices, UVs, joints, weights and colours - real retail meshes, e.g.
+block 0 is 884 vertices, 1,764 indices, 7 materials, spanning y 0.000-0.094
+(a shoe, and the pack's name list starts with Moccasins and Formal Shoes). The
+tallest single-chunk asset spans y 1.107-1.360, a hat.
+
+The other 165 assets fail with `bit overrun at 262144`, i.e. they need 256 KB -
+eight chunks - and one chunk each is all the grouping below gives them.
+
+## What is still missing here
+
+The mapping, not the data:
+
+- Chunks are stored out of order and only 96 of them carry a non-zero
+  `output_offset` (0x8000, 0x10000, 0x18000). Grouping "a new asset starts at
+every offset 0" gives 327 assets but truncates the large ones, so the real
+  per-asset chunk list lives in the toc's record table, which is not decoded.
+- The 5,304 names are not tied to assets yet. They come in about nine
+  languages per item, so asset order and name order can only be matched once
+  that record table is read.
+- Textures are still empty in every parsed model (`textures: []`), same as the
+  NXE closet, so the colour question is unchanged by this pack.
