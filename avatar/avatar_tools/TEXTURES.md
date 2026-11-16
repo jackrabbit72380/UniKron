@@ -127,6 +127,31 @@ Each of these was checked against real items rather than assumed:
   `ambientColour`, `lightColour1/2` and `jitterMap`. Nothing in the file
   populates them.
 
+## The pack's `Texture` block does carry pixels
+
+"Every texture slot is empty" was true of the **models'** inline slots, but it is
+not the whole story. 187 assets ship a separate `Texture` block (STRB block 2),
+and that block holds real compressed image data:
+
+- It is LZX-framed like the Model block, so `avatar_mesh.decompress` gives a
+  33-byte header followed by pixel bytes.
+- The declared size at header +0x0c matches the decoded length **exactly in 187
+  of 187** cases, so nothing is truncated or padded.
+- Dimensions are two sizes only: **128 x 64** for 161 assets and **128 x 128**
+  for the other 26.
+- They sit in exactly the categories whose items have no geometry: `15_face`
+  (45), `50_hair` (45), `10_body` (27), `16_face-paint` (26) and
+  `45_facial-hair` (17) - the skin, eye, hair-detail and decal art.
+
+What is *not* cracked is the storage order. Reading the bytes as plain linear
+DXT1 and decoding with `avatar_mesh.decode_dxt` produces vertical stripes, not a
+face or a beard. Five reorderings were tried against the smoothness of the
+result (linear, 32x32 tiles row-major, column-major, and Morton order at both
+the tile and the block level, each with and without the 8-in-16 byte swap): all
+landed within 3% of each other, which means none of them is the real layout. So
+the art genuinely exists in this file, and decoding it needs the console's
+tiling worked out properly rather than guessed.
+
 So the colour arrives at runtime. The dashboard's own strings name the channel:
 `/live/{:08x}/avataritems/{}.acp`, plus `AvatarMarketplaceManifest`, whose body
 is `manifestVersion="1.0"` XML. Item colour and item category both come from
