@@ -121,10 +121,18 @@ the garment is the wrong one.
 ## Blocks the tools still ignore
 
 * **Block 4, `ShapeOverrides`.** All 18 nose items (`Boxer's Nose`, `Curved Nose`,
-  …) carry one and nothing else: no model, no texture. `Defined Nose`'s payload is
-  1,505 bytes starting `00000000 d4130000 01000000 0200 0300 <8-byte id>` — a
-  serialised object with a small header and a type id, not a delta buffer in any
-  layout the project has decoded. So a nose is a **head shape override**, not art,
-  and no set is baked for those 18.
+  …) carry one and nothing else: no model, no texture. So a nose is a **head shape
+  override**, not art, and no set is baked for those 18.
+
+  What the bytes show, and what they refuse to show: the payload starts with two
+  nested headers of the same shape, `u32 0, u32 0x13d4, u32 1, u16 2, u16 3`, then
+  the same 8-byte id (`c1c8f109 a19cb2e0`) that repeats in every `.Avatar` entry,
+  then a second copy of that header at +32. Length varies per nose (1,505 for
+  `Defined Nose`, 1,608 for `Boxer's Nose`) and everything from +32 differs, so the
+  shape data lives after the headers. Reading it as an array of little-endian
+  floats gives exponent garbage and NaNs (`2053219840.0`, `nan`), so it is not a
+  plain delta or matrix buffer; it is more likely another chunked/compressed
+  serialisation like the model blocks. Decoding it is the open task, and until it
+  is done the 18 noses have no 3D set.
 * `45_facial-hair` and `16_face-paint` are textures only (block 2), which is why
   they bake as decals; `15_face` is 43 eye sheets (block 2) plus those 18 noses.
