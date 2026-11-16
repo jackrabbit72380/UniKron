@@ -44,7 +44,9 @@ HAIR_COLOUR = "6e5326"
 CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  # A dress or a suit covers the torso and legs at once, so only the
                  # shoes are kept underneath.
-                 "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress"}
+                 "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress",
+                 # Picking a hairstyle takes the stock one off.
+                 "50_hair": "hair"}
 
 
 def bake_one(pack, clip, description, asset, kind, folder, frames, width, height):
@@ -53,7 +55,8 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
         worn = [STOCK["shoes"]]
     else:
         worn = [STOCK[k] for k in ("shirts", "pants", "shoes") if k != kind]
-    parts = ["MaleBody", "Head", HAIR, asset] + worn
+    head = ["MaleBody", "Head"] + ([] if kind == "hair" else [HAIR])
+    parts = head + [asset] + worn
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
          "--colours=" + description, "--hair=" + HAIR_COLOUR, "--face"] + parts,
