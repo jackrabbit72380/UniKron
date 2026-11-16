@@ -249,12 +249,28 @@ debugging.
    machine. With that file the same recipe applies (base from `mkelf.py`,
    `PowerPC:BE:64:64-32addr`, then `patch_vmx128.py`), and it is the corpus that
    would answer the shader questions the editor cannot.
-2. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
+2. **`NXE.exe` (42 MB) decompiles slowly and is only partly done.** Ghidra
+   analysed it in 15 minutes, then the per-function decompile wrote **7,202**
+   functions before the runner restarted and killed the process; the project
+   was deleted, so finishing it means re-running analysis. What the 7,202
+   functions do not contain is any avatar lighting: `AmbientLight`,
+   `SunLightDirection`, `lightColour`, `texEye` and `XtlEffect` all match **zero**
+   files. The dash's scene names live in XUI data and the effect names in the
+   `.updb` blobs, so a bigger corpus would not hand over the rig either.
+3. **The closet index has no garment category.** `closet_index.tsv` is
+   `id, group, code, name`, and `code` is not the category: 904 of the caps,
+   566 helmets and 92 pairs of glasses are `3`, while shirts split across `1`
+   (1,302) and `2` (815) and shoes across `1` and `2` too. It looks like an item
+   source class. The editor's real filter is `AeSearchSet` in the port DLL,
+   which works on loaded asset metadata (block 4), and block 4 has not been
+   decoded - so the closet can be named and iconned today, but not sorted into
+   the editor's categories without that.
+4. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
    `28672` as ciphertext. Six LZX attempts (offsets 28672/28696/28720 at 1 MiB
    and 4 MiB output) all fail with `bad aligned table` or `bad block type`.
    What this needs: the decrypted image, or the console's XEX keys. Nothing in
    the archive supplies either.
-3. **The remaining 21 third-party PEs** - `XBOX HUB.exe` (238 MiB),
+5. **The remaining 21 third-party PEs** - `XBOX HUB.exe` (238 MiB),
    `dxcompiler.dll` x2, `dxil.dll`, `vk_swiftshader`, `vulkan-1`, `ffmpeg`,
    `d3dcompiler_47`, `SDL2`, `iCUESDK`, the MSVC runtimes and
    `xenia_canary_netplay.exe`. That is Chromium, DirectX tooling, an emulator
