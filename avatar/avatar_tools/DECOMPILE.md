@@ -376,6 +376,11 @@ needs to write a manifest the port would accept.
 title, and its own notes name the editor's values - "the Metro dashboard uses
 11028, the Avatar Editor 10900" for the D3D work-retired handler offset.
 
+`nxe_dash_LivePack.dll` (16 MB) is decompiled too: **8,072 functions**, in
+`UniKron-decompiled-livepack.zip`. It is the local Live/marketplace responder,
+and its only avatar contact is an import of `XamAvatarManifestGetBodyType` -
+no avatar catalogue of its own, so it adds no category data.
+
 That closes every first-party binary in the dump: dashboard 39,611, runtime
-28,447, GPU 4,848, editor DLL 10,550, editor XEX 3,095. What remains encrypted
-is the flash XUI (18 files) and the 2010 editor XEX.
+28,447, LivePack 8,072, GPU 4,848, editor DLL 10,550, editor XEX 3,095. What
+remains encrypted is the flash XUI (18 files) and the 2010 editor XEX.
