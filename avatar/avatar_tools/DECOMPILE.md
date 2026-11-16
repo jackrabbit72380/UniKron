@@ -31,28 +31,40 @@ The 2008 editor is the one this theme reproduces, so its corpus is the useful on
 
 **Correction: the corpus that was shipped the first time was not real C.** Every
 file in the original `UniKron-decompiled-xbox360-2008.zip` was a three-line
-`halt_baddata()` stub - the import had been made at the base the PE header
-claims (`0x92000000`) rather than the one the code builds (`0x98000000`), so
-the whole image decoded as garbage. The numbers in the table above describe the
-re-run, not that archive. The re-run imports at `0x98000400` (`mkelf.py` reports
-it), and the result is:
+`halt_baddata()` stub. Two separate faults were behind that, and the table above
+predates both fixes:
+
+1. **The base was wrong.** The import used the base the PE header claims
+   (`0x92000000`) instead of the one the code builds (`0x98000000`), so the whole
+   image decoded as garbage. Importing at `0x98000400` (`mkelf.py` reports it)
+   gives 1,093 real bodies and 893 stubs.
+2. **The word size was wrong.** The remaining 893 were not `vmx128` after all.
+   The editor saves its floating-point registers with `std`, a *64-bit* store;
+   `PowerPC:BE:32:default` rejects it and truncates the function at its prologue.
+   Importing the same bytes as `PowerPC:BE:64:64-32addr` - 64-bit registers, a
+   32-bit address space, which is what Xenon is - decodes them: **2,967
+   functions, 189 stubs**.
+
+What is left after that is a smaller `vmx128` residue plus padding. `vmx128` is
+not in any shipped PowerPC language, so `patch_vmx128.py` rewrites those words to
+`nop` in a copy of the image (6,819 words) and decompiles that. The result this
+corpus holds:
 
 | | functions |
 | --- | ---: |
-| in the image | 1,986 |
-| with a decompiled body | 1,093 |
-| still `halt_baddata` | 893 |
+| in the image | 3,095 |
+| with a decompiled body | 2,903 |
+| without one | 192 |
 
-The 893 are not a bad import. They are the functions whose first block contains
-a Xenon `vmx128` instruction - the 360's 128-bit vector extension, which
-Ghidra's PowerPC module does not model, so decoding stops at the first one.
-Nothing in Ghidra 12.2's language list covers it (`4xx`, `e500`, `QUICC`,
-`default`), which means the vector maths and most of the rendering path are
-still unreadable as C. Everything that gates on it - the light rig's numbers,
-the stage camera - is plausibly in that 45%.
+The 192 are zero-filled padding Ghidra promoted to functions, and a handful of
+pcode failures (`Unable to resolve constructor`), not undecoded code. The
+neutralised vector words are absent from the C - store/load pairs that fed them
+read as unused loads - so the bodies are readable for control flow, calls,
+string references and scalar constants, and are not a faithful simulation.
 
 `decompiled/nxe2008_index.txt` is regenerated from this corpus (address, body
-length, first literal), and `decompiled/samples/` holds a real function from it.
+length, first literal), and `decompiled/samples/` holds the function that
+declares the editor's scene lights.
 
 The 2010 host binary is the largest single result at 20,381 functions, and it
 documents the direction that dash took: marketplace and telemetry strings such
@@ -80,6 +92,16 @@ python3 mkelf.py avatareditor.xex /tmp/nxe2008.elf
 JAVA_HOME=/tmp/jdk-25.0.5+8 ghidra_*/support/analyzeHeadless /tmp/proj uni2008 \
   -import /tmp/nxe2008.elf -processor PowerPC:BE:32:default \
   -scriptPath ghidra -postScript DecompileAll.java /tmp/decompiled/nxe2008 -deleteProject
+
+# the language matters more than the base: `-processor PowerPC:BE:32:default`
+# rejects the 64-bit `std`/`ld` the editor saves registers with, and every
+# function that uses them becomes a stub. 64-bit registers, 32-bit addresses:
+JAVA_HOME=/tmp/jdk-25.0.5+8 ghidra_*/support/analyzeHeadless /tmp/proj uni2008 \
+  -import /tmp/nxe2008.elf -processor PowerPC:BE:64:64-32addr \
+  -scriptPath ghidra -postScript DecompileAll.java /tmp/decompiled/nxe64 -deleteProject
+
+# neutralise the remaining vmx128 words so control flow around them decodes
+python3 patch_vmx128.py /tmp/nxe2008.elf /tmp/nxe2008_nop.elf /tmp/vmx128.json
 
 # x86 XBE: same wrapper, different architecture
 python3 mkelf.py Toolbox.xip /tmp/Toolbox.elf --x86

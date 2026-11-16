@@ -1,7 +1,7 @@
 # How XTL lights and frames an avatar
 
 Extracted from the 2008 XTL avatar renderer (`default_uncompressed.xex`, 6,618
-functions) and the editor that drives it (`nxe2008/avatareditor.xex`, 1,986
+functions) and the editor that drives it (`nxe2008/avatareditor.xex`, 3,095
 functions). Reproducible with `xtl_constants.py`, which needs no Ghidra run -
 only the ELF `mkelf.py` writes from the same XEX.
 
@@ -53,17 +53,41 @@ An overhead key leaning toward the camera, a front-right fill and a back-left
 rim - which is why reference avatars read evenly lit from above rather than lit
 from one side. `bake_turntable.py` now uses exactly these three vectors.
 
+## The editor's own scene lights - recovered
+
+Those colours are not in the effect blobs, but they are in the editor. Its UI
+scene registers four elements in one table (`FUN_980b3c40` in the corpus), each
+with a name and a getter:
+
+| element | type | getter | value |
+| --- | --- | --- | --- |
+| `CameraElement` | 5 | `FUN_980b0e08` | index 0 |
+| `AmbientLight` | 6 | `FUN_980b0718` | `0xFF202020` |
+| `SunLightDirection` | 7 | `FUN_980b0680` | `(1.0, 0.0, 0.0)` |
+| `SunLightColor` | 6 | `FUN_980b0788` | `0xFFFFFFFF` |
+
+So the editor's scene is **one ambient at 32/255 grey (0.1255, 0.1255, 0.1255),
+one white directional light pointing along +x**, and no rim light of its own.
+The direction is three floats lifted from `.rdata`: `1.0` at `0x9800162c` and
+`0.0` twice at `0x980013e0`.
+
+This is the scene the avatar is drawn in, and it is a single sun - not the three
+directional colours the effect declares. The shader takes three because XTL lights
+are generic; the editor feeds it one white sun plus ambient, which is why the
+reference renders read as bright and flat rather than three-point lit.
+
 ## What is still not in the archive
 
-The **colours** (`ambientColour`, `lightColour1..3`, `rimLightColour`) and the
-**shadow strength** have no stored defaults: the name table carries names and
-types, the effect blobs carry directions, and every colour slot around the rig is
-zero. They are supplied by the scene when the dashboard renders an avatar, and
-that scene data is not in this dump - the same wall as the missing textures.
+The **per-slot colours** (`lightColour1..3`, `rimLightColour`) and the **shadow
+strength** still have no stored values: every colour slot around the rig is zero
+in the effect blobs, and the scene above supplies one sun colour and one ambient
+for the whole UI. How the editor folds white into three slots is a runtime
+mapping that the decompiled code does not spell out.
 
-`bake_turntable.py` therefore names its constants after the recovered parameters
-and uses this port's chosen colours, documented in the file, calibrated so the
-three recovered directions read softly rather than as a hard top light.
+`bake_turntable.py` names its constants after the recovered parameters and uses
+this port's chosen colours; they are **not** the editor's. With the scene values
+now known, the honest next step is to replace its ambient with `0.1255` grey and
+feed the recovered sun direction, rather than keep the calibrated picks.
 
 ## Camera
 
