@@ -354,8 +354,34 @@ Item {
         }
         list.sort(function (a, b) { return a.z - b.z })
         categories = list
+        pruneState()
         seedOutfit()
         fillItems()
+    }
+
+    // Switching to the pack's items leaves picks behind that only exist as drawn
+    // art ("hair_short_brown.png"), which would then be requested from
+    // pack_art/ and fail. Drop those, but only where the category still exists,
+    // so a wardrobe saved in one mode survives a round trip through the other.
+    function pruneState() {
+        var next = {}
+        var changed = false
+        for (var key in state) {
+            var keep = state[key]
+            for (var i = 0; i < categories.length; ++i) {
+                if (categories[i].id !== key)
+                    continue
+                if ((categories[i].files || []).indexOf(keep) < 0)
+                    keep = ""
+                break
+            }
+            if (keep)
+                next[key] = keep
+            else
+                changed = true
+        }
+        if (changed)
+            state = next
     }
 
     // A fresh avatar wears a stock outfit, the way the dashboard's does: without
