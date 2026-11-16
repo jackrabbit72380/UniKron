@@ -333,11 +333,20 @@ the editor browses, and it logs
 
     [avatar] v1 enum cats={:#x} bodies={:#x}: {} stock + {} closet item(s), {} as outfits
 
-So the port computes a **category bitmask** and a **body bitmask** across
-`stock + closet` items, and counts some of them "as outfits". That is the
-category logic the retail item files do not carry: it belongs to the port's
-enumeration, not to the asset. The bit values and the per-item test are the
-next thing to pull out of `FUN_180637410`.
+Reading the function settles what those masks are. They are **the request's own
+filters**, not something the port works out per item: the two values are ANDed
+against each stock record's fields (`(filter & record[+0]) != 0` for category,
+`(filter & record[+4]) != 0` for body), over a table of 216-byte records that
+is built at runtime (the globals hold heap pointers). The guest supplies the
+category bits, so the *labels and their order live in the guest's XUI*
+(`$flash_dash.xex`), which is encrypted. The stock counter is the one
+incremented inside that loop; the "closet item(s)" and "as outfits" figures are
+passed to the log from counters built elsewhere, and the wording is the port's
+own - it does not show closet items carrying category bits.
+
+So the retail assets and the port agree: an item carries no category. The
+division is: bits and labels in the guest UI, geometry and names in the
+closet, and the port only matching one against the other.
 
 `rexgpu-xenos.dll` (2.7 MB) is decompiled as well: **4,848 functions**, in
 `UniKron-decompiled-rexgpu-xenos.zip`. It is the part that patches the guest per
