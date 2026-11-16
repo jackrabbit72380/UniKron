@@ -1,0 +1,301 @@
+{
+ "source": "gamedir/avatareditor.xex (retail editor, MD5 39432fadd9a1866d94a859974ae8e616)",
+ "encoding": "UTF-16LE inside the editor's XUI scene strings",
+ "note": "The editor's category buttons, the label each maps to in its string table, the icon the scene pairs with it, and the theme folder that already implements it. Icons are only recorded where that exact png name exists in the file.",
+ "buttons": [
+  {
+   "button": "OptionBodyDefaultButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f63b8",
+   "theme_folder": null
+  },
+  {
+   "button": "FeaturesSkinCreateButton",
+   "label": "Skin Color",
+   "icon": "facial_unselected.png",
+   "offset": "0x1f70c6",
+   "theme_folder": null
+  },
+  {
+   "button": "FeaturesBeardCreateButton",
+   "label": "Facial Hair",
+   "icon": "facial_hair_male_unselected.png",
+   "offset": "0x1f7178",
+   "theme_folder": "45_facial-hair"
+  },
+  {
+   "button": "OptionBodyNormalButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f7262",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodySmallFatButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f73de",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodySmallThinButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f74c6",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodyTallThinButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f7582",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodyTallFatButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f7638",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetDummyButton",
+   "label": null,
+   "icon": "dummy_button_unselected.png",
+   "offset": "0x1f7ad6",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetCarryablesButton",
+   "label": "Carryables",
+   "icon": "dummy_button_carryables.png",
+   "offset": "0x1f7b66",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetAccessoriesButton",
+   "label": "Accessories",
+   "icon": "dummy_button_accessories.png",
+   "offset": "0x1f7bcc",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetMakeupButton",
+   "label": "Makeup",
+   "icon": "makeup_unselected.png",
+   "offset": "0x1f81b2",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetBodyAccessoriesButton",
+   "label": "Body Accessories",
+   "icon": "body_access_unselected.png",
+   "offset": "0x1f822c",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetHeadAccessoriesButton",
+   "label": null,
+   "icon": "head_access_unselected.png",
+   "offset": "0x1f82cc",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetHeadgearButton",
+   "label": "Headwear",
+   "icon": "hat_unselected.png",
+   "offset": "0x1f836c",
+   "theme_folder": "60_hat"
+  },
+  {
+   "button": "ClosetShoesButton",
+   "label": "Shoes",
+   "icon": "shoes_unselected.png",
+   "offset": "0x1f83de",
+   "theme_folder": "30_shoes"
+  },
+  {
+   "button": "ClosetBottomsButton",
+   "label": "Bottoms",
+   "icon": "bottoms_unselected.png",
+   "offset": "0x1f8452",
+   "theme_folder": "20_pants"
+  },
+  {
+   "button": "ClosetTopsButton",
+   "label": "Tops",
+   "icon": "tops_unselected.png",
+   "offset": "0x1f84d2",
+   "theme_folder": "40_shirt"
+  },
+  {
+   "button": "OptionBodyTallButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f8540",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodySmallButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f85b2",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodyFatButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f866e",
+   "theme_folder": null
+  },
+  {
+   "button": "OptionBodyThinButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f871e",
+   "theme_folder": null
+  },
+  {
+   "button": "EyebrowsCreateButton",
+   "label": "Eyebrows",
+   "icon": "eyebrows_unselected.png",
+   "offset": "0x1f87d4",
+   "theme_folder": null
+  },
+  {
+   "button": "EyesCreateButton",
+   "label": "Eyes",
+   "icon": "eyes_unselected.png",
+   "offset": "0x1f885a",
+   "theme_folder": null
+  },
+  {
+   "button": "MouthCreateButton",
+   "label": "Mouth",
+   "icon": "mouth_unselected.png",
+   "offset": "0x1f88c8",
+   "theme_folder": null
+  },
+  {
+   "button": "FeaturesCreateButton",
+   "label": "Facial Features",
+   "icon": "body_unselected.png",
+   "offset": "0x1f893c",
+   "theme_folder": null
+  },
+  {
+   "button": "BodyCreateButton",
+   "label": "Skin Color and Body",
+   "icon": "body_unselected.png",
+   "offset": "0x1f8966",
+   "theme_folder": "10_body"
+  },
+  {
+   "button": "NoseCreateButton",
+   "label": "Nose",
+   "icon": "nose_unselected.png",
+   "offset": "0x1f89d4",
+   "theme_folder": null
+  },
+  {
+   "button": "EarCreateButton",
+   "label": "Ears",
+   "icon": "ears_unselected.png",
+   "offset": "0x1f8a42",
+   "theme_folder": null
+  },
+  {
+   "button": "HeadshapeCreateButton",
+   "label": "Head Shape",
+   "icon": "faceshape_unselected.png",
+   "offset": "0x1f8aae",
+   "theme_folder": null
+  },
+  {
+   "button": "HairCreateButton",
+   "label": "Hairstyles",
+   "icon": "hair_unselected.png",
+   "offset": "0x1f8b3a",
+   "theme_folder": "50_hair"
+  },
+  {
+   "button": "ClosetLoadoutfitButton",
+   "label": "My Outfits",
+   "icon": "dummy_button_loadoutfits.png",
+   "offset": "0x1f8ba8",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetCostumesMaleButton",
+   "label": "Costumes (male)",
+   "icon": "dummy_button_formalcostume.png",
+   "offset": "0x1f8c10",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetCostumesFemaleButton",
+   "label": "Costumes (female)",
+   "icon": null,
+   "offset": "0x1f8c80",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetButton",
+   "label": null,
+   "icon": null,
+   "offset": "0x1f8cce",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetBodyAccessoriesGlovesButton",
+   "label": "Gloves",
+   "icon": "gloves_unselected.png",
+   "offset": "0x1f8e90",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetBodyAccessoriesWristButton",
+   "label": "Wristwear",
+   "icon": "watch_unselected.png",
+   "offset": "0x1f8f28",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetBodyAccessoriesRingButton",
+   "label": "Rings",
+   "icon": "ring_unselected.png",
+   "offset": "0x1f8fba",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetHeadAccessoriesEarringButton",
+   "label": "Earrings",
+   "icon": "earring_unselected.png",
+   "offset": "0x1f9046",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetMakeupEyeshadowButton",
+   "label": "Eye Shadow",
+   "icon": "eyeshadow_unselected.png",
+   "offset": "0x1f90e4",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetMakeupLipstickButton",
+   "label": "Lip",
+   "icon": "lipstick_unselected.png",
+   "offset": "0x1f917c",
+   "theme_folder": null
+  },
+  {
+   "button": "ClosetHeadAccessoriesGlassesButton",
+   "label": "Glasses",
+   "icon": "glasses_unselected.png",
+   "offset": "0x1f920e",
+   "theme_folder": "70_glasses"
+  }
+ ]
+}
