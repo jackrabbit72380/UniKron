@@ -1,0 +1,9456 @@
+{
+ "_comment": "Pack items by slot category; names, genders and slots come from the toc records and the STRB AssetMetadataVersioned blocks.",
+ "categories": {
+  "10_body": [
+   {
+    "name": "MaleBody",
+    "gender": "male",
+    "slots": [
+     "body"
+    ],
+    "offset": 539596,
+    "size": 33084,
+    "vertices": 1137,
+    "triangles": 2264,
+    "has_color_table": false
+   },
+   {
+    "name": "FemaleBody",
+    "gender": "female",
+    "slots": [
+     "body"
+    ],
+    "offset": 572680,
+    "size": 38560,
+    "vertices": 1232,
+    "triangles": 2454,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11830292,
+    "size": 3316,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Arched Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11833608,
+    "size": 2988,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11836596,
+    "size": 2872,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Curvy Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11839468,
+    "size": 3296,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Large Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11842764,
+    "size": 3260,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Familiar Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11846024,
+    "size": 2948,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Thick Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11848972,
+    "size": 3356,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Small Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11852328,
+    "size": 2068,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Angled Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11854396,
+    "size": 3184,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Big and Flat Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11857580,
+    "size": 3332,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Delicate Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11860912,
+    "size": 2916,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Small and Thin Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11863828,
+    "size": 2688,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Short and Thick Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11866516,
+    "size": 2968,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight and Thick Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11869484,
+    "size": 3300,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Half Moon Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11872784,
+    "size": 3064,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Soft Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11875848,
+    "size": 2972,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Strong Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11878820,
+    "size": 2924,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Monobrow",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11881744,
+    "size": 3808,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Bendy Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11885552,
+    "size": 2864,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Pointed Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11888416,
+    "size": 2784,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Squared Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11891200,
+    "size": 3096,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaved Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11894296,
+    "size": 3584,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "No Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11897880,
+    "size": 336,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wing Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11898216,
+    "size": 3604,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Huge Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11901820,
+    "size": 3796,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Pointy Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11905616,
+    "size": 3568,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Center Eyebrows",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 11909184,
+    "size": 4056,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Fantasy Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12859604,
+    "size": 672,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Butterfly Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12860276,
+    "size": 872,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Round Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12861148,
+    "size": 188,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Elven Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12861336,
+    "size": 848,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Long Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12862184,
+    "size": 936,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Prominent Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12863120,
+    "size": 920,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaped Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12864040,
+    "size": 736,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Small Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12864776,
+    "size": 988,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Spiked Ears",
+    "gender": "both",
+    "slots": [
+     "body"
+    ],
+    "offset": 12865764,
+    "size": 560,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   }
+  ],
+  "15_face": [
+   {
+    "name": "Head",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 611240,
+    "size": 18628,
+    "vertices": 648,
+    "triangles": 846,
+    "has_color_table": true
+   },
+   {
+    "name": "Happy Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11913240,
+    "size": 11828,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Sharp Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11925792,
+    "size": 9584,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Half Moon Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11936156,
+    "size": 9436,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Focussed Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11946348,
+    "size": 11224,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Harmless Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11958696,
+    "size": 10076,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Passive Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11969476,
+    "size": 12320,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Relaxed Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11982848,
+    "size": 9936,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Surprised Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 11993672,
+    "size": 7584,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Soft Lashes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12002620,
+    "size": 12152,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Restful Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12015764,
+    "size": 12580,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Monday Morning Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12029272,
+    "size": 8536,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Bold Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12038648,
+    "size": 14060,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Soft Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12053752,
+    "size": 9492,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Funky Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12064156,
+    "size": 12072,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wild Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12077500,
+    "size": 12820,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Comforting Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12091440,
+    "size": 12580,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Droopy Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12104976,
+    "size": 11792,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Content Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12118840,
+    "size": 11572,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Slim Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12131888,
+    "size": 10432,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Excited Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12143280,
+    "size": 10484,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eagle Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12154768,
+    "size": 11112,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Polite Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12166676,
+    "size": 11572,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Soothing",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12179128,
+    "size": 10480,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Puppy Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12190524,
+    "size": 12832,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Rounded Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12204512,
+    "size": 12068,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Strong Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12217440,
+    "size": 11928,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Boxed Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12230708,
+    "size": 10616,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Arc Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12243028,
+    "size": 12868,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12256736,
+    "size": 12668,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Tranquil Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12270700,
+    "size": 11716,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Dark Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12283712,
+    "size": 6856,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Dot Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12291908,
+    "size": 4892,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Tilted Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12297504,
+    "size": 10328,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Delicate Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12308836,
+    "size": 11000,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Almond Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12320680,
+    "size": 10648,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wavy Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12332380,
+    "size": 9748,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Thick Lashed Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12342992,
+    "size": 11932,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wide Awake Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12356320,
+    "size": 11828,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Calm Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12369220,
+    "size": 10020,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Slender Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12380452,
+    "size": 10208,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Kind Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12391872,
+    "size": 12272,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Drowsy Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12405104,
+    "size": 14652,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Acorn Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12420776,
+    "size": 10424,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Sunset Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12432088,
+    "size": 10424,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Genial Eyes",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12443400,
+    "size": 11168,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Defined Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12833948,
+    "size": 1580,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Boxer's Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12835528,
+    "size": 1680,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Curved Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12837208,
+    "size": 1656,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Drooped Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12838864,
+    "size": 1280,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Angled Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12840144,
+    "size": 188,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Hooked Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12840332,
+    "size": 1500,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Bulbous Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12841832,
+    "size": 1724,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Large Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12843556,
+    "size": 1528,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Sharp Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12845084,
+    "size": 1632,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Perked Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12846716,
+    "size": 1220,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Smooth Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12847936,
+    "size": 1672,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Rounded Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12849608,
+    "size": 1580,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Small Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12851188,
+    "size": 1348,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12852536,
+    "size": 1632,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Long Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12854168,
+    "size": 1672,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Tiny Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12855840,
+    "size": 1576,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wide Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12857416,
+    "size": 996,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Soft Nose",
+    "gender": "both",
+    "slots": [
+     "head"
+    ],
+    "offset": 12858412,
+    "size": 1192,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   }
+  ],
+  "30_shoes": [
+   {
+    "name": "Moccasins",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1807656,
+    "size": 23408,
+    "vertices": 884,
+    "triangles": 588,
+    "has_color_table": true
+   },
+   {
+    "name": "Formal Shoes",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1831064,
+    "size": 17884,
+    "vertices": 654,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "High Top Sneakers",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1848948,
+    "size": 23380,
+    "vertices": 868,
+    "triangles": 588,
+    "has_color_table": true
+   },
+   {
+    "name": "Hiking Shoes",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1872328,
+    "size": 16516,
+    "vertices": 582,
+    "triangles": 560,
+    "has_color_table": true
+   },
+   {
+    "name": "Punk Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1888844,
+    "size": 17736,
+    "vertices": 588,
+    "triangles": 636,
+    "has_color_table": true
+   },
+   {
+    "name": "Grunge Trainers",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1906580,
+    "size": 20892,
+    "vertices": 806,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Flip Flops",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1927472,
+    "size": 15128,
+    "vertices": 536,
+    "triangles": 448,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Pixie Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1942600,
+    "size": 16368,
+    "vertices": 708,
+    "triangles": 620,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1958968,
+    "size": 24864,
+    "vertices": 748,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Green Xbox Sneakers",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1983832,
+    "size": 14600,
+    "vertices": 698,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Male White Xbox Sneakers",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 1998432,
+    "size": 14548,
+    "vertices": 700,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Plimsolls",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2012980,
+    "size": 19588,
+    "vertices": 648,
+    "triangles": 592,
+    "has_color_table": true
+   },
+   {
+    "name": "Brown Formal Shoes",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2032568,
+    "size": 16908,
+    "vertices": 654,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Cowboy Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2049476,
+    "size": 17004,
+    "vertices": 756,
+    "triangles": 596,
+    "has_color_table": true
+   },
+   {
+    "name": "Goth Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2066480,
+    "size": 20340,
+    "vertices": 823,
+    "triangles": 612,
+    "has_color_table": true
+   },
+   {
+    "name": "70's Leather Platforms",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2086820,
+    "size": 20084,
+    "vertices": 588,
+    "triangles": 612,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Snowboarding Boots",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 2106904,
+    "size": 19980,
+    "vertices": 766,
+    "triangles": 540,
+    "has_color_table": true
+   },
+   {
+    "name": "Sports Trainers",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6350820,
+    "size": 16616,
+    "vertices": 1048,
+    "triangles": 576,
+    "has_color_table": true
+   },
+   {
+    "name": "Ballet Flats",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6367436,
+    "size": 16376,
+    "vertices": 644,
+    "triangles": 518,
+    "has_color_table": true
+   },
+   {
+    "name": "Sandals",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6383812,
+    "size": 17224,
+    "vertices": 784,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "White 60's Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6401036,
+    "size": 21716,
+    "vertices": 682,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Scarlet Pumps",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6422752,
+    "size": 15928,
+    "vertices": 546,
+    "triangles": 468,
+    "has_color_table": true
+   },
+   {
+    "name": "Cork High Heels",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6438680,
+    "size": 27184,
+    "vertices": 778,
+    "triangles": 644,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Goth Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6465864,
+    "size": 13444,
+    "vertices": 776,
+    "triangles": 676,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Neo Rave Pumps",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6479308,
+    "size": 16332,
+    "vertices": 644,
+    "triangles": 518,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Strappy High Heels",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6495640,
+    "size": 23280,
+    "vertices": 834,
+    "triangles": 632,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Dayglo Zebra Print Pumps",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6518920,
+    "size": 21964,
+    "vertices": 690,
+    "triangles": 514,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Rainy Day Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6540884,
+    "size": 11496,
+    "vertices": 640,
+    "triangles": 588,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tiger Print Pumps",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6552380,
+    "size": 18416,
+    "vertices": 688,
+    "triangles": 514,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Black 60's Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6570796,
+    "size": 17880,
+    "vertices": 682,
+    "triangles": 584,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Jelly Clogs",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6588676,
+    "size": 25600,
+    "vertices": 754,
+    "triangles": 592,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Platform Shoes",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6614276,
+    "size": 18736,
+    "vertices": 636,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Snugg Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6633012,
+    "size": 16532,
+    "vertices": 498,
+    "triangles": 596,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Snowboarding Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 6649544,
+    "size": 20456,
+    "vertices": 800,
+    "triangles": 592,
+    "has_color_table": true
+   },
+   {
+    "name": "Cowgirl Boots",
+    "gender": "female",
+    "slots": [
+     "feet"
+    ],
+    "offset": 13094872,
+    "size": 22752,
+    "vertices": 772,
+    "triangles": 576,
+    "has_color_table": true
+   },
+   {
+    "name": "Socks and Sandals",
+    "gender": "male",
+    "slots": [
+     "feet"
+    ],
+    "offset": 13360132,
+    "size": 17872,
+    "vertices": 936,
+    "triangles": 624,
+    "has_color_table": true
+   }
+  ],
+  "40_shirt": [
+   {
+    "name": "Presenter Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2126884,
+    "size": 43824,
+    "vertices": 1230,
+    "triangles": 1190,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Colorful Polo Shirt",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2170708,
+    "size": 35392,
+    "vertices": 1000,
+    "triangles": 956,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Bright Sprite Hoodie",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2206100,
+    "size": 37932,
+    "vertices": 1185,
+    "triangles": 1150,
+    "has_color_table": true
+   },
+   {
+    "name": "Gothic Long Sleeved Top",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2244032,
+    "size": 37800,
+    "vertices": 1059,
+    "triangles": 976,
+    "has_color_table": true
+   },
+   {
+    "name": "High School Sports Hoodie",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2281832,
+    "size": 37356,
+    "vertices": 1238,
+    "triangles": 1184,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Punk Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2319188,
+    "size": 26428,
+    "vertices": 560,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Black Hoodie",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2345616,
+    "size": 38740,
+    "vertices": 1085,
+    "triangles": 1076,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Crew Neck Sweater",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2384356,
+    "size": 27676,
+    "vertices": 953,
+    "triangles": 922,
+    "has_color_table": true
+   },
+   {
+    "name": "Winter Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2412032,
+    "size": 39180,
+    "vertices": 1130,
+    "triangles": 1112,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Power Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2451212,
+    "size": 21672,
+    "vertices": 532,
+    "triangles": 620,
+    "has_color_table": true
+   },
+   {
+    "name": "Rocker Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2472884,
+    "size": 41912,
+    "vertices": 1275,
+    "triangles": 1192,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Formal Shirt",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2514796,
+    "size": 36624,
+    "vertices": 1164,
+    "triangles": 1104,
+    "has_color_table": true
+   },
+   {
+    "name": "Polo Shirt1",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2551420,
+    "size": 35472,
+    "vertices": 1000,
+    "triangles": 956,
+    "has_color_table": true
+   },
+   {
+    "name": "Full-zip Hoodie with Chain",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2586892,
+    "size": 34488,
+    "vertices": 1060,
+    "triangles": 1184,
+    "has_color_table": true
+   },
+   {
+    "name": "Rockabilly Top",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2621380,
+    "size": 47896,
+    "vertices": 1348,
+    "triangles": 1120,
+    "has_color_table": true
+   },
+   {
+    "name": "Waistcoat and Shirt",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2669276,
+    "size": 27956,
+    "vertices": 871,
+    "triangles": 942,
+    "has_color_table": true
+   },
+   {
+    "name": "Tropical Shirt",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2697232,
+    "size": 33816,
+    "vertices": 1017,
+    "triangles": 936,
+    "has_color_table": true
+   },
+   {
+    "name": "Punk Jacket and Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2731048,
+    "size": 28448,
+    "vertices": 746,
+    "triangles": 766,
+    "has_color_table": true
+   },
+   {
+    "name": "Striped Sweater with Chain",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2759496,
+    "size": 34900,
+    "vertices": 1192,
+    "triangles": 1062,
+    "has_color_table": true
+   },
+   {
+    "name": "70's Checked Shirt",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2794396,
+    "size": 32668,
+    "vertices": 887,
+    "triangles": 810,
+    "has_color_table": true
+   },
+   {
+    "name": "Groovy Shirt",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2827064,
+    "size": 27388,
+    "vertices": 868,
+    "triangles": 1034,
+    "has_color_table": true
+   },
+   {
+    "name": "Skateboard Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2854452,
+    "size": 26304,
+    "vertices": 532,
+    "triangles": 620,
+    "has_color_table": true
+   },
+   {
+    "name": "Jacket with Tee",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2880756,
+    "size": 35268,
+    "vertices": 1285,
+    "triangles": 1142,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Football Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2916024,
+    "size": 45524,
+    "vertices": 1050,
+    "triangles": 1025,
+    "has_color_table": true
+   },
+   {
+    "name": "Pastel Shirt with Tee",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 2961548,
+    "size": 34736,
+    "vertices": 1111,
+    "triangles": 1096,
+    "has_color_table": true
+   },
+   {
+    "name": "Metal Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 2996284,
+    "size": 27972,
+    "vertices": 544,
+    "triangles": 620,
+    "has_color_table": true
+   },
+   {
+    "name": "Track Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3024256,
+    "size": 38980,
+    "vertices": 1072,
+    "triangles": 1158,
+    "has_color_table": true
+   },
+   {
+    "name": "Jacket with Sweater",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3063236,
+    "size": 44620,
+    "vertices": 1231,
+    "triangles": 1212,
+    "has_color_table": true
+   },
+   {
+    "name": "Open Neck Cardigan",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3107856,
+    "size": 35224,
+    "vertices": 1053,
+    "triangles": 896,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Guest 1",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3143080,
+    "size": 20916,
+    "vertices": 538,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Guest 2",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3163996,
+    "size": 22744,
+    "vertices": 538,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Guest 3",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3186740,
+    "size": 23196,
+    "vertices": 538,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Grunge Tee",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3209936,
+    "size": 26184,
+    "vertices": 900,
+    "triangles": 880,
+    "has_color_table": true
+   },
+   {
+    "name": "Long Sleeved Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3236120,
+    "size": 24920,
+    "vertices": 795,
+    "triangles": 860,
+    "has_color_table": true
+   },
+   {
+    "name": "Work Shirt",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3261040,
+    "size": 30472,
+    "vertices": 852,
+    "triangles": 958,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Soccer Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3291512,
+    "size": 41136,
+    "vertices": 960,
+    "triangles": 1006,
+    "has_color_table": true
+   },
+   {
+    "name": "Quantum Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3332648,
+    "size": 22324,
+    "vertices": 538,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Baseball Jersey",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3354972,
+    "size": 40936,
+    "vertices": 984,
+    "triangles": 920,
+    "has_color_table": true
+   },
+   {
+    "name": "Male White Vest",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3395908,
+    "size": 30288,
+    "vertices": 833,
+    "triangles": 854,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Snowboarding Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3426196,
+    "size": 54236,
+    "vertices": 1479,
+    "triangles": 1186,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Bright Print Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3480432,
+    "size": 24956,
+    "vertices": 539,
+    "triangles": 616,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Denim Jacket with Tee",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3505388,
+    "size": 51036,
+    "vertices": 1243,
+    "triangles": 1188,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Striped Jacket with Polo",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3556424,
+    "size": 50396,
+    "vertices": 1187,
+    "triangles": 1176,
+    "has_color_table": true
+   },
+   {
+    "name": "Male School Tie Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3606820,
+    "size": 24472,
+    "vertices": 734,
+    "triangles": 900,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Checked Jacket with Polo",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3631292,
+    "size": 45824,
+    "vertices": 1136,
+    "triangles": 1202,
+    "has_color_table": true
+   },
+   {
+    "name": "Male CSchool Jacket with Polo",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3677116,
+    "size": 46488,
+    "vertices": 1206,
+    "triangles": 1168,
+    "has_color_table": true
+   },
+   {
+    "name": "Male 70's Full-zip Jacket",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 3723604,
+    "size": 42732,
+    "vertices": 1309,
+    "triangles": 1178,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Dollar Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3766336,
+    "size": 31100,
+    "vertices": 634,
+    "triangles": 696,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Tattoo Sweater",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3797436,
+    "size": 31080,
+    "vertices": 799,
+    "triangles": 868,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Wales Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3828516,
+    "size": 30280,
+    "vertices": 869,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male France Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3858796,
+    "size": 28328,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Switzerland Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3887124,
+    "size": 26360,
+    "vertices": 858,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Sweden Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3913484,
+    "size": 29456,
+    "vertices": 869,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Spain Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3942940,
+    "size": 28740,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Scotland Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 3971680,
+    "size": 28844,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Republic of Ireland Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4000524,
+    "size": 29024,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Portugal Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4029548,
+    "size": 29112,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Norway Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4058660,
+    "size": 28812,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Northern Ireland Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4087472,
+    "size": 29764,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Netherlands Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4117236,
+    "size": 28844,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Italy Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4146080,
+    "size": 28428,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Germany Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4174508,
+    "size": 29224,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Finland Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4203732,
+    "size": 29300,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male England Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4233032,
+    "size": 29384,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Denmark Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4262416,
+    "size": 27932,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Belgium Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4290348,
+    "size": 28224,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Austria Sport Top",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4318572,
+    "size": 28148,
+    "vertices": 867,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Rashguard",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4346720,
+    "size": 29040,
+    "vertices": 629,
+    "triangles": 646,
+    "has_color_table": true
+   },
+   {
+    "name": "Shirt with Cummerbund",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 4375760,
+    "size": 35752,
+    "vertices": 1146,
+    "triangles": 1192,
+    "has_color_table": true
+   },
+   {
+    "name": "Red Formal Shirt",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 4411512,
+    "size": 31284,
+    "vertices": 1160,
+    "triangles": 1076,
+    "has_color_table": true
+   },
+   {
+    "name": "Monkey Tee",
+    "gender": "male",
+    "slots": [
+     "torso"
+    ],
+    "offset": 4442796,
+    "size": 28376,
+    "vertices": 864,
+    "triangles": 912,
+    "has_color_table": true
+   },
+   {
+    "name": "Snowboarding Jacket",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 6670000,
+    "size": 35172,
+    "vertices": 1010,
+    "triangles": 1084,
+    "has_color_table": true
+   },
+   {
+    "name": "Green Full-Zip Hoodie",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6705172,
+    "size": 45452,
+    "vertices": 1158,
+    "triangles": 1113,
+    "has_color_table": true
+   },
+   {
+    "name": "Punk Tee",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 6750624,
+    "size": 36144,
+    "vertices": 1007,
+    "triangles": 1138,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Full-zip Hoodie",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6786768,
+    "size": 44844,
+    "vertices": 1101,
+    "triangles": 1154,
+    "has_color_table": true
+   },
+   {
+    "name": "Gingham Shirt",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 6831612,
+    "size": 34284,
+    "vertices": 1080,
+    "triangles": 1068,
+    "has_color_table": true
+   },
+   {
+    "name": "Tight Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6865896,
+    "size": 21984,
+    "vertices": 623,
+    "triangles": 722,
+    "has_color_table": true
+   },
+   {
+    "name": "Tee with Belt",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6887880,
+    "size": 30220,
+    "vertices": 826,
+    "triangles": 1006,
+    "has_color_table": true
+   },
+   {
+    "name": "Cardigan with Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6918100,
+    "size": 19460,
+    "vertices": 683,
+    "triangles": 836,
+    "has_color_table": true
+   },
+   {
+    "name": "Brown Full-Zip Hoodie",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 6937560,
+    "size": 36068,
+    "vertices": 1129,
+    "triangles": 1226,
+    "has_color_table": true
+   },
+   {
+    "name": "Vest with Straps",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 6973628,
+    "size": 25616,
+    "vertices": 732,
+    "triangles": 612,
+    "has_color_table": true
+   },
+   {
+    "name": "Hacking Jacket",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 6999244,
+    "size": 36800,
+    "vertices": 1202,
+    "triangles": 1176,
+    "has_color_table": true
+   },
+   {
+    "name": "Formal Blouse",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7036044,
+    "size": 25976,
+    "vertices": 811,
+    "triangles": 940,
+    "has_color_table": true
+   },
+   {
+    "name": "Open Neck Sweater",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7062020,
+    "size": 24228,
+    "vertices": 627,
+    "triangles": 826,
+    "has_color_table": true
+   },
+   {
+    "name": "Two Tone Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7086248,
+    "size": 22724,
+    "vertices": 575,
+    "triangles": 586,
+    "has_color_table": true
+   },
+   {
+    "name": "Waistcoat with Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7108972,
+    "size": 29040,
+    "vertices": 770,
+    "triangles": 772,
+    "has_color_table": true
+   },
+   {
+    "name": "Crop Top with Sweat Bands",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7138012,
+    "size": 16556,
+    "vertices": 621,
+    "triangles": 540,
+    "has_color_table": true
+   },
+   {
+    "name": "Surfer Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7154568,
+    "size": 24468,
+    "vertices": 622,
+    "triangles": 764,
+    "has_color_table": true
+   },
+   {
+    "name": "Crew Neck Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7179036,
+    "size": 24624,
+    "vertices": 720,
+    "triangles": 750,
+    "has_color_table": true
+   },
+   {
+    "name": "Star Pattern Shirt",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7203660,
+    "size": 38068,
+    "vertices": 1024,
+    "triangles": 904,
+    "has_color_table": true
+   },
+   {
+    "name": "V Neck Top",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7241728,
+    "size": 32548,
+    "vertices": 1018,
+    "triangles": 924,
+    "has_color_table": true
+   },
+   {
+    "name": "Hot Pink Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7274276,
+    "size": 23280,
+    "vertices": 604,
+    "triangles": 510,
+    "has_color_table": true
+   },
+   {
+    "name": "V Neck Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7297556,
+    "size": 22056,
+    "vertices": 690,
+    "triangles": 750,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Crew Neck Sweater",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7319612,
+    "size": 29132,
+    "vertices": 855,
+    "triangles": 1038,
+    "has_color_table": true
+   },
+   {
+    "name": "Wrap Shirt",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7348744,
+    "size": 36664,
+    "vertices": 1387,
+    "triangles": 1186,
+    "has_color_table": true
+   },
+   {
+    "name": "Turtleneck Sweater",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7385408,
+    "size": 31856,
+    "vertices": 950,
+    "triangles": 1116,
+    "has_color_table": true
+   },
+   {
+    "name": "Sweater with Shirt",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7417264,
+    "size": 41748,
+    "vertices": 1247,
+    "triangles": 1130,
+    "has_color_table": true
+   },
+   {
+    "name": "Layered Jacket",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7459012,
+    "size": 46376,
+    "vertices": 1236,
+    "triangles": 1174,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Polo shirt",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7505388,
+    "size": 23680,
+    "vertices": 861,
+    "triangles": 884,
+    "has_color_table": true
+   },
+   {
+    "name": "Cowgirl Shirt",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7529068,
+    "size": 28020,
+    "vertices": 615,
+    "triangles": 654,
+    "has_color_table": true
+   },
+   {
+    "name": "Biker Jacket",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7557088,
+    "size": 37444,
+    "vertices": 1496,
+    "triangles": 1172,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Power Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7594532,
+    "size": 25744,
+    "vertices": 705,
+    "triangles": 758,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Guest 1",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7620276,
+    "size": 29112,
+    "vertices": 730,
+    "triangles": 758,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Guest 2",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7649388,
+    "size": 30868,
+    "vertices": 730,
+    "triangles": 758,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Guest 3",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7680256,
+    "size": 29056,
+    "vertices": 709,
+    "triangles": 758,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Full-zip Tracksuit",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7709312,
+    "size": 42596,
+    "vertices": 1074,
+    "triangles": 1146,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Glass Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7751908,
+    "size": 36636,
+    "vertices": 817,
+    "triangles": 750,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Lips Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7788544,
+    "size": 31772,
+    "vertices": 732,
+    "triangles": 758,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Pinstripe Blazer",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7820316,
+    "size": 43600,
+    "vertices": 1098,
+    "triangles": 1216,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Oversized Jacket with Chains",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7863916,
+    "size": 40296,
+    "vertices": 1154,
+    "triangles": 1124,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Rain Coat",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7904212,
+    "size": 46968,
+    "vertices": 1558,
+    "triangles": 1210,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Denim Jacket",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 7951180,
+    "size": 30088,
+    "vertices": 1138,
+    "triangles": 1128,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Fitted Blazer",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 7981268,
+    "size": 41404,
+    "vertices": 1146,
+    "triangles": 1132,
+    "has_color_table": true
+   },
+   {
+    "name": "Flower Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8022672,
+    "size": 32096,
+    "vertices": 642,
+    "triangles": 510,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Boombox Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8054768,
+    "size": 31260,
+    "vertices": 824,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Austria Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8086028,
+    "size": 17668,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Belgium Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8103696,
+    "size": 17868,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Denmark Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8121564,
+    "size": 17864,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female England Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8139428,
+    "size": 19044,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Finland Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8158472,
+    "size": 18948,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female France Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8177420,
+    "size": 18028,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Germany Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8195448,
+    "size": 19012,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Italy Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8214460,
+    "size": 18860,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Netherlands Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8233320,
+    "size": 19260,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Northern Ireland Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8252580,
+    "size": 19684,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Norway Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8272264,
+    "size": 18024,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Portugal Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8290288,
+    "size": 18848,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Republic of Ireland Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8309136,
+    "size": 18808,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Scotland Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8327944,
+    "size": 17964,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Spain Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8345908,
+    "size": 19128,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Sweden Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8365036,
+    "size": 19852,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Switzerland Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8384888,
+    "size": 18484,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Wales Sport Top",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 8403372,
+    "size": 20180,
+    "vertices": 737,
+    "triangles": 806,
+    "has_color_table": true
+   },
+   {
+    "name": "Vintage Snowdrop Blouse",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso"
+    ],
+    "offset": 8423552,
+    "size": 40164,
+    "vertices": 1164,
+    "triangles": 1158,
+    "has_color_table": true
+   },
+   {
+    "name": "Cans Tee",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 13194452,
+    "size": 35700,
+    "vertices": 845,
+    "triangles": 902,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Knitted Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 13257844,
+    "size": 34412,
+    "vertices": 945,
+    "triangles": 1122,
+    "has_color_table": true
+   },
+   {
+    "name": "Sports Vest",
+    "gender": "female",
+    "slots": [
+     "torso"
+    ],
+    "offset": 13378004,
+    "size": 24528,
+    "vertices": 652,
+    "triangles": 510,
+    "has_color_table": true
+   }
+  ],
+  "20_pants": [
+   {
+    "name": "Male Cargo Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4471172,
+    "size": 23496,
+    "vertices": 916,
+    "triangles": 850,
+    "has_color_table": true
+   },
+   {
+    "name": "Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4494668,
+    "size": 19500,
+    "vertices": 653,
+    "triangles": 712,
+    "has_color_table": true
+   },
+   {
+    "name": "Faded Jeans with Print",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4514168,
+    "size": 33124,
+    "vertices": 896,
+    "triangles": 798,
+    "has_color_table": true
+   },
+   {
+    "name": "Chinos",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4547292,
+    "size": 20276,
+    "vertices": 786,
+    "triangles": 772,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Surf Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4567568,
+    "size": 22168,
+    "vertices": 558,
+    "triangles": 602,
+    "has_color_table": true
+   },
+   {
+    "name": "Metal Combats",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4589736,
+    "size": 32772,
+    "vertices": 994,
+    "triangles": 818,
+    "has_color_table": true
+   },
+   {
+    "name": "Punk Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4622508,
+    "size": 21388,
+    "vertices": 642,
+    "triangles": 742,
+    "has_color_table": true
+   },
+   {
+    "name": "70's Plaid Flares",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4643896,
+    "size": 22340,
+    "vertices": 830,
+    "triangles": 820,
+    "has_color_table": true
+   },
+   {
+    "name": "Swim Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4666236,
+    "size": 26804,
+    "vertices": 797,
+    "triangles": 660,
+    "has_color_table": true
+   },
+   {
+    "name": "Moleskin Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4693040,
+    "size": 17068,
+    "vertices": 717,
+    "triangles": 770,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Grunge Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4710108,
+    "size": 24548,
+    "vertices": 855,
+    "triangles": 796,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Chino Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4734656,
+    "size": 26048,
+    "vertices": 820,
+    "triangles": 706,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Flower Print Flares",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4760704,
+    "size": 25316,
+    "vertices": 796,
+    "triangles": 780,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Camo Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4786020,
+    "size": 24792,
+    "vertices": 892,
+    "triangles": 850,
+    "has_color_table": true
+   },
+   {
+    "name": "Pinstripe Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4810812,
+    "size": 21624,
+    "vertices": 778,
+    "triangles": 772,
+    "has_color_table": true
+   },
+   {
+    "name": "Dark Purple Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4832436,
+    "size": 30404,
+    "vertices": 817,
+    "triangles": 686,
+    "has_color_table": true
+   },
+   {
+    "name": "Denim Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4862840,
+    "size": 22988,
+    "vertices": 881,
+    "triangles": 782,
+    "has_color_table": true
+   },
+   {
+    "name": "Black Skinny Fit Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4885828,
+    "size": 26432,
+    "vertices": 724,
+    "triangles": 718,
+    "has_color_table": true
+   },
+   {
+    "name": "Tracksuit Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4912260,
+    "size": 20600,
+    "vertices": 875,
+    "triangles": 704,
+    "has_color_table": true
+   },
+   {
+    "name": "Rodeo Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4932860,
+    "size": 19636,
+    "vertices": 673,
+    "triangles": 746,
+    "has_color_table": true
+   },
+   {
+    "name": "Cargo Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4952496,
+    "size": 23156,
+    "vertices": 991,
+    "triangles": 802,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Popper Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4975652,
+    "size": 23240,
+    "vertices": 749,
+    "triangles": 798,
+    "has_color_table": true
+   },
+   {
+    "name": "Green Skinny Fit Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 4998892,
+    "size": 25876,
+    "vertices": 700,
+    "triangles": 700,
+    "has_color_table": true
+   },
+   {
+    "name": "Turn Up Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 5024768,
+    "size": 22212,
+    "vertices": 852,
+    "triangles": 762,
+    "has_color_table": true
+   },
+   {
+    "name": "Embroidered Pants",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 5046980,
+    "size": 31608,
+    "vertices": 805,
+    "triangles": 796,
+    "has_color_table": true
+   },
+   {
+    "name": "Worn Jeans",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 5078588,
+    "size": 27060,
+    "vertices": 670,
+    "triangles": 682,
+    "has_color_table": true
+   },
+   {
+    "name": "Skinny Fit Jeans",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8463716,
+    "size": 25816,
+    "vertices": 719,
+    "triangles": 804,
+    "has_color_table": true
+   },
+   {
+    "name": "Chino Shorts",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8489532,
+    "size": 18872,
+    "vertices": 490,
+    "triangles": 538,
+    "has_color_table": true
+   },
+   {
+    "name": "Slacks",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8508404,
+    "size": 21992,
+    "vertices": 552,
+    "triangles": 702,
+    "has_color_table": true
+   },
+   {
+    "name": "Polkadot Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8530396,
+    "size": 11912,
+    "vertices": 339,
+    "triangles": 482,
+    "has_color_table": true
+   },
+   {
+    "name": "Thread Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8542308,
+    "size": 31992,
+    "vertices": 977,
+    "triangles": 668,
+    "has_color_table": true
+   },
+   {
+    "name": "Jogging Pants",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8574300,
+    "size": 13800,
+    "vertices": 456,
+    "triangles": 552,
+    "has_color_table": true
+   },
+   {
+    "name": "Chinos with Belt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8588100,
+    "size": 17660,
+    "vertices": 670,
+    "triangles": 772,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Cargo Pants",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8605760,
+    "size": 23344,
+    "vertices": 972,
+    "triangles": 874,
+    "has_color_table": true
+   },
+   {
+    "name": "Denim Surfer Shorts",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8629104,
+    "size": 23644,
+    "vertices": 685,
+    "triangles": 748,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tracksuit Pants",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8652748,
+    "size": 26424,
+    "vertices": 698,
+    "triangles": 692,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Surfer Hotpants",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8679172,
+    "size": 22016,
+    "vertices": 606,
+    "triangles": 610,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Denim Shorts with Thread",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8701188,
+    "size": 21492,
+    "vertices": 799,
+    "triangles": 760,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tartan Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8722680,
+    "size": 16108,
+    "vertices": 449,
+    "triangles": 582,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Surfer Shorts",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8738788,
+    "size": 21424,
+    "vertices": 595,
+    "triangles": 642,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Short Shorts",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8760212,
+    "size": 27100,
+    "vertices": 771,
+    "triangles": 642,
+    "has_color_table": true
+   },
+   {
+    "name": "Dogtooth Pattern Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8787312,
+    "size": 26964,
+    "vertices": 632,
+    "triangles": 546,
+    "has_color_table": true
+   },
+   {
+    "name": "Denim Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8814276,
+    "size": 30644,
+    "vertices": 869,
+    "triangles": 760,
+    "has_color_table": true
+   },
+   {
+    "name": "Surfer Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8844920,
+    "size": 36112,
+    "vertices": 871,
+    "triangles": 718,
+    "has_color_table": true
+   },
+   {
+    "name": "Pencil Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8881032,
+    "size": 25060,
+    "vertices": 676,
+    "triangles": 714,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tennis Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8906092,
+    "size": 25020,
+    "vertices": 674,
+    "triangles": 746,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tartan Skirt Re-textured",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8931112,
+    "size": 16220,
+    "vertices": 449,
+    "triangles": 582,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Baggy Jeans",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8947332,
+    "size": 27668,
+    "vertices": 731,
+    "triangles": 792,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Flares",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 8975000,
+    "size": 29564,
+    "vertices": 788,
+    "triangles": 800,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Leopard Print Leggings",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 9004564,
+    "size": 27672,
+    "vertices": 493,
+    "triangles": 560,
+    "has_color_table": true
+   },
+   {
+    "name": "Retro Skirt",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 9032236,
+    "size": 20308,
+    "vertices": 455,
+    "triangles": 582,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Chequered Shorts",
+    "gender": "male",
+    "slots": [
+     "legs"
+    ],
+    "offset": 13230152,
+    "size": 18168,
+    "vertices": 723,
+    "triangles": 590,
+    "has_color_table": true
+   },
+   {
+    "name": "Denim Skirt with Leggings",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 13292256,
+    "size": 22724,
+    "vertices": 794,
+    "triangles": 798,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Camo Pants",
+    "gender": "female",
+    "slots": [
+     "legs"
+    ],
+    "offset": 13553748,
+    "size": 33876,
+    "vertices": 984,
+    "triangles": 784,
+    "has_color_table": true
+   }
+  ],
+  "81_formal": [
+   {
+    "name": "Male Suit and Tie",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 5105648,
+    "size": 58464,
+    "vertices": 1719,
+    "triangles": 1906,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Formal Suit",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 5164112,
+    "size": 67636,
+    "vertices": 2171,
+    "triangles": 1938,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Suspenders with High Pants",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 5231748,
+    "size": 68924,
+    "vertices": 2094,
+    "triangles": 2030,
+    "has_color_table": true
+   },
+   {
+    "name": "Tan Formal Suit",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 5549376,
+    "size": 65844,
+    "vertices": 2171,
+    "triangles": 1938,
+    "has_color_table": true
+   },
+   {
+    "name": "Morning Suit",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 5615220,
+    "size": 57792,
+    "vertices": 1680,
+    "triangles": 1846,
+    "has_color_table": true
+   },
+   {
+    "name": "Twin Set",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 9563804,
+    "size": 71424,
+    "vertices": 1738,
+    "triangles": 1842,
+    "has_color_table": true
+   },
+   {
+    "name": "Formal Trouser Suit",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs"
+    ],
+    "offset": 9635228,
+    "size": 57588,
+    "vertices": 1521,
+    "triangles": 1734,
+    "has_color_table": true
+   }
+  ],
+  "82_coat": [
+   {
+    "name": "Black Trench Coat",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs",
+     "feet"
+    ],
+    "offset": 5300672,
+    "size": 81576,
+    "vertices": 2243,
+    "triangles": 2374,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Tuxedo",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs",
+     "feet"
+    ],
+    "offset": 5382248,
+    "size": 85680,
+    "vertices": 2425,
+    "triangles": 2512,
+    "has_color_table": true
+   },
+   {
+    "name": "Western Duster",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs",
+     "feet"
+    ],
+    "offset": 5467928,
+    "size": 81448,
+    "vertices": 2243,
+    "triangles": 2374,
+    "has_color_table": true
+   },
+   {
+    "name": "Black Tuxedo",
+    "gender": "male",
+    "slots": [
+     "wristwear",
+     "torso",
+     "legs",
+     "feet"
+    ],
+    "offset": 5673012,
+    "size": 91932,
+    "vertices": 2429,
+    "triangles": 2512,
+    "has_color_table": true
+   }
+  ],
+  "46_gloves": [
+   {
+    "name": "Grunge Fingerless Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 5764944,
+    "size": 14056,
+    "vertices": 546,
+    "triangles": 656,
+    "has_color_table": true
+   },
+   {
+    "name": "Woolly Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 5779000,
+    "size": 23916,
+    "vertices": 722,
+    "triangles": 1096,
+    "has_color_table": true
+   },
+   {
+    "name": "Pink Fingerless Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9859636,
+    "size": 18012,
+    "vertices": 548,
+    "triangles": 664,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Fingerless Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9877648,
+    "size": 17252,
+    "vertices": 548,
+    "triangles": 664,
+    "has_color_table": true
+   },
+   {
+    "name": "Yellow Fingerless Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9894900,
+    "size": 18124,
+    "vertices": 530,
+    "triangles": 664,
+    "has_color_table": true
+   },
+   {
+    "name": "Biker Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9913024,
+    "size": 22652,
+    "vertices": 794,
+    "triangles": 710,
+    "has_color_table": true
+   },
+   {
+    "name": "Rainbow Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9935676,
+    "size": 27976,
+    "vertices": 812,
+    "triangles": 1100,
+    "has_color_table": true
+   },
+   {
+    "name": "Fingerless Heart Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 9963652,
+    "size": 21108,
+    "vertices": 690,
+    "triangles": 1060,
+    "has_color_table": true
+   },
+   {
+    "name": "Leather Biker Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13120860,
+    "size": 15084,
+    "vertices": 774,
+    "triangles": 700,
+    "has_color_table": true
+   },
+   {
+    "name": "Driving Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13135944,
+    "size": 17564,
+    "vertices": 726,
+    "triangles": 1136,
+    "has_color_table": true
+   },
+   {
+    "name": "Black and Blue Fingerless Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13153508,
+    "size": 13300,
+    "vertices": 546,
+    "triangles": 656,
+    "has_color_table": true
+   },
+   {
+    "name": "Male White Dress Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13166808,
+    "size": 15060,
+    "vertices": 641,
+    "triangles": 1100,
+    "has_color_table": true
+   },
+   {
+    "name": "Female White Dress Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13181868,
+    "size": 12584,
+    "vertices": 620,
+    "triangles": 1108,
+    "has_color_table": true
+   },
+   {
+    "name": "Motocross Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13314980,
+    "size": 25328,
+    "vertices": 820,
+    "triangles": 1136,
+    "has_color_table": true
+   },
+   {
+    "name": "Pink Ski Gloves",
+    "gender": "female",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13342384,
+    "size": 17748,
+    "vertices": 736,
+    "triangles": 1072,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Ski Gloves",
+    "gender": "male",
+    "slots": [
+     "rings",
+     "gloves"
+    ],
+    "offset": 13587624,
+    "size": 19364,
+    "vertices": 736,
+    "triangles": 1072,
+    "has_color_table": true
+   }
+  ],
+  "75_earrings": [
+   {
+    "name": "Male Diamond Stud Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5802916,
+    "size": 964,
+    "vertices": 28,
+    "triangles": 48,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Gold Stud Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5803880,
+    "size": 2024,
+    "vertices": 90,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Silver Stud Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5805904,
+    "size": 2028,
+    "vertices": 90,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Left Feather Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5807932,
+    "size": 5540,
+    "vertices": 92,
+    "triangles": 98,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Punk Studs",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5813472,
+    "size": 1992,
+    "vertices": 104,
+    "triangles": 60,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Left Beaded Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5815464,
+    "size": 5136,
+    "vertices": 87,
+    "triangles": 70,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Gold Hoop Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5820600,
+    "size": 1800,
+    "vertices": 72,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Silver Hoop Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 5822400,
+    "size": 1796,
+    "vertices": 72,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Left Gold Hoop Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 9984760,
+    "size": 1732,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Left Silver Hoop Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 9986492,
+    "size": 1728,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Diamante Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 9988220,
+    "size": 2168,
+    "vertices": 58,
+    "triangles": 108,
+    "has_color_table": true
+   },
+   {
+    "name": "Female 60's Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 9990388,
+    "size": 2748,
+    "vertices": 204,
+    "triangles": 100,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Gold Heart Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13117624,
+    "size": 3236,
+    "vertices": 148,
+    "triangles": 100,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Scarlet Teardrop Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13340308,
+    "size": 2076,
+    "vertices": 94,
+    "triangles": 156,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Large Hoop Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13550568,
+    "size": 1372,
+    "vertices": 60,
+    "triangles": 112,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Gold Hoop Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13551940,
+    "size": 1808,
+    "vertices": 72,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Right Gold Hoop Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13606988,
+    "size": 1732,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Right Silver Hoop Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13608720,
+    "size": 1728,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Right Feather Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13610448,
+    "size": 5548,
+    "vertices": 92,
+    "triangles": 98,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Right Beaded Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13615996,
+    "size": 5360,
+    "vertices": 91,
+    "triangles": 70,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Left Gold Hoop Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13621356,
+    "size": 1732,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Left Silver Hoop Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13623088,
+    "size": 1728,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Gold Heart Earrings",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13624816,
+    "size": 3236,
+    "vertices": 148,
+    "triangles": 100,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Right Gold Hoop Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13628052,
+    "size": 1732,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Right Silver Hoop Earring",
+    "gender": "male",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13629784,
+    "size": 1728,
+    "vertices": 65,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Diamond Stud Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13631512,
+    "size": 964,
+    "vertices": 28,
+    "triangles": 48,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Gold Stud Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13632476,
+    "size": 2024,
+    "vertices": 90,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Silver Stud Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13634500,
+    "size": 2028,
+    "vertices": 90,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Left Feather Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13636528,
+    "size": 5540,
+    "vertices": 92,
+    "triangles": 98,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Punk Studs",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13642068,
+    "size": 1992,
+    "vertices": 104,
+    "triangles": 60,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Left Beaded Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13644060,
+    "size": 5136,
+    "vertices": 87,
+    "triangles": 70,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Silver Hoop Earrings",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13649196,
+    "size": 1796,
+    "vertices": 72,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Right Feather Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13650992,
+    "size": 5548,
+    "vertices": 92,
+    "triangles": 98,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Right Beaded Earring",
+    "gender": "female",
+    "slots": [
+     "earrings"
+    ],
+    "offset": 13656540,
+    "size": 5360,
+    "vertices": 91,
+    "triangles": 70,
+    "has_color_table": true
+   }
+  ],
+  "70_glasses": [
+   {
+    "name": "Metallic Carbon Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5824196,
+    "size": 8096,
+    "vertices": 412,
+    "triangles": 356,
+    "has_color_table": true
+   },
+   {
+    "name": "Surfer Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5832292,
+    "size": 9528,
+    "vertices": 416,
+    "triangles": 380,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Arthouse Glasses",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5841820,
+    "size": 9248,
+    "vertices": 445,
+    "triangles": 390,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Jam Jar Glasses",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5851068,
+    "size": 10920,
+    "vertices": 431,
+    "triangles": 392,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Pilot Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5861988,
+    "size": 8492,
+    "vertices": 336,
+    "triangles": 368,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Tortoise Shell Glasses",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5870480,
+    "size": 11476,
+    "vertices": 422,
+    "triangles": 400,
+    "has_color_table": true
+   },
+   {
+    "name": "Red Shutter Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5881956,
+    "size": 8804,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Monacle",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5890760,
+    "size": 7276,
+    "vertices": 244,
+    "triangles": 310,
+    "has_color_table": true
+   },
+   {
+    "name": "Retro Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5898036,
+    "size": 10160,
+    "vertices": 436,
+    "triangles": 352,
+    "has_color_table": true
+   },
+   {
+    "name": "Hippy Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5908196,
+    "size": 10720,
+    "vertices": 490,
+    "triangles": 356,
+    "has_color_table": true
+   },
+   {
+    "name": "White Shutter Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5918916,
+    "size": 10732,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Black Shutter Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5929648,
+    "size": 10728,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Professional Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5940376,
+    "size": 10316,
+    "vertices": 460,
+    "triangles": 384,
+    "has_color_table": true
+   },
+   {
+    "name": "Studious Glasses",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5950692,
+    "size": 11096,
+    "vertices": 488,
+    "triangles": 356,
+    "has_color_table": true
+   },
+   {
+    "name": "50's Glasses",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5961788,
+    "size": 9236,
+    "vertices": 424,
+    "triangles": 360,
+    "has_color_table": true
+   },
+   {
+    "name": "Sports Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5971024,
+    "size": 8972,
+    "vertices": 402,
+    "triangles": 356,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5979996,
+    "size": 9328,
+    "vertices": 464,
+    "triangles": 368,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Star Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5989324,
+    "size": 8456,
+    "vertices": 356,
+    "triangles": 372,
+    "has_color_table": true
+   },
+   {
+    "name": "Pilot Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 5997780,
+    "size": 8608,
+    "vertices": 336,
+    "triangles": 368,
+    "has_color_table": true
+   },
+   {
+    "name": "Pink Gem Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6006388,
+    "size": 8896,
+    "vertices": 307,
+    "triangles": 354,
+    "has_color_table": true
+   },
+   {
+    "name": "Slick Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6015284,
+    "size": 8740,
+    "vertices": 349,
+    "triangles": 382,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Yellow Shutter Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6024024,
+    "size": 10744,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Shutter Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6034768,
+    "size": 10744,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Green Shutter Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6045512,
+    "size": 10744,
+    "vertices": 425,
+    "triangles": 398,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Oval Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6056256,
+    "size": 10196,
+    "vertices": 406,
+    "triangles": 384,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Tortoiseshell Star Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6066452,
+    "size": 12392,
+    "vertices": 500,
+    "triangles": 396,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Red Heart Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6078844,
+    "size": 4752,
+    "vertices": 183,
+    "triangles": 196,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Red Gem Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6083596,
+    "size": 9116,
+    "vertices": 378,
+    "triangles": 342,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Black 60's Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6092712,
+    "size": 7140,
+    "vertices": 306,
+    "triangles": 334,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Studious Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6099852,
+    "size": 10044,
+    "vertices": 422,
+    "triangles": 412,
+    "has_color_table": true
+   },
+   {
+    "name": "Female White Heart Shades",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 6109896,
+    "size": 4764,
+    "vertices": 183,
+    "triangles": 196,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Shades",
+    "gender": "male",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 13054180,
+    "size": 8664,
+    "vertices": 331,
+    "triangles": 384,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Rimless Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 13062844,
+    "size": 8992,
+    "vertices": 383,
+    "triangles": 358,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Red 60's Glasses",
+    "gender": "female",
+    "slots": [
+     "glasses"
+    ],
+    "offset": 13071836,
+    "size": 6496,
+    "vertices": 278,
+    "triangles": 334,
+    "has_color_table": true
+   }
+  ],
+  "77_wristwear": [
+   {
+    "name": "Slick Watch",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6114660,
+    "size": 5144,
+    "vertices": 185,
+    "triangles": 130,
+    "has_color_table": true
+   },
+   {
+    "name": "Studded Wrist Strap",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6119804,
+    "size": 4728,
+    "vertices": 86,
+    "triangles": 64,
+    "has_color_table": true
+   },
+   {
+    "name": "Leather Strap Watch",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6124532,
+    "size": 3564,
+    "vertices": 86,
+    "triangles": 80,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Solidarity Band",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6128096,
+    "size": 1984,
+    "vertices": 62,
+    "triangles": 60,
+    "has_color_table": true
+   },
+   {
+    "name": "Retro Digital Watch",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6130080,
+    "size": 3656,
+    "vertices": 76,
+    "triangles": 56,
+    "has_color_table": true
+   },
+   {
+    "name": "Titanium Sports Watch",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6133736,
+    "size": 5636,
+    "vertices": 121,
+    "triangles": 100,
+    "has_color_table": true
+   },
+   {
+    "name": "Pink Sweat Bands",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6139372,
+    "size": 3764,
+    "vertices": 144,
+    "triangles": 192,
+    "has_color_table": true
+   },
+   {
+    "name": "Vibrant Sweat Bands",
+    "gender": "male",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 6143136,
+    "size": 2252,
+    "vertices": 78,
+    "triangles": 128,
+    "has_color_table": true
+   },
+   {
+    "name": "Gold Bracelet",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 9993136,
+    "size": 2136,
+    "vertices": 18,
+    "triangles": 16,
+    "has_color_table": true
+   },
+   {
+    "name": "Digital Watch",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 9995272,
+    "size": 2884,
+    "vertices": 82,
+    "triangles": 56,
+    "has_color_table": true
+   },
+   {
+    "name": "Skull Wrist Band",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 9998156,
+    "size": 2792,
+    "vertices": 38,
+    "triangles": 32,
+    "has_color_table": true
+   },
+   {
+    "name": "Sporty Sweat Bands",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 10000948,
+    "size": 4424,
+    "vertices": 104,
+    "triangles": 120,
+    "has_color_table": true
+   },
+   {
+    "name": "Orange Solidarity Band",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 10005372,
+    "size": 1896,
+    "vertices": 62,
+    "triangles": 60,
+    "has_color_table": true
+   },
+   {
+    "name": "Silver Chain Bracelet",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 10007268,
+    "size": 2692,
+    "vertices": 32,
+    "triangles": 16,
+    "has_color_table": true
+   },
+   {
+    "name": "Elegant Watch",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 10009960,
+    "size": 2440,
+    "vertices": 55,
+    "triangles": 32,
+    "has_color_table": true
+   },
+   {
+    "name": "Chunky Beaded Bracelet",
+    "gender": "female",
+    "slots": [
+     "wristwear"
+    ],
+    "offset": 10012400,
+    "size": 5300,
+    "vertices": 42,
+    "triangles": 32,
+    "has_color_table": true
+   }
+  ],
+  "60_hat": [
+   {
+    "name": "Male Baseball Cap",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6145388,
+    "size": 11080,
+    "vertices": 537,
+    "triangles": 342,
+    "has_color_table": true
+   },
+   {
+    "name": "Red Visor Beanie",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6156468,
+    "size": 7944,
+    "vertices": 389,
+    "triangles": 322,
+    "has_color_table": true
+   },
+   {
+    "name": "Flame Beanie",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6164412,
+    "size": 11024,
+    "vertices": 235,
+    "triangles": 300,
+    "has_color_table": true
+   },
+   {
+    "name": "Vintage Trilby",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6175436,
+    "size": 11896,
+    "vertices": 431,
+    "triangles": 506,
+    "has_color_table": true
+   },
+   {
+    "name": "Camo Baseball Cap",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6187332,
+    "size": 13964,
+    "vertices": 466,
+    "triangles": 342,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Two Tone Beanie",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6201296,
+    "size": 10028,
+    "vertices": 428,
+    "triangles": 322,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Deer Stalker",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6211324,
+    "size": 14356,
+    "vertices": 438,
+    "triangles": 580,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Cowboy hat",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6225680,
+    "size": 13992,
+    "vertices": 480,
+    "triangles": 598,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Bowler",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6239672,
+    "size": 11704,
+    "vertices": 385,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Stripped Visor Beanie",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6251376,
+    "size": 7220,
+    "vertices": 208,
+    "triangles": 322,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Black Cowboy Hat",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6258596,
+    "size": 13552,
+    "vertices": 480,
+    "triangles": 598,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Black Trilby",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6272148,
+    "size": 9792,
+    "vertices": 419,
+    "triangles": 506,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Tweed Trilby",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6281940,
+    "size": 12012,
+    "vertices": 447,
+    "triangles": 506,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Top Hat",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6293952,
+    "size": 15680,
+    "vertices": 556,
+    "triangles": 546,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Rave Baseball Cap",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6309632,
+    "size": 11508,
+    "vertices": 450,
+    "triangles": 330,
+    "has_color_table": true
+   },
+   {
+    "name": "Surfer Baseball Cap",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 6321140,
+    "size": 10852,
+    "vertices": 534,
+    "triangles": 346,
+    "has_color_table": true
+   },
+   {
+    "name": "Panama Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10017700,
+    "size": 13544,
+    "vertices": 516,
+    "triangles": 550,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Baseball Cap",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10031244,
+    "size": 14636,
+    "vertices": 502,
+    "triangles": 316,
+    "has_color_table": true
+   },
+   {
+    "name": "Straw Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10045880,
+    "size": 14328,
+    "vertices": 757,
+    "triangles": 486,
+    "has_color_table": true
+   },
+   {
+    "name": "Knit Pull-on",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10060208,
+    "size": 10308,
+    "vertices": 369,
+    "triangles": 350,
+    "has_color_table": true
+   },
+   {
+    "name": "Tartan Flat Cap",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10070516,
+    "size": 7264,
+    "vertices": 190,
+    "triangles": 600,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Rhinestone Cowgirl Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10077780,
+    "size": 13600,
+    "vertices": 421,
+    "triangles": 584,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Striped Knit Pull-on",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10091380,
+    "size": 10284,
+    "vertices": 343,
+    "triangles": 350,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Knit Pull-on with Bobble",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10101664,
+    "size": 12948,
+    "vertices": 415,
+    "triangles": 430,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Sailor Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10114612,
+    "size": 13544,
+    "vertices": 468,
+    "triangles": 496,
+    "has_color_table": true
+   },
+   {
+    "name": "Maroon Knit Pull-on",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10128156,
+    "size": 11040,
+    "vertices": 382,
+    "triangles": 350,
+    "has_color_table": true
+   },
+   {
+    "name": "Green Bucket Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10139196,
+    "size": 13172,
+    "vertices": 388,
+    "triangles": 414,
+    "has_color_table": true
+   },
+   {
+    "name": "White Cowgirl Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10152368,
+    "size": 13228,
+    "vertices": 421,
+    "triangles": 584,
+    "has_color_table": true
+   },
+   {
+    "name": "Blue Bucket Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10165596,
+    "size": 13084,
+    "vertices": 388,
+    "triangles": 414,
+    "has_color_table": true
+   },
+   {
+    "name": "Flower Bobble Hat",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10178680,
+    "size": 13504,
+    "vertices": 403,
+    "triangles": 430,
+    "has_color_table": true
+   },
+   {
+    "name": "Green Floral Baseball Cap",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10192184,
+    "size": 14080,
+    "vertices": 488,
+    "triangles": 300,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Rave Baseball Cap",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 10206264,
+    "size": 11484,
+    "vertices": 450,
+    "triangles": 330,
+    "has_color_table": true
+   },
+   {
+    "name": "Trucker Cap",
+    "gender": "male",
+    "slots": [
+     "hat"
+    ],
+    "offset": 13078332,
+    "size": 16540,
+    "vertices": 446,
+    "triangles": 520,
+    "has_color_table": true
+   },
+   {
+    "name": "Pattern Knit Pull-on",
+    "gender": "female",
+    "slots": [
+     "hat"
+    ],
+    "offset": 13248320,
+    "size": 9524,
+    "vertices": 314,
+    "triangles": 350,
+    "has_color_table": true
+   }
+  ],
+  "76_rings": [
+   {
+    "name": "Silver Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6331992,
+    "size": 1844,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Gold Wedding Band",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6333836,
+    "size": 1888,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Male Silver Wedding Band",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6335724,
+    "size": 1892,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Gold Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6337616,
+    "size": 1948,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Sovereign Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6339564,
+    "size": 2636,
+    "vertices": 96,
+    "triangles": 124,
+    "has_color_table": true
+   },
+   {
+    "name": "Square Stones Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6342200,
+    "size": 2908,
+    "vertices": 184,
+    "triangles": 114,
+    "has_color_table": true
+   },
+   {
+    "name": "Skull Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6345108,
+    "size": 3164,
+    "vertices": 153,
+    "triangles": 116,
+    "has_color_table": true
+   },
+   {
+    "name": "Celtic Ring",
+    "gender": "male",
+    "slots": [
+     "rings"
+    ],
+    "offset": 6348272,
+    "size": 2548,
+    "vertices": 80,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Gold Wedding Band",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10217748,
+    "size": 1948,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Silver Wedding Band",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10219696,
+    "size": 1948,
+    "vertices": 75,
+    "triangles": 96,
+    "has_color_table": true
+   },
+   {
+    "name": "Gold Ring with Emeralds",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10221644,
+    "size": 2612,
+    "vertices": 176,
+    "triangles": 112,
+    "has_color_table": true
+   },
+   {
+    "name": "Silver Sapphire Ring",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10224256,
+    "size": 3048,
+    "vertices": 118,
+    "triangles": 108,
+    "has_color_table": true
+   },
+   {
+    "name": "Large Diamond Ring",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10227304,
+    "size": 3372,
+    "vertices": 162,
+    "triangles": 108,
+    "has_color_table": true
+   },
+   {
+    "name": "Red Chunky Ring",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10230676,
+    "size": 4688,
+    "vertices": 78,
+    "triangles": 44,
+    "has_color_table": true
+   },
+   {
+    "name": "Green Chunky Ring",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10235364,
+    "size": 4480,
+    "vertices": 72,
+    "triangles": 44,
+    "has_color_table": true
+   },
+   {
+    "name": "Split Ring",
+    "gender": "female",
+    "slots": [
+     "rings"
+    ],
+    "offset": 10239844,
+    "size": 2140,
+    "vertices": 97,
+    "triangles": 86,
+    "has_color_table": true
+   }
+  ],
+  "80_dress": [
+   {
+    "name": "Strapless Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9052544,
+    "size": 33748,
+    "vertices": 993,
+    "triangles": 976,
+    "has_color_table": true
+   },
+   {
+    "name": "Striped Sundress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9086292,
+    "size": 25344,
+    "vertices": 885,
+    "triangles": 1002,
+    "has_color_table": true
+   },
+   {
+    "name": "Pleated Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9111636,
+    "size": 46608,
+    "vertices": 1151,
+    "triangles": 1292,
+    "has_color_table": true
+   },
+   {
+    "name": "Cheerleader Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9158244,
+    "size": 22564,
+    "vertices": 922,
+    "triangles": 848,
+    "has_color_table": true
+   },
+   {
+    "name": "Babydoll Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9180808,
+    "size": 36584,
+    "vertices": 1030,
+    "triangles": 1134,
+    "has_color_table": true
+   },
+   {
+    "name": "Rockabilly Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9217392,
+    "size": 53920,
+    "vertices": 1753,
+    "triangles": 1626,
+    "has_color_table": true
+   },
+   {
+    "name": "60's Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9271312,
+    "size": 21820,
+    "vertices": 1017,
+    "triangles": 1046,
+    "has_color_table": true
+   },
+   {
+    "name": "Dress with Sash",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9293132,
+    "size": 34156,
+    "vertices": 751,
+    "triangles": 1016,
+    "has_color_table": true
+   },
+   {
+    "name": "Mint Sundress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9327288,
+    "size": 34928,
+    "vertices": 914,
+    "triangles": 1022,
+    "has_color_table": true
+   },
+   {
+    "name": "Female Two Button Babydoll Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9406480,
+    "size": 41084,
+    "vertices": 1126,
+    "triangles": 1252,
+    "has_color_table": true
+   },
+   {
+    "name": "Daisy Print Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9447564,
+    "size": 42712,
+    "vertices": 1073,
+    "triangles": 1106,
+    "has_color_table": true
+   },
+   {
+    "name": "Dungarees",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9490276,
+    "size": 73528,
+    "vertices": 1940,
+    "triangles": 2004,
+    "has_color_table": true
+   },
+   {
+    "name": "Elegant Ball Gown",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9692816,
+    "size": 45488,
+    "vertices": 1151,
+    "triangles": 1292,
+    "has_color_table": true
+   },
+   {
+    "name": "Jogger",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9738304,
+    "size": 59808,
+    "vertices": 1404,
+    "triangles": 1548,
+    "has_color_table": true
+   },
+   {
+    "name": "Surfer Dress",
+    "gender": "female",
+    "slots": [
+     "torso",
+     "legs"
+    ],
+    "offset": 9798112,
+    "size": 61524,
+    "vertices": 1018,
+    "triangles": 976,
+    "has_color_table": true
+   }
+  ],
+  "83_dress-formal": [
+   {
+    "name": "Female Little Black Dress",
+    "gender": "female",
+    "slots": [
+     "wristwear",
+     "rings",
+     "torso",
+     "legs",
+     "gloves"
+    ],
+    "offset": 9362216,
+    "size": 44264,
+    "vertices": 1426,
+    "triangles": 2144,
+    "has_color_table": true
+   }
+  ],
+  "50_hair": [
+   {
+    "name": "Bald",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10241984,
+    "size": 160,
+    "vertices": 0,
+    "triangles": 0,
+    "has_color_table": false
+   },
+   {
+    "name": "Bald (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10242144,
+    "size": 160,
+    "vertices": 0,
+    "triangles": 0,
+    "has_color_table": false
+   },
+   {
+    "name": "Peak",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10242304,
+    "size": 6460,
+    "vertices": 264,
+    "triangles": 480,
+    "has_color_table": false
+   },
+   {
+    "name": "Peak (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10248764,
+    "size": 2424,
+    "vertices": 94,
+    "triangles": 150,
+    "has_color_table": false
+   },
+   {
+    "name": "Fauxhawk",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10251188,
+    "size": 9584,
+    "vertices": 385,
+    "triangles": 734,
+    "has_color_table": false
+   },
+   {
+    "name": "Fauxhawk (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10260772,
+    "size": 2560,
+    "vertices": 110,
+    "triangles": 172,
+    "has_color_table": false
+   },
+   {
+    "name": "Flat Top",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10263332,
+    "size": 7028,
+    "vertices": 295,
+    "triangles": 452,
+    "has_color_table": false
+   },
+   {
+    "name": "Flat Top (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10270360,
+    "size": 2504,
+    "vertices": 113,
+    "triangles": 174,
+    "has_color_table": false
+   },
+   {
+    "name": "The Captain Cut",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10272864,
+    "size": 4076,
+    "vertices": 170,
+    "triangles": 294,
+    "has_color_table": false
+   },
+   {
+    "name": "Old Hair (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10276940,
+    "size": 2084,
+    "vertices": 85,
+    "triangles": 134,
+    "has_color_table": false
+   },
+   {
+    "name": "High and Tight",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10279024,
+    "size": 4148,
+    "vertices": 185,
+    "triangles": 312,
+    "has_color_table": false
+   },
+   {
+    "name": "High and Tight (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10283172,
+    "size": 2696,
+    "vertices": 114,
+    "triangles": 162,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Comb Over",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10285868,
+    "size": 10540,
+    "vertices": 424,
+    "triangles": 747,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Comb Over (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10296408,
+    "size": 3488,
+    "vertices": 140,
+    "triangles": 234,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Comb Over",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10299896,
+    "size": 10568,
+    "vertices": 424,
+    "triangles": 747,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaped Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10310464,
+    "size": 14428,
+    "vertices": 625,
+    "triangles": 888,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaped Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10324892,
+    "size": 11344,
+    "vertices": 470,
+    "triangles": 611,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaped Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10336236,
+    "size": 14364,
+    "vertices": 625,
+    "triangles": 888,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaped Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10350600,
+    "size": 11344,
+    "vertices": 470,
+    "triangles": 611,
+    "has_color_table": false
+   },
+   {
+    "name": "Short and Spikey",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10361944,
+    "size": 5264,
+    "vertices": 210,
+    "triangles": 378,
+    "has_color_table": false
+   },
+   {
+    "name": "Short and Spikey (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10367208,
+    "size": 2300,
+    "vertices": 98,
+    "triangles": 146,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10369508,
+    "size": 8404,
+    "vertices": 334,
+    "triangles": 591,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10377912,
+    "size": 8412,
+    "vertices": 334,
+    "triangles": 591,
+    "has_color_table": false
+   },
+   {
+    "name": "Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10386324,
+    "size": 3516,
+    "vertices": 143,
+    "triangles": 189,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Curved Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10389840,
+    "size": 10112,
+    "vertices": 424,
+    "triangles": 770,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Curved Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10399952,
+    "size": 5444,
+    "vertices": 226,
+    "triangles": 368,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Curved Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10405396,
+    "size": 10100,
+    "vertices": 424,
+    "triangles": 770,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Curved Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10415496,
+    "size": 5448,
+    "vertices": 226,
+    "triangles": 368,
+    "has_color_table": false
+   },
+   {
+    "name": "Short with Left Curls",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10420944,
+    "size": 7700,
+    "vertices": 319,
+    "triangles": 557,
+    "has_color_table": false
+   },
+   {
+    "name": "Short with Left Curls (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10428644,
+    "size": 2628,
+    "vertices": 102,
+    "triangles": 154,
+    "has_color_table": false
+   },
+   {
+    "name": "Short with Right Curls",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10431272,
+    "size": 7696,
+    "vertices": 319,
+    "triangles": 557,
+    "has_color_table": false
+   },
+   {
+    "name": "Short with Right Curls (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10438968,
+    "size": 2628,
+    "vertices": 102,
+    "triangles": 154,
+    "has_color_table": false
+   },
+   {
+    "name": "Number One",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10441596,
+    "size": 3416,
+    "vertices": 146,
+    "triangles": 262,
+    "has_color_table": false
+   },
+   {
+    "name": "Number One (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10445012,
+    "size": 2696,
+    "vertices": 114,
+    "triangles": 162,
+    "has_color_table": false
+   },
+   {
+    "name": "Raised Left Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10447708,
+    "size": 9572,
+    "vertices": 381,
+    "triangles": 699,
+    "has_color_table": false
+   },
+   {
+    "name": "Raised Right Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10457280,
+    "size": 9580,
+    "vertices": 381,
+    "triangles": 699,
+    "has_color_table": false
+   },
+   {
+    "name": "Raised Right Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10466860,
+    "size": 2688,
+    "vertices": 111,
+    "triangles": 141,
+    "has_color_table": false
+   },
+   {
+    "name": "Raised Left Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10469548,
+    "size": 2688,
+    "vertices": 111,
+    "triangles": 141,
+    "has_color_table": false
+   },
+   {
+    "name": "Thin on Top",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10472236,
+    "size": 8232,
+    "vertices": 328,
+    "triangles": 587,
+    "has_color_table": false
+   },
+   {
+    "name": "Thin on Top (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10480468,
+    "size": 3640,
+    "vertices": 145,
+    "triangles": 238,
+    "has_color_table": false
+   },
+   {
+    "name": "Parted Left and Slicked",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10484108,
+    "size": 7516,
+    "vertices": 294,
+    "triangles": 530,
+    "has_color_table": false
+   },
+   {
+    "name": "Parted Right and Slicked",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10491624,
+    "size": 7512,
+    "vertices": 294,
+    "triangles": 530,
+    "has_color_table": false
+   },
+   {
+    "name": "Parted Right and Slicked (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10499136,
+    "size": 2104,
+    "vertices": 80,
+    "triangles": 108,
+    "has_color_table": false
+   },
+   {
+    "name": "Parted Left and Slicked (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10501240,
+    "size": 2104,
+    "vertices": 80,
+    "triangles": 108,
+    "has_color_table": false
+   },
+   {
+    "name": "Spiky on Top",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10503344,
+    "size": 4996,
+    "vertices": 211,
+    "triangles": 386,
+    "has_color_table": false
+   },
+   {
+    "name": "Spiky on Top (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10508340,
+    "size": 2596,
+    "vertices": 105,
+    "triangles": 162,
+    "has_color_table": false
+   },
+   {
+    "name": "Buzz Cut",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10510936,
+    "size": 5944,
+    "vertices": 243,
+    "triangles": 450,
+    "has_color_table": false
+   },
+   {
+    "name": "Buzz Cut (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10516880,
+    "size": 2216,
+    "vertices": 82,
+    "triangles": 117,
+    "has_color_table": false
+   },
+   {
+    "name": "Raised Front",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10519096,
+    "size": 6356,
+    "vertices": 272,
+    "triangles": 472,
+    "has_color_table": false
+   },
+   {
+    "name": "Quiff (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10525452,
+    "size": 2312,
+    "vertices": 88,
+    "triangles": 124,
+    "has_color_table": false
+   },
+   {
+    "name": "Mohawk",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10527764,
+    "size": 11736,
+    "vertices": 481,
+    "triangles": 658,
+    "has_color_table": false
+   },
+   {
+    "name": "Mohawk (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10539500,
+    "size": 4244,
+    "vertices": 179,
+    "triangles": 242,
+    "has_color_table": false
+   },
+   {
+    "name": "Perm with Fringe",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10543744,
+    "size": 14568,
+    "vertices": 568,
+    "triangles": 1089,
+    "has_color_table": false
+   },
+   {
+    "name": "Perm with Fringe (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10558312,
+    "size": 4748,
+    "vertices": 202,
+    "triangles": 314,
+    "has_color_table": false
+   },
+   {
+    "name": "Afro",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10563060,
+    "size": 10588,
+    "vertices": 445,
+    "triangles": 836,
+    "has_color_table": false
+   },
+   {
+    "name": "Afro (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10573648,
+    "size": 4548,
+    "vertices": 187,
+    "triangles": 304,
+    "has_color_table": false
+   },
+   {
+    "name": "Curtains",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10578196,
+    "size": 10732,
+    "vertices": 429,
+    "triangles": 788,
+    "has_color_table": false
+   },
+   {
+    "name": "Curtains (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10588928,
+    "size": 4800,
+    "vertices": 203,
+    "triangles": 336,
+    "has_color_table": false
+   },
+   {
+    "name": "Wild from the Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10593728,
+    "size": 12556,
+    "vertices": 507,
+    "triangles": 827,
+    "has_color_table": false
+   },
+   {
+    "name": "Wild from the Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10606284,
+    "size": 10216,
+    "vertices": 419,
+    "triangles": 593,
+    "has_color_table": false
+   },
+   {
+    "name": "Wild from the Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10616500,
+    "size": 12572,
+    "vertices": 507,
+    "triangles": 827,
+    "has_color_table": false
+   },
+   {
+    "name": "Wild from the Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10629072,
+    "size": 10232,
+    "vertices": 419,
+    "triangles": 593,
+    "has_color_table": false
+   },
+   {
+    "name": "Cornrows",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10639304,
+    "size": 16988,
+    "vertices": 690,
+    "triangles": 1280,
+    "has_color_table": false
+   },
+   {
+    "name": "Cornrows (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10656292,
+    "size": 8124,
+    "vertices": 343,
+    "triangles": 554,
+    "has_color_table": false
+   },
+   {
+    "name": "Funky Bumps",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10664416,
+    "size": 17212,
+    "vertices": 940,
+    "triangles": 1114,
+    "has_color_table": false
+   },
+   {
+    "name": "Funky Bumps (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10681628,
+    "size": 5908,
+    "vertices": 355,
+    "triangles": 355,
+    "has_color_table": false
+   },
+   {
+    "name": "Surfer Bob",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10687536,
+    "size": 17548,
+    "vertices": 767,
+    "triangles": 1161,
+    "has_color_table": false
+   },
+   {
+    "name": "Surfer Bob (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10705084,
+    "size": 15720,
+    "vertices": 645,
+    "triangles": 911,
+    "has_color_table": false
+   },
+   {
+    "name": "Compact",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10720804,
+    "size": 6272,
+    "vertices": 267,
+    "triangles": 498,
+    "has_color_table": false
+   },
+   {
+    "name": "Compact (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10727076,
+    "size": 2360,
+    "vertices": 74,
+    "triangles": 106,
+    "has_color_table": false
+   },
+   {
+    "name": "Bun",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10729436,
+    "size": 11356,
+    "vertices": 456,
+    "triangles": 856,
+    "has_color_table": false
+   },
+   {
+    "name": "Bun (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10740792,
+    "size": 2468,
+    "vertices": 99,
+    "triangles": 142,
+    "has_color_table": false
+   },
+   {
+    "name": "Ponytail",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10743260,
+    "size": 11936,
+    "vertices": 550,
+    "triangles": 828,
+    "has_color_table": false
+   },
+   {
+    "name": "Ponytail (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10755196,
+    "size": 4080,
+    "vertices": 162,
+    "triangles": 253,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept Back",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10759276,
+    "size": 8536,
+    "vertices": 331,
+    "triangles": 620,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept Back (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10767812,
+    "size": 5764,
+    "vertices": 250,
+    "triangles": 370,
+    "has_color_table": false
+   },
+   {
+    "name": "Pig Tails with Fringe",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10773576,
+    "size": 18840,
+    "vertices": 768,
+    "triangles": 1116,
+    "has_color_table": false
+   },
+   {
+    "name": "Pig Tails with Fringe (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10792416,
+    "size": 15116,
+    "vertices": 601,
+    "triangles": 784,
+    "has_color_table": false
+   },
+   {
+    "name": "Dreadlocks",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10807532,
+    "size": 15448,
+    "vertices": 607,
+    "triangles": 1192,
+    "has_color_table": false
+   },
+   {
+    "name": "Dreadlocks (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10822980,
+    "size": 14484,
+    "vertices": 594,
+    "triangles": 887,
+    "has_color_table": false
+   },
+   {
+    "name": "Crew Cut",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10837464,
+    "size": 6664,
+    "vertices": 290,
+    "triangles": 546,
+    "has_color_table": false
+   },
+   {
+    "name": "Crew Cut (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10844128,
+    "size": 2644,
+    "vertices": 108,
+    "triangles": 165,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept from Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10846772,
+    "size": 8868,
+    "vertices": 360,
+    "triangles": 616,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept from Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10855640,
+    "size": 8840,
+    "vertices": 360,
+    "triangles": 616,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept from Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10864480,
+    "size": 4344,
+    "vertices": 178,
+    "triangles": 231,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept from Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10868824,
+    "size": 4352,
+    "vertices": 178,
+    "triangles": 231,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Left Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10873176,
+    "size": 13612,
+    "vertices": 533,
+    "triangles": 1019,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Left Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10886788,
+    "size": 8964,
+    "vertices": 358,
+    "triangles": 629,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Right Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10895752,
+    "size": 13616,
+    "vertices": 533,
+    "triangles": 1019,
+    "has_color_table": false
+   },
+   {
+    "name": "Straight Right Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10909368,
+    "size": 8960,
+    "vertices": 358,
+    "triangles": 629,
+    "has_color_table": false
+   },
+   {
+    "name": "Low Ponytail",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10918328,
+    "size": 11260,
+    "vertices": 490,
+    "triangles": 884,
+    "has_color_table": false
+   },
+   {
+    "name": "Low Ponytail (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10929588,
+    "size": 6904,
+    "vertices": 286,
+    "triangles": 470,
+    "has_color_table": false
+   },
+   {
+    "name": "Shoulder Length",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10936492,
+    "size": 15084,
+    "vertices": 632,
+    "triangles": 1078,
+    "has_color_table": false
+   },
+   {
+    "name": "Shoulder Length (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10951576,
+    "size": 11620,
+    "vertices": 472,
+    "triangles": 752,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaved Pattern",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10963196,
+    "size": 13384,
+    "vertices": 540,
+    "triangles": 946,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaved Pattern (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10976580,
+    "size": 4260,
+    "vertices": 171,
+    "triangles": 277,
+    "has_color_table": false
+   },
+   {
+    "name": "Slicked",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10980840,
+    "size": 14448,
+    "vertices": 570,
+    "triangles": 936,
+    "has_color_table": false
+   },
+   {
+    "name": "Slicked (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 10995288,
+    "size": 7600,
+    "vertices": 325,
+    "triangles": 385,
+    "has_color_table": false
+   },
+   {
+    "name": "Pig Tails",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11002888,
+    "size": 15220,
+    "vertices": 624,
+    "triangles": 1092,
+    "has_color_table": false
+   },
+   {
+    "name": "Pig Tails (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11018108,
+    "size": 2492,
+    "vertices": 96,
+    "triangles": 140,
+    "has_color_table": false
+   },
+   {
+    "name": "Layered with Fringe",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11020600,
+    "size": 16752,
+    "vertices": 709,
+    "triangles": 964,
+    "has_color_table": false
+   },
+   {
+    "name": "Layered with Fringe (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11037352,
+    "size": 16568,
+    "vertices": 682,
+    "triangles": 835,
+    "has_color_table": false
+   },
+   {
+    "name": "Chopsticks Left Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11053920,
+    "size": 10392,
+    "vertices": 412,
+    "triangles": 713,
+    "has_color_table": false
+   },
+   {
+    "name": "Chopsticks Parted Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11064312,
+    "size": 8748,
+    "vertices": 358,
+    "triangles": 506,
+    "has_color_table": false
+   },
+   {
+    "name": "Chopsticks Right Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11073060,
+    "size": 10372,
+    "vertices": 412,
+    "triangles": 713,
+    "has_color_table": false
+   },
+   {
+    "name": "Gentle Waves",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11083432,
+    "size": 17884,
+    "vertices": 703,
+    "triangles": 1194,
+    "has_color_table": false
+   },
+   {
+    "name": "Gentle Waves (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11101316,
+    "size": 12124,
+    "vertices": 520,
+    "triangles": 799,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Ties",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11113440,
+    "size": 25272,
+    "vertices": 909,
+    "triangles": 1104,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Ties (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11138712,
+    "size": 10124,
+    "vertices": 351,
+    "triangles": 412,
+    "has_color_table": false
+   },
+   {
+    "name": "Long Flick",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11148836,
+    "size": 10368,
+    "vertices": 423,
+    "triangles": 744,
+    "has_color_table": false
+   },
+   {
+    "name": "Long Flick (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11159204,
+    "size": 7244,
+    "vertices": 293,
+    "triangles": 470,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11166448,
+    "size": 10680,
+    "vertices": 434,
+    "triangles": 781,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11177128,
+    "size": 4244,
+    "vertices": 170,
+    "triangles": 278,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11181372,
+    "size": 10684,
+    "vertices": 434,
+    "triangles": 781,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11192056,
+    "size": 4244,
+    "vertices": 170,
+    "triangles": 278,
+    "has_color_table": false
+   },
+   {
+    "name": "Even Length",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11196300,
+    "size": 11116,
+    "vertices": 449,
+    "triangles": 826,
+    "has_color_table": false
+   },
+   {
+    "name": "Even Length (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11207416,
+    "size": 7060,
+    "vertices": 282,
+    "triangles": 473,
+    "has_color_table": false
+   },
+   {
+    "name": "Tied on Top Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11214476,
+    "size": 12392,
+    "vertices": 506,
+    "triangles": 804,
+    "has_color_table": false
+   },
+   {
+    "name": "Tied on Top Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11226868,
+    "size": 4956,
+    "vertices": 217,
+    "triangles": 257,
+    "has_color_table": false
+   },
+   {
+    "name": "Tied on Top Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11231824,
+    "size": 12340,
+    "vertices": 506,
+    "triangles": 804,
+    "has_color_table": false
+   },
+   {
+    "name": "Tied on Top Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11244164,
+    "size": 4792,
+    "vertices": 210,
+    "triangles": 257,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept Back Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11248956,
+    "size": 14228,
+    "vertices": 577,
+    "triangles": 1122,
+    "has_color_table": false
+   },
+   {
+    "name": "Swept Back Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11263184,
+    "size": 9180,
+    "vertices": 368,
+    "triangles": 636,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaggy",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11272364,
+    "size": 13452,
+    "vertices": 592,
+    "triangles": 1040,
+    "has_color_table": false
+   },
+   {
+    "name": "Shaggy (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11285816,
+    "size": 7624,
+    "vertices": 351,
+    "triangles": 513,
+    "has_color_table": false
+   },
+   {
+    "name": "Pinup Curls",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11293440,
+    "size": 14656,
+    "vertices": 570,
+    "triangles": 1016,
+    "has_color_table": false
+   },
+   {
+    "name": "Pinup Curls (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11308096,
+    "size": 4732,
+    "vertices": 197,
+    "triangles": 312,
+    "has_color_table": false
+   },
+   {
+    "name": "Up and Over",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11312828,
+    "size": 15664,
+    "vertices": 617,
+    "triangles": 1116,
+    "has_color_table": false
+   },
+   {
+    "name": "Up and Over (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11328492,
+    "size": 9672,
+    "vertices": 388,
+    "triangles": 661,
+    "has_color_table": false
+   },
+   {
+    "name": "Bob with Fringe",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11338164,
+    "size": 13100,
+    "vertices": 520,
+    "triangles": 840,
+    "has_color_table": false
+   },
+   {
+    "name": "Bob with Fringe (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11351264,
+    "size": 9128,
+    "vertices": 400,
+    "triangles": 532,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Plaits Left Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11360392,
+    "size": 17708,
+    "vertices": 583,
+    "triangles": 1014,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Plaits Parted Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11378100,
+    "size": 13932,
+    "vertices": 454,
+    "triangles": 758,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Plaits Right Parting",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11392032,
+    "size": 17752,
+    "vertices": 583,
+    "triangles": 1014,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Plaits Parted Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11409784,
+    "size": 13932,
+    "vertices": 454,
+    "triangles": 758,
+    "has_color_table": false
+   },
+   {
+    "name": "Bob with Curls",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11423716,
+    "size": 14740,
+    "vertices": 630,
+    "triangles": 1015,
+    "has_color_table": false
+   },
+   {
+    "name": "Bob with Curls (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11438456,
+    "size": 8660,
+    "vertices": 351,
+    "triangles": 592,
+    "has_color_table": false
+   },
+   {
+    "name": "Mullet",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11447116,
+    "size": 9988,
+    "vertices": 417,
+    "triangles": 724,
+    "has_color_table": false
+   },
+   {
+    "name": "Mullet (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11457104,
+    "size": 5480,
+    "vertices": 232,
+    "triangles": 306,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Flick Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11462584,
+    "size": 12808,
+    "vertices": 512,
+    "triangles": 869,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Flick Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11475392,
+    "size": 9276,
+    "vertices": 386,
+    "triangles": 588,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Flick Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11484668,
+    "size": 12812,
+    "vertices": 512,
+    "triangles": 869,
+    "has_color_table": false
+   },
+   {
+    "name": "Short Flick Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11497480,
+    "size": 9256,
+    "vertices": 386,
+    "triangles": 588,
+    "has_color_table": false
+   },
+   {
+    "name": "A-line Bob",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11506736,
+    "size": 11624,
+    "vertices": 541,
+    "triangles": 1016,
+    "has_color_table": false
+   },
+   {
+    "name": "A-line Bob (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11518360,
+    "size": 6708,
+    "vertices": 305,
+    "triangles": 514,
+    "has_color_table": false
+   },
+   {
+    "name": "Styled Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11525068,
+    "size": 14440,
+    "vertices": 572,
+    "triangles": 935,
+    "has_color_table": false
+   },
+   {
+    "name": "Styled Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11539508,
+    "size": 8772,
+    "vertices": 366,
+    "triangles": 643,
+    "has_color_table": false
+   },
+   {
+    "name": "Styled Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11548280,
+    "size": 14400,
+    "vertices": 572,
+    "triangles": 935,
+    "has_color_table": false
+   },
+   {
+    "name": "Styled Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11562680,
+    "size": 9088,
+    "vertices": 366,
+    "triangles": 643,
+    "has_color_table": false
+   },
+   {
+    "name": "Crimped",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11571768,
+    "size": 11924,
+    "vertices": 481,
+    "triangles": 954,
+    "has_color_table": false
+   },
+   {
+    "name": "Crimped (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11583692,
+    "size": 7256,
+    "vertices": 291,
+    "triangles": 524,
+    "has_color_table": false
+   },
+   {
+    "name": "Beehive with Right Curl",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11590948,
+    "size": 11856,
+    "vertices": 482,
+    "triangles": 718,
+    "has_color_table": false
+   },
+   {
+    "name": "Beehive with Right Curl (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11602804,
+    "size": 4536,
+    "vertices": 197,
+    "triangles": 240,
+    "has_color_table": false
+   },
+   {
+    "name": "Beehive with Left Curl",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11607340,
+    "size": 11888,
+    "vertices": 482,
+    "triangles": 718,
+    "has_color_table": false
+   },
+   {
+    "name": "Beehive with Left Curl (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11619228,
+    "size": 4548,
+    "vertices": 197,
+    "triangles": 240,
+    "has_color_table": false
+   },
+   {
+    "name": "Ringlet Curls",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11623776,
+    "size": 16848,
+    "vertices": 659,
+    "triangles": 1157,
+    "has_color_table": false
+   },
+   {
+    "name": "Ringlet Curls (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11640624,
+    "size": 13392,
+    "vertices": 540,
+    "triangles": 821,
+    "has_color_table": false
+   },
+   {
+    "name": "Braided Crown",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11654016,
+    "size": 18680,
+    "vertices": 798,
+    "triangles": 1079,
+    "has_color_table": false
+   },
+   {
+    "name": "Braided Crown (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11672696,
+    "size": 6168,
+    "vertices": 272,
+    "triangles": 287,
+    "has_color_table": false
+   },
+   {
+    "name": "Bedhead",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11678864,
+    "size": 13980,
+    "vertices": 595,
+    "triangles": 891,
+    "has_color_table": false
+   },
+   {
+    "name": "Bedhead (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11692844,
+    "size": 9544,
+    "vertices": 415,
+    "triangles": 526,
+    "has_color_table": false
+   },
+   {
+    "name": "Pompadour",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11702388,
+    "size": 8524,
+    "vertices": 340,
+    "triangles": 622,
+    "has_color_table": false
+   },
+   {
+    "name": "Pompadour (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11710912,
+    "size": 3016,
+    "vertices": 117,
+    "triangles": 180,
+    "has_color_table": false
+   },
+   {
+    "name": "Bowl Cut",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11713928,
+    "size": 8640,
+    "vertices": 363,
+    "triangles": 657,
+    "has_color_table": false
+   },
+   {
+    "name": "Basin (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11722568,
+    "size": 5096,
+    "vertices": 208,
+    "triangles": 297,
+    "has_color_table": false
+   },
+   {
+    "name": "Teased Spikes",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11727664,
+    "size": 14432,
+    "vertices": 579,
+    "triangles": 891,
+    "has_color_table": false
+   },
+   {
+    "name": "Teased Spikes (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11742096,
+    "size": 5140,
+    "vertices": 239,
+    "triangles": 302,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Left",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11747236,
+    "size": 10892,
+    "vertices": 437,
+    "triangles": 798,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Left (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11758128,
+    "size": 5484,
+    "vertices": 220,
+    "triangles": 350,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Right",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11763612,
+    "size": 10880,
+    "vertices": 437,
+    "triangles": 798,
+    "has_color_table": false
+   },
+   {
+    "name": "Studious Right (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11774492,
+    "size": 5492,
+    "vertices": 220,
+    "triangles": 350,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Buns",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11779984,
+    "size": 16852,
+    "vertices": 780,
+    "triangles": 1178,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Buns (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11796836,
+    "size": 9044,
+    "vertices": 447,
+    "triangles": 622,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Back",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11805880,
+    "size": 12684,
+    "vertices": 506,
+    "triangles": 960,
+    "has_color_table": false
+   },
+   {
+    "name": "Combed Back (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11818564,
+    "size": 4076,
+    "vertices": 168,
+    "triangles": 258,
+    "has_color_table": false
+   },
+   {
+    "name": "Zigzag Fringe",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11822640,
+    "size": 5420,
+    "vertices": 237,
+    "triangles": 406,
+    "has_color_table": false
+   },
+   {
+    "name": "Zigzag Fringe (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11828060,
+    "size": 2232,
+    "vertices": 85,
+    "triangles": 118,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 001",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11925068,
+    "size": 724,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 002",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11935376,
+    "size": 780,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 003",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11945592,
+    "size": 756,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 004",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11957572,
+    "size": 1124,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 005",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11968772,
+    "size": 704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 006",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11981796,
+    "size": 1052,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 007",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11992784,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 008",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12001256,
+    "size": 1364,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 009",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12014772,
+    "size": 992,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 010",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12028344,
+    "size": 928,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 011",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12037808,
+    "size": 840,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 012",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12052708,
+    "size": 1044,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 013",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12063244,
+    "size": 912,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 014",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12076228,
+    "size": 1272,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 015",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12090320,
+    "size": 1120,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 016",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12104020,
+    "size": 956,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 017",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12116768,
+    "size": 2072,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 018",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12130412,
+    "size": 1476,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 019",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12142320,
+    "size": 960,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 020",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12153764,
+    "size": 1004,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 021",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12165880,
+    "size": 796,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 022",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12178248,
+    "size": 880,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 023",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12189608,
+    "size": 916,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 024",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12203356,
+    "size": 1156,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 025",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12216580,
+    "size": 860,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 026",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12229368,
+    "size": 1340,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 027",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12241324,
+    "size": 1704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 028",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12255896,
+    "size": 840,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 029",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12269404,
+    "size": 1296,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 030",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12282416,
+    "size": 1296,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 031",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12290568,
+    "size": 1340,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 032",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12296800,
+    "size": 704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 033",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12307832,
+    "size": 1004,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 034",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12319836,
+    "size": 844,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 035",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12331328,
+    "size": 1052,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 036",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12342128,
+    "size": 864,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 037",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12354924,
+    "size": 1396,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 038",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12368148,
+    "size": 1072,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 039",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12379240,
+    "size": 1212,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 040",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12390660,
+    "size": 1212,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 041",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12404144,
+    "size": 960,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 042",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12419756,
+    "size": 1020,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 043",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12431200,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 044",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12442512,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 045",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12454568,
+    "size": 1352,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Parting (Hat)",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 13050676,
+    "size": 3504,
+    "vertices": 143,
+    "triangles": 189,
+    "has_color_table": false
+   }
+  ],
+  "45_facial-hair": [
+   {
+    "name": "Jaw Stubble",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12455920,
+    "size": 2288,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Beard",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12458208,
+    "size": 2116,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Square Goatee",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12460324,
+    "size": 1028,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Split Goatee",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12461352,
+    "size": 996,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Chin Spike",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12462348,
+    "size": 816,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Round Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12463164,
+    "size": 668,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Wide Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12463832,
+    "size": 724,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Comb Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12464556,
+    "size": 628,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Regal Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12465184,
+    "size": 640,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Master Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12465824,
+    "size": 676,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Mountainous Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12466500,
+    "size": 636,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Rich Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12467136,
+    "size": 612,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Handlebar Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12467748,
+    "size": 796,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Sideburns",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12468544,
+    "size": 1624,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Twin Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12470168,
+    "size": 720,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Trimmed Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12470888,
+    "size": 548,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Squared Moustache",
+    "gender": "male",
+    "slots": [
+     "head",
+     "body"
+    ],
+    "offset": 12471436,
+    "size": 508,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   }
+  ],
+  "16_face-paint": [
+   {
+    "name": "Camo Facepaint",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12794004,
+    "size": 4828,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Butterfly Facepaint",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12798832,
+    "size": 2136,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Tiger Facepaint",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12800968,
+    "size": 2712,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Skull Facepaint",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12803680,
+    "size": 2056,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Heart",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12805736,
+    "size": 544,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Rosy Cheeks",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12806280,
+    "size": 1432,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Vertical Stripes",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12807712,
+    "size": 284,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Horizontal Stripe",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12807996,
+    "size": 216,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Paired Lines",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12808212,
+    "size": 360,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Freckles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12808572,
+    "size": 504,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Cheek Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12809076,
+    "size": 368,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Cheekbone Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12809444,
+    "size": 356,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Chin Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12809800,
+    "size": 364,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Cheek Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12810164,
+    "size": 368,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Cheekbone Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12810532,
+    "size": 364,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Left Chin Mole",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12810896,
+    "size": 352,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Warrior Scar",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12811248,
+    "size": 928,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Right Eye Scar",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12812176,
+    "size": 728,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Cheerful Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12812904,
+    "size": 744,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Harsh Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12813648,
+    "size": 776,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Tired Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12814424,
+    "size": 760,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Concerned Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12815184,
+    "size": 624,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Stressed Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12815808,
+    "size": 800,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Forehead Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12816608,
+    "size": 1000,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "More Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12817608,
+    "size": 1388,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Most Wrinkles",
+    "gender": "both",
+    "slots": [
+     "head",
+     "hair"
+    ],
+    "offset": 12818996,
+    "size": 1536,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   }
+  ]
+ }
+}
