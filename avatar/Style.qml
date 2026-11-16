@@ -6,6 +6,9 @@ import QtQuick 2.15
 // the same language as everything that reads it. Put one inside a component
 // with `Style { id: style }` and use `style.accent` and friends.
 QtObject {
+    // Real pack names for the art files that were baked from an asset.
+    readonly property ItemNames itemNames: ItemNames {}
+
     readonly property string accent: "#a4d21c"
     readonly property string accentDeep: "#5f8a0c"
     readonly property string ink: "#ffffff"
@@ -36,6 +39,11 @@ QtObject {
         var dot = n.lastIndexOf(".")
         if (dot > 0)
             n = n.substring(0, dot)
+        // A wardrobe file named for a colour (tee_blue) was baked from a real
+        // pack asset; show that asset's own name instead of the art stem.
+        var real = itemNames.of(n)
+        if (real !== "")
+            return real
         n = n.replace(/[_\-]+/g, " ").replace(/\s+/g, " ").trim()
         return n.replace(/\b\w/g, function (c) { return c.toUpperCase() })
     }
