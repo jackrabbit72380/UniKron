@@ -18,6 +18,7 @@ import os
 import sys
 
 import avatar_mesh
+import toc_parse
 
 # AssetMetadataVersioned (block 8) is 15 bytes, big-endian:
 #
@@ -134,14 +135,13 @@ def main():
                     help="also write the items grouped by slot category, for the editor")
     args = ap.parse_args()
 
-    here = os.path.dirname(os.path.abspath(__file__))
-    index_path = os.path.join(here, "avatar-assets.json")
-    with open(index_path, "r", encoding="utf-8") as fh:
-        index = json.load(fh)
-    assets = index.get("assets", index)
-
-    with open(args.toc, "rb") as fh:
-        pack = fh.read()
+    # Read the records out of the pack we were handed. Taking them from
+    # avatar-assets.json instead silently decodes another build's offsets the
+    # moment someone passes a different AvatarAssetPack.toc, which is what
+    # happened with the metro2010 pack.
+    pack, assets, unresolved = toc_parse.parse(args.toc)
+    if unresolved:
+        print("%d records without a blob" % unresolved)
 
     catalog = []
     with_model = 0

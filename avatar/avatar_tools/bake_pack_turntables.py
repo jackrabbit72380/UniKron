@@ -12,6 +12,12 @@ approximation `bake_items.py` makes, because a baked frame cannot mix two picks.
     python3 bake_pack_turntables.py PACK CLIP DESCRIPTION \
         --categories 40_shirt,20_pants,30_shoes [--frames 6] [--limit N]
 
+All three inputs ship with the project, so this runs from a clean checkout:
+
+    PACK="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/AvatarAssetPack.toc"
+    CLIP="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/Cheer.AvatarAnimation"
+    DESC=descriptors/Avatar6400.Avatar
+
 Writes into ../assets/3d/turntable/<slug>/ and skips sets that already have
 frames, so an interrupted run resumes.
 """
@@ -35,12 +41,18 @@ STOCK = {"shirts": "Jacket with Sweater",
          "shoes": "Grunge Trainers"}
 HAIR = "Left Parting"
 HAIR_COLOUR = "6e5326"
-CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes"}
+CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
+                 # A dress or a suit covers the torso and legs at once, so only the
+                 # shoes are kept underneath.
+                 "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress"}
 
 
 def bake_one(pack, clip, description, asset, kind, folder, frames, width, height):
     obj = "/tmp/pack_tt_%s.obj" % slug(asset)
-    worn = [STOCK[k] for k in ("shirts", "pants", "shoes") if k != kind]
+    if kind == "dress":
+        worn = [STOCK["shoes"]]
+    else:
+        worn = [STOCK[k] for k in ("shirts", "pants", "shoes") if k != kind]
     parts = ["MaleBody", "Head", HAIR, asset] + worn
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
