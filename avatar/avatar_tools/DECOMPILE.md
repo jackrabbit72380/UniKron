@@ -275,21 +275,32 @@ debugging.
    machine. With that file the same recipe applies (base from `mkelf.py`,
    `PowerPC:BE:64:64-32addr`, then `patch_vmx128.py`), and it is the corpus that
    would answer the shader questions the editor cannot.
-2. **`NXE.exe` (42 MB) decompiles slowly and is only partly done.** Ghidra
-   analysed it in 15 minutes, then the per-function decompile wrote **7,202**
-   functions before the runner restarted and killed the process; the project
-   was deleted, so finishing it means re-running analysis. What the 7,202
-   functions do not contain is any avatar lighting: `AmbientLight`,
-   `SunLightDirection`, `lightColour`, `texEye` and `XtlEffect` all match **zero**
-   files. The dash's scene names live in XUI data and the effect names in the
-   `.updb` blobs, so a bigger corpus would not hand over the rig either.
+2. **`NXE.exe` (42 MB) is decompiled in full: 39,611 functions**, in
+   `UniKron-decompiled-nxe-dashboard.zip` beside the other corpora. The first
+   attempt was killed by a runner restart at 7,202, and the run had
+   `-deleteProject`, so it was lost; the second used `DecompileResume.java`
+   against a kept project, which skips functions already written and resumes.
+   That run wrote 32,409 new files and skipped the 7,202 already on disk, with 5
+   functions failing to decompile.
+
+   It still holds no avatar lighting: `AmbientLight`, `SunLightDirection`,
+   `lightColour`, `texEye` and `XtlEffect` match **zero** files across all
+   39,611. The dash's scene names live in XUI data and the effect names in the
+   `.updb` blobs, so the corpus could not have handed over the rig.
 3. **The closet index has no garment category.** `closet_index.tsv` is
    `id, group, code, name`, and `code` is not the category: 904 of the caps,
    566 helmets and 92 pairs of glasses are `3`, while shirts split across `1`
    (1,302) and `2` (815) and shoes across `1` and `2` too. It looks like an item
    source class. The editor's real filter is `AeSearchSet` in the port DLL,
-   which works on loaded asset metadata (block 4), and block 4 has not been
-   decoded - so the closet can be named and iconned today, but not sorted into
+   which works on loaded asset metadata. The full dashboard corpus also names
+   the source of that metadata: `FUN_142529e40` builds
+   `/live/{:08x}/avataritems/{}.acp`, and the port's own settings carry
+   `CatalogCDNUriRoot`, `AvatarAssetUriRoot`, `AvatarMarketplaceManifest`,
+   `ManifestUriPath` and `PreviewUri`. A port log line states the closet layout
+   plainly - "Imported marketplace and award items -- props, outfits, shirts,
+   trousers, shoes, accessories -- as <guid>.bin plus closet_index.tsv" - so the
+   folder we have is that import, and the per-item manifest it was built from is
+   not in the dump. The closet can be named and iconned today, but not sorted into
    the editor's categories without that.
 4. **`metro2010/assets/avatareditor.xex` is encrypted.** Its PE begins at
    `28672` as ciphertext. Six LZX attempts (offsets 28672/28696/28720 at 1 MiB
