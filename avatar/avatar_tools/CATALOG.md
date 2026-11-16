@@ -207,3 +207,31 @@ records parse cleanly and the other four slots of that file are ordinary
 (`FemaleBody`, `Head`, `Combed Right`, `V Neck Top`), so this is not an alignment
 error we can see - it may be a deliberately random or corrupt test fixture. Its
 data is noted here but not used for anything.
+
+## 2D plates: what the frame has to contain
+
+The first plates framed each item against `MaleBody` alone, which produced two
+visible faults that are worth writing down because both were only found by
+looking at the result:
+
+* **No head.** The pack keeps the head in its own asset - the descriptors equip
+  `Head` in slot 1 next to `MaleBody` in slot 2 - so a body plate was a body with
+  a neck stump. The reference frame is now measured on `MaleBody` + `Head`
+  together (1.4756 tall instead of 1.1458), and a body plate is baked from both.
+  Every plate had to be re-baked in the new frame, since the frame sets the scale.
+* **No face.** `bake_pack_plates.py` did not pass `--face`, so the head came out
+  as a blank skin shell. It now asks for the same brow/eye/mouth masks the 3D
+  turntables are baked with, and the face is drawn per pixel from the sheets.
+* **Hair covered the face.** A hairstyle is an open shell; rendered on its own,
+  the inside of its far side faces the camera and fills the silhouette. Hair is
+  now rendered with the head and body drawn into the depth buffer first
+  (`bake_turntable.render(occluders=...)`), so only hair in front of the head
+  survives. The same reason the 3D sets never showed the fault: the head is
+  already there.
+
+**The `(Hat)` hairstyles are damaged assets.** `Short with Left Curls (Hat)` is
+102 vertices sitting between y 1.176 and 1.35 - a shell inside the skull rather
+than around it - so its 3D set renders as a bald head. `Shaved Pattern (Hat)` is
+the same shape of asset (171 vertices, y 1.176-1.347). Avatar6400 wears one of
+these, so the editor's seed uses the stock `Left Parting` instead and this note
+is the record of why the seed differs from the descriptor.

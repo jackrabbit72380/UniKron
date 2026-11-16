@@ -436,11 +436,15 @@ Item {
     // with Left Curls (Hat), Jacket with Sweater, Male Flower Print Flares and
     // Grunge Trainers - so a fresh pack avatar dresses the way the console's
     // sample avatar is dressed rather than in the first file of each category.
+    // The hairstyle is the one exception: Avatar6400 wears `Short with Left
+    // Curls (Hat)`, but that asset is a 102-vertex shell that sits inside the
+    // skull, so it renders as a bald head (see CATALOG.md). The stock style is
+    // used instead until that asset draws properly.
     readonly property var packSeedPicks: ({
         "shirt": "jacket-with-sweater.png",
         "pants": "male-flower-print-flares.png",
         "shoes": "grunge-trainers.png",
-        "hair": "short-with-left-curls-hat.png"
+        "hair": "left-parting.png"
     })
 
     function seedOutfit() {

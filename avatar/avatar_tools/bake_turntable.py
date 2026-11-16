@@ -330,7 +330,49 @@ def _unit(v):
     return v / np.linalg.norm(v)
 
 
-def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=None):
+def _occlude(depth, verts, tris, rot, k, w, h):
+    """Write a depth-only pass, so a shell's inside cannot fill its silhouette.
+
+    A hairstyle is an open shell. Rendered on its own, the inside of its far side
+    faces the camera and covers the whole face in a plate, while in a full render
+    the head is already there and hides it. Drawing the head into the depth
+    buffer first gives the shell the same occluder it has in the full figure.
+    """
+    model = verts @ rot.T
+    z = model[:, 2]
+    sx = model[:, 0] * k + w * 0.5
+    sy = (0.5 - model[:, 1]) * k + h * 0.5
+    for t in range(len(tris)):
+        x0, x1, x2 = sx[tris[t, 0]], sx[tris[t, 1]], sx[tris[t, 2]]
+        y0, y1, y2 = sy[tris[t, 0]], sy[tris[t, 1]], sy[tris[t, 2]]
+        minx = max(int(math.floor(min(x0, x1, x2))), 0)
+        maxx = min(int(math.ceil(max(x0, x1, x2))), w - 1)
+        miny = max(int(math.floor(min(y0, y1, y2))), 0)
+        maxy = min(int(math.ceil(max(y0, y1, y2))), h - 1)
+        if minx > maxx or miny > maxy:
+            continue
+        area = (x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)
+        if abs(area) < 1e-9:
+            continue
+        xs = np.arange(minx, maxx + 1) + 0.5
+        ys = np.arange(miny, maxy + 1) + 0.5
+        px, py = np.meshgrid(xs, ys)
+        w0 = ((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py)) / area
+        w1 = ((x2 - px) * (y0 - py) - (x0 - px) * (y2 - py)) / area
+        w2 = 1.0 - w0 - w1
+        inside = (w0 >= -1e-6) & (w1 >= -1e-6) & (w2 >= -1e-6)
+        if not inside.any():
+            continue
+        zz = w0 * z[tris[t, 0]] + w1 * z[tris[t, 1]] + w2 * z[tris[t, 2]]
+        sub = depth[miny:maxy + 1, minx:maxx + 1]
+        if sub.shape != inside.shape:
+            continue
+        nearer = inside & (zz < sub)
+        sub[nearer] = zz[nearer]
+
+
+def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=None,
+           occluders=None):
     """One frame: yaw the model, project, rasterise with a z-buffer.
 
     Normals are interpolated across each triangle and lit per pixel, so curved
@@ -351,6 +393,9 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
     colour = np.zeros((h, w, 3), dtype=np.float64)
     depth = np.full((h, w), np.inf)
     alpha = np.zeros((h, w), dtype=bool)
+
+    for overts, otris in (occluders or []):
+        _occlude(depth, overts, otris, rot, k, w, h)
 
     light_dirs = [_unit(d) for d in XTL_LIGHT_DIRECTION]
     light_colours = [c * XTL_ONE_MINUS_SHADOW_STRENGTH for c in XTL_LIGHT_COLOUR]
