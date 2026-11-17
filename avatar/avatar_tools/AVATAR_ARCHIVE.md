@@ -1121,3 +1121,18 @@ Following `joints[node]["parent"]` instead selects the whole hand. The same rig 
 that read as a fused paddle now show four fingers and a thumb, in bind pose and in
 every clip, which also means the earlier judgements about hand poses were made on
 broken geometry and have to be re-read.
+
+### Confirming the hand is whole
+
+After both selection fixes, the surface is closed and the skeleton supplies real finger
+bones rather than a fan of zero-length joints:
+
+    finger joints          30 (37-40, 43-47, 50 proximal; 51-60 middle; 61-70 distal)
+    phalanx lengths        0.047 and 0.034 m along 37 -> 51 -> 61
+    selected per hand      267 vertices, 523 triangles
+    boundary edges         9, every one on the wrist cut (y 1.006..1.045)
+
+Rendered in context at 700x1000 and cropped, the fingers of `intro_pose05` hook at the
+first knuckle and the thumb sits along the palm; the pack clip's own hand, rendered the
+same way, fans into a thin paddle. The remaining coarseness is the mesh: 523 triangles
+for the hand and no textures or normals in this renderer, not a data or pose fault.
