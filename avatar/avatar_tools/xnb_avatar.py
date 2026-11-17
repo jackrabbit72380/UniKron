@@ -257,19 +257,20 @@ def read_dna(path):
                 records=sum(len(b["rotation"]) for b in bones))
 
 
-def dna_poses(clip, frame=0, flip_y=True):
+def dna_poses(clip, frame=0, flip_y=False):
     """A DNA clip as avatar_pose tuples, one bone per rig joint.
 
     The rotation channel is a local rotation per bone, so the bind offsets from
     the skeleton supply placement and `delta` mode puts the rotation on top -
     bones the clip leaves at identity simply stay at bind.
 
-    `flip_y` negates the quaternion's y. The DNA engine's rotations are in the
-    opposite handedness, and without the flip the arms end up above the head: on
-    `Laser Wars 2/GenericIdle` the wrists sit at y 0.856 unflipped and 0.768
-    flipped, against 0.642 for the pack's own idle. Flipping is the only one of
-    the sixteen axis-sign choices that lands the hands at shoulder height with
-    the feet on the floor.
+    The quaternions are used as stored. Signs were tried all eight ways against
+    two measurements that a right hand cannot fake at once - fingertip distance
+    from the wrist, and the finger heights - and only the plain form curls the
+    fingers: on `Laser Wars 2/intro_pose05` the fingertips sit at 0.33 of their
+    bind distance with 0.021 of splay, against 0.49 and 0.026 for the best
+    flipped variant, whose fingers fan apart instead of closing. `flip_y` is kept
+    only so the wrong reading can be reproduced and seen.
     """
     out = []
     for bone in clip["bones"]:

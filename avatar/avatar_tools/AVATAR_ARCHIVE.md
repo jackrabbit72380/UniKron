@@ -1080,9 +1080,16 @@ With one key per channel that is 52 bytes a bone, and `GenericIdle` is exactly
 byte, which is how the layout was confirmed. Bone order matches the retail rig: the
 finger groups land on 37-40, 51-54, 58, 66-69, the same indices `finger_bones` finds.
 
-**The quaternions need their y negated.** Without that the arms end up above the
-head; with it, `Laser Wars 2/GenericIdle` throws one arm across the chest and lets the
-other hang, which is what the game shows.
+**The quaternions are used as stored - no sign flips.** An earlier pass negated y
+because that lowered the wrists, and it was wrong: all eight axis-sign variants were
+then measured on two things a right hand cannot fake at the same time, fingertip
+distance from the wrist and the spread between fingertips. On `intro_pose05`:
+
+    plain (x,y,z,w)   fingertips at 0.33 of bind distance, splay 0.021   curled
+    y negated         fingertips at 0.49, splay 0.026                     fanned
+
+The flipped form fixes the arm height and fans the fingers. `dna_poses(flip_y=True)`
+is kept only so the wrong reading can be reproduced and seen.
 
 **82 clips decode** across Warfare (51 files), Laser Wars 2 (37) and Connection (1),
 every one landing exactly on its file size. Mean finger rotation spans 27.6 deg
@@ -1099,3 +1106,18 @@ data.
 Rendered from `intro_pose05`, the hand reads as separate curled digits with the thumb
 across the palm; from the pack's own clip it reads as a flat paddle. The pose was the
 problem, and the pose now comes from shipped data in every case.
+
+### The hands were being rendered as a hole-punched fragment
+
+The reason every hand image looked mangled, including in bind pose, was not the pose
+and not the mesh: `show_hand.py` selected vertices by walking each influencing joint
+up to a wrist, and walked the wrong way - it searched for joints whose *parent* was
+the current node, which descends into the children. Most vertices never resolved to a
+wrist and were dropped, and every triangle with a dropped corner went with them:
+
+    69 of 129 vertices, 100 of 222 triangles, white holes through the palm
+
+Following `joints[node]["parent"]` instead selects the whole hand. The same rig poses
+that read as a fused paddle now show four fingers and a thumb, in bind pose and in
+every clip, which also means the earlier judgements about hand poses were made on
+broken geometry and have to be re-read.
