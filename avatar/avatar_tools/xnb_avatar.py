@@ -46,7 +46,35 @@ import struct
 
 import numpy as np
 
+import lzx
+
 DEFAULT = "Content/Avatar Animations/Idle.xnb"
+
+
+def load(path):
+    """File bytes, decompressed if the XNB carries an LZX stream.
+
+    Avatar Boogie's five custom dances are version 4 with flags 0x80, so after
+    the ten byte header comes the decompressed size, then the LZX stream. The
+    pack decoder's `lzx` takes them, and the result is an ordinary XNB payload.
+    """
+    data = open(path, "rb").read()
+    if data[:4] != b"XNBx" and data[:4] != b"XNBw" and data[:4] != b"XNBm":
+        raise ValueError("not an XNB: %r" % data[:4])
+    if not data[5] & 0x80:
+        return data
+    size = struct.unpack_from("<I", data, 10)[0]
+    try:
+        raw = lzx.decompress(data[14:], size, 0x8000)
+    except lzx.LzxError as error:
+        # Avatar Boogie's five custom dances are exactly this case (version 4,
+        # flags 0x80) and the pack's LZX decoder does not read them: the stream
+        # fails at its first block header from every byte and bit offset tried,
+        # which means XNA's XCompress framing is not the kernel XMemCompress one.
+        raise ValueError("compressed XNB this decoder cannot read yet: %s" % error)
+    if len(raw) != size:
+        raise ValueError("decompressed %d of %d bytes" % (len(raw), size))
+    return raw
 
 
 def _unpack_7bit(data, pos):
@@ -101,7 +129,7 @@ def read_clip(path):
 
     frames is a list of (time_seconds, {joint: 4x4 rotation}).
     """
-    data = open(path, "rb").read()
+    data = load(path)
     head = read_type_readers(data)
     pos = head["payload"]
 

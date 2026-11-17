@@ -975,3 +975,39 @@ With that, the avatar stands with its arms down and the hand reads as a closed,
 relaxed grip rather than the open paddle the pack clip produces. The remaining
 weakness is resolution: the hand is 69 vertices and 100 triangles, drawn flat, so
 separate digits only show at the silhouettes.
+
+## Boogie and Survival Games, opened properly
+
+Both were extracted whole rather than surveyed from the zip listing.
+
+**Avatar Survival Games** (432 files): 211 `.xnb`, 90 of them version 4 with flags
+0x80 (compressed). Its 24 avatar clips are uncompressed version 5 and were already
+decoded - `xnb_avatar.read_clip` reads them.
+
+**Avatar Boogie** (276 files): has no `Content/Avatar Animations` folder at all, which
+is why the first sweep called it empty. It keeps its dances somewhere else:
+
+    Content/AnimationDataCustom/CountryCircle.xnb          1.2 MB
+    Content/AnimationDataCustom/DanceHipHopSequence.xnb    2.8 MB
+    Content/AnimationDataCustom/Disco.xnb                  2.0 MB
+    Content/AnimationDataCustom/Hardcore.xnb               1.7 MB
+    Content/AnimationDataCustom/IrishJigging.xnb           1.7 MB
+    AvatarCustomAnimation.dll        (the game's own animation type)
+    ColladaReader.dll
+
+All five are XNB **version 4, flags 0x80** - compressed - and **this project cannot read
+them yet**. What was tried on `CountryCircle`:
+
+    payload entropy                     7.95 bits/byte, so genuinely compressed
+    header u32 at 6                     1,209,050 = the file size
+    header u32 at 10                    4,527,994 = the decompressed size
+    lzx.decompress from bytes 6..40     "bad block type" at every offset
+    with a 64 KiB window                same
+    at the 24 bit-shifted candidate
+      block headers the scan found      "bad block type" / "bad aligned table"
+    zlib, raw deflate, gzip             all refuse
+
+So XNA's XCompress framing is not the kernel XMemCompress framing that lzx.py
+implements for the avatar pack, and the five Boogie dances stay unread until that
+framing is worked out - most likely from `AvatarBoogie.exe`'s own decompressor, which
+ships with the game. Boogie's clips are dances in any case, not the resting hand.
