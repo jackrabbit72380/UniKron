@@ -206,11 +206,33 @@ Item {
         return -1
     }
 
+    function categoryIndexForId(id) {
+        for (var i = 0; i < categories.length; ++i) {
+            if (String(categories[i].id) === String(id))
+                return i
+        }
+        return -1
+    }
+
+    // Two of the six feature tiles name their subject in the XUI's words, not the
+    // pack's: the scene says "Skin" and "Lips", while the items live in the slots
+    // the pack files them under, so a label match alone leaves those tiles
+    // opening nothing. The keys are featureItems keys, the values the slot the
+    // pack's own contents put that subject in - 10_body carries the body and
+    // head, 18_mouth the mouths. Eyes needs no entry: 15_face is every *-eyes
+    // sheet, so its slot is labelled "Eyes" and matches on its own.
+    readonly property var featureSlots: ({
+        "skin": "10_body",
+        "lips": "18_mouth"
+    })
+
     function activateFeature(index) {
         var item = featureItems[index]
         if (!item)
             return
         var at = categoryIndexFor(item.label)
+        if (at < 0 && featureSlots[item.key] !== undefined)
+            at = categoryIndexForId(featureSlots[item.key])
         if (at < 0)
             return
         categoryIndex = at
