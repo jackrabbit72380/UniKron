@@ -449,8 +449,13 @@ def read_model(data):
             normal.read(s)
             w = weight.read(s)
             b = blend.read(s)
-            # The per-vertex colour is the garment's own colouring: it is the
-            # only colour a clothing asset carries, since none has a texture.
+            # Four bytes that are not a colour. Measured over all 583 models and
+            # 342,442 vertices: the alpha byte is always 255 and the three colour
+            # bytes always carry the same value, so the field is one grey scalar
+            # replicated into RGB (median 230, p05 188). It reads as a baked
+            # occlusion/shading term - the jeans' darkest vertices sit on the inner
+            # seam, the shoe soles are darkest of all - but the shader that
+            # consumes it is Xenos microcode, which says nothing about the name.
             colours.append(colour.read(s))
             sets = []
             for _ in range(uv_count):

@@ -180,11 +180,11 @@ Texture block and 187 assets carry one — but all 187 are face features
 wrinkles), decoded in TEXTURES.md. No garment, hat, glasses or shoe asset has a
 Texture block, and 581 of the 583 models declare no texture slot at all. What a
 model does carry is a
-per-vertex colour field - `read_model` calls a colour serialiser once per vertex
-and currently discards the result - plus, on the 39 sport tops, the type 7
-colour table. So the item artwork is expressed as colour rather than as images,
-which is why the theme's 2D art had to be drawn from the source's own UI art:
-there are no item textures in this build to lift.
+per-vertex field that `read_model` reads into `colours` - see below, it turned
+out to be one grey scalar and not a colour - plus, on the 39 sport tops, the type
+7 colour table. So there is no per-item colouring to lift from this build, which
+is why the theme's 2D art had to be drawn from the source's own UI art: there are
+no item textures in this pack.
 
 It also explains an earlier puzzle. The 41 `Animation Generic *` clips in the
 pack are *item* animations (emotes such as Clap, Wave, Celebration); they carry
@@ -837,3 +837,32 @@ folders, so female 3D fell back to whatever set was last probed. It now has 20 f
 448x672 of `FemaleBody`, `Shaved Pattern` hair and the stock female outfit
 (`Sweater with Shirt`, `Formal Trouser Suit`, `Female Jelly Clogs`), rotated by ten
 frames so index 0 is the front view, which is where the male set starts.
+
+
+## The per-vertex "colour" field is one grey scalar
+
+`read_model` has always filled `colours` from a 32-bit serialiser per vertex and
+nothing consumed it. Measured across every model in the pack (583 models, 342,442
+vertices, no failures) the field is not a colour at all:
+
+* **the high byte is always 255**, and
+* **bytes 2, 1 and 0 are always equal** - min, mean, max and the distinct-value
+  count match exactly for all three on every model sampled.
+
+So it is one 0-255 scalar replicated into R, G and B over an opaque alpha. Per
+model the mean sits at 230 (median), p05 188, p95 255, and the distribution is
+not noise: the darkest models are all footwear (`Formal Shoes` min 0 with 34% of
+vertices below 200, `Flip Flops`, `Male Pixie Boots` 0 with 33%), and inside one
+garment the darkest vertices are where occlusion would be - on `Worn Jeans` they
+average |x| = 0.023 against 0.079 for the model as a whole, i.e. down the inner
+seam, and on the baseball cap they sit at the top of the crown's inside.
+
+That is consistent with a baked occlusion or ambient term multiplied into the
+shader's diffuse. It is **not** proven: the shader that consumes it is the
+Xenos microcode in `shader_body_opaque_ps` (see DECOMPILE.md), which has no
+D3D9 token stream to read, and the parameter table for that effect lists
+`ambientColour`, `CustomColor1-3` and `s_intensityTex` without saying which of
+them takes a vertex channel. Correlation with the geometric normal is weak
+(`+0.31` on the jeans, `-0.08` on the shoes), so it is not a plain normal-tilt
+term either. Nothing is applied from it yet, and it is deliberately not
+described as a colour anywhere in the code now.

@@ -118,75 +118,42 @@ on the male stock body, because the descriptor fixes gender and the female seed
 outfit is not established anywhere in the data. They render, but the body under
 the garment is the wrong one.
 
-## Blocks the tools still ignore
+## Block 4, `ShapeOverrides`: decoded, all 266 of them
 
-* **Block 4, `ShapeOverrides`.** All 18 nose items (`Boxer's Nose`, `Curved Nose`,
-  …) carry one and nothing else: no model, no texture. So a nose is a **head shape
-  override**, not art, and no set is baked for those 18.
+This section used to say the block was undecoded. It is not: `decode_shape.py`
+reads it, and the hint was already written down here - every payload length is
+odd (`Boxer's Nose` 1,608, `Large Chin` 1,613, `Sharp Chin` 1,763), so the body
+is **bit-packed** and wants `BitStream`, not `struct`. The LZX attempts failed
+for the same reason: it was never compressed.
 
-  What the bytes show, and what they refuse to show: the payload starts with two
-  nested headers of the same shape, `u32 0, u32 0x13d4, u32 1, u16 2, u16 3`, then
-  the same 8-byte id (`c1c8f109 a19cb2e0`) that repeats in every `.Avatar` entry,
-  then a second copy of that header at +32. Length varies per nose (1,505 for
-  `Defined Nose`, 1,608 for `Boxer's Nose`) and everything from +32 differs, so the
-  shape data lives after the headers. Reading it as an array of little-endian
-  floats gives exponent garbage and NaNs (`2053219840.0`, `nan`), so it is not a
-  plain delta or matrix buffer; it is more likely another chunked/compressed
-  serialisation like the model blocks. Decoding it is the open task, and until it
-  is done the 18 noses have no 3D set.
-* `45_facial-hair` and `16_face-paint` are textures only (block 2), which is why
-  they bake as decals; `15_face` is 43 eye sheets (block 2) plus those 18 noses.
+All 266 decode, with no failures, and they split three ways:
 
-## Shape overrides: the biggest undecoded block
+| kind | assets | target mesh | stride | non-empty |
+| --- | ---: | --- | ---: | ---: |
+| `* Hiding Template` | 202 | body | 40 | 163 |
+| `* Nose` / `* Chin` / `* Ear` | 36 | head | 52 | 25 |
+| body and garment templates | 28 | body and head | 40 / 52 | 18 |
 
-`inspect_pack.py` counts **266 assets whose only payload is block 4,
-`ShapeOverrides`** — chins, noses and their relatives (`Large Chin`, `Boxer's
-Nose`, `Chiseled Chin`, …). They are not art and not meshes; they are morphs, and
-without them the pack's body and face shapes cannot be shown.
+The stride is the target mesh's own vertex size, so it says which asset a shape
+moves without being told. Each entry is a vertex number and the position that
+vertex takes, which is why the face shapes move the head in bind pose and carry
+into the skinning.
 
-What has been ruled out, by test rather than by eye:
+**51 of the 266 are 115 bytes and hold zero entries.** They are the defaults -
+`Small Chin`, `Angled Nose`, `Round Ears`, `Male Short Sleeved V Top Template` -
+where the item *is* the shipped body, so there is nothing to decode and nothing
+to apply. That is why 36 face shapes give 25 non-empty morphs.
 
-* **Not an LZX chain.** Exhaustive search over the first 96 bytes of `Defined Nose`,
-  all six field orderings of the 12-byte header and three readings of the output
-  size produced 0 successful decompressions; every model block decodes on the same
-  call.
-* **Not a flat float array.** Reading from +64 as little-endian float triples gives
-  `2053219840.0` and `nan` where vertex deltas should be.
-* **Not fixed-stride.** Payload lengths are irregular (`length % 12` spreads across
-  every residue), so it is not `count + n × entry`.
+**What a hiding template is.** It names the body vertices its garment covers, and
+`bake_avatar.py --hide` drops the body triangles that use them so the cloth is the
+only surface. It is not a complete list of the covered region: the formal
+trousers name 38 vertices, and the thighs still show skin through them.
 
-The header repeats: `u32 0, u32 0x13d4, u32 1, u16 2, u16 3`, the same 8-byte id
-(`c1c8f109 a19cb2e0`) that every `.Avatar` entry repeats, then a second copy of that
-header 32 bytes in.
-
-That id is **constant** - `Defined Nose`, `Curved Nose`, `Large Chin`, `Thin Chin`
-and `Chiseled Chin` all carry it, and so does every 16-byte `.Avatar` entry
-(`031f 0003 c1c8f109 a19cb2e0 00080000`). So it is a type GUID shared by the shape
-objects and the description entries, not a per-item id, and it cannot be used to
-match a shape to an item. The `u16 3` inside both headers does line up with the
-class byte (3 = ShapeOverrides).
-
-Ruled out since, by test:
-
-* **Not an LZX chain either.** Every 4-byte offset from 0 to 96 was tried with all
-  six orderings of the three header fields as (compressed, out offset, out size),
-  constrained only by the payload length, and not one decompressed. So the block is
-  not the chunked-and-compressed scheme the model blocks use.
-* **Not a byte-aligned array.** Every shape's payload length is odd (`Boxer's Nose`
-  1608, `Large Chin` 1613, `Sharp Chin` 1763) and there is no constant stride: after
-the 64-byte header the sizes are 1549, 1277, 1522, 1359, 1699 - none divisible by
-the head's 648 vertices, by 6 or by 12. An odd length after an even header means
-the data is **bit-packed**, like the animation stream, so the next thing to try is
-`BitStream` rather than `struct`.
-* **A constant footer.** All three shapes end `... 03fc0000 00000000`, and the first
-  word after the header is the same `36ed4402` in all of them - so the stream has a
-  fixed prologue and epilogue that a decoder can key on once the body is understood.
-
-What the header says, word for word (`Defined Nose`): `0, 0x13d4, 1, u16 2, u16 3,
-GUID, 0, 0` then the same shape again with `0x6c` and `0x8400` where the first had
-`0x13d4` and `1`. 0x6c is 108, 0x74 is 116, 0x6e is 110 - those track the payload
-size closely enough to be a byte count, and `0x8400` (33,792) is constant across all
-three, so it is a size for something the shape does not change.
+**What the body templates are.** 198 of the entries in `High Heel Body Modification
+Template` and `Female Strappy High Heels Template` reshape the feet; the rest are
+per-garment fit adjustments (`Female Medium Skirt Bottom Template`,
+`Male Long Sleeved Top Template`, `Two Tone Tee Template`). None of them is applied
+by the bakers yet.
 
 ## `.Avatar` descriptors: the avatars' own outfits
 
@@ -400,8 +367,9 @@ and the pack against the item list a bake will walk.
 
 `DECODE_STATUS.md` is its output, written by `--md`, and it is the honest answer
 to "do we have everything": 583 assets with geometry, 187 textures, 41
-animations, 71 joints, and two named gaps - the 266 shape-override-only items
-(block 4 undecoded) and the 87 scalp-cap hairstyles that only work under a hat.
+animations, 71 joints, and two gaps it still names: the 87 scalp-cap hairstyles that
+only work under a hat, and the body templates of block 4, which decode but are
+not applied by any baker.
 Anything unexpected makes it exit non-zero and stops the bake; `SKIP_AUDIT=1`
 bypasses it, which is only for iterating on the bakers themselves.
 
