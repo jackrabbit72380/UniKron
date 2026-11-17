@@ -527,3 +527,35 @@ apply, and the 38 vertices the formal trousers name are all it moves, which is
 why the thighs still show. And a shape whose stride does not match the asset it is
 applied to should be refused rather than applied, which `--shape` does not check
 yet.
+
+## The pack container, from `asset_pack.cpp`
+
+The three loaders are in the corpus and the version numbers are read from the
+file, so the 2010 pack's own header decides which one applies. Ours is **V2**
+(`u32 @ 0x10` is 2), and `LoadAssetPackFromMemoryV2` (`FUN_140dbcbe0`) gives the
+layout:
+
+    header   0x28 bytes, asset count as a big-endian u32 at +0x1c
+    table    count records of 0xF8 (248) bytes, starting at +0x28
+    record   +0x00 u32 00000002, +0x04 01 01 01 00 ...   (version, gender, class)
+             +0xF0 u32 offset, +0xF4 u32 size   (both big-endian)
+
+Tested against `metro2010/assets/AvatarAssetPack.toc`, 13,648,884 bytes:
+
+* count `1282`, so the table is `0x28 + 1282 * 0xF8 = 317,976` bytes;
+* **1,079 of the 1,282 records have a size** - the same 1,079 assets every other
+  tool in this repo already walks;
+* the first record's offset is `539,596`, which is exactly the `MaleBody` offset
+  in `asset_catalog.json`, so this is the same table `pack_toc.py` reads, now
+  with its field names known;
+* the last payload ends at `13,648,884` - **the file's final byte, exactly**, so
+  the pack is header, table, then contiguous payloads with nothing else in it.
+
+V3 differs in two constants - 0x30 header and 0x10C records, with offset and size
+at +0x104 and +0x108 - and V1 has the same shape as V2 with the smaller record, so
+a pack of any of the three versions can be walked from these numbers alone.
+
+That also settles what the earlier note called "the 13.4 MB from 0x12fa42 that is
+not plain records". Every asset payload in this pack starts at a table-supplied
+offset and the chain ends exactly at EOF, so that region is not an undecoded
+stream at all: it is the assets themselves, each already located by the table.
