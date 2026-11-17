@@ -1193,3 +1193,17 @@ size-LE@6 and decompressed-LE@10 are correct for both (1280/3834 and 13478/39562
 decodes. That single byte is the whole difference: whatever consumes it is a block
 marker, and the aligned/verbatim/uncompressed attempt belongs in `lzx.py`'s first
 header read (line ~296), not in the offset sweep.
+
+#### Calibrating the bit reader (the earlier offset sweeps were invalid)
+
+`lzx.py` packs *16-bit little-endian words* and reads them MSB-first, so any
+hand-modelled header that walks bytes MSB- or LSB-first will misparse both groups.
+Traced through the real `Decoder`:
+
+    RifleIdle (off 15): intel=1, sizes 62493/53256, block type 2, length 3834 = full output
+    LMGShoulderWalk (off 15): intel=0, block type 0 -> invalid
+
+That means the 58 files that "decode" are **uncompressed blocks inside an LZX wrapper** -
+their length exactly equals the declared output - so the 54 extracted clips are raw
+payloads, not decompressed ones. The 88 are the genuinely compressed streams, and the
+header model has to be calibrated on the real reader before any offset is judged.
