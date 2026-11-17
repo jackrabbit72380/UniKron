@@ -236,6 +236,37 @@ the same shape of asset (171 vertices, y 1.176-1.347). Avatar6400 wears one of
 these, so the editor's seed uses the stock `Left Parting` instead and this note
 is the record of why the seed differs from the descriptor.
 
+## Face overlays in the 2D editor: a rendered difference, not a cutout
+
+The pack's face items are UV sheets, not body plates, so they cannot be baked like
+a shirt: there is no mesh to pose, only paint on the head. What the editor needed
+was the same thing the 3D bake produces, a flat picture of the head wearing the
+item, and `bake_pack_face.py` makes it by subtraction. It renders the pose's frame
+once with the default head and once with the item in place, and keeps the pixels
+that changed:
+
+```
+alpha = clamp((|painted - plain| - 6/255) / (24/255), 0, 1) * painted_alpha
+```
+
+The lower bound drops colour rounding, and the band up to `24/255` feathers the
+edge, because a sheet's border is antialiased. A hard cutoff at `4/255` drew a
+faint rectangle around the eyes where the sheet's own edge is. An item that changes
+nothing (`Happy Eyes` against the default head) fails rather than baking an empty
+plate, and `Head` has no texture at all and is skipped.
+
+Result: **44** `15_face` plates (the 18 noses have no art to draw - they are
+`ShapeOverrides` morphs), **26** `16_face-paint`, **17** `45_facial-hair` - 87
+plates, each composited above `10_body` and below `50_hair` by its category's own
+number. `AvatarEditor.qml` used to drop all three categories in pack mode
+(`isPackDecal`); it now drops them only when the category has no plates.
+
+This also exposed a bug in the shared decal blend, which affected the 3D sets too:
+`art + albedo * (1 - cover)` added the sheet's colour even where its alpha was
+zero, so a sheet with white transparent pixels washed the whole face out. It is
+`art * cover + albedo * (1 - cover)` now, and the 43 face-paint and facial-hair
+sets were rebaked with it.
+
 ## The pose: an idle, not a cheer, and hands that come from the clip
 
 Every static bake used frame 0 of `Cheer.AvatarAnimation`, the one clip that ships

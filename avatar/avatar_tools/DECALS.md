@@ -56,6 +56,17 @@ built-in sheet and the brow and mouth stay. `Soft Lashes` and `Soothing` go
 through the same path. **Not done:** the 18 noses, which are not art at all - they
 carry a `ShapeOverrides` blob and are head shape morphs (see CATALOG.md).
 
+## The 2D editor's copy of these sheets
+
+The editor cannot use a sheet directly, so `bake_pack_face.py` bakes one overlay
+plate per item: it renders the pose frame with and without the sheet on the head
+and keeps the difference, feathered between `6/255` and `24/255` so the sheet's own
+antialiased border does not leave a rectangle. 87 plates came out
+(44 eye sheets, 26 face paints, 17 facial hair; the noses are morphs and `Happy
+Eyes` matches the default head, so neither has a plate). They composite above the
+body plate and below the hair, in category order. See CATALOG.md for the blend fix
+this turned up - the art term now carries the sheet's own alpha.
+
 ## Re-running the probes
 
 ```

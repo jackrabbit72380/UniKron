@@ -491,7 +491,11 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                 else:
                     art = np.power(np.clip(texel[..., :3], 0.0, 1.0), 2.2)
                     cover = texel[..., 3:4] * decal.get("gain", 1.0)
-                    albedo = art + albedo * (1.0 - cover)
+                    # The art has to be weighted by its own coverage. Adding it
+                    # unweighted let a sheet whose transparent pixels are white
+                    # wash the whole face out - which is exactly what the face
+                    # paint did before this line.
+                    albedo = art * cover + albedo * (1.0 - cover)
         shaded = np.power(
             np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
         )

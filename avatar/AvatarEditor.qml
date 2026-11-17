@@ -617,7 +617,11 @@ Item {
             var name = state[c.id]
             if (!name)
                 continue
-            if (usePackArt && isPackDecal(c.id))
+            // Face items are UV sheets, not body plates, so they used to be left
+            // out of the 2D stack entirely. They have overlay plates now
+            // (bake_pack_face.py diffs the head with and without the sheet), so
+            // they join the stack; without a plate they still cannot be drawn.
+            if (usePackArt && isPackDecal(c.id) && !hasPlates(c.id))
                 continue
             var url = style.itemUrl(c.path, name)
             if (usePackArt) {

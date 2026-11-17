@@ -64,18 +64,26 @@ if obj.property("usePackArt") is not None:
         ids = ids.toVariant() if hasattr(ids, "toVariant") else ids
         return [row.get("id") for row in (ids or [])]
 
+    # Go through the editor's own setItem: poking `state` leaves _layers stale,
+    # which made this check report a stack the editor never showed.
+    from PyQt5.QtCore import Q_ARG as _QARG, QMetaObject as _QMO, Qt as _Qt
+
     for decal_id in ("15_face", "16_face-paint", "45_facial-hair"):
         decal = next((c for c in v if c.get("id") == decal_id), None)
         files = (decal or {}).get("files") or []
         if not files:
             continue
         obj.setProperty("usePackArt", True)
-        obj.setProperty("state", dict(obj.property("state").toVariant(), **{decal_id: files[0]}))
+        _QMO.invokeMethod(obj, "setItem", _Qt.DirectConnection,
+                          _QARG("QVariant", decal_id), _QARG("QVariant", files[0]))
         QTimer.singleShot(0, app.quit)
         app.exec_()
-        leaked = [i for i in layer_ids() if i == decal_id]
+        shown = layer_ids()
         print("  pack mode, %s chosen -> layers %s%s"
-              % (decal_id, layer_ids(), "  LEAKED" if leaked else ""))
+              % (decal_id, shown, "" if decal_id in shown else "  (not a layer)"))
+        if decal_id in shown:
+            row = next(r for r in (obj.property("_layers").toVariant()) if r.get("id") == decal_id)
+            print("    its url: %s" % row.get("url"))
 
     # A pack item with a baked set must name it, and the folder must exist.
     shirt = next((c for c in v if c.get("id") == "40_shirt"), None)
