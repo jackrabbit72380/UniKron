@@ -31,7 +31,16 @@ PACK = os.path.join(HERE, "../../../src_archive/XBOX HUB/resources/editors/metro
 CLIP = os.path.join(HERE, "../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/"
                           "Cheer.AvatarAnimation")
 
-HAND_JOINTS = set(range(37, 51))
+def hand_joints(rig):
+    """Every finger phalanx, from the rig itself rather than a guessed range.
+
+    The rig numbers fingers by phalanx level, not by finger: 37-40, 43-47 and 50
+    are proximal, 51-60 middle, 61-70 distal. A range like 37..50 therefore keeps
+    one bone of each finger and drops the two that carry most of its vertices,
+    which punched the holes that made the hand look mangled.
+    """
+    bind = [ap.mat_trs(j["position"], j["rotation"]) for j in rig]
+    return {bone[0] for bone in ap.finger_bones(rig, bind)}
 
 
 def hand_mesh(pack, asset, poses, joints, side):
@@ -45,13 +54,14 @@ def hand_mesh(pack, asset, poses, joints, side):
     posed = ap.posed_positions([batch], joints, poses)[0]
     all_verts = np.array(posed["vertices"])
     wrist_at = np.array(ap.posed_joint_positions(joints, poses)[wrist])
+    fingers = hand_joints(joints)
     keep = set()
     for i, (js, ws) in enumerate(zip(batch["joints"], batch["weights"])):
         # Selection has to be generous. Any vertex a finger touches, plus the palm
         # that rides the wrist itself: keeping only strong finger weights left
         # bands of the hand out, the triangles among them were dropped with it,
         # and what rendered was a hole-punched fragment that read as mangled.
-        touches_finger = any(j in HAND_JOINTS and w > 0.0 for j, w in zip(js, ws))
+        touches_finger = any(j in fingers and w > 0.0 for j, w in zip(js, ws))
         rides_wrist = (any(j == wrist and w > 0.5 for j, w in zip(js, ws))
                        and np.linalg.norm(all_verts[i] - wrist_at) < 0.17)
         if not (touches_finger or rides_wrist):
