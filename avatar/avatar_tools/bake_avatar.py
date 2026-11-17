@@ -26,6 +26,7 @@ import numpy as np
 
 import avatar_mesh as am
 import decode_shape
+import xnb_avatar
 import xpr0_export as xpr
 import avatar_pose as ap
 import skeleton_nxe as sk
@@ -200,6 +201,10 @@ def main():
     # --shape="Large Chin" reshapes the Head before skinning, from the decoded
     # block 4. The vertices are the ones the block names, so nothing is guessed.
     shape_args = [a for a in sys.argv if a.startswith("--shape=")]
+    # --xnb=PATH[:FRAME] poses the whole avatar from an avatar game's clip
+    # instead of the pack's .AvatarAnimation file. Those clips are the only
+    # shipped poses that include a resting hand.
+    xnb_args = [a for a in sys.argv if a.startswith("--xnb=")]
     if len(args) < 5:
         print(__doc__)
         return 1
@@ -242,6 +247,15 @@ def main():
         raise SystemExit("no animation block in " + clip)
     poses, frames = ap.read_animation_poses(payload[0][3], frame)
     print("%s frame %d/%d" % (clip.split("/")[-1], frame, frames))
+
+    if xnb_args:
+        value = xnb_args[0].split("=", 1)[1]
+        path, _, wanted = value.partition(":")
+        game = xnb_avatar.read_clip(path)
+        wanted = int(wanted) if wanted else frame
+        poses = xnb_avatar.poses(game, wanted)
+        print("xnb %s: %d frames, using frame %d"
+              % (os.path.basename(path), len(game["frames"]), wanted))
 
     lines = []
     written = 0

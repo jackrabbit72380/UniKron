@@ -949,3 +949,29 @@ idles where the fingers carry no rotation at all. The weapon poses are the most
 useful oddity: `HandGunPos`, `ShotGunPos`, `UzziPos` and `CrossBowAnimation` are 201
 frame holds at 3.33 s - a grip, not a shake - so they pin down how the fingers wrap an
 object, which no pack clip does.
+
+## Driving the rig from a game clip
+
+`xnb_avatar.poses()` turns a decoded clip into avatar_pose's `(position, quaternion,
+scale)` tuples, and both `show_hand.py --xnb` and `bake_avatar.py --xnb=PATH[:FRAME]`
+use it. Two things had to be established to make it usable.
+
+**Row-vector convention.** XNA's Matrix multiplies row vectors, so the rotation to
+apply is the transpose of the stored one. Measured on frame 0 of Paintball's `Idle`,
+by posing the rig and reading the wrist heights:
+
+    as stored     wrists y = 1.235   head y = 0.755   arms overhead
+    transposed    wrists y = 0.670   head y = 0.755
+    pack's own    wrists y = 0.642   head y = 0.742   "Animation Male Idle Shifts Weight"
+
+The pack's own idle is the arbiter: 0.670 against 0.642 is an idle, 1.235 is a
+celebration. `poses()` therefore conjugates.
+
+**Frame-filling.** A joint absent from a clip keeps an identity delta, which in
+`delta` mode leaves it exactly at its bind transform - no guessed angles, and the
+finger joints that a clip does animate override it.
+
+With that, the avatar stands with its arms down and the hand reads as a closed,
+relaxed grip rather than the open paddle the pack clip produces. The remaining
+weakness is resolution: the hand is 69 vertices and 100 triangles, drawn flat, so
+separate digits only show at the silhouettes.

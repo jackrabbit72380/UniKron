@@ -166,6 +166,65 @@ def rotation_degrees(m):
     return float(np.degrees(np.arccos(max(-1.0, min(1.0, (trace - 1.0) / 2.0)))))
 
 
+def quat_from_matrix(r):
+    """Quaternion (x, y, z, w) of the 3x3 rotation part of `r`."""
+    trace = r[0, 0] + r[1, 1] + r[2, 2]
+    if trace > 0.0:
+        s = np.sqrt(trace + 1.0) * 2.0
+        w = 0.25 * s
+        x = (r[2, 1] - r[1, 2]) / s
+        y = (r[0, 2] - r[2, 0]) / s
+        z = (r[1, 0] - r[0, 1]) / s
+    elif r[0, 0] > r[1, 1] and r[0, 0] > r[2, 2]:
+        s = np.sqrt(1.0 + r[0, 0] - r[1, 1] - r[2, 2]) * 2.0
+        w = (r[2, 1] - r[1, 2]) / s
+        x = 0.25 * s
+        y = (r[0, 1] + r[1, 0]) / s
+        z = (r[0, 2] + r[2, 0]) / s
+    elif r[1, 1] > r[2, 2]:
+        s = np.sqrt(1.0 + r[1, 1] - r[0, 0] - r[2, 2]) * 2.0
+        w = (r[0, 2] - r[2, 0]) / s
+        x = (r[0, 1] + r[1, 0]) / s
+        y = 0.25 * s
+        z = (r[1, 2] + r[2, 1]) / s
+    else:
+        s = np.sqrt(1.0 + r[2, 2] - r[0, 0] - r[1, 1]) * 2.0
+        w = (r[1, 0] - r[0, 1]) / s
+        x = (r[0, 2] + r[2, 0]) / s
+        y = (r[1, 2] + r[2, 1]) / s
+        z = 0.25 * s
+    return (float(x), float(y), float(z), float(w))
+
+
+def poses(clip, frame=0, joints=71):
+    """A clip frame in the avatar_pose tuple form: (position, quaternion, scale).
+
+    The matrices are the joints' own local rotations, so the position stays zero
+    and avatar_pose's `delta` mode puts the rotation on top of the bind offset -
+    a joint that does not move in the clip keeps its bind transform exactly.
+    Root motion, when a clip has it, rides in the root matrix's bottom row.
+
+    XNA's Matrix multiplies row vectors, so the rotation to apply here is the
+    transpose of the stored one - the conjugate quaternion. Getting that wrong is
+    visible rather than subtle: on frame 0 of `Idle` the wrists sit at y 1.235
+    (arms overhead) as stored and 0.670 transposed, while the pack's own idle clip
+    puts them at 0.642.
+    """
+    frames = clip["frames"]
+    index = max(0, min(frame, len(frames) - 1))
+    data = frames[index][1]
+    out = []
+    for joint in range(joints):
+        matrix = data.get(joint)
+        if matrix is None:
+            out.append(((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0), (1.0, 1.0, 1.0)))
+            continue
+        x, y, z, w = quat_from_matrix(matrix[:3, :3])
+        out.append((tuple(float(v) for v in matrix[3, :3]),
+                    (-x, -y, -z, w), (1.0, 1.0, 1.0)))
+    return out
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("clip", nargs="?", default=DEFAULT)

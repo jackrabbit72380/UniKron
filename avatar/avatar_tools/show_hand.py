@@ -8,6 +8,7 @@ angles with its own projection, so the shape can actually be seen.
     python3 show_hand.py                    # bind pose vs the idle clip
     python3 show_hand.py --yaws 12 --out /tmp/hand.png
     python3 show_hand.py --hand right
+    python3 show_hand.py --xnb /tmp/av/Idle.xnb    # adds a row from a game clip
 """
 
 import argparse
@@ -22,6 +23,7 @@ import avatar_mesh as am
 import avatar_pose as ap
 import pack_clip
 import skeleton_nxe as sk
+import xnb_avatar
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.join(HERE, "../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/"
@@ -118,6 +120,8 @@ def main():
     parser.add_argument("--out", default=os.path.join(HERE, "hand_sides.png"))
     parser.add_argument("--clip-asset", default="Animation Male Idle Shifts Weight")
     parser.add_argument("--frame", type=int, default=0)
+    parser.add_argument("--xnb", default="",
+                        help="also draw a row from an avatar game's .xnb clip")
     args = parser.parse_args()
 
     joints = sk.read_skeleton()
@@ -125,8 +129,16 @@ def main():
     poses, total = ap.read_animation_poses(
         [b for b in am.strb_blocks(open(clip, "rb").read()) if b[0] == 1][0][3], args.frame)
 
+    sources = [("bind", None), ("clip", poses)]
+    if args.xnb:
+        game = xnb_avatar.read_clip(args.xnb)
+        game_poses = xnb_avatar.poses(game, args.frame)
+        sources.append(("xnb", game_poses))
+        print("xnb %s: %d frames, frame %d"
+              % (args.xnb, len(game["frames"]), args.frame))
+
     rows = []
-    for label, use in (("bind", None), ("clip", poses)):
+    for label, use in sources:
         ps = [((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0), (1.0, 1.0, 1.0))] * len(joints) if use is None else use
         verts, tris = hand_mesh(PACK, "MaleBody", ps, joints, args.hand)
         grid = Image.new("RGB", (args.size * 4, args.size * math.ceil(args.yaws / 4)),
