@@ -381,7 +381,17 @@ debugging.
    `Lip Color`, `Eye Shadow Color`, `Carryables`, `My Outfits`, `Costumes`).
    So the wording needs no service at all. The bits still mean what the pack's
    own table says they mean, and the colour screens are palettes rather than item
-   lists - `CATALOG.md` records both corrections. The editor's real filter is `AeSearchSet` in the port DLL, which
+   lists - `CATALOG.md` records both corrections.
+
+   **The palette *values* are not in the image, though (measured negative).** The
+   names `Color0`..`Color15` sit in the theme's variable table, and a scan of all
+   15.8 MB of `avatareditor.xex` for runs of six or more opaque warm ARGB words -
+   what a skin-tone ramp looks like in memory - finds **none**. So the swatch
+   colours are either composed by the theme at runtime or stored in the 18
+   encrypted `.xui` files; either way they cannot be read out of this image, and
+   inventing a ramp would be putting colours in the editor that the console never
+   showed. The colour screens stay unimplemented until a decrypted theme or a
+   capture of the real grid turns up. The editor's real filter is `AeSearchSet` in the port DLL, which
    works on loaded asset metadata. The full dashboard corpus also names
    the source of that metadata: `FUN_142529e40` builds
    `/live/{:08x}/avataritems/{}.acp`, and the port's own settings carry
