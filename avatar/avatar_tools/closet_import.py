@@ -15,10 +15,12 @@ id and the column is a restatement of it. Column three is `avatarBodyType`:
 shoes split across those two values. The port logs the same pair on startup as
 `enum assets cats={:#x} bodies={:#x}`.
 
-What is *not* recoverable here is which bit of the mask means "hair" or
-"shoes": those labels are carried by the LIVE response header
-`X-Avatar-Item-Categories` and by the editor's encrypted XUI data, and the word
-list does not occur in the exe, the DLL or the XEX strings.
+The bits mean what the pack's own slot table says they mean (see the top of
+`CATALOG.md`: 0x0001 glasses, 0x0002 wristwear, 0x0004 earrings, 0x0008 rings,
+0x0100 head, 0x0200 body, 0x0400 hair, 0x0800 torso, 0x1000 legs, 0x2000 feet,
+0x4000 hat, 0x8000 gloves, with multi-bit combinations for outfits). That table
+was read out of `AssetMetadataVersioned` in the pack; the LIVE service sent the
+same kind of mask in `X-Avatar-Item-Categories` when it served an item.
 
 This reads that folder without copying it and writes one JSON file the theme
 can consume, so a real 20,349-item closet can be addressed by name. It records

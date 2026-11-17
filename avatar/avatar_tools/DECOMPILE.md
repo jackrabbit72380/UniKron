@@ -350,8 +350,16 @@ debugging.
    its own id. The port logs the same pair at startup as
    `[avatar] enum assets cats={:#x} bodies={:#x} closet={}`.
 
-   The bit *names* are still out of reach, and their transport is now known:
-   the port builds `/live/{:08x}/avataritems/{}.acp` and reads the item's
+   **The bits themselves are mapped** - see the slot table at the top of
+   `CATALOG.md`, read out of the pack's own `AssetMetadataVersioned` masks and
+   corroborated by the gender byte (0x0001 glasses, 0x0002 wristwear, 0x0004
+   earrings, 0x0008 rings, 0x0100 head, 0x0200 body, 0x0400 hair, 0x0800 torso,
+   0x1000 legs, 0x2000 feet, 0x4000 hat, 0x8000 gloves, with multi-bit
+   combinations for outfits). Under that table the closet sample reads
+   consistently: `Halo Spartan Armor` at 0x00000ffc is a full set (head, body,
+   hair, torso, legs, feet, earrings, rings). So what is missing is only the
+   retail *wording* of a category, not its meaning, and the wording's transport is
+   now known too: the port builds `/live/{:08x}/avataritems/{}.acp` and reads the item's
    metadata from the **response headers** `X-Avatar-Item-Name`,
    `X-Avatar-Item-Categories`, `X-Avatar-Item-Bodies` (its local server, 
    `rex::kernel::xam::ServeAvatarItem` on `/avataritems/`, answers with them and
@@ -359,10 +367,10 @@ debugging.
    `avatar_marketplace_server` with `X-Marketplace-Key`; the manifest it serves
    is `JMstudios.marketplace.v1` (key label `JMKEY1`) and the catalogue query is
    `methodName=FindGameOffers` with `&Names=NameFilter&Values=` and a
-   `<totalItems>` reply. So the labels lived in the service, not the disc, and
-   neither `hair`/`headwear`/`tops`/`bottoms`/`shoes` nor any sibling word occurs
-   in `avatareditor.exe`, `rexruntime.dll` or the XEX strings - measured, not
-   assumed. The editor's real filter is `AeSearchSet` in the port DLL, which
+   `<totalItems>`    reply. So the retail *wording* lived in the service, not the disc, and neither
+   `hair`/`headwear`/`tops`/`bottoms`/`shoes` nor any sibling word occurs in
+   `avatareditor.exe`, `rexruntime.dll` or the XEX strings - measured, not
+   assumed; the bits still mean what the pack's own table says they mean. The editor's real filter is `AeSearchSet` in the port DLL, which
    works on loaded asset metadata. The full dashboard corpus also names
    the source of that metadata: `FUN_142529e40` builds
    `/live/{:08x}/avataritems/{}.acp`, and the port's own settings carry
