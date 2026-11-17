@@ -544,803 +544,29 @@
   "Blue Fingerless Gloves Hiding Template"
  ],
  "problems": {
-  "Large Chin": [
-   "ShapeOverrides: 1613 bytes not decoded"
-  ],
-  "Thin Chin": [
-   "ShapeOverrides: 1341 bytes not decoded"
-  ],
-  "Long Chin": [
-   "ShapeOverrides: 1586 bytes not decoded"
-  ],
-  "Chiseled Chin": [
-   "ShapeOverrides: 1423 bytes not decoded"
-  ],
-  "Rounded Chin": [
-   "ShapeOverrides: 1613 bytes not decoded"
-  ],
-  "Sharp Chin": [
-   "ShapeOverrides: 1763 bytes not decoded"
-  ],
-  "Square Chin": [
-   "ShapeOverrides: 1586 bytes not decoded"
-  ],
-  "Small Chin": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Wide Chin": [
-   "ShapeOverrides: 1710 bytes not decoded"
-  ],
-  "Defined Nose": [
-   "ShapeOverrides: 1505 bytes not decoded"
-  ],
-  "Boxer's Nose": [
-   "ShapeOverrides: 1608 bytes not decoded"
-  ],
-  "Curved Nose": [
-   "ShapeOverrides: 1582 bytes not decoded"
-  ],
-  "Drooped Nose": [
-   "ShapeOverrides: 1207 bytes not decoded"
-  ],
-  "Angled Nose": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Hooked Nose": [
-   "ShapeOverrides: 1428 bytes not decoded"
-  ],
-  "Bulbous Nose": [
-   "ShapeOverrides: 1652 bytes not decoded"
-  ],
-  "Large Nose": [
-   "ShapeOverrides: 1454 bytes not decoded"
-  ],
-  "Sharp Nose": [
-   "ShapeOverrides: 1557 bytes not decoded"
-  ],
-  "Perked Nose": [
-   "ShapeOverrides: 1145 bytes not decoded"
-  ],
-  "Smooth Nose": [
-   "ShapeOverrides: 1597 bytes not decoded"
-  ],
-  "Rounded Nose": [
-   "ShapeOverrides: 1505 bytes not decoded"
-  ],
-  "Small Nose": [
-   "ShapeOverrides: 1273 bytes not decoded"
-  ],
-  "Straight Nose": [
-   "ShapeOverrides: 1557 bytes not decoded"
-  ],
-  "Long Nose": [
-   "ShapeOverrides: 1597 bytes not decoded"
-  ],
-  "Tiny Nose": [
-   "ShapeOverrides: 1503 bytes not decoded"
-  ],
-  "Wide Nose": [
-   "ShapeOverrides: 921 bytes not decoded"
-  ],
-  "Soft Nose": [
-   "ShapeOverrides: 1119 bytes not decoded"
-  ],
-  "Fantasy Ears": [
-   "ShapeOverrides: 599 bytes not decoded"
-  ],
-  "Butterfly Ears": [
-   "ShapeOverrides: 799 bytes not decoded"
-  ],
-  "Round Ears": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Elven Ears": [
-   "ShapeOverrides: 776 bytes not decoded"
-  ],
-  "Long Ears": [
-   "ShapeOverrides: 862 bytes not decoded"
-  ],
-  "Prominent Ears": [
-   "ShapeOverrides: 848 bytes not decoded"
-  ],
-  "Shaped Ears": [
-   "ShapeOverrides: 661 bytes not decoded"
-  ],
-  "Small Ears": [
-   "ShapeOverrides: 913 bytes not decoded"
-  ],
-  "Spiked Ears": [
-   "ShapeOverrides: 485 bytes not decoded"
-  ],
-  "Female Boombox Tee Hiding Template": [
-   "ShapeOverrides: 1075 bytes not decoded"
-  ],
-  "Female Tennis Skirt Hiding Template": [
-   "ShapeOverrides: 1239 bytes not decoded"
-  ],
-  "Male Goth Boots Hiding Template": [
-   "ShapeOverrides: 956 bytes not decoded"
-  ],
-  "Pinstripe Pants Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Gothic Long Sleeved Top Hiding Template": [
-   "ShapeOverrides: 1132 bytes not decoded"
-  ],
-  "Cowboy Boots Hiding Template": [
-   "ShapeOverrides: 620 bytes not decoded"
-  ],
-  "Green Hoodie Hiding Template": [
-   "ShapeOverrides: 2463 bytes not decoded"
-  ],
-  "Formal Suit Hiding Template": [
-   "ShapeOverrides: 1993 bytes not decoded"
-  ],
-  "Punk Tee Hiding Template": [
-   "ShapeOverrides: 3472 bytes not decoded"
-  ],
-  "Leopard Print Leggings Hiding Template": [
-   "ShapeOverrides: 676 bytes not decoded"
-  ],
-  "Blue Full-zip Hoodie Hiding Template": [
-   "ShapeOverrides: 1686 bytes not decoded"
-  ],
-  "Twin Set Hiding Template": [
-   "ShapeOverrides: 2807 bytes not decoded"
-  ],
   "Daisy Print Dress Hiding Template": [
-   "ShapeOverrides: 2047 bytes not decoded"
-  ],
-  "Dungarees Hiding Template": [
-   "ShapeOverrides: 1474 bytes not decoded"
-  ],
-  "Flares Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Baggy Jeans Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Jogging Pants Hiding Template": [
-   "ShapeOverrides: 676 bytes not decoded"
-  ],
-  "Denim Shorts Hiding Template": [
-   "ShapeOverrides: 726 bytes not decoded"
-  ],
-  "Tracksuit Pants Hiding Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Pencil Skirt Hiding Template": [
-   "ShapeOverrides: 1837 bytes not decoded"
-  ],
-  "Surfer Vest Hiding Template": [
-   "ShapeOverrides: 803 bytes not decoded"
-  ],
-  "Female Sport Top Hiding Template": [
-   "ShapeOverrides: 1052 bytes not decoded"
-  ],
-  "Male Sport Top Hiding Template": [
-   "ShapeOverrides: 1529 bytes not decoded"
-  ],
-  "Boots Hiding Template": [
-   "ShapeOverrides: 757 bytes not decoded"
+   "ShapeOverrides: section B wants 1921920 bits, 9642 remain - variant not decoded"
   ],
   "70's Full-zip Jacket Hiding Template": [
-   "ShapeOverrides: 1320 bytes not decoded"
-  ],
-  "White Xbox Sneakers Hiding Template": [
-   "ShapeOverrides: 439 bytes not decoded"
-  ],
-  "Geek Pants Hiding Template": [
-   "ShapeOverrides: 1115 bytes not decoded"
-  ],
-  "Camo Pants Hiding Template": [
-   "ShapeOverrides: 1096 bytes not decoded"
-  ],
-  "Full-zip Hoodie with Chain Hiding Template": [
-   "ShapeOverrides: 1486 bytes not decoded"
-  ],
-  "Skinny Fit Jeans Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Little Black Dress Hiding Template": [
-   "ShapeOverrides: 4072 bytes not decoded"
-  ],
-  "Metal Combats Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "70's Checked Shirt Hiding Template": [
-   "ShapeOverrides: 996 bytes not decoded"
-  ],
-  "Fitted Blazer Hiding Template": [
-   "ShapeOverrides: 1268 bytes not decoded"
-  ],
-  "Two Button Babydoll Dress Hiding Template": [
-   "ShapeOverrides: 2262 bytes not decoded"
-  ],
-  "Swim Shorts Hiding Template": [
-   "ShapeOverrides: 1068 bytes not decoded"
-  ],
-  "Checked Jacket with Polo Hiding Template": [
-   "ShapeOverrides: 1634 bytes not decoded"
-  ],
-  "Striped Jacket with Polo Hiding Template": [
-   "ShapeOverrides: 1244 bytes not decoded"
-  ],
-  "Grunge Pants Hiding Template": [
-   "ShapeOverrides: 899 bytes not decoded"
-  ],
-  "Sundress Hiding Template": [
-   "ShapeOverrides: 2094 bytes not decoded"
-  ],
-  "Pixie Boots Hiding Template": [
-   "ShapeOverrides: 745 bytes not decoded"
-  ],
-  "Snowboarding Jacket Hiding Template": [
-   "ShapeOverrides: 858 bytes not decoded"
-  ],
-  "Pinstripe Blazer Hiding Template": [
-   "ShapeOverrides: 2354 bytes not decoded"
-  ],
-  "High Heel Body Modification Template": [
-   "ShapeOverrides: 3580 bytes not decoded"
-  ],
-  "Female Leggings Bottom Template": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Female Medium Skirt Bottom Template": [
-   "ShapeOverrides: 1193 bytes not decoded"
-  ],
-  "Female Trousers Bottom Template": [
-   "ShapeOverrides: 925 bytes not decoded"
-  ],
-  "Female Long Sleeved Top Template": [
-   "ShapeOverrides: 1559 bytes not decoded"
-  ],
-  "Female Short Sleeved Top Template": [
-   "ShapeOverrides: 916 bytes not decoded"
-  ],
-  "Female Short Sleeved V Top Template": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Male Shorts Bottom Template": [
-   "ShapeOverrides: 604 bytes not decoded"
-  ],
-  "Male Trousers Bottom Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Male Long Sleeved Top Template": [
-   "ShapeOverrides: 1264 bytes not decoded"
-  ],
-  "Male Long Sleeved V Top Template": [
-   "ShapeOverrides: 115 bytes not decoded"
-  ],
-  "Male Short Sleeved Top Template": [
-   "ShapeOverrides: 1012 bytes not decoded"
-  ],
-  "Male Polo Shirt Hiding Template": [
-   "ShapeOverrides: 704 bytes not decoded"
-  ],
-  "Strapless Dress Hiding Template": [
-   "ShapeOverrides: 1389 bytes not decoded"
-  ],
-  "Dress with Sash Hiding Template": [
-   "ShapeOverrides: 2252 bytes not decoded"
+   "ShapeOverrides: section B wants 671360 bits, 3466 remain - variant not decoded"
   ],
   "60's Dress Hiding Template": [
-   "ShapeOverrides: 2076 bytes not decoded"
-  ],
-  "Striped Sundress Hiding Template": [
-   "ShapeOverrides: 2368 bytes not decoded"
-  ],
-  "Babydoll Dress Hiding Template": [
-   "ShapeOverrides: 2262 bytes not decoded"
-  ],
-  "60's Boots Hiding Template": [
-   "ShapeOverrides: 997 bytes not decoded"
-  ],
-  "Female Goth Boots Hiding Template": [
-   "ShapeOverrides: 613 bytes not decoded"
-  ],
-  "Tight Tee Hiding Template": [
-   "ShapeOverrides: 1706 bytes not decoded"
-  ],
-  "Tee with Belt Hiding Template": [
-   "ShapeOverrides: 1152 bytes not decoded"
-  ],
-  "Cardigan with Vest Hiding Template": [
-   "ShapeOverrides: 1395 bytes not decoded"
-  ],
-  "Full-zip Hoodie Hiding Template": [
-   "ShapeOverrides: 1448 bytes not decoded"
-  ],
-  "Hacking Jacket Hiding Template": [
-   "ShapeOverrides: 1471 bytes not decoded"
-  ],
-  "Grunge Tee Hiding Template": [
-   "ShapeOverrides: 1727 bytes not decoded"
-  ],
-  "Groovy Shirt Hiding Template": [
-   "ShapeOverrides: 2481 bytes not decoded"
-  ],
-  "Football Tee Hiding Template": [
-   "ShapeOverrides: 2979 bytes not decoded"
-  ],
-  "Track Jacket Hiding Template": [
-   "ShapeOverrides: 2277 bytes not decoded"
-  ],
-  "Geek Shirt Hiding Template": [
-   "ShapeOverrides: 1229 bytes not decoded"
-  ],
-  "Turtleneck Sweater Hiding Template": [
-   "ShapeOverrides: 991 bytes not decoded"
-  ],
-  "Female Crew Neck Sweater Hiding Template": [
-   "ShapeOverrides: 1698 bytes not decoded"
-  ],
-  "Vest Hiding Template": [
-   "ShapeOverrides: 812 bytes not decoded"
-  ],
-  "Female Polo shirt Hiding Template": [
-   "ShapeOverrides: 833 bytes not decoded"
-  ],
-  "Waistcoat with Vest Hiding Template": [
-   "ShapeOverrides: 1075 bytes not decoded"
-  ],
-  "Wrap Shirt Hiding Template": [
-   "ShapeOverrides: 1608 bytes not decoded"
-  ],
-  "Rockabilly Dress Hiding Template": [
-   "ShapeOverrides: 2937 bytes not decoded"
-  ],
-  "Sweater with Shirt Hiding Template": [
-   "ShapeOverrides: 1403 bytes not decoded"
-  ],
-  "Biker Jacket Hiding Template": [
-   "ShapeOverrides: 1539 bytes not decoded"
-  ],
-  "Layered Jacket Hiding Template": [
-   "ShapeOverrides: 2112 bytes not decoded"
-  ],
-  "Punk Pants Hiding Template": [
-   "ShapeOverrides: 1022 bytes not decoded"
-  ],
-  "Punk Boots Hiding Template": [
-   "ShapeOverrides: 757 bytes not decoded"
-  ],
-  "Grunge Trainers Hiding Template": [
-   "ShapeOverrides: 478 bytes not decoded"
-  ],
-  "Open Neck Cardigan Hiding Template": [
-   "ShapeOverrides: 1043 bytes not decoded"
-  ],
-  "Tropical Shirt Hiding Template": [
-   "ShapeOverrides: 1352 bytes not decoded"
-  ],
-  "Hoodie Hiding Template": [
-   "ShapeOverrides: 1588 bytes not decoded"
-  ],
-  "Glass Tee Hiding Template": [
-   "ShapeOverrides: 1726 bytes not decoded"
-  ],
-  "Long Sleeved Tee Hiding Template": [
-   "ShapeOverrides: 1034 bytes not decoded"
-  ],
-  "Full-zip Tracksuit Hiding Template": [
-   "ShapeOverrides: 1686 bytes not decoded"
-  ],
-  "Tartan Skirt Hiding Template": [
-   "ShapeOverrides: 1103 bytes not decoded"
-  ],
-  "Denim Shorts with Thread Hiding Template": [
-   "ShapeOverrides: 777 bytes not decoded"
-  ],
-  "Oversized Jacket with Chains Hiding Template": [
-   "ShapeOverrides: 957 bytes not decoded"
-  ],
-  "Bright Print Tee Hiding Template": [
-   "ShapeOverrides: 1188 bytes not decoded"
-  ],
-  "School Jacket with Polo Hiding Template": [
-   "ShapeOverrides: 1273 bytes not decoded"
-  ],
-  "Denim Jacket with Tee Hiding Template": [
-   "ShapeOverrides: 915 bytes not decoded"
-  ],
-  "Rain Coat Hiding Template": [
-   "ShapeOverrides: 1918 bytes not decoded"
-  ],
-  "Open Neck Sweater Hiding Template": [
-   "ShapeOverrides: 1919 bytes not decoded"
-  ],
-  "Suit and Tie Hiding Template": [
-   "ShapeOverrides: 1970 bytes not decoded"
-  ],
-  "School Tie Tee Hiding Template": [
-   "ShapeOverrides: 1209 bytes not decoded"
-  ],
-  "Chino Shorts Hiding Template": [
-   "ShapeOverrides: 1160 bytes not decoded"
-  ],
-  "Denim Jacket Hiding Template": [
-   "ShapeOverrides: 1155 bytes not decoded"
-  ],
-  "Black Tuxedo Hiding Template": [
-   "ShapeOverrides: 3052 bytes not decoded"
-  ],
-  "Tan Formal Suit Hiding Template": [
-   "ShapeOverrides: 1993 bytes not decoded"
-  ],
-  "Jogger Hiding Template": [
-   "ShapeOverrides: 1415 bytes not decoded"
-  ],
-  "Sweat Bands Hiding Template": [
-   "ShapeOverrides: 1431 bytes not decoded"
-  ],
-  "Embroidered Pants Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Stripy Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 985 bytes not decoded"
-  ],
-  "Yellow Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 823 bytes not decoded"
-  ],
-  "Rockabilly Top Hiding Template": [
-   "ShapeOverrides: 949 bytes not decoded"
-  ],
-  "Black Skinny Fit Jeans Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Thread Skirt Hiding Template": [
-   "ShapeOverrides: 1619 bytes not decoded"
-  ],
-  "Gold Bracelet Hiding Template": [
-   "ShapeOverrides: 1824 bytes not decoded"
-  ],
-  "Jelly Clogs Hiding Template": [
-   "ShapeOverrides: 507 bytes not decoded"
-  ],
-  "Black and Blue Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 1723 bytes not decoded"
-  ],
-  "Dogtooth Pattern Skirt Hiding Template": [
-   "ShapeOverrides: 1619 bytes not decoded"
+   "ShapeOverrides: section B wants 2005408 bits, 10042 remain - variant not decoded"
   ],
   "Plimsolls Hiding Template": [
-   "ShapeOverrides: 727 bytes not decoded"
-  ],
-  "Cargo Shorts Hiding Template": [
-   "ShapeOverrides: 700 bytes not decoded"
-  ],
-  "Retro Digital Watch Hiding Template": [
-   "ShapeOverrides: 1824 bytes not decoded"
-  ],
-  "Pink Glow Bands Hiding Template": [
-   "ShapeOverrides: 401 bytes not decoded"
-  ],
-  "Gingham Shirt Hiding Template": [
-   "ShapeOverrides: 1492 bytes not decoded"
-  ],
-  "Cans Tee Hiding Template": [
-   "ShapeOverrides: 2000 bytes not decoded"
-  ],
-  "Snug Boots Hiding Template": [
-   "ShapeOverrides: 843 bytes not decoded"
-  ],
-  "Denim Skirt Hiding Template": [
-   "ShapeOverrides: 956 bytes not decoded"
-  ],
-  "Formal Shoes Hiding Template": [
-   "ShapeOverrides: 363 bytes not decoded"
-  ],
-  "Dark Denim Jeans Hiding Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Rodeo Jeans Hiding Template": [
-   "ShapeOverrides: 940 bytes not decoded"
-  ],
-  "Moccasins Hiding Template": [
-   "ShapeOverrides: 750 bytes not decoded"
-  ],
-  "Star Pattern Shirt Hiding Template": [
-   "ShapeOverrides: 1041 bytes not decoded"
-  ],
-  "Crop Top with Sweat Bands Hiding Template": [
-   "ShapeOverrides: 1287 bytes not decoded"
-  ],
-  "Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 823 bytes not decoded"
-  ],
-  "Female Chino Shorts Hiding Template": [
-   "ShapeOverrides: 669 bytes not decoded"
-  ],
-  "Female Short Shorts Hiding Template": [
-   "ShapeOverrides: 1088 bytes not decoded"
-  ],
-  "Female Knitted Vest Hiding Template": [
-   "ShapeOverrides: 1518 bytes not decoded"
-  ],
-  "Worn Jeans Hiding Template": [
-   "ShapeOverrides: 939 bytes not decoded"
-  ],
-  "High School Sports Hoodie Hiding Template": [
-   "ShapeOverrides: 1486 bytes not decoded"
+   "ShapeOverrides: section B wants 600576 bits, 3138 remain - variant not decoded"
   ],
   "70's Leather Platforms Hiding Template": [
-   "ShapeOverrides: 544 bytes not decoded"
-  ],
-  "Chequered Shorts Hiding Template": [
-   "ShapeOverrides: 700 bytes not decoded"
-  ],
-  "Shirt with Cummerbund Hiding Template": [
-   "ShapeOverrides: 2078 bytes not decoded"
-  ],
-  "Male Rashguard Hiding Template": [
-   "ShapeOverrides: 1902 bytes not decoded"
-  ],
-  "Male Snowboarding Boots Hiding Template": [
-   "ShapeOverrides: 761 bytes not decoded"
-  ],
-  "Flower Print Flares Hiding Template": [
-   "ShapeOverrides: 1115 bytes not decoded"
-  ],
-  "Cowgirl Boots Hiding Template": [
-   "ShapeOverrides: 757 bytes not decoded"
-  ],
-  "Braces with High Pants Hiding Template": [
-   "ShapeOverrides: 2848 bytes not decoded"
+   "ShapeOverrides: section B wants 254080 bits, 1338 remain - variant not decoded"
   ],
   "Formal Trouser Suit Hiding Template": [
-   "ShapeOverrides: 2453 bytes not decoded"
-  ],
-  "Driving Gloves Hiding Template": [
-   "ShapeOverrides: 1705 bytes not decoded"
-  ],
-  "Rainy Day Boots Hiding Template": [
-   "ShapeOverrides: 868 bytes not decoded"
-  ],
-  "Leggings with Denim Skirt Hiding Template": [
-   "ShapeOverrides: 676 bytes not decoded"
-  ],
-  "Red Formal Shirt Hiding Template": [
-   "ShapeOverrides: 1846 bytes not decoded"
-  ],
-  "Leather Biker Gloves Hiding Template": [
-   "ShapeOverrides: 1057 bytes not decoded"
-  ],
-  "Retro Skirt Hiding Template": [
-   "ShapeOverrides: 1085 bytes not decoded"
-  ],
-  "Winter Jacket Hiding Template": [
-   "ShapeOverrides: 1814 bytes not decoded"
-  ],
-  "Turn Up Jeans Hiding Template": [
-   "ShapeOverrides: 877 bytes not decoded"
-  ],
-  "Bright Sprite Hoodie Hiding Template": [
-   "ShapeOverrides: 1193 bytes not decoded"
-  ],
-  "Male Punk Tee Hiding Template": [
-   "ShapeOverrides: 1339 bytes not decoded"
-  ],
-  "Socks and Sandals Hiding Template": [
-   "ShapeOverrides: 535 bytes not decoded"
-  ],
-  "Cowgirl Shirt Hiding Template": [
-   "ShapeOverrides: 792 bytes not decoded"
-  ],
-  "Lips Tee Hiding Template": [
-   "ShapeOverrides: 1188 bytes not decoded"
+   "ShapeOverrides: section B wants 1275584 bits, 6578 remain - variant not decoded"
   ],
   "Surfer Shorts Hiding Template": [
-   "ShapeOverrides: 1642 bytes not decoded"
+   "ShapeOverrides: section B wants 2080224 bits, 10482 remain - variant not decoded"
   ],
   "Surfer Hotpants Hiding Template": [
-   "ShapeOverrides: 1642 bytes not decoded"
-  ],
-  "Snowboarding Boots Hiding Template": [
-   "ShapeOverrides: 958 bytes not decoded"
-  ],
-  "Western Duster Hiding Template": [
-   "ShapeOverrides: 2364 bytes not decoded"
-  ],
-  "Black Trench Coat Hiding Template": [
-   "ShapeOverrides: 2364 bytes not decoded"
-  ],
-  "Female White Dress Gloves Hiding Template": [
-   "ShapeOverrides: 2029 bytes not decoded"
-  ],
-  "Rocker Jacket Hiding Template": [
-   "ShapeOverrides: 1278 bytes not decoded"
-  ],
-  "Cheerleader Dress Hiding Template": [
-   "ShapeOverrides: 1125 bytes not decoded"
-  ],
-  "Motocross Gloves Hiding Template": [
-   "ShapeOverrides: 1729 bytes not decoded"
-  ],
-  "Popper Pants Hiding Template": [
-   "ShapeOverrides: 748 bytes not decoded"
-  ],
-  "Pleated Dress Hiding Template": [
-   "ShapeOverrides: 3058 bytes not decoded"
-  ],
-  "Woolly Gloves Hiding Template": [
-   "ShapeOverrides: 1729 bytes not decoded"
-  ],
-  "Vintage Snowdrop Blouse Hiding Template": [
-   "ShapeOverrides: 2269 bytes not decoded"
-  ],
-  "Male White Dress Gloves Hiding Template": [
-   "ShapeOverrides: 1729 bytes not decoded"
-  ],
-  "Female Ski Gloves Hiding Template": [
-   "ShapeOverrides: 1723 bytes not decoded"
-  ],
-  "Colorful Polo Shirt Hiding Template": [
-   "ShapeOverrides: 704 bytes not decoded"
-  ],
-  "Sports Vest Hiding Template": [
-   "ShapeOverrides: 836 bytes not decoded"
-  ],
-  "Blue Formal Shirt Hiding Template": [
-   "ShapeOverrides: 980 bytes not decoded"
-  ],
-  "V Neck Top Hiding Template": [
-   "ShapeOverrides: 1553 bytes not decoded"
-  ],
-  "Jacket with Tee Hiding Template": [
-   "ShapeOverrides: 1395 bytes not decoded"
-  ],
-  "Elegant Ball Gown Hiding Template": [
-   "ShapeOverrides: 3058 bytes not decoded"
-  ],
-  "Surfer Dress Hiding Template": [
-   "ShapeOverrides: 1700 bytes not decoded"
-  ],
-  "Female Camo Pants Hiding Template": [
-   "ShapeOverrides: 1286 bytes not decoded"
-  ],
-  "Female Power Tee Hiding Template": [
-   "ShapeOverrides: 2885 bytes not decoded"
-  ],
-  "Male Ski Gloves Hiding Template": [
-   "ShapeOverrides: 1729 bytes not decoded"
-  ],
-  "Punk Jacket and Tee Hiding Template": [
-   "ShapeOverrides: 1197 bytes not decoded"
-  ],
-  "Skull Wrist Band Hiding Template": [
-   "ShapeOverrides: 2500 bytes not decoded"
-  ],
-  "Biker Gloves Hiding Template": [
-   "ShapeOverrides: 964 bytes not decoded"
-  ],
-  "Vest with Straps Hiding Template": [
-   "ShapeOverrides: 1276 bytes not decoded"
-  ],
-  "Rainbow Gloves Hiding Template": [
-   "ShapeOverrides: 1722 bytes not decoded"
-  ],
-  "American Football Jersey Hiding Template": [
-   "ShapeOverrides: 809 bytes not decoded"
-  ],
-  "Baseball Jersey Hiding Template": [
-   "ShapeOverrides: 1031 bytes not decoded"
-  ],
-  "Male White Vest Hiding Template": [
-   "ShapeOverrides: 746 bytes not decoded"
-  ],
-  "Male Presenter Jacket Hiding Template": [
-   "ShapeOverrides: 2083 bytes not decoded"
-  ],
-  "Striped Sweater with Chain Hiding Template": [
-   "ShapeOverrides: 1193 bytes not decoded"
-  ],
-  "Female Platform Shoes Hiding Template": [
-   "ShapeOverrides: 3580 bytes not decoded"
-  ],
-  "V Neck Tee Hiding Template": [
-   "ShapeOverrides: 1239 bytes not decoded"
-  ],
-  "Jacket with Sweater Hiding Template": [
-   "ShapeOverrides: 1634 bytes not decoded"
-  ],
-  "Polkadot Skirt Hiding Template": [
-   "ShapeOverrides: 1411 bytes not decoded"
-  ],
-  "Waistcoat and Shirt Hiding Template": [
-   "ShapeOverrides: 2256 bytes not decoded"
-  ],
-  "Hiking Shoes Hiding Template": [
-   "ShapeOverrides: 354 bytes not decoded"
-  ],
-  "Green Xbox Sneakers Hiding Template": [
-   "ShapeOverrides: 439 bytes not decoded"
-  ],
-  "Brown Formal Shoes Hiding Template": [
-   "ShapeOverrides: 669 bytes not decoded"
-  ],
-  "Skateboard Tee Hiding Template": [
-   "ShapeOverrides: 1198 bytes not decoded"
-  ],
-  "Pastel Shirt with Tee Template": [
-   "ShapeOverrides: 1380 bytes not decoded"
-  ],
-  "Metal Tee Template": [
-   "ShapeOverrides: 930 bytes not decoded"
-  ],
-  "Male Guest Template": [
-   "ShapeOverrides: 1101 bytes not decoded"
-  ],
-  "Quantum Tee Template": [
-   "ShapeOverrides: 1101 bytes not decoded"
-  ],
-  "Male Dollar Tee Template": [
-   "ShapeOverrides: 930 bytes not decoded"
-  ],
-  "Male Tattoo Sweater Template": [
-   "ShapeOverrides: 875 bytes not decoded"
-  ],
-  "Male Jeans Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Faded Jeans with Print Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Chinos Template": [
-   "ShapeOverrides: 844 bytes not decoded"
-  ],
-  "Plaid Flares Template": [
-   "ShapeOverrides: 1115 bytes not decoded"
-  ],
-  "Green Skinny Fit Jeans Hiding Template": [
-   "ShapeOverrides: 892 bytes not decoded"
-  ],
-  "Blue Tuxedo Hiding Template": [
-   "ShapeOverrides: 3052 bytes not decoded"
-  ],
-  "Morning Suit Hiding Template": [
-   "ShapeOverrides: 2042 bytes not decoded"
-  ],
-  "Grunge Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 991 bytes not decoded"
-  ],
-  "Female Strappy High Heels Template": [
-   "ShapeOverrides: 3580 bytes not decoded"
-  ],
-  "Black 60's Boots Hiding Template": [
-   "ShapeOverrides: 997 bytes not decoded"
-  ],
-  "Two Tone Tee Template": [
-   "ShapeOverrides: 1573 bytes not decoded"
-  ],
-  "Crew Neck Tee Template": [
-   "ShapeOverrides: 1248 bytes not decoded"
-  ],
-  "Female Guest Hiding Template": [
-   "ShapeOverrides: 3124 bytes not decoded"
-  ],
-  "Flower Vest Hiding Template": [
-   "ShapeOverrides: 812 bytes not decoded"
-  ],
-  "Chinos with Belt Template": [
-   "ShapeOverrides: 925 bytes not decoded"
-  ],
-  "Female Cargo Pants Template": [
-   "ShapeOverrides: 925 bytes not decoded"
-  ],
-  "Female Tracksuit Pants Template": [
-   "ShapeOverrides: 925 bytes not decoded"
-  ],
-  "Surfer Skirt Hiding Template": [
-   "ShapeOverrides: 1747 bytes not decoded"
-  ],
-  "Female Tartan Skirt Re-textured Hiding Template": [
-   "ShapeOverrides: 1103 bytes not decoded"
-  ],
-  "Blue Fingerless Gloves Hiding Template": [
-   "ShapeOverrides: 985 bytes not decoded"
+   "ShapeOverrides: section B wants 2080224 bits, 10482 remain - variant not decoded"
   ]
  },
  "skeleton": {
@@ -32927,12 +32153,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1613,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 110,
+     "stride_multiples": 110,
+     "vertices": 110,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1613 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -32951,12 +32180,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1341,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 90,
+     "stride_multiples": 90,
+     "vertices": 90,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1341 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -32975,12 +32207,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1586,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 108,
+     "stride_multiples": 108,
+     "vertices": 108,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1586 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -32999,12 +32234,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1423,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 96,
+     "stride_multiples": 96,
+     "vertices": 96,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1423 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33023,12 +32261,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1613,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 110,
+     "stride_multiples": 110,
+     "vertices": 110,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1613 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33047,12 +32288,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1763,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 121,
+     "stride_multiples": 121,
+     "vertices": 121,
+     "spare_bits": 1
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1763 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33071,12 +32315,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1586,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 108,
+     "stride_multiples": 108,
+     "vertices": 108,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1586 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33095,12 +32342,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33119,12 +32369,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1710,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 116,
+     "stride_multiples": 116,
+     "vertices": 116,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1710 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33145,12 +32398,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1505,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 108,
+     "stride_multiples": 108,
+     "vertices": 108,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1505 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33171,12 +32427,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1608,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 116,
+     "stride_multiples": 116,
+     "vertices": 116,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1608 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33197,12 +32456,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1582,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 114,
+     "stride_multiples": 114,
+     "vertices": 114,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1582 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33223,12 +32485,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1207,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 84,
+     "stride_multiples": 84,
+     "vertices": 84,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1207 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33249,12 +32514,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33275,12 +32543,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1428,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 102,
+     "stride_multiples": 102,
+     "vertices": 102,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1428 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33301,12 +32572,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1652,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 116,
+     "stride_multiples": 116,
+     "vertices": 116,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1652 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33327,12 +32601,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1454,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 104,
+     "stride_multiples": 104,
+     "vertices": 104,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1454 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33353,12 +32630,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1557,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 112,
+     "stride_multiples": 112,
+     "vertices": 112,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1557 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33379,12 +32659,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1145,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 80,
+     "stride_multiples": 80,
+     "vertices": 80,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1145 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33405,12 +32688,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1597,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 114,
+     "stride_multiples": 114,
+     "vertices": 114,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1597 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33431,12 +32717,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1505,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 108,
+     "stride_multiples": 108,
+     "vertices": 108,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1505 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33457,12 +32746,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1273,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 90,
+     "stride_multiples": 90,
+     "vertices": 90,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1273 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33483,12 +32775,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1557,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 112,
+     "stride_multiples": 112,
+     "vertices": 112,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1557 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33509,12 +32804,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1597,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 114,
+     "stride_multiples": 114,
+     "vertices": 114,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1597 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33535,12 +32833,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1503,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 110,
+     "stride_multiples": 110,
+     "vertices": 110,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1503 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33561,12 +32862,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 921,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 62,
+     "stride_multiples": 62,
+     "vertices": 62,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 921 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33587,12 +32891,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1119,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 78,
+     "stride_multiples": 78,
+     "vertices": 78,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1119 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33613,12 +32920,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 599,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 34,
+     "stride_multiples": 34,
+     "vertices": 34,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 599 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33639,12 +32949,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 799,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 48,
+     "stride_multiples": 48,
+     "vertices": 48,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 799 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33665,12 +32978,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33691,12 +33007,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 776,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 46,
+     "stride_multiples": 46,
+     "vertices": 46,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 776 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33717,12 +33036,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 862,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 52,
+     "stride_multiples": 52,
+     "vertices": 52,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 862 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33743,12 +33065,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 848,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 51,
+     "stride_multiples": 51,
+     "vertices": 51,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 848 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33769,12 +33094,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 661,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 38,
+     "stride_multiples": 38,
+     "vertices": 38,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 661 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33795,12 +33123,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 913,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 56,
+     "stride_multiples": 56,
+     "vertices": 56,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 913 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33821,12 +33152,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 485,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 26,
+     "stride_multiples": 26,
+     "vertices": 26,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 485 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33845,12 +33179,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1075,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 428,
+     "entries_b": 15,
+     "stride_multiples": 9,
+     "vertices": 443,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1075 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33869,12 +33206,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1239,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 158,
+     "entries_b": 42,
+     "stride_multiples": 5,
+     "vertices": 200,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1239 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33893,12 +33233,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 956,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 312,
+     "entries_b": 26,
+     "stride_multiples": 6,
+     "vertices": 338,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 956 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33917,12 +33260,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33941,12 +33287,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1132,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 508,
+     "entries_b": 12,
+     "stride_multiples": 9,
+     "vertices": 520,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1132 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33965,12 +33314,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 620,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 280,
+     "entries_b": 6,
+     "stride_multiples": 6,
+     "vertices": 286,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 620 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -33989,12 +33341,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2463,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 76,
+     "stride_multiples": 16,
+     "vertices": 546,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2463 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34013,12 +33368,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1993,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 910,
+     "entries_b": 26,
+     "stride_multiples": 18,
+     "vertices": 936,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1993 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34037,12 +33395,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3472,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 440,
+     "entries_b": 124,
+     "stride_multiples": 18,
+     "vertices": 564,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3472 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34061,12 +33422,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 676,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 374,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 374,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 676 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34085,12 +33449,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1686,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 460,
+     "entries_b": 41,
+     "stride_multiples": 11,
+     "vertices": 501,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1686 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34109,12 +33476,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2807,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 802,
+     "entries_b": 74,
+     "stride_multiples": 23,
+     "vertices": 876,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2807 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34133,11 +33503,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2047,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 2047 bytes not decoded"
+    "ShapeOverrides: section B wants 1921920 bits, 9642 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -34157,12 +33528,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1474,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 906,
+     "entries_b": 0,
+     "stride_multiples": 18,
+     "vertices": 906,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1474 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34181,12 +33555,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34205,12 +33582,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34229,12 +33609,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 676,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 374,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 374,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 676 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34253,12 +33636,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 726,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 390,
+     "entries_b": 2,
+     "stride_multiples": 7,
+     "vertices": 392,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 726 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34277,12 +33663,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34301,12 +33690,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1837,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 238,
+     "entries_b": 70,
+     "stride_multiples": 9,
+     "vertices": 308,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1837 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34325,12 +33717,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 803,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 204,
+     "entries_b": 18,
+     "stride_multiples": 4,
+     "vertices": 222,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 803 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34349,12 +33744,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1052,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 354,
+     "entries_b": 19,
+     "stride_multiples": 9,
+     "vertices": 373,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1052 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34373,12 +33771,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1529,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 294,
+     "entries_b": 45,
+     "stride_multiples": 9,
+     "vertices": 339,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1529 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34397,12 +33798,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 757,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 248,
+     "entries_b": 16,
+     "stride_multiples": 6,
+     "vertices": 264,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 757 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34421,11 +33825,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1320,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 1320 bytes not decoded"
+    "ShapeOverrides: section B wants 671360 bits, 3466 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -34445,12 +33850,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 439,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 216,
+     "entries_b": 0,
+     "stride_multiples": 4,
+     "vertices": 216,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 439 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34469,12 +33877,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 492,
+     "entries_b": 14,
+     "stride_multiples": 11,
+     "vertices": 506,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34493,12 +33904,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1096,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 492,
+     "entries_b": 13,
+     "stride_multiples": 11,
+     "vertices": 505,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1096 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34517,12 +33931,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1486,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 31,
+     "stride_multiples": 9,
+     "vertices": 501,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1486 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34541,12 +33958,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34565,12 +33985,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 4072,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1536,
+     "entries_b": 76,
+     "stride_multiples": 35,
+     "vertices": 1612,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 4072 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34589,12 +34012,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34613,12 +34039,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 996,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 258,
+     "entries_b": 23,
+     "stride_multiples": 8,
+     "vertices": 281,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 996 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34637,12 +34066,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1268,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 578,
+     "entries_b": 16,
+     "stride_multiples": 13,
+     "vertices": 594,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1268 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34661,12 +34093,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2262,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 402,
+     "entries_b": 71,
+     "stride_multiples": 11,
+     "vertices": 473,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2262 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34685,12 +34120,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1068,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 262,
+     "entries_b": 32,
+     "stride_multiples": 7,
+     "vertices": 294,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1068 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34709,12 +34147,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1634,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 508,
+     "entries_b": 35,
+     "stride_multiples": 13,
+     "vertices": 543,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1634 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34733,12 +34174,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1244,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 478,
+     "entries_b": 21,
+     "stride_multiples": 9,
+     "vertices": 499,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1244 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34757,12 +34201,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 899,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 454,
+     "entries_b": 6,
+     "stride_multiples": 6,
+     "vertices": 460,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 899 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34781,12 +34228,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2094,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 488,
+     "entries_b": 58,
+     "stride_multiples": 12,
+     "vertices": 546,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2094 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34805,12 +34255,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 745,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 216,
+     "entries_b": 18,
+     "stride_multiples": 6,
+     "vertices": 234,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 745 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34829,12 +34282,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 858,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 2,
+     "stride_multiples": 8,
+     "vertices": 472,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 858 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34853,12 +34309,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2354,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 504,
+     "entries_b": 69,
+     "stride_multiples": 16,
+     "vertices": 573,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2354 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34877,12 +34336,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3580,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 198,
+     "stride_multiples": 13,
+     "vertices": 198,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3580 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34901,12 +34363,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34925,12 +34390,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1193,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 266,
+     "entries_b": 38,
+     "stride_multiples": 7,
+     "vertices": 304,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1193 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34949,12 +34417,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 925,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 2,
+     "stride_multiples": 10,
+     "vertices": 520,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 925 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34973,12 +34444,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1559,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 528,
+     "entries_b": 30,
+     "stride_multiples": 11,
+     "vertices": 558,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1559 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -34997,12 +34471,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 916,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 534,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 534,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 916 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35021,12 +34498,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35045,12 +34525,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 604,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 326,
+     "entries_b": 0,
+     "stride_multiples": 4,
+     "vertices": 326,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 604 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35069,12 +34552,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35093,12 +34579,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1264,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 382,
+     "entries_b": 29,
+     "stride_multiples": 9,
+     "vertices": 411,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1264 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35117,12 +34606,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 0,
+     "stride_multiples": 0,
+     "vertices": 0,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35141,12 +34633,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1012,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 26,
+     "stride_multiples": 7,
+     "vertices": 280,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1012 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35165,12 +34660,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 704,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 328,
+     "entries_b": 5,
+     "stride_multiples": 5,
+     "vertices": 333,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 704 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35189,12 +34687,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1389,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 388,
+     "entries_b": 32,
+     "stride_multiples": 10,
+     "vertices": 420,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1389 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35213,12 +34714,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2252,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 436,
+     "entries_b": 69,
+     "stride_multiples": 11,
+     "vertices": 505,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2252 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35237,11 +34741,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2076,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 2076 bytes not decoded"
+    "ShapeOverrides: section B wants 2005408 bits, 10042 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -35261,12 +34766,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2368,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 392,
+     "entries_b": 77,
+     "stride_multiples": 13,
+     "vertices": 469,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2368 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35285,12 +34793,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2262,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 402,
+     "entries_b": 71,
+     "stride_multiples": 11,
+     "vertices": 473,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2262 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35309,12 +34820,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 997,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 330,
+     "entries_b": 22,
+     "stride_multiples": 6,
+     "vertices": 352,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 997 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35333,12 +34847,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 613,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 294,
+     "entries_b": 4,
+     "stride_multiples": 5,
+     "vertices": 298,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 613 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35357,12 +34874,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1706,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 330,
+     "entries_b": 51,
+     "stride_multiples": 11,
+     "vertices": 381,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1706 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35381,12 +34901,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1152,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 466,
+     "entries_b": 16,
+     "stride_multiples": 13,
+     "vertices": 482,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1152 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35405,12 +34928,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1395,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 452,
+     "entries_b": 28,
+     "stride_multiples": 11,
+     "vertices": 480,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1395 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35429,12 +34955,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1448,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 502,
+     "entries_b": 27,
+     "stride_multiples": 12,
+     "vertices": 529,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1448 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35453,12 +34982,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1471,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 546,
+     "entries_b": 25,
+     "stride_multiples": 12,
+     "vertices": 571,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1471 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35477,12 +35009,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1727,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 408,
+     "entries_b": 46,
+     "stride_multiples": 11,
+     "vertices": 454,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1727 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35501,12 +35036,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2481,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 484,
+     "entries_b": 82,
+     "stride_multiples": 14,
+     "vertices": 566,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2481 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35525,12 +35063,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2979,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 356,
+     "entries_b": 109,
+     "stride_multiples": 12,
+     "vertices": 465,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2979 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35549,12 +35090,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2277,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 67,
+     "stride_multiples": 13,
+     "vertices": 537,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2277 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35573,12 +35117,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1229,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 438,
+     "entries_b": 23,
+     "stride_multiples": 8,
+     "vertices": 461,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1229 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35597,12 +35144,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 991,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 584,
+     "entries_b": 0,
+     "stride_multiples": 12,
+     "vertices": 584,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 991 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35621,12 +35171,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1698,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 580,
+     "entries_b": 33,
+     "stride_multiples": 15,
+     "vertices": 613,
+     "spare_bits": 1
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1698 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35645,12 +35198,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 812,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 268,
+     "entries_b": 14,
+     "stride_multiples": 6,
+     "vertices": 282,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 812 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35669,12 +35225,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 833,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 382,
+     "entries_b": 7,
+     "stride_multiples": 9,
+     "vertices": 389,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 833 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35693,12 +35252,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1075,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 170,
+     "entries_b": 33,
+     "stride_multiples": 6,
+     "vertices": 203,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1075 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35717,12 +35279,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1608,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 534,
+     "entries_b": 32,
+     "stride_multiples": 12,
+     "vertices": 566,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1608 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35741,12 +35306,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2937,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 562,
+     "entries_b": 91,
+     "stride_multiples": 17,
+     "vertices": 653,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2937 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35765,12 +35333,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1403,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 572,
+     "entries_b": 20,
+     "stride_multiples": 12,
+     "vertices": 592,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1403 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35789,12 +35360,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1539,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 548,
+     "entries_b": 28,
+     "stride_multiples": 12,
+     "vertices": 576,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1539 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35813,12 +35387,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2112,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 510,
+     "entries_b": 58,
+     "stride_multiples": 13,
+     "vertices": 568,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2112 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35837,12 +35414,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1022,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 454,
+     "entries_b": 16,
+     "stride_multiples": 12,
+     "vertices": 470,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1022 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35861,12 +35441,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 757,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 248,
+     "entries_b": 16,
+     "stride_multiples": 6,
+     "vertices": 264,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 757 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35885,12 +35468,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 478,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 170,
+     "entries_b": 8,
+     "stride_multiples": 7,
+     "vertices": 178,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 478 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35909,12 +35495,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1043,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 428,
+     "entries_b": 16,
+     "stride_multiples": 9,
+     "vertices": 444,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1043 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35933,12 +35522,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1352,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 298,
+     "entries_b": 40,
+     "stride_multiples": 9,
+     "vertices": 338,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1352 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35957,12 +35549,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1588,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 492,
+     "entries_b": 37,
+     "stride_multiples": 11,
+     "vertices": 529,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1588 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -35981,12 +35576,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1726,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 416,
+     "entries_b": 50,
+     "stride_multiples": 13,
+     "vertices": 466,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1726 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36005,12 +35603,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1034,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 366,
+     "entries_b": 19,
+     "stride_multiples": 7,
+     "vertices": 385,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1034 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36029,12 +35630,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1686,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 460,
+     "entries_b": 41,
+     "stride_multiples": 11,
+     "vertices": 501,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1686 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36053,12 +35657,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1103,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 194,
+     "entries_b": 36,
+     "stride_multiples": 7,
+     "vertices": 230,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1103 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36077,12 +35684,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 777,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 266,
+     "entries_b": 18,
+     "stride_multiples": 6,
+     "vertices": 284,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 777 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36101,12 +35711,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 957,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 478,
+     "entries_b": 6,
+     "stride_multiples": 9,
+     "vertices": 484,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 957 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36125,12 +35738,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1188,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 32,
+     "stride_multiples": 7,
+     "vertices": 286,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1188 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36149,12 +35765,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1273,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 428,
+     "entries_b": 24,
+     "stride_multiples": 9,
+     "vertices": 452,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1273 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36173,12 +35792,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 915,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 496,
+     "entries_b": 3,
+     "stride_multiples": 10,
+     "vertices": 499,
+     "spare_bits": 1
     }
    ],
-   "problems": [
-    "ShapeOverrides: 915 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36197,12 +35819,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1918,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 664,
+     "entries_b": 38,
+     "stride_multiples": 14,
+     "vertices": 702,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1918 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36221,12 +35846,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1919,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 50,
+     "stride_multiples": 14,
+     "vertices": 536,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1919 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36245,12 +35873,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1970,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 962,
+     "entries_b": 21,
+     "stride_multiples": 18,
+     "vertices": 983,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1970 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36269,12 +35900,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1209,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 33,
+     "stride_multiples": 7,
+     "vertices": 287,
+     "spare_bits": 1
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1209 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36293,12 +35927,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1160,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 326,
+     "entries_b": 32,
+     "stride_multiples": 5,
+     "vertices": 358,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1160 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36317,12 +35954,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1155,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 484,
+     "entries_b": 16,
+     "stride_multiples": 11,
+     "vertices": 500,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1155 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36341,12 +35981,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3052,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1122,
+     "entries_b": 58,
+     "stride_multiples": 25,
+     "vertices": 1180,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3052 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36365,12 +36008,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1993,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 910,
+     "entries_b": 26,
+     "stride_multiples": 18,
+     "vertices": 936,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1993 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36389,12 +36035,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1415,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 596,
+     "entries_b": 19,
+     "stride_multiples": 13,
+     "vertices": 615,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1415 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36413,12 +36062,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1431,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 32,
+     "entries_b": 64,
+     "stride_multiples": 6,
+     "vertices": 96,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1431 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36437,12 +36089,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36461,12 +36116,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 985,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 580,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 580,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 985 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36485,12 +36143,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 823,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 472,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 472,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 823 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36509,12 +36170,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 949,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 468,
+     "entries_b": 7,
+     "stride_multiples": 10,
+     "vertices": 475,
+     "spare_bits": 5
     }
    ],
-   "problems": [
-    "ShapeOverrides: 949 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36533,12 +36197,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36557,12 +36224,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1619,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 262,
+     "entries_b": 57,
+     "stride_multiples": 8,
+     "vertices": 319,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1619 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36581,12 +36251,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1824,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 86,
+     "stride_multiples": 7,
+     "vertices": 86,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1824 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36605,12 +36278,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 507,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 62,
+     "entries_b": 18,
+     "stride_multiples": 2,
+     "vertices": 80,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 507 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36629,12 +36305,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1723,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 488,
+     "entries_b": 48,
+     "stride_multiples": 13,
+     "vertices": 536,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1723 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36653,12 +36332,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1619,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 262,
+     "entries_b": 57,
+     "stride_multiples": 8,
+     "vertices": 319,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1619 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36677,11 +36359,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 727,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 727 bytes not decoded"
+    "ShapeOverrides: section B wants 600576 bits, 3138 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -36701,12 +36384,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 700,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 390,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 390,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 700 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36725,12 +36411,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1824,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 86,
+     "stride_multiples": 6,
+     "vertices": 86,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1824 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36749,12 +36438,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 401,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 16,
+     "stride_multiples": 1,
+     "vertices": 16,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 401 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36773,12 +36465,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1492,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 560,
+     "entries_b": 25,
+     "stride_multiples": 12,
+     "vertices": 585,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1492 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36797,12 +36492,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2000,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 300,
+     "entries_b": 66,
+     "stride_multiples": 12,
+     "vertices": 366,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2000 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36821,12 +36519,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 843,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 294,
+     "entries_b": 20,
+     "stride_multiples": 6,
+     "vertices": 314,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 843 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36845,12 +36546,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 956,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 262,
+     "entries_b": 23,
+     "stride_multiples": 6,
+     "vertices": 285,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 956 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36869,12 +36573,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 363,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 165,
+     "entries_b": 0,
+     "stride_multiples": 3,
+     "vertices": 165,
+     "spare_bits": 10
     }
    ],
-   "problems": [
-    "ShapeOverrides: 363 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36893,12 +36600,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36917,12 +36627,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 940,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 550,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 550,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 940 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -36941,12 +36654,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 750,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 140,
+     "entries_b": 25,
+     "stride_multiples": 5,
+     "vertices": 165,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 750 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37632,12 +37348,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1041,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 304,
+     "entries_b": 22,
+     "stride_multiples": 7,
+     "vertices": 326,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1041 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37656,12 +37375,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1287,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 140,
+     "entries_b": 45,
+     "stride_multiples": 4,
+     "vertices": 185,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1287 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37680,12 +37402,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 823,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 472,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 472,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 823 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37704,12 +37429,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 669,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 158,
+     "entries_b": 15,
+     "stride_multiples": 4,
+     "vertices": 173,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 669 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37728,12 +37456,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1088,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 156,
+     "entries_b": 35,
+     "stride_multiples": 4,
+     "vertices": 191,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1088 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37752,12 +37483,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1518,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 388,
+     "entries_b": 38,
+     "stride_multiples": 11,
+     "vertices": 426,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1518 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37776,12 +37510,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 939,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 549,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 549,
+     "spare_bits": 10
     }
    ],
-   "problems": [
-    "ShapeOverrides: 939 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37800,12 +37537,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1486,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 31,
+     "stride_multiples": 9,
+     "vertices": 501,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1486 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37824,11 +37564,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 544,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 544 bytes not decoded"
+    "ShapeOverrides: section B wants 254080 bits, 1338 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -37848,12 +37589,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 700,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 390,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 390,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 700 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37872,12 +37616,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2078,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 444,
+     "entries_b": 60,
+     "stride_multiples": 12,
+     "vertices": 504,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2078 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37896,12 +37643,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1902,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 270,
+     "entries_b": 70,
+     "stride_multiples": 10,
+     "vertices": 340,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1902 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37920,12 +37670,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 761,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 280,
+     "entries_b": 16,
+     "stride_multiples": 11,
+     "vertices": 296,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 761 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37944,12 +37697,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 492,
+     "entries_b": 14,
+     "stride_multiples": 11,
+     "vertices": 506,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37968,12 +37724,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 757,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 294,
+     "entries_b": 14,
+     "stride_multiples": 5,
+     "vertices": 308,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 757 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -37992,12 +37751,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2848,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 894,
+     "entries_b": 64,
+     "stride_multiples": 21,
+     "vertices": 958,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2848 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38016,11 +37778,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2453,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 2453 bytes not decoded"
+    "ShapeOverrides: section B wants 1275584 bits, 6578 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -38040,12 +37803,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1705,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1060,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1060,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1705 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38064,12 +37830,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 868,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 330,
+     "entries_b": 18,
+     "stride_multiples": 4,
+     "vertices": 348,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 868 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38088,12 +37857,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 676,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 374,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 374,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 676 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38112,12 +37884,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1846,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 386,
+     "entries_b": 58,
+     "stride_multiples": 13,
+     "vertices": 444,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1846 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38136,12 +37911,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1057,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 568,
+     "entries_b": 6,
+     "stride_multiples": 11,
+     "vertices": 574,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1057 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38160,12 +37938,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1085,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 230,
+     "entries_b": 36,
+     "stride_multiples": 7,
+     "vertices": 266,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1085 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38184,12 +37965,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1814,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 46,
+     "stride_multiples": 12,
+     "vertices": 516,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1814 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38208,12 +37992,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 877,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 508,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 508,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 877 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38232,12 +38019,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1193,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 19,
+     "stride_multiples": 9,
+     "vertices": 489,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1193 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38256,12 +38046,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1339,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 260,
+     "entries_b": 42,
+     "stride_multiples": 8,
+     "vertices": 302,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1339 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38280,12 +38073,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 535,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 280,
+     "entries_b": 0,
+     "stride_multiples": 6,
+     "vertices": 280,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 535 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38304,12 +38100,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 792,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 406,
+     "entries_b": 4,
+     "stride_multiples": 10,
+     "vertices": 410,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 792 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38328,12 +38127,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1188,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 400,
+     "entries_b": 22,
+     "stride_multiples": 9,
+     "vertices": 422,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1188 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38352,11 +38154,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1642,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 1642 bytes not decoded"
+    "ShapeOverrides: section B wants 2080224 bits, 10482 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -38376,11 +38179,12 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1642,
-     "decoded": false
+     "decoded": false,
+     "variant": true
     }
    ],
    "problems": [
-    "ShapeOverrides: 1642 bytes not decoded"
+    "ShapeOverrides: section B wants 2080224 bits, 10482 remain - variant not decoded"
    ],
    "counts": {}
   },
@@ -38400,12 +38204,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 958,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 294,
+     "entries_b": 28,
+     "stride_multiples": 6,
+     "vertices": 322,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 958 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38424,12 +38231,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2364,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1110,
+     "entries_b": 27,
+     "stride_multiples": 22,
+     "vertices": 1137,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2364 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38448,12 +38258,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2364,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1110,
+     "entries_b": 27,
+     "stride_multiples": 22,
+     "vertices": 1137,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2364 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38472,12 +38285,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2029,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1038,
+     "entries_b": 18,
+     "stride_multiples": 23,
+     "vertices": 1056,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2029 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38496,12 +38312,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1278,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 444,
+     "entries_b": 23,
+     "stride_multiples": 10,
+     "vertices": 467,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1278 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38520,12 +38339,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1125,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 392,
+     "entries_b": 20,
+     "stride_multiples": 9,
+     "vertices": 412,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1125 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38544,12 +38366,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1729,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1076,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1076,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1729 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38568,12 +38393,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 748,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 422,
+     "entries_b": 0,
+     "stride_multiples": 7,
+     "vertices": 422,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 748 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38592,12 +38420,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3058,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 434,
+     "entries_b": 106,
+     "stride_multiples": 16,
+     "vertices": 540,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3058 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38616,12 +38447,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1729,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1076,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1076,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1729 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38640,12 +38474,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2269,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 610,
+     "entries_b": 57,
+     "stride_multiples": 17,
+     "vertices": 667,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2269 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38664,12 +38501,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1729,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1076,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1076,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1729 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38688,12 +38528,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1723,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1072,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1072,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1723 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38712,12 +38555,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 704,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 328,
+     "entries_b": 5,
+     "stride_multiples": 5,
+     "vertices": 333,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 704 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38736,12 +38582,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 836,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 266,
+     "entries_b": 15,
+     "stride_multiples": 5,
+     "vertices": 281,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 836 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38760,12 +38609,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 980,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 386,
+     "entries_b": 16,
+     "stride_multiples": 10,
+     "vertices": 402,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 980 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38784,12 +38636,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1553,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 520,
+     "entries_b": 31,
+     "stride_multiples": 14,
+     "vertices": 551,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1553 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38808,12 +38663,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1395,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 456,
+     "entries_b": 30,
+     "stride_multiples": 12,
+     "vertices": 486,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1395 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38832,12 +38690,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3058,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 434,
+     "entries_b": 106,
+     "stride_multiples": 16,
+     "vertices": 540,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3058 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38856,12 +38717,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1700,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 394,
+     "entries_b": 46,
+     "stride_multiples": 11,
+     "vertices": 440,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1700 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38880,12 +38744,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1286,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 574,
+     "entries_b": 18,
+     "stride_multiples": 13,
+     "vertices": 592,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1286 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38904,12 +38771,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2885,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 428,
+     "entries_b": 99,
+     "stride_multiples": 16,
+     "vertices": 527,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2885 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38928,12 +38798,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1729,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1076,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1076,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1729 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38952,12 +38825,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1197,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 148,
+     "entries_b": 40,
+     "stride_multiples": 5,
+     "vertices": 188,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1197 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -38976,12 +38852,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2500,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 120,
+     "stride_multiples": 10,
+     "vertices": 120,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2500 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39000,12 +38879,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 964,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 566,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 566,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 964 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39024,12 +38906,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1276,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 190,
+     "entries_b": 41,
+     "stride_multiples": 7,
+     "vertices": 231,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1276 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39048,12 +38933,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1722,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1071,
+     "entries_b": 0,
+     "stride_multiples": 21,
+     "vertices": 1071,
+     "spare_bits": 10
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1722 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39072,12 +38960,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 809,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 364,
+     "entries_b": 7,
+     "stride_multiples": 7,
+     "vertices": 371,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 809 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39096,12 +38987,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1031,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 404,
+     "entries_b": 16,
+     "stride_multiples": 10,
+     "vertices": 420,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1031 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39120,12 +39014,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 746,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 180,
+     "entries_b": 17,
+     "stride_multiples": 3,
+     "vertices": 197,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 746 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39144,12 +39041,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2083,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 57,
+     "stride_multiples": 13,
+     "vertices": 543,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2083 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39168,12 +39068,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1193,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 470,
+     "entries_b": 19,
+     "stride_multiples": 9,
+     "vertices": 489,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1193 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39192,12 +39095,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3580,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 198,
+     "stride_multiples": 13,
+     "vertices": 198,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3580 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39216,12 +39122,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1239,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 420,
+     "entries_b": 23,
+     "stride_multiples": 10,
+     "vertices": 443,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1239 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39240,12 +39149,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1634,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 508,
+     "entries_b": 35,
+     "stride_multiples": 13,
+     "vertices": 543,
+     "spare_bits": 7
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1634 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39264,12 +39176,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1411,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 230,
+     "entries_b": 54,
+     "stride_multiples": 8,
+     "vertices": 284,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1411 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39288,12 +39203,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2256,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 456,
+     "entries_b": 67,
+     "stride_multiples": 13,
+     "vertices": 523,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2256 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39312,12 +39230,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 354,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 159,
+     "entries_b": 0,
+     "stride_multiples": 3,
+     "vertices": 159,
+     "spare_bits": 10
     }
    ],
-   "problems": [
-    "ShapeOverrides: 354 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39336,12 +39257,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 439,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 216,
+     "entries_b": 0,
+     "stride_multiples": 4,
+     "vertices": 216,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 439 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39360,12 +39284,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 669,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 146,
+     "entries_b": 20,
+     "stride_multiples": 6,
+     "vertices": 166,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 669 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39384,12 +39311,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1198,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 222,
+     "entries_b": 38,
+     "stride_multiples": 9,
+     "vertices": 260,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1198 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39408,12 +39338,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1380,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 382,
+     "entries_b": 32,
+     "stride_multiples": 9,
+     "vertices": 414,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1380 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39432,12 +39365,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 930,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 22,
+     "stride_multiples": 7,
+     "vertices": 276,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 930 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39456,12 +39392,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1101,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 28,
+     "stride_multiples": 7,
+     "vertices": 282,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1101 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39480,12 +39419,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1101,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 28,
+     "stride_multiples": 7,
+     "vertices": 282,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1101 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39504,12 +39446,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 930,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 254,
+     "entries_b": 22,
+     "stride_multiples": 7,
+     "vertices": 276,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 930 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39528,12 +39473,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 875,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 378,
+     "entries_b": 10,
+     "stride_multiples": 7,
+     "vertices": 388,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 875 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39552,12 +39500,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39576,12 +39527,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39600,12 +39554,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 844,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 486,
+     "entries_b": 0,
+     "stride_multiples": 8,
+     "vertices": 486,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 844 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39624,12 +39581,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1115,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 492,
+     "entries_b": 14,
+     "stride_multiples": 11,
+     "vertices": 506,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1115 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39648,12 +39608,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 892,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 0,
+     "stride_multiples": 9,
+     "vertices": 518,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 892 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39672,12 +39635,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3052,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 1122,
+     "entries_b": 58,
+     "stride_multiples": 25,
+     "vertices": 1180,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3052 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39696,12 +39662,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 2042,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 956,
+     "entries_b": 25,
+     "stride_multiples": 18,
+     "vertices": 981,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 2042 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39720,12 +39689,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 991,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 584,
+     "entries_b": 0,
+     "stride_multiples": 11,
+     "vertices": 584,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 991 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39744,12 +39716,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3580,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 0,
+     "entries_b": 198,
+     "stride_multiples": 13,
+     "vertices": 198,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3580 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39768,12 +39743,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 997,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 330,
+     "entries_b": 22,
+     "stride_multiples": 6,
+     "vertices": 352,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 997 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39792,12 +39770,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1573,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 378,
+     "entries_b": 41,
+     "stride_multiples": 10,
+     "vertices": 419,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1573 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39816,12 +39797,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1248,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 354,
+     "entries_b": 28,
+     "stride_multiples": 10,
+     "vertices": 382,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1248 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39840,12 +39824,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 3124,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 406,
+     "entries_b": 111,
+     "stride_multiples": 17,
+     "vertices": 517,
+     "spare_bits": 3
     }
    ],
-   "problems": [
-    "ShapeOverrides: 3124 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39864,12 +39851,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 812,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 268,
+     "entries_b": 14,
+     "stride_multiples": 6,
+     "vertices": 282,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 812 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39888,12 +39878,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 925,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 2,
+     "stride_multiples": 10,
+     "vertices": 520,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 925 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39912,12 +39905,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 925,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 2,
+     "stride_multiples": 10,
+     "vertices": 520,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 925 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39936,12 +39932,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 925,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 518,
+     "entries_b": 2,
+     "stride_multiples": 10,
+     "vertices": 520,
+     "spare_bits": 4
     }
    ],
-   "problems": [
-    "ShapeOverrides: 925 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39960,12 +39959,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1747,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 266,
+     "entries_b": 70,
+     "stride_multiples": 11,
+     "vertices": 336,
+     "spare_bits": 0
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1747 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -39984,12 +39986,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 1103,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 194,
+     "entries_b": 36,
+     "stride_multiples": 7,
+     "vertices": 230,
+     "spare_bits": 2
     }
    ],
-   "problems": [
-    "ShapeOverrides: 1103 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {
@@ -40008,12 +40013,15 @@
     {
      "kind": "ShapeOverrides",
      "bytes": 985,
-     "decoded": false
+     "decoded": true,
+     "entries_a": 580,
+     "entries_b": 0,
+     "stride_multiples": 10,
+     "vertices": 580,
+     "spare_bits": 6
     }
    ],
-   "problems": [
-    "ShapeOverrides: 985 bytes not decoded"
-   ],
+   "problems": [],
    "counts": {}
   },
   {

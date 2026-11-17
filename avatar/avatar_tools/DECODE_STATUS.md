@@ -19,14 +19,27 @@ Each model was checked for indices inside the batch, skin weights summing to
 one, joint indices inside the skeleton and finite UVs; each animation for
 unit quaternions; each texture for its declared size.
 
-## Not decoded
+## Shape overrides (block 4)
 
-**ShapeOverrides (block 4), 266 assets.** Every one of them carries no model,
-no texture and no animation - it is a morph to apply to someone else's mesh.
-Until that block is read, those items cannot be drawn or shaped at all.
-It is not LZX, not a byte-aligned array and not floats; see
-`EDITOR_BINARIES.md` for the tests already ruled out and the two constants
-that anchor the next attempt.
+**266 assets.** None of them carries a model, a texture or an
+animation of its own: each is a morph onto someone else's mesh, which is why
+they cannot be drawn alone whatever the reader does.
+
+The block is a bitstream of two sections, each `count, u32, 16-byte record,
+base, width`, then a bit-packed list. Geometry shapes have an empty first
+section; clothing hiding templates carry their vertex list there. The second
+section holds 32-byte entries, and an entry is a vertex and that vertex's
+new position: the leading field is a byte offset, so the vertex is the
+offset divided by the 52-byte vertex stride, and the three floats are the
+position, quantised at 7.071e-06 per unit.
+
+258 of the 266 decode and every one of those is consumed to within a
+byte; their positions land millimetres from the vertices they name and on
+the anatomy the item is called after. Two things are not read: the meaning
+of the four trailing pairs in each entry (their lengths are right, their
+values are not understood), and the section layout of the other eight
+hiding templates, whose second section decodes to a header that cannot be
+right. Those eight are named by the audit rather than passed quietly.
 
 ## Faults in the artwork itself
 

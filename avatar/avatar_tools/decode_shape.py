@@ -113,11 +113,8 @@ def read_record(stream, pos):
     return bitstream.read_record(stream, pos)
 
 
-def decode(name, pack=PACK, wanted=4):
-    index = am.load_pack_index(pack)
-    blob = am.asset_bytes(pack, index, name)
-    payload = next(p for i, _, _, p in am.strb_blocks(blob) if i == 4)
-
+def decode_payload(payload, name=""):
+    """Decode a block-4 payload that has already been read out of a pack."""
     pos = 0
     out = {"payload": payload, "name": name}
 
@@ -155,6 +152,15 @@ def decode(name, pack=PACK, wanted=4):
 
     scale = (f32(b) * 2.0, f32(b) * 2.0 * (2.0 / 3.0) ** 0.5, f32(b) * 3.0 ** 0.5)
     start = pos
+    needed = count_b * (width0 + sum(w) + sum(pw for _, pw in pairs))
+    if needed > len(payload) * 8 - pos:
+        # Eight hiding templates in the pack land here: their section B header
+        # decodes to values that cannot be right, so the section boundary is
+        # wrong for that variant. Fail loudly rather than read past the end and
+        # report invented numbers.
+        raise ValueError(
+            "section B wants %d bits, %d remain - variant not decoded"
+            % (needed, len(payload) * 8 - pos))
     entries_b = []
     for _ in range(count_b):
         i0, pos = bitstream.read_bits(payload, pos, width0)
@@ -185,8 +191,19 @@ def decode(name, pack=PACK, wanted=4):
         "start_bit": start,
         "end_bit": pos,
         "bits": len(payload) * 8,
-        "_wanted": wanted,
+        "spare_bits": len(payload) * 8 - pos,
+        "_wanted": 0,
     })
+    return out
+
+
+def decode(name, pack=PACK, wanted=4):
+    """Decode the block 4 of a named asset."""
+    index = am.load_pack_index(pack)
+    blob = am.asset_bytes(pack, index, name)
+    payload = next(p for i, _, _, p in am.strb_blocks(blob) if i == 4)
+    out = decode_payload(payload, name)
+    out["_wanted"] = wanted
     return out
 
 

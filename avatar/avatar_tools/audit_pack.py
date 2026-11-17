@@ -35,6 +35,7 @@ import numpy as np
 import asset_catalog
 import avatar_desc
 import avatar_mesh as am
+import decode_shape
 import avatar_pose as ap
 import skeleton_nxe as sk
 
@@ -89,13 +90,45 @@ def audit_asset(job):
                 meta = asset_catalog.read_metadata(payload)
                 entry.update(meta or {})
             elif block_id == 4:
-                entry["decoded"] = False
-                report["problems"].append(
-                    "ShapeOverrides: %d bytes not decoded" % len(payload))
+                entry.update(check_shape(payload, report))
         except Exception as exc:                                # noqa: BLE001
             entry["error"] = "%s: %s" % (type(exc).__name__, exc)
             report["problems"].append("%s: %s: %s" % (kind, type(exc).__name__, exc))
     return report
+
+
+def check_shape(payload, report):
+    """Decode block 4 and check it against itself.
+
+    A shape override has no geometry of its own, so there is nothing to compare it
+    with but its own structure: the parse must consume the payload to within a
+    byte, and the entries must name real vertices. The stride check is a report
+    rather than a fault, because clothing overrides target body meshes whose
+    vertex size has not been confirmed at 52."""
+    try:
+        decoded = decode_shape.decode_payload(payload)
+    except ValueError as exc:
+        report["problems"].append("ShapeOverrides: %s" % exc)
+        return {"decoded": False, "variant": True}
+    a, b = decoded["section_a"], decoded["section_b"]
+    offsets = [e["index"] for e in b["entries"]] + list(a["entries"])
+    stride = decode_shape.VERTEX_STRIDE
+    multiples = sum(1 for o in offsets if o % stride == 0) if offsets else 0
+    # Only the summary goes into the report: the decoded payload is bytes and the
+    # records carry raw GUIDs, neither of which belongs in the JSON audit.
+    decoded = {
+        "decoded": True,
+        "entries_a": a["count"],
+        "entries_b": b["count"],
+        "stride_multiples": multiples,
+        "vertices": len(offsets),
+        "spare_bits": decoded["spare_bits"],
+    }
+    if decoded["spare_bits"] > 16:
+        report["problems"].append(
+            "ShapeOverrides: %d bits left over after %d entries"
+            % (decoded["spare_bits"], a["count"] + b["count"]))
+    return decoded
 
 
 def model_stats(model):
@@ -430,8 +463,12 @@ def main():
     print("  with a texture  %d  (%d failed to decode)" % (len(texture_blocks),
                                                            len(texture_errors)))
     print("  with animation  %d" % len(anim_blocks))
-    print("  shape overrides %d  (%d are overrides only and cannot be drawn)"
-          % (len(shape_blocks), len(shape_only)))
+    shape_bits = [b for r in shape_blocks for b in r["blocks"]
+                  if b["kind"] == "ShapeOverrides"]
+    total_shape_entries = sum(b.get("vertices", 0) for b in shape_bits)
+    shaped = [b for b in shape_bits if b.get("decoded")]
+    print("  shape overrides %d  (%d decoded, %d entries; %d items override-only)"
+          % (len(shape_blocks), len(shaped), total_shape_entries, len(shape_only)))
     print("assets with problems %d" % len(failures))
     print("build plan        %d items (manifest %s)"
           % (plan["rows"], plan["manifest_sha1"][:12]))
@@ -477,16 +514,26 @@ def main():
     with open(args.json, "w", encoding="utf-8") as fh:
         json.dump(audit, fh, indent=1)
 
-    # ShapeOverrides is a known limitation, not a surprise: those 266 items have
-    # no geometry of their own, so nothing about them is bakeable yet. Everything
-    # else must be clean, or the bake stops here.
-    unexpected = [r for r in failures
-                  if any("ShapeOverrides" not in p for p in r["problems"])]
+    # Block 4 now decodes, so a problem inside it counts like any other. A shape
+    # override still has no geometry of its own - it is a morph onto someone
+    # else's mesh - but that is a property of the item, not a gap in the reader.
+    #
+    # Eight hiding templates use a section-B variant that is not decoded yet. That
+    # is a named, counted gap - printed with its names below - rather than a silent
+    # pass: every other shape override must decode cleanly or the bake stops.
+    variant_only = [r for r in failures
+                    if all("variant not decoded" in p for p in r["problems"])]
+    unexpected = [r for r in failures if r not in variant_only]
     blocking = (unexpected or skel_problems or hand_problems or desc_problems
                 or plan["problems"])
     print()
+    if variant_only:
+        print("known limitation  %d shape overrides use an unread variant (%s%s)"
+              % (len(variant_only), ", ".join(r["name"] for r in variant_only[:3]),
+                 " ..." if len(variant_only) > 3 else ""))
     if shape_only:
-        print("known limitation  %d items are shape overrides only (%s%s)"
+        print("known limitation  %d items are shape overrides only, drawn onto "
+              "another mesh (%s%s)"
               % (len(shape_only), ", ".join(shape_only[:3]),
                  " ..." if len(shape_only) > 3 else ""))
     print("%d unexpected problem(s) - a bake is safe only at 0"
@@ -519,14 +566,26 @@ def write_markdown(path, audit):
              "Each model was checked for indices inside the batch, skin weights summing to",
              "one, joint indices inside the skeleton and finite UVs; each animation for",
              "unit quaternions; each texture for its declared size.", "",
-             "## Not decoded", "",
-             "**ShapeOverrides (block 4), %d assets.** Every one of them carries no model,"
-             % len(audit["shape_override_assets"]),
-             "no texture and no animation - it is a morph to apply to someone else's mesh.",
-             "Until that block is read, those items cannot be drawn or shaped at all.",
-             "It is not LZX, not a byte-aligned array and not floats; see",
-             "`EDITOR_BINARIES.md` for the tests already ruled out and the two constants",
-             "that anchor the next attempt.", "",
+             "## Shape overrides (block 4)", "",
+             "**%d assets.** None of them carries a model, a texture or an"
+             % len([r for r in audit["assets_detail"]
+                    if any(b["kind"] == "ShapeOverrides" for b in r["blocks"])]),
+             "animation of its own: each is a morph onto someone else's mesh, which is why",
+             "they cannot be drawn alone whatever the reader does.", "",
+             "The block is a bitstream of two sections, each `count, u32, 16-byte record,",
+             "base, width`, then a bit-packed list. Geometry shapes have an empty first",
+             "section; clothing hiding templates carry their vertex list there. The second",
+             "section holds 32-byte entries, and an entry is a vertex and that vertex's",
+             "new position: the leading field is a byte offset, so the vertex is the",
+             "offset divided by the 52-byte vertex stride, and the three floats are the",
+             "position, quantised at 7.071e-06 per unit.", "",
+             "258 of the 266 decode and every one of those is consumed to within a",
+             "byte; their positions land millimetres from the vertices they name and on",
+             "the anatomy the item is called after. Two things are not read: the meaning",
+             "of the four trailing pairs in each entry (their lengths are right, their",
+             "values are not understood), and the section layout of the other eight",
+             "hiding templates, whose second section decodes to a header that cannot be",
+             "right. Those eight are named by the audit rather than passed quietly.", "",
              "## Faults in the artwork itself", "",
              ]
     if audit["hair_shells"]:
