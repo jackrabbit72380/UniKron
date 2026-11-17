@@ -24,8 +24,9 @@ Two callers give the layout, and both were checked against the pack:
 `0x140dbe690` reads a component record - 32 bits, 16, 16, then eight single bytes
 - and applies `bswap` to the 32 and `rol $8` to each 16. Because the fields are
 byte aligned, that comes back to exactly the same bytes as the unpacked record:
-decoding Large Chin, Soft Nose and Elven Ears from 0x40 yields
-`01000000-0200-0300` and the family GUID every time.
+decoding Large Chin, Soft Nose, Elven Ears and Thin Chin from **bit position 64,
+i.e. byte 8** (positions here are bits, not bytes) yields `01000000-0200-0300` and
+the family GUID every time.
 
 `0x140dbee70` reads a quantised value:
 

@@ -494,3 +494,46 @@ widths). Something fills it from the block-4 header before the values are read,
 and that function is the last piece. The header fields already measured are the
 candidates: the per-item count at `+0x20` (110, 78, 46) and the small values at
 `+0x3c` (16, 15, 16) look exactly like a value count and a bit width.
+
+### Correction, then the parameter block
+
+The check above returns bit position 64, **which is byte 8**, not offset 0x40: bit
+positions throughout this reader are bit-granular. Byte 8 of the block-4 payload is
+where the first component record sits (`01000000-0200-0300` + family GUID), so the
+bit order is still confirmed - the annotation was off by a factor of eight, the code
+was not.
+
+With that fixed, the last piece, `0x140dbecb0`, fills the parameter block from the
+same bitstream, all 32-bit fields except three 6-bit widths:
+
+    +0x04  u32   base                  (read 1)
+    +0x08  u32   bit width             (read 2)
+    +0x0c  u32   b                      (read 3) - the quantisation step
+    +0x10  u32   offset 0               (read 4, used as a float)
+    +0x14  u32   offset 1               (read 5)
+    +0x18  u32   offset 2               (read 6)
+    +0x1c  f32   scale 0 = b * 2                (read 7..9 are six bits each)
+    +0x20  f32   scale 1 = b * 1.632993  (= 2 * sqrt(2/3))
+    +0x24  f32   scale 2 = b * 1.732051  (= sqrt(3))
+    +0x28  u8    width 1, +0x29 width 2, +0x2a width 3   (six bits each)
+    +0x2c  u64   a second base/width pair
+
+and `0x140dbee70` then decodes one entry per call:
+
+    out[0] = base + read_bits(width)                 ; an integer, the vertex index
+    f0 = offset0 + scale0 * read_bits(width1)
+    f1 = offset1 + scale1 * read_bits(width2)
+    f2 = offset2 + scale2 * read_bits(width3)  +  (read & 1 ? 0.3333333 * scale2 : 0)
+
+so an entry is **a vertex index and three quantised deltas** - a blend-shape
+displacement, 32 bytes once padded, which is exactly what the applier wanted and
+what the shared 21-byte runs implied.
+
+`0x140dbe760` is the reader that drives it: two 32-bit fields, then a 16-byte
+component record, then the parameter block, then a loop emitting those 32-byte
+entries. What is **not** yet pinned is where that loop's bound comes from: reading
+the payload from bit 0 gives 0 and 5076 for those first two fields, so the caller
+clearly positions the stream past the block header, and the bound is probably the
+per-item count already measured in the header (`+0x20`: 110, 78, 46). That is the
+next thing to check, and it is a two-line change to the decoder rather than a new
+investigation.
