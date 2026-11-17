@@ -251,11 +251,19 @@ def main():
     if xnb_args:
         value = xnb_args[0].split("=", 1)[1]
         path, _, wanted = value.partition(":")
-        game = xnb_avatar.read_clip(path)
         wanted = int(wanted) if wanted else frame
-        poses = xnb_avatar.poses(game, wanted)
-        print("xnb %s: %d frames, using frame %d"
-              % (os.path.basename(path), len(game["frames"]), wanted))
+        try:
+            game = xnb_avatar.read_clip(path)
+            poses = xnb_avatar.poses(game, wanted)
+            print("xnb %s: %d frames, using frame %d"
+                  % (os.path.basename(path), len(game["frames"]), wanted))
+        except ValueError:
+            # The Digital DNA games (Laser Wars 2, Warfare, Connection) use a
+            # different reader and a static pose per bone.
+            game = xnb_avatar.read_dna(path)
+            poses = xnb_avatar.dna_poses(game, 0)
+            print("dna %s: %d bones, static pose"
+                  % (os.path.basename(path), len(game["bones"])))
 
     lines = []
     written = 0

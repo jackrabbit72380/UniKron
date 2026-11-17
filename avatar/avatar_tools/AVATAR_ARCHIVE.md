@@ -1060,3 +1060,42 @@ format and still unparsed.
 * **the DNA clip layout** - `DNA.Drawing.Animation.AnimationClip`. Its payload starts
   with a byte, the name ("Take 001"), an i32, an i64, then 71, then per-bone records of
   roughly 36-52 bytes. Not decoded yet, so no frames or joints come out of it.
+
+## The DNA clip format, decoded
+
+`DNA.Drawing.Animation.AnimationClip` (the Digital DNA games) turned out to be simple
+once measured. Payload:
+
+    u8   flag, then u8 length + name ("Take 001")
+    i32  frame count   (30)
+    i64  duration ticks (3,166,666 = 1/3 s)
+    i32  bone count    (71)
+    per bone, three channels, each `i32 count` then that many elements:
+        count x Vector3     (12 bytes)  translation
+        count x Quaternion  (16 bytes)  rotation
+        count x Vector3     (12 bytes)  scale
+
+With one key per channel that is 52 bytes a bone, and `GenericIdle` is exactly
+71 x 52 bytes from the header to the last byte - the walk ends on the file's final
+byte, which is how the layout was confirmed. Bone order matches the retail rig: the
+finger groups land on 37-40, 51-54, 58, 66-69, the same indices `finger_bones` finds.
+
+**The quaternions need their y negated.** Without that the arms end up above the
+head; with it, `Laser Wars 2/GenericIdle` throws one arm across the chest and lets the
+other hang, which is what the game shows.
+
+**82 clips decode** across Warfare (51 files), Laser Wars 2 (37) and Connection (1),
+every one landing exactly on its file size. Mean finger rotation spans 27.6 deg
+(`intro_pose05`, the most relaxed) to 58 deg (`Warfare/Idle`, a weapon grip).
+
+### What the hands actually are
+
+Measuring the MaleBody's weights settles the resolution question: **210 vertices are
+driven by finger joints** (about 105 a hand) across 42 distinct influence sets, so the
+model has real fingers - 69 vertices was only what `show_hand.py` was selecting, not
+what exists. The visible coarseness is 100 triangles for the whole hand, not a lack of
+data.
+
+Rendered from `intro_pose05`, the hand reads as separate curled digits with the thumb
+across the palm; from the pack's own clip it reads as a flat paddle. The pose was the
+problem, and the pose now comes from shipped data in every case.

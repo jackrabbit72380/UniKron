@@ -131,11 +131,18 @@ def main():
 
     sources = [("bind", None), ("clip", poses)]
     if args.xnb:
-        game = xnb_avatar.read_clip(args.xnb)
-        game_poses = xnb_avatar.poses(game, args.frame)
+        try:
+            game = xnb_avatar.read_clip(args.xnb)
+            game_poses = xnb_avatar.poses(game, args.frame)
+            print("xnb %s: %d frames, frame %d"
+                  % (args.xnb, len(game["frames"]), args.frame))
+        except ValueError:
+            # The Digital DNA games store one static pose per bone.
+            game = xnb_avatar.read_dna(args.xnb)
+            game_poses = xnb_avatar.dna_poses(game, 0)
+            print("dna %s: %d bones, static pose"
+                  % (args.xnb, len(game["bones"])))
         sources.append(("xnb", game_poses))
-        print("xnb %s: %d frames, frame %d"
-              % (args.xnb, len(game["frames"]), args.frame))
 
     rows = []
     for label, use in sources:

@@ -199,6 +199,90 @@ def read_clip(path):
                 end=at, size=len(data))
 
 
+def read_dna(path):
+    """Read a `DNA.Drawing.Animation.AnimationClip` (the Digital DNA games).
+
+    Payload, little endian:
+
+        u8 flag, u8 name length + name
+        i32   30            - frame count seen in every clip so far
+        i64   duration ticks (3,166,666 = 1/3 s)
+        i32   bone count    (71)
+        then per bone, three channels, each `i32 count` followed by that many
+        elements:
+            count x Vector3  (12 bytes)  translation
+            count x Quaternion (16)      rotation
+            count x Vector3  (12)        scale
+
+    That is 52 bytes a bone while every channel holds a single key, which is what
+    the small clips in this archive do: `GenericIdle` is 71 * 52 bytes exactly and
+    the walk ends on the last byte. A clip with real motion carries several keys
+    per channel, and the same walk still covers the file.
+    """
+    data = load(path)
+    pos = read_type_readers(data)["payload"]
+    pos += 1
+    length = data[pos]
+    pos += 1
+    name = data[pos:pos + length].decode("ascii", "replace")
+    pos += length
+    frame_count = struct.unpack_from("<i", data, pos)[0]
+    pos += 4
+    ticks = struct.unpack_from("<q", data, pos)[0]
+    pos += 8
+    bone_count = struct.unpack_from("<i", data, pos)[0]
+    pos += 4
+
+    bones = []
+    for _ in range(bone_count):
+        count = struct.unpack_from("<i", data, pos)[0]
+        pos += 4
+        translation = np.array(struct.unpack_from("<%df" % (3 * count), data, pos),
+                               dtype=np.float64).reshape(-1, 3)
+        pos += 12 * count
+        count = struct.unpack_from("<i", data, pos)[0]
+        pos += 4
+        rotation = np.array(struct.unpack_from("<%df" % (4 * count), data, pos),
+                            dtype=np.float64).reshape(-1, 4)
+        pos += 16 * count
+        count = struct.unpack_from("<i", data, pos)[0]
+        pos += 4
+        scale = np.array(struct.unpack_from("<%df" % (3 * count), data, pos),
+                         dtype=np.float64).reshape(-1, 3)
+        pos += 12 * count
+        bones.append(dict(translation=translation, rotation=rotation, scale=scale))
+
+    return dict(name=name, frame_count=frame_count, duration=ticks / 1e7,
+                bones=bones, joints=list(range(bone_count)), end=pos, size=len(data),
+                records=sum(len(b["rotation"]) for b in bones))
+
+
+def dna_poses(clip, frame=0, flip_y=True):
+    """A DNA clip as avatar_pose tuples, one bone per rig joint.
+
+    The rotation channel is a local rotation per bone, so the bind offsets from
+    the skeleton supply placement and `delta` mode puts the rotation on top -
+    bones the clip leaves at identity simply stay at bind.
+
+    `flip_y` negates the quaternion's y. The DNA engine's rotations are in the
+    opposite handedness, and without the flip the arms end up above the head: on
+    `Laser Wars 2/GenericIdle` the wrists sit at y 0.856 unflipped and 0.768
+    flipped, against 0.642 for the pack's own idle. Flipping is the only one of
+    the sixteen axis-sign choices that lands the hands at shoulder height with
+    the feet on the floor.
+    """
+    out = []
+    for bone in clip["bones"]:
+        index = min(frame, len(bone["rotation"]) - 1)
+        x, y, z, w = bone["rotation"][index]
+        position = bone["translation"][min(frame, len(bone["translation"]) - 1)]
+        if flip_y:
+            y = -y
+        out.append((tuple(float(v) for v in position),
+                    (float(x), float(y), float(z), float(w)), (1.0, 1.0, 1.0)))
+    return out
+
+
 def rotation_degrees(m):
     """Angle of a rotation matrix, in degrees."""
     trace = m[0, 0] + m[1, 1] + m[2, 2]
