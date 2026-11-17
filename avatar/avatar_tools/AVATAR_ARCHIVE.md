@@ -1215,3 +1215,37 @@ carry four extra bytes after the 0xff marker and only decode when the LZX stream
 at offset 19; their output starts `01 mDNA.Drawing.Animation.AnimationClip..., i.e. a real
 clip, and all twenty walk to the end of the payload. `decode_game_clips.py` now tries 15
 then 19, which takes the archive from **54 to 74 clips**.
+
+#### The four clips the walker still refuses are a second layout, not a bad offset
+
+`SitInPlace` (Avatar Connection) and `AssaultShoulderShoot`, `LMGShoulderShoot`,
+`RifleShoulderShoot` (Laser Wars 2) decompress cleanly from offset 15 and their
+headers are the same shape as the 74 that decode - `Take 001`, 30 frames, 71
+bones, data at 142. What differs is everything after the header:
+
+    decoding clips    payload 3834-9210   header duration 1500000
+    the four          payload 2698       header duration 1000000  (SitInPlace)
+                      payload 6298       header duration  999999  (the shoots)
+
+The walk desyncs mid-clip, not at the first bone: `RifleShoulderShoot` parses
+bones 0-27 normally and then reads the scale count at offset 1946 as
+`0x00FFFFFB`. That is not corrupt data - the surrounding bytes are valid floats
+(`0x3d0216ab`, `0x3ed6c3cb`, `0x3f63e07c` = 0.032, 0.419, 0.891) followed by a
+run of `00 00 80 3f` (1.0), i.e. the stream is scale data with no count in front
+of it where the layout expects one.
+
+Two explanations were tested and ruled out rather than assumed:
+
+  * **Misalignment.** A backtracking walk that may skip 0, 2, 4, 6, 8 or 12
+    bytes before every channel (and before every bone) finds no path from
+    offset 142 to the exact end of the payload for either file. So it is not a
+    shifted start.
+  * **Bad floats in the decoded 74.** Every value in the 74 written clips is
+    within [-1, 1]: 39,600 components in [1e-6, 1000), 78 below 1e-6, none
+    denormal, maximum exactly 1.0, and identity scales read exactly 1.0. The
+    numbers are plausible; only the four above are unread.
+
+What this needs is the semantics of `DNA.Drawing.Animation.AnimationClip+Reader`
+(the type name is in every payload) - a per-clip key layout that can switch
+between countable channels and a packed run. Nothing in the pack or the editor
+build documents it, so the four stay undecoded until that reader is read.
