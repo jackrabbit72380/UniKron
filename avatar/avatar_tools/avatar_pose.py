@@ -255,15 +255,17 @@ def finger_bones(joints_rig, bind):
             nxt = joints_rig[middle_children[0]]["position"]
             middle_dir = _normalise([nxt[i] - joints_rig[middle]["position"][i] for i in range(3)])
 
-        # The thumb is the knuckle that sits furthest off the palm's own plane.
-        # The earlier test used |y| in wrist space, which put joints 43 and 50 on
-        # the wrong side of the line: they are the thumbs, and being treated as
-        # fingers they were swung 36 degrees by the fan correction.
-        def off_plane(k):
-            offset = [joints_rig[k]["position"][i] - palm_centre[i] for i in range(3)]
-            return abs(sum(offset[i] * normal[i] for i in range(3)))
-
-        thumb_root = max(kids, key=off_plane)
+        # The thumb is the knuckle whose root sits *on the wrist*. Measured in
+        # the rig: joints 43 and 50 sit 0.0099 out from wrist 33/36, while every
+        # other child of a wrist is 0.107 or further. Two earlier tests were
+        # wrong and both left the thumb unposed: |y| in wrist space, and
+        # "furthest off the palm's own plane" - which cannot work, because a
+        # thumb root back at the wrist is very nearly *in* that plane, so the max
+        # landed on an ordinary finger and no joint was ever flagged as a thumb.
+        # `finger_bones` returned 30 entries and not one of them a thumb, which is
+        # why scaling the thumb's curl and adduction changed no pixel at all.
+        wrist_at = joints_rig[wrist]["position"]
+        thumb_root = min(kids, key=lambda k: _distance(joints_rig[k]["position"], wrist_at))
         # Which way the palm faces. The thumb is the landmark: it lies on the
         # palm's side of the hand, so the side of the palm plane it sits on is
         # the side the fingers close toward. This has to use the thumb's *tip*,

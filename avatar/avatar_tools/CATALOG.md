@@ -403,6 +403,18 @@ That is a thumb, and a real thumb's base joint sits back at the wrist like that.
 They had been filtered out as helper bones, so the thumb was a rigid stub. The
 childless joints 41/42 and 48/49 are the ones with nothing attached.
 
+**CORRECTION: the thumb was still never flagged.** `finger_bones` chose the thumb
+as the knuckle sitting furthest off the palm's own plane, and that cannot work:
+a thumb root back at the wrist is very nearly *in* that plane, so the maximum
+landed on an ordinary finger and `is_thumb` was false for every entry - 30 entries
+in the list, not one of them a thumb. The tell was that deleting the
+`FINGER_THUMB_SCALE` on the adduction changed **0 pixels**. The rig separates the
+two structurally instead: joints 43 and 50 sit 0.0099 from wrist 33/36, and every
+other child of a wrist is 0.107 or further, so the thumb is the nearest one. With
+that, 43/50 and their phalanges (55/65 and 60/70) are flagged, the thumb takes its
+lighter curl and adduction, and the hand changes by 1.2% of the plate, all of it
+in the two thumb regions.
+
 **The fingers had to be brought together, not fanned back.** The four knuckles sit
 at z +0.042, +0.011, -0.019, -0.047 and their tips at +0.043, +0.011, -0.019,
 -0.047: the bind fingers are *parallel* and 0.03 apart, so there is no fan angle to
