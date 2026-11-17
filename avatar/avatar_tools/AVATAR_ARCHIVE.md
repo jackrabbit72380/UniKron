@@ -190,3 +190,40 @@ something before or between the compressed chunks, and the loader
 (`0x140dbc530`, `0x140dbcbe0`, `0x140dbd290`), each 1,470 bytes. Both packs in
 this archive match the middle constant. That is the V1/V2/V3 split: three pack
 generations, one magic each - not three files in the folder.
+
+## What the V2 loader and the applier prove
+
+`0x140dbcbe0` is `rex::avatars::LoadAssetPackFromMemoryV2` - the strings it uses
+name it, and give its source file as `kernel/xam/avatars/asset_pack.cpp`. It
+validates the file header, then a table of **0xf8-byte asset headers**, then loads
+each asset with a size check ("avatar asset pack V2: cannot load asset #{}, buffer
+too small"). So the pack's index is richer than the name/offset pairs our
+`avatar-aaets.json` keeps: 248 bytes per asset, with room for block tables.
+
+The blend-shape applier reads a component descriptor as
+
+    mov (%rsi),%edx ; bswap          ; u32 big-endian  at +0
+    movzwl 0x4(%rsi),%ecx ; rol $8   ; u16 big-endian  at +4
+    movzwl 0x6(%rsi),%eax ; rol $8   ; u16 big-endian  at +6
+    eight movzbl from 0x8(%rsi)      ; the 8 GUID bytes at +8
+
+which is exactly the 16 bytes at offset 40 of every block-4 payload, and with the
+guest's word order the values are 1, 2 and 3. So the payload opens:
+
+    u32 flags = 0
+    u32 declared size (5076 / 13584 / 14724, always a multiple of 12)
+    descriptor: u32 1, u16 2, u16 3, GUID c1c8f109a19cb2e0
+    ...a second descriptor near offset 40...
+    u32 0, u32 16
+    compressed blob from offset 64
+
+Still open, and the only thing standing between us and the 266 face shapes: the
+blob's codec. It is not LZX from any offset under the working decoder, not the
+model framing (no `(compressed, out_offset, out_size)` header anywhere in the
+payload), and not zlib, deflate, lzma or bz2.
+
+The fastest way to close it now is not more disassembly: it is one retail save
+whose face has been edited. The `.Avatar` manifests already store component
+settings (with values like big-endian 1.0f), so a before/after pair would show
+which component the shape drives and what a non-default value looks like, and
+that pins the blob's meaning without having to trace 4,412 instructions.
