@@ -400,3 +400,50 @@ it. Both headers end just before the packed region.
 What I did **not** find: the loop that unpacks it. The per-asset load is a virtual
 call (`call *0x10(%rax)` at 0x140e2b2f0), so the parser is behind a vtable rather
 than reachable from the pack loader by following calls.
+
+## The blend-shape pipeline, located end to end
+
+Every blend-shape message in the binary - "Failed to load avatar blend shape {}!",
+"Failed to load component blend shape {}!", "Failed to apply blend shape {} to
+asset {}!", "failed to load hiding shape {} for component {}" - resolves to the
+*same* function, `0x140dd7e60`. I had read that function once and concluded it held
+"only logging and distance maths". That was wrong: it is the whole pipeline, and its
+size (20,867 bytes) is why the first read missed the parts that matter.
+
+The loop at `0x140dd8200`:
+
+    inc    %r13
+    cmp    $0x3,%r13                     ; three component slots, then done
+    jae    0x140dd85aa
+    shl    $0x4,%rax                     ; each record is 16 bytes
+    cmpl   $0x0,(%rsi,%rax,1)            ; u32 == 0  \
+    cmpw   $0x0,0x4(...)                 ; u16 == 0   > empty record: skip it
+    cmpw   $0x0,0x6(...)                 ; u16 == 0  /
+    mov    0x8(%r14),%rax
+    cmp    0x2c8(%rbp),%rax              ; GUID tail == c1c8f109a19cb2e0 else
+                                         ;   it is not our family, fall through
+    call   0x140ddea10
+
+and the call it makes is a 204-byte wrapper:
+
+    0x140ddea10  calls 0x140ddeb30 (fills two out-params) then 0x140dbec50
+    0x140ddeb30  the loader: 1,460 bytes, resolves the item and yields
+                 a pointer and a size; calls 0x140dc9d80, 0x140dc1ba0,
+                 0x140dcde50, 0x140dbde80, 0x140d29df0
+    0x140dbec50  the apply step: 90 bytes, a thunk
+
+So the shape data is decoded **between** `0x140ddeb30` and `0x140dbec50`. That is
+where the packed payload of the previous section has to be unpacked, and it is a much
+smaller place to search than the 20,867-byte function I had been reading.
+
+What I did not manage this round: the unpacker itself. Of the candidates,
+`0x140dc9d80` is the only one with byte-at-a-time reads (21 `movzbl`), but none of
+them contains a bit-unpacking loop, and two of the callees (`0x140dbde80`,
+`0x140dc1ba0`) have no `.pdata` entry at all, so their bounds are not available yet
+and they have not been read.
+
+Side finding while looking: the two functions that compare the `STRB` magic
+(`0x140dea1a0`, `0x140dea540`) are size calculators, not parsers. They read the
+header's flag byte at `+4` and the byte counts at `+0x16`, `+0x17`, `+0x1a`, then
+round `a + 2b + c` up to an alignment. Those are the fields `strb_blocks()` already
+relies on, which is a useful independent confirmation of the container header.
