@@ -663,15 +663,35 @@ brow mask of the three face masks and the eye and mouth sheets stay stock. 27 ma
 (`huge-eyebrows`, `no-eyebrows`, `half-moon-eyebrows`) render as visibly different
 faces, checked side by side.
 
-That leaves **695 of the wardrobe's 743 items** with a 3D set. The 48 without one are
-not missing data:
+### Eye shadow is UV set 5, and it is now baked
 
-* 3 are the base layers - `MaleBody`, `FemaleBody`, `Head` - which are drawn into every
-  set rather than being stage variants.
-* 45 are the **eye-shadow** sheets, filed under `50_hair` but painting the head. They
-  are 128x64 masks like the beard sheet, and `probe_decal_render.py` was run on
-  `eye-shadow-001.png` across all six UV sets: set 1 puts them on the cheeks (that is
-  the beard set), sets 2/3/4 are the brow, eye and mouth masks, and set 5 draws arcs
-  just above the eyes that read like a second brow band rather than a shadow. No set
-  put the sheet around the eye where eye shadow belongs, so these 45 are left unbaked
-  rather than guessed - the stage falls back to the hairstyle set for them.
+The 45 eye-shadow sheets are filed under `50_hair` but they paint the head, and finding
+their UV set took a measurement rather than a guess. `eye-shadow-001.png` was rendered
+on all six sets and each set's painted band measured as a fraction of the frame:
+
+| set | band | where that is | role |
+| --- | --- | --- | --- |
+| 0 | y 0.28-0.55, wide | forehead | face paint |
+| 1 | y 0.68-0.91 | jaw and chin | facial hair |
+| 2 | y 0.40-0.50 | brow band | brow |
+| 3 | y 0.51-0.58, narrow | lashes only | eye |
+| 4 | y 0.76-0.82 | mouth | mouth |
+| **5** | **y 0.50-0.59, x 0.32-0.70** | brackets the eye band, wider than the lash sheet | **eye shadow** |
+
+Baked once with the tint forced to pure red, set 5 draws two patches on the upper lids
+right under the brows - the eyeshadow placement, not a brow band. Three more things had
+to be right for it to show at all:
+
+* The sheet carries its mask in **alpha** (red is 1.0 everywhere), which the renderer
+  already multiplies, so no channel conversion was needed.
+* It is tinted with the avatar's own **eye shadow colour slot** (`83,149,202` in
+  `Avatar6400`), not `HAIR_TINT` - the hair colour over skin made it disappear.
+* The item has to bake as a decal, not as a hairstyle; as a hairstyle it replaced the
+  hair and drew nothing.
+
+A first attempt also failed because reading the colour into the local `colours` name
+clobbered the mesh's vertex colours and fed a dict to the renderer.
+
+That leaves **740 of the wardrobe's 743 items** with a 3D set, 45 male and 45 female of
+them eye shadow. The only three without one are the base layers - `MaleBody`,
+`FemaleBody`, `Head` - which are drawn into every set rather than being stage variants.

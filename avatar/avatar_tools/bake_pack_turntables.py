@@ -57,7 +57,23 @@ HAIR_COLOUR = "6e5326"
 # the hair), face paint on set 0 (its own colours). See DECALS.md.
 # Which UV set of the head each decal sheet paints through, and whether the sheet
 # is a mask tinted with the avatar's colour or a colour sheet used as drawn.
-DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False)}
+#
+# The eye-shadow sheets are filed under 50_hair but they paint the head. Probe run
+# on eye-shadow-001.png across all six sets, measuring where each set puts the
+# sheet (y as a fraction of the frame, x across it):
+#
+#     set 0  y 0.28..0.55  wide      forehead      - face paint
+#     set 1  y 0.68..0.91            jaw and chin  - facial hair
+#     set 2  y 0.40..0.50            brow band     - brow
+#     set 3  y 0.51..0.58  narrow    lashes only   - eye
+#     set 4  y 0.76..0.82            mouth         - mouth
+#     set 5  y 0.50..0.59  x 0.32..0.70  brackets the eye band, wider than the
+#                                     lash sheet: the eyelid wash
+#
+# So eye shadow is set 5, and its sheet carries the mask in alpha (red is 1.0
+# everywhere), which the renderer already multiplies.
+DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False),
+              "eye-shadow": (5, True)}
 HAIR_TINT = (0x6E / 255.0, 0x53 / 255.0, 0x26 / 255.0)
 ART = os.path.join(os.path.dirname(HERE), "pack_art")
 BASE_ASSETS = {"MaleBody", "FemaleBody", "Head"}
@@ -110,12 +126,24 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
     face = bt.load_face(obj)
     if kind == "decal" and face is not None and "uvsets" in face:
         decal_set, is_mask = DECAL_SETS[category]
-        sheet = os.path.join(ART, category, slug(asset) + ".png")
+        # The sheet stays in the folder the pack files it in (50_hair for the eye
+        # shadows), so only the UV-set key is remapped.
+        sheet_category = "50_hair" if category == "eye-shadow" else category
+        sheet = os.path.join(ART, sheet_category, slug(asset) + ".png")
         if not os.path.exists(sheet):
             return "no decal sheet for " + asset
         spec = {"uvs": face["uvsets"][:, :, decal_set, :], "texture": read_rgba(sheet)}
         if is_mask:
-            spec["tint"] = np.power(np.array(HAIR_TINT, dtype=np.float64), 2.2)
+            tint = HAIR_TINT
+            if category == "eye-shadow":
+                # Tinting the shadow with the hair colour made it vanish into the
+                # skin. It is drawn in the avatar's own eye-shadow slot.
+                import bake_avatar
+                # Not `colours`: that name already holds the mesh's vertex
+                # colours, and rebinding it fed a dict to the renderer.
+                desc_colours, _ = bake_avatar.read_description(description)
+                tint = tuple(c / 255.0 for c in desc_colours["eye shadow"])
+            spec["tint"] = np.power(np.array(tint, dtype=np.float64), 2.2)
         else:
             spec["tint"] = None
         if spec["tint"] is None:
@@ -147,6 +175,8 @@ def main():
     ap.add_argument("--width", type=int, default=192)
     ap.add_argument("--height", type=int, default=288)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--only", default="",
+                    help="bake only items whose retail name contains this, ignoring case")
     ap.add_argument("--start", type=int, default=0,
                     help="skip the first N items, to run a long rebake in chunks")
     ap.add_argument("--force", action="store_true", help="rebake sets that exist")
@@ -184,12 +214,16 @@ def main():
         # the brow slot of the three face masks.
         if CATEGORY_KIND.get(category) == "brow" and "brow" not in record["name"].lower():
             continue
-        if category in wanted and (has_mesh or category in DECAL_SETS
+        # The catalog spells it "Eye shadow 001"; the slug is the file stem.
+        decal_key = "eye-shadow" if slug(record["name"]).startswith("eye-shadow") else category
+        if category in wanted and (has_mesh or decal_key in DECAL_SETS
                                    or CATEGORY_KIND.get(category) in ("eyes", "brow")
                                    or category == "15_face"):
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
-            items.append((record["name"], CATEGORY_KIND.get(category), category))
+            items.append((record["name"], CATEGORY_KIND.get(category), decal_key))
+    if args.only:
+        items = [it for it in items if args.only.lower() in it[0].lower()]
     if args.start:
         items = items[args.start:]
     print("%d items to bake" % len(items))
@@ -201,6 +235,10 @@ def main():
 
     done = skipped = failed = 0
     for name, kind, category in items:
+        # The eye shadows are filed with the hairstyles; the decal key is what
+        # says they paint the head instead.
+        if category in DECAL_SETS and category != "45_facial-hair" and category != "16_face-paint":
+            kind = "decal"
         # --limit caps how many are *baked*, not how many are looked at: a run
         # restarted after a timeout must still find work, and slicing the list
         # first would only re-walk the sets that already exist.
