@@ -74,6 +74,30 @@ def xrefs(path, target):
     return out
 
 
+def functions(path):
+    """(begin, end) virtual addresses from .pdata, sorted."""
+    with open(path, "rb") as fh:
+        blob = fh.read()
+    for name, rawptr, va, size in sections(path):
+        if name != ".pdata":
+            continue
+        out = []
+        for off in range(0, size - 11, 12):
+            begin, end, _unwind = struct.unpack_from("<III", blob, rawptr + off)
+            if begin and end > begin:
+                out.append((BASE + begin, BASE + end))
+        return sorted(out)
+    return []
+
+
+def function_at(path, va):
+    """The (begin, end) of the function containing va, or None."""
+    for begin, end in functions(path):
+        if begin <= va < end:
+            return begin, end
+    return None
+
+
 def disassemble(path, va, size):
     out = subprocess.run(["objdump", "-d", "--no-show-raw-insn",
                           "--start-address=0x%x" % va,
@@ -87,6 +111,8 @@ def main():
     parser.add_argument("exe")
     parser.add_argument("string", nargs="?")
     parser.add_argument("--at", type=lambda s: int(s, 0), help="disassemble at this address")
+    parser.add_argument("--function", type=lambda s: int(s, 0),
+                        help="disassemble the whole function containing this address")
     parser.add_argument("--bytes", type=int, default=600)
     parser.add_argument("--strings", help="list strings containing this text")
     parser.add_argument("--sections", action="store_true")
@@ -105,6 +131,15 @@ def main():
         return 0
     if args.at:
         print(disassemble(args.exe, args.at, args.bytes))
+        return 0
+    if args.function:
+        bounds = function_at(args.exe, args.function)
+        if not bounds:
+            print("no function contains 0x%x" % args.function)
+            return 1
+        begin, end = bounds
+        print("function 0x%x..0x%x (%d bytes)" % (begin, end, end - begin))
+        print(disassemble(args.exe, begin, end - begin))
         return 0
 
     hits = find_string(args.exe, args.string)

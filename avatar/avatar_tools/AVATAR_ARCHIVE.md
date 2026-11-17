@@ -117,3 +117,38 @@ descriptor is already visible in it. The order is: read the loader
 (`LoadAssetPackFromMemoryV3`) and `blend_shape_apply`, get the record layout from
 the instructions, then write the LZX decoder the payloads need. That is a decode
 with a known target rather than a search.
+
+## Block 4: what has been established, and where it stopped
+
+Established by measurement, not assumption:
+
+- all 266 payloads open `flags u32, size u32`; `size` is divisible by 12 in every
+  one of the 266 and takes three values, 5,076 / 13,584 / 14,724 - i.e. 423,
+  1,132 or 1,227 three-float records per shape;
+- a 16-byte component descriptor ending in `c1 c8 f1 09 a1 9c b2 e0` appears in
+  the payload and the same GUID is written by a `movabs` in the manifest parser;
+- the data past byte 64 has 7.3-7.6 bits of entropy per byte, so it is compressed
+  rather than stored (raw vertex data of this size would be far lower).
+
+The `.Avatar` manifests are the useful discovery here. They are plain arrays of
+16- and 32-byte records in the same shape: a type byte, an index, a constant
+`0x0003`, the eight GUID bytes, then a value - and one of those values is
+`3f 80 00 00`, a **big-endian** 1.0f. So the descriptor fields are big-endian and
+the manifest is a list of component settings, which is what the parser
+(`XamAvatarSetManifest`, 2,648 bytes at `0x140d5d380`) reads and the string
+"buffer at {:#x} has a zero body component" belongs to.
+
+Where it stopped: `lzx.py` implements LZX, but no payload decodes under any
+framing tried - stream start anywhere in bytes 56-72, 16- and 32-bit words, both
+bit orders, windows 15/16/21, with and without the leading block-type flag - and
+none of the 4 x 2 x 2 x 2 x 120 combinations produces a 5,076-byte block header
+either. Either the framing is XCompress-specific (the 4 bytes at offset 64,
+`02 44 ed 36`, are not a standard LZX block header), or the decoder's tree
+handling is wrong. With no reference LZX stream in the workspace, there is no way
+to tell those apart by experiment, so the next step is the binary: the loader
+(`LoadAssetPackFromMemoryV3`) and `rex::kernel::xam::avatars::blend_shape_apply`
+is a 20,867-byte function at `0x140dd7e60` whose call graph and constants will
+give the exact arguments the decompressor is called with.
+
+`re_pe.py --function 0xADDR` resolves a function's exact bounds from `.pdata` and
+disassembles it, which is how both of those sizes are known.
