@@ -53,6 +53,29 @@ QtObject {
         return itemLabel(name)
     }
 
+    // The rail title for a slot folder. Where the retail editor names the
+    // button, its own wording wins over anything derived from the folder name -
+    // these eight are the pairs avatar_tools/editor_categories.json read out of
+    // the editor's XUI strings (button -> label -> theme folder), so "40_shirt"
+    // is "Tops" and "50_hair" is "Hairstyles", not "Shirt" and "Hair".
+    // Slots the 2008 scene has no button for keep the derived name rather than
+    // borrowing a retail label that belongs to something else.
+    readonly property var slotLabels: ({
+        "10_body": "Skin Color and Body",
+        "20_pants": "Bottoms",
+        "30_shoes": "Shoes",
+        "40_shirt": "Tops",
+        "45_facial-hair": "Facial Hair",
+        "50_hair": "Hairstyles",
+        "60_hat": "Headwear",
+        "70_glasses": "Glasses"
+    })
+
+    function slotLabel(folderName) {
+        var key = String(folderName)
+        return slotLabels[key] !== undefined ? slotLabels[key] : titleCase(cleanFolderName(key))
+    }
+
     // Layer order from the folder name: "20_pants" -> 20, "pants" -> 1000
     function layerOrder(folderName) {
         var m = /^(\d+)[\-_ ]+(.+)$/.exec(String(folderName))

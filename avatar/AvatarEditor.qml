@@ -438,7 +438,7 @@ Item {
             }
             list.push({
                 id: name,
-                label: style.titleCase(style.cleanFolderName(name)),
+                label: style.slotLabel(name),
                 path: folderPath,
                 files: folderFiles,
                 z: style.layerOrder(name)
