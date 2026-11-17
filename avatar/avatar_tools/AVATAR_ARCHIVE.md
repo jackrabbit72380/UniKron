@@ -152,3 +152,41 @@ give the exact arguments the decompressor is called with.
 
 `re_pe.py --function 0xADDR` resolves a function's exact bounds from `.pdata` and
 disassembles it, which is how both of those sizes are known.
+
+## Corrections, after reading the binaries
+
+**The project already had an LZX decoder.** `lzx.py` was written in `70fb6dfd`,
+ported from libmspack's `lzxd.c`, and every model and animation in the pack is
+decoded through it (`avatar_mesh.decompress`, 32 KiB window, 8 KiB frames, 12-byte
+`(compressed, out_offset, out_size)` headers). While working on block 4 I replaced
+it with a fresh, unverified implementation and committed that, which broke model
+decoding outright - `am.decompress` raised `bad window bits 32768` on every
+model. It is restored byte-for-byte here; `MaleBody` decodes to 1,137 vertices
+again and the audit passes.
+
+That mistake is worth naming: I reported "there is no LZX decoder in this
+environment" after checking pip, without checking the repository I was standing
+in. The tool existed and worked.
+
+**The legacy pack is the same container, not a different one.** `toc_parse.py`
+reads `AvatarAssetPackLegacyV1.toc` without changes: 44 assets, offsets from
+13,284, same STRB layout, same loader (both packs share the 16-byte magic at
+`0x140f7b240`, which the version dispatcher at `0x140dbd940` sends to
+`0x140dbcbe0`). The earlier "different container" note was wrong: the failure was
+passing it the *main* pack's offsets, and the one asset that "parsed" parsed by
+accident.
+
+**Block 4 is still not decoded.** With the working decoder, no offset in the first
+400 bytes of a payload decodes, and neither do zlib, raw deflate, lzma or bz2 -
+while the data is definitely compressed (7.3-7.6 bits per byte). So the wrapper is
+not the model framing and not a bare LZX stream: the payload interleaves
+something before or between the compressed chunks, and the loader
+(`0x140dbcbe0`, 1,470 bytes) is where that layout is written down.
+
+## What the version dispatcher proves
+
+`0x140dbd940` compares the pack's first 16 bytes against three constants
+(`0x140f7b230`, `0x140f7b240`, `0x140f7b250`) and jumps to one of three loaders
+(`0x140dbc530`, `0x140dbcbe0`, `0x140dbd290`), each 1,470 bytes. Both packs in
+this archive match the middle constant. That is the V1/V2/V3 split: three pack
+generations, one magic each - not three files in the folder.
