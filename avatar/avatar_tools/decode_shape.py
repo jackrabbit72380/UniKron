@@ -41,7 +41,7 @@ Its parameter block comes from 0x140dbecb0:
 with scale 0 = b*2, scale 1 = b*2*sqrt(2/3), scale 2 = b*sqrt(3), and one entry
 from 0x140dbee70 being:
 
-    out+0x00  base 0 + read(width 0)
+    out+0x00  base 0 + read(width 0)     <- vertex index * 52, NOT an index
     out+0x04  offset 0 + scale 0 * read(width 1)
     out+0x08  offset 1 + scale 1 * read(width 2)
     out+0x0c  offset 2 + scale 2 * read(width 3)   (plus a bias when the read's
@@ -55,15 +55,25 @@ Run over all 258 block-4 items in the pack this decoder consumes every payload t
 within a byte: 254 of them leave 0-7 spare bits, which is padding (914 bits of
 content in a 115-byte block is the clearest case). Large Chin lands on bit 12904 of
 12904 exactly. That is the strongest structural check available without the retail
-applier, and it means the field set is complete - but three things are still
-unverified, and this tool reports them instead of hiding them:
+applier, and it means the field set is complete.
 
-  * the index field. With base 0 / width 16 the values run past 64k, but the Head
-    mesh has 648 vertices, so the u32 at out+0x00 is either not a vertex index or
-    is masked downstream. Do not treat these as vertex indices yet.
+THE FIRST FIELD IS A BYTE OFFSET, and that is settled. Its value is always an exact
+multiple of 52, and 52 is the Head mesh's vertex stride (32-byte base plus five
+4-byte UV sets). Divided by 52, every entry of every shape lands inside 0..647 -
+Head's 648 vertices - and the entry's position sits a mean of 4 mm from that
+vertex, never more than 43 mm. Checked on Large Chin, Soft Nose, Elven Ears, Thin
+Chin and Rounded Chin: 434 entries, all multiples of 52, none out of range. So
+`vertex = (base + read(width 0)) // 52`, and the three floats are that vertex's
+new position rather than a delta.
+
+WHAT IS STILL UNVERIFIED:
   * b is 7.071e-06 (sqrt(0.5)*1e-5) on all five shapes checked, i.e. it does not
     vary per shape the way the offsets do. Either it is a fixed quantisation
-    constant or the field is not b at all.
+    constant or the field is not b at all. With it a 14-bit value spans 0.23 m,
+    which is the right order for a facial displacement.
+  * the three header floats are an anchor position, not the offsets they were
+    called above. Angled Nose, which has no entries, stores exactly Head vertex 0
+    (0.0121, 1.2473, 0.1458), which looks like a default when the shape is empty.
   * the last four base/width pairs decode to implausible values on every item
     checked (a base of 78 million, two zero widths, a base near 2^32). Their
     widths do add up - 51 bits for Large Chin, which is what makes the payload
@@ -87,6 +97,11 @@ import avatar_mesh as am
 import bitstream
 
 PACK = "../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/AvatarAssetPack.toc"
+
+# Head/human vertex stride in bytes: 32-byte base plus five 4-byte UV sets. The
+# entry's first field is a byte offset into the vertex buffer, so dividing by this
+# gives the vertex. Checked against every entry of five shapes.
+VERTEX_STRIDE = 52
 
 
 def f32(u):
@@ -150,8 +165,10 @@ def decode(name, pack=PACK, wanted=4):
         for base, width in pairs:
             e, pos = bitstream.read_bits(payload, pos, width)
             extra.append(base + e)
+        raw = base0 + i0
         entries_b.append({
-            "index": base0 + i0,
+            "index": raw,
+            "vertex": raw // VERTEX_STRIDE if raw % VERTEX_STRIDE == 0 else None,
             "xyz": (o[0] + scale[0] * v1,
                     o[1] + scale[1] * v2,
                     o[2] + scale[2] * v3),
@@ -189,8 +206,9 @@ def show(r):
     print("     entries start bit %d, end bit %d of %d"
           % (r["start_bit"], r["end_bit"], r["bits"]))
     for e in b["entries"][:r["_wanted"]]:
-        print("       index %6d  xyz (%9.5f, %9.5f, %9.5f)  extra %s"
-              % (e["index"], e["xyz"][0], e["xyz"][1], e["xyz"][2], e["extra"]))
+        print("       offset %6d -> vertex %s  position (%9.5f, %9.5f, %9.5f)  extra %s"
+              % (e["index"], e["vertex"], e["xyz"][0], e["xyz"][1], e["xyz"][2],
+                 e["extra"]))
 
 
 def main(argv=None):

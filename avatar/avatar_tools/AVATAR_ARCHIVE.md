@@ -600,3 +600,46 @@ What remains genuinely unread is only the meaning of the four trailing base/widt
 pairs inside each entry: 51 bits for Large Chin. Their lengths are right - that is
 what makes the payload totals come out - but the values they produce are not
 believable, so they are lengths that fit rather than fields that are understood.
+
+## Block 4 is solved: the first field is a byte offset, and the shape works
+
+The last open question was the entry's first field: 16 bits with base 0 gave values
+up to 64k against a 648-vertex Head, so it could not be a vertex index. It is not.
+It is a **byte offset**, and dividing by the vertex stride recovers the vertex.
+
+The path to it was geometric rather than disassembly. Decoding Large Chin's 110
+entries and comparing each entry's three floats against the real Head mesh put
+every position within millimetres of *some* vertex, so the floats are positions.
+Then the offsets 17732, 17784, 17888, 18044 ... differ by 52, 104, 156, by 52 and
+its multiples, and 17732 = 52 x 341 while the vertex nearest that position is
+vertex 341. 52 is the Head vertex stride: 32-byte base plus five 4-byte UV sets.
+
+Checked across five shapes, 434 entries in total:
+
+    shape          entries  all multiples of 52  vertex range   dist to that vertex
+    Large Chin       110    yes                   17..641        mean 14.2 mm, max 43.0
+    Soft Nose         78    yes                    0..574        mean  3.9 mm, max  7.5
+    Elven Ears        46    yes                  296..647        mean  7.7 mm, max 12.9
+    Thin Chin         90    yes                   72..641        mean  4.9 mm, max 14.2
+    Rounded Chin     110    yes                   17..641        mean  6.2 mm, max 12.2
+
+Every value is an exact multiple of 52, every recovered vertex is inside 0..647
+with no masking needed, and every position is a few millimetres from that vertex.
+That is the whole thing: **an entry is (vertex, new position)**, a facial blend
+shape expressed as absolute target positions rather than deltas, quantised at
+7.071e-06 per unit.
+
+Two supporting details, both consequences of this reading rather than separate
+findings:
+
+* vertices 341 and 344 of Large Chin carry the same position, because the Head mesh
+  splits vertices at UV seams; different vertices, one position, is exactly what a
+  seam looks like.
+* the positions are symmetric in x (the centroid is -0.0000 on all three shapes
+  checked), which a face should be.
+
+The three header floats are still an anchor of some kind, not the offsets they were
+first called: Angled Nose, which has no entries, stores exactly Head vertex 0
+(0.0121, 1.2473, 0.1458), and the value is not the centroid of the entries (3.6 cm
+off for Soft Nose, 15.8 cm for Elven Ears). Anchoring the shape to a vertex would
+explain both facts; that is a hypothesis, not something this evidence forces.
