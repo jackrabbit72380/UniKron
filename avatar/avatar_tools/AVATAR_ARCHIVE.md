@@ -251,3 +251,74 @@ the model frame wrapper. The remaining places the wrapper can be described are
 `LoadAssetPackFromMemoryV2`'s per-asset load path (it already owns the buffer the
 asset is loaded into) and the guest `.xex`. Both are code reading, not byte
 guessing - which is why the byte guessing stopped here.
+
+## What `LoadAssetPackFromMemoryV2` actually does (0x140dbcbe0)
+
+Read from the disassembly, not inferred. It is 1,470 bytes and starts with a
+version gate, then copies every record into a runtime entry.
+
+    +0x40 of the pack object      version;  > 4 is rejected outright
+    version >= 5                  a further check on the object at +0x88, and
+                                  the load fails if it returns false
+    +0x1c (big-endian)            record count, 1282 in this pack
+    +0x28, stride 0xf8            the records themselves
+
+Per record it builds a 216-byte (0xd8) entry and memcpys 0xd8 of it:
+
+    +0x00  u32   id, big-endian                   (1 Head, 2 MaleBody, 0x2000
+                                                   Happy Eyes, 0x100000 Large Chin)
+    +0x04  u8 x3 kind
+    +0x07  0x91  a 145-byte field, copied verbatim
+    +0x98  u32   another id, big-endian           (20001, 10004 ...)
+    +0x9c  16    component record, verbatim
+    +0xac  16    a second one, all zero in this pack
+    +0xbc  13 x u32   language name pointers      (read here as +0x04 from a
+                                                   base 0xb8 further on)
+    +0xf0  u32   blob offset, big-endian
+    +0xf4  u32   blob size, big-endian
+
+`toc_parse.py` was reading the same bytes all along - its anchor of 0xe0 is
+0x28 + 0xb8 - so nothing it produced needed correcting. It now also exposes `id`,
+`kind`, `detail` (+0x98), `component` (+0x9c) and `component2` (+0xac).
+
+Two things this settles:
+
+* **1,079 of the 1,282 records point at an `STRB` blob** - exactly the asset count
+  the audit sees. The other 203 have no blob at all: they are the alias/alias-only
+  entries, which is why nothing was ever missing.
+* **678 of the 1,079 carry an all-zero component record**, and the 401 that do not
+  carry 361 distinct 16-byte values, every one ending in `c1c8f109a19cb2e0`.
+
+## The component record is a type tag the blend-shape code tests
+
+`{ u32, u16, u16, 8-byte GUID }`, stored **verbatim** while every other integer
+field in the pack is big-endian. That GUID is not decoration:
+
+    movabs $0xe0b29ca109f1c8c1,%rax     # the GUID, at 0x140dd7ebd
+    mov    %rax,0x2c8(%rbp)
+    cmpl   $0x02000000,0x120(%rcx)      # u32 of the descriptor
+    movzwl 0x124(%rcx),%eax             # u16, must be 0
+    movzwl 0x126(%rcx),%r9d             # u16, must be 0x100
+    mov    0x128(%rcx),%rax             # the 8 GUID bytes
+    cmp    0x2c8(%rbp),%rax
+    sete   %sil
+
+So `0x140dd7e60` - the function I already had as the blend-shape applier - takes an
+object whose `+0x120` block is one of these records, and wants exactly
+`(0x02000000, 0, 0x100, that GUID)`.
+
+Large Chin, though, has an **all-zero** component record and `detail` 10004, so a
+shape asset's block-4 descriptors do not come from its own record. That rules out
+the shortcut I was hoping for: the descriptor is built by whatever parses the blob,
+which is one level deeper.
+
+## Why no decompressor call is visible in the pack loader
+
+The per-asset load at `0x140e2b2f0` is a single instruction:
+
+    call *0x10(%rax)
+
+One virtual call, slot 2. The decoding is polymorphic - which is consistent with
+`VBlendShape` being a class - so there is no direct `lzx_decompress` call to find
+from the pack loader. Any further progress on block 4 has to come from the concrete
+class behind that vtable, or from your save pair.

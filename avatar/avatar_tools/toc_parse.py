@@ -89,6 +89,13 @@ def parse(path):
         if not names:
             unresolved += 1
 
+        # The loader (`LoadAssetPackFromMemoryV2`, 0x140dbcbe0) puts the record's
+        # real start 0xb8 before the anchor used above; from there it copies an
+        # id, three bytes, a 145-byte field, a u32, two 16-byte component records
+        # and the 13 language pointers. The component records are what a blend
+        # shape refers to, so they are worth keeping: each is
+        # { u32, u16, u16, 8-byte GUID } stored verbatim, not byte-swapped.
+        start = rec - 0xB8
         assets.append({
             "name": names[0] if names else None,
             "names": names,
@@ -96,6 +103,11 @@ def parse(path):
             "size": size,
             "count": count,
             "flags": "0x%08x" % flags,
+            "id": struct.unpack_from(">I", data, start)[0],
+            "kind": tuple(data[start + 4:start + 7]),
+            "detail": struct.unpack_from(">I", data, start + 0x98)[0],
+            "component": data[start + 0x9C:start + 0xAC].hex(),
+            "component2": data[start + 0xAC:start + 0xBC].hex(),
         })
         rec += stride
 
