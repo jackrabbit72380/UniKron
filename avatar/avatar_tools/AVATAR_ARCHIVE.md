@@ -849,3 +849,56 @@ angles each shows the same problem in both: the fingers read as one fused paddle
 rather than separate digits. So the shape of the hand is not being decided by which
 clip is loaded - the isolation or the skinning of the 15 finger joints needs to be
 checked before the pose is tuned again.
+
+## The Avatar Games archive: 19 games, and 31 authentic hand-posed clips
+
+The Avatar Games zip holds two folders of XNA avatar games - Avatar Golf, Avatar
+Punch, Avatar Miner Paintball, Avatar Survival Games, Avatar Bowling, Avatar Karting
+2, Avatar Laser Wars 2 and the rest - and each carries an `avatar/assets` folder:
+
+    AvatarAssetPack.toc   md5 2b58915d809332b23ecff1669acdccee
+    the same pack these tools have been using, byte for byte
+
+So the games add no new pack, no new skeleton and no new meshes. What they do add is
+content the pack never had:
+
+    avatar/closet/closet_index.tsv     00000ffc-c6d1-72d2-c96e-82df4d5309cf  Halo Spartan Armor - Steel
+                                       00001000-a7a2-a223-c4a8-d4e454510874  Baby Po Animation
+    Content/Avatar Animations/*.xnb    31 clips: Idle, Dance, Run, walk, Jump, Climb,
+                                       Swim, Faint, BowIdle, BowFire, the gun idles,
+                                       AttackBat/Club/Hammer, GrenadeThrow, Throw
+
+The closet index is the file name the nxe2008 executable asks for (the string
+`-closet_index.tsv` is in its binary), so the editor's closet can read these entries.
+
+### `xnb_avatar.py` reads those clips
+
+Uncompressed XNB (`XNBx`, version 5, flags 0), root object
+`Hazzah.Engine.CustomAvatarAnimationData`: two single-byte fields, a name, an i64
+duration in ticks, then a flat list of 76-byte records - `i32 joint index`,
+`i64 time`, `4x4 matrix` - one per moving joint per frame. Joints that never move in
+a clip are absent (`Fly` carries 67 of the 71). A correct walk ends one byte short of
+the file size, that byte being the expression list's count.
+
+All 31 clips decode. `Idle` is 181 frames over 3.00 s - 60 fps, 12,851 records,
+exactly 181 * 71 - and `Dance` is 540 frames over 9 s, 38,340 records.
+
+### What they say about the hands
+
+These are the only hand-posed data outside the pack, and they disagree with what this
+project had been doing. Mean rotation of our 30 finger phalanges across each clip:
+
+    Idle         26.8 deg   (per joint 2 to 38, thumb lowest)
+    IdlePistol   37.8 deg
+    Dance        67.7 deg   (every finger uniform: a fist)
+    WalkCrouch    0.0 deg   (straight fingers)
+
+Against `FINGER_CURL_DEGREES = (8, 10, 6)` and `FINGER_THUMB_SCALE = 0.22`: the
+invented curl is roughly a quarter of what the games use for a resting hand. That is
+consistent with the hands reading as open and straight rather than relaxed, and it is
+the strongest evidence yet that the curl should not be invented at all - `Idle.xnb`
+already is the resting hand, curl included, for this exact 71-joint rig.
+
+Unproven: the joint index space of these clips is assumed equal to the skeleton's
+(the values are anatomically sensible if so - uniform fist in Dance, near-zero thumb,
+zero for every finger in WalkCrouch - but that is agreement, not proof).

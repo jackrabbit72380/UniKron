@@ -1,0 +1,196 @@
+"""Read the avatar animation clips the XNA avatar games ship as .xnb.
+
+The Avatar Games archive carries 39 clips under `Content/Avatar Animations/`
+that were authored by the game developers against the same 71-joint Xbox rig
+the retail pack uses. They are the only hand-posed source outside the pack
+itself, so they matter for anything the pack's clips never show - a resting
+hand above all.
+
+File layout, all little endian, XNB version 5, target 'x' (Xbox 360),
+flags 0x00 (nothing compressed - the declared size equals the file size):
+
+    0x00  'XNBx'
+    0x04  u8  version = 5
+    0x05  u8  flags   = 0
+    0x06  u32 total file size
+    0x0a  7-bit length, then for each type reader:
+              7-bit length + name, i32 version
+          7-bit shared resource count
+          root object
+
+The root is `Hazzah.Engine.CustomAvatarAnimationData`, written by XNA's
+ReflectiveReader in field order:
+
+    u8, u8                            two single byte fields, then
+    7-bit length + name string        ("Take 001")
+    i64 duration ticks                (3 s = 30,000,000)
+    i32 count, then count records of
+        i32 joint index               0..70
+        i64 time ticks
+        f32[16] 4x4 matrix            row major
+
+The records are per joint, not per frame: count = frames * moving joints, and
+they are interleaved. 181 frames at 60 fps gives 12,851 records, which is exactly
+181 * 71 for `Idle`; joints that never move in a clip are simply absent, so `Fly`
+carries 67 per frame. One byte is left after the last record (the expression
+list's count), so a correct walk ends on size - 1.
+
+Most clips store rotation only, so the bind positions from skeleton_nxe supply
+the joint placement and the two compose without guessing where a joint sits.
+Clips that move the character store the root's translation in the bottom row of
+the root joint's matrix (`Run` does); every other joint stays rotation only.
+"""
+
+import argparse
+import struct
+
+import numpy as np
+
+DEFAULT = "Content/Avatar Animations/Idle.xnb"
+
+
+def _unpack_7bit(data, pos):
+    value = 0
+    shift = 0
+    while True:
+        byte = data[pos]
+        pos += 1
+        value |= (byte & 0x7F) << shift
+        shift += 7
+        if not byte & 0x80:
+            return value, pos
+
+
+def read_type_readers(data):
+    """The XNB type-reader table, as (name, version) pairs."""
+    if data[:4] != b"XNBx":
+        raise ValueError("not an Xbox 360 XNB: %r" % data[:4])
+    version = data[4]
+    flags = data[5]
+    size = struct.unpack_from("<I", data, 6)[0]
+    pos = 10
+    count, pos = _unpack_7bit(data, pos)
+    readers = []
+    for _ in range(count):
+        length, pos = _unpack_7bit(data, pos)
+        name = data[pos:pos + length].decode("utf-8", "replace")
+        pos += length
+        ver = struct.unpack_from("<i", data, pos)[0]
+        pos += 4
+        readers.append((name, ver))
+    shared, pos = _unpack_7bit(data, pos)
+    return dict(version=version, flags=flags, size=size,
+                readers=readers, shared=shared, payload=pos)
+
+
+def _is_affine(data, at, tol=2e-2):
+    """A 4x4 that could be a joint transform, translation allowed."""
+    if at + 64 > len(data):
+        return False
+    m = struct.unpack_from("<16f", data, at)
+    if abs(m[15] - 1.0) > tol:
+        return False
+    if abs(m[3]) > tol or abs(m[7]) > tol or abs(m[11]) > tol:
+        return False
+    return all(abs(m[c] ** 2 + m[4 + c] ** 2 + m[8 + c] ** 2 - 1.0) < 0.2
+               for c in range(3))
+
+
+def read_clip(path):
+    """Decode a clip into (name, duration_seconds, frames, joints).
+
+    frames is a list of (time_seconds, {joint: 4x4 rotation}).
+    """
+    data = open(path, "rb").read()
+    head = read_type_readers(data)
+    pos = head["payload"]
+
+    # Two single byte fields come first and their meaning is not established,
+    # so the name is found by shape: a length whose bytes are printable text.
+    name = ""
+    for lead in range(pos, pos + 8):
+        length, after = _unpack_7bit(data, lead)
+        if not 0 < length < 64 or after + length + 8 > len(data):
+            continue
+        text = data[after:after + length]
+        if all(32 <= b < 127 for b in text):
+            ticks = struct.unpack_from("<q", data, after + length)[0]
+            if 0 < ticks < 3600 * 10 ** 7:
+                name = text.decode("ascii")
+                pos = after + length
+                break
+    else:
+        raise ValueError("no name/duration found in %s" % path)
+    ticks = struct.unpack_from("<q", data, pos)[0]
+    pos += 8
+
+    # The count that precedes the first record is written by the list reader;
+    # rather than trust an offset guess, walk records until they stop looking
+    # like records. 76 bytes each, and the walk ends on the last byte.
+    start = None
+    for probe in range(pos, pos + 64):
+        if _is_affine(data, probe + 12):
+            index = struct.unpack_from("<i", data, probe)[0]
+            if 0 <= index <= 70:
+                start = probe
+                break
+    if start is None:
+        raise ValueError("no keyframe records found in %s" % path)
+
+    at = start
+    by_time = {}
+    moved = False
+    while at + 76 <= len(data) and _is_affine(data, at + 12):
+        index = struct.unpack_from("<i", data, at)[0]
+        if not 0 <= index <= 70:
+            break
+        time = struct.unpack_from("<q", data, at + 4)[0]
+        rot = np.array(struct.unpack_from("<16f", data, at + 12),
+                       dtype=np.float64).reshape(4, 4)
+        if np.abs(rot[3, :3]).max() > 1e-4:
+            moved = True
+        by_time.setdefault(time, {})[index] = rot
+        at += 76
+
+    frames = [(t / 1e7, by_time[t]) for t in sorted(by_time)]
+    joints = sorted({j for _, frame in frames for j in frame})
+    return dict(name=name, duration=ticks / 1e7, frames=frames, joints=joints,
+                records=len(by_time and [r for f in by_time.values()
+                                        for r in f]), moved=moved,
+                end=at, size=len(data))
+
+
+def rotation_degrees(m):
+    """Angle of a rotation matrix, in degrees."""
+    trace = m[0, 0] + m[1, 1] + m[2, 2]
+    return float(np.degrees(np.arccos(max(-1.0, min(1.0, (trace - 1.0) / 2.0)))))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("clip", nargs="?", default=DEFAULT)
+    parser.add_argument("--joints", default="",
+                        help="comma separated joint indices to report")
+    args = parser.parse_args()
+
+    clip = read_clip(args.clip)
+    frames = clip["frames"]
+    print("%s: %r, %.3f s, %d frames, %d joints, %d records%s"
+          % (args.clip, clip["name"], clip["duration"], len(frames),
+             len(clip["joints"]), clip["records"],
+             ", carries root motion" if clip["moved"] else ""))
+    if clip["end"] < clip["size"] - 8:
+        print("  warning: walk ended at %d of %d bytes"
+              % (clip["end"], clip["size"]))
+    wanted = [int(v) for v in args.joints.split(",") if v.strip()]
+    if wanted:
+        for joint in wanted:
+            angles = [rotation_degrees(f[joint]) for _, f in frames if joint in f]
+            if angles:
+                print("  joint %2d: %5.1f deg mean, %5.1f max over %d frames"
+                      % (joint, sum(angles) / len(angles), max(angles),
+                         len(angles)))
+
+
+if __name__ == "__main__":
+    main()
