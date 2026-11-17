@@ -769,3 +769,40 @@ keying it by slug yields "both" for one-gender items.
 
 The three wardrobe items without a set are `MaleBody`, `FemaleBody` and `Head`, which every
 set already contains.
+
+## Seeing the editor without a desktop
+
+`qml_check.py` proves the QML creates; it does not show what it looks like. `render_editor.py`
+does, and it is how the screens below were checked:
+
+    QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software \
+    PYTHONPATH=/tmp/qt \
+    LD_LIBRARY_PATH=<workspace>/.local-qt/usr/lib/x86_64-linux-gnu \
+    FONTCONFIG_FILE=<workspace>/.local-qt/etc/fonts/fonts.conf \
+    python3 avatar_tools/render_editor.py avatar_tools/avatar_preview.qml /tmp/menu.png \
+        --width 1280 --height 800 --set screen=closet --category 18_mouth
+
+Things that cost time here:
+
+* `QQuickWindow.grabWindow()` returns 0x0 on the offscreen platform. Grab the scene's
+  content item instead (`grabToImage`), and note PyQt5 only exposes the overload that
+  returns a result whose `ready` signal fires.
+* Offscreen has no GL context, so Qt Quick needs `QT_QUICK_BACKEND=software`.
+* Without a fontconfig config every label renders invisible; a two-line `fonts.conf`
+  pointing at the unpacked DejaVu directory is enough.
+* `--set` and `--category` drive the editor through its own properties (`screen`,
+  `categoryIndex`, `usePackArt`), and `rebuildCategories()` has to be invoked after
+  changing `usePackArt` because the list is built once.
+
+## The closet now opens on the pack
+
+`usePackArt` defaulted to **false**, so the running editor offered the theme's eight drawn
+categories and none of the 743 decoded items. It is now **true**: the pack is the retail
+content, and every item in it has art and a set. Rendered offscreen, the rail lists 20
+categories - Body, Face, Face Paint, Face Shape, Mouth, Pants, Shoes, Shirt, Facial Hair,
+Gloves, Hair, Headwear, Glasses, Earrings, Rings, Wristwear, Dress, Formal, Coat, Dress
+Formal - and `82_coat` comes back at index 18, which is the whole list.
+
+`avatar_preview_pack.qml` exists because setting `usePackArt` after load is not the same as
+starting in it: the theme's picks are already in `state`, so the stage asks `pack_art/` for
+`jeans_indigo.png` and other stems that only exist in the theme's art.

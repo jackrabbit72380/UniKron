@@ -84,7 +84,11 @@ Item {
     property url packPlateFolder: plateFolder()
     readonly property string turntableRoot: turntableFolder()
     readonly property var activePlates: platesIndex()
-    property bool usePackArt: false
+    // The closet browses the pack's own items. Every one of them has a plate and
+    // a baked set (740 of 743; the three left are the base body and head), and
+    // the pack is the retail content - the theme's eight drawn categories are the
+    // port's fallback, not the thing this editor is reproducing.
+    property bool usePackArt: true
     property string gamerTag: "Player"
     // The original editor's own wording for this screen: the string table of
     // scnEditor in avatareditor.xex holds exactly this sentence.
