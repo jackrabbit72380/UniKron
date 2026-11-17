@@ -589,21 +589,24 @@ Three limits in the data, each checked rather than assumed:
   search is in TEXTURES.md). That is also why skin shows through at the
   shoulders: garments hide body regions with `... Hiding Template` assets, and
   those carry no model block at all.
-- **The hands are modelled straight, and are curled by hand.** `MaleBody` is
-  1,137 vertices and its hand is a flat palm with straight fingers in the bind
-  pose; the idle clip rotates the finger joints 11-34° but almost all of that is
-  twist, so the hand stays flat. The fingers are joints 37-40 and 44-47 (each
-  with two phalanges under it); 41/42 and 48/49 are the thumbs, and 43/50 sit *on*
-  the wrist with a chain hanging off them - they are helpers, and an earlier test
-  that "forcing every hand joint back to bind changes nothing" was forcing those
-  helpers rather than the fingers, which is why it looked inert.
-`avatar_pose.apply_finger_pose` therefore adds a **deliberate art choice**:
-  8/10/6 degrees of curl per phalanx, the fan closed by each finger's own measured
-  fan angle (0.1-0.9°, so barely anything), and the thumb at 22% curl, with bend
-  and swing directions derived per hand from the palm plane. Measured with
-  `probe_hand.py`: knuckle bend goes from 6-12° (clip) to 16-25°, fingertips move
-  5 cm on a 1.47-unit body. Nothing in the archive asks for this - it exists so
-  the hand reads like the reference avatar instead of a rake of prongs.
+- **The hands are modelled straight, and are posed by hand.** `MaleBody` is
+  1,137 vertices and its hand is 69 of them - 100 triangles - a flat palm with
+  parallel fingers 0.03 apart. The fingers are joints 37-40 and 44-47, each with
+  two phalanges; the thumbs are **43 and 50**, whose root sits exactly on the
+  wrist (0.010 out) and whose chain ends at (0.098, -0.055, 0.079) in wrist
+  space. 41/42 and 48/49 are childless. The thumbs were once filtered out as
+  degenerate helpers, which is why they were rigid stubs.
+`avatar_pose` adds a **deliberate art choice** on top of the clip: 8/10/6 degrees
+  of curl per phalanx (bend sign taken from the side of the palm plane the thumb
+  tip is on), 85% of the full adduction that would land each fingertip on the
+  hand's midline, the thumb at 22% of both, and a 90° forearm pronation
+  (`apply_wrist_roll`) because no clip in the pack twists the forearm and without
+  it every hand faces the camera flat, as a fan of prongs. The retail editor's
+  own preview image (`resources/app/app/assets/previews/editor-metro2010.png`)
+  shows the palms facing the thighs, which is what that roll reproduces.
+  `scan_clips.py` over all 41 animations confirms no clip contains a relaxed
+  hand: frame 0 is the bind pose for fingers in every one of them, the idles
+  reach 23°, and only `Angry` (114°) closes a fist.
 
   Rotating the knuckles alone left a notch where each finger met the palm: the
   pack weights a finger's base ring entirely to the finger, with no blend into

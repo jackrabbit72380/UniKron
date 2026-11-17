@@ -98,17 +98,26 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 # look, and a look has to be chosen by looking.
 #
 #   AVATAR_FINGER_CURL="20,28,16"
-#   AVATAR_FINGER_INWARD="6"
+#   AVATAR_FINGER_ADDUCT="0.6"
 #
 FINGER_CURL_DEGREES = tuple(
     float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "8,10,6").split(",")
 )                                            # per phalanx, base to tip
-# How much of each finger's own fan is taken out. 1.0 would leave every finger
-# pointing the way the middle one does; a little under that keeps the hand from
-# looking bound together. The angle itself is measured per finger from the mesh's
-# own knuckles (finger_bones), not guessed: one fixed angle for every finger
-# either leaves the outer ones splayed or drags them across each other.
-FINGER_FAN_CLOSE = float(os.environ.get("AVATAR_FINGER_FAN", "0.85"))
+# How far each finger is brought across the palm, as a fraction of the angle
+# that would land its tip on the hand's midline. 1.0 stacks every finger on the
+# centre line; a little under leaves them touching but stacked, which is what a
+# relaxed hand looks like. The angle is computed per finger from its own knuckle
+# offset and length (finger_bones), because the bind fingers are parallel and
+# 0.03 apart - there is no fan angle to take back, only a gap to close.
+FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.85"))
+# -1 curls the fingers toward the back of the hand instead of the palm. It exists
+# only so the two directions can be rendered side by side and the right one
+# chosen by looking at the hand rather than trusting a cross product.
+FINGER_SIGN = float(os.environ.get("AVATAR_FINGER_SIGN", "1"))
+# Forearm pronation, in degrees about the arm's own axis. The pack's idle clips
+# carry none, which leaves the palms facing sideways and the hand flat to the
+# camera; the retail editor shows them facing the thighs.
+WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "-90"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
@@ -255,19 +264,30 @@ def finger_bones(joints_rig, bind):
             return abs(sum(offset[i] * normal[i] for i in range(3)))
 
         thumb_root = max(kids, key=off_plane)
-        # The thumb sits on the palm side, so the direction from the knuckle
-        # centre to the thumb root is the direction a finger curls toward.
-        palm_side = _normalise([joints_rig[thumb_root]["position"][i] - palm_centre[i]
-                                for i in range(3)])
+        # Which way the palm faces. The thumb is the landmark: it lies on the
+        # palm's side of the hand, so the side of the palm plane it sits on is
+        # the side the fingers close toward. This has to use the thumb's *tip*,
+        # not its root - with 43/50 identified as the thumbs, the root is back at
+        # the wrist, and a direction from the knuckles to the wrist is not the
+        # palm normal at all. Using the root made the fingers curl backwards,
+        # away from the palm, which is the "long prongs" look.
+        thumb_tip = thumb_root
+        while True:
+            nxt = [c for c, info in enumerate(joints_rig) if info["parent"] == thumb_tip]
+            if not nxt:
+                break
+            thumb_tip = nxt[0]
+        thumb_offset = [joints_rig[thumb_tip]["position"][i] - palm_centre[i] for i in range(3)]
+        facing = sum(thumb_offset[i] * normal[i] for i in range(3))
+        palm_side = [normal[i] * (1.0 if facing >= 0.0 else -1.0) for i in range(3)]
 
         for root in kids:
-            # 43 and 50 sit on the wrist itself (local length ~0.01) with a
-            # three-joint chain hanging off them. Rotating one of those swings a
-            # whole chain from inside the palm, which bowed the baked hand into a
-            # hook; they are helpers, not fingers.
-            if _distance(mat_apply(mat_inverse_rigid(bind[wrist]),
-                                   joints_rig[root]["position"]), [0.0, 0.0, 0.0]) < 0.03:
-                continue
+            # 43 and 50 look degenerate - their root sits exactly on the wrist,
+            # 0.0099 out - but each carries a three-joint chain out to
+            # (0.098, -0.055, 0.079) in wrist space. That is the thumb: a real
+            # thumb's base joint sits back at the wrist, not out at the knuckles.
+            # They were being filtered out as helpers, which is why the thumb has
+            # been a rigid stub this whole time.
             chain = [root]
             while True:
                 children = [c for c, info in enumerate(joints_rig)
@@ -302,22 +322,16 @@ def finger_bones(joints_rig, bind):
             swung = _rotate_about(tip, here, mat_axis_angle(normal, 15.0))
             swing_sign = -1.0 if lateral(swung) < lateral(tip) else 1.0
 
-            # How far this finger fans away from the middle one, in the palm
-            # plane: that is the angle to take back out.
-            fan_deg = 0.0
-            if middle_dir is not None:
-                flat = [direction[i] - normal[i] * sum(direction[k] * normal[k]
-                                                       for k in range(3))
-                        for i in range(3)]
-                mid_flat = [middle_dir[i] - normal[i] * sum(middle_dir[k] * normal[k]
-                                                           for k in range(3))
-                            for i in range(3)]
-                if _distance(flat, [0, 0, 0]) > 1e-9 and _distance(mid_flat, [0, 0, 0]) > 1e-9:
-                    flat = _normalise(flat)
-                    mid_flat = _normalise(mid_flat)
-                    fan_deg = math.degrees(math.atan2(
-                        sum(_cross(flat, mid_flat)[i] * normal[i] for i in range(3)),
-                        sum(flat[i] * mid_flat[i] for i in range(3))))
+            # Fingers have to come together, not just curl. In wrist space the
+            # four knuckles sit at z +0.042, +0.011, -0.019, -0.047 and their
+            # tips at z +0.043, +0.011, -0.019, -0.047: the bones are parallel
+            # and 0.03 apart, so no fan angle exists to take back (measured
+            # 0.1-0.9 degrees). Rotating each finger about the palm normal at
+            # its knuckle is what closes the gaps between the tubes; the angle
+            # that lands the tip on the hand's midline is atan2(spread, length).
+            spread = lateral(here)
+            length = max(_distance(tip, here), 1e-6)
+            adduct = math.degrees(math.atan2(spread, length))
 
             for depth, joint in enumerate(chain, 1):
                 joint_here = joints_rig[joint]["position"]
@@ -333,7 +347,7 @@ def finger_bones(joints_rig, bind):
                                                     for c in range(3)]
                 out.append((joint, own_to_local(own_bend), own_to_local(normal),
                             depth, root == thumb_root, sign, swing_sign,
-                            fan_deg if depth == 1 else 0.0))
+                            adduct if depth == 1 else 0.0))
     return out
 
 
@@ -468,19 +482,46 @@ def hand_weight_blend(joints_rig):
     return blend
 
 
+def apply_wrist_roll(joints_rig, locals_):
+    """Pronate each forearm so the palm faces the thigh instead of outward.
+
+    The idle clips swing the arm down from the T-pose without any twist, so the
+    palm - which faces down in the bind pose - ends up facing sideways. Every
+    hand then shows the camera its full width, and a 69-vertex hand at full width
+    is a fan of thin prongs. The retail editor's avatar has its palms facing the
+    thighs, which stacks the fingers behind one another and reads as a hand.
+
+    The rotation is about the forearm axis, which is the wrist joint's local X
+    (the bind fingers run along X). Zero turns it off.
+    """
+    if not WRIST_ROLL_DEGREES:
+        return locals_
+    for wrist in WRIST_JOINTS:
+        if wrist < len(locals_):
+            sign = -1.0 if wrist == WRIST_JOINTS[1] else 1.0
+            locals_[wrist] = mat_mul(locals_[wrist],
+                                     mat_axis_angle((1.0, 0.0, 0.0),
+                                                    math.radians(WRIST_ROLL_DEGREES * sign)))
+    return locals_
+
+
 def apply_finger_pose(joints_rig, bind, locals_):
     """Add the art-choice finger curl on top of the clip's pose, in place."""
-    for joint, bend, swing, depth, thumb, sign, swing_sign, fan in finger_bones(joints_rig, bind):
+    for joint, bend, swing, depth, thumb, sign, swing_sign, adduct in finger_bones(joints_rig, bind):
         if joint >= len(locals_):
             continue
         degrees = FINGER_CURL_DEGREES[min(depth, len(FINGER_CURL_DEGREES)) - 1]
         if thumb:
             degrees *= FINGER_THUMB_SCALE
-        locals_[joint] = mat_mul(locals_[joint], mat_axis_angle(bend, sign * degrees))
-        if depth == 1 and not thumb:
-            # Close the fan the bind geometry was modelled with, by this finger's
-            # own measured angle rather than one angle for the whole hand.
-            inward = abs(fan) * FINGER_FAN_CLOSE * swing_sign
+        locals_[joint] = mat_mul(locals_[joint], mat_axis_angle(bend, FINGER_SIGN * sign * degrees))
+        if depth == 1:
+            # Bring the fingers together across the palm. The angle is the one
+            # that lands this finger's tip on the hand's midline, scaled by how
+            # far to go; the thumb closes a little as well, since it too hangs
+            # out to the side in the bind pose.
+            inward = adduct * FINGER_ADDUCT * swing_sign
+            if thumb:
+                inward *= FINGER_THUMB_SCALE
             locals_[joint] = mat_mul(locals_[joint], mat_axis_angle(swing, inward))
     return locals_
 
@@ -570,6 +611,48 @@ def conj(q):
     return (-q[0], -q[1], -q[2], q[3])
 
 
+def posed_joint_positions(joints_rig, poses):
+    """Where every joint ends up, without skinning any mesh.
+
+    The finger question is a joint question: whether a clip curls a hand shows in
+    the joint positions before a single vertex is skinned, and this makes it
+    cheap enough to ask about all 41 clips in the pack.
+    """
+    bind = []
+    for joint in joints_rig:
+        rotation = conj(joint["rotation"]) if BIND_CONJ else joint["rotation"]
+        bind.append(mat_trs(joint["position"], rotation))
+
+    bind_local = []
+    for i, joint in enumerate(joints_rig):
+        parent = joint["parent"]
+        if parent == 255 or parent >= i:
+            bind_local.append(bind[i])
+        else:
+            bind_local.append(mat_mul(mat_inverse_rigid(bind[parent]), bind[i]))
+
+    locals_ = []
+    for i in range(len(joints_rig)):
+        if i < len(poses):
+            p, q, sc = poses[i]
+            if IGNORE_SCALE:
+                sc = (1.0, 1.0, 1.0)
+            delta = mat_trs(p, conj(q) if CONJ else q, sc)
+            locals_.append(mat_mul(bind_local[i], delta) if MODE == "delta" else
+                          (mat_mul(delta, bind_local[i]) if MODE == "delta2" else delta))
+        else:
+            locals_.append(bind_local[i] if MODE == "delta" else bind[i])
+
+    worlds = []
+    for i, joint in enumerate(joints_rig):
+        parent = joint["parent"]
+        if MODE == "world" or parent == 255 or parent >= i:
+            worlds.append(locals_[i])
+        else:
+            worlds.append(mat_mul(worlds[parent], locals_[i]))
+    return [(w[0][3], w[1][3], w[2][3]) for w in worlds]
+
+
 def posed_positions(batches, joints_rig, poses):
     """Joint world matrices, then linear blend skinning of every vertex."""
     bind = []
@@ -607,13 +690,12 @@ def posed_positions(batches, joints_rig, poses):
         else:
             locals_.append(bind_local[i] if MODE == "delta" else bind[i])
 
-    # The clip never bends a finger, so the relaxed hand is added here (see the
-    # ART CHOICE note at the top of this file).
-    # On by default. The pack models the hand open and fanned and the idle clip
-    # only moves the finger joints a few degrees, so without this every bake has
-    # flat, straight fingers - the hands that did not look right. Set
-    # `AVATAR_FINGER_POSE=0` to see the clip's own hand, and probe_hand.py to
-    # compare the two.
+    # The pack models the hand open and straight, and the idle clip's 11-34
+    # degrees on the finger joints is nearly all twist - the knuckle bend only
+    # goes from 17.9 to 23 degrees - so the relaxed hand is added here (see the
+    # ART CHOICE note at the top of this file). `AVATAR_FINGER_POSE=0` shows the
+    # clip's own hand, and probe_hand.py / show_hand.py render either.
+    apply_wrist_roll(joints_rig, locals_)
     if os.environ.get("AVATAR_FINGER_POSE", "1") == "1":
         apply_finger_pose(joints_rig, bind, locals_)
 

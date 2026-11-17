@@ -320,21 +320,49 @@ and tip, which is what a viewer sees).
 | knuckle bend, idle clip | 6-12° | - |
 | knuckle bend, clip + curl | - | 16-25° |
 
-So the clip does key the finger joints (11-34° of rotation) but almost all of it
-is twist about the finger's own axis: the hand stays flat, which is the "prongs"
-look. Turning the authored curl back on alone did not fix it either, because two of
-the joints under each wrist (43 and 50) sit *on* the wrist - an offset of 0.01 on
-a 1.47-unit body - and hang a three-joint chain off it. They were being treated as
-fingers, so the fan correction swung a whole chain 36° from inside the palm and
-bowed the hand into a hook. `finger_bones` now drops any root within 0.03 of the
-wrist.
+**Every clip was asked, not just the idle.** `scan_clips.py` measures the knuckle
+bend for all 41 animations in the pack. All of them sit at 17.9° - the bind
+geometry's own angle, the fingers straight - at frame 0, and only the expressive
+clips close a hand at all: `Angry` reaches 114° (a fist), `Clap` and
+`Idle Checks Hand` about 45°, `Idle Shifts Weight` 23°. The nine
+`Animation Creator Look *` clips are head-only: the fingers never leave 17.5°.
+There is **no relaxed-hand pose in the pack** to copy, so the pose has to be built.
 
-With that gone the curl reads correctly: 8/10/6 degrees per phalanx, the fan
-correction taken per finger from its own measured fan angle (0.1-0.9° - the bind
-fingers are nearly parallel already, so only the thumb needed excluding), and
-fingertips travel 5 cm on a 1.47-unit body. Every plate, turntable and animated
-frame was rebaked with it. `AVATAR_FINGER_POSE=0` shows the clip's own hand for
-comparison, and `AVATAR_FINGER_CURL` / `AVATAR_FINGER_FAN` override the numbers.
+**The thumbs were missing entirely.** Joints 43 and 50 look degenerate - their root
+sits exactly on the wrist, 0.010 out - but each carries a three-joint chain ending
+at (0.098, -0.055, 0.079) in wrist space: out from the wrist, down, and forward.
+That is a thumb, and a real thumb's base joint sits back at the wrist like that.
+They had been filtered out as helper bones, so the thumb was a rigid stub. The
+childless joints 41/42 and 48/49 are the ones with nothing attached.
+
+**The fingers had to be brought together, not fanned back.** The four knuckles sit
+at z +0.042, +0.011, -0.019, -0.047 and their tips at +0.043, +0.011, -0.019,
+-0.047: the bind fingers are *parallel* and 0.03 apart, so there is no fan angle to
+remove (measured 0.1-0.9°, which is why the earlier fan correction did nothing).
+What closes the gaps is adduction - rotating each knuckle about the palm normal by
+`atan2(spread, length)`, which lands the tip on the hand's midline - times
+`FINGER_ADDUCT` (default 0.85).
+
+**The wrists needed 90° of pronation, which no clip has.** The idle swings the arm
+down from the T-pose without any twist, so the palm - down in bind - ends up facing
+sideways, showing the camera the hand's full width. A 69-vertex hand at full width
+is a fan of thin prongs. The retail editor's own preview
+(`resources/app/app/assets/previews/editor-metro2010.png`) shows palms facing the
+thighs, which stacks the fingers behind one another and reads as a hand.
+`apply_wrist_roll` turns each forearm about its own axis (`AVATAR_WRIST_ROLL`,
+default -90°); the two signs were rendered side by side and -90° chosen.
+
+Curl is 8/10/6 degrees per phalanx. `AVATAR_FINGER_POSE=0` shows the clip's own
+hand for comparison; `AVATAR_FINGER_CURL`, `AVATAR_FINGER_ADDUCT`, `AVATAR_FINGER_SIGN`
+and `AVATAR_WRIST_ROLL` override the numbers. `show_hand.py` draws one hand from
+eight angles against the bind pose, and `probe_hand.py` prints joint and knuckle
+angles.
+
+The hand is small: 69 vertices and 100 triangles, selected by skin weight (the palm
+rides the wrist joint, not a finger). Its finger bones cover the inner two thirds of
+the geometry - bones 0.082 long, geometry 0.120 from the knuckle - so the tips ride
+rigidly on the last joint. That is the mesh, not a decode error; both packs in the
+archive carry the same 1,137-vertex `MaleBody`.
 
 Also ruled out while looking: the clip's joint *scale* is not what stretched the
 hand (`AVATAR_IGNORE_SCALE=1` renders identically; the scales are 1.0).
