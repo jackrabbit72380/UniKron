@@ -41,7 +41,15 @@ def payload(data):
     flags = data[5]
     if flags & 0x80:
         out_len, = struct.unpack_from("<I", data, 10)
-        return lzx.decompress(data[15:], out_len, 0x10000)
+        # Two stream starts occur in the shipped files: most begin at 15, but 20 of
+        # the 88 carry four extra bytes there and only decode from 19. Try the
+        # common case first, then the variant.
+        for start in (15, 19):
+            try:
+                return lzx.decompress(data[start:], out_len, 0x10000)
+            except Exception:
+                if start == 19:
+                    raise
     return data[10:]
 
 

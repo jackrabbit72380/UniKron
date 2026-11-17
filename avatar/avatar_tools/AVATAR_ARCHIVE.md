@@ -1207,3 +1207,11 @@ That means the 58 files that "decode" are **uncompressed blocks inside an LZX wr
 their length exactly equals the declared output - so the 54 extracted clips are raw
 payloads, not decompressed ones. The 88 are the genuinely compressed streams, and the
 header model has to be calibrated on the real reader before any offset is judged.
+
+#### The stream start is not always 15: 20 clips decode from 19
+
+Sweeping all 88 with the calibrated reader showed a second stream start. Twenty files
+carry four extra bytes after the 0xff marker and only decode when the LZX stream begins
+at offset 19; their output starts `01 mDNA.Drawing.Animation.AnimationClip..., i.e. a real
+clip, and all twenty walk to the end of the payload. `decode_game_clips.py` now tries 15
+then 19, which takes the archive from **54 to 74 clips**.
