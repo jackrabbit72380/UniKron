@@ -71,7 +71,12 @@ QtObject {
         "45_facial-hair": "Facial Hair",
         "50_hair": "Hairstyles",
         "60_hat": "Headwear",
-        "70_glasses": "Glasses"
+        "70_glasses": "Glasses",
+        // The three the editor's XUI names separately for the 36 shape
+        // overrides: nose, ears and faceshape.
+        "71_nose": "Nose",
+        "72_ears": "Ears",
+        "73_head-shape": "Head Shape"
     })
 
     function slotLabel(folderName) {

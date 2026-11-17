@@ -86,24 +86,24 @@ was measured rather than guessed - set 5 brackets the eye band, wider than the
 lash sheet - so `bake_pack_face.py` renders them through that set (mask in
 alpha). 50_hair keeps its 178 real hairstyles.
 
-### Face shape cannot be split yet, and why
+### Face shape, split into Nose / Ears / Head Shape
 
-`17_face-shape` (36 items: noses, ears, chins) is the last category the retail
-editor splits and we do not (Nose, Ears, Head Shape). The split is a name-suffix
-job, but it is blocked on the art: these items are block-4 shape overrides with
-no geometry of their own, so their pictures are the per-item renders in
-`pack_art/17_face-shape/`, and those are **head close-ups framed on the item**
-(`large-chin.png` fills its canvas with a face) - not plates registered to the
-body frame the stage stacks. Used as a layer they cannot line up, and there are
-no `pack_plates/17_face-shape` plates to use instead.
+The 36 shape overrides divide exactly as their names do, and as the retail
+buttons do: **18 `*nose`, 9 `*ears`, 9 `*chin`**. They are now three folders -
+`71_nose`, `72_ears`, `73_head-shape` - with the retail labels out of the XUI
+(`nose`, `ears`, `faceshape`), so the rail reads Nose, Ears, Head Shape instead of
+one "Face Shape" list of noses, ears and chins together.
 
-What a split needs first: a shape plate baker. `bake_avatar.py --shape=NAME`
-already applies a decoded override to `Head` and renders it, and
-`bake_pack_plates.reference_frame` gives the body frame the other plates use, so
-the missing piece is a pass that renders the shaped head in that frame - the
-difference trick `bake_pack_face.py` uses will not serve here, because a morph
-moves the silhouette in both directions and a difference plate can only add
-pixels, never remove the stock outline.
+The art caveat stands and is why this stayed one list for so long: these items
+have no geometry of their own (block-4 overrides), so their pictures are the
+per-item renders in `pack_art/71_nose/` etc., and those are **head close-ups
+framed on the item** (`large-chin.png` fills its canvas with a face) rather than
+plates registered to the body frame the stage stacks. Splitting them does not
+change that: a shape is a geometry morph, which a layer stack cannot express, and
+the 3D sets (`assets/3d/turntable/angled-nose/` and friends, all 266 shapes have
+one) are what actually show it. A 2D plate would have to be a full head render in
+`bake_pack_plates.reference_frame`, not a difference plate: a morph moves the
+silhouette both ways and a difference can only add pixels.
 
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.

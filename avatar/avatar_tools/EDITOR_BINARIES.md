@@ -750,8 +750,9 @@ mouths at the same place on the face.
 
 Their closet art is the lower face cropped from those bakes into `pack_art/18_mouth/`, and
 `PackIndex.qml` now lists 20 folders. The numeric prefix is what orders the rail
-(`Style.layerOrder` reads it), so `17_face-shape` and `18_mouth` sort between face paint
-and pants without touching any QML.
+(`Style.layerOrder` reads it), so `17_eye-shadow` and `18_mouth` sort between face paint
+and pants without touching any QML. The same trick split the 36 shape overrides into
+`71_nose`, `72_ears` and `73_head-shape`, which now sit after `70_glasses`.
 
 Feature coverage after this pass, all in both genders:
 
