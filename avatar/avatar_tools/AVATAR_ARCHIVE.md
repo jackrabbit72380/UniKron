@@ -1182,3 +1182,14 @@ so the next pass belongs in `lzx.py`'s header handling rather than in the offset
 The good files carry **0xff at offset 14** and start at 15; these carry
 0x2c/0x5e/0x58/0x42/0x60 there, so the two groups differ systematically in exactly
 that byte.
+
+Both groups parse identically up to byte 14, so the container is not in doubt:
+
+    good  RifleIdle         58 4e 42 78 05 81 | 00 05 00 00 | fa 0e 00 00 | ff | stream...
+    bad   LMGShoulderWalk   58 4e 42 78 05 81 | a6 34 00 00 | 8a 9a 00 00 | 2c | stream...
+
+size-LE@6 and decompressed-LE@10 are correct for both (1280/3834 and 13478/39562),
+`XNBx` + version 5 + flags 0x81 match, and byte 14 is 0xff only in the group that
+decodes. That single byte is the whole difference: whatever consumes it is a block
+marker, and the aligned/verbatim/uncompressed attempt belongs in `lzx.py`'s first
+header read (line ~296), not in the offset sweep.
