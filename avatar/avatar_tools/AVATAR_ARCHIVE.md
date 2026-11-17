@@ -227,3 +227,27 @@ whose face has been edited. The `.Avatar` manifests already store component
 settings (with values like big-endian 1.0f), so a before/after pair would show
 which component the shape drives and what a non-default value looks like, and
 that pins the blob's meaning without having to trace 4,412 instructions.
+
+## Block 4: every framing tried, so none is repeated
+
+A shape asset is small: block 8 (15 bytes of metadata) and block 4, nothing else.
+A model has block 3 instead, whose payload *is* a chain of `(compressed,
+out_offset, out_size)` headers - `Head` declares `comp 18502, out 0, size 28581`
+at its first 12 bytes. Block 4 has no such header anywhere in it: the only place
+the declared size appears is offset 4.
+
+Tried, and failed, on the working decoder:
+
+| what | result |
+|---|---|
+| LZX at offsets 0, 24, 32, 40, 56, 64, 68, 72 | bad block type / bad pretree / out of input |
+| LZX at **every** offset 0..1605, both 16-bit word orders | no success; deepest failures reach "out of input bytes", i.e. it consumes the whole payload and produces nothing |
+| window 4K, 8K, 16K, 32K, 64K, 128K | no success |
+| a `(comp, out_off, out_size)` chain at every offset | no header carries the declared size except the field at +4 |
+| zlib, raw deflate, lzma, bz2 from every offset 0..200 | no match |
+
+So the payload is LZX-family compressed but is not a bare stream and does not use
+the model frame wrapper. The remaining places the wrapper can be described are
+`LoadAssetPackFromMemoryV2`'s per-asset load path (it already owns the buffer the
+asset is loaded into) and the guest `.xex`. Both are code reading, not byte
+guessing - which is why the byte guessing stopped here.
