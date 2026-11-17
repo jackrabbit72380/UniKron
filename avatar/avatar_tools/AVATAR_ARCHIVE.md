@@ -361,3 +361,42 @@ Everything lines up with what was measured before:
 So block 4's header is a GUID-keyed component record followed by its payload. The
 payload's framing is still the open question, and the save pair is still the fastest
 way to pin it.
+
+## Correction: block 4 is not entropy-coded
+
+I recorded earlier that the block-4 payload must be compressed because its entropy
+is 7.3-7.6 bits/byte. That inference was wrong, and the measurement that refutes it
+is simple: encode two *different* shapes and see how much survives.
+
+Large Chin and Rounded Chin both declare 5076 and are both 1613 bytes. From 0x40 on
+they share **296 of 1549 bytes (19%)**, including a 21-byte identical run:
+
+    00 00 fc 03 00 00 00 00 4c 00 00 00 00 00 00 00 e0 e3 e3 ff 4f 00 00 00 10 15
+
+Two independently compressed streams cannot share that. The payload is structured
+data with long identical regions, and the high entropy is in the bit-packed parts of
+it, not in the whole block.
+
+It is not a float array either, which was the other easy guess: scanning every
+4-byte window from 0x44 as a little-endian float finds only 3 plausible values in a
+row before the pattern breaks, and over the whole payload only 56-59% of words parse
+as finite floats with |v| < 10 - which is chance, not a format.
+
+So the open question is narrower than before but still open: **the payload is a
+packed encoding of 5076 bytes' worth of something - 423 records at 12 bytes -
+stored in 1613**, and the 3.15x is bit-width packing rather than compression. The
+families make this concrete:
+
+| declared | /12 | items | what they are |
+|---|---|---|---|
+| 5076 | 423 | 36 | chins, noses, ears |
+| 13584 | 1132 | 115 | smaller hiding templates |
+| 14724 | 1227 | 115 | larger hiding templates |
+
+The 5076 family's header is 0x40 bytes and 36 items share its first 32; the hiding
+templates' header is 0x20 and none of them share a prefix because the count is in
+it. Both headers end just before the packed region.
+
+What I did **not** find: the loop that unpacks it. The per-asset load is a virtual
+call (`call *0x10(%rax)` at 0x140e2b2f0), so the parser is behind a vtable rather
+than reachable from the pack loader by following calls.
