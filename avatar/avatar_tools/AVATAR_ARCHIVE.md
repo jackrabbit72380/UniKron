@@ -902,3 +902,50 @@ already is the resting hand, curl included, for this exact 71-joint rig.
 Unproven: the joint index space of these clips is assumed equal to the skeleton's
 (the values are anatomically sensible if so - uniform fist in Dance, near-zero thumb,
 zero for every finger in WalkCrouch - but that is agreement, not proof).
+
+### All of it, game by game
+
+The first pass only opened Avatar Miner Paintball's clips. Scanning every one of the
+4,484 `.xnb` in the archive for `CustomAvatarAnimationData` finds **88 avatar clips
+across 7 of the 19 games** (81 unique contents; the games reuse each other's clips -
+`walk` is byte-identical in Paintball, Deathmatch, Maze Game and Deadly Tomb):
+
+    Miner Paintball    37   Idle, Dance, Run, walk, Jump, Climb, Swim, Faint x3,
+                            BowIdle, BowFire, GrenadeThrow, Throw, AttackBat/Club/
+                            Hammer + the gun idles (duplicated in a Gun Anims folder)
+    Survival Games     24   idle, run/back/left/right, jump, fall, bow_aim/idle/reload,
+                            crossbow_*, catapult_aim, sword_block/idle/swing,
+                            throwingknife_*, blowpipe_idle, item_eat/plant, holster
+    and the Deadly Tomb 12  walk, run, run_org, Jump, Fall, Faint, Fail, Kick, Punch,
+                            Push, OnWall, hang
+    Deathmatch          9   Run, walk, Faint, Shooting, CrouchForward, CrossBowAnimation,
+                            HandGunPos, ShotGunPos, UzziPos
+    Maze Game           3   Walk, Run, PickUp
+    Air Wars            2   Plane, Helicopter (3 frames each)
+    Karting 2           1   steer
+
+The other twelve games (Golf, Punch, QuizCall, Avenue, Boogie, Bowling, Connection,
+Blackjack, Hangman, Laser Wars 2, Warfare) ship no avatar clip at all: they drive the
+avatar through `Microsoft.Xna.Framework.GamerServices.AvatarAnimation`, the platform's
+own preset library, which is not a file in the archive.
+
+### Every clip's hand, measured
+
+Mean rotation of the 30 finger phalanges, all 88 clips:
+
+    lowest   0.0   Paintball IdleCrouch and WalkCrouch - fingers not animated at all
+           14.2   SwimUnderwater
+           22.1   every walk
+           26.8   Paintball Idle          <- the standing rest pose
+           29.5   Survival Games idle
+           38.6   Deathmatch ShotGunPos / CrossBowAnimation
+           45.9   every run
+           46.8   Deathmatch HandGunPos
+           60.8   Deadly Tomb Punch
+           67.7   Paintball Dance         <- fist
+
+Nothing shipped is as open as `FINGER_CURL_DEGREES = (8, 10, 6)` except the two crouch
+idles where the fingers carry no rotation at all. The weapon poses are the most
+useful oddity: `HandGunPos`, `ShotGunPos`, `UzziPos` and `CrossBowAnimation` are 201
+frame holds at 3.33 s - a grip, not a shake - so they pin down how the fingers wrap an
+object, which no pack clip does.
