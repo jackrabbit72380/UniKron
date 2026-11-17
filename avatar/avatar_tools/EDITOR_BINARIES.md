@@ -87,6 +87,24 @@ any plausible scale range exists anywhere in the three files.
     avatar_eye_whites = false     # eye rendering variant
     model_shadows = true          # avatar casts a shadow
 
+The exe carries a documentation string beside every key it accepts, so the
+full surface is readable even where the shipped toml stops:
+
+    allow_avatar_initialization   Enable Avatar Initialization (some games need a full avatar impl)
+    avatar_asset_pack_dir         folder holding AvatarAssetPack*.toc; empty = game_data_root
+    avatar_closet_dir             <guid>.bin + closet_index.tsv; empty = <avatar_asset_pack_dir>/closet
+    avatar_data_dir               shared cross-title manifest folder; empty = <user_data_root>/avatar/manifest
+    avatar_marketplace_server     scheme://host[:port]; https means 443; "the only host the store will talk to"
+    avatar_marketplace_key        shared secret sent as X-Marketplace-Key
+    online_mode                   connect the editor's marketplace to that server
+    ae_enum_first                 closet item names to list first (';'-separated)
+    user_language, user_name, user_gamerpic
+
+`avatar_data_dir` matters for parity: the editor writes the manifest to one
+shared per-user folder that every other title then loads as the local avatar,
+which is why `Avatar6400.Avatar` in the pack folder and
+`avatar_manifest.bin` under user data are the same 1,000-byte record family.
+
 ## The Hub's avatar system (`resources/app/avatars.js`)
 
 The Xbox 360 Hub app ships as **plain readable JavaScript**, and `avatars.js`

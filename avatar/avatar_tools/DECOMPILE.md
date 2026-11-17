@@ -339,12 +339,31 @@ debugging.
    `lightColour`, `texEye` and `XtlEffect` match **zero** files across all
    39,611. The dash's scene names live in XUI data and the effect names in the
    `.updb` blobs, so the corpus could not have handed over the rig.
-3. **The closet index has no garment category.** `closet_index.tsv` is
-   `id, group, code, name`, and `code` is not the category: 904 of the caps,
-   566 helmets and 92 pairs of glasses are `3`, while shirts split across `1`
-   (1,302) and `2` (815) and shoes across `1` and `2` too. It looks like an item
-   source class. The editor's real filter is `AeSearchSet` in the port DLL,
-   which works on loaded asset metadata. The full dashboard corpus also names
+3. **The closet index has the category bitmask but not the bit names.**
+   `closet_index.tsv` is `id, categories, bodies, name`. **Corrected:** the third
+   column is not a source class, it is `avatarBodyType` - `3` is male+female and
+   `1`/`2` are one body each, which is why the caps, helmets and glasses counted
+   above sit at `3` while shirts and shoes split across `1` and `2`. The category
+   mask is column two, and it is not independent data either: it is the GUID's
+   first four bytes in hex (the Hub's importer writes
+   `parseInt(guid.slice(0, 8), 16)`), so each item carries its categories inside
+   its own id. The port logs the same pair at startup as
+   `[avatar] enum assets cats={:#x} bodies={:#x} closet={}`.
+
+   The bit *names* are still out of reach, and their transport is now known:
+   the port builds `/live/{:08x}/avataritems/{}.acp` and reads the item's
+   metadata from the **response headers** `X-Avatar-Item-Name`,
+   `X-Avatar-Item-Categories`, `X-Avatar-Item-Bodies` (its local server, 
+   `rex::kernel::xam::ServeAvatarItem` on `/avataritems/`, answers with them and
+   logs `[avatar-store] no local item for {}`). Online mode talks to
+   `avatar_marketplace_server` with `X-Marketplace-Key`; the manifest it serves
+   is `JMstudios.marketplace.v1` (key label `JMKEY1`) and the catalogue query is
+   `methodName=FindGameOffers` with `&Names=NameFilter&Values=` and a
+   `<totalItems>` reply. So the labels lived in the service, not the disc, and
+   neither `hair`/`headwear`/`tops`/`bottoms`/`shoes` nor any sibling word occurs
+   in `avatareditor.exe`, `rexruntime.dll` or the XEX strings - measured, not
+   assumed. The editor's real filter is `AeSearchSet` in the port DLL, which
+   works on loaded asset metadata. The full dashboard corpus also names
    the source of that metadata: `FUN_142529e40` builds
    `/live/{:08x}/avataritems/{}.acp`, and the port's own settings carry
    `CatalogCDNUriRoot`, `AvatarAssetUriRoot`, `AvatarMarketplaceManifest`,

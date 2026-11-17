@@ -6,6 +6,20 @@ The `Clean Slate NXE` build ships the dashboard's whole closet as
 
     00000008-001f-62f1-c10d-7afc354107d4  00000008  1  2014 Colombia Home Jersey
 
+Four columns: the item GUID, the item's **category bitmask**, its **body**
+mask, and its name. Column two is the GUID's first four bytes in hex, which is
+where the LIVE service put the categories - the Hub's importer writes it as
+`parseInt(guid.slice(0, 8), 16)` - so an item's categories travel inside its own
+id and the column is a restatement of it. Column three is `avatarBodyType`:
+`3` is male+female, `1` and `2` are one body each, which is why shirts and
+shoes split across those two values. The port logs the same pair on startup as
+`enum assets cats={:#x} bodies={:#x}`.
+
+What is *not* recoverable here is which bit of the mask means "hair" or
+"shoes": those labels are carried by the LIVE response header
+`X-Avatar-Item-Categories` and by the editor's encrypted XUI data, and the word
+list does not occur in the exe, the DLL or the XEX strings.
+
 This reads that folder without copying it and writes one JSON file the theme
 can consume, so a real 20,349-item closet can be addressed by name. It records
 what each item actually contains (block ids and sizes) rather than assuming a
@@ -14,9 +28,9 @@ garment type.
 The model block in a retail item is LZX-framed inside the STRB, where the
 editor's own pack stores its blocks plain; `avatar_mesh.decompress` handles
 the frame and then `read_model` reads it normally, giving batches, vertices,
-triangles, UVs, materials, joints and weights. Neither the item id, the index
-code, the joint binding nor the mesh position states a garment category, so
-this catalogue does not claim one.
+triangles, UVs, materials, joints and weights. Neither the item id, the category
+mask, the joint binding nor the mesh position states which bit means "hair" or
+"shoes", so this catalogue records the mask and claims no garment type.
 
     python3 closet_import.py <closet_dir> <out.json>
 """
@@ -31,7 +45,11 @@ INDEX = "closet_index.tsv"
 
 
 def read_index(folder):
-    """id -> (group, code, name) from the tab-separated index."""
+    """id -> (categories, bodies, name) from the tab-separated index.
+
+    Column two is the category bitmask (the GUID's first four bytes in hex),
+    column three the body mask: 3 = male+female, 1 and 2 = one body each.
+    """
     path = os.path.join(folder, INDEX)
     entries = {}
     with open(path, "r", encoding="utf-8", errors="replace") as handle:
@@ -39,8 +57,13 @@ def read_index(folder):
             parts = line.rstrip("\n").split("\t")
             if len(parts) < 4:
                 continue
-            item, group, code, name = parts[0], parts[1], parts[2], parts[3]
-            entries[item] = (group, code, name)
+            item, cats, bodies, name = parts[0], parts[1], parts[2], parts[3]
+            try:
+                cats = int(cats, 16)
+                bodies = int(bodies, 10)
+            except ValueError:
+                continue
+            entries[item] = (cats, bodies, name)
     return entries
 
 
@@ -91,7 +114,7 @@ def main(argv):
         return 1
     index = read_index(folder)
     items = []
-    for item, (group, code, name) in sorted(index.items()):
+    for item, (cats, bodies, name) in sorted(index.items()):
         facts = describe(folder, item)
         if facts is None:
             continue
@@ -99,8 +122,8 @@ def main(argv):
         items.append({
             "id": item,
             "name": name,
-            "group": group,
-            "code": code,
+            "categories": cats,
+            "bodies": bodies,
             "icon": icon if os.path.exists(os.path.join(folder, "icons", icon)) else None,
             "bytes": facts["size"],
             "blocks": facts["blocks"],
