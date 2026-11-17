@@ -404,3 +404,22 @@ animations, 71 joints, and two named gaps - the 266 shape-override-only items
 (block 4 undecoded) and the 87 scalp-cap hairstyles that only work under a hat.
 Anything unexpected makes it exit non-zero and stops the bake; `SKIP_AUDIT=1`
 bypasses it, which is only for iterating on the bakers themselves.
+
+## Verifying the art against the plan
+
+`verify_art.py` answers, without baking, whether the files on disk are the ones
+the plan asks for: one plate and one six-frame turntable per item, 120 animated
+frames, and nothing missing. `rebake_everything.sh all` now ends with it, so a
+rebuild that quietly skipped something exits non-zero instead of looking finished.
+
+It expects two things that are easy to mistake for gaps. Female face, face-paint
+and facial-hair plates are not expected: both bodies share the one `Head` asset and
+the editor falls back to the male sheet. And an item with no geometry cannot have
+a plate of its own, which is why the eyes are drawn by `bake_pack_face.py`.
+
+That difference bake had one hole of its own. The stock face is `Straight
+Eyebrows, Happy Eyes, Smirk Mouth`, and the comparison starts from it, so the item
+that *is* that face differed from itself by nothing and was dropped as "the sheet
+changed nothing" - `pack_plates/15_face/happy-eyes.png` was the only plate in the
+project that did not exist. That item is now compared against `Sharp Eyes`
+instead, which differs only in the iris.

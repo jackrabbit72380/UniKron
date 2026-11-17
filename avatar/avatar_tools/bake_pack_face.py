@@ -38,6 +38,11 @@ ART = os.path.join(os.path.dirname(HERE), "pack_art")
 WORK = tempfile.mkdtemp(prefix="face_plate_")
 # The stock face the comparison starts from, the same default the 3D bake uses.
 FACE_DEFAULT = ("Straight Eyebrows", "Happy Eyes", "Smirk Mouth")
+# The item that *is* the stock face cannot be recovered by difference against it:
+# the two renders are the same picture and every pixel is unchanged, so that one
+# plate came out empty. It is compared against this other eye instead, which
+# differs only in the iris - exactly what that plate should carry.
+FACE_ALTERNATE = "Sharp Eyes"
 # A sheet's edge is antialiased, so the difference fades out rather than stopping.
 # Below LO is rounding noise and stays clear, above HI is paint at full alpha, and
 # in between the plate keeps a soft edge - a hard cutoff drew a faint rectangular
@@ -137,7 +142,13 @@ def main():
 
         # Keep only what the item changed: same geometry, same frame, so the
         # difference is the sheet's own painting and nothing else.
-        diff = np.abs(painted[..., :3] - source[..., :3]).max(axis=2)
+        base = source
+        if category == "15_face" and name == FACE_DEFAULT[1]:
+            base = render_head(args.pack, clip, args.description,
+                               "--face=%s,%s,%s" % (FACE_DEFAULT[0], FACE_ALTERNATE,
+                                                    FACE_DEFAULT[2]),
+                               centre, height, args.width, args.height)
+        diff = np.abs(painted[..., :3] - base[..., :3]).max(axis=2)
         alpha = np.clip((diff - LO) / (HI - LO), 0.0, 1.0) * painted[..., 3]
         changed = alpha > 0.0
         if not changed.any():

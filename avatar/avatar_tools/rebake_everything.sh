@@ -31,6 +31,19 @@ CLIP_ASSET="Animation Male Idle Shifts Weight"
 JOBS="${JOBS:-8}"
 STAGE="${1:-all}"
 
+# The eyes, face paint and facial hair are UV sheets painted on the head rather
+# than body plates, so bake_pack_plates.py skips them (they have no geometry) and
+# bake_pack_face.py is the only thing that draws them. It was missing from this
+# script: a rebuild from scratch left 88 plates absent and said nothing about it.
+# One run covers both bodies - they share the Head asset, and the editor falls
+# back to the male sheet for the female avatar (AvatarEditor.qml, hasPlates).
+faces() {
+  python3 bake_pack_face.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
+    --categories 15_face,16_face-paint,45_facial-hair \
+    --outdir ../pack_plates --force --clip-asset "$CLIP_ASSET"
+  echo "face plates done"
+}
+
 plates() {
   for gender in male female; do
     if [ "$gender" = female ]; then
@@ -52,6 +65,7 @@ plates() {
       --outdir "$out" --force --clip-asset "$CLIP_ASSET"
     echo "plates $gender done"
   done
+  faces
 }
 
 turntables() {
@@ -86,7 +100,9 @@ case "$STAGE" in
   plates) plates ;;
   turntables) turntables ;;
   animated) animated ;;
-  all) plates; turntables; animated ;;
+  # Everything the plan asks for, or a non-zero exit: a bake that quietly left an
+  # item out is the one failure a directory listing never shows.
+  all) plates; turntables; animated; python3 verify_art.py ;;
   *) echo "usage: $0 [all|plates|turntables|animated]" >&2; exit 2 ;;
 esac
 echo "rebake complete: $STAGE"
