@@ -592,10 +592,11 @@ def write_markdown(path, audit):
              "meaning of the four trailing pairs in each entry (lengths right, values",
              "not).", "",
              "Each shape targets a stock mesh, and verify_shapes.py checks that rather",
-             "than assuming it: 207 of the 215 items with entries put every entry within",
-             "60 mm of the vertex its offset names - 33 on Head, 84 on MaleBody, 90 on",
-             "FemaleBody, mean 8 mm - and three of the high heels sit on FemaleBody with a",
-             "few vertices further out, which is what lifting a foot does.", "",
+             "than assuming it: 212 of the 215 items with entries put every entry within",
+             "60 mm of the vertex its offset names - 33 on Head at stride 52, 85 on",
+             "MaleBody and 94 on FemaleBody at stride 40, mean 8 mm. The other three are the",
+             "high heels, on FemaleBody with 190 of 198 entries in tolerance, which is what",
+             "a foot being lifted looks like.", "",
              "## Faults in the artwork itself", "",
              ]
     if audit["hair_shells"]:
