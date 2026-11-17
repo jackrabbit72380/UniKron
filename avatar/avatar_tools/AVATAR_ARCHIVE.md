@@ -447,3 +447,50 @@ Side finding while looking: the two functions that compare the `STRB` magic
 header's flag byte at `+4` and the byte counts at `+0x16`, `+0x17`, `+0x1a`, then
 round `a + 2b + c` up to an alignment. Those are the fields `strb_blocks()` already
 relies on, which is a useful independent confirmation of the container header.
+
+## Block 4 decoded: it is a bitstream, and here is the reader
+
+This is the answer the whole investigation was for, and it came from following the
+vtable rather than from more guesses about bytes.
+
+`0x140dbe460` is a variable-width **bit reader** - the only unpacking code in the
+binary:
+
+    mov 0x8(%rcx),%rsi          ; position, held in BITS
+    mov (%r8),%rdi              ; buffer
+  loop:
+    r11 = pos & 7               ; bit offset in the current byte
+    r10 = min(8 - r11, left)    ; bits this byte can still give
+    ebp = ~(-1 << r10)          ; mask
+    part = (data[pos >> 3] >> r11) & ebp
+    value |= part << got        ; assembled low bits first
+    got += r10; pos += r10; left -= r10
+  ; then the stream position advances by the number of bits consumed
+
+Its two callers give the format:
+
+**`0x140dbe690` - a component record**: 32 bits, 16, 16, then eight single bytes,
+with `bswap` on the 32 and `rol $8` on each 16. Since every field is byte aligned,
+that lands on exactly the same bytes as the unpacked record. Decoding Large Chin,
+Soft Nose, Elven Ears and Thin Chin from offset 0x40 returns
+`01000000-0200-0300` and the family GUID every time - which is the check that pins
+the bit order. It is `bitstream.py` in this directory.
+
+**`0x140dbee70` - a quantised value**:
+
+    v     = base (+0x04 of a parameter block) + read_bits(width at +0x08)
+    then three more reads, at widths (+0x28), (+0x29), (+0x2a)
+    float = offset (+0x10 / +0x18 / +0x14) + scale (+0x1c / +0x20 / +0x24) * v
+    and one read is signed: `and $1`, and when set it adds a constant to flip it
+
+So block 4 is quantised floats: per-field bit widths with per-field scale and
+offset, plus a zig-zag sign bit. That is why 5076 bytes of data fit in 1613: the
+values are 9-16 bit integers, not 32-bit floats. The 3.15x ratio is the quantisation,
+exactly as the shared 21-byte runs suggested and as compression never could.
+
+What is still open is only the parameter block: `+0x04` (base), `+0x08` (bit
+width), `+0x10`-`+0x24` (scales and offsets) and `+0x28`-`+0x2a` (three more
+widths). Something fills it from the block-4 header before the values are read,
+and that function is the last piece. The header fields already measured are the
+candidates: the per-item count at `+0x20` (110, 78, 46) and the small values at
+`+0x3c` (16, 15, 16) look exactly like a value count and a bit width.
