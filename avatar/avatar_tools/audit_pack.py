@@ -111,17 +111,20 @@ def check_shape(payload, report):
         report["problems"].append("ShapeOverrides: %s" % exc)
         return {"decoded": False, "variant": True}
     a, b = decoded["section_a"], decoded["section_b"]
-    offsets = [e["index"] for e in b["entries"]] + list(a["entries"])
-    stride = decode_shape.VERTEX_STRIDE
-    multiples = sum(1 for o in offsets if o % stride == 0) if offsets else 0
+    # Section A is a plain index list; only section B's leading field is a byte
+    # offset, and the stride it divides by depends on the mesh the shape targets.
+    offsets = [e["index"] for e in b["entries"]]
+    stride = decoded["stride"]
+    multiples = sum(1 for o in offsets if o % stride == 0) if (offsets and stride) else 0
     # Only the summary goes into the report: the decoded payload is bytes and the
     # records carry raw GUIDs, neither of which belongs in the JSON audit.
     decoded = {
         "decoded": True,
         "entries_a": a["count"],
         "entries_b": b["count"],
+        "stride": stride,
         "stride_multiples": multiples,
-        "vertices": len(offsets),
+        "vertices": len(offsets) + a["count"],
         "spare_bits": decoded["spare_bits"],
     }
     if decoded["spare_bits"] > 16:
@@ -518,9 +521,9 @@ def main():
     # override still has no geometry of its own - it is a morph onto someone
     # else's mesh - but that is a property of the item, not a gap in the reader.
     #
-    # Eight hiding templates use a section-B variant that is not decoded yet. That
-    # is a named, counted gap - printed with its names below - rather than a silent
-    # pass: every other shape override must decode cleanly or the bake stops.
+    # Nothing is expected to fail here any more - section B headers are byte
+    # aligned and that fixed the last eight - but a future variant would land in
+    # this bucket and be named rather than silently passing.
     variant_only = [r for r in failures
                     if all("variant not decoded" in p for p in r["problems"])]
     unexpected = [r for r in failures if r not in variant_only]
@@ -579,13 +582,17 @@ def write_markdown(path, audit):
              "new position: the leading field is a byte offset, so the vertex is the",
              "offset divided by the 52-byte vertex stride, and the three floats are the",
              "position, quantised at 7.071e-06 per unit.", "",
-             "258 of the 266 decode and every one of those is consumed to within a",
-             "byte; their positions land millimetres from the vertices they name and on",
-             "the anatomy the item is called after. Two things are not read: the meaning",
-             "of the four trailing pairs in each entry (their lengths are right, their",
-             "values are not understood), and the section layout of the other eight",
-             "hiding templates, whose second section decodes to a header that cannot be",
-             "right. Those eight are named by the audit rather than passed quietly.", "",
+             "Section A is a plain 12-bit index list for the clothing templates and empty",
+             "for the geometry shapes, and each section header is byte-aligned - the",
+             "padding after an odd-length list is what made eight of them read their",
+             "second header four bits early.", "",
+             "All 266 decode and every payload is consumed to within a byte. For the",
+             "facial shapes the positions land millimetres from the vertices they name and",
+             "on the anatomy the item is called after. Three things are not read: the",
+             "meaning of the four trailing pairs in each entry (lengths right, values",
+             "not), and which mesh the clothing hiding templates address - their offsets",
+             "divide by 40, but that puts their positions half a metre from MaleBody's", 
+             "vertices, so the target is unconfirmed.", "",
              "## Faults in the artwork itself", "",
              ]
     if audit["hair_shells"]:

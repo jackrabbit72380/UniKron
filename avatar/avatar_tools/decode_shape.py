@@ -57,20 +57,31 @@ content in a 115-byte block is the clearest case). Large Chin lands on bit 12904
 12904 exactly. That is the strongest structural check available without the retail
 applier, and it means the field set is complete.
 
-THE FIRST FIELD IS A BYTE OFFSET, and that is settled. Its value is always an exact
-multiple of 52, and 52 is the Head mesh's vertex stride (32-byte base plus five
-4-byte UV sets). Divided by 52, every entry of every shape lands inside 0..647 -
-Head's 648 vertices - and the entry's position sits a mean of 4 mm from that
-vertex, never more than 43 mm. Checked on Large Chin, Soft Nose, Elven Ears, Thin
-Chin and Rounded Chin: 434 entries, all multiples of 52, none out of range. So
-`vertex = (base + read(width 0)) // 52`, and the three floats are that vertex's
-new position rather than a delta.
+THE FIRST FIELD IS A BYTE OFFSET, and for the facial shapes that is settled. Its
+value is always an exact multiple of 52, and 52 is the Head mesh's vertex stride
+(32-byte base plus five 4-byte UV sets). Divided by 52, every entry lands inside
+0..647 - Head's 648 vertices - and the entry's position sits a mean of 4 mm from
+that vertex, never more than 43 mm. Checked on Large Chin, Soft Nose, Elven Ears,
+Thin Chin and Rounded Chin: 434 entries, all multiples of 52, none out of range.
+So the three floats are that vertex's new position rather than a delta.
+
+The stride is a property of the mesh, so this module derives it with a gcd of the
+offsets instead of hardcoding 52. That works for the faces at 52. For the clothing
+templates the gcd is 40, which is the MaleBody stride (32-byte base plus two 4-byte
+UV sets) - but those positions sit a mean of 0.5 m from MaleBody's vertices, so the
+mesh they target is NOT confirmed and the vertex numbers for clothing should not be
+trusted yet. The payload structure is confirmed for all 266; the mesh mapping is
+confirmed for the facial shapes only.
 
 WHAT IS STILL UNVERIFIED:
   * b is 7.071e-06 (sqrt(0.5)*1e-5) on all five shapes checked, i.e. it does not
     vary per shape the way the offsets do. Either it is a fixed quantisation
     constant or the field is not b at all. With it a 14-bit value spans 0.23 m,
     which is the right order for a facial displacement.
+  * which mesh the clothing hiding templates address. Their payloads decode and
+    consume to the byte, but mapping 40-stride offsets onto MaleBody puts the
+    positions half a metre from the vertices, so something is wrong with the
+    target (a garment mesh, a different body, or another space).
   * the three header floats are an anchor position, not the offsets they were
     called above. Angled Nose, which has no entries, stores exactly Head vertex 0
     (0.0121, 1.2473, 0.1458), which looks like a default when the shape is empty.
@@ -90,6 +101,7 @@ Usage:
     python3 decode_shape.py --all
 """
 import argparse
+import math
 import struct
 import sys
 
@@ -98,9 +110,12 @@ import bitstream
 
 PACK = "../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/AvatarAssetPack.toc"
 
-# Head/human vertex stride in bytes: 32-byte base plus five 4-byte UV sets. The
-# entry's first field is a byte offset into the vertex buffer, so dividing by this
-# gives the vertex. Checked against every entry of five shapes.
+# The entry's first field is a byte offset into the vertex buffer, so dividing by
+# the vertex stride gives the vertex. The stride is a property of the mesh, not of
+# the block: head shapes divide by 52 (32-byte base plus five 4-byte UV sets) and
+# clothing divides by 40 (32 plus two). Every offset in a payload is a multiple of
+# one of those, so decode_payload works the stride out with a gcd rather than
+# trusting a constant.
 VERTEX_STRIDE = 52
 
 
@@ -128,6 +143,13 @@ def decode_payload(payload, name=""):
     for _ in range(count_a):
         v, pos = bitstream.read_bits(payload, pos, width_a)
         entries_a.append(base_a + v)
+
+    # Section headers are byte-aligned. A 12-bit index list leaves the position
+    # mid-byte, so 0-7 padding bits sit before section B: 1996 -> 2000 bits for
+    # Surfer Shorts, already aligned at 4216 for 60's Boots. Without this, eight
+    # hiding templates read their section B header four bits early and got a
+    # count of 992 and a 256-bit width, which is how this was found.
+    pos = (pos + 7) // 8 * 8
 
     # ---- section B (0x140dbe760 + 0x140dbecb0) -----------------------
     count_b, pos = bitstream.read_bits(payload, pos, 32)
@@ -174,14 +196,23 @@ def decode_payload(payload, name=""):
         raw = base0 + i0
         entries_b.append({
             "index": raw,
-            "vertex": raw // VERTEX_STRIDE if raw % VERTEX_STRIDE == 0 else None,
+            "vertex": None,
             "xyz": (o[0] + scale[0] * v1,
                     o[1] + scale[1] * v2,
                     o[2] + scale[2] * v3),
             "extra": extra,
         })
 
+    stride = 0
+    for e in entries_b:
+        stride = math.gcd(stride, e["index"])
+    if stride > 1:
+        for e in entries_b:
+            if e["index"] % stride == 0:
+                e["vertex"] = e["index"] // stride
+
     out.update({
+        "stride": stride,
         "section_a": {"count": count_a, "base": base_a, "width": width_a,
                       "value": value_a, "record": rec_a, "entries": entries_a},
         "section_b": {"count": count_b, "base": base0, "width": width0,
@@ -220,6 +251,7 @@ def show(r):
              b["record"]["guid"].hex()))
     print("     b %.6g  offsets %s  widths %s  pairs %s"
           % (b["b"], ["%.4f" % x for x in b["offsets"]], b["widths"], b["pairs"]))
+    print("     vertex stride %d bytes (from the gcd of the offsets)" % r["stride"])
     print("     entries start bit %d, end bit %d of %d"
           % (r["start_bit"], r["end_bit"], r["bits"]))
     for e in b["entries"][:r["_wanted"]]:

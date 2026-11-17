@@ -33,13 +33,18 @@ new position: the leading field is a byte offset, so the vertex is the
 offset divided by the 52-byte vertex stride, and the three floats are the
 position, quantised at 7.071e-06 per unit.
 
-258 of the 266 decode and every one of those is consumed to within a
-byte; their positions land millimetres from the vertices they name and on
-the anatomy the item is called after. Two things are not read: the meaning
-of the four trailing pairs in each entry (their lengths are right, their
-values are not understood), and the section layout of the other eight
-hiding templates, whose second section decodes to a header that cannot be
-right. Those eight are named by the audit rather than passed quietly.
+Section A is a plain 12-bit index list for the clothing templates and empty
+for the geometry shapes, and each section header is byte-aligned - the
+padding after an odd-length list is what made eight of them read their
+second header four bits early.
+
+All 266 decode and every payload is consumed to within a byte. For the
+facial shapes the positions land millimetres from the vertices they name and
+on the anatomy the item is called after. Three things are not read: the
+meaning of the four trailing pairs in each entry (lengths right, values
+not), and which mesh the clothing hiding templates address - their offsets
+divide by 40, but that puts their positions half a metre from MaleBody's
+vertices, so the target is unconfirmed.
 
 ## Faults in the artwork itself
 

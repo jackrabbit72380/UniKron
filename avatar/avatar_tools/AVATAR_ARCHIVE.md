@@ -665,3 +665,42 @@ mapping.
 The silhouette change is real but subtle (mean 14 mm on a head about 22 cm tall),
 so it reads as a variation rather than a caricature, which is what these sliders
 are for.
+
+## The eight that would not decode: section headers are byte aligned
+
+Eight hiding templates (Daisy Print Dress, 70's Full-zip Jacket, 60's Dress,
+Plimsolls, 70's Leather Platforms, Formal Trouser Suit, Surfer Shorts, Surfer
+Hotpants) came back with a section B header of "count 992, index width 256" inside
+a 13136-bit block - impossible. The reader failed loudly on them rather than reading
+past the end, and the audit named all eight.
+
+The fix came from an anchor rather than a guess. `b`, the quantisation constant, is
+0x36ed4402 on every single item, so searching for that 32-bit value locates the
+parameter block exactly, and the parameter block starts 64 bits into it. Working back
+256 bits gives the section B header start:
+
+    60's Boots       b at 4472 -> section B at 4216 = 256 + 330 x 12   exact
+    Surfer Shorts    b at 2256 -> section B at 2000 = 256 + 145 x 12 + 4
+    Plimsolls        b at 2280 -> section B at 2024 = 256 + 147 x 12 + 4
+
+Four bits out, and four was the clue: 1996 bits is not a byte boundary (249.5
+bytes), 2000 is. Section headers are byte aligned and the writer pads the gap. 60's
+Boots needed no padding because 330 x 12 = 3960 already landed on a byte.
+
+The decoder now aligns before reading section B, and all 266 shape overrides parse:
+109032 entries, every payload consumed to within a byte, no problem assets. The same
+alignment explains the 0-7 spare bits seen across the whole pack.
+
+## What the clothing entries point at is still open
+
+Section A of a hiding template is a plain 12-bit index list (0, 1, 2, 3 ... - the
+vertices to hide), not offsets. Section B's leading field is an offset, but its
+stride differs from the faces: the gcd of the offsets is 40 against 52 for head
+shapes, and 40 is MaleBody's vertex stride (32-byte base plus two 4-byte UV sets).
+
+It does not fit, though. Mapping those offsets onto MaleBody's vertices puts the
+positions a mean of 0.51 m (Surfer Shorts) and 0.61 m (60's Boots) away from the
+vertex the offset names - not millimetres. So the clothing templates decode
+structurally but their target is not MaleBody: it could be the garment's own mesh,
+another body, or a different coordinate space. Their vertex numbers should not be
+used until that is settled, and the docstring and DECODE_STATUS.md both say so.
