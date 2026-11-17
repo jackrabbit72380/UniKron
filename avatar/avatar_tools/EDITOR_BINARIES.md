@@ -743,3 +743,29 @@ Feature coverage after this pass, all in both genders:
 | eyes | 45 |
 | mouths | 26 |
 | head shapes (chin, nose, ears) | 36 |
+
+## What the pack does not have
+
+The retail editor offers body builds - normal, tall, small, fat, thin and their
+combinations - and this pack has **none of them**. Its only body assets are `MaleBody`
+and `FemaleBody`; a scan of all 1079 asset names finds no tall, small, fat or thin body,
+no body-type mesh and no body-type morph. The 36 block-4 overrides are all head shapes
+(chin, nose, ears). The `BodyCreateButton` options are therefore not recoverable from this
+data, and the editor must not offer a body build it cannot draw.
+
+Two naming details that cost time here: `slug()` keeps the apostrophe's consonant
+(`Boxer's Nose` -> `boxer-s-nose`), and `pack_genders.json` is keyed by retail name, so
+keying it by slug yields "both" for one-gender items.
+
+## Coverage after the feature passes
+
+| group | count | 3D sets |
+| --- | ---: | --- |
+| wardrobe items (18 pack categories) | 743 | 740 |
+| head shapes | 36 | 36 both genders |
+| eyebrows | 26 | 26 both |
+| eyes | 45 | 45 both |
+| mouths | 26 | 26 both |
+
+The three wardrobe items without a set are `MaleBody`, `FemaleBody` and `Head`, which every
+set already contains.
