@@ -411,6 +411,20 @@ What closes the gaps is adduction - rotating each knuckle about the palm normal 
 `atan2(spread, length)`, which lands the tip on the hand's midline - times
 `FINGER_ADDUCT` (default 0.85).
 
+**That adduction was inverted, and it was the fan.** `finger_bones` picks the
+direction by rotating the tip 15° about the palm normal and asking whether that
+brings it nearer the midline; the answer is the *inward* direction, so it needs
++1, but it was stored as -1 and every adduction came out as an abduction. The
+measurement that shows it is a sweep of `AVATAR_FINGER_ADDUCT` on the idle pose:
+before the fix 0.85 fanned the fingers a little and 1.4 fanned them *wider*, which
+no amount of tuning could have fixed from the outside. With the sign corrected the
+same values converge, and the bakes are rebaked with it - the plates, the 1,204
+item sets, the four hairstyle sets, both default sets and the 120 animated frames.
+
+What is left is the mesh, not the pose: a hand is 69 vertices and 100 triangles,
+four tubes with no webbing, so at a close zoom the fingers still show as separate
+prongs. At the size the closet draws them they read as one hand.
+
 **The wrists needed 90° of pronation, which no clip has.** The idle swings the arm
 down from the T-pose without any twist, so the palm - down in bind - ends up facing
 sideways, showing the camera the hand's full width. A 69-vertex hand at full width

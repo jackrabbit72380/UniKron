@@ -50,6 +50,10 @@ def main():
     pack, clip, description, outdir = args[:4]
     poses = int(opts.get("poses", 6))
     yaws = int(opts.get("yaws", 8))
+    # A full set is 120 frames at about eight seconds a frame, which is longer
+    # than a tool timeout allows: `--only=3,4` bakes just those poses, leaving
+    # the rest of the folder alone so a long run can continue where it stopped.
+    only = [int(v) for v in opts.get("only", "").split(",") if v.strip() != ""]
 
     with open(os.path.join(HERE, "outfits.json"), "r", encoding="utf-8") as fh:
         spec = json.load(fh)
@@ -66,11 +70,14 @@ def main():
     frames = [round(i * (total - 1) / max(poses, 1)) for i in range(poses)]
 
     os.makedirs(outdir, exist_ok=True)
-    for stale in os.listdir(outdir):
-        if stale.startswith("yaw_") and stale.endswith(".png"):
-            os.remove(os.path.join(outdir, stale))
+    if not only:
+        for stale in os.listdir(outdir):
+            if stale.startswith("yaw_") and stale.endswith(".png"):
+                os.remove(os.path.join(outdir, stale))
 
     for index, frame in enumerate(frames):
+        if only and index not in only:
+            continue
         obj = os.path.join("/tmp", "animated_pose_%02d.obj" % index)
         subprocess.run(
             [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, str(frame), obj,

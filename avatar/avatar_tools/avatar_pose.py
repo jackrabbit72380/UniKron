@@ -319,8 +319,13 @@ def finger_bones(joints_rig, bind):
                 along = sum(offset[i] * middle_dir[i] for i in range(3))
                 return math.sqrt(max(0.0, sum(c * c for c in offset) - along * along))
 
+            # A positive angle about the palm normal is the inward direction when
+            # it brings the tip closer to the hand's midline, so it needs +1, not
+            # -1: the earlier -1 turned every adduction into an abduction and the
+            # stronger the value the wider the hand splayed (measured: 0.85 fanned,
+            # 1.4 fanned further).
             swung = _rotate_about(tip, here, mat_axis_angle(normal, 15.0))
-            swing_sign = -1.0 if lateral(swung) < lateral(tip) else 1.0
+            swing_sign = 1.0 if lateral(swung) < lateral(tip) else -1.0
 
             # Fingers have to come together, not just curl. In wrist space the
             # four knuckles sit at z +0.042, +0.011, -0.019, -0.047 and their

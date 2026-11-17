@@ -619,7 +619,11 @@ Three limits in the data, each checked rather than assumed:
   tip is on), 85% of the full adduction that would land each fingertip on the
   hand's midline, the thumb at 22% of both, and a 90° forearm pronation
   (`apply_wrist_roll`) because no clip in the pack twists the forearm and without
-  it every hand faces the camera flat, as a fan of prongs. The retail editor's
+  it every hand faces the camera flat, as a fan of prongs. **CORRECTION:** that
+  adduction was applied with the wrong sign (the inward test returned +1, the code
+  used -1), so it pushed the fingers apart - 0.85 fanned them and 1.4 fanned them
+  wider, which is how the inversion was caught. With the sign fixed the fingers
+  converge and the fan in the bakes was the abduction, not the mesh. The retail editor's
   own preview image (`resources/app/app/assets/previews/editor-metro2010.png`)
   shows the palms facing the thighs, which is what that roll reproduces.
   `scan_clips.py` over all 41 animations confirms no clip contains a relaxed
