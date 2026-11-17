@@ -810,3 +810,42 @@ same bake without a shape:
 That is the whole chain in one command: pack bytes, bit reader, quantised positions,
 vertex stride, bind-pose reshape, 71-joint skinning, OBJ, turntable frames. The
 frames render a complete posed figure, which is what AvatarStage3D plays.
+
+## There are two avatar builds, and the dashboard's own poses were in the pack all along
+
+Asked whether every avatar game in the archive has been looked at: there are exactly
+two, `resources/editors/metro2010` and `resources/editors/nxe2008`, and they are the
+same content in two builds.
+
+    AvatarAssetPack.toc      md5 2b58915d809332b23ecff1669acdccee   identical
+    10 .AvatarAnimation      md5 identical, all ten
+    avatareditor.toml        identical
+    avatareditor.exe         17,567,232 bytes  vs  8,651,264 bytes   different build
+
+The nxe2008 binary is the smaller one and it is Rex-hosted with C++ RTTI left in,
+including a source path: `NXE/avatar_editor_7357/src/kernel/xam/avatars/skeleton.cpp`.
+So there is no third game hiding avatar data here - only a second build of the same
+editor, which is still worth having because of the symbols.
+
+What that build's string table gives us is the animation names, and they matter:
+
+    Animation Generic Stand 0 .. 7
+    Animation Male Idle Checks Hand / Looks Around / Shifts Weight / Stretch
+    Animation Female Idle Check Nails / Fixes Shoe / Looks Around / Shifts Weight
+
+Every one of those is **in the pack**, as block-1 assets, and `show_hand.py
+--clip-asset` already resolves them (`Generic Stand 0`: 108 frames; `Male Idle Shifts
+Weight`: 242). `Generic Stand 0..7` are the dashboard's own standing poses.
+
+This contradicts the earlier note in CATALOG.md that "there is no relaxed-hand pose in
+the pack to copy, so the pose has to be built": the bakes were using
+`IdleOffScreen.AvatarAnimation`, an editor clip, and adding a hand-invented curl on
+top of it. The retail stand poses were sitting in the pack unused. Whatever the right
+hand turn out to be, they should come from these clips rather than from
+`AVATAR_FINGER_CURL`.
+
+Rendering the isolated hand from `Generic Stand 0` and from the idle clip at eight
+angles each shows the same problem in both: the fingers read as one fused paddle
+rather than separate digits. So the shape of the hand is not being decided by which
+clip is loaded - the isolation or the skinning of the 15 finger joints needs to be
+checked before the pose is tuned again.
