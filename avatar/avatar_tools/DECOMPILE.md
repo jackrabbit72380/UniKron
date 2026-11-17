@@ -592,3 +592,16 @@ So the pack is, in order: 0x28 header, `count x 0xF8` records, the UTF-16BE name
 pool, then the payloads back to back ending exactly at EOF. Every asset's name,
 offset and size come from its own record, and nothing in the file is left
 unaccounted for.
+
+### The name field, partly pinned
+
+Read on more records, `+0xC0` is an **absolute file offset into the name pool**
+(`Male Power Tee` -> 330098, which is inside the pool), not pool-relative and not
+constant. It does *not* point at the start of every name: at `Large Chin`'s value
+the pool reads "Large" and at `Male Power Tee`'s it reads "Power Tee", so the pool
+is **deduplicated by substring** - both fragments also exist as their own entries
+in it. The second fragment's field is not yet identified; `+0x98`, `+0x9C`, `+0xA0`,
+`+0xA4`, `+0xA8`, `+0xB0` and `+0xB8` decode to nothing readable as UTF-16 at
+either absolute or pool-relative offsets, so the pair is not simply two offsets in
+those slots. A name is therefore assembled, not stored whole, and the assembler has
+not been found in `LoadAssetPackFromMemoryV2`.
