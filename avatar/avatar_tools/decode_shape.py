@@ -66,22 +66,28 @@ Thin Chin and Rounded Chin: 434 entries, all multiples of 52, none out of range.
 So the three floats are that vertex's new position rather than a delta.
 
 The stride is a property of the mesh, so this module derives it with a gcd of the
-offsets instead of hardcoding 52. That works for the faces at 52. For the clothing
-templates the gcd is 40, which is the MaleBody stride (32-byte base plus two 4-byte
-UV sets) - but those positions sit a mean of 0.5 m from MaleBody's vertices, so the
-mesh they target is NOT confirmed and the vertex numbers for clothing should not be
-trusted yet. The payload structure is confirmed for all 266; the mesh mapping is
-confirmed for the facial shapes only.
+offsets instead of hardcoding 52: faces divide by 52 (32-byte base plus five 4-byte
+UV sets) and the bodies by 40 (32 plus two). The target is then whichever stock mesh
+the vertices actually sit on - Head, MaleBody or FemaleBody - and that is checkable
+rather than assumed; see verify_shapes.py. Using the same offsets, the clothing
+templates give a mean distance of 0.51 m against MaleBody and 0.002 m against
+FemaleBody, which is how the target was pinned down.
+
+Across the 215 shape-only items that carry entries, 207 put every entry within 60 mm
+of the named vertex (mean 8 mm): 33 on Head, 84 on MaleBody, 90 on FemaleBody. Three
+more are on the right mesh with a few vertices further out - the high heels, which do
+lift a foot. Five 2-entry "Template" items do not fit any of the three and are still
+unexplained.
 
 WHAT IS STILL UNVERIFIED:
   * b is 7.071e-06 (sqrt(0.5)*1e-5) on all five shapes checked, i.e. it does not
     vary per shape the way the offsets do. Either it is a fixed quantisation
     constant or the field is not b at all. With it a 14-bit value spans 0.23 m,
     which is the right order for a facial displacement.
-  * which mesh the clothing hiding templates address. Their payloads decode and
-    consume to the byte, but mapping 40-stride offsets onto MaleBody puts the
-    positions half a metre from the vertices, so something is wrong with the
-    target (a garment mesh, a different body, or another space).
+  * what the five 2-entry "Template" items (Chinos with Belt, Female Cargo Pants,
+    Female Tracksuit Pants, Female Trousers Bottom, Denim Jacket with Tee) mean.
+    Their entries land 0.28-0.59 m from every stock mesh, so with two or three
+    entries there is nothing to fit them against.
   * the three header floats are an anchor position, not the offsets they were
     called above. Angled Nose, which has no entries, stores exactly Head vertex 0
     (0.0121, 1.2473, 0.1458), which looks like a default when the shape is empty.

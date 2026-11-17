@@ -704,3 +704,35 @@ vertex the offset names - not millimetres. So the clothing templates decode
 structurally but their target is not MaleBody: it could be the garment's own mesh,
 another body, or a different coordinate space. Their vertex numbers should not be
 used until that is settled, and the docstring and DECODE_STATUS.md both say so.
+
+## Which mesh a shape targets - and how that was found
+
+The clothing templates decode, but their 40-stride offsets did not fit MaleBody: the
+positions sat a mean of 0.51 m away. Testing the same offsets against every stock
+mesh answered it in one step - the distance to FemaleBody's vertex was 0.002 m, and
+the nearest-vertex index minus the stored vertex was **0 for every entry**. The
+templates were never wrong; the assumed target was.
+
+`verify_shapes.py` now does that test for every shape-only item rather than trusting
+a constant. It derives the stride with a gcd, takes the vertex out of the offset,
+and asks which of Head / MaleBody / FemaleBody the vertices sit on:
+
+    shape-only items with entries: 215
+    every entry within 60 mm:      207 of 215   (mean 8 mm)
+        Head          33 items, mean 0.0080 m, worst 0.0170 m
+        MaleBody      84 items, mean 0.0077 m, worst 0.0195 m
+        FemaleBody    90 items, mean 0.0078 m, worst 0.0260 m
+
+A wrong target misses by hundreds of millimetres and a right one by millimetres, so
+there is no grey area and nothing to tune: the exit status is 1 if fewer than 207
+items fit or if the item count drops.
+
+Eight do not fit completely, and they are two different things:
+
+* three high heels - Female Platform Shoes, Female Strappy High Heels, High Heel
+  Body Modification - are on FemaleBody with 190 of 198 entries inside 60 mm and a
+  26 mm mean. That is a shoe lifting the foot, not a wrong target.
+* five 2-entry "Template" items (Chinos with Belt, Female Cargo Pants, Female
+  Tracksuit Pants, Female Trousers Bottom, Denim Jacket with Tee) land 0.28-0.59 m
+  from every stock mesh. With two or three entries there is nothing to fit them
+  against, so they stay unexplained rather than being forced to fit something.

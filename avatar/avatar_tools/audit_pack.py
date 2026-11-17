@@ -588,11 +588,14 @@ def write_markdown(path, audit):
              "second header four bits early.", "",
              "All 266 decode and every payload is consumed to within a byte. For the",
              "facial shapes the positions land millimetres from the vertices they name and",
-             "on the anatomy the item is called after. Three things are not read: the",
+             "on the anatomy the item is called after. Two things are not read: the",
              "meaning of the four trailing pairs in each entry (lengths right, values",
-             "not), and which mesh the clothing hiding templates address - their offsets",
-             "divide by 40, but that puts their positions half a metre from MaleBody's", 
-             "vertices, so the target is unconfirmed.", "",
+             "not), and what the five 2-entry \"Template\" items mean.", "",
+             "Each shape targets a stock mesh, and verify_shapes.py checks that rather",
+             "than assuming it: 207 of the 215 items with entries put every entry within",
+             "60 mm of the vertex its offset names - 33 on Head, 84 on MaleBody, 90 on",
+             "FemaleBody, mean 8 mm - and three of the high heels sit on FemaleBody with a",
+             "few vertices further out, which is what lifting a foot does.", "",
              "## Faults in the artwork itself", "",
              ]
     if audit["hair_shells"]:
