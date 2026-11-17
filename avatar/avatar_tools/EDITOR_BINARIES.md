@@ -695,3 +695,24 @@ clobbered the mesh's vertex colours and fed a dict to the renderer.
 That leaves **740 of the wardrobe's 743 items** with a 3D set, 45 male and 45 female of
 them eye shadow. The only three without one are the base layers - `MaleBody`,
 `FemaleBody`, `Head` - which are drawn into every set rather than being stage variants.
+
+## The facial shapes are now items
+
+The editor offers chins, noses and ears that move the head rather than replacing a part.
+`pack_audit.json` lists 36 of them - 9 chin, 18 nose, 9 ear - as block-4 overrides, and
+`decode_shape.py` had already proven the format (`Large Chin` moves 110 of 3975 vertices,
+mean 14 mm, all inside `Head`). What was missing was any way to show them.
+
+`bake_pack_turntables.py` gained a `shape` kind and a `--shapes` flag: the asset goes to
+`bake_avatar.py --shape=` instead of into the parts list, so the head is reshaped before
+skinning. 36 male and 36 female sets are baked in `assets/3d/turntable{, _female}/`, and
+`large-chin` against `thin-chin` differs exactly where it should - a full, heavy jaw
+against a narrow pointed one.
+
+Their closet art is the head cropped out of those bakes, written to
+`pack_art/17_face-shape/<slug>.png`, and `PackIndex.qml` now lists 19 folders instead of
+18. The strip therefore offers a Face Shape category whose picks resolve to
+`assets/3d/turntable/<slug>/` like any other item.
+
+One naming trap: `slug()` keeps the apostrophe's consonant, so `Boxer's Nose` becomes
+`boxer-s-nose`, not `boxers-nose`.

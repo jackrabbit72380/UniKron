@@ -109,7 +109,14 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
     else:
         worn = [stock[k] for k in ("shirts", "pants", "shoes") if k != kind]
     head = [BODY_FOR[gender], "Head"] + ([] if kind == "hair" else [hair])
-    parts = head + [asset] + worn
+    # A shape is not a worn asset: it rewrites the head's vertices before skinning,
+    # so it goes to --shape and nothing is added to the parts list.
+    shape_args = []
+    if kind == "shape":
+        parts = head + worn
+        shape_args = ["--shape=" + asset]
+    else:
+        parts = head + [asset] + worn
     face_arg = "--face"
     if kind == "eyes":
         face_arg = "--face=Straight Eyebrows,%s,Smirk Mouth" % asset
@@ -117,7 +124,7 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
         face_arg = "--face=%s,Happy Eyes,Smirk Mouth" % asset
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
-         "--colours=" + description, "--hair=" + HAIR_COLOUR, face_arg] + parts,
+         "--colours=" + description, "--hair=" + HAIR_COLOUR, face_arg] + shape_args + parts,
         capture_output=True, text=True)
     if result.returncode != 0 or not os.path.exists(obj):
         return "bake_avatar: " + (result.stderr.strip().splitlines() or ["failed"])[-1]
@@ -175,6 +182,8 @@ def main():
     ap.add_argument("--width", type=int, default=192)
     ap.add_argument("--height", type=int, default=288)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--shapes", action="store_true",
+                    help="also bake the block-4 facial shapes (chin, nose, ears)")
     ap.add_argument("--only", default="",
                     help="bake only items whose retail name contains this, ignoring case")
     ap.add_argument("--start", type=int, default=0,
@@ -222,6 +231,15 @@ def main():
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
             items.append((record["name"], CATEGORY_KIND.get(category), decal_key))
+    if args.shapes:
+        # The decoded block-4 overrides that move the head. The other entries in
+        # the same block are clothing hiding/target templates, which are not
+        # faces and are not stage variants.
+        with open(os.path.join(HERE, "pack_audit.json"), "r", encoding="utf-8") as fh:
+            audit = json.load(fh)["shape_override_assets"]
+        faces = [n for n in audit
+                 if not n.endswith("Template") and n.split()[-1] in ("Chin", "Nose", "Ears")]
+        items.extend((n, "shape", "shape") for n in faces)
     if args.only:
         items = [it for it in items if args.only.lower() in it[0].lower()]
     if args.start:
@@ -239,6 +257,8 @@ def main():
         # says they paint the head instead.
         if category in DECAL_SETS and category != "45_facial-hair" and category != "16_face-paint":
             kind = "decal"
+        elif category == "shape":
+            kind = "shape"
         # --limit caps how many are *baked*, not how many are looked at: a run
         # restarted after a timeout must still find work, and slicing the list
         # first would only re-walk the sets that already exist.
