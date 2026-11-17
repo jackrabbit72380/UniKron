@@ -1,0 +1,11138 @@
+{
+ "xex": "avatareditor.xex",
+ "string_count": 3660,
+ "icon_bases": [
+  {
+   "at": "0x004739",
+   "name": "controlp"
+  },
+  {
+   "at": "0x00476d",
+   "name": "legend_y"
+  },
+  {
+   "at": "0x004781",
+   "name": "legend_x"
+  },
+  {
+   "at": "0x004795",
+   "name": "legend_b"
+  },
+  {
+   "at": "0x0047a9",
+   "name": "legend_a"
+  },
+  {
+   "at": "0x005b99",
+   "name": "option_dialog_yes"
+  },
+  {
+   "at": "0x005bbd",
+   "name": "option_dialog_no"
+  },
+  {
+   "at": "0x005be1",
+   "name": "bodyshape_tallnormal"
+  },
+  {
+   "at": "0x005c0d",
+   "name": "bodyshape_normalthin"
+  },
+  {
+   "at": "0x005c39",
+   "name": "bodyshape_normalnormal"
+  },
+  {
+   "at": "0x005c69",
+   "name": "bodyshape_normalfat"
+  },
+  {
+   "at": "0x005c91",
+   "name": "bodyshape_smallnormal"
+  },
+  {
+   "at": "0x005cbd",
+   "name": "goto_startover"
+  },
+  {
+   "at": "0x005cdd",
+   "name": "goto_creator"
+  },
+  {
+   "at": "0x005cf9",
+   "name": "goto_closet"
+  },
+  {
+   "at": "0x005d11",
+   "name": "goto_saveandexit"
+  },
+  {
+   "at": "0x005d35",
+   "name": "icon_buttonb_back"
+  },
+  {
+   "at": "0x005d59",
+   "name": "saveoutfit"
+  },
+  {
+   "at": "0x005d71",
+   "name": "eyeshadow_remove"
+  },
+  {
+   "at": "0x005d95",
+   "name": "border_long_nofill_vertical"
+  },
+  {
+   "at": "0x005dcd",
+   "name": "facial_hair_male_remove"
+  },
+  {
+   "at": "0x005dfd",
+   "name": "facial_skin_male_remove"
+  },
+  {
+   "at": "0x005e2d",
+   "name": "glasses_remove"
+  },
+  {
+   "at": "0x005e4d",
+   "name": "earring_remove"
+  },
+  {
+   "at": "0x005e6d",
+   "name": "watch_remove"
+  },
+  {
+   "at": "0x005e89",
+   "name": "ring_remove"
+  },
+  {
+   "at": "0x005ea1",
+   "name": "gloves_remove"
+  },
+  {
+   "at": "0x005ebd",
+   "name": "border_nofill"
+  },
+  {
+   "at": "0x005ed9",
+   "name": "imdone"
+  },
+  {
+   "at": "0x005ee9",
+   "name": "option_colour"
+  },
+  {
+   "at": "0x005f05",
+   "name": "colour_palette_skin"
+  },
+  {
+   "at": "0x005f2d",
+   "name": "takephoto"
+  },
+  {
+   "at": "0x005f41",
+   "name": "photobooth"
+  },
+  {
+   "at": "0x005f59",
+   "name": "loadoutfit"
+  },
+  {
+   "at": "0x005f71",
+   "name": "lipstick"
+  },
+  {
+   "at": "0x005f85",
+   "name": "eyeshadow"
+  },
+  {
+   "at": "0x005f99",
+   "name": "gloves"
+  },
+  {
+   "at": "0x005fa9",
+   "name": "gloves_female"
+  },
+  {
+   "at": "0x005fc5",
+   "name": "ring"
+  },
+  {
+   "at": "0x005fd1",
+   "name": "watch"
+  },
+  {
+   "at": "0x005fdd",
+   "name": "earring"
+  },
+  {
+   "at": "0x005fed",
+   "name": "glasses"
+  },
+  {
+   "at": "0x005ffd",
+   "name": "malecostume"
+  },
+  {
+   "at": "0x006015",
+   "name": "femalecostume"
+  },
+  {
+   "at": "0x006031",
+   "name": "body_access"
+  },
+  {
+   "at": "0x006049",
+   "name": "head_access"
+  },
+  {
+   "at": "0x006061",
+   "name": "makeup_male"
+  },
+  {
+   "at": "0x006079",
+   "name": "makeup"
+  },
+  {
+   "at": "0x006089",
+   "name": "hat"
+  },
+  {
+   "at": "0x006091",
+   "name": "shoes"
+  },
+  {
+   "at": "0x00609d",
+   "name": "bottoms"
+  },
+  {
+   "at": "0x0060ad",
+   "name": "tops"
+  },
+  {
+   "at": "0x0060b9",
+   "name": "facial_skin_male"
+  },
+  {
+   "at": "0x0060dd",
+   "name": "facial_female"
+  },
+  {
+   "at": "0x0060f9",
+   "name": "facial_hair_male"
+  },
+  {
+   "at": "0x00611d",
+   "name": "eyebrows"
+  },
+  {
+   "at": "0x006131",
+   "name": "eyes"
+  },
+  {
+   "at": "0x00613d",
+   "name": "mouth_male"
+  },
+  {
+   "at": "0x006155",
+   "name": "mouth"
+  },
+  {
+   "at": "0x006161",
+   "name": "nose"
+  },
+  {
+   "at": "0x00616d",
+   "name": "ears"
+  },
+  {
+   "at": "0x006179",
+   "name": "facial"
+  },
+  {
+   "at": "0x006189",
+   "name": "faceshape"
+  },
+  {
+   "at": "0x00619d",
+   "name": "hair"
+  },
+  {
+   "at": "0x0061a9",
+   "name": "body"
+  },
+  {
+   "at": "0x02af69",
+   "name": "false"
+  },
+  {
+   "at": "0x02af75",
+   "name": "true"
+  },
+  {
+   "at": "0x02be91",
+   "name": "section"
+  },
+  {
+   "at": "0x02bea1",
+   "name": "memory"
+  },
+  {
+   "at": "0x02c39d",
+   "name": "xzp"
+  },
+  {
+   "at": "0x02c3d1",
+   "name": "file"
+  },
+  {
+   "at": "0x0313e5",
+   "name": "klcc"
+  },
+  {
+   "at": "0x0313f1",
+   "name": "diners"
+  },
+  {
+   "at": "0x031401",
+   "name": "jcb"
+  },
+  {
+   "at": "0x031409",
+   "name": "discover"
+  },
+  {
+   "at": "0x03141d",
+   "name": "amex"
+  },
+  {
+   "at": "0x031429",
+   "name": "mastercard"
+  },
+  {
+   "at": "0x031441",
+   "name": "visa"
+  },
+  {
+   "at": "0x03144d",
+   "name": "japanesekatakana"
+  },
+  {
+   "at": "0x031471",
+   "name": "japanesehiragana"
+  },
+  {
+   "at": "0x031495",
+   "name": "schfull"
+  },
+  {
+   "at": "0x0314a5",
+   "name": "latinextended"
+  },
+  {
+   "at": "0x0314c1",
+   "name": "russionfull"
+  },
+  {
+   "at": "0x0314d9",
+   "name": "tchfull"
+  },
+  {
+   "at": "0x0314e9",
+   "name": "koreanfull"
+  },
+  {
+   "at": "0x031501",
+   "name": "japanesefull"
+  },
+  {
+   "at": "0x03151d",
+   "name": "latinalphabet"
+  },
+  {
+   "at": "0x031539",
+   "name": "latinnumeric"
+  },
+  {
+   "at": "0x031555",
+   "name": "latinipaddress"
+  },
+  {
+   "at": "0x031575",
+   "name": "latinphone"
+  },
+  {
+   "at": "0x03158d",
+   "name": "latingamertag"
+  },
+  {
+   "at": "0x0315a9",
+   "name": "latinemail"
+  },
+  {
+   "at": "0x0315c1",
+   "name": "latinfull"
+  },
+  {
+   "at": "0x0315d5",
+   "name": "phone"
+  },
+  {
+   "at": "0x0315e1",
+   "name": "contactemail"
+  },
+  {
+   "at": "0x0315fd",
+   "name": "postalcode"
+  },
+  {
+   "at": "0x031615",
+   "name": "state"
+  },
+  {
+   "at": "0x031621",
+   "name": "city"
+  },
+  {
+   "at": "0x03162d",
+   "name": "district"
+  },
+  {
+   "at": "0x031641",
+   "name": "street2"
+  },
+  {
+   "at": "0x031651",
+   "name": "street1"
+  },
+  {
+   "at": "0x031661",
+   "name": "none"
+  },
+  {
+   "at": "0x1aff46",
+   "name": "circleanimations"
+  },
+  {
+   "at": "0x1aff7a",
+   "name": "animation1"
+  },
+  {
+   "at": "0x1affbc",
+   "name": "animation2"
+  },
+  {
+   "at": "0x1affd2",
+   "name": "animation3"
+  },
+  {
+   "at": "0x1b08fa",
+   "name": "xenon_ball"
+  },
+  {
+   "at": "0x1b54f9",
+   "name": "legend_b"
+  },
+  {
+   "at": "0x1b5537",
+   "name": "legend_a"
+  },
+  {
+   "at": "0x1b555b",
+   "name": "legend_x"
+  },
+  {
+   "at": "0x1b557f",
+   "name": "legend_y"
+  },
+  {
+   "at": "0x1b5591",
+   "name": "legend_"
+  },
+  {
+   "at": "0x1f1ef3",
+   "name": "background"
+  },
+  {
+   "at": "0x1f3223",
+   "name": "fade"
+  },
+  {
+   "at": "0x1f3249",
+   "name": "legend_b"
+  },
+  {
+   "at": "0x1f328b",
+   "name": "legend_a"
+  },
+  {
+   "at": "0x1f32b3",
+   "name": "legend_x"
+  },
+  {
+   "at": "0x1f32db",
+   "name": "legend_y"
+  },
+  {
+   "at": "0x1f48ba",
+   "name": "button_legends"
+  },
+  {
+   "at": "0x1f4dbe",
+   "name": "panel_bottom"
+  },
+  {
+   "at": "0x1f4e06",
+   "name": "panel_top"
+  },
+  {
+   "at": "0x1f4e80",
+   "name": "category_header"
+  },
+  {
+   "at": "0x1f4f08",
+   "name": "category_page_number"
+  },
+  {
+   "at": "0x1f4f90",
+   "name": "range_left_items"
+  },
+  {
+   "at": "0x1f5100",
+   "name": "gamertag_header"
+  },
+  {
+   "at": "0x1f5d08",
+   "name": "imdone_button"
+  },
+  {
+   "at": "0x1f5d36",
+   "name": "unselected"
+  },
+  {
+   "at": "0x1f5d78",
+   "name": "selected"
+  },
+  {
+   "at": "0x1f60f2",
+   "name": "parts_button"
+  },
+  {
+   "at": "0x1f615e",
+   "name": "category_header"
+  },
+  {
+   "at": "0x1f61d8",
+   "name": "category_page_number"
+  },
+  {
+   "at": "0x1f6ed8",
+   "name": "beam"
+  },
+  {
+   "at": "0x1f6f16",
+   "name": "beam_particle"
+  },
+  {
+   "at": "0x1f6f4a",
+   "name": "beam_particle1"
+  },
+  {
+   "at": "0x1f6f68",
+   "name": "beam_particle2"
+  },
+  {
+   "at": "0x1f6f86",
+   "name": "beam_particle3"
+  },
+  {
+   "at": "0x1f6fa4",
+   "name": "beam_particle4"
+  },
+  {
+   "at": "0x1f6fc2",
+   "name": "beam_particle5"
+  },
+  {
+   "at": "0x1f6fe0",
+   "name": "beam_particle6"
+  },
+  {
+   "at": "0x1f6ffe",
+   "name": "beam_particle7"
+  },
+  {
+   "at": "0x1f70a6",
+   "name": "gamertag_header"
+  },
+  {
+   "at": "0x1f782c",
+   "name": "preview"
+  },
+  {
+   "at": "0x1f783c",
+   "name": "stencil"
+  },
+  {
+   "at": "0x1f78ea",
+   "name": "chosen"
+  },
+  {
+   "at": "0x1f7a18",
+   "name": "fadeout_borders_left"
+  },
+  {
+   "at": "0x1f7dd6",
+   "name": "xbutton"
+  },
+  {
+   "at": "0x1f92c8",
+   "name": "newitem"
+  },
+  {
+   "at": "0x1f9532",
+   "name": "delete_x_unselected"
+  },
+  {
+   "at": "0x1f9594",
+   "name": "delete_x_selected"
+  },
+  {
+   "at": "0x1f9792",
+   "name": "fadout_border"
+  },
+  {
+   "at": "0x221b8f",
+   "name": "imdone_button"
+  },
+  {
+   "at": "0x223991",
+   "name": "imdone_button"
+  },
+  {
+   "at": "0x223a07",
+   "name": "unselected"
+  },
+  {
+   "at": "0x224b6c",
+   "name": "imdone_button"
+  },
+  {
+   "at": "0x225663",
+   "name": "imdone_button"
+  },
+  {
+   "at": "0x225f97",
+   "name": "background"
+  },
+  {
+   "at": "0x22696d",
+   "name": "background"
+  },
+  {
+   "at": "0x226bc5",
+   "name": "overlay"
+  },
+  {
+   "at": "0x22777d",
+   "name": "background"
+  },
+  {
+   "at": "0x22802f",
+   "name": "background"
+  },
+  {
+   "at": "0x2288b7",
+   "name": "background"
+  },
+  {
+   "at": "0x228aa9",
+   "name": "overlay"
+  },
+  {
+   "at": "0xf0e5eb",
+   "name": "hle"
+  },
+  {
+   "at": "0xf0e75b",
+   "name": "hle"
+  },
+  {
+   "at": "0xf0e8d9",
+   "name": "nner"
+  },
+  {
+   "at": "0xf0ec8b",
+   "name": "ndern"
+  },
+  {
+   "at": "0xf0eca1",
+   "name": "hlen"
+  },
+  {
+   "at": "0xf0f03f",
+   "name": "rper"
+  },
+  {
+   "at": "0xf0f075",
+   "name": "rper"
+  },
+  {
+   "at": "0xf0f0a1",
+   "name": "nder"
+  },
+  {
+   "at": "0xf0f0c1",
+   "name": "nder"
+  },
+  {
+   "at": "0xf0f33d",
+   "name": "ndern"
+  },
+  {
+   "at": "0xf0f367",
+   "name": "ndern"
+  },
+  {
+   "at": "0xf0f517",
+   "name": "glichkeiten"
+  },
+  {
+   "at": "0xf0f85d",
+   "name": "hlen"
+  },
+  {
+   "at": "0xf0fb79",
+   "name": "mic"
+  },
+  {
+   "at": "0xf10449",
+   "name": "ecas"
+  },
+  {
+   "at": "0xf10c1d",
+   "name": "ecas"
+  },
+  {
+   "at": "0xf10ce1",
+   "name": "lectionne"
+  },
+  {
+   "at": "0xf10d7d",
+   "name": "motic"
+  },
+  {
+   "at": "0xf10ead",
+   "name": "par"
+  },
+  {
+   "at": "0xf1146d",
+   "name": "arri"
+  },
+  {
+   "at": "0xf11491",
+   "name": "image"
+  },
+  {
+   "at": "0xf114a1",
+   "name": "lectionner"
+  },
+  {
+   "at": "0xf11555",
+   "name": "riph"
+  },
+  {
+   "at": "0xf115e9",
+   "name": "riph"
+  },
+  {
+   "at": "0xf1175f",
+   "name": "connect"
+  },
+  {
+   "at": "0xf11779",
+   "name": "diteur"
+  },
+  {
+   "at": "0xf118cb",
+   "name": "tements"
+  },
+  {
+   "at": "0xf119ad",
+   "name": "res"
+  },
+  {
+   "at": "0xf119f1",
+   "name": "eyeliner"
+  },
+  {
+   "at": "0xf11a47",
+   "name": "vres"
+  },
+  {
+   "at": "0xf11a75",
+   "name": "habiller"
+  },
+  {
+   "at": "0xf11b7d",
+   "name": "tements"
+  },
+  {
+   "at": "0xf11c1f",
+   "name": "oreilles"
+  },
+  {
+   "at": "0xf11ded",
+   "name": "avatar"
+  },
+  {
+   "at": "0xf11f59",
+   "name": "oreilles"
+  },
+  {
+   "at": "0xf11f9b",
+   "name": "res"
+  },
+  {
+   "at": "0xf120c1",
+   "name": "lectionner"
+  },
+  {
+   "at": "0xf14199",
+   "name": "mic"
+  },
+  {
+   "at": "0xf14b69",
+   "name": "bios"
+  },
+  {
+   "at": "0xf14bb9",
+   "name": "sticas"
+  },
+  {
+   "at": "0xf14cef",
+   "name": "sticas"
+  },
+  {
+   "at": "0xf14d55",
+   "name": "culos"
+  },
+  {
+   "at": "0xf150df",
+   "name": "culos"
+  },
+  {
+   "at": "0xf166bf",
+   "name": "kszeni"
+  },
+  {
+   "at": "0xf1677d",
+   "name": "kszy"
+  },
+  {
+   "at": "0xf16e25",
+   "name": "kawice"
+  },
+  {
+   "at": "0xf17045",
+   "name": "dek"
+  },
+  {
+   "at": "0xf17429",
+   "name": "kawice"
+  },
+  {
+   "at": "0xf174dd",
+   "name": "cie"
+  }
+ ],
+ "icon_states": [
+  "_pressdisable.png",
+  "_unselected.png",
+  "_selected.png"
+ ],
+ "labels": [
+  {
+   "at": "0x0042c7",
+   "text": "XXuiCanvas"
+  },
+  {
+   "at": "0x00430b",
+   "text": "XGamerPicManager"
+  },
+  {
+   "at": "0x0043c5",
+   "text": "ConvectionUI"
+  },
+  {
+   "at": "0x004689",
+   "text": "PREVIEW"
+  },
+  {
+   "at": "0x004707",
+   "text": "XMEDIA"
+  },
+  {
+   "at": "0x004721",
+   "text": "Legend"
+  },
+  {
+   "at": "0x00474d",
+   "text": "LegendScene.xur"
+  },
+  {
+   "at": "0x0047bd",
+   "text": "EditorBG.xur"
+  },
+  {
+   "at": "0x0047d9",
+   "text": "EditorSkin.xur"
+  },
+  {
+   "at": "0x004869",
+   "text": "XuiElement"
+  },
+  {
+   "at": "0x004881",
+   "text": "AvatarRenderSceneOverride"
+  },
+  {
+   "at": "0x0048bd",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x0054b9",
+   "text": "PREVIEW%.04d"
+  },
+  {
+   "at": "0x0054e1",
+   "text": "Photo"
+  },
+  {
+   "at": "0x0054ed",
+   "text": "Closet"
+  },
+  {
+   "at": "0x00560d",
+   "text": "AvatarShadow.png"
+  },
+  {
+   "at": "0x00581d",
+   "text": "AvatarSelectButtonOverride"
+  },
+  {
+   "at": "0x005859",
+   "text": "AvatarRefreshRandomButtonOverride"
+  },
+  {
+   "at": "0x0058e5",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x0058f9",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x00592d",
+   "text": "AvatarItemWrapperScene"
+  },
+  {
+   "at": "0x005a51",
+   "text": "Grid1x1Button_deleteitem"
+  },
+  {
+   "at": "0x005a85",
+   "text": "Grid1x1OneColourButton"
+  },
+  {
+   "at": "0x005ab5",
+   "text": "Grid1x1ItemButton"
+  },
+  {
+   "at": "0x005ad9",
+   "text": "Grid1x1Button"
+  },
+  {
+   "at": "0x005af5",
+   "text": "Grid3x2Button"
+  },
+  {
+   "at": "0x005b11",
+   "text": "Grid3x1Button"
+  },
+  {
+   "at": "0x006225",
+   "text": "Visual"
+  },
+  {
+   "at": "0x006291",
+   "text": "Idle"
+  },
+  {
+   "at": "0x00629d",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x0062ad",
+   "text": "Pulse"
+  },
+  {
+   "at": "0x0062b9",
+   "text": "PulseEnd"
+  },
+  {
+   "at": "0x0062cd",
+   "text": "BonusColors"
+  },
+  {
+   "at": "0x0062e5",
+   "text": "BonusColorsEnd"
+  },
+  {
+   "at": "0x006305",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x006321",
+   "text": "AvatarDialogButtonOverride"
+  },
+  {
+   "at": "0x006359",
+   "text": "AvatarDialogLabelOverride"
+  },
+  {
+   "at": "0x006395",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x0063b1",
+   "text": "DialogYesButton"
+  },
+  {
+   "at": "0x0063d1",
+   "text": "DialogNoButton"
+  },
+  {
+   "at": "0x006429",
+   "text": "AvatarMirrorParentSceneOverride"
+  },
+  {
+   "at": "0x006469",
+   "text": "AvatarMirrorSceneOverride"
+  },
+  {
+   "at": "0x0064c9",
+   "text": "AvatarPhotoboothYButtonOverride"
+  },
+  {
+   "at": "0x006509",
+   "text": "AvatarPhotoboothPreviewSceneOverride"
+  },
+  {
+   "at": "0x006555",
+   "text": "AvatarPhotoboothSceneOverride"
+  },
+  {
+   "at": "0x006591",
+   "text": "AvatarZoomedNearSceneOverride"
+  },
+  {
+   "at": "0x0065cd",
+   "text": "AvatarZoomedFarSceneOverride"
+  },
+  {
+   "at": "0x006609",
+   "text": "BrushImageControl"
+  },
+  {
+   "at": "0x006679",
+   "text": "FadeIn"
+  },
+  {
+   "at": "0x006689",
+   "text": "FadeInEnd"
+  },
+  {
+   "at": "0x0066f9",
+   "text": "FadeOut"
+  },
+  {
+   "at": "0x006709",
+   "text": "FadeOutEnd"
+  },
+  {
+   "at": "0x006737",
+   "text": "PAvatarGamertagLabelOverride"
+  },
+  {
+   "at": "0x006771",
+   "text": "AvatarCategoryLabelOverride"
+  },
+  {
+   "at": "0x0067a9",
+   "text": "AvatarPageLabelOverride"
+  },
+  {
+   "at": "0x0067d9",
+   "text": "AvatarItemLabelOverride"
+  },
+  {
+   "at": "0x006809",
+   "text": "AvatarPageLeftButtonOverride"
+  },
+  {
+   "at": "0x006845",
+   "text": "AvatarPageRightButtonOverride"
+  },
+  {
+   "at": "0x006881",
+   "text": "AvatarPulseArrowsSceneOverride"
+  },
+  {
+   "at": "0x0068c1",
+   "text": "AvatarAButtonOverride"
+  },
+  {
+   "at": "0x0068ed",
+   "text": "AvatarBackButtonOverride"
+  },
+  {
+   "at": "0x006921",
+   "text": "AvatarDeleteOutfitButtonOverride"
+  },
+  {
+   "at": "0x0069bd",
+   "text": "AvatarEditorParentBGOverride"
+  },
+  {
+   "at": "0x006a09",
+   "text": "EditorStart.xur"
+  },
+  {
+   "at": "0x006a29",
+   "text": "EditorMain.xur"
+  },
+  {
+   "at": "0x006a49",
+   "text": "AvatarItemSceneOverride"
+  },
+  {
+   "at": "0x006a81",
+   "text": "End"
+  },
+  {
+   "at": "0x006a89",
+   "text": "Left"
+  },
+  {
+   "at": "0x006a95",
+   "text": "Right"
+  },
+  {
+   "at": "0x006aa1",
+   "text": "Forward"
+  },
+  {
+   "at": "0x006ab1",
+   "text": "Backward"
+  },
+  {
+   "at": "0x006acd",
+   "text": "Out"
+  },
+  {
+   "at": "0x006ad5",
+   "text": "ItemButton"
+  },
+  {
+   "at": "0x006aed",
+   "text": "XuiPerspectiveScene"
+  },
+  {
+   "at": "0x006b15",
+   "text": "AvatarPlaySoundSceneOverride"
+  },
+  {
+   "at": "0x006b59",
+   "text": "BelchHigher"
+  },
+  {
+   "at": "0x006b71",
+   "text": "BelchHigh2"
+  },
+  {
+   "at": "0x006b89",
+   "text": "BelchHigh"
+  },
+  {
+   "at": "0x006b9d",
+   "text": "BelchNormal2"
+  },
+  {
+   "at": "0x006bb9",
+   "text": "BelchNormal"
+  },
+  {
+   "at": "0x006bd1",
+   "text": "BelchLow2"
+  },
+  {
+   "at": "0x006be5",
+   "text": "BelchLow"
+  },
+  {
+   "at": "0x006bf9",
+   "text": "Spin"
+  },
+  {
+   "at": "0x006c05",
+   "text": "Bonk"
+  },
+  {
+   "at": "0x006c11",
+   "text": "Wobble"
+  },
+  {
+   "at": "0x006c21",
+   "text": "Emote"
+  },
+  {
+   "at": "0x006c2d",
+   "text": "BonusUnlocked"
+  },
+  {
+   "at": "0x006c49",
+   "text": "Save"
+  },
+  {
+   "at": "0x006c55",
+   "text": "Camera"
+  },
+  {
+   "at": "0x006c65",
+   "text": "CameraZoom"
+  },
+  {
+   "at": "0x006c7d",
+   "text": "CameraOn"
+  },
+  {
+   "at": "0x006c91",
+   "text": "CameraOff"
+  },
+  {
+   "at": "0x006ca5",
+   "text": "BeamSelect"
+  },
+  {
+   "at": "0x006cbd",
+   "text": "Beam"
+  },
+  {
+   "at": "0x006cc9",
+   "text": "Footsteps"
+  },
+  {
+   "at": "0x006cdd",
+   "text": "FootstepsMore"
+  },
+  {
+   "at": "0x006cf9",
+   "text": "AvatarResizedSceneOverride"
+  },
+  {
+   "at": "0x006d3d",
+   "text": "OutroEnd"
+  },
+  {
+   "at": "0x006d51",
+   "text": "Outro"
+  },
+  {
+   "at": "0x006d5d",
+   "text": "Editing8End"
+  },
+  {
+   "at": "0x006d75",
+   "text": "Editing8"
+  },
+  {
+   "at": "0x006d89",
+   "text": "Editing7End"
+  },
+  {
+   "at": "0x006da1",
+   "text": "Editing7"
+  },
+  {
+   "at": "0x006db5",
+   "text": "Editing6End"
+  },
+  {
+   "at": "0x006dcd",
+   "text": "Editing6"
+  },
+  {
+   "at": "0x006de1",
+   "text": "Editing5End"
+  },
+  {
+   "at": "0x006df9",
+   "text": "Editing5"
+  },
+  {
+   "at": "0x006e0d",
+   "text": "Editing4End"
+  },
+  {
+   "at": "0x006e25",
+   "text": "Editing4"
+  },
+  {
+   "at": "0x006e39",
+   "text": "Editing3End"
+  },
+  {
+   "at": "0x006e51",
+   "text": "Editing3"
+  },
+  {
+   "at": "0x006e65",
+   "text": "Editing2End"
+  },
+  {
+   "at": "0x006e7d",
+   "text": "Editing2"
+  },
+  {
+   "at": "0x006e91",
+   "text": "Editing1End"
+  },
+  {
+   "at": "0x006ea9",
+   "text": "Editing1"
+  },
+  {
+   "at": "0x006ebd",
+   "text": "ApplicationIntroEnd"
+  },
+  {
+   "at": "0x006ee5",
+   "text": "ApplicationIntro"
+  },
+  {
+   "at": "0x006f09",
+   "text": "SilenceEnd"
+  },
+  {
+   "at": "0x006f21",
+   "text": "Silence"
+  },
+  {
+   "at": "0x006f31",
+   "text": "IntroductionEnd"
+  },
+  {
+   "at": "0x006f51",
+   "text": "Introduction"
+  },
+  {
+   "at": "0x006f6d",
+   "text": "IntroOpeningEnd"
+  },
+  {
+   "at": "0x006f8d",
+   "text": "IntroOpening"
+  },
+  {
+   "at": "0x0073b1",
+   "text": "AvatarNoOutfitOverride"
+  },
+  {
+   "at": "0x008031",
+   "text": "DisableTimelineRecursion"
+  },
+  {
+   "at": "0x00851d",
+   "text": "Aceptar"
+  },
+  {
+   "at": "0x0087c1",
+   "text": "Dieses Spiel unterst"
+  },
+  {
+   "at": "0x008945",
+   "text": "Questo gioco non supporta la modalit"
+  },
+  {
+   "at": "0x008ad1",
+   "text": "PAL-50"
+  },
+  {
+   "at": "0x008af3",
+   "text": "PAL-60"
+  },
+  {
+   "at": "0x008bab",
+   "text": "D PAL-6"
+  },
+  {
+   "at": "0x008c27",
+   "text": "Este jogo n"
+  },
+  {
+   "at": "0x021fbf",
+   "text": "D@TX"
+  },
+  {
+   "at": "0x02a385",
+   "text": "EndKillFocus"
+  },
+  {
+   "at": "0x02a3a1",
+   "text": "EndPressDisable"
+  },
+  {
+   "at": "0x02a3c1",
+   "text": "PressDisable"
+  },
+  {
+   "at": "0x02a3dd",
+   "text": "EndInitFocusCheckDisable"
+  },
+  {
+   "at": "0x02a411",
+   "text": "InitFocusCheckDisable"
+  },
+  {
+   "at": "0x02a43d",
+   "text": "EndInitFocusCheck"
+  },
+  {
+   "at": "0x02a461",
+   "text": "InitFocusCheck"
+  },
+  {
+   "at": "0x02a481",
+   "text": "EndInitFocusDisable"
+  },
+  {
+   "at": "0x02a4a9",
+   "text": "InitFocusDisable"
+  },
+  {
+   "at": "0x02a4cd",
+   "text": "EndInitFocus"
+  },
+  {
+   "at": "0x02a4e9",
+   "text": "InitFocus"
+  },
+  {
+   "at": "0x02a4fd",
+   "text": "EndScrollMoreDisable"
+  },
+  {
+   "at": "0x02a529",
+   "text": "ScrollMoreDisable"
+  },
+  {
+   "at": "0x02a54d",
+   "text": "EndScrolling"
+  },
+  {
+   "at": "0x02a569",
+   "text": "Scrolling"
+  },
+  {
+   "at": "0x02a57d",
+   "text": "EndScrollMore"
+  },
+  {
+   "at": "0x02a599",
+   "text": "ScrollMore"
+  },
+  {
+   "at": "0x02a5b1",
+   "text": "EndNormalSelCheckDisable"
+  },
+  {
+   "at": "0x02a5e5",
+   "text": "NormalSelCheckDisable"
+  },
+  {
+   "at": "0x02a611",
+   "text": "EndNormalSelDisable"
+  },
+  {
+   "at": "0x02a639",
+   "text": "NormalSelDisable"
+  },
+  {
+   "at": "0x02a65d",
+   "text": "EndNormalSelCheck"
+  },
+  {
+   "at": "0x02a681",
+   "text": "NormalSelCheck"
+  },
+  {
+   "at": "0x02a6a1",
+   "text": "EndNormalSel"
+  },
+  {
+   "at": "0x02a6bd",
+   "text": "NormalSel"
+  },
+  {
+   "at": "0x02a6d1",
+   "text": "EndFocusCheckDisable"
+  },
+  {
+   "at": "0x02a6fd",
+   "text": "FocusCheckDisable"
+  },
+  {
+   "at": "0x02a721",
+   "text": "EndNormalCheckDisable"
+  },
+  {
+   "at": "0x02a74d",
+   "text": "NormalCheckDisable"
+  },
+  {
+   "at": "0x02a775",
+   "text": "EndFocusCheck"
+  },
+  {
+   "at": "0x02a791",
+   "text": "FocusCheck"
+  },
+  {
+   "at": "0x02a7a9",
+   "text": "EndNormalCheck"
+  },
+  {
+   "at": "0x02a7c9",
+   "text": "NormalCheck"
+  },
+  {
+   "at": "0x02a7e1",
+   "text": "EndNormalPress"
+  },
+  {
+   "at": "0x02a801",
+   "text": "NormalPress"
+  },
+  {
+   "at": "0x02a819",
+   "text": "EndPress"
+  },
+  {
+   "at": "0x02a82d",
+   "text": "Press"
+  },
+  {
+   "at": "0x02a839",
+   "text": "EndFocusDisable"
+  },
+  {
+   "at": "0x02a859",
+   "text": "FocusDisable"
+  },
+  {
+   "at": "0x02a875",
+   "text": "EndNormalDisable"
+  },
+  {
+   "at": "0x02a899",
+   "text": "NormalDisable"
+  },
+  {
+   "at": "0x02a8b5",
+   "text": "KillFocus"
+  },
+  {
+   "at": "0x02a8c9",
+   "text": "EndFocus"
+  },
+  {
+   "at": "0x02a8dd",
+   "text": "Focus"
+  },
+  {
+   "at": "0x02a8e9",
+   "text": "EndNormal"
+  },
+  {
+   "at": "0x02a8fd",
+   "text": "Normal"
+  },
+  {
+   "at": "0x02aa91",
+   "text": "ClassOverride"
+  },
+  {
+   "at": "0x02aab1",
+   "text": "Height"
+  },
+  {
+   "at": "0x02aac1",
+   "text": "Pivot"
+  },
+  {
+   "at": "0x02aacd",
+   "text": "Width"
+  },
+  {
+   "at": "0x02aaf5",
+   "text": "XuiTransition"
+  },
+  {
+   "at": "0x02ab11",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x02ab21",
+   "text": "XuiControl"
+  },
+  {
+   "at": "0x02ab69",
+   "text": "XuiVisual"
+  },
+  {
+   "at": "0x02ab7d",
+   "text": "XuiBackButton"
+  },
+  {
+   "at": "0x02ab99",
+   "text": "XuiCheckbox"
+  },
+  {
+   "at": "0x02abb1",
+   "text": "PressKey"
+  },
+  {
+   "at": "0x02abc5",
+   "text": "XuiRadioButton"
+  },
+  {
+   "at": "0x02abe5",
+   "text": "XuiRadioGroup"
+  },
+  {
+   "at": "0x02ac01",
+   "text": "XuiTextPresenter"
+  },
+  {
+   "at": "0x02ac25",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x02ac39",
+   "text": "XuiSound"
+  },
+  {
+   "at": "0x02ac4d",
+   "text": "XuiListItem"
+  },
+  {
+   "at": "0x02ac65",
+   "text": "XuiScrollEnd"
+  },
+  {
+   "at": "0x02ac81",
+   "text": "XuiScrollBar"
+  },
+  {
+   "at": "0x02ac9d",
+   "text": "XuiList"
+  },
+  {
+   "at": "0x02acad",
+   "text": "XuiCommonList"
+  },
+  {
+   "at": "0x02acc9",
+   "text": "XuiComboBox"
+  },
+  {
+   "at": "0x02ace1",
+   "text": "XuiComboBoxList"
+  },
+  {
+   "at": "0x02ad01",
+   "text": "XuiProgressBar"
+  },
+  {
+   "at": "0x02ad21",
+   "text": "XuiSlider"
+  },
+  {
+   "at": "0x02ad35",
+   "text": "XuiEdit"
+  },
+  {
+   "at": "0x02ad45",
+   "text": "XuiCaret"
+  },
+  {
+   "at": "0x02ad59",
+   "text": "XuiMessageBox"
+  },
+  {
+   "at": "0x02ad75",
+   "text": "XuiImagePresenter"
+  },
+  {
+   "at": "0x02ad99",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x02adad",
+   "text": "XuiTabScene"
+  },
+  {
+   "at": "0x02adc5",
+   "text": "Xui3DScene"
+  },
+  {
+   "at": "0x02addd",
+   "text": "Xui3DElement"
+  },
+  {
+   "at": "0x02adf9",
+   "text": "Xui3DCamera"
+  },
+  {
+   "at": "0x02ae11",
+   "text": "Xui3DMesh"
+  },
+  {
+   "at": "0x02ae25",
+   "text": "Xui3DSkeleton"
+  },
+  {
+   "at": "0x02ae41",
+   "text": "Xui3DBone"
+  },
+  {
+   "at": "0x02ae55",
+   "text": "XuiNineGrid"
+  },
+  {
+   "at": "0x02ae6d",
+   "text": "XuiTextureSurface"
+  },
+  {
+   "at": "0x02ae91",
+   "text": "XuiShader"
+  },
+  {
+   "at": "0x02aea5",
+   "text": "XuiVariable"
+  },
+  {
+   "at": "0x02af01",
+   "text": "ComboBoxStyle"
+  },
+  {
+   "at": "0x02af1d",
+   "text": "BrushFlags"
+  },
+  {
+   "at": "0x02af35",
+   "text": "DataAssociation"
+  },
+  {
+   "at": "0x02af55",
+   "text": "SizeMode"
+  },
+  {
+   "at": "0x02afff",
+   "text": "MStrokeColor"
+  },
+  {
+   "at": "0x02b019",
+   "text": "StrokeWidth"
+  },
+  {
+   "at": "0x02b031",
+   "text": "StopPos"
+  },
+  {
+   "at": "0x02b041",
+   "text": "StopColor"
+  },
+  {
+   "at": "0x02b055",
+   "text": "NumStops"
+  },
+  {
+   "at": "0x02b069",
+   "text": "Radial"
+  },
+  {
+   "at": "0x02b0b9",
+   "text": "WrapY"
+  },
+  {
+   "at": "0x02b0c5",
+   "text": "WrapX"
+  },
+  {
+   "at": "0x02b0d1",
+   "text": "Rotation"
+  },
+  {
+   "at": "0x02b0e5",
+   "text": "Scale"
+  },
+  {
+   "at": "0x02b0f1",
+   "text": "Translation"
+  },
+  {
+   "at": "0x02b109",
+   "text": "Gradient"
+  },
+  {
+   "at": "0x02b11d",
+   "text": "TextureFileName"
+  },
+  {
+   "at": "0x02b13d",
+   "text": "FillColor"
+  },
+  {
+   "at": "0x02b151",
+   "text": "FillType"
+  },
+  {
+   "at": "0x02b165",
+   "text": "Points"
+  },
+  {
+   "at": "0x02b175",
+   "text": "Closed"
+  },
+  {
+   "at": "0x02b185",
+   "text": "Fill"
+  },
+  {
+   "at": "0x02b191",
+   "text": "Stroke"
+  },
+  {
+   "at": "0x02b1a9",
+   "text": "Direction"
+  },
+  {
+   "at": "0x02b1bd",
+   "text": "MinThumbSize"
+  },
+  {
+   "at": "0x02b1d9",
+   "text": "ProjectionCenterV"
+  },
+  {
+   "at": "0x02b1fd",
+   "text": "ProjectionCenterU"
+  },
+  {
+   "at": "0x02b221",
+   "text": "ProjectionScale"
+  },
+  {
+   "at": "0x02b249",
+   "text": "LineSpacingAdjust"
+  },
+  {
+   "at": "0x02b26d",
+   "text": "TextStyle"
+  },
+  {
+   "at": "0x02b281",
+   "text": "Font"
+  },
+  {
+   "at": "0x02b28d",
+   "text": "PointSize"
+  },
+  {
+   "at": "0x02b2a1",
+   "text": "DropShadowColor"
+  },
+  {
+   "at": "0x02b2c1",
+   "text": "TextColor"
+  },
+  {
+   "at": "0x02b2d5",
+   "text": "Text"
+  },
+  {
+   "at": "0x02b2e1",
+   "text": "IgnorePresses"
+  },
+  {
+   "at": "0x02b2fd",
+   "text": "InterruptTransitions"
+  },
+  {
+   "at": "0x02b329",
+   "text": "TransBackTo"
+  },
+  {
+   "at": "0x02b341",
+   "text": "TransBackFrom"
+  },
+  {
+   "at": "0x02b35d",
+   "text": "TransTo"
+  },
+  {
+   "at": "0x02b36d",
+   "text": "TransFrom"
+  },
+  {
+   "at": "0x02b381",
+   "text": "DefaultFocus"
+  },
+  {
+   "at": "0x02b39d",
+   "text": "FocusAnimEndFrame"
+  },
+  {
+   "at": "0x02b3c1",
+   "text": "FocusAnimStartFrame"
+  },
+  {
+   "at": "0x02b3e9",
+   "text": "FocusAnimObject"
+  },
+  {
+   "at": "0x02b409",
+   "text": "PressAnimEndFrame"
+  },
+  {
+   "at": "0x02b42d",
+   "text": "PressAnimStartFrame"
+  },
+  {
+   "at": "0x02b455",
+   "text": "PressAnimObject"
+  },
+  {
+   "at": "0x02b475",
+   "text": "DestTransIndex"
+  },
+  {
+   "at": "0x02b495",
+   "text": "SrcTransIndex"
+  },
+  {
+   "at": "0x02b4b1",
+   "text": "StayVisible"
+  },
+  {
+   "at": "0x02b4c9",
+   "text": "PressPath"
+  },
+  {
+   "at": "0x02b4dd",
+   "text": "Volume"
+  },
+  {
+   "at": "0x02b4ed",
+   "text": "Finish"
+  },
+  {
+   "at": "0x02b4fd",
+   "text": "Loop"
+  },
+  {
+   "at": "0x02b509",
+   "text": "State"
+  },
+  {
+   "at": "0x02b515",
+   "text": "SmoothScrollAcceleration"
+  },
+  {
+   "at": "0x02b549",
+   "text": "SmoothScrollMaxSpeed"
+  },
+  {
+   "at": "0x02b575",
+   "text": "SmoothScrollBaseSpeed"
+  },
+  {
+   "at": "0x02b5a1",
+   "text": "SmoothScroll"
+  },
+  {
+   "at": "0x02b5bd",
+   "text": "InterItemSpacing"
+  },
+  {
+   "at": "0x02b5e1",
+   "text": "KeepSizeUnfocused"
+  },
+  {
+   "at": "0x02b605",
+   "text": "SelectedSize"
+  },
+  {
+   "at": "0x02b621",
+   "text": "Checkable"
+  },
+  {
+   "at": "0x02b635",
+   "text": "Layout"
+  },
+  {
+   "at": "0x02b645",
+   "text": "WrapBump"
+  },
+  {
+   "at": "0x02b659",
+   "text": "Wrap"
+  },
+  {
+   "at": "0x02b665",
+   "text": "ItemsNavPath"
+  },
+  {
+   "at": "0x02b681",
+   "text": "ItemsImage"
+  },
+  {
+   "at": "0x02b699",
+   "text": "ItemsText"
+  },
+  {
+   "at": "0x02b6ad",
+   "text": "Value"
+  },
+  {
+   "at": "0x02b6b9",
+   "text": "RangeMax"
+  },
+  {
+   "at": "0x02b6cd",
+   "text": "RangeMin"
+  },
+  {
+   "at": "0x02b6e1",
+   "text": "AccelTime"
+  },
+  {
+   "at": "0x02b6f5",
+   "text": "AccelInc"
+  },
+  {
+   "at": "0x02b709",
+   "text": "Vertical"
+  },
+  {
+   "at": "0x02b71d",
+   "text": "Step"
+  },
+  {
+   "at": "0x02b729",
+   "text": "Multiline"
+  },
+  {
+   "at": "0x02b73d",
+   "text": "ReadOnly"
+  },
+  {
+   "at": "0x02b751",
+   "text": "PasswordChar"
+  },
+  {
+   "at": "0x02b76d",
+   "text": "AllowedChars"
+  },
+  {
+   "at": "0x02b789",
+   "text": "TextLimit"
+  },
+  {
+   "at": "0x02b79d",
+   "text": "TextureSurfaceElement"
+  },
+  {
+   "at": "0x02b7c9",
+   "text": "ImagePath"
+  },
+  {
+   "at": "0x02b7dd",
+   "text": "DefaultTab"
+  },
+  {
+   "at": "0x02b7f5",
+   "text": "NoAutoHide"
+  },
+  {
+   "at": "0x02b80d",
+   "text": "VerticalTabs"
+  },
+  {
+   "at": "0x02b829",
+   "text": "UserInterrupt"
+  },
+  {
+   "at": "0x02b845",
+   "text": "TabCount"
+  },
+  {
+   "at": "0x02b859",
+   "text": "SunLightColor"
+  },
+  {
+   "at": "0x02b875",
+   "text": "SunLightDirection"
+  },
+  {
+   "at": "0x02b899",
+   "text": "AmbientLight"
+  },
+  {
+   "at": "0x02b8b5",
+   "text": "CameraElement"
+  },
+  {
+   "at": "0x02b8d1",
+   "text": "MaxZ"
+  },
+  {
+   "at": "0x02b8dd",
+   "text": "MinZ"
+  },
+  {
+   "at": "0x02b8e9",
+   "text": "OrthogonalFOV"
+  },
+  {
+   "at": "0x02b905",
+   "text": "HorizontalFOV"
+  },
+  {
+   "at": "0x02b921",
+   "text": "BaseColor"
+  },
+  {
+   "at": "0x02b935",
+   "text": "Fullbrite"
+  },
+  {
+   "at": "0x02b949",
+   "text": "ZWrite"
+  },
+  {
+   "at": "0x02b959",
+   "text": "Wireframe"
+  },
+  {
+   "at": "0x02b96d",
+   "text": "TwoSided"
+  },
+  {
+   "at": "0x02b981",
+   "text": "SkeletonSourceElement"
+  },
+  {
+   "at": "0x02b9ad",
+   "text": "MeshFileName"
+  },
+  {
+   "at": "0x02b9c9",
+   "text": "ParentRelativeTransform"
+  },
+  {
+   "at": "0x02b9f9",
+   "text": "ParentBone"
+  },
+  {
+   "at": "0x02ba11",
+   "text": "Length"
+  },
+  {
+   "at": "0x02ba21",
+   "text": "NoCenter"
+  },
+  {
+   "at": "0x02ba35",
+   "text": "BottomOffset"
+  },
+  {
+   "at": "0x02ba51",
+   "text": "RightOffset"
+  },
+  {
+   "at": "0x02ba69",
+   "text": "TopOffset"
+  },
+  {
+   "at": "0x02ba7d",
+   "text": "LeftOffset"
+  },
+  {
+   "at": "0x02ba95",
+   "text": "EffectParams5"
+  },
+  {
+   "at": "0x02bab1",
+   "text": "EffectParams4"
+  },
+  {
+   "at": "0x02bacd",
+   "text": "EffectParams3"
+  },
+  {
+   "at": "0x02bae9",
+   "text": "EffectParams2"
+  },
+  {
+   "at": "0x02bb05",
+   "text": "EffectParams1"
+  },
+  {
+   "at": "0x02bb21",
+   "text": "ForceComposite"
+  },
+  {
+   "at": "0x02bb41",
+   "text": "CompositeEdge"
+  },
+  {
+   "at": "0x02bb5d",
+   "text": "ShaderFile"
+  },
+  {
+   "at": "0x02bb75",
+   "text": "IntegerVariable"
+  },
+  {
+   "at": "0x02bb95",
+   "text": "FloatVariable"
+  },
+  {
+   "at": "0x02bbb1",
+   "text": "VectorVariable"
+  },
+  {
+   "at": "0x02bbd1",
+   "text": "DisableFocusRecursion"
+  },
+  {
+   "at": "0x02bbfd",
+   "text": "EnableEffects"
+  },
+  {
+   "at": "0x02bc19",
+   "text": "ClipChildren"
+  },
+  {
+   "at": "0x02bc35",
+   "text": "ColorWriteFlags"
+  },
+  {
+   "at": "0x02bc55",
+   "text": "DesignTime"
+  },
+  {
+   "at": "0x02bc6d",
+   "text": "BlendMode"
+  },
+  {
+   "at": "0x02bc81",
+   "text": "Show"
+  },
+  {
+   "at": "0x02bc8d",
+   "text": "Anchor"
+  },
+  {
+   "at": "0x02bc9d",
+   "text": "Opacity"
+  },
+  {
+   "at": "0x02bcad",
+   "text": "Position"
+  },
+  {
+   "at": "0x02bcc1",
+   "text": "NavTabBackward"
+  },
+  {
+   "at": "0x02bce1",
+   "text": "NavTabForward"
+  },
+  {
+   "at": "0x02bcfd",
+   "text": "NavDown"
+  },
+  {
+   "at": "0x02bd0d",
+   "text": "NavUp"
+  },
+  {
+   "at": "0x02bd19",
+   "text": "NavRight"
+  },
+  {
+   "at": "0x02bd2d",
+   "text": "NavLeft"
+  },
+  {
+   "at": "0x02bd3d",
+   "text": "UnfocusedInput"
+  },
+  {
+   "at": "0x02bd5d",
+   "text": "Enabled"
+  },
+  {
+   "at": "0x02bdf1",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x02be21",
+   "text": "File"
+  },
+  {
+   "at": "0x02c075",
+   "text": "SliderThumb"
+  },
+  {
+   "at": "0x02c08d",
+   "text": "ScrollDown"
+  },
+  {
+   "at": "0x02c0a5",
+   "text": "ScrollUp"
+  },
+  {
+   "at": "0x02c0b9",
+   "text": "ScrollRight"
+  },
+  {
+   "at": "0x02c0d1",
+   "text": "ScrollLeft"
+  },
+  {
+   "at": "0x02c0e9",
+   "text": "Caret"
+  },
+  {
+   "at": "0x02c0fd",
+   "text": "Button"
+  },
+  {
+   "at": "0x02c10d",
+   "text": "Tab%u"
+  },
+  {
+   "at": "0x02c165",
+   "text": "ComboBoxList"
+  },
+  {
+   "at": "0x02c181",
+   "text": "ComboBoxDrop"
+  },
+  {
+   "at": "0x02c19d",
+   "text": "ComboBoxValue"
+  },
+  {
+   "at": "0x02c1dd",
+   "text": "ScrollBarBody"
+  },
+  {
+   "at": "0x02c1f9",
+   "text": "ProgressBody"
+  },
+  {
+   "at": "0x02c215",
+   "text": "ScrollMax"
+  },
+  {
+   "at": "0x02c229",
+   "text": "ScrollMin"
+  },
+  {
+   "at": "0x02c23d",
+   "text": "SliderBody"
+  },
+  {
+   "at": "0x02c289",
+   "text": "EndTransTo"
+  },
+  {
+   "at": "0x02c2a1",
+   "text": "EndTransFrom"
+  },
+  {
+   "at": "0x02c2bd",
+   "text": "EndTransBackTo"
+  },
+  {
+   "at": "0x02c2dd",
+   "text": "EndTransBackFrom"
+  },
+  {
+   "at": "0x02c315",
+   "text": "ListWatermark"
+  },
+  {
+   "at": "0x02c331",
+   "text": "ListItemGroup"
+  },
+  {
+   "at": "0x031809",
+   "text": "ShowEnd"
+  },
+  {
+   "at": "0x031829",
+   "text": "Label_Head"
+  },
+  {
+   "at": "0x031841",
+   "text": "Label_HeadR"
+  },
+  {
+   "at": "0x031859",
+   "text": "Label_HeadSL"
+  },
+  {
+   "at": "0x031875",
+   "text": "Label_HeadSR"
+  },
+  {
+   "at": "0x031891",
+   "text": "SRTitle"
+  },
+  {
+   "at": "0x0318a1",
+   "text": "SLTitle"
+  },
+  {
+   "at": "0x0318b1",
+   "text": "RTitle"
+  },
+  {
+   "at": "0x0318c1",
+   "text": "LTitle"
+  },
+  {
+   "at": "0x0318d1",
+   "text": "YButton"
+  },
+  {
+   "at": "0x0318e1",
+   "text": "XButton"
+  },
+  {
+   "at": "0x0318f1",
+   "text": "BButton"
+  },
+  {
+   "at": "0x031901",
+   "text": "AButton"
+  },
+  {
+   "at": "0x031911",
+   "text": "HideEnd"
+  },
+  {
+   "at": "0x031921",
+   "text": "Hide"
+  },
+  {
+   "at": "0x031931",
+   "text": "PressEnd"
+  },
+  {
+   "at": "0x031945",
+   "text": "VariablesScene"
+  },
+  {
+   "at": "0x031965",
+   "text": "AuraScene"
+  },
+  {
+   "at": "0x031979",
+   "text": "AuraControl"
+  },
+  {
+   "at": "0x031991",
+   "text": "LegendScene"
+  },
+  {
+   "at": "0x0319a9",
+   "text": "MobyRootScene"
+  },
+  {
+   "at": "0x0319c5",
+   "text": "MobyChannelScene"
+  },
+  {
+   "at": "0x0319e9",
+   "text": "RomeRootScene"
+  },
+  {
+   "at": "0x031a05",
+   "text": "LegacyControl"
+  },
+  {
+   "at": "0x031a2d",
+   "text": "BannerImage"
+  },
+  {
+   "at": "0x031a45",
+   "text": "SurfaceSphere"
+  },
+  {
+   "at": "0x031a61",
+   "text": "BackgroundImage"
+  },
+  {
+   "at": "0x031a81",
+   "text": "ThemeImageIndex"
+  },
+  {
+   "at": "0x031aa7",
+   "text": "HSceneTransitions/TransitionScene"
+  },
+  {
+   "at": "0x031af1",
+   "text": "SceneTransitions/TransitionSubElements"
+  },
+  {
+   "at": "0x031b41",
+   "text": "SceneTransitions/TransitionChannel"
+  },
+  {
+   "at": "0x031b89",
+   "text": "SceneTransitions/TransitionPanel"
+  },
+  {
+   "at": "0x031bcd",
+   "text": "MobyDefaultSpacing"
+  },
+  {
+   "at": "0x031bf5",
+   "text": "MobyFoldSpeed"
+  },
+  {
+   "at": "0x031c11",
+   "text": "MobyFoldNextRange"
+  },
+  {
+   "at": "0x031c35",
+   "text": "MobyUnfoldSpeed"
+  },
+  {
+   "at": "0x031c55",
+   "text": "MobyUnfoldEaseRange"
+  },
+  {
+   "at": "0x031c7d",
+   "text": "MobyUnfoldNextRange"
+  },
+  {
+   "at": "0x031ca5",
+   "text": "MobyUnfoldMinSpeed"
+  },
+  {
+   "at": "0x031ccd",
+   "text": "MobyFrontPosition"
+  },
+  {
+   "at": "0x031cf1",
+   "text": "MobyBackPosition"
+  },
+  {
+   "at": "0x031d15",
+   "text": "MobyVisiblePanelDistance"
+  },
+  {
+   "at": "0x031d49",
+   "text": "MobyVisiblePanelDistanceSD"
+  },
+  {
+   "at": "0x031d81",
+   "text": "MobyChannelInputAcceleration"
+  },
+  {
+   "at": "0x031dbd",
+   "text": "MobyChannelInputDeceleration"
+  },
+  {
+   "at": "0x031df9",
+   "text": "MobyChannelInputMaxVelocity"
+  },
+  {
+   "at": "0x031e31",
+   "text": "MobyPanelInputAcceleration"
+  },
+  {
+   "at": "0x031e69",
+   "text": "MobyPanelInputDeceleration"
+  },
+  {
+   "at": "0x031ea1",
+   "text": "MobyPanelInputMaxVelocity"
+  },
+  {
+   "at": "0x031ed5",
+   "text": "RomeDefaultSpacing"
+  },
+  {
+   "at": "0x031efd",
+   "text": "RomeFoldSpeed"
+  },
+  {
+   "at": "0x031f19",
+   "text": "RomeFoldNextRange"
+  },
+  {
+   "at": "0x031f3d",
+   "text": "RomeUnfoldSpeed"
+  },
+  {
+   "at": "0x031f5d",
+   "text": "RomeUnfoldEaseRange"
+  },
+  {
+   "at": "0x031f85",
+   "text": "RomeUnfoldNextRange"
+  },
+  {
+   "at": "0x031fad",
+   "text": "RomeUnfoldMinSpeed"
+  },
+  {
+   "at": "0x031fd5",
+   "text": "RomeFrontPosition"
+  },
+  {
+   "at": "0x031ff9",
+   "text": "RomeBackPosition"
+  },
+  {
+   "at": "0x03201d",
+   "text": "RomeVisiblePanelDistance"
+  },
+  {
+   "at": "0x032051",
+   "text": "RomeVisiblePanelDistanceSD"
+  },
+  {
+   "at": "0x032089",
+   "text": "RomeInputAcceleration"
+  },
+  {
+   "at": "0x0320b5",
+   "text": "RomeInputDeceleration"
+  },
+  {
+   "at": "0x0320e1",
+   "text": "RomeInputMaxVelocity"
+  },
+  {
+   "at": "0x03210d",
+   "text": "SoundButtonBack"
+  },
+  {
+   "at": "0x03212d",
+   "text": "SoundButtonSelect"
+  },
+  {
+   "at": "0x032151",
+   "text": "SoundChannelUp"
+  },
+  {
+   "at": "0x032171",
+   "text": "SoundChannelDown"
+  },
+  {
+   "at": "0x032195",
+   "text": "SoundPanelLeft"
+  },
+  {
+   "at": "0x0321b5",
+   "text": "SoundPanelRight"
+  },
+  {
+   "at": "0x0321d5",
+   "text": "SoundPanelFold"
+  },
+  {
+   "at": "0x0321f5",
+   "text": "SoundPanelUnfold"
+  },
+  {
+   "at": "0x032219",
+   "text": "SceneTransitions"
+  },
+  {
+   "at": "0x032251",
+   "text": "Theme"
+  },
+  {
+   "at": "0x03225d",
+   "text": "Sphere"
+  },
+  {
+   "at": "0x03226d",
+   "text": "Back"
+  },
+  {
+   "at": "0x032279",
+   "text": "Banner"
+  },
+  {
+   "at": "0x032291",
+   "text": "Front"
+  },
+  {
+   "at": "0x03229d",
+   "text": "Front/Logos"
+  },
+  {
+   "at": "0x0322b5",
+   "text": "Sphere/Color"
+  },
+  {
+   "at": "0x0322d1",
+   "text": "Color%d"
+  },
+  {
+   "at": "0x0322e1",
+   "text": "Live"
+  },
+  {
+   "at": "0x0322ed",
+   "text": "LiveEnd"
+  },
+  {
+   "at": "0x032325",
+   "text": "Sound"
+  },
+  {
+   "at": "0x032331",
+   "text": "SoundEnd"
+  },
+  {
+   "at": "0x03234d",
+   "text": "ToEnd"
+  },
+  {
+   "at": "0x032359",
+   "text": "From"
+  },
+  {
+   "at": "0x032365",
+   "text": "FromEnd"
+  },
+  {
+   "at": "0x032375",
+   "text": "BackTo"
+  },
+  {
+   "at": "0x032385",
+   "text": "BackToEnd"
+  },
+  {
+   "at": "0x032399",
+   "text": "BackFrom"
+  },
+  {
+   "at": "0x0323ad",
+   "text": "BackFromEnd"
+  },
+  {
+   "at": "0x0323e5",
+   "text": "Queue\\Marker2"
+  },
+  {
+   "at": "0x032401",
+   "text": "Queue\\Marker1"
+  },
+  {
+   "at": "0x03241d",
+   "text": "Description"
+  },
+  {
+   "at": "0x032435",
+   "text": "Queue\\Prev1"
+  },
+  {
+   "at": "0x03244d",
+   "text": "Queue\\Current"
+  },
+  {
+   "at": "0x032469",
+   "text": "Queue\\Next1"
+  },
+  {
+   "at": "0x032481",
+   "text": "Queue\\Next2"
+  },
+  {
+   "at": "0x032499",
+   "text": "Queue\\Next3"
+  },
+  {
+   "at": "0x0324b1",
+   "text": "Queue\\Next4"
+  },
+  {
+   "at": "0x0324c9",
+   "text": "Queue\\Next5"
+  },
+  {
+   "at": "0x0324e1",
+   "text": "Queue\\Next6"
+  },
+  {
+   "at": "0x032581",
+   "text": "PanelLayer"
+  },
+  {
+   "at": "0x032599",
+   "text": "ChannelLayer"
+  },
+  {
+   "at": "0x0325b5",
+   "text": "AnchorLayer"
+  },
+  {
+   "at": "0x032629",
+   "text": "ColumnLayer"
+  },
+  {
+   "at": "0x032641",
+   "text": "OverlayLayer"
+  },
+  {
+   "at": "0x032663",
+   "text": "HLegacyBackFrom"
+  },
+  {
+   "at": "0x032685",
+   "text": "LegacyBackFromEx"
+  },
+  {
+   "at": "0x0326a9",
+   "text": "LegacyBackTo"
+  },
+  {
+   "at": "0x0326c5",
+   "text": "LegacyBackToEx"
+  },
+  {
+   "at": "0x0326e5",
+   "text": "LegacyFrom"
+  },
+  {
+   "at": "0x0326fd",
+   "text": "LegacyFromEx"
+  },
+  {
+   "at": "0x032719",
+   "text": "LegacyTo"
+  },
+  {
+   "at": "0x03272d",
+   "text": "LegacyToEx"
+  },
+  {
+   "at": "0x144b87",
+   "text": "U<$"
+  },
+  {
+   "at": "0x149a7d",
+   "text": "AsyncTaskManager0"
+  },
+  {
+   "at": "0x19ada0",
+   "text": "Legend_A.png"
+  },
+  {
+   "at": "0x19adc1",
+   "text": "Legend_B.png"
+  },
+  {
+   "at": "0x19ade2",
+   "text": "Legend_X.png"
+  },
+  {
+   "at": "0x19ae03",
+   "text": "Legend_Y.png"
+  },
+  {
+   "at": "0x19ae24",
+   "text": "Legend_Menu.png"
+  },
+  {
+   "at": "0x19ae4b",
+   "text": "Legend_Highlight.png"
+  },
+  {
+   "at": "0x19aeaf",
+   "text": "Aura_Horizon.png"
+  },
+  {
+   "at": "0x19aed8",
+   "text": "SphereHighlight.png"
+  },
+  {
+   "at": "0x19af28",
+   "text": "MobyChannelZero.png"
+  },
+  {
+   "at": "0x19af72",
+   "text": "PanelShadow.png"
+  },
+  {
+   "at": "0x19af99",
+   "text": "AuraScene.xur"
+  },
+  {
+   "at": "0x19afbc",
+   "text": "MobyRootScene.xur"
+  },
+  {
+   "at": "0x19afe7",
+   "text": "MobyChannelScene.xur"
+  },
+  {
+   "at": "0x19b018",
+   "text": "RomeRootScene.xur"
+  },
+  {
+   "at": "0x19b043",
+   "text": "RomeOverlayScene.xur"
+  },
+  {
+   "at": "0x19b074",
+   "text": "LegendScene.xur"
+  },
+  {
+   "at": "0x19b09b",
+   "text": "PanelScene.xur"
+  },
+  {
+   "at": "0x19b0c0",
+   "text": "Variables.xur"
+  },
+  {
+   "at": "0x1afe58",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1afe6c",
+   "text": "XuiPerspectiveScene"
+  },
+  {
+   "at": "0x1afe94",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x1afea8",
+   "text": "AuraScene"
+  },
+  {
+   "at": "0x1afebc",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1afece",
+   "text": "Back"
+  },
+  {
+   "at": "0x1afed8",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x1afeec",
+   "text": "TopDark"
+  },
+  {
+   "at": "0x1afefc",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1aff0e",
+   "text": "ImgBG"
+  },
+  {
+   "at": "0x1aff68",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x1b0014",
+   "text": "Theme"
+  },
+  {
+   "at": "0x1b0020",
+   "text": "XuiImagePresenter"
+  },
+  {
+   "at": "0x1b0044",
+   "text": "Image_Current"
+  },
+  {
+   "at": "0x1b0060",
+   "text": "XuiShader"
+  },
+  {
+   "at": "0x1b0074",
+   "text": "XuiShader1"
+  },
+  {
+   "at": "0x1b00ac",
+   "text": "Image_Next"
+  },
+  {
+   "at": "0x1b00c2",
+   "text": "VisionCameraLayer"
+  },
+  {
+   "at": "0x1b00e6",
+   "text": "Bind"
+  },
+  {
+   "at": "0x1b00f0",
+   "text": "Show"
+  },
+  {
+   "at": "0x1b00fa",
+   "text": "ShowEnd"
+  },
+  {
+   "at": "0x1b010a",
+   "text": "Hide"
+  },
+  {
+   "at": "0x1b0114",
+   "text": "HideEnd"
+  },
+  {
+   "at": "0x1b0124",
+   "text": "Sphere"
+  },
+  {
+   "at": "0x1b0132",
+   "text": "Color"
+  },
+  {
+   "at": "0x1b013e",
+   "text": "SolidBack"
+  },
+  {
+   "at": "0x1b0152",
+   "text": "LighBackLarge"
+  },
+  {
+   "at": "0x1b016e",
+   "text": "LightBack"
+  },
+  {
+   "at": "0x1b0182",
+   "text": "Horizon"
+  },
+  {
+   "at": "0x1b0192",
+   "text": "Aura_Horizon.png"
+  },
+  {
+   "at": "0x1b01b4",
+   "text": "LightFront"
+  },
+  {
+   "at": "0x1b01ca",
+   "text": "Default"
+  },
+  {
+   "at": "0x1b01da",
+   "text": "Color0"
+  },
+  {
+   "at": "0x1b01e8",
+   "text": "Color1"
+  },
+  {
+   "at": "0x1b01f6",
+   "text": "Color2"
+  },
+  {
+   "at": "0x1b0204",
+   "text": "Color3"
+  },
+  {
+   "at": "0x1b0212",
+   "text": "Color4"
+  },
+  {
+   "at": "0x1b0220",
+   "text": "Color5"
+  },
+  {
+   "at": "0x1b022e",
+   "text": "Color6"
+  },
+  {
+   "at": "0x1b023c",
+   "text": "Color7"
+  },
+  {
+   "at": "0x1b024a",
+   "text": "Color8"
+  },
+  {
+   "at": "0x1b0258",
+   "text": "Color9"
+  },
+  {
+   "at": "0x1b0266",
+   "text": "Color10"
+  },
+  {
+   "at": "0x1b0276",
+   "text": "Color11"
+  },
+  {
+   "at": "0x1b0286",
+   "text": "Color12"
+  },
+  {
+   "at": "0x1b0296",
+   "text": "Color13"
+  },
+  {
+   "at": "0x1b02a6",
+   "text": "Color14"
+  },
+  {
+   "at": "0x1b02b6",
+   "text": "Color15"
+  },
+  {
+   "at": "0x1b02c6",
+   "text": "Banner"
+  },
+  {
+   "at": "0x1b02d4",
+   "text": "Image_Banner"
+  },
+  {
+   "at": "0x1b02ee",
+   "text": "Front"
+  },
+  {
+   "at": "0x1b02fa",
+   "text": "Rings_Pulse"
+  },
+  {
+   "at": "0x1b0334",
+   "text": "XuiImage1"
+  },
+  {
+   "at": "0x1b035c",
+   "text": "XuiShader2"
+  },
+  {
+   "at": "0x1b0372",
+   "text": "XuiImage2"
+  },
+  {
+   "at": "0x1b0386",
+   "text": "XuiShader3"
+  },
+  {
+   "at": "0x1b039c",
+   "text": "XuiImage3"
+  },
+  {
+   "at": "0x1b03b0",
+   "text": "Pulse"
+  },
+  {
+   "at": "0x1b03bc",
+   "text": "PulseEnd"
+  },
+  {
+   "at": "0x1b03ce",
+   "text": "Rings_Constant"
+  },
+  {
+   "at": "0x1b03ec",
+   "text": "XuiShader4"
+  },
+  {
+   "at": "0x1b0402",
+   "text": "XuiImage4"
+  },
+  {
+   "at": "0x1b0416",
+   "text": "XuiShader5"
+  },
+  {
+   "at": "0x1b042c",
+   "text": "XuiImage5"
+  },
+  {
+   "at": "0x1b0440",
+   "text": "XuiShader6"
+  },
+  {
+   "at": "0x1b0456",
+   "text": "XuiImage6"
+  },
+  {
+   "at": "0x1b046a",
+   "text": "XuiShader7"
+  },
+  {
+   "at": "0x1b0480",
+   "text": "XuiImage7"
+  },
+  {
+   "at": "0x1b0494",
+   "text": "XuiShader8"
+  },
+  {
+   "at": "0x1b04aa",
+   "text": "XuiImage8"
+  },
+  {
+   "at": "0x1b04be",
+   "text": "XuiShader9"
+  },
+  {
+   "at": "0x1b04d4",
+   "text": "XuiImage9"
+  },
+  {
+   "at": "0x1b04e8",
+   "text": "XuiShader10"
+  },
+  {
+   "at": "0x1b0500",
+   "text": "XuiImage10"
+  },
+  {
+   "at": "0x1b0516",
+   "text": "XuiShader11"
+  },
+  {
+   "at": "0x1b052e",
+   "text": "XuiImage11"
+  },
+  {
+   "at": "0x1b0544",
+   "text": "XuiShader12"
+  },
+  {
+   "at": "0x1b055c",
+   "text": "XuiImage12"
+  },
+  {
+   "at": "0x1b0572",
+   "text": "XuiShader13"
+  },
+  {
+   "at": "0x1b058a",
+   "text": "XuiImage13"
+  },
+  {
+   "at": "0x1b05a0",
+   "text": "XuiShader14"
+  },
+  {
+   "at": "0x1b05b8",
+   "text": "XuiImage14"
+  },
+  {
+   "at": "0x1b05ce",
+   "text": "XuiShader15"
+  },
+  {
+   "at": "0x1b05e6",
+   "text": "XuiImage15"
+  },
+  {
+   "at": "0x1b05fc",
+   "text": "XuiShader16"
+  },
+  {
+   "at": "0x1b0614",
+   "text": "XuiImage16"
+  },
+  {
+   "at": "0x1b062a",
+   "text": "XuiShader17"
+  },
+  {
+   "at": "0x1b0642",
+   "text": "XuiImage17"
+  },
+  {
+   "at": "0x1b0658",
+   "text": "XuiShader18"
+  },
+  {
+   "at": "0x1b0670",
+   "text": "XuiImage18"
+  },
+  {
+   "at": "0x1b0686",
+   "text": "XuiShader19"
+  },
+  {
+   "at": "0x1b069e",
+   "text": "XuiImage19"
+  },
+  {
+   "at": "0x1b06b4",
+   "text": "XuiShader20"
+  },
+  {
+   "at": "0x1b06cc",
+   "text": "XuiImage20"
+  },
+  {
+   "at": "0x1b06e2",
+   "text": "XuiShader21"
+  },
+  {
+   "at": "0x1b06fa",
+   "text": "XuiImage21"
+  },
+  {
+   "at": "0x1b0710",
+   "text": "XuiShader22"
+  },
+  {
+   "at": "0x1b0728",
+   "text": "XuiImage22"
+  },
+  {
+   "at": "0x1b073e",
+   "text": "XuiShader23"
+  },
+  {
+   "at": "0x1b0756",
+   "text": "XuiImage23"
+  },
+  {
+   "at": "0x1b076c",
+   "text": "XuiShader24"
+  },
+  {
+   "at": "0x1b0784",
+   "text": "XuiImage24"
+  },
+  {
+   "at": "0x1b079a",
+   "text": "XuiShader25"
+  },
+  {
+   "at": "0x1b07b2",
+   "text": "XuiImage25"
+  },
+  {
+   "at": "0x1b07c8",
+   "text": "XuiShader26"
+  },
+  {
+   "at": "0x1b07e0",
+   "text": "XuiImage26"
+  },
+  {
+   "at": "0x1b07f6",
+   "text": "XuiShader27"
+  },
+  {
+   "at": "0x1b080e",
+   "text": "XuiImage27"
+  },
+  {
+   "at": "0x1b0824",
+   "text": "XuiShader28"
+  },
+  {
+   "at": "0x1b083c",
+   "text": "XuiImage28"
+  },
+  {
+   "at": "0x1b0852",
+   "text": "XuiShader29"
+  },
+  {
+   "at": "0x1b086a",
+   "text": "XuiImage29"
+  },
+  {
+   "at": "0x1b0880",
+   "text": "XuiShader30"
+  },
+  {
+   "at": "0x1b0898",
+   "text": "XuiImage30"
+  },
+  {
+   "at": "0x1b08ae",
+   "text": "Logos"
+  },
+  {
+   "at": "0x1b08ba",
+   "text": "LiveLogo"
+  },
+  {
+   "at": "0x1b08cc",
+   "text": "Shadow1"
+  },
+  {
+   "at": "0x1b0910",
+   "text": "Legend_Menu.png"
+  },
+  {
+   "at": "0x1b099e",
+   "text": "XenonShine"
+  },
+  {
+   "at": "0x1b09b4",
+   "text": "SphereHighlight.png"
+  },
+  {
+   "at": "0x1b09dc",
+   "text": "LiveAnimation"
+  },
+  {
+   "at": "0x1b0a50",
+   "text": "Shine"
+  },
+  {
+   "at": "0x1b0a5c",
+   "text": "LiveGlow"
+  },
+  {
+   "at": "0x1b0a6e",
+   "text": "Live"
+  },
+  {
+   "at": "0x1b0a78",
+   "text": "LiveEnd"
+  },
+  {
+   "at": "0x1b0a88",
+   "text": "Idle"
+  },
+  {
+   "at": "0x1b0a92",
+   "text": "IdleEn"
+  },
+  {
+   "at": "0x1b548f",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b54a3",
+   "text": "MobyRootScene"
+  },
+  {
+   "at": "0x1b54bf",
+   "text": "MobyRootScene1"
+  },
+  {
+   "at": "0x1b54dd",
+   "text": "XuiBackButton"
+  },
+  {
+   "at": "0x1b551d",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x1b56d3",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b56e7",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1b56f9",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x1b570d",
+   "text": "MobyChannelScene"
+  },
+  {
+   "at": "0x1b572f",
+   "text": "XuiHtmlElement"
+  },
+  {
+   "at": "0x1b574d",
+   "text": "Description"
+  },
+  {
+   "at": "0x1b5765",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1b5777",
+   "text": "Queue"
+  },
+  {
+   "at": "0x1b5783",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x1b5793",
+   "text": "Prev1"
+  },
+  {
+   "at": "0x1b579f",
+   "text": "Current"
+  },
+  {
+   "at": "0x1b57af",
+   "text": "Next1"
+  },
+  {
+   "at": "0x1b57bb",
+   "text": "Next2"
+  },
+  {
+   "at": "0x1b57c7",
+   "text": "Next3"
+  },
+  {
+   "at": "0x1b57d3",
+   "text": "Next4"
+  },
+  {
+   "at": "0x1b57df",
+   "text": "Next5"
+  },
+  {
+   "at": "0x1b57eb",
+   "text": "Next6"
+  },
+  {
+   "at": "0x1b57f7",
+   "text": "Marker1"
+  },
+  {
+   "at": "0x1b5807",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1b5819",
+   "text": "Image"
+  },
+  {
+   "at": "0x1b5825",
+   "text": "MobyChannelZero.png"
+  },
+  {
+   "at": "0x1b584d",
+   "text": "Marker"
+  },
+  {
+   "at": "0x1b5bc2",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b5bd6",
+   "text": "RomeRootScene"
+  },
+  {
+   "at": "0x1b5bf2",
+   "text": "RomeRootScene1"
+  },
+  {
+   "at": "0x1b5c77",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b5c8b",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1b5c9d",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x1b5cb1",
+   "text": "XuiHtmlElement"
+  },
+  {
+   "at": "0x1b5ccf",
+   "text": "Descriptio"
+  },
+  {
+   "at": "0x1b5d75",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b5d89",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1b5d9b",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x1b5daf",
+   "text": "LegendScene"
+  },
+  {
+   "at": "0x1b5dc7",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1b5dd9",
+   "text": "BButton"
+  },
+  {
+   "at": "0x1b5de9",
+   "text": "Images"
+  },
+  {
+   "at": "0x1b5df7",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1b5e09",
+   "text": "Button_Image"
+  },
+  {
+   "at": "0x1b5e23",
+   "text": "Legend_B.png"
+  },
+  {
+   "at": "0x1b5e3d",
+   "text": "Button_Highlight"
+  },
+  {
+   "at": "0x1b5e5f",
+   "text": "Legend_Highlight.png"
+  },
+  {
+   "at": "0x1b5e89",
+   "text": "Bind"
+  },
+  {
+   "at": "0x1b5e93",
+   "text": "Press"
+  },
+  {
+   "at": "0x1b5e9f",
+   "text": "PressEnd"
+  },
+  {
+   "at": "0x1b5eb1",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x1b5ec1",
+   "text": "Text"
+  },
+  {
+   "at": "0x1b5ecb",
+   "text": "Show"
+  },
+  {
+   "at": "0x1b5ed5",
+   "text": "ShowEnd"
+  },
+  {
+   "at": "0x1b5ee5",
+   "text": "Hide"
+  },
+  {
+   "at": "0x1b5eef",
+   "text": "HideEnd"
+  },
+  {
+   "at": "0x1b5eff",
+   "text": "AButton"
+  },
+  {
+   "at": "0x1b5f0f",
+   "text": "Legend_A.png"
+  },
+  {
+   "at": "0x1b5f29",
+   "text": "XButton"
+  },
+  {
+   "at": "0x1b5f39",
+   "text": "Legend_X.png"
+  },
+  {
+   "at": "0x1b5f53",
+   "text": "YButton"
+  },
+  {
+   "at": "0x1b5f63",
+   "text": "Legend_Y.png"
+  },
+  {
+   "at": "0x1b5f7d",
+   "text": "SRTitle"
+  },
+  {
+   "at": "0x1b5f8d",
+   "text": "SLTitle"
+  },
+  {
+   "at": "0x1b5f9d",
+   "text": "RTitle"
+  },
+  {
+   "at": "0x1b5fab",
+   "text": "LTitl"
+  },
+  {
+   "at": "0x1b6f96",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b6faa",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1b6fda",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1b6fec",
+   "text": "Panel"
+  },
+  {
+   "at": "0x1b6ff8",
+   "text": "XuiTextureSurface"
+  },
+  {
+   "at": "0x1b701c",
+   "text": "ReflectedItems"
+  },
+  {
+   "at": "0x1b703a",
+   "text": "XuiShader"
+  },
+  {
+   "at": "0x1b704e",
+   "text": "ReflectionShader"
+  },
+  {
+   "at": "0x1b7090",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1b70a2",
+   "text": "Reflection"
+  },
+  {
+   "at": "0x1b70b8",
+   "text": "NonReflectedItems"
+  },
+  {
+   "at": "0x1b70dc",
+   "text": "XuiNineGrid"
+  },
+  {
+   "at": "0x1b70f4",
+   "text": "Shadow"
+  },
+  {
+   "at": "0x1b7102",
+   "text": "PanelShadow.png"
+  },
+  {
+   "at": "0x1b727a",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1b728e",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1b72a0",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x1b72b4",
+   "text": "VariablesScene"
+  },
+  {
+   "at": "0x1b72d2",
+   "text": "XuiVariable"
+  },
+  {
+   "at": "0x1b72ea",
+   "text": "RomeInputMaxVelocity"
+  },
+  {
+   "at": "0x1b7314",
+   "text": "RomeInputDeceleration"
+  },
+  {
+   "at": "0x1b7340",
+   "text": "RomeInputAcceleration"
+  },
+  {
+   "at": "0x1b736c",
+   "text": "RomeVisiblePanelDistanceSD"
+  },
+  {
+   "at": "0x1b73a2",
+   "text": "RomeVisiblePanelDistance"
+  },
+  {
+   "at": "0x1b73d4",
+   "text": "RomeBackPosition"
+  },
+  {
+   "at": "0x1b73f6",
+   "text": "RomeFrontPosition"
+  },
+  {
+   "at": "0x1b741a",
+   "text": "RomeUnfoldMinSpeed"
+  },
+  {
+   "at": "0x1b7440",
+   "text": "RomeUnfoldNextRange"
+  },
+  {
+   "at": "0x1b7468",
+   "text": "RomeUnfoldEaseRange"
+  },
+  {
+   "at": "0x1b7490",
+   "text": "RomeUnfoldSpeed"
+  },
+  {
+   "at": "0x1b74b0",
+   "text": "RomeFoldNextRange"
+  },
+  {
+   "at": "0x1b74d4",
+   "text": "RomeFoldSpeed"
+  },
+  {
+   "at": "0x1b74f0",
+   "text": "RomeDefaultSpacing"
+  },
+  {
+   "at": "0x1b7516",
+   "text": "MobyPanelInputMaxVelocity"
+  },
+  {
+   "at": "0x1b754a",
+   "text": "MobyPanelInputDeceleration"
+  },
+  {
+   "at": "0x1b7580",
+   "text": "MobyPanelInputAcceleration"
+  },
+  {
+   "at": "0x1b75b6",
+   "text": "MobyChannelInputMaxVelocity"
+  },
+  {
+   "at": "0x1b75ee",
+   "text": "MobyChannelInputDeceleration"
+  },
+  {
+   "at": "0x1b7628",
+   "text": "MobyChannelInputAcceleration"
+  },
+  {
+   "at": "0x1b7662",
+   "text": "MobyVisiblePanelDistanceSD"
+  },
+  {
+   "at": "0x1b7698",
+   "text": "MobyVisiblePanelDistance"
+  },
+  {
+   "at": "0x1b76ca",
+   "text": "MobyBackPosition"
+  },
+  {
+   "at": "0x1b76ec",
+   "text": "MobyFrontPosition"
+  },
+  {
+   "at": "0x1b7710",
+   "text": "MobyUnfoldMinSpeed"
+  },
+  {
+   "at": "0x1b7736",
+   "text": "MobyUnfoldNextRange"
+  },
+  {
+   "at": "0x1b775e",
+   "text": "MobyUnfoldEaseRange"
+  },
+  {
+   "at": "0x1b7786",
+   "text": "MobyUnfoldSpeed"
+  },
+  {
+   "at": "0x1b77a6",
+   "text": "MobyFoldNextRange"
+  },
+  {
+   "at": "0x1b77ca",
+   "text": "MobyFoldSpeed"
+  },
+  {
+   "at": "0x1b77e6",
+   "text": "MobyDefaultSpacing"
+  },
+  {
+   "at": "0x1b780c",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1b781e",
+   "text": "SceneTransitions"
+  },
+  {
+   "at": "0x1b7840",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x1b785e",
+   "text": "TransitionSound"
+  },
+  {
+   "at": "0x1b787e",
+   "text": "TransitionPanel"
+  },
+  {
+   "at": "0x1b789e",
+   "text": "TransitionChannel"
+  },
+  {
+   "at": "0x1b78c2",
+   "text": "TransitionSubElements"
+  },
+  {
+   "at": "0x1b78ee",
+   "text": "TransitionScene"
+  },
+  {
+   "at": "0x1b790e",
+   "text": "Bind"
+  },
+  {
+   "at": "0x1b791e",
+   "text": "ToEnd"
+  },
+  {
+   "at": "0x1b792a",
+   "text": "From"
+  },
+  {
+   "at": "0x1b7934",
+   "text": "FromEnd"
+  },
+  {
+   "at": "0x1b7944",
+   "text": "BackTo"
+  },
+  {
+   "at": "0x1b7952",
+   "text": "BackToEnd"
+  },
+  {
+   "at": "0x1b7966",
+   "text": "BackFrom"
+  },
+  {
+   "at": "0x1b7978",
+   "text": "BackFromEnd"
+  },
+  {
+   "at": "0x1b79ec",
+   "text": "SoundPanelUnfold"
+  },
+  {
+   "at": "0x1b7a0e",
+   "text": "Sound"
+  },
+  {
+   "at": "0x1b7a1a",
+   "text": "SoundEnd"
+  },
+  {
+   "at": "0x1b7a54",
+   "text": "SoundPanelFold"
+  },
+  {
+   "at": "0x1b7a96",
+   "text": "SoundPanelRight"
+  },
+  {
+   "at": "0x1b7adc",
+   "text": "SoundPanelLeft"
+  },
+  {
+   "at": "0x1b7b1e",
+   "text": "SoundChannelDown"
+  },
+  {
+   "at": "0x1b7b68",
+   "text": "SoundChannelUp"
+  },
+  {
+   "at": "0x1b7baa",
+   "text": "SoundButtonSelect"
+  },
+  {
+   "at": "0x1b7bf8",
+   "text": "SoundButtonBack"
+  },
+  {
+   "at": "0x1e9ca0",
+   "text": "Strings.xus"
+  },
+  {
+   "at": "0x1e9cbf",
+   "text": "EditorBG.xur"
+  },
+  {
+   "at": "0x1e9ce0",
+   "text": "EditorStart.xur"
+  },
+  {
+   "at": "0x1e9d07",
+   "text": "EditorMain.xur"
+  },
+  {
+   "at": "0x1e9d2c",
+   "text": "EditorSkin.xur"
+  },
+  {
+   "at": "0x1e9d51",
+   "text": "Grid.xur"
+  },
+  {
+   "at": "0x1e9d6a",
+   "text": "GridMain.xur"
+  },
+  {
+   "at": "0x1e9d8b",
+   "text": "GridWide.xur"
+  },
+  {
+   "at": "0x1e9dac",
+   "text": "GridTall.xur"
+  },
+  {
+   "at": "0x1e9dcd",
+   "text": "GridTall2Button.xur"
+  },
+  {
+   "at": "0x1e9dfc",
+   "text": "Dialog.xur"
+  },
+  {
+   "at": "0x1e9e19",
+   "text": "DialogPhotobooth.xur"
+  },
+  {
+   "at": "0x1e9e4a",
+   "text": "MessageBox.xur"
+  },
+  {
+   "at": "0x1e9e6f",
+   "text": "Progress.xur"
+  },
+  {
+   "at": "0x1e9e90",
+   "text": "Photobooth.xur"
+  },
+  {
+   "at": "0x1e9eb5",
+   "text": "Abutton.png"
+  },
+  {
+   "at": "0x1ea212",
+   "text": "Bbutton.png"
+  },
+  {
+   "at": "0x1ec414",
+   "text": "Legend_A.png"
+  },
+  {
+   "at": "0x1ec435",
+   "text": "Legend_B.png"
+  },
+  {
+   "at": "0x1ec456",
+   "text": "Legend_Highlight.png"
+  },
+  {
+   "at": "0x1ec56f",
+   "text": "Legend_X.png"
+  },
+  {
+   "at": "0x1ec590",
+   "text": "Legend_Y.png"
+  },
+  {
+   "at": "0x1ed602",
+   "text": "Xbutton.png"
+  },
+  {
+   "at": "0x1ed621",
+   "text": "Ybutton.png"
+  },
+  {
+   "at": "0x1ed640",
+   "text": "AvatarShadow.png"
+  },
+  {
+   "at": "0x1ee14c",
+   "text": "Transition_select_to_editor.xma"
+  },
+  {
+   "at": "0x1ee2b2",
+   "text": "Burp_high.xma"
+  },
+  {
+   "at": "0x1ee2d5",
+   "text": "Burp_high2.xma"
+  },
+  {
+   "at": "0x1ee2fa",
+   "text": "Burp_Highest.xma"
+  },
+  {
+   "at": "0x1ee323",
+   "text": "Burp_medium.xma"
+  },
+  {
+   "at": "0x1ee34a",
+   "text": "Burp_medium3.xma"
+  },
+  {
+   "at": "0x1ee373",
+   "text": "Burp_low.xma"
+  },
+  {
+   "at": "0x1ee394",
+   "text": "Burp_low3.xma"
+  },
+  {
+   "at": "0x1eec75",
+   "text": "Menu_F_exit.xma"
+  },
+  {
+   "at": "0x1eec9c",
+   "text": "Mirror_In.xma"
+  },
+  {
+   "at": "0x1eecbf",
+   "text": "Mirror_Out.xma"
+  },
+  {
+   "at": "0x1eed4f",
+   "text": "ToiletFlush.xma"
+  },
+  {
+   "at": "0x1eedbb",
+   "text": "Avatars_more_choices.xma"
+  },
+  {
+   "at": "0x1eedf4",
+   "text": "Avatars_run_in.xma"
+  },
+  {
+   "at": "0x1eee21",
+   "text": "Camera.xma"
+  },
+  {
+   "at": "0x1eee81",
+   "text": "Emote_trigger.xma"
+  },
+  {
+   "at": "0x1eeeac",
+   "text": "Feature_unlocked.xma"
+  },
+  {
+   "at": "0x1eeedd",
+   "text": "Focus_negative.xma"
+  },
+  {
+   "at": "0x1eef5a",
+   "text": "Wobble.xma"
+  },
+  {
+   "at": "0x1f11a3",
+   "text": "Back"
+  },
+  {
+   "at": "0x1f11ad",
+   "text": "Larger"
+  },
+  {
+   "at": "0x1f11bb",
+   "text": "Average"
+  },
+  {
+   "at": "0x1f11cb",
+   "text": "Thinner"
+  },
+  {
+   "at": "0x1f11db",
+   "text": "Shorter"
+  },
+  {
+   "at": "0x1f11eb",
+   "text": "Taller"
+  },
+  {
+   "at": "0x1f11f9",
+   "text": "Cancel"
+  },
+  {
+   "at": "0x1f12fd",
+   "text": "Saving"
+  },
+  {
+   "at": "0x1f14f5",
+   "text": "Save and Exit"
+  },
+  {
+   "at": "0x1f1511",
+   "text": "Change Picture Background"
+  },
+  {
+   "at": "0x1f1545",
+   "text": "Select"
+  },
+  {
+   "at": "0x1f1645",
+   "text": "Can't save this item."
+  },
+  {
+   "at": "0x1f1773",
+   "text": "Exit"
+  },
+  {
+   "at": "0x1f177d",
+   "text": "Wear %s"
+  },
+  {
+   "at": "0x1f178d",
+   "text": "Skin Color and Body"
+  },
+  {
+   "at": "0x1f17b5",
+   "text": "Body Accessories"
+  },
+  {
+   "at": "0x1f17d7",
+   "text": "Gloves"
+  },
+  {
+   "at": "0x1f17e5",
+   "text": "Neckwear"
+  },
+  {
+   "at": "0x1f17f7",
+   "text": "Rings"
+  },
+  {
+   "at": "0x1f1803",
+   "text": "Wristwear"
+  },
+  {
+   "at": "0x1f1817",
+   "text": "Bottoms"
+  },
+  {
+   "at": "0x1f1827",
+   "text": "Carryables"
+  },
+  {
+   "at": "0x1f183d",
+   "text": "My Clothes"
+  },
+  {
+   "at": "0x1f1853",
+   "text": "Facial Hair Color"
+  },
+  {
+   "at": "0x1f1877",
+   "text": "Facial Feature Color"
+  },
+  {
+   "at": "0x1f18a1",
+   "text": "Eyebrow Color"
+  },
+  {
+   "at": "0x1f18bd",
+   "text": "Eye Shadow Color"
+  },
+  {
+   "at": "0x1f18df",
+   "text": "Eye Color"
+  },
+  {
+   "at": "0x1f18f3",
+   "text": "Eyeliner Color"
+  },
+  {
+   "at": "0x1f1911",
+   "text": "Hair Color"
+  },
+  {
+   "at": "0x1f1927",
+   "text": "Lip Color"
+  },
+  {
+   "at": "0x1f193b",
+   "text": "Skin Color"
+  },
+  {
+   "at": "0x1f1951",
+   "text": "Dress Up"
+  },
+  {
+   "at": "0x1f1963",
+   "text": "My Features"
+  },
+  {
+   "at": "0x1f1991",
+   "text": "Gamer Picture"
+  },
+  {
+   "at": "0x1f19ad",
+   "text": "Ears"
+  },
+  {
+   "at": "0x1f19b9",
+   "text": "Eyebrows"
+  },
+  {
+   "at": "0x1f19cb",
+   "text": "Eyes"
+  },
+  {
+   "at": "0x1f19d5",
+   "text": "Chin"
+  },
+  {
+   "at": "0x1f19df",
+   "text": "Face"
+  },
+  {
+   "at": "0x1f19e9",
+   "text": "Facial Hair"
+  },
+  {
+   "at": "0x1f1a01",
+   "text": "Facial Features"
+  },
+  {
+   "at": "0x1f1a21",
+   "text": "Change My Clothes"
+  },
+  {
+   "at": "0x1f1a45",
+   "text": "Change My Features"
+  },
+  {
+   "at": "0x1f1a6b",
+   "text": "Hairstyles"
+  },
+  {
+   "at": "0x1f1a81",
+   "text": "Head Accessories"
+  },
+  {
+   "at": "0x1f1aa3",
+   "text": "Earrings"
+  },
+  {
+   "at": "0x1f1ab5",
+   "text": "Glasses"
+  },
+  {
+   "at": "0x1f1ac5",
+   "text": "Headwear"
+  },
+  {
+   "at": "0x1f1ad7",
+   "text": "Mouth"
+  },
+  {
+   "at": "0x1f1ae3",
+   "text": "Makeup"
+  },
+  {
+   "at": "0x1f1af1",
+   "text": "Nose"
+  },
+  {
+   "at": "0x1f1afb",
+   "text": "Outfit"
+  },
+  {
+   "at": "0x1f1b09",
+   "text": "Deleting"
+  },
+  {
+   "at": "0x1f1b1b",
+   "text": "My Outfits"
+  },
+  {
+   "at": "0x1f1b31",
+   "text": "Loading"
+  },
+  {
+   "at": "0x1f1b41",
+   "text": "Save Outfit"
+  },
+  {
+   "at": "0x1f1b59",
+   "text": "Saving"
+  },
+  {
+   "at": "0x1f1b67",
+   "text": "Gamer Picture"
+  },
+  {
+   "at": "0x1f1b89",
+   "text": "Shoes"
+  },
+  {
+   "at": "0x1f1b95",
+   "text": "Gamer Picture"
+  },
+  {
+   "at": "0x1f1bb5",
+   "text": "Tops"
+  },
+  {
+   "at": "0x1f1bbf",
+   "text": "More Choices"
+  },
+  {
+   "at": "0x1f1bd9",
+   "text": "Avatar Error"
+  },
+  {
+   "at": "0x1f1bfb",
+   "text": "This outfit has been saved."
+  },
+  {
+   "at": "0x1f1c33",
+   "text": "Outfit"
+  },
+  {
+   "at": "0x1f1c41",
+   "text": "Outfits storage is full."
+  },
+  {
+   "at": "0x1f1c73",
+   "text": "Outfit Name"
+  },
+  {
+   "at": "0x1f1c8b",
+   "text": "Enter a name for your outfit."
+  },
+  {
+   "at": "0x1f1cc7",
+   "text": "Page %d of %d"
+  },
+  {
+   "at": "0x1f1ce3",
+   "text": "Remove Facial Hair"
+  },
+  {
+   "at": "0x1f1d09",
+   "text": "Remove Earrings"
+  },
+  {
+   "at": "0x1f1d29",
+   "text": "Remove Eye Shadow"
+  },
+  {
+   "at": "0x1f1d4d",
+   "text": "Remove Facial Feature"
+  },
+  {
+   "at": "0x1f1d79",
+   "text": "Remove Glasses"
+  },
+  {
+   "at": "0x1f1d97",
+   "text": "Remove Gloves"
+  },
+  {
+   "at": "0x1f1db3",
+   "text": "Remove Headwear"
+  },
+  {
+   "at": "0x1f1dd3",
+   "text": "Remove Neckwear"
+  },
+  {
+   "at": "0x1f1df3",
+   "text": "Remove Ring"
+  },
+  {
+   "at": "0x1f1e0b",
+   "text": "Remove Wristwear"
+  },
+  {
+   "at": "0x1f1e2d",
+   "text": "Select"
+  },
+  {
+   "at": "0x1f1e3b",
+   "text": "Take Pictur"
+  },
+  {
+   "at": "0x1f1ea5",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1f1eb9",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1f1ee1",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1f1f3f",
+   "text": "AvatarEditorParentBGOverride"
+  },
+  {
+   "at": "0x1f1f79",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x1f1faf",
+   "text": "AvatarPlayMusicSceneOverride"
+  },
+  {
+   "at": "0x1f1fe9",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x1f201f",
+   "text": "Idle"
+  },
+  {
+   "at": "0x1f2029",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x1f2039",
+   "text": "IntroOpening"
+  },
+  {
+   "at": "0x1f2053",
+   "text": "IntroOpeningEnd"
+  },
+  {
+   "at": "0x1f2073",
+   "text": "ApplicationIntro"
+  },
+  {
+   "at": "0x1f2095",
+   "text": "ApplicationIntroEnd"
+  },
+  {
+   "at": "0x1f20bd",
+   "text": "Introduction"
+  },
+  {
+   "at": "0x1f20d7",
+   "text": "IntroductionEnd"
+  },
+  {
+   "at": "0x1f20f7",
+   "text": "Outro"
+  },
+  {
+   "at": "0x1f2103",
+   "text": "OutroEnd"
+  },
+  {
+   "at": "0x1f2115",
+   "text": "Editing1"
+  },
+  {
+   "at": "0x1f2127",
+   "text": "Editing1End"
+  },
+  {
+   "at": "0x1f213f",
+   "text": "Editing2"
+  },
+  {
+   "at": "0x1f2151",
+   "text": "Editing2End"
+  },
+  {
+   "at": "0x1f2169",
+   "text": "Editing3"
+  },
+  {
+   "at": "0x1f217b",
+   "text": "Editing3End"
+  },
+  {
+   "at": "0x1f2193",
+   "text": "Editing4"
+  },
+  {
+   "at": "0x1f21a5",
+   "text": "Editing4End"
+  },
+  {
+   "at": "0x1f21bd",
+   "text": "Editing5"
+  },
+  {
+   "at": "0x1f21cf",
+   "text": "Editing5End"
+  },
+  {
+   "at": "0x1f21e7",
+   "text": "Editing6"
+  },
+  {
+   "at": "0x1f21f9",
+   "text": "Editing6End"
+  },
+  {
+   "at": "0x1f2211",
+   "text": "Editing7"
+  },
+  {
+   "at": "0x1f2223",
+   "text": "Editing7End"
+  },
+  {
+   "at": "0x1f223b",
+   "text": "Editing8"
+  },
+  {
+   "at": "0x1f224d",
+   "text": "Editing8End"
+  },
+  {
+   "at": "0x1f2265",
+   "text": "Silence"
+  },
+  {
+   "at": "0x1f26dd",
+   "text": "AvatarPlaySoundSceneOverride"
+  },
+  {
+   "at": "0x1f272b",
+   "text": "Burp_medium.xma"
+  },
+  {
+   "at": "0x1f274b",
+   "text": "BelchNormal"
+  },
+  {
+   "at": "0x1f2763",
+   "text": "BelchNormalEnd"
+  },
+  {
+   "at": "0x1f2781",
+   "text": "BelchNormal2"
+  },
+  {
+   "at": "0x1f279b",
+   "text": "BelchNormal2End"
+  },
+  {
+   "at": "0x1f27bb",
+   "text": "BelchHigh"
+  },
+  {
+   "at": "0x1f27cf",
+   "text": "BelchHighEnd"
+  },
+  {
+   "at": "0x1f27e9",
+   "text": "BelchHigh2"
+  },
+  {
+   "at": "0x1f27ff",
+   "text": "BelchHigh2End"
+  },
+  {
+   "at": "0x1f281b",
+   "text": "BelchLow"
+  },
+  {
+   "at": "0x1f282d",
+   "text": "BelchLowEnd"
+  },
+  {
+   "at": "0x1f2845",
+   "text": "BelchLow2"
+  },
+  {
+   "at": "0x1f2859",
+   "text": "BelchLow2End"
+  },
+  {
+   "at": "0x1f2873",
+   "text": "BelchHigher"
+  },
+  {
+   "at": "0x1f288b",
+   "text": "BelchHigherEnd"
+  },
+  {
+   "at": "0x1f28a9",
+   "text": "Wobble"
+  },
+  {
+   "at": "0x1f28b7",
+   "text": "WobbleEnd"
+  },
+  {
+   "at": "0x1f28cb",
+   "text": "Emote"
+  },
+  {
+   "at": "0x1f28d7",
+   "text": "EmoteEnd"
+  },
+  {
+   "at": "0x1f28e9",
+   "text": "Footsteps"
+  },
+  {
+   "at": "0x1f28fd",
+   "text": "FootstepsEnd"
+  },
+  {
+   "at": "0x1f2917",
+   "text": "FootstepsMore"
+  },
+  {
+   "at": "0x1f2933",
+   "text": "FootstepsMoreEnd"
+  },
+  {
+   "at": "0x1f2955",
+   "text": "BonusUnlocked"
+  },
+  {
+   "at": "0x1f2971",
+   "text": "BonusUnlockedEnd"
+  },
+  {
+   "at": "0x1f2993",
+   "text": "Burp_medium3.xma"
+  },
+  {
+   "at": "0x1f29b5",
+   "text": "Burp_high.xma"
+  },
+  {
+   "at": "0x1f29d1",
+   "text": "Burp_high2.xma"
+  },
+  {
+   "at": "0x1f29ef",
+   "text": "Burp_low.xma"
+  },
+  {
+   "at": "0x1f2a09",
+   "text": "Burp_low3.xma"
+  },
+  {
+   "at": "0x1f2a25",
+   "text": "Burp_Highest.xma"
+  },
+  {
+   "at": "0x1f2a83",
+   "text": "Wobble.xma"
+  },
+  {
+   "at": "0x1f2a99",
+   "text": "Emote_trigger.xma"
+  },
+  {
+   "at": "0x1f2abd",
+   "text": "Avatars_run_in.xma"
+  },
+  {
+   "at": "0x1f2ae3",
+   "text": "Avatars_more_choices.xma"
+  },
+  {
+   "at": "0x1f2b15",
+   "text": "Feature_unlocked.xma"
+  },
+  {
+   "at": "0x1f2b81",
+   "text": "InitialEnd"
+  },
+  {
+   "at": "0x1f2b97",
+   "text": "Spin"
+  },
+  {
+   "at": "0x1f2ba1",
+   "text": "SpinEnd"
+  },
+  {
+   "at": "0x1f2cc1",
+   "text": "Bonk"
+  },
+  {
+   "at": "0x1f2ccb",
+   "text": "BonkEnd"
+  },
+  {
+   "at": "0x1f2d43",
+   "text": "Save"
+  },
+  {
+   "at": "0x1f2d4d",
+   "text": "SaveEnd"
+  },
+  {
+   "at": "0x1f2d83",
+   "text": "Camera.xma"
+  },
+  {
+   "at": "0x1f2d99",
+   "text": "Camera"
+  },
+  {
+   "at": "0x1f2da7",
+   "text": "CameraEnd"
+  },
+  {
+   "at": "0x1f2dbb",
+   "text": "CameraOn"
+  },
+  {
+   "at": "0x1f2dcd",
+   "text": "CameraOnEnd"
+  },
+  {
+   "at": "0x1f2de5",
+   "text": "CameraOff"
+  },
+  {
+   "at": "0x1f2df9",
+   "text": "CameraOffEnd"
+  },
+  {
+   "at": "0x1f2e13",
+   "text": "Mirror_In.xma"
+  },
+  {
+   "at": "0x1f2e2f",
+   "text": "Mirror_Out.xma"
+  },
+  {
+   "at": "0x1f2e7b",
+   "text": "CameraZoom"
+  },
+  {
+   "at": "0x1f2e91",
+   "text": "CameraZoomEnd"
+  },
+  {
+   "at": "0x1f2eeb",
+   "text": "Transition_select_to_editor.xma"
+  },
+  {
+   "at": "0x1f2f2b",
+   "text": "Beam"
+  },
+  {
+   "at": "0x1f2f35",
+   "text": "BeamEnd"
+  },
+  {
+   "at": "0x1f2fbb",
+   "text": "BeamSelect"
+  },
+  {
+   "at": "0x1f2fd1",
+   "text": "BeamSelectEnd"
+  },
+  {
+   "at": "0x1f3001",
+   "text": "AvatarMirrorParentSceneOverride"
+  },
+  {
+   "at": "0x1f3063",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x1f30a1",
+   "text": "AvatarMirrorSceneOverride"
+  },
+  {
+   "at": "0x1f319b",
+   "text": "AvatarRenderSceneOverride"
+  },
+  {
+   "at": "0x1f31cf",
+   "text": "Start"
+  },
+  {
+   "at": "0x1f31db",
+   "text": "End"
+  },
+  {
+   "at": "0x1f31f3",
+   "text": "AvatarFadeSceneOverride"
+  },
+  {
+   "at": "0x1f322d",
+   "text": "XuiBackButton"
+  },
+  {
+   "at": "0x1f3271",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x1f463c",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1f4650",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1f4676",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x1f4692",
+   "text": "AvatarButton1"
+  },
+  {
+   "at": "0x1f46ae",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x1f46c2",
+   "text": "AvatarSelectButtonOverride"
+  },
+  {
+   "at": "0x1f46f8",
+   "text": "AvatarSelectButton"
+  },
+  {
+   "at": "0x1f471e",
+   "text": "AvatarButton2"
+  },
+  {
+   "at": "0x1f473a",
+   "text": "AvatarButton10"
+  },
+  {
+   "at": "0x1f4758",
+   "text": "AvatarSelectButtonFemale"
+  },
+  {
+   "at": "0x1f478a",
+   "text": "AvatarButton9"
+  },
+  {
+   "at": "0x1f47a6",
+   "text": "AvatarButton3"
+  },
+  {
+   "at": "0x1f47c2",
+   "text": "AvatarButton8"
+  },
+  {
+   "at": "0x1f47de",
+   "text": "AvatarButton4"
+  },
+  {
+   "at": "0x1f47fa",
+   "text": "AvatarButton7"
+  },
+  {
+   "at": "0x1f4816",
+   "text": "AvatarButton6"
+  },
+  {
+   "at": "0x1f4832",
+   "text": "AvatarButton5"
+  },
+  {
+   "at": "0x1f484e",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x1f48d8",
+   "text": "AvatarResizedSceneOverride"
+  },
+  {
+   "at": "0x1f490e",
+   "text": "A button"
+  },
+  {
+   "at": "0x1f4920",
+   "text": "AvatarAButtonOverride"
+  },
+  {
+   "at": "0x1f4cde",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1f4cf2",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x1f4d26",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x1f4d42",
+   "text": "XuiPerspectiveScene"
+  },
+  {
+   "at": "0x1f4d7a",
+   "text": "AvatarItemSceneOverride"
+  },
+  {
+   "at": "0x1f4daa",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x1f4e1a",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x1f4e2c",
+   "text": "Category name"
+  },
+  {
+   "at": "0x1f4e48",
+   "text": "AvatarCategoryLabelOverride"
+  },
+  {
+   "at": "0x1f4eb6",
+   "text": "Item page number"
+  },
+  {
+   "at": "0x1f4ed8",
+   "text": "AvatarPageLabelOverride"
+  },
+  {
+   "at": "0x1f4f32",
+   "text": "Page 1 of 1"
+  },
+  {
+   "at": "0x1f4f4e",
+   "text": "Help bar"
+  },
+  {
+   "at": "0x1f4f60",
+   "text": "AvatarItemLabelOverride"
+  },
+  {
+   "at": "0x1f4fb2",
+   "text": "AvatarResizedSceneOverride"
+  },
+  {
+   "at": "0x1f4fe8",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x1f4ffc",
+   "text": "B button - back"
+  },
+  {
+   "at": "0x1f501c",
+   "text": "AvatarBackButtonOverride"
+  },
+  {
+   "at": "0x1f504e",
+   "text": "B button"
+  },
+  {
+   "at": "0x1f5060",
+   "text": "Back"
+  },
+  {
+   "at": "0x1f506a",
+   "text": "A button"
+  },
+  {
+   "at": "0x1f507c",
+   "text": "AvatarAButtonOverride"
+  },
+  {
+   "at": "0x1f50a8",
+   "text": "Select"
+  },
+  {
+   "at": "0x1f50b6",
+   "text": "Gamertag"
+  },
+  {
+   "at": "0x1f50c8",
+   "text": "AvatarGamertagLabelOverride"
+  },
+  {
+   "at": "0x1f5120",
+   "text": "RT button"
+  },
+  {
+   "at": "0x1f5136",
+   "text": "RT button"
+  },
+  {
+   "at": "0x1f514a",
+   "text": "Rotate right"
+  },
+  {
+   "at": "0x1f5164",
+   "text": "LT button"
+  },
+  {
+   "at": "0x1f5178",
+   "text": "Rotate left"
+  },
+  {
+   "at": "0x1f5194",
+   "text": "LB button"
+  },
+  {
+   "at": "0x1f51a8",
+   "text": "Emote"
+  },
+  {
+   "at": "0x1f51d0",
+   "text": "AvatarPhotoboothSceneOverride"
+  },
+  {
+   "at": "0x1f520c",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1f523a",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1f524c",
+   "text": "XuiImage1"
+  },
+  {
+   "at": "0x1f528a",
+   "text": "Normal"
+  },
+  {
+   "at": "0x1f5298",
+   "text": "NormalEnd"
+  },
+  {
+   "at": "0x1f52ac",
+   "text": "FadeIn"
+  },
+  {
+   "at": "0x1f52ba",
+   "text": "FadeInEnd"
+  },
+  {
+   "at": "0x1f52ce",
+   "text": "FadeOut"
+  },
+  {
+   "at": "0x1f52de",
+   "text": "FadeOutEnd"
+  },
+  {
+   "at": "0x1f530e",
+   "text": "AvatarZoomedFarSceneOverride"
+  },
+  {
+   "at": "0x1f539c",
+   "text": "AvatarZoomedNearSceneOverride"
+  },
+  {
+   "at": "0x1f5c34",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x1f5c48",
+   "text": "XuiVisual"
+  },
+  {
+   "at": "0x1f5c5c",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x1f5c78",
+   "text": "Normal"
+  },
+  {
+   "at": "0x1f5c86",
+   "text": "EndNormal"
+  },
+  {
+   "at": "0x1f5c9a",
+   "text": "Focus"
+  },
+  {
+   "at": "0x1f5ca6",
+   "text": "EndFocus"
+  },
+  {
+   "at": "0x1f5cb8",
+   "text": "TransFrom"
+  },
+  {
+   "at": "0x1f5ccc",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x1f5ce0",
+   "text": "TransObject"
+  },
+  {
+   "at": "0x1f5cf8",
+   "text": "TransTo"
+  },
+  {
+   "at": "0x1f5d24",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x1f5db2",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x1f5dd0",
+   "text": "XuiSoundXAudio1"
+  },
+  {
+   "at": "0x1f5e1c",
+   "text": "FocusLoop"
+  },
+  {
+   "at": "0x1f5e30",
+   "text": "NormalDisable"
+  },
+  {
+   "at": "0x1f5e4c",
+   "text": "EndNormalDisable"
+  },
+  {
+   "at": "0x1f5e6e",
+   "text": "FocusDisable"
+  },
+  {
+   "at": "0x1f5e88",
+   "text": "InactiveFocusLoop"
+  },
+  {
+   "at": "0x1f5eac",
+   "text": "EndFocusDisable"
+  },
+  {
+   "at": "0x1f5ecc",
+   "text": "Press"
+  },
+  {
+   "at": "0x1f5ed8",
+   "text": "EndPress"
+  },
+  {
+   "at": "0x1f5eea",
+   "text": "NormalSel"
+  },
+  {
+   "at": "0x1f5efe",
+   "text": "EndNormalSel"
+  },
+  {
+   "at": "0x1f5f18",
+   "text": "InitFocus"
+  },
+  {
+   "at": "0x1f5f2c",
+   "text": "InitFocusLoop"
+  },
+  {
+   "at": "0x1f5f48",
+   "text": "EndInitFocus"
+  },
+  {
+   "at": "0x1f5f62",
+   "text": "InitFocusDisable"
+  },
+  {
+   "at": "0x1f5f84",
+   "text": "InitFocusDisableLoop"
+  },
+  {
+   "at": "0x1f5fae",
+   "text": "EndInitFocusDisable"
+  },
+  {
+   "at": "0x1f6008",
+   "text": "FaceCreateThumbnailList"
+  },
+  {
+   "at": "0x1f6038",
+   "text": "XuiScrollEnd"
+  },
+  {
+   "at": "0x1f6074",
+   "text": "XuiScrollEndUp"
+  },
+  {
+   "at": "0x1f60b8",
+   "text": "XuiListItem"
+  },
+  {
+   "at": "0x1f610c",
+   "text": "KillFocus"
+  },
+  {
+   "at": "0x1f6120",
+   "text": "Help bar"
+  },
+  {
+   "at": "0x1f6132",
+   "text": "XuiTextPresenter"
+  },
+  {
+   "at": "0x1f6154",
+   "text": "Text"
+  },
+  {
+   "at": "0x1f617e",
+   "text": "XuiTextPresenter1"
+  },
+  {
+   "at": "0x1f61a2",
+   "text": "NormalCheck"
+  },
+  {
+   "at": "0x1f61ba",
+   "text": "EndNormalCheck"
+  },
+  {
+   "at": "0x1f6202",
+   "text": "OptionSizeButton"
+  },
+  {
+   "at": "0x1f628c",
+   "text": "OptionColourButton"
+  },
+  {
+   "at": "0x1f6322",
+   "text": "OptionRotateButton"
+  },
+  {
+   "at": "0x1f63b8",
+   "text": "OptionBodyDefaultButton"
+  },
+  {
+   "at": "0x1f6878",
+   "text": "OptionScaleDefaultButton"
+  },
+  {
+   "at": "0x1f6dca",
+   "text": "OptionMoveDefaultButton"
+  },
+  {
+   "at": "0x1f6eb2",
+   "text": "AvatarSelectButton"
+  },
+  {
+   "at": "0x1f7090",
+   "text": "DialogText"
+  },
+  {
+   "at": "0x1f70c6",
+   "text": "FeaturesSkinCreateButton"
+  },
+  {
+   "at": "0x1f714c",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x1f715c",
+   "text": "XuiText1"
+  },
+  {
+   "at": "0x1f716e",
+   "text": "Skin"
+  },
+  {
+   "at": "0x1f7178",
+   "text": "FeaturesBeardCreateButton"
+  },
+  {
+   "at": "0x1f71ac",
+   "text": "Beard"
+  },
+  {
+   "at": "0x1f71b8",
+   "text": "A button"
+  },
+  {
+   "at": "0x1f71ca",
+   "text": "Button_Image"
+  },
+  {
+   "at": "0x1f71e4",
+   "text": "Legend_A.png"
+  },
+  {
+   "at": "0x1f71fe",
+   "text": "Button_Highlight"
+  },
+  {
+   "at": "0x1f7220",
+   "text": "Legend_Highlight.png"
+  },
+  {
+   "at": "0x1f7324",
+   "text": "XuiImagePresenter"
+  },
+  {
+   "at": "0x1f7746",
+   "text": "OptionItemPickerButton"
+  },
+  {
+   "at": "0x1f78f8",
+   "text": "PressDisable"
+  },
+  {
+   "at": "0x1f7912",
+   "text": "EndPressDisable"
+  },
+  {
+   "at": "0x1f79f0",
+   "text": "PageButton"
+  },
+  {
+   "at": "0x1f7a06",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x1f7a42",
+   "text": "XuiImage1"
+  },
+  {
+   "at": "0x1f7a8a",
+   "text": "XuiImage2"
+  },
+  {
+   "at": "0x1f7a9e",
+   "text": "XuiImage3"
+  },
+  {
+   "at": "0x1f7ad6",
+   "text": "ClosetDummyButton"
+  },
+  {
+   "at": "0x1f7b66",
+   "text": "ClosetCarryablesButton"
+  },
+  {
+   "at": "0x1f7bcc",
+   "text": "ClosetAccessoriesButton"
+  },
+  {
+   "at": "0x1f7c36",
+   "text": "OptionWideItemButton"
+  },
+  {
+   "at": "0x1f7d8c",
+   "text": "OptionTallPickerButton"
+  },
+  {
+   "at": "0x1f7dba",
+   "text": "X_button_undo"
+  },
+  {
+   "at": "0x1f7de6",
+   "text": "Xbutton.png"
+  },
+  {
+   "at": "0x1f7fc0",
+   "text": "PageButtonPulse"
+  },
+  {
+   "at": "0x1f8022",
+   "text": "Button1"
+  },
+  {
+   "at": "0x1f8088",
+   "text": "Legend_B.png"
+  },
+  {
+   "at": "0x1f80ea",
+   "text": "Button"
+  },
+  {
+   "at": "0x1f80f8",
+   "text": "Legend_X.png"
+  },
+  {
+   "at": "0x1f815e",
+   "text": "Legend_Y.png"
+  },
+  {
+   "at": "0x1f817c",
+   "text": "B button"
+  },
+  {
+   "at": "0x1f818e",
+   "text": "X button"
+  },
+  {
+   "at": "0x1f81a0",
+   "text": "Y button"
+  },
+  {
+   "at": "0x1f81b2",
+   "text": "ClosetMakeupButton"
+  },
+  {
+   "at": "0x1f822c",
+   "text": "ClosetBodyAccessoriesButton"
+  },
+  {
+   "at": "0x1f82cc",
+   "text": "ClosetHeadAccessoriesButton"
+  },
+  {
+   "at": "0x1f836c",
+   "text": "ClosetHeadgearButton"
+  },
+  {
+   "at": "0x1f83de",
+   "text": "ClosetShoesButton"
+  },
+  {
+   "at": "0x1f8452",
+   "text": "ClosetBottomsButton"
+  },
+  {
+   "at": "0x1f84d2",
+   "text": "ClosetTopsButton"
+  },
+  {
+   "at": "0x1f87d4",
+   "text": "EyebrowsCreateButton"
+  },
+  {
+   "at": "0x1f885a",
+   "text": "EyesCreateButton"
+  },
+  {
+   "at": "0x1f88c8",
+   "text": "MouthCreateButton"
+  },
+  {
+   "at": "0x1f893c",
+   "text": "FeaturesCreateButton"
+  },
+  {
+   "at": "0x1f8966",
+   "text": "BodyCreateButton"
+  },
+  {
+   "at": "0x1f89d4",
+   "text": "NoseCreateButton"
+  },
+  {
+   "at": "0x1f8a42",
+   "text": "EarCreateButton"
+  },
+  {
+   "at": "0x1f8aae",
+   "text": "HeadshapeCreateButton"
+  },
+  {
+   "at": "0x1f8b3a",
+   "text": "HairCreateButton"
+  },
+  {
+   "at": "0x1f8ba8",
+   "text": "ClosetLoadoutfitButton"
+  },
+  {
+   "at": "0x1f8c10",
+   "text": "ClosetCostumesMaleButton"
+  },
+  {
+   "at": "0x1f8c80",
+   "text": "ClosetCostumesFemaleButton"
+  },
+  {
+   "at": "0x1f8cb6",
+   "text": "OptionJumpToClosetButton"
+  },
+  {
+   "at": "0x1f8d50",
+   "text": "OptionJumpToCreatorButton"
+  },
+  {
+   "at": "0x1f8df0",
+   "text": "OptionStartOverButton"
+  },
+  {
+   "at": "0x1f8fba",
+   "text": "ClosetBodyAccessoriesRingButton"
+  },
+  {
+   "at": "0x1f90e4",
+   "text": "ClosetMakeupEyeshadowButton"
+  },
+  {
+   "at": "0x1f917c",
+   "text": "ClosetMakeupLipstickButton"
+  },
+  {
+   "at": "0x1f92ac",
+   "text": "Grid1x1Button"
+  },
+  {
+   "at": "0x1f932a",
+   "text": "Grid1x1ItemButton"
+  },
+  {
+   "at": "0x1f934e",
+   "text": "Focus_negative.xma"
+  },
+  {
+   "at": "0x1f9374",
+   "text": "Grid1x1OneColourButton"
+  },
+  {
+   "at": "0x1f93b4",
+   "text": "Grid3x2Button"
+  },
+  {
+   "at": "0x1f93d0",
+   "text": "Grid3x1Button"
+  },
+  {
+   "at": "0x1f94e6",
+   "text": "EndKillFocus"
+  },
+  {
+   "at": "0x1f9500",
+   "text": "Grid1x1Button_deleteitem"
+  },
+  {
+   "at": "0x1f968e",
+   "text": "DialogNoButton"
+  },
+  {
+   "at": "0x1f9728",
+   "text": "PhotoPreviewButton"
+  },
+  {
+   "at": "0x1f974e",
+   "text": "XuiImagePresenter1"
+  },
+  {
+   "at": "0x1f9774",
+   "text": "PageButtonTall"
+  },
+  {
+   "at": "0x1f97ec",
+   "text": "PageButtonTallPulse"
+  },
+  {
+   "at": "0x1f9814",
+   "text": "LT button"
+  },
+  {
+   "at": "0x1f9844",
+   "text": "RT button"
+  },
+  {
+   "at": "0x1f9874",
+   "text": "LB button"
+  },
+  {
+   "at": "0x1f98a4",
+   "text": "RB button"
+  },
+  {
+   "at": "0x2217a9",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x2217bd",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x2217df",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x2217fb",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x22180f",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x221827",
+   "text": "AvatarItemWrapperScene"
+  },
+  {
+   "at": "0x221855",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x22186d",
+   "text": "ItemButton4"
+  },
+  {
+   "at": "0x221885",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x22189f",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x2218d1",
+   "text": "BodyCreateButton"
+  },
+  {
+   "at": "0x2218f3",
+   "text": "Idle"
+  },
+  {
+   "at": "0x2218fd",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x22190d",
+   "text": "Pulse"
+  },
+  {
+   "at": "0x221919",
+   "text": "PulseEnd"
+  },
+  {
+   "at": "0x22192b",
+   "text": "BonusColors"
+  },
+  {
+   "at": "0x221943",
+   "text": "BonusColorsEnd"
+  },
+  {
+   "at": "0x221961",
+   "text": "HairCreateButton"
+  },
+  {
+   "at": "0x221983",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x22199b",
+   "text": "ItemButton5"
+  },
+  {
+   "at": "0x2219b3",
+   "text": "HeadshapeCreateButton"
+  },
+  {
+   "at": "0x2219df",
+   "text": "ItemButton6"
+  },
+  {
+   "at": "0x2219f7",
+   "text": "EarCreateButton"
+  },
+  {
+   "at": "0x221a17",
+   "text": "ItemButton7"
+  },
+  {
+   "at": "0x221a2f",
+   "text": "FeaturesCreateButton"
+  },
+  {
+   "at": "0x221a59",
+   "text": "ItemButton8"
+  },
+  {
+   "at": "0x221a71",
+   "text": "NoseCreateButton"
+  },
+  {
+   "at": "0x221a93",
+   "text": "ItemButton9"
+  },
+  {
+   "at": "0x221aab",
+   "text": "MouthCreateButton"
+  },
+  {
+   "at": "0x221acf",
+   "text": "ItemButton10"
+  },
+  {
+   "at": "0x221ae9",
+   "text": "EyesCreateButton"
+  },
+  {
+   "at": "0x221b0b",
+   "text": "ItemButton11"
+  },
+  {
+   "at": "0x221b25",
+   "text": "EyebrowsCreateButton"
+  },
+  {
+   "at": "0x221b4f",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x221b69",
+   "text": "OptionColourButton"
+  },
+  {
+   "at": "0x221bc7",
+   "text": "AvatarPulseArrowsSceneOverride"
+  },
+  {
+   "at": "0x221c05",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x221c47",
+   "text": "AvatarPageRightButtonOverride"
+  },
+  {
+   "at": "0x221c83",
+   "text": "PageButtonPulse"
+  },
+  {
+   "at": "0x221cc5",
+   "text": "PageButton"
+  },
+  {
+   "at": "0x221d07",
+   "text": "AvatarPageLeftButtonOverride"
+  },
+  {
+   "at": "0x221d61",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x221dfb",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x221e09",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x221e1d",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x221e2d",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x221e43",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x221e53",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x221e69",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x221e7b",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x221e93",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x221ea7",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x221ec1",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x221ed7",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x221ef3",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x221f09",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x221f25",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x222d9f",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x222db3",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x222dd5",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x222df1",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x222e05",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x222e1d",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x222e37",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x222e69",
+   "text": "OptionWideTextButton"
+  },
+  {
+   "at": "0x222e93",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x222eab",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x222ec3",
+   "text": "ItemButton4"
+  },
+  {
+   "at": "0x222edb",
+   "text": "ItemButton5"
+  },
+  {
+   "at": "0x222ef3",
+   "text": "Idle"
+  },
+  {
+   "at": "0x222efd",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x222f0d",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x222fa7",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x222fb5",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x222fc9",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x222fd9",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x222fef",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x222fff",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x223015",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x223027",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x22303f",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x223053",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x22306d",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x223083",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x22309f",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x2230b5",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x2230d1",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x223773",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x223787",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x2237a9",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x2237e1",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x223847",
+   "text": "A button"
+  },
+  {
+   "at": "0x223859",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x22386d",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x223885",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x22389f",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x2238d1",
+   "text": "Grid1x3Button"
+  },
+  {
+   "at": "0x2238ed",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x223905",
+   "text": "ItemButton10"
+  },
+  {
+   "at": "0x22391f",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x223937",
+   "text": "ItemButton11"
+  },
+  {
+   "at": "0x223951",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x22396b",
+   "text": "OptionColourButton"
+  },
+  {
+   "at": "0x2239c7",
+   "text": "AvatarNoOutfitOverride"
+  },
+  {
+   "at": "0x2239f5",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x223a39",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x223a49",
+   "text": "XuiText1"
+  },
+  {
+   "at": "0x223a5b",
+   "text": "You have no outfits."
+  },
+  {
+   "at": "0x223aa1",
+   "text": "AvatarPulseArrowsSceneOverride"
+  },
+  {
+   "at": "0x223b0d",
+   "text": "AvatarPageRightButtonOverride"
+  },
+  {
+   "at": "0x223b49",
+   "text": "PageButtonTallPulse"
+  },
+  {
+   "at": "0x223b93",
+   "text": "PageButtonTall"
+  },
+  {
+   "at": "0x223bdd",
+   "text": "AvatarPageLeftButtonOverride"
+  },
+  {
+   "at": "0x223c37",
+   "text": "Idle"
+  },
+  {
+   "at": "0x223c41",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x223c51",
+   "text": "Pulse"
+  },
+  {
+   "at": "0x223c5d",
+   "text": "PulseEnd"
+  },
+  {
+   "at": "0x223c6f",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x223d09",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x223d17",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x223d2b",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x223d3b",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x223d51",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x223d61",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x223d77",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x223d89",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x223da1",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x223db5",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x223dcf",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x223de5",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x223e01",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x223e17",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x223e33",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x2249d4",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x2249e8",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x224a0a",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x224a26",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x224a3a",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x224a52",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x224a6c",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x224a9e",
+   "text": "OptionWideTextButton"
+  },
+  {
+   "at": "0x224ac8",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x224ae0",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x224af8",
+   "text": "ItemButton11"
+  },
+  {
+   "at": "0x224b12",
+   "text": "OptionColourButton"
+  },
+  {
+   "at": "0x224b38",
+   "text": "ItemButton10"
+  },
+  {
+   "at": "0x224b52",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x224b88",
+   "text": "Idle"
+  },
+  {
+   "at": "0x224b92",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x224ba2",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x224c3c",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x224c4a",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x224c5e",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x224c6e",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x224c84",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x224c94",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x224caa",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x224cbc",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x224cd4",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x224ce8",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x224d02",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x224d18",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x224d34",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x224d4a",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x224d66",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x225469",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x22547d",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x22549f",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x2254bb",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x2254cf",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x2254e7",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x2255d7",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x2255ef",
+   "text": "ItemButton11"
+  },
+  {
+   "at": "0x225609",
+   "text": "OptionColourButton"
+  },
+  {
+   "at": "0x22562f",
+   "text": "ItemButton10"
+  },
+  {
+   "at": "0x225649",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x22567f",
+   "text": "Idle"
+  },
+  {
+   "at": "0x225689",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x225699",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x225733",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x225741",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x225755",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x225765",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x22577b",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x22578b",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x2257a1",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x2257b3",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x2257cb",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x2257df",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x2257f9",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x22580f",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x22582b",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x225841",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x22585d",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x225f1f",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x225f33",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x225f55",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x225f71",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x225f85",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x225fc9",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x225fe3",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x225ffb",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x22602d",
+   "text": "DialogYesButton"
+  },
+  {
+   "at": "0x22604d",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x226065",
+   "text": "ItemButton4"
+  },
+  {
+   "at": "0x22607d",
+   "text": "DialogNoButton"
+  },
+  {
+   "at": "0x22609b",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x2260b3",
+   "text": "ItemButton5"
+  },
+  {
+   "at": "0x2260cb",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x2260ed",
+   "text": "AvatarDialogLabelOverride"
+  },
+  {
+   "at": "0x226121",
+   "text": "DialogText"
+  },
+  {
+   "at": "0x226145",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x22615f",
+   "text": "Idle"
+  },
+  {
+   "at": "0x226169",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x226179",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x226187",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x22619b",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x2261ab",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x2261c1",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x2261d1",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x2261e7",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x2261f9",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x226211",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x226225",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x22623f",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x226255",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x226271",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x226287",
+   "text": "BackwardOutEnd"
+  },
+  {
+   "at": "0x2262a5",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x2262bd",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x2262db",
+   "text": "XuiSoundXAudio1"
+  },
+  {
+   "at": "0x226323",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x2268f5",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x226909",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x22692b",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x226947",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x22695b",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x22699f",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x2269b9",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x2269d1",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x226a03",
+   "text": "DialogYesButton"
+  },
+  {
+   "at": "0x226a23",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x226a3b",
+   "text": "ItemButton4"
+  },
+  {
+   "at": "0x226a53",
+   "text": "DialogNoButton"
+  },
+  {
+   "at": "0x226a71",
+   "text": "ItemButton3"
+  },
+  {
+   "at": "0x226a89",
+   "text": "ItemButton5"
+  },
+  {
+   "at": "0x226b0b",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x226b37",
+   "text": "XuiControl"
+  },
+  {
+   "at": "0x226b67",
+   "text": "BrushImageControl"
+  },
+  {
+   "at": "0x226b8b",
+   "text": "PhotoPreviewButton"
+  },
+  {
+   "at": "0x226bb1",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x226c39",
+   "text": "Idle"
+  },
+  {
+   "at": "0x226c43",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x226c53",
+   "text": "FadeIn"
+  },
+  {
+   "at": "0x226c61",
+   "text": "FadeInEnd"
+  },
+  {
+   "at": "0x226c75",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x226c85",
+   "text": "XuiText1"
+  },
+  {
+   "at": "0x226c97",
+   "text": "Use this as your gamer picture?"
+  },
+  {
+   "at": "0x226cd7",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x226cf1",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x226cff",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x226d13",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x226d23",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x226d39",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x226d49",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x226d5f",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x226d71",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x226d89",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x226d9d",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x226db7",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x226dcd",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x226de9",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x226dff",
+   "text": "BackwardOutEnd"
+  },
+  {
+   "at": "0x226e1d",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x226e35",
+   "text": "XuiSoundXAudio"
+  },
+  {
+   "at": "0x226e53",
+   "text": "XuiSoundXAudio1"
+  },
+  {
+   "at": "0x226e9b",
+   "text": "BackwardInEnd"
+  },
+  {
+   "at": "0x227705",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x227719",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x22773b",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x227757",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x22776b",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x2277af",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x2277c9",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x2277e1",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x227813",
+   "text": "DialogYesButton"
+  },
+  {
+   "at": "0x227833",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x22784b",
+   "text": "ItemButton4"
+  },
+  {
+   "at": "0x227863",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x227885",
+   "text": "AvatarDialogLabelOverride"
+  },
+  {
+   "at": "0x2278b9",
+   "text": "DialogText"
+  },
+  {
+   "at": "0x2278dd",
+   "text": "ItemButton12"
+  },
+  {
+   "at": "0x2278f7",
+   "text": "Idle"
+  },
+  {
+   "at": "0x227901",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x227911",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x22791f",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x227933",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x227943",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x227959",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x227969",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x22797f",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x227991",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x2279a9",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x2279bd",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x2279d7",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x2279ed",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x227a09",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x227a1f",
+   "text": "BackwardOutEnd"
+  },
+  {
+   "at": "0x227a3d",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x227a55",
+   "text": "BackwardInEn"
+  },
+  {
+   "at": "0x227f9f",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x227fb3",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x227fd5",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x227ff1",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x228005",
+   "text": "ItemButton2"
+  },
+  {
+   "at": "0x22801d",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x2280ad",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x2280cf",
+   "text": "AvatarDialogLabelOverride"
+  },
+  {
+   "at": "0x228103",
+   "text": "DialogText"
+  },
+  {
+   "at": "0x228127",
+   "text": "Idle"
+  },
+  {
+   "at": "0x228131",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x228141",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x22814f",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x228163",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x228173",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x228189",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x228199",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x2281af",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x2281c1",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x2281d9",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x2281ed",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x228207",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x22821d",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x228239",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x22824f",
+   "text": "BackwardOutEnd"
+  },
+  {
+   "at": "0x22826d",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x228285",
+   "text": "BackwardInEn"
+  },
+  {
+   "at": "0x2287d9",
+   "text": "XuiCanvas"
+  },
+  {
+   "at": "0x2287ed",
+   "text": "XuiScene"
+  },
+  {
+   "at": "0x22880f",
+   "text": "XuiSceneBlank"
+  },
+  {
+   "at": "0x22882b",
+   "text": "XuiScene1"
+  },
+  {
+   "at": "0x2288a5",
+   "text": "XuiImage"
+  },
+  {
+   "at": "0x2288e9",
+   "text": "XuiLabel"
+  },
+  {
+   "at": "0x22890b",
+   "text": "DialogText"
+  },
+  {
+   "at": "0x228921",
+   "text": "XuiNavButton"
+  },
+  {
+   "at": "0x22893b",
+   "text": "ItemButton1"
+  },
+  {
+   "at": "0x228953",
+   "text": "AvatarItemButtonOverride"
+  },
+  {
+   "at": "0x2289ef",
+   "text": "XuiGroup"
+  },
+  {
+   "at": "0x228a1b",
+   "text": "XuiControl"
+  },
+  {
+   "at": "0x228a4b",
+   "text": "BrushImageControl"
+  },
+  {
+   "at": "0x228a6f",
+   "text": "PhotoPreviewButton"
+  },
+  {
+   "at": "0x228a95",
+   "text": "XuiFigure"
+  },
+  {
+   "at": "0x228b1d",
+   "text": "Idle"
+  },
+  {
+   "at": "0x228b27",
+   "text": "IdleEnd"
+  },
+  {
+   "at": "0x228b37",
+   "text": "FadeIn"
+  },
+  {
+   "at": "0x228b45",
+   "text": "FadeInEnd"
+  },
+  {
+   "at": "0x228b59",
+   "text": "RB button"
+  },
+  {
+   "at": "0x228b89",
+   "text": "D Pad"
+  },
+  {
+   "at": "0x228bb5",
+   "text": "Left Thumbstick"
+  },
+  {
+   "at": "0x228c03",
+   "text": "XuiText"
+  },
+  {
+   "at": "0x228c33",
+   "text": "Zoom"
+  },
+  {
+   "at": "0x228c3d",
+   "text": "DPad text"
+  },
+  {
+   "at": "0x228c51",
+   "text": "Pan"
+  },
+  {
+   "at": "0x228c59",
+   "text": "RB text"
+  },
+  {
+   "at": "0x228c69",
+   "text": "Take Picture"
+  },
+  {
+   "at": "0x228c83",
+   "text": "XuiText1"
+  },
+  {
+   "at": "0x228c95",
+   "text": "Preview"
+  },
+  {
+   "at": "0x228ca5",
+   "text": "XuiImage1"
+  },
+  {
+   "at": "0x228cd5",
+   "text": "XuiImage2"
+  },
+  {
+   "at": "0x228d05",
+   "text": "RB text1"
+  },
+  {
+   "at": "0x228d17",
+   "text": "Turn Right"
+  },
+  {
+   "at": "0x228d2f",
+   "text": "Turn Left"
+  },
+  {
+   "at": "0x228d43",
+   "text": "LeftIn"
+  },
+  {
+   "at": "0x228d51",
+   "text": "LeftInEnd"
+  },
+  {
+   "at": "0x228d65",
+   "text": "LeftOut"
+  },
+  {
+   "at": "0x228d75",
+   "text": "LeftOutEnd"
+  },
+  {
+   "at": "0x228d8b",
+   "text": "RightIn"
+  },
+  {
+   "at": "0x228d9b",
+   "text": "RightInEnd"
+  },
+  {
+   "at": "0x228db1",
+   "text": "RightOut"
+  },
+  {
+   "at": "0x228dc3",
+   "text": "RightOutEnd"
+  },
+  {
+   "at": "0x228ddb",
+   "text": "ForwardIn"
+  },
+  {
+   "at": "0x228def",
+   "text": "ForwardInEnd"
+  },
+  {
+   "at": "0x228e09",
+   "text": "ForwardOut"
+  },
+  {
+   "at": "0x228e1f",
+   "text": "ForwardOutEnd"
+  },
+  {
+   "at": "0x228e3b",
+   "text": "BackwardIn"
+  },
+  {
+   "at": "0x228e51",
+   "text": "BackwardOutEnd"
+  },
+  {
+   "at": "0x228e6f",
+   "text": "BackwardOut"
+  },
+  {
+   "at": "0x228ea3",
+   "text": "XuiButton"
+  },
+  {
+   "at": "0x228eb7",
+   "text": "YButton"
+  },
+  {
+   "at": "0x228ec7",
+   "text": "AvatarPhotoboothYButtonOverride"
+  },
+  {
+   "at": "0x228f07",
+   "text": "A butto"
+  },
+  {
+   "at": "0xe9f0e4",
+   "text": "MMMM"
+  },
+  {
+   "at": "0xf0d8d7",
+   "text": "Xbox LIVE"
+  },
+  {
+   "at": "0xf0d929",
+   "text": "Xbox LIVE"
+  },
+  {
+   "at": "0xf0dbbf",
+   "text": "T &"
+  },
+  {
+   "at": "0xf0dc37",
+   "text": "T &"
+  },
+  {
+   "at": "0xf0e5cf",
+   "text": "Zur"
+  },
+  {
+   "at": "0xf0e5e1",
+   "text": "Ausw"
+  },
+  {
+   "at": "0xf0e5f9",
+   "text": "Nach rechts drehe"
+  },
+  {
+   "at": "0xf0e623",
+   "text": "Nach links drehen"
+  },
+  {
+   "at": "0xf0e7a5",
+   "text": "Sie haben keine Outfits"
+  },
+  {
+   "at": "0xf0e7f3",
+   "text": "Schwenke"
+  },
+  {
+   "at": "0xf0e80b",
+   "text": "Bild aufnehme"
+  },
+  {
+   "at": "0xf0e82d",
+   "text": "Vorscha"
+  },
+  {
+   "at": "0xf0e843",
+   "text": "Rechts drehen"
+  },
+  {
+   "at": "0xf0e861",
+   "text": "Links drehe"
+  },
+  {
+   "at": "0xf0e897",
+   "text": "Zur"
+  },
+  {
+   "at": "0xf0e8a5",
+   "text": "Dicker"
+  },
+  {
+   "at": "0xf0e8b3",
+   "text": "Durchschnittlich"
+  },
+  {
+   "at": "0xf0e8e3",
+   "text": "Kleiner"
+  },
+  {
+   "at": "0xf0e901",
+   "text": "Abbrechen"
+  },
+  {
+   "at": "0xf0e915",
+   "text": "Erneut beginnen"
+  },
+  {
+   "at": "0xf0e935",
+   "text": "Dieses Outfit wirklich l"
+  },
+  {
+   "at": "0xf0e9e3",
+   "text": "Speichern ..."
+  },
+  {
+   "at": "0xf0ec3d",
+   "text": "Speichern und beenden"
+  },
+  {
+   "at": "0xf0ec69",
+   "text": "Bildhintergrund"
+  },
+  {
+   "at": "0xf0ec97",
+   "text": "Ausw"
+  },
+  {
+   "at": "0xf0ecab",
+   "text": "Outfit l"
+  },
+  {
+   "at": "0xf0eff7",
+   "text": "Verlassen"
+  },
+  {
+   "at": "0xf0f01f",
+   "text": "Hautfarbe und K"
+  },
+  {
+   "at": "0xf0f049",
+   "text": "Accessoires f"
+  },
+  {
+   "at": "0xf0f07f",
+   "text": "Handschuhe"
+  },
+  {
+   "at": "0xf0f095",
+   "text": "Halsb"
+  },
+  {
+   "at": "0xf0f0ab",
+   "text": "Ringe"
+  },
+  {
+   "at": "0xf0f0b7",
+   "text": "Armb"
+  },
+  {
+   "at": "0xf0f0cb",
+   "text": "Unterteile"
+  },
+  {
+   "at": "0xf0f0e1",
+   "text": "Tragbares"
+  },
+  {
+   "at": "0xf0f0f5",
+   "text": "Meine Kleidung"
+  },
+  {
+   "at": "0xf0f113",
+   "text": "Farbe der Gesichtshaare"
+  },
+  {
+   "at": "0xf0f143",
+   "text": "Farbe der Gesichtsmerkmale"
+  },
+  {
+   "at": "0xf0f179",
+   "text": "Augenbrauenfarbe"
+  },
+  {
+   "at": "0xf0f19b",
+   "text": "Lidschattenfarbe"
+  },
+  {
+   "at": "0xf0f1bd",
+   "text": "Augenfarbe"
+  },
+  {
+   "at": "0xf0f1d3",
+   "text": "Eyeliner-Farbe"
+  },
+  {
+   "at": "0xf0f1f1",
+   "text": "Haarfarbe"
+  },
+  {
+   "at": "0xf0f205",
+   "text": "Lippenfarbe"
+  },
+  {
+   "at": "0xf0f21d",
+   "text": "Hautfarbe"
+  },
+  {
+   "at": "0xf0f231",
+   "text": "Herausputzen"
+  },
+  {
+   "at": "0xf0f24b",
+   "text": "Mein Aussehen"
+  },
+  {
+   "at": "0xf0f27b",
+   "text": "Spielerbild"
+  },
+  {
+   "at": "0xf0f293",
+   "text": "Ohren"
+  },
+  {
+   "at": "0xf0f2a1",
+   "text": "Augenbrauen"
+  },
+  {
+   "at": "0xf0f2b9",
+   "text": "Augen"
+  },
+  {
+   "at": "0xf0f2c5",
+   "text": "Kinn"
+  },
+  {
+   "at": "0xf0f2cf",
+   "text": "Gesicht"
+  },
+  {
+   "at": "0xf0f2df",
+   "text": "Gesichtshaare"
+  },
+  {
+   "at": "0xf0f2fb",
+   "text": "Gesichtsmerkmale"
+  },
+  {
+   "at": "0xf0f31d",
+   "text": "Meine Kleidung"
+  },
+  {
+   "at": "0xf0f349",
+   "text": "Mein Aussehen"
+  },
+  {
+   "at": "0xf0f373",
+   "text": "Frisuren"
+  },
+  {
+   "at": "0xf0f385",
+   "text": "Accessoires f"
+  },
+  {
+   "at": "0xf0f3b7",
+   "text": "Ohrringe"
+  },
+  {
+   "at": "0xf0f3c9",
+   "text": "Brillen"
+  },
+  {
+   "at": "0xf0f3d9",
+   "text": "Kopfbedeckung"
+  },
+  {
+   "at": "0xf0f3f5",
+   "text": "Mund"
+  },
+  {
+   "at": "0xf0f3ff",
+   "text": "Make-up"
+  },
+  {
+   "at": "0xf0f40f",
+   "text": "Nase"
+  },
+  {
+   "at": "0xf0f433",
+   "text": "Meine Outfits"
+  },
+  {
+   "at": "0xf0f44f",
+   "text": "Laden"
+  },
+  {
+   "at": "0xf0f45b",
+   "text": "Outfits speichern"
+  },
+  {
+   "at": "0xf0f47f",
+   "text": "Speichern ..."
+  },
+  {
+   "at": "0xf0f49b",
+   "text": "Spielerbild"
+  },
+  {
+   "at": "0xf0f4b9",
+   "text": "Schuhe"
+  },
+  {
+   "at": "0xf0f4c7",
+   "text": "Spielerbild"
+  },
+  {
+   "at": "0xf0f4e1",
+   "text": "Oberteile"
+  },
+  {
+   "at": "0xf0f4f5",
+   "text": "Weitere Auswahlm"
+  },
+  {
+   "at": "0xf0f52f",
+   "text": "Avatar-Fehler"
+  },
+  {
+   "at": "0xf0f591",
+   "text": "CZu viele Outfits. L"
+  },
+  {
+   "at": "0xf0f691",
+   "text": "Seite %d von %d"
+  },
+  {
+   "at": "0xf0f6b1",
+   "text": "Gesichtshaare entfernen"
+  },
+  {
+   "at": "0xf0f6e1",
+   "text": "Ohrringe entfernen"
+  },
+  {
+   "at": "0xf0f707",
+   "text": "Lidschatten entfernen"
+  },
+  {
+   "at": "0xf0f733",
+   "text": "Gesichtsmerkmal entfernen"
+  },
+  {
+   "at": "0xf0f767",
+   "text": "Brille entfernen"
+  },
+  {
+   "at": "0xf0f789",
+   "text": "Handschuhe entfernen"
+  },
+  {
+   "at": "0xf0f7b3",
+   "text": "Kopfbedeckung entfernen"
+  },
+  {
+   "at": "0xf0f7e3",
+   "text": "Halsb"
+  },
+  {
+   "at": "0xf0f80d",
+   "text": "Ring entfernen"
+  },
+  {
+   "at": "0xf0f82b",
+   "text": "Armb"
+  },
+  {
+   "at": "0xf0f853",
+   "text": "Ausw"
+  },
+  {
+   "at": "0xf0f867",
+   "text": "Bild aufnehme"
+  },
+  {
+   "at": "0xf0f915",
+   "text": "Atr"
+  },
+  {
+   "at": "0xf0f925",
+   "text": "Selecciona"
+  },
+  {
+   "at": "0xf0f941",
+   "text": "Rotar a la derech"
+  },
+  {
+   "at": "0xf0f96b",
+   "text": "Rotar a la izquierda"
+  },
+  {
+   "at": "0xf0f99d",
+   "text": "Expresar emoci"
+  },
+  {
+   "at": "0xf0fb1b",
+   "text": "No tienes ning"
+  },
+  {
+   "at": "0xf0fb6d",
+   "text": "Panor"
+  },
+  {
+   "at": "0xf0fb87",
+   "text": "Hacer fot"
+  },
+  {
+   "at": "0xf0fba1",
+   "text": "Vista previ"
+  },
+  {
+   "at": "0xf0fbbf",
+   "text": "Girar der."
+  },
+  {
+   "at": "0xf0fbd7",
+   "text": "Girar iz"
+  },
+  {
+   "at": "0xf0fc07",
+   "text": "Atr"
+  },
+  {
+   "at": "0xf0fc29",
+   "text": "Promedio"
+  },
+  {
+   "at": "0xf0fc79",
+   "text": "Cancelar"
+  },
+  {
+   "at": "0xf0fc8b",
+   "text": "Volver a empezar4"
+  },
+  {
+   "at": "0xf0fcaf",
+   "text": "Est"
+  },
+  {
+   "at": "0xf0fd49",
+   "text": "Est"
+  },
+  {
+   "at": "0xf0fda5",
+   "text": "Guardando"
+  },
+  {
+   "at": "0xf0ffe5",
+   "text": "Guardar y salir"
+  },
+  {
+   "at": "0xf10005",
+   "text": "Cambiar fondo de imagen"
+  },
+  {
+   "at": "0xf10035",
+   "text": "Seleccionar"
+  },
+  {
+   "at": "0xf10349",
+   "text": "Salir"
+  },
+  {
+   "at": "0xf10355",
+   "text": "Llevar %s"
+  },
+  {
+   "at": "0xf10369",
+   "text": "Color de piel y cuerpo"
+  },
+  {
+   "at": "0xf10397",
+   "text": "Accesorios para el cuerpo"
+  },
+  {
+   "at": "0xf103cb",
+   "text": "Guantes"
+  },
+  {
+   "at": "0xf103db",
+   "text": "Art"
+  },
+  {
+   "at": "0xf1040d",
+   "text": "Anillos"
+  },
+  {
+   "at": "0xf1041d",
+   "text": "Art"
+  },
+  {
+   "at": "0xf10453",
+   "text": "Prendas inferiores"
+  },
+  {
+   "at": "0xf10479",
+   "text": "Complementos"
+  },
+  {
+   "at": "0xf10493",
+   "text": "Mi ropa"
+  },
+  {
+   "at": "0xf104a3",
+   "text": "Color de vello facial"
+  },
+  {
+   "at": "0xf104cf",
+   "text": "Color de rasgo facial"
+  },
+  {
+   "at": "0xf104fb",
+   "text": "Color de cejas"
+  },
+  {
+   "at": "0xf10519",
+   "text": "Color de sombra de ojos"
+  },
+  {
+   "at": "0xf10549",
+   "text": "Color de ojos"
+  },
+  {
+   "at": "0xf10565",
+   "text": "Color de l"
+  },
+  {
+   "at": "0xf10593",
+   "text": "Color de cabello"
+  },
+  {
+   "at": "0xf105b5",
+   "text": "Color de labios"
+  },
+  {
+   "at": "0xf105d5",
+   "text": "Color de piel"
+  },
+  {
+   "at": "0xf105f1",
+   "text": "Vestirse"
+  },
+  {
+   "at": "0xf10603",
+   "text": "Mis rasgos"
+  },
+  {
+   "at": "0xf1062d",
+   "text": "Imagen de jugador"
+  },
+  {
+   "at": "0xf10651",
+   "text": "Orejas"
+  },
+  {
+   "at": "0xf10661",
+   "text": "Cejas"
+  },
+  {
+   "at": "0xf1066d",
+   "text": "Ojos"
+  },
+  {
+   "at": "0xf10677",
+   "text": "Barbilla"
+  },
+  {
+   "at": "0xf10689",
+   "text": "Cara"
+  },
+  {
+   "at": "0xf10693",
+   "text": "Vello facial"
+  },
+  {
+   "at": "0xf106ad",
+   "text": "Rasgos faciales"
+  },
+  {
+   "at": "0xf106cd",
+   "text": "Cambiar mi ropa"
+  },
+  {
+   "at": "0xf106ed",
+   "text": "Cambiar mis rasgos personales"
+  },
+  {
+   "at": "0xf10729",
+   "text": "Peinados"
+  },
+  {
+   "at": "0xf1073b",
+   "text": "Accesorios para la cabeza"
+  },
+  {
+   "at": "0xf1076f",
+   "text": "Pendientes"
+  },
+  {
+   "at": "0xf10785",
+   "text": "Gafas"
+  },
+  {
+   "at": "0xf10791",
+   "text": "Art"
+  },
+  {
+   "at": "0xf107c3",
+   "text": "Boca"
+  },
+  {
+   "at": "0xf107cd",
+   "text": "Maquillaje"
+  },
+  {
+   "at": "0xf107e3",
+   "text": "Nariz"
+  },
+  {
+   "at": "0xf107ef",
+   "text": "Conjunto"
+  },
+  {
+   "at": "0xf10801",
+   "text": "Eliminando"
+  },
+  {
+   "at": "0xf10817",
+   "text": "Mis conjuntos"
+  },
+  {
+   "at": "0xf10833",
+   "text": "Cargando"
+  },
+  {
+   "at": "0xf10845",
+   "text": "Guardar conjunto"
+  },
+  {
+   "at": "0xf10867",
+   "text": "Guardando"
+  },
+  {
+   "at": "0xf1087b",
+   "text": "Imagen de jugador"
+  },
+  {
+   "at": "0xf108a5",
+   "text": "Calzado"
+  },
+  {
+   "at": "0xf108b5",
+   "text": "Foto de jugador"
+  },
+  {
+   "at": "0xf108d7",
+   "text": "Prendas superiores"
+  },
+  {
+   "at": "0xf10917",
+   "text": "Error de avatar"
+  },
+  {
+   "at": "0xf10939",
+   "text": "Aceptar"
+  },
+  {
+   "at": "0xf10949",
+   "text": "Se ha guardado este conjunto."
+  },
+  {
+   "at": "0xf10985",
+   "text": "Conjunto#El almac"
+  },
+  {
+   "at": "0xf10a6f",
+   "text": "Quitar vello facial"
+  },
+  {
+   "at": "0xf10a97",
+   "text": "Quitar pendientes"
+  },
+  {
+   "at": "0xf10abb",
+   "text": "Quitar sombra de ojos"
+  },
+  {
+   "at": "0xf10ae7",
+   "text": "Quitar rasgo facial"
+  },
+  {
+   "at": "0xf10b0f",
+   "text": "Quitar gafas"
+  },
+  {
+   "at": "0xf10b29",
+   "text": "Quitar guantes"
+  },
+  {
+   "at": "0xf10b47",
+   "text": "Quitar art"
+  },
+  {
+   "at": "0xf10b87",
+   "text": "Quitar art"
+  },
+  {
+   "at": "0xf10bc7",
+   "text": "Quitar anillo!Quitar art"
+  },
+  {
+   "at": "0xf10c27",
+   "text": "Seleccionar"
+  },
+  {
+   "at": "0xf10c3f",
+   "text": "Hacer fot"
+  },
+  {
+   "at": "0xf10ccb",
+   "text": "Retou"
+  },
+  {
+   "at": "0xf10cfb",
+   "text": "Faire pivoter vers la droit"
+  },
+  {
+   "at": "0xf10d39",
+   "text": "Faire pivoter vers la gauche"
+  },
+  {
+   "at": "0xf10ef7",
+   "text": "Vous"
+  },
+  {
+   "at": "0xf10f47",
+   "text": "Panoram"
+  },
+  {
+   "at": "0xf10f5d",
+   "text": "Prendre une phot"
+  },
+  {
+   "at": "0xf10f85",
+   "text": "Aper"
+  },
+  {
+   "at": "0xf10fc7",
+   "text": "Tourner vers la gauch"
+  },
+  {
+   "at": "0xf11011",
+   "text": "Retour"
+  },
+  {
+   "at": "0xf1101f",
+   "text": "Plus gros"
+  },
+  {
+   "at": "0xf11033",
+   "text": "Moyen"
+  },
+  {
+   "at": "0xf1103f",
+   "text": "Plus mince"
+  },
+  {
+   "at": "0xf11055",
+   "text": "Plus petit"
+  },
+  {
+   "at": "0xf1106b",
+   "text": "Plus grand"
+  },
+  {
+   "at": "0xf11081",
+   "text": "Annuler"
+  },
+  {
+   "at": "0xf11179",
+   "text": "Enregistrement en cours"
+  },
+  {
+   "at": "0xf111ab",
+   "text": "IVoulez-vous d"
+  },
+  {
+   "at": "0xf11429",
+   "text": "Enregistrer et quitter\"Modifier"
+  },
+  {
+   "at": "0xf114b7",
+   "text": "Supprimer la tenue`Impossible"
+  },
+  {
+   "at": "0xf117c3",
+   "text": "Quitter"
+  },
+  {
+   "at": "0xf117d3",
+   "text": "Habit %s"
+  },
+  {
+   "at": "0xf117e5",
+   "text": "Couleur de peau et corps"
+  },
+  {
+   "at": "0xf11817",
+   "text": "Accessoires pour le corps"
+  },
+  {
+   "at": "0xf1184b",
+   "text": "Gants"
+  },
+  {
+   "at": "0xf11857",
+   "text": "Colliers"
+  },
+  {
+   "at": "0xf11869",
+   "text": "Bagues"
+  },
+  {
+   "at": "0xf11877",
+   "text": "Bracelets"
+  },
+  {
+   "at": "0xf1188b",
+   "text": "Bas"
+  },
+  {
+   "at": "0xf11893",
+   "text": "Accessoires portatifs"
+  },
+  {
+   "at": "0xf118bf",
+   "text": "Mes v"
+  },
+  {
+   "at": "0xf118db",
+   "text": "Couleur de la moustache/barbe"
+  },
+  {
+   "at": "0xf11917",
+   "text": "Couleur des traits du visage"
+  },
+  {
+   "at": "0xf11951",
+   "text": "Couleur des sourcils"
+  },
+  {
+   "at": "0xf1197b",
+   "text": "Couleurs du fard"
+  },
+  {
+   "at": "0xf119b5",
+   "text": "Couleur des yeux"
+  },
+  {
+   "at": "0xf119d7",
+   "text": "Couleur de"
+  },
+  {
+   "at": "0xf11a03",
+   "text": "Couleur des cheveux"
+  },
+  {
+   "at": "0xf11a2b",
+   "text": "Couleur des l"
+  },
+  {
+   "at": "0xf11a51",
+   "text": "Couleur de peau"
+  },
+  {
+   "at": "0xf11a87",
+   "text": "Mes traits"
+  },
+  {
+   "at": "0xf11ab1",
+   "text": "Image de joueur"
+  },
+  {
+   "at": "0xf11ad1",
+   "text": "Oreilles"
+  },
+  {
+   "at": "0xf11ae5",
+   "text": "Sourcils"
+  },
+  {
+   "at": "0xf11af7",
+   "text": "Yeux"
+  },
+  {
+   "at": "0xf11b01",
+   "text": "Menton"
+  },
+  {
+   "at": "0xf11b0f",
+   "text": "Visage"
+  },
+  {
+   "at": "0xf11b1d",
+   "text": "Moustache/barbe"
+  },
+  {
+   "at": "0xf11b3d",
+   "text": "Traits du visage"
+  },
+  {
+   "at": "0xf11b5f",
+   "text": "Modifier mes v"
+  },
+  {
+   "at": "0xf11b8d",
+   "text": "Modifier mes traits"
+  },
+  {
+   "at": "0xf11bb5",
+   "text": "Coupes de cheveux"
+  },
+  {
+   "at": "0xf11bd9",
+   "text": "Accessoires pour la t"
+  },
+  {
+   "at": "0xf11c0b",
+   "text": "Boucles"
+  },
+  {
+   "at": "0xf11c31",
+   "text": "Lunettes"
+  },
+  {
+   "at": "0xf11c43",
+   "text": "Chapeaux"
+  },
+  {
+   "at": "0xf11c55",
+   "text": "Bouche"
+  },
+  {
+   "at": "0xf11c63",
+   "text": "Maquillage"
+  },
+  {
+   "at": "0xf11c79",
+   "text": "Nez"
+  },
+  {
+   "at": "0xf11c81",
+   "text": "Tenue"
+  },
+  {
+   "at": "0xf11c8d",
+   "text": "Suppression en cours"
+  },
+  {
+   "at": "0xf11cb7",
+   "text": "Mes tenues"
+  },
+  {
+   "at": "0xf11ccd",
+   "text": "Chargement en cours"
+  },
+  {
+   "at": "0xf11cf5",
+   "text": "Enregistrer la tenue"
+  },
+  {
+   "at": "0xf11d1f",
+   "text": "Enregistrement en cours"
+  },
+  {
+   "at": "0xf11d4f",
+   "text": "Image de joueur"
+  },
+  {
+   "at": "0xf11d75",
+   "text": "Chaussures"
+  },
+  {
+   "at": "0xf11d8b",
+   "text": "Prendre"
+  },
+  {
+   "at": "0xf11db3",
+   "text": "Hauts"
+  },
+  {
+   "at": "0xf11dbf",
+   "text": "Plus de choix"
+  },
+  {
+   "at": "0xf11ddb",
+   "text": "Erreur"
+  },
+  {
+   "at": "0xf11dff",
+   "text": "Cette tenue a"
+  },
+  {
+   "at": "0xf11e3d",
+   "text": "Tenue"
+  },
+  {
+   "at": "0xf11e49",
+   "text": "La penderie est pleine."
+  },
+  {
+   "at": "0xf11e79",
+   "text": "Nom de la tenue"
+  },
+  {
+   "at": "0xf11e99",
+   "text": "Attribuez un nom"
+  },
+  {
+   "at": "0xf11ed9",
+   "text": "Page %d sur %d"
+  },
+  {
+   "at": "0xf11ef7",
+   "text": "Retirer la moustache/barbe"
+  },
+  {
+   "at": "0xf11f2d",
+   "text": "Retirer les boucles"
+  },
+  {
+   "at": "0xf11f6b",
+   "text": "Retirer le fard"
+  },
+  {
+   "at": "0xf11fa3",
+   "text": "Retirer le trait du visage"
+  },
+  {
+   "at": "0xf11fd9",
+   "text": "Retirer les lunettes"
+  },
+  {
+   "at": "0xf12003",
+   "text": "Retirer les gants"
+  },
+  {
+   "at": "0xf12027",
+   "text": "Retirer le chapeau"
+  },
+  {
+   "at": "0xf1204d",
+   "text": "Retirer le collier"
+  },
+  {
+   "at": "0xf12073",
+   "text": "Retirer la bague"
+  },
+  {
+   "at": "0xf12095",
+   "text": "Retirer le bracelet"
+  },
+  {
+   "at": "0xf120d7",
+   "text": "Phot"
+  },
+  {
+   "at": "0xf1217b",
+   "text": "Indietr"
+  },
+  {
+   "at": "0xf12191",
+   "text": "Selezion"
+  },
+  {
+   "at": "0xf121a9",
+   "text": "Ruota a destr"
+  },
+  {
+   "at": "0xf121cb",
+   "text": "Ruota a sinistr"
+  },
+  {
+   "at": "0xf121f1",
+   "text": "Emozion"
+  },
+  {
+   "at": "0xf12365",
+   "text": "Non hai alcun completo"
+  },
+  {
+   "at": "0xf123b1",
+   "text": "Panoramic"
+  },
+  {
+   "at": "0xf123cb",
+   "text": "Scatta immagin"
+  },
+  {
+   "at": "0xf123ef",
+   "text": "Anteprim"
+  },
+  {
+   "at": "0xf12407",
+   "text": "Gira a destra"
+  },
+  {
+   "at": "0xf12425",
+   "text": "Gira a sinistr"
+  },
+  {
+   "at": "0xf12461",
+   "text": "Indietro"
+  },
+  {
+   "at": "0xf12489",
+   "text": "Medio"
+  },
+  {
+   "at": "0xf124db",
+   "text": "Annulla"
+  },
+  {
+   "at": "0xf125ff",
+   "text": "Salvataggio"
+  },
+  {
+   "at": "0xf12829",
+   "text": "Salva ed esci"
+  },
+  {
+   "at": "0xf12845",
+   "text": "Modifica sfondo immagine"
+  },
+  {
+   "at": "0xf12877",
+   "text": "Seleziona"
+  },
+  {
+   "at": "0xf12b93",
+   "text": "Esci"
+  },
+  {
+   "at": "0xf12c07",
+   "text": "Accessori per il corpo"
+  },
+  {
+   "at": "0xf12c35",
+   "text": "Guanti"
+  },
+  {
+   "at": "0xf12c43",
+   "text": "Collane"
+  },
+  {
+   "at": "0xf12c53",
+   "text": "Anelli"
+  },
+  {
+   "at": "0xf12c61",
+   "text": "Bracciali e orologi"
+  },
+  {
+   "at": "0xf12c89",
+   "text": "Parte di sotto"
+  },
+  {
+   "at": "0xf12ca7",
+   "text": "Accessori"
+  },
+  {
+   "at": "0xf12cbb",
+   "text": "Abbigliamento personale"
+  },
+  {
+   "at": "0xf12ceb",
+   "text": "Colore dei peli del viso"
+  },
+  {
+   "at": "0xf12d1d",
+   "text": "Colore caratteristiche del viso"
+  },
+  {
+   "at": "0xf12d5d",
+   "text": "Colore sopracciglia"
+  },
+  {
+   "at": "0xf12d85",
+   "text": "Colore ombretto"
+  },
+  {
+   "at": "0xf12da5",
+   "text": "Colore degli occhi"
+  },
+  {
+   "at": "0xf12dcb",
+   "text": "Colore eye-liner"
+  },
+  {
+   "at": "0xf12ded",
+   "text": "Colore dei capelli"
+  },
+  {
+   "at": "0xf12e13",
+   "text": "Colore delle labbra"
+  },
+  {
+   "at": "0xf12e3b",
+   "text": "Colore della pelle"
+  },
+  {
+   "at": "0xf12e61",
+   "text": "Abiti eleganti"
+  },
+  {
+   "at": "0xf12e7f",
+   "text": "Caratteristiche personali"
+  },
+  {
+   "at": "0xf12ec7",
+   "text": "Immagine del giocatore"
+  },
+  {
+   "at": "0xf12ef5",
+   "text": "Orecchie"
+  },
+  {
+   "at": "0xf12f09",
+   "text": "Sopracciglia"
+  },
+  {
+   "at": "0xf12f23",
+   "text": "Occhi"
+  },
+  {
+   "at": "0xf12f2f",
+   "text": "Mento"
+  },
+  {
+   "at": "0xf12f3b",
+   "text": "Viso"
+  },
+  {
+   "at": "0xf12f45",
+   "text": "Peli del viso"
+  },
+  {
+   "at": "0xf12f61",
+   "text": "Caratteristiche del viso"
+  },
+  {
+   "at": "0xf13013",
+   "text": "Acconciature"
+  },
+  {
+   "at": "0xf1302d",
+   "text": "Accessori per la testa"
+  },
+  {
+   "at": "0xf1305b",
+   "text": "Orecchini"
+  },
+  {
+   "at": "0xf1306f",
+   "text": "Occhiali"
+  },
+  {
+   "at": "0xf13081",
+   "text": "Copricapo"
+  },
+  {
+   "at": "0xf13095",
+   "text": "Bocca"
+  },
+  {
+   "at": "0xf130a1",
+   "text": "Trucco"
+  },
+  {
+   "at": "0xf130af",
+   "text": "Naso"
+  },
+  {
+   "at": "0xf130b9",
+   "text": "Completo"
+  },
+  {
+   "at": "0xf130cb",
+   "text": "Eliminazione"
+  },
+  {
+   "at": "0xf130e5",
+   "text": "Completi personali"
+  },
+  {
+   "at": "0xf1310b",
+   "text": "Caricamento in corso"
+  },
+  {
+   "at": "0xf13135",
+   "text": "Salva completo"
+  },
+  {
+   "at": "0xf13153",
+   "text": "Salvataggio"
+  },
+  {
+   "at": "0xf1316b",
+   "text": "Immagine del giocatore"
+  },
+  {
+   "at": "0xf1319f",
+   "text": "Scarpe"
+  },
+  {
+   "at": "0xf131ad",
+   "text": "Immagine del giocatore"
+  },
+  {
+   "at": "0xf131dd",
+   "text": "Parte di sopra"
+  },
+  {
+   "at": "0xf131fb",
+   "text": "Altre opzioni"
+  },
+  {
+   "at": "0xf13217",
+   "text": "Errore avatar"
+  },
+  {
+   "at": "0xf13289",
+   "text": "Completo\"La memoria per i completi"
+  },
+  {
+   "at": "0xf13347",
+   "text": "Pagina %d di %d"
+  },
+  {
+   "at": "0xf13367",
+   "text": "Rimuovi peli del viso"
+  },
+  {
+   "at": "0xf13393",
+   "text": "Rimuovi orecchini"
+  },
+  {
+   "at": "0xf1341b",
+   "text": "Rimuovi occhiali"
+  },
+  {
+   "at": "0xf1343d",
+   "text": "Rimuovi guanti"
+  },
+  {
+   "at": "0xf1345b",
+   "text": "Rimuovi copricapo"
+  },
+  {
+   "at": "0xf1347f",
+   "text": "Rimuovi collane"
+  },
+  {
+   "at": "0xf1349f",
+   "text": "Rimuovi anelli"
+  },
+  {
+   "at": "0xf134bd",
+   "text": "Rimuovi bracciali e orologi"
+  },
+  {
+   "at": "0xf134f5",
+   "text": "Seleziona"
+  },
+  {
+   "at": "0xf13509",
+   "text": "Scatta immagin"
+  },
+  {
+   "at": "0xf13f07",
+   "text": "Volta"
+  },
+  {
+   "at": "0xf13f19",
+   "text": "Seleciona"
+  },
+  {
+   "at": "0xf13f33",
+   "text": "Nome do Jogado"
+  },
+  {
+   "at": "0xf13f57",
+   "text": "Girar para a direit"
+  },
+  {
+   "at": "0xf13f85",
+   "text": "Girar para a esquerda"
+  },
+  {
+   "at": "0xf13fb9",
+   "text": "Expressar Emo"
+  },
+  {
+   "at": "0xf1413b",
+   "text": "Voc"
+  },
+  {
+   "at": "0xf1418d",
+   "text": "Panor"
+  },
+  {
+   "at": "0xf141a7",
+   "text": "Tirar Fot"
+  },
+  {
+   "at": "0xf141c1",
+   "text": "Visualiza"
+  },
+  {
+   "at": "0xf141db",
+   "text": "Virar Dir"
+  },
+  {
+   "at": "0xf141f1",
+   "text": "Virar Es"
+  },
+  {
+   "at": "0xf14221",
+   "text": "Voltar"
+  },
+  {
+   "at": "0xf1422f",
+   "text": "Maior"
+  },
+  {
+   "at": "0xf1424d",
+   "text": "Mais Magro(a)"
+  },
+  {
+   "at": "0xf14269",
+   "text": "Menor"
+  },
+  {
+   "at": "0xf14275",
+   "text": "Mais Alto(a)"
+  },
+  {
+   "at": "0xf1428f",
+   "text": "Cancelar"
+  },
+  {
+   "at": "0xf142a1",
+   "text": "Recome"
+  },
+  {
+   "at": "0xf1439f",
+   "text": "Salvando"
+  },
+  {
+   "at": "0xf1461b",
+   "text": "Selecionar"
+  },
+  {
+   "at": "0xf14631",
+   "text": "Excluir TrajeaN"
+  },
+  {
+   "at": "0xf14911",
+   "text": "Sair"
+  },
+  {
+   "at": "0xf1491b",
+   "text": "Usar %s"
+  },
+  {
+   "at": "0xf1492b",
+   "text": "Cor da Pele e Corpo"
+  },
+  {
+   "at": "0xf14953",
+   "text": "Acess"
+  },
+  {
+   "at": "0xf14983",
+   "text": "Luvas"
+  },
+  {
+   "at": "0xf1498f",
+   "text": "Para o Pesco"
+  },
+  {
+   "at": "0xf149b9",
+   "text": "Pulseiras"
+  },
+  {
+   "at": "0xf149cd",
+   "text": "Para a Parte Inferior"
+  },
+  {
+   "at": "0xf149f9",
+   "text": "Para Levar nas M"
+  },
+  {
+   "at": "0xf14a21",
+   "text": "Minhas Roupas"
+  },
+  {
+   "at": "0xf14a3d",
+   "text": "Cor dos P"
+  },
+  {
+   "at": "0xf14a6b",
+   "text": "Cor dos Detalhes do Rosto"
+  },
+  {
+   "at": "0xf14a9f",
+   "text": "Cor das Sobrancelhas"
+  },
+  {
+   "at": "0xf14ac9",
+   "text": "Cor da Sombra dos Olhos"
+  },
+  {
+   "at": "0xf14af9",
+   "text": "Cor dos Olhos"
+  },
+  {
+   "at": "0xf14b15",
+   "text": "Cor do Delineador"
+  },
+  {
+   "at": "0xf14b39",
+   "text": "Cor do Cabelo"
+  },
+  {
+   "at": "0xf14b55",
+   "text": "Cor dos L"
+  },
+  {
+   "at": "0xf14b73",
+   "text": "Cor da Pele"
+  },
+  {
+   "at": "0xf14b8b",
+   "text": "Vestir"
+  },
+  {
+   "at": "0xf14b99",
+   "text": "Minhas Caracter"
+  },
+  {
+   "at": "0xf14bdb",
+   "text": "Imagem do Jogador"
+  },
+  {
+   "at": "0xf14bff",
+   "text": "Orelhas"
+  },
+  {
+   "at": "0xf14c11",
+   "text": "Sobrancelhas"
+  },
+  {
+   "at": "0xf14c2b",
+   "text": "Olhos"
+  },
+  {
+   "at": "0xf14c37",
+   "text": "Queixo"
+  },
+  {
+   "at": "0xf14c45",
+   "text": "Rosto"
+  },
+  {
+   "at": "0xf14c6f",
+   "text": "Detalhes do Rosto"
+  },
+  {
+   "at": "0xf14c93",
+   "text": "Alterar Minhas Roupas"
+  },
+  {
+   "at": "0xf14cbf",
+   "text": "Alterar Minhas Caracter"
+  },
+  {
+   "at": "0xf14cfd",
+   "text": "Penteados"
+  },
+  {
+   "at": "0xf14d11",
+   "text": "Acess"
+  },
+  {
+   "at": "0xf14d43",
+   "text": "Brincos"
+  },
+  {
+   "at": "0xf14d61",
+   "text": "Para a Cabe"
+  },
+  {
+   "at": "0xf14d7d",
+   "text": "Boca"
+  },
+  {
+   "at": "0xf14d87",
+   "text": "Maquiagem"
+  },
+  {
+   "at": "0xf14d9b",
+   "text": "Nariz"
+  },
+  {
+   "at": "0xf14da7",
+   "text": "Traje"
+  },
+  {
+   "at": "0xf14db3",
+   "text": "Excluindo"
+  },
+  {
+   "at": "0xf14dc7",
+   "text": "Meus Trajes"
+  },
+  {
+   "at": "0xf14ddf",
+   "text": "Carregando"
+  },
+  {
+   "at": "0xf14df5",
+   "text": "Salvar Traje"
+  },
+  {
+   "at": "0xf14e0f",
+   "text": "Salvando"
+  },
+  {
+   "at": "0xf14e21",
+   "text": "Imagem do Jogador"
+  },
+  {
+   "at": "0xf14e4b",
+   "text": "Para os P"
+  },
+  {
+   "at": "0xf14e63",
+   "text": "Imagem"
+  },
+  {
+   "at": "0xf14e8b",
+   "text": "Para a Parte Superior"
+  },
+  {
+   "at": "0xf14eb7",
+   "text": "Mais Op"
+  },
+  {
+   "at": "0xf14ecf",
+   "text": "Erro de Avatar"
+  },
+  {
+   "at": "0xf14ef1",
+   "text": "Este Traje foi salvo."
+  },
+  {
+   "at": "0xf14f1d",
+   "text": "Traje9Voc"
+  },
+  {
+   "at": "0xf1501b",
+   "text": "Remover P"
+  },
+  {
+   "at": "0xf15049",
+   "text": "Remover Brincos"
+  },
+  {
+   "at": "0xf15069",
+   "text": "Remover Sombra dos Olhos"
+  },
+  {
+   "at": "0xf1509b",
+   "text": "Remover Detalhe do Rosto"
+  },
+  {
+   "at": "0xf150cd",
+   "text": "Remover"
+  },
+  {
+   "at": "0xf150eb",
+   "text": "Remover Luvas"
+  },
+  {
+   "at": "0xf15107",
+   "text": "Remover Chap"
+  },
+  {
+   "at": "0xf15125",
+   "text": "Remover Artigo do Pesco"
+  },
+  {
+   "at": "0xf15159",
+   "text": "Remover Anel"
+  },
+  {
+   "at": "0xf15173",
+   "text": "Remover Pulseira"
+  },
+  {
+   "at": "0xf15195",
+   "text": "Selecionar"
+  },
+  {
+   "at": "0xf151ab",
+   "text": "Tirar Fot"
+  },
+  {
+   "at": "0xf15847",
+   "text": "C Xbox LIVE."
+  },
+  {
+   "at": "0xf15bf1",
+   "text": "L %s"
+  },
+  {
+   "at": "0xf164c1",
+   "text": "Wybier"
+  },
+  {
+   "at": "0xf164d5",
+   "text": "Tag gracz"
+  },
+  {
+   "at": "0xf164ef",
+   "text": "W praw"
+  },
+  {
+   "at": "0xf16503",
+   "text": "W lew"
+  },
+  {
+   "at": "0xf16515",
+   "text": "Emocj"
+  },
+  {
+   "at": "0xf1667d",
+   "text": "Brak wyg"
+  },
+  {
+   "at": "0xf166b5",
+   "text": "Pow"
+  },
+  {
+   "at": "0xf166d3",
+   "text": "Przes"
+  },
+  {
+   "at": "0xf16705",
+   "text": "Podg"
+  },
+  {
+   "at": "0xf16719",
+   "text": "Obr"
+  },
+  {
+   "at": "0xf16737",
+   "text": "Obr"
+  },
+  {
+   "at": "0xf16787",
+   "text": "Zredni"
+  },
+  {
+   "at": "0xf16795",
+   "text": "Chudszy"
+  },
+  {
+   "at": "0xf167c1",
+   "text": "Anuluj"
+  },
+  {
+   "at": "0xf168c9",
+   "text": "Zapisywanie"
+  },
+  {
+   "at": "0xf16a2f",
+   "text": "Bugi Xbox LIVE.AFunkcja jest dos"
+  },
+  {
+   "at": "0xf16ad5",
+   "text": "Zapisz i wyj"
+  },
+  {
+   "at": "0xf16af3",
+   "text": "Zmi"
+  },
+  {
+   "at": "0xf16afb",
+   "text": "D obraz"
+  },
+  {
+   "at": "0xf16b13",
+   "text": "Wybierz"
+  },
+  {
+   "at": "0xf16b29",
+   "text": "D wyg"
+  },
+  {
+   "at": "0xf16bcb",
+   "text": "Bo po"
+  },
+  {
+   "at": "0xf16c89",
+   "text": "Nie m"
+  },
+  {
+   "at": "0xf16d55",
+   "text": "B wylogowany. Edytor awatar"
+  },
+  {
+   "at": "0xf16db9",
+   "text": "Wyj"
+  },
+  {
+   "at": "0xf16dd7",
+   "text": "Sylwetka i kolor sk"
+  },
+  {
+   "at": "0xf16e05",
+   "text": "Dodatki ci"
+  },
+  {
+   "at": "0xf16e33",
+   "text": "Naszyjniki"
+  },
+  {
+   "at": "0xf16e49",
+   "text": "Pie"
+  },
+  {
+   "at": "0xf16e61",
+   "text": "Bransolety"
+  },
+  {
+   "at": "0xf16e77",
+   "text": "Dolna c"
+  },
+  {
+   "at": "0xf16e8f",
+   "text": "Trzymane przedmioty"
+  },
+  {
+   "at": "0xf16eb7",
+   "text": "Ubranie"
+  },
+  {
+   "at": "0xf16ec7",
+   "text": "Kolor zarostu"
+  },
+  {
+   "at": "0xf16ee3",
+   "text": "Kolor cech twarzy"
+  },
+  {
+   "at": "0xf16f07",
+   "text": "Kolor brwi"
+  },
+  {
+   "at": "0xf16f1d",
+   "text": "Kolor cienia do oczu"
+  },
+  {
+   "at": "0xf16f47",
+   "text": "Kolor oczu"
+  },
+  {
+   "at": "0xf16f5d",
+   "text": "Kolor kredki do oczu"
+  },
+  {
+   "at": "0xf16f87",
+   "text": "Kolor"
+  },
+  {
+   "at": "0xf16f95",
+   "text": "Bos"
+  },
+  {
+   "at": "0xf16fa1",
+   "text": "Kolor ust"
+  },
+  {
+   "at": "0xf16fb5",
+   "text": "Kolor sk"
+  },
+  {
+   "at": "0xf16fcd",
+   "text": "Ubierz"
+  },
+  {
+   "at": "0xf16fdb",
+   "text": "Cechy"
+  },
+  {
+   "at": "0xf16ffb",
+   "text": "Obrazek gracza"
+  },
+  {
+   "at": "0xf17019",
+   "text": "Uszy"
+  },
+  {
+   "at": "0xf17025",
+   "text": "Brwi"
+  },
+  {
+   "at": "0xf1702f",
+   "text": "Oczy"
+  },
+  {
+   "at": "0xf17039",
+   "text": "Podbr"
+  },
+  {
+   "at": "0xf1704d",
+   "text": "Twarz"
+  },
+  {
+   "at": "0xf17059",
+   "text": "Zarost"
+  },
+  {
+   "at": "0xf17067",
+   "text": "Cechy twarzy"
+  },
+  {
+   "at": "0xf17081",
+   "text": "Zmi"
+  },
+  {
+   "at": "0xf17089",
+   "text": "D ubranie"
+  },
+  {
+   "at": "0xf1709d",
+   "text": "Zmi"
+  },
+  {
+   "at": "0xf170a5",
+   "text": "D cechy"
+  },
+  {
+   "at": "0xf170b5",
+   "text": "Fryzury"
+  },
+  {
+   "at": "0xf170c5",
+   "text": "Dodatki"
+  },
+  {
+   "at": "0xf170d7",
+   "text": "Bowy"
+  },
+  {
+   "at": "0xf170e1",
+   "text": "Kolczyki"
+  },
+  {
+   "at": "0xf170f3",
+   "text": "Okulary"
+  },
+  {
+   "at": "0xf17103",
+   "text": "Nakrycie"
+  },
+  {
+   "at": "0xf17117",
+   "text": "Bowy"
+  },
+  {
+   "at": "0xf17121",
+   "text": "Usta"
+  },
+  {
+   "at": "0xf1712b",
+   "text": "Makij"
+  },
+  {
+   "at": "0xf1713b",
+   "text": "Nos"
+  },
+  {
+   "at": "0xf17143",
+   "text": "Wyg"
+  },
+  {
+   "at": "0xf17151",
+   "text": "Usuwanie"
+  },
+  {
+   "at": "0xf17163",
+   "text": "Wyg"
+  },
+  {
+   "at": "0xf17171",
+   "text": "Aadowanie"
+  },
+  {
+   "at": "0xf17185",
+   "text": "Zapisz wyg"
+  },
+  {
+   "at": "0xf171a1",
+   "text": "Zapisywanie"
+  },
+  {
+   "at": "0xf171b9",
+   "text": "Obrazek gracza"
+  },
+  {
+   "at": "0xf171dd",
+   "text": "Buty"
+  },
+  {
+   "at": "0xf171e7",
+   "text": "Obrazek gracza"
+  },
+  {
+   "at": "0xf17257",
+   "text": "Wybrany ubi"
+  },
+  {
+   "at": "0xf1727d",
+   "text": "B zapisany."
+  },
+  {
+   "at": "0xf17297",
+   "text": "Wyg"
+  },
+  {
+   "at": "0xf172df",
+   "text": "D jeden przed zapisaniem nowego."
+  },
+  {
+   "at": "0xf17321",
+   "text": "Nazwa wyg"
+  },
+  {
+   "at": "0xf1733d",
+   "text": "Wpisz naz"
+  },
+  {
+   "at": "0xf17367",
+   "text": "Strona %d z %d"
+  },
+  {
+   "at": "0xf1738b",
+   "text": "D zarost"
+  },
+  {
+   "at": "0xf173a3",
+   "text": "D kolczyki"
+  },
+  {
+   "at": "0xf173bf",
+   "text": "D ci"
+  },
+  {
+   "at": "0xf173c9",
+   "text": "D do oczu"
+  },
+  {
+   "at": "0xf173e3",
+   "text": "D cec"
+  },
+  {
+   "at": "0xf17407",
+   "text": "D okulary"
+  },
+  {
+   "at": "0xf1743d",
+   "text": "D nakrycie"
+  },
+  {
+   "at": "0xf17455",
+   "text": "Bowy"
+  },
+  {
+   "at": "0xf17465",
+   "text": "D naszyjnik"
+  },
+  {
+   "at": "0xf17483",
+   "text": "D pie"
+  },
+  {
+   "at": "0xf174a1",
+   "text": "D bransolety"
+  },
+  {
+   "at": "0xf174bb",
+   "text": "Wybierz"
+  }
+ ],
+ "colour_slots": [
+  "Color0",
+  "Color1",
+  "Color2",
+  "Color3",
+  "Color4",
+  "Color5",
+  "Color6",
+  "Color7",
+  "Color8",
+  "Color9",
+  "Color10",
+  "Color11",
+  "Color12",
+  "Color13",
+  "Color14",
+  "Color15"
+ ],
+ "colour_format": "Color%d",
+ "colour_bonus_range": [
+  "BonusColors",
+  "BonusColorsEnd",
+  "BonusColors",
+  "BonusColorsEnd"
+ ],
+ "media": [
+  {
+   "at": "0x1994d7",
+   "width": 64,
+   "height": 64,
+   "bytes": 1028
+  },
+  {
+   "at": "0x19c41e",
+   "width": 32,
+   "height": 32,
+   "bytes": 4454
+  },
+  {
+   "at": "0x19d584",
+   "width": 32,
+   "height": 32,
+   "bytes": 4414
+  },
+  {
+   "at": "0x19e6c2",
+   "width": 32,
+   "height": 32,
+   "bytes": 4487
+  },
+  {
+   "at": "0x19f849",
+   "width": 32,
+   "height": 32,
+   "bytes": 4469
+  },
+  {
+   "at": "0x1a09be",
+   "width": 108,
+   "height": 108,
+   "bytes": 6466
+  },
+  {
+   "at": "0x1a2300",
+   "width": 32,
+   "height": 32,
+   "bytes": 1220
+  },
+  {
+   "at": "0x1aabab",
+   "width": 1600,
+   "height": 75,
+   "bytes": 8167
+  },
+  {
+   "at": "0x1acb92",
+   "width": 100,
+   "height": 100,
+   "bytes": 2528
+  },
+  {
+   "at": "0x1ad572",
+   "width": 128,
+   "height": 128,
+   "bytes": 5509
+  },
+  {
+   "at": "0x1aeaf7",
+   "width": 17,
+   "height": 17,
+   "bytes": 723
+  },
+  {
+   "at": "0x1aedca",
+   "width": 16,
+   "height": 16,
+   "bytes": 167
+  },
+  {
+   "at": "0x1aee71",
+   "width": 32,
+   "height": 320,
+   "bytes": 3948
+  },
+  {
+   "at": "0x22982e",
+   "width": 64,
+   "height": 64,
+   "bytes": 4529
+  },
+  {
+   "at": "0x22a9df",
+   "width": 128,
+   "height": 128,
+   "bytes": 5228
+  },
+  {
+   "at": "0x22be4b",
+   "width": 128,
+   "height": 128,
+   "bytes": 6133
+  },
+  {
+   "at": "0x22d640",
+   "width": 128,
+   "height": 128,
+   "bytes": 5301
+  },
+  {
+   "at": "0x22eaf5",
+   "width": 128,
+   "height": 128,
+   "bytes": 6147
+  },
+  {
+   "at": "0x2302f8",
+   "width": 128,
+   "height": 128,
+   "bytes": 4122
+  },
+  {
+   "at": "0x231312",
+   "width": 128,
+   "height": 128,
+   "bytes": 3214
+  },
+  {
+   "at": "0x231fa0",
+   "width": 128,
+   "height": 128,
+   "bytes": 5306
+  },
+  {
+   "at": "0x23345a",
+   "width": 128,
+   "height": 128,
+   "bytes": 6123
+  },
+  {
+   "at": "0x234c45",
+   "width": 128,
+   "height": 128,
+   "bytes": 5200
+  },
+  {
+   "at": "0x236095",
+   "width": 128,
+   "height": 128,
+   "bytes": 6047
+  },
+  {
+   "at": "0x237834",
+   "width": 128,
+   "height": 128,
+   "bytes": 7080
+  },
+  {
+   "at": "0x2393dc",
+   "width": 256,
+   "height": 508,
+   "bytes": 66230
+  },
+  {
+   "at": "0x249692",
+   "width": 256,
+   "height": 508,
+   "bytes": 50497
+  },
+  {
+   "at": "0x255bd3",
+   "width": 1280,
+   "height": 720,
+   "bytes": 454546
+  },
+  {
+   "at": "0x2c4b65",
+   "width": 64,
+   "height": 64,
+   "bytes": 4364
+  },
+  {
+   "at": "0x2c5c71",
+   "width": 32,
+   "height": 32,
+   "bytes": 591
+  },
+  {
+   "at": "0x2c5ec0",
+   "width": 128,
+   "height": 128,
+   "bytes": 19506
+  },
+  {
+   "at": "0x2caaf2",
+   "width": 128,
+   "height": 128,
+   "bytes": 14767
+  },
+  {
+   "at": "0x2ce4a1",
+   "width": 128,
+   "height": 128,
+   "bytes": 14293
+  },
+  {
+   "at": "0x2d1c76",
+   "width": 128,
+   "height": 128,
+   "bytes": 11302
+  },
+  {
+   "at": "0x2d489c",
+   "width": 128,
+   "height": 128,
+   "bytes": 13356
+  },
+  {
+   "at": "0x2d7cc8",
+   "width": 128,
+   "height": 128,
+   "bytes": 10491
+  },
+  {
+   "at": "0x2da5c3",
+   "width": 128,
+   "height": 128,
+   "bytes": 14305
+  },
+  {
+   "at": "0x2ddda4",
+   "width": 128,
+   "height": 128,
+   "bytes": 13952
+  },
+  {
+   "at": "0x2e1424",
+   "width": 128,
+   "height": 128,
+   "bytes": 10388
+  },
+  {
+   "at": "0x2e3cb8",
+   "width": 128,
+   "height": 128,
+   "bytes": 13052
+  },
+  {
+   "at": "0x2e6fb4",
+   "width": 128,
+   "height": 128,
+   "bytes": 11493
+  },
+  {
+   "at": "0x2e9c99",
+   "width": 128,
+   "height": 128,
+   "bytes": 7209
+  },
+  {
+   "at": "0x2eb8c2",
+   "width": 128,
+   "height": 128,
+   "bytes": 14201
+  },
+  {
+   "at": "0x2ef03b",
+   "width": 128,
+   "height": 128,
+   "bytes": 10251
+  },
+  {
+   "at": "0x2f1846",
+   "width": 128,
+   "height": 128,
+   "bytes": 11376
+  },
+  {
+   "at": "0x2f44b6",
+   "width": 128,
+   "height": 128,
+   "bytes": 6728
+  },
+  {
+   "at": "0x2f5efe",
+   "width": 128,
+   "height": 128,
+   "bytes": 13287
+  },
+  {
+   "at": "0x2f92e5",
+   "width": 128,
+   "height": 128,
+   "bytes": 10747
+  },
+  {
+   "at": "0x2fbce0",
+   "width": 128,
+   "height": 128,
+   "bytes": 7690
+  },
+  {
+   "at": "0x2fdaea",
+   "width": 128,
+   "height": 128,
+   "bytes": 14229
+  },
+  {
+   "at": "0x30127f",
+   "width": 128,
+   "height": 128,
+   "bytes": 10988
+  },
+  {
+   "at": "0x303d6b",
+   "width": 128,
+   "height": 128,
+   "bytes": 13401
+  },
+  {
+   "at": "0x3071c4",
+   "width": 128,
+   "height": 128,
+   "bytes": 11471
+  },
+  {
+   "at": "0x309e93",
+   "width": 128,
+   "height": 128,
+   "bytes": 7319
+  },
+  {
+   "at": "0x30bb2a",
+   "width": 512,
+   "height": 128,
+   "bytes": 12599
+  },
+  {
+   "at": "0x30ec61",
+   "width": 512,
+   "height": 128,
+   "bytes": 12054
+  },
+  {
+   "at": "0x311b77",
+   "width": 56,
+   "height": 128,
+   "bytes": 2750
+  },
+  {
+   "at": "0x312635",
+   "width": 128,
+   "height": 128,
+   "bytes": 4583
+  },
+  {
+   "at": "0x31381c",
+   "width": 64,
+   "height": 400,
+   "bytes": 11495
+  },
+  {
+   "at": "0x316503",
+   "width": 128,
+   "height": 128,
+   "bytes": 3447
+  },
+  {
+   "at": "0x31727a",
+   "width": 512,
+   "height": 128,
+   "bytes": 20249
+  },
+  {
+   "at": "0x31c193",
+   "width": 512,
+   "height": 128,
+   "bytes": 12512
+  },
+  {
+   "at": "0x31f273",
+   "width": 128,
+   "height": 512,
+   "bytes": 14004
+  },
+  {
+   "at": "0x322927",
+   "width": 128,
+   "height": 512,
+   "bytes": 13355
+  },
+  {
+   "at": "0x325d52",
+   "width": 128,
+   "height": 512,
+   "bytes": 5147
+  },
+  {
+   "at": "0x32716d",
+   "width": 128,
+   "height": 512,
+   "bytes": 5743
+  },
+  {
+   "at": "0x3287dc",
+   "width": 1280,
+   "height": 720,
+   "bytes": 611970
+  },
+  {
+   "at": "0x3bde5e",
+   "width": 512,
+   "height": 512,
+   "bytes": 145856
+  },
+  {
+   "at": "0x3e181e",
+   "width": 128,
+   "height": 128,
+   "bytes": 11239
+  },
+  {
+   "at": "0x3e4405",
+   "width": 128,
+   "height": 128,
+   "bytes": 9249
+  },
+  {
+   "at": "0x3e6826",
+   "width": 358,
+   "height": 358,
+   "bytes": 23195
+  },
+  {
+   "at": "0x3ec2c1",
+   "width": 128,
+   "height": 128,
+   "bytes": 5168
+  },
+  {
+   "at": "0x3ed6f1",
+   "width": 128,
+   "height": 128,
+   "bytes": 15598
+  },
+  {
+   "at": "0x3f13df",
+   "width": 128,
+   "height": 128,
+   "bytes": 14357
+  },
+  {
+   "at": "0x3f4bf4",
+   "width": 128,
+   "height": 128,
+   "bytes": 377
+  },
+  {
+   "at": "0x3f4d6d",
+   "width": 128,
+   "height": 128,
+   "bytes": 1017
+  },
+  {
+   "at": "0x3f5166",
+   "width": 128,
+   "height": 128,
+   "bytes": 17506
+  },
+  {
+   "at": "0x3f95c8",
+   "width": 128,
+   "height": 128,
+   "bytes": 12994
+  },
+  {
+   "at": "0x3fc88a",
+   "width": 512,
+   "height": 512,
+   "bytes": 15062
+  },
+  {
+   "at": "0x400360",
+   "width": 128,
+   "height": 128,
+   "bytes": 2860
+  },
+  {
+   "at": "0x400e8c",
+   "width": 128,
+   "height": 128,
+   "bytes": 2862
+  },
+  {
+   "at": "0x4019ba",
+   "width": 300,
+   "height": 160,
+   "bytes": 17129
+  },
+  {
+   "at": "0x405ca3",
+   "width": 128,
+   "height": 128,
+   "bytes": 9478
+  },
+  {
+   "at": "0x4081a9",
+   "width": 128,
+   "height": 128,
+   "bytes": 8720
+  },
+  {
+   "at": "0x40a3b9",
+   "width": 128,
+   "height": 128,
+   "bytes": 4530
+  },
+  {
+   "at": "0x40b56b",
+   "width": 128,
+   "height": 128,
+   "bytes": 10251
+  },
+  {
+   "at": "0x40dd76",
+   "width": 128,
+   "height": 128,
+   "bytes": 12609
+  },
+  {
+   "at": "0x410eb7",
+   "width": 128,
+   "height": 128,
+   "bytes": 10562
+  },
+  {
+   "at": "0x4137f9",
+   "width": 128,
+   "height": 128,
+   "bytes": 11336
+  },
+  {
+   "at": "0x416441",
+   "width": 128,
+   "height": 128,
+   "bytes": 8753
+  },
+  {
+   "at": "0x418672",
+   "width": 128,
+   "height": 128,
+   "bytes": 16178
+  },
+  {
+   "at": "0x41c5a4",
+   "width": 128,
+   "height": 128,
+   "bytes": 10994
+  },
+  {
+   "at": "0x41f096",
+   "width": 128,
+   "height": 128,
+   "bytes": 13335
+  },
+  {
+   "at": "0x4224ad",
+   "width": 128,
+   "height": 128,
+   "bytes": 10881
+  },
+  {
+   "at": "0x424f2e",
+   "width": 128,
+   "height": 128,
+   "bytes": 14607
+  },
+  {
+   "at": "0x42883d",
+   "width": 128,
+   "height": 128,
+   "bytes": 12140
+  },
+  {
+   "at": "0x42b7a9",
+   "width": 128,
+   "height": 128,
+   "bytes": 16940
+  },
+  {
+   "at": "0x42f9d5",
+   "width": 128,
+   "height": 128,
+   "bytes": 13808
+  },
+  {
+   "at": "0x432fc5",
+   "width": 360,
+   "height": 200,
+   "bytes": 45468
+  },
+  {
+   "at": "0x43e161",
+   "width": 360,
+   "height": 200,
+   "bytes": 34315
+  },
+  {
+   "at": "0x44676c",
+   "width": 128,
+   "height": 128,
+   "bytes": 15260
+  },
+  {
+   "at": "0x44a308",
+   "width": 128,
+   "height": 128,
+   "bytes": 12321
+  },
+  {
+   "at": "0x44d329",
+   "width": 128,
+   "height": 128,
+   "bytes": 13029
+  },
+  {
+   "at": "0x45060e",
+   "width": 128,
+   "height": 128,
+   "bytes": 10471
+  },
+  {
+   "at": "0x452ef5",
+   "width": 128,
+   "height": 128,
+   "bytes": 14491
+  },
+  {
+   "at": "0x456790",
+   "width": 128,
+   "height": 128,
+   "bytes": 13332
+  },
+  {
+   "at": "0x459ba4",
+   "width": 360,
+   "height": 200,
+   "bytes": 37202
+  },
+  {
+   "at": "0x462cf6",
+   "width": 360,
+   "height": 200,
+   "bytes": 27574
+  },
+  {
+   "at": "0x4698ac",
+   "width": 128,
+   "height": 128,
+   "bytes": 15220
+  },
+  {
+   "at": "0x46d420",
+   "width": 128,
+   "height": 128,
+   "bytes": 12130
+  },
+  {
+   "at": "0x470382",
+   "width": 128,
+   "height": 128,
+   "bytes": 15114
+  },
+  {
+   "at": "0x473e8c",
+   "width": 128,
+   "height": 128,
+   "bytes": 11545
+  },
+  {
+   "at": "0x476ba5",
+   "width": 128,
+   "height": 128,
+   "bytes": 17834
+  },
+  {
+   "at": "0x47b14f",
+   "width": 128,
+   "height": 128,
+   "bytes": 14653
+  },
+  {
+   "at": "0x47ea8c",
+   "width": 128,
+   "height": 128,
+   "bytes": 13806
+  },
+  {
+   "at": "0x48207a",
+   "width": 128,
+   "height": 128,
+   "bytes": 10763
+  },
+  {
+   "at": "0x484a85",
+   "width": 128,
+   "height": 128,
+   "bytes": 19229
+  },
+  {
+   "at": "0x4895a2",
+   "width": 128,
+   "height": 128,
+   "bytes": 15496
+  },
+  {
+   "at": "0x48d22a",
+   "width": 360,
+   "height": 200,
+   "bytes": 57692
+  },
+  {
+   "at": "0x49b386",
+   "width": 360,
+   "height": 200,
+   "bytes": 43779
+  },
+  {
+   "at": "0x4a5e89",
+   "width": 128,
+   "height": 128,
+   "bytes": 18823
+  },
+  {
+   "at": "0x4aa810",
+   "width": 128,
+   "height": 128,
+   "bytes": 14922
+  },
+  {
+   "at": "0x4ae25a",
+   "width": 360,
+   "height": 200,
+   "bytes": 58051
+  },
+  {
+   "at": "0x4bc51d",
+   "width": 360,
+   "height": 200,
+   "bytes": 43360
+  },
+  {
+   "at": "0x4c6e7d",
+   "width": 128,
+   "height": 128,
+   "bytes": 18142
+  },
+  {
+   "at": "0x4cb55b",
+   "width": 128,
+   "height": 128,
+   "bytes": 13527
+  },
+  {
+   "at": "0x4cea32",
+   "width": 128,
+   "height": 128,
+   "bytes": 15905
+  },
+  {
+   "at": "0x4d2853",
+   "width": 128,
+   "height": 128,
+   "bytes": 13166
+  },
+  {
+   "at": "0x4d5bc1",
+   "width": 360,
+   "height": 200,
+   "bytes": 53420
+  },
+  {
+   "at": "0x4e2c6d",
+   "width": 360,
+   "height": 200,
+   "bytes": 41275
+  },
+  {
+   "at": "0x4ecda8",
+   "width": 512,
+   "height": 128,
+   "bytes": 44933
+  },
+  {
+   "at": "0x4f7d2d",
+   "width": 512,
+   "height": 128,
+   "bytes": 34742
+  },
+  {
+   "at": "0x5004e3",
+   "width": 128,
+   "height": 128,
+   "bytes": 20535
+  },
+  {
+   "at": "0x50551a",
+   "width": 128,
+   "height": 128,
+   "bytes": 15069
+  },
+  {
+   "at": "0x508ff7",
+   "width": 512,
+   "height": 128,
+   "bytes": 46148
+  },
+  {
+   "at": "0x51443b",
+   "width": 512,
+   "height": 128,
+   "bytes": 34922
+  },
+  {
+   "at": "0x51cca5",
+   "width": 512,
+   "height": 128,
+   "bytes": 35859
+  },
+  {
+   "at": "0x5258b8",
+   "width": 512,
+   "height": 128,
+   "bytes": 28838
+  },
+  {
+   "at": "0x52c95e",
+   "width": 512,
+   "height": 128,
+   "bytes": 32622
+  },
+  {
+   "at": "0x5348cc",
+   "width": 512,
+   "height": 128,
+   "bytes": 26241
+  },
+  {
+   "at": "0x53af4d",
+   "width": 512,
+   "height": 128,
+   "bytes": 29485
+  },
+  {
+   "at": "0x54227a",
+   "width": 512,
+   "height": 128,
+   "bytes": 23495
+  },
+  {
+   "at": "0x547e41",
+   "width": 512,
+   "height": 128,
+   "bytes": 41534
+  },
+  {
+   "at": "0x55207f",
+   "width": 512,
+   "height": 128,
+   "bytes": 34281
+  },
+  {
+   "at": "0x55a668",
+   "width": 340,
+   "height": 270,
+   "bytes": 3332
+  },
+  {
+   "at": "0x55b36c",
+   "width": 128,
+   "height": 128,
+   "bytes": 18175
+  },
+  {
+   "at": "0x55fa6b",
+   "width": 128,
+   "height": 128,
+   "bytes": 14539
+  },
+  {
+   "at": "0x563336",
+   "width": 128,
+   "height": 128,
+   "bytes": 19405
+  },
+  {
+   "at": "0x567f03",
+   "width": 128,
+   "height": 128,
+   "bytes": 15912
+  },
+  {
+   "at": "0x56bd2b",
+   "width": 128,
+   "height": 128,
+   "bytes": 17615
+  },
+  {
+   "at": "0x5701fa",
+   "width": 128,
+   "height": 128,
+   "bytes": 14644
+  },
+  {
+   "at": "0x573b2e",
+   "width": 512,
+   "height": 128,
+   "bytes": 7531
+  },
+  {
+   "at": "0x575899",
+   "width": 128,
+   "height": 128,
+   "bytes": 11533
+  },
+  {
+   "at": "0x5785a6",
+   "width": 128,
+   "height": 128,
+   "bytes": 9588
+  },
+  {
+   "at": "0x57ab1a",
+   "width": 128,
+   "height": 128,
+   "bytes": 1927
+  },
+  {
+   "at": "0x57b2a1",
+   "width": 512,
+   "height": 128,
+   "bytes": 6725
+  },
+  {
+   "at": "0x57cce6",
+   "width": 512,
+   "height": 128,
+   "bytes": 930
+  },
+  {
+   "at": "0x57d088",
+   "width": 128,
+   "height": 512,
+   "bytes": 7468
+  },
+  {
+   "at": "0x57edb4",
+   "width": 128,
+   "height": 512,
+   "bytes": 1303
+  },
+  {
+   "at": "0x57f2cb",
+   "width": 512,
+   "height": 128,
+   "bytes": 2615
+  },
+  {
+   "at": "0x57fd02",
+   "width": 128,
+   "height": 512,
+   "bytes": 2940
+  },
+  {
+   "at": "0x58087e",
+   "width": 128,
+   "height": 128,
+   "bytes": 12075
+  },
+  {
+   "at": "0x5837a9",
+   "width": 128,
+   "height": 128,
+   "bytes": 9440
+  },
+  {
+   "at": "0x585c89",
+   "width": 128,
+   "height": 128,
+   "bytes": 1852
+  },
+  {
+   "at": "0x5863c5",
+   "width": 32,
+   "height": 32,
+   "bytes": 4454
+  },
+  {
+   "at": "0x58752b",
+   "width": 32,
+   "height": 32,
+   "bytes": 4414
+  },
+  {
+   "at": "0x588669",
+   "width": 32,
+   "height": 32,
+   "bytes": 1220
+  },
+  {
+   "at": "0x588b2d",
+   "width": 70,
+   "height": 70,
+   "bytes": 6616
+  },
+  {
+   "at": "0x58a505",
+   "width": 75,
+   "height": 65,
+   "bytes": 3316
+  },
+  {
+   "at": "0x58b1f9",
+   "width": 65,
+   "height": 75,
+   "bytes": 3249
+  },
+  {
+   "at": "0x58beaa",
+   "width": 80,
+   "height": 70,
+   "bytes": 5844
+  },
+  {
+   "at": "0x58d57e",
+   "width": 75,
+   "height": 65,
+   "bytes": 3531
+  },
+  {
+   "at": "0x58e349",
+   "width": 65,
+   "height": 75,
+   "bytes": 3721
+  },
+  {
+   "at": "0x58f1d2",
+   "width": 32,
+   "height": 32,
+   "bytes": 4487
+  },
+  {
+   "at": "0x590359",
+   "width": 32,
+   "height": 32,
+   "bytes": 4469
+  },
+  {
+   "at": "0x5914ce",
+   "width": 360,
+   "height": 200,
+   "bytes": 40037
+  },
+  {
+   "at": "0x59b133",
+   "width": 360,
+   "height": 200,
+   "bytes": 28212
+  },
+  {
+   "at": "0x5a1f67",
+   "width": 128,
+   "height": 128,
+   "bytes": 18118
+  },
+  {
+   "at": "0x5a662d",
+   "width": 128,
+   "height": 128,
+   "bytes": 13811
+  },
+  {
+   "at": "0x5a9c20",
+   "width": 200,
+   "height": 200,
+   "bytes": 44613
+  },
+  {
+   "at": "0x5b4a65",
+   "width": 128,
+   "height": 128,
+   "bytes": 21178
+  },
+  {
+   "at": "0x5b9d1f",
+   "width": 128,
+   "height": 128,
+   "bytes": 16760
+  },
+  {
+   "at": "0x5bde97",
+   "width": 128,
+   "height": 128,
+   "bytes": 18748
+  },
+  {
+   "at": "0x5c27d3",
+   "width": 128,
+   "height": 128,
+   "bytes": 15456
+  },
+  {
+   "at": "0x5c6433",
+   "width": 128,
+   "height": 128,
+   "bytes": 17577
+  },
+  {
+   "at": "0x5ca8dc",
+   "width": 128,
+   "height": 128,
+   "bytes": 13668
+  },
+  {
+   "at": "0x5cde40",
+   "width": 128,
+   "height": 128,
+   "bytes": 19970
+  },
+  {
+   "at": "0x5d2c42",
+   "width": 128,
+   "height": 128,
+   "bytes": 16244
+  },
+  {
+   "at": "0x5d6bb6",
+   "width": 128,
+   "height": 128,
+   "bytes": 18831
+  },
+  {
+   "at": "0x5db545",
+   "width": 128,
+   "height": 128,
+   "bytes": 14505
+  },
+  {
+   "at": "0x5dedee",
+   "width": 128,
+   "height": 128,
+   "bytes": 3245
+  },
+  {
+   "at": "0x5dfa9b",
+   "width": 128,
+   "height": 128,
+   "bytes": 14953
+  },
+  {
+   "at": "0x5e3504",
+   "width": 128,
+   "height": 128,
+   "bytes": 11785
+  },
+  {
+   "at": "0x5e630d",
+   "width": 128,
+   "height": 128,
+   "bytes": 4676
+  },
+  {
+   "at": "0x5e7551",
+   "width": 128,
+   "height": 128,
+   "bytes": 5390
+  },
+  {
+   "at": "0x5e8a5f",
+   "width": 128,
+   "height": 128,
+   "bytes": 4665
+  },
+  {
+   "at": "0x5e9c98",
+   "width": 128,
+   "height": 128,
+   "bytes": 5363
+  },
+  {
+   "at": "0x5eb18b",
+   "width": 128,
+   "height": 128,
+   "bytes": 4719
+  },
+  {
+   "at": "0x5ec3fa",
+   "width": 128,
+   "height": 128,
+   "bytes": 5407
+  },
+  {
+   "at": "0x5ed919",
+   "width": 128,
+   "height": 128,
+   "bytes": 4722
+  },
+  {
+   "at": "0x5eeb8b",
+   "width": 128,
+   "height": 128,
+   "bytes": 5427
+  },
+  {
+   "at": "0x5f00be",
+   "width": 128,
+   "height": 128,
+   "bytes": 9373
+  },
+  {
+   "at": "0x5f255b",
+   "width": 128,
+   "height": 128,
+   "bytes": 7114
+  },
+  {
+   "at": "0x5f4125",
+   "width": 128,
+   "height": 128,
+   "bytes": 6102
+  },
+  {
+   "at": "0x5f58fb",
+   "width": 128,
+   "height": 128,
+   "bytes": 6641
+  },
+  {
+   "at": "0x5f72ec",
+   "width": 128,
+   "height": 128,
+   "bytes": 10463
+  },
+  {
+   "at": "0x5f9bcb",
+   "width": 128,
+   "height": 128,
+   "bytes": 6049
+  },
+  {
+   "at": "0x5fb36c",
+   "width": 128,
+   "height": 128,
+   "bytes": 4288
+  },
+  {
+   "at": "0x5fc42c",
+   "width": 128,
+   "height": 128,
+   "bytes": 4845
+  },
+  {
+   "at": "0x5fd719",
+   "width": 128,
+   "height": 128,
+   "bytes": 4751
+  },
+  {
+   "at": "0x5fe9a8",
+   "width": 128,
+   "height": 128,
+   "bytes": 5486
+  },
+  {
+   "at": "0x5fff16",
+   "width": 128,
+   "height": 128,
+   "bytes": 5429
+  },
+  {
+   "at": "0x60144b",
+   "width": 128,
+   "height": 128,
+   "bytes": 4741
+  },
+  {
+   "at": "0x6026d0",
+   "width": 250,
+   "height": 250,
+   "bytes": 4202
+  },
+  {
+   "at": "0x60373a",
+   "width": 128,
+   "height": 128,
+   "bytes": 4777
+  },
+  {
+   "at": "0x6049e3",
+   "width": 128,
+   "height": 128,
+   "bytes": 5436
+  },
+  {
+   "at": "0x605f1f",
+   "width": 250,
+   "height": 250,
+   "bytes": 4216
+  },
+  {
+   "at": "0x606f97",
+   "width": 250,
+   "height": 250,
+   "bytes": 6315
+  },
+  {
+   "at": "0x608842",
+   "width": 250,
+   "height": 250,
+   "bytes": 5681
+  },
+  {
+   "at": "0x609e73",
+   "width": 122,
+   "height": 108,
+   "bytes": 551
+  },
+  {
+   "at": "0x60a09a",
+   "width": 250,
+   "height": 250,
+   "bytes": 2450
+  },
+  {
+   "at": "0x60aa2c",
+   "width": 250,
+   "height": 250,
+   "bytes": 2475
+  },
+  {
+   "at": "0x60b3d7",
+   "width": 128,
+   "height": 64,
+   "bytes": 7354
+  },
+  {
+   "at": "0x60d091",
+   "width": 128,
+   "height": 64,
+   "bytes": 7381
+  },
+  {
+   "at": "0x60ed66",
+   "width": 128,
+   "height": 128,
+   "bytes": 3427
+  },
+  {
+   "at": "0x60fac9",
+   "width": 512,
+   "height": 128,
+   "bytes": 22796
+  },
+  {
+   "at": "0x6153d5",
+   "width": 512,
+   "height": 128,
+   "bytes": 32790
+  },
+  {
+   "at": "0x61d3eb",
+   "width": 512,
+   "height": 128,
+   "bytes": 25447
+  },
+  {
+   "at": "0x623752",
+   "width": 128,
+   "height": 128,
+   "bytes": 2140
+  },
+  {
+   "at": "0x623fae",
+   "width": 128,
+   "height": 128,
+   "bytes": 20352
+  },
+  {
+   "at": "0x628f2e",
+   "width": 128,
+   "height": 128,
+   "bytes": 16580
+  },
+  {
+   "at": "0x62cff2",
+   "width": 512,
+   "height": 128,
+   "bytes": 42437
+  },
+  {
+   "at": "0x6375b7",
+   "width": 512,
+   "height": 128,
+   "bytes": 34835
+  },
+  {
+   "at": "0x63fdca",
+   "width": 128,
+   "height": 128,
+   "bytes": 10911
+  },
+  {
+   "at": "0x642869",
+   "width": 128,
+   "height": 128,
+   "bytes": 7354
+  },
+  {
+   "at": "0x644523",
+   "width": 128,
+   "height": 128,
+   "bytes": 9186
+  },
+  {
+   "at": "0x646905",
+   "width": 128,
+   "height": 128,
+   "bytes": 19785
+  },
+  {
+   "at": "0x64b64e",
+   "width": 128,
+   "height": 128,
+   "bytes": 15128
+  },
+  {
+   "at": "0x64f166",
+   "width": 512,
+   "height": 128,
+   "bytes": 12599
+  },
+  {
+   "at": "0x65229d",
+   "width": 512,
+   "height": 128,
+   "bytes": 12054
+  },
+  {
+   "at": "0x6551b3",
+   "width": 128,
+   "height": 128,
+   "bytes": 18410
+  },
+  {
+   "at": "0x65999d",
+   "width": 128,
+   "height": 128,
+   "bytes": 14504
+  },
+  {
+   "at": "0x65d245",
+   "width": 128,
+   "height": 128,
+   "bytes": 20482
+  },
+  {
+   "at": "0x662247",
+   "width": 128,
+   "height": 128,
+   "bytes": 16252
+  },
+  {
+   "at": "0x6661c3",
+   "width": 512,
+   "height": 128,
+   "bytes": 47109
+  },
+  {
+   "at": "0x6719c8",
+   "width": 512,
+   "height": 128,
+   "bytes": 36779
+  },
+  {
+   "at": "0x67a973",
+   "width": 64,
+   "height": 64,
+   "bytes": 4643
+  },
+  {
+   "at": "0x67bb96",
+   "width": 64,
+   "height": 64,
+   "bytes": 4405
+  },
+  {
+   "at": "0x67cccb",
+   "width": 128,
+   "height": 128,
+   "bytes": 4514
+  },
+  {
+   "at": "0x67de6d",
+   "width": 128,
+   "height": 128,
+   "bytes": 13983
+  },
+  {
+   "at": "0x68150c",
+   "width": 128,
+   "height": 128,
+   "bytes": 11247
+  },
+  {
+   "at": "0x6840fb",
+   "width": 128,
+   "height": 128,
+   "bytes": 11247
+  },
+  {
+   "at": "0x686cea",
+   "width": 128,
+   "height": 128,
+   "bytes": 9703
+  },
+  {
+   "at": "0x6892d1",
+   "width": 128,
+   "height": 128,
+   "bytes": 9366
+  },
+  {
+   "at": "0x68b767",
+   "width": 128,
+   "height": 128,
+   "bytes": 10616
+  },
+  {
+   "at": "0x68e0df",
+   "width": 64,
+   "height": 64,
+   "bytes": 3350
+  },
+  {
+   "at": "0x68edf5",
+   "width": 32,
+   "height": 32,
+   "bytes": 1238
+  },
+  {
+   "at": "0x68f2cb",
+   "width": 64,
+   "height": 64,
+   "bytes": 3175
+  },
+  {
+   "at": "0x68ff32",
+   "width": 32,
+   "height": 32,
+   "bytes": 1154
+  },
+  {
+   "at": "0x6903b4",
+   "width": 64,
+   "height": 64,
+   "bytes": 3371
+  },
+  {
+   "at": "0x6910df",
+   "width": 32,
+   "height": 32,
+   "bytes": 1219
+  },
+  {
+   "at": "0x6915a2",
+   "width": 64,
+   "height": 64,
+   "bytes": 3237
+  },
+  {
+   "at": "0x692247",
+   "width": 32,
+   "height": 32,
+   "bytes": 1198
+  },
+  {
+   "at": "0x6926f5",
+   "width": 64,
+   "height": 64,
+   "bytes": 3639
+  },
+  {
+   "at": "0x69352c",
+   "width": 32,
+   "height": 32,
+   "bytes": 1255
+  },
+  {
+   "at": "0x693a13",
+   "width": 64,
+   "height": 64,
+   "bytes": 3530
+  },
+  {
+   "at": "0x6947dd",
+   "width": 32,
+   "height": 32,
+   "bytes": 1253
+  },
+  {
+   "at": "0x694cc2",
+   "width": 64,
+   "height": 64,
+   "bytes": 3711
+  },
+  {
+   "at": "0x695b41",
+   "width": 32,
+   "height": 32,
+   "bytes": 1293
+  },
+  {
+   "at": "0x69604e",
+   "width": 64,
+   "height": 64,
+   "bytes": 3477
+  },
+  {
+   "at": "0x696de3",
+   "width": 32,
+   "height": 32,
+   "bytes": 1223
+  },
+  {
+   "at": "0x6972aa",
+   "width": 64,
+   "height": 64,
+   "bytes": 3651
+  },
+  {
+   "at": "0x6980ed",
+   "width": 32,
+   "height": 32,
+   "bytes": 1266
+  },
+  {
+   "at": "0x6985df",
+   "width": 64,
+   "height": 64,
+   "bytes": 3585
+  },
+  {
+   "at": "0x6993e0",
+   "width": 32,
+   "height": 32,
+   "bytes": 1266
+  },
+  {
+   "at": "0x6998d2",
+   "width": 64,
+   "height": 64,
+   "bytes": 3433
+  },
+  {
+   "at": "0x69a63b",
+   "width": 32,
+   "height": 32,
+   "bytes": 1257
+  },
+  {
+   "at": "0x69ab24",
+   "width": 64,
+   "height": 64,
+   "bytes": 3580
+  },
+  {
+   "at": "0x69b920",
+   "width": 32,
+   "height": 32,
+   "bytes": 1271
+  },
+  {
+   "at": "0x69be17",
+   "width": 64,
+   "height": 64,
+   "bytes": 3384
+  },
+  {
+   "at": "0x69cb4f",
+   "width": 32,
+   "height": 32,
+   "bytes": 1265
+  },
+  {
+   "at": "0x69d040",
+   "width": 64,
+   "height": 64,
+   "bytes": 3551
+  },
+  {
+   "at": "0x69de1f",
+   "width": 32,
+   "height": 32,
+   "bytes": 1238
+  },
+  {
+   "at": "0x69e2f5",
+   "width": 64,
+   "height": 64,
+   "bytes": 2848
+  },
+  {
+   "at": "0x69ee15",
+   "width": 32,
+   "height": 32,
+   "bytes": 1121
+  },
+  {
+   "at": "0x69f276",
+   "width": 64,
+   "height": 64,
+   "bytes": 2497
+  },
+  {
+   "at": "0x69fc37",
+   "width": 32,
+   "height": 32,
+   "bytes": 932
+  },
+  {
+   "at": "0x69ffdb",
+   "width": 64,
+   "height": 64,
+   "bytes": 3600
+  },
+  {
+   "at": "0x6a0deb",
+   "width": 32,
+   "height": 32,
+   "bytes": 1191
+  },
+  {
+   "at": "0x6a1292",
+   "width": 64,
+   "height": 64,
+   "bytes": 2943
+  },
+  {
+   "at": "0x6a1e11",
+   "width": 32,
+   "height": 32,
+   "bytes": 1056
+  },
+  {
+   "at": "0x6a2231",
+   "width": 64,
+   "height": 64,
+   "bytes": 875
+  },
+  {
+   "at": "0x6a259c",
+   "width": 32,
+   "height": 32,
+   "bytes": 400
+  }
+ ]
+}

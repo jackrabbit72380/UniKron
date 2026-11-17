@@ -108,6 +108,46 @@ pixels, never remove the stock outline.
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.
 
+## The retail buttons, read from the editor's own strings
+
+`xex_ui_strings.py` pulls the 2008 editor's UI vocabulary out of
+`avatareditor.xex` (UTF-16LE, `editor_ui.json`) and writes its embedded button
+art to `assets/_ui/xex/` (293 PNGs). The editor names its categories itself:
+
+    body hair faceshape facial nose ears eyes eyebrows mouth mouth_male
+    facial_hair_male facial_skin_male facial_female tops bottoms shoes hat
+    glasses gloves gloves_female ring watch earring body_access head_access
+    makeup makeup_male lipstick eyeshadow colour_palette_skin option_colour
+    malecostume femalecostume loadoutfit saveoutfit takephoto photobooth
+    bodyshape_normalthin bodyshape_normalnormal bodyshape_normalfat
+    bodyshape_tallnormal bodyshape_smallnormal
+
+each with `_selected.png`, `_unselected.png` and `_pressdisable.png`. Two things
+this corrects:
+
+* **The accessory buttons are not missing content.** `Gloves`, `Rings`,
+  `Wristwear` and `Earrings` are all in the pack and already in the rail
+  (`46_gloves` 16 items, `75_earrings` 34, `76_rings` 16, `77_wristwear` 16;
+  half as many after the gender filter). An earlier note in this folder claimed
+  these screens had no content because the search looked for *accessory* words;
+  the items are called `Woolly Gloves`, `Slick Watch`, `Male Diamond Stud
+  Earrings`, `Gold Bracelet`, `Gold Ring with Emeralds`.
+* **`Skin Color`, `Lip`, `Eye Shadow` and `Makeup` are colour screens, not item
+  lists.** The image carries `colour_palette_skin`, `lipstick`, `eyeshadow`,
+  `makeup`, `option_colour` and the slots `Color0`...`Color15` with
+  `BonusColors`/`BonusColorsEnd` and the `Color%d` name format. They paint the
+  descriptor's nine ARGB colours (`avatar_desc.py`, `+0x0f8`) instead of picking
+  items, which is why the pack contains no lipstick item and never would.
+
+There is also a **body shape** control with five options
+(`bodyshape_normalthin`, `_normalnormal`, `_normalfat`, `_tallnormal`,
+`_smallnormal`), which `10_body` does not yet offer.
+
+Still unimplemented although the icons exist: `body_access`,
+`head_access`, the `nose`/`ears`/`faceshape` split, `facial` (Facial Features),
+`malecostume`/`femalecostume`, `loadoutfit`/`saveoutfit` (My Outfits, with
+`AvatarDeleteOutfitButtonOverride`), `takephoto`/`photobooth`.
+
 ## Thumbnails are renders, not restored art
 
 Because there is no texture art to extract, `bake_pack_thumbs.py` renders one

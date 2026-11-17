@@ -367,10 +367,21 @@ debugging.
    `avatar_marketplace_server` with `X-Marketplace-Key`; the manifest it serves
    is `JMstudios.marketplace.v1` (key label `JMKEY1`) and the catalogue query is
    `methodName=FindGameOffers` with `&Names=NameFilter&Values=` and a
-   `<totalItems>`    reply. So the retail *wording* lived in the service, not the disc, and neither
-   `hair`/`headwear`/`tops`/`bottoms`/`shoes` nor any sibling word occurs in
-   `avatareditor.exe`, `rexruntime.dll` or the XEX strings - measured, not
-   assumed; the bits still mean what the pack's own table says they mean. The editor's real filter is `AeSearchSet` in the port DLL, which
+   `<totalItems>`    reply. CORRECTION: the retail *wording* **is** on the disc, and an earlier note here
+   said the opposite. `avatareditor.xex` keeps its UI strings as **UTF-16LE**, and
+   a search for ASCII strings cannot see them; `xex_ui_strings.py` reads them into
+   `editor_ui.json` (3,660 strings). The image names its own categories - `body`,
+   `hair`, `faceshape`, `facial`, `nose`, `ears`, `eyes`, `eyebrows`, `mouth`,
+   `facial_hair_male`, `facial_skin_male`, `tops`, `bottoms`, `shoes`, `hat`,
+   `glasses`, `gloves`, `ring`, `watch`, `earring`, `body_access`, `head_access`,
+   `makeup`, `lipstick`, `eyeshadow`, `colour_palette_skin`, `malecostume`,
+   `femalecostume`, `loadoutfit`, `saveoutfit` - each with the states
+   `_selected.png`, `_unselected.png` and `_pressdisable.png`, and spells the
+   labels too (`Headwear`, `Hairstyles`, `Tops`, `Bottoms`, `Skin Color and Body`,
+   `Lip Color`, `Eye Shadow Color`, `Carryables`, `My Outfits`, `Costumes`).
+   So the wording needs no service at all. The bits still mean what the pack's
+   own table says they mean, and the colour screens are palettes rather than item
+   lists - `CATALOG.md` records both corrections. The editor's real filter is `AeSearchSet` in the port DLL, which
    works on loaded asset metadata. The full dashboard corpus also names
    the source of that metadata: `FUN_142529e40` builds
    `/live/{:08x}/avataritems/{}.acp`, and the port's own settings carry
