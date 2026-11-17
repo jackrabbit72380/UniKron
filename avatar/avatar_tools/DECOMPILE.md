@@ -243,6 +243,58 @@ writes each blob out verbatim (`.updb` beside `effects.json`) and disassembles
 nothing. Reading the bodies needs a Xenon `vmx128`/clause decoder, the same gap
 that blocks 893 of the C functions.
 
+## The shader bodies: what was tried, and why it is still open
+
+`xtl_effects.py` writes each effect out verbatim, and the note above said the
+bodies are Xenos microcode with no D3D9 token stream. Attempting to decode them
+established that the **extraction is the problem, not just the format**:
+
+* `find_blobs()` ends each blob at the *next* `.updb` path string in the image.
+  Ten of the 21 blobs therefore contain no `0x102A1100` footer at all, and
+  **every vertex shader that has code beside it is one of them**
+  (`shader_body_opaque_vs`, `shader_head_opaque_vs`, `shader_body_shiny_vs`,
+  `shader_body_transparent_vs`, `loading_vs`, `loadingbact_vs`,
+  `loadingmist_vs`, the two `loadingstars` ones and `shader_simpleshadow_vs`).
+  Their parameter tables arrived; their bodies did not.
+* Even where the footer is present, the eight words after it are larger than the
+  file: `shader_body_opaque_ps` (footer at `0x80d`) reads
+  `102A1101 208 388 24 90 130 158 0`, i.e. 520 and 904 bytes, in a 2 KB file that
+  also has to hold the path and parameter table. So those fields describe the
+  assembled shader somewhere else in the image, not the blob on disk.
+
+The image itself carries **44 headers** - `0x102A1100` x30 (vertex) and
+`0x102A1101` x14 (pixel) - each followed by the same 7-field size list
+(`280,132,36,128,0,224,0` for `shader_simpleshadow_vs`, `520,904,36,144,304,344,0`
+for `shader_body_opaque_ps`). The dead end: nothing around any of the 44 is
+microcode. Scoring every 4-byte offset for a valid `vfetch` - the encoding below
+- gives at most one candidate per region, and that candidate always has stride 0
+and format 0, i.e. junk. The same test on the whole 15.8 MB image finds 2,006
+candidates with the same defect.
+
+The `vfetch` encoding is recorded here so the next attempt does not start over.
+It is from Xenia's `ucode.h` (`VertexFetchInstruction`), cross-checked field by
+field against Mesa's `instr-a2xx.h` in `xenos-linux-gpu`'s ISA comparison:
+
+    dw0  [0:4]   opcode, 0 = vfetch        [12:17] dest register
+         [19]    must_be_one               [20:24] fetch constant index
+         [25:26] constant index selector
+    dw1  [0:11]  dest swizzle              [12]    format_comp_all (signed)
+         [13]    num_format_all (0 = normalised)
+         [16:21] vertex format             [30]    is_mini_fetch
+    dw2  [0:7]   stride in dwords          [8:30]  23-bit signed byte offset
+
+`must_be_one` is what separates a fetch from an ALU instruction in the same
+triple stream. Microcode is triples of 32-bit big-endian dwords; control flow
+occupies the first slots as 48-bit pairs (CF0 = dw0 + dw1[0:15], CF1 =
+dw1[16:31] + dw2), with the opcode at `[44:47]` of each pair, and `exec.address`
+counts 96-bit slots from the shader start - so a working carve has to begin at a
+CF slot, which none of the 44 headers' neighbourhoods do.
+
+What is needed: the framing those 7 size words describe, so the bodies can be
+carved whole, or the original `.updb` files from the dash image. Without one of
+those, a decoder here would be guessing at where code begins, which is exactly
+what these notes are not for.
+
 ## What the runtime and the front-end expose
 
 Decompiling the host side answers a question the XEX could not: how the editor
