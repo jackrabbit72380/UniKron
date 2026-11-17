@@ -388,3 +388,19 @@ archive carry the same 1,137-vertex `MaleBody`.
 
 Also ruled out while looking: the clip's joint *scale* is not what stretched the
 hand (`AVATAR_IGNORE_SCALE=1` renders identically; the scales are 1.0).
+
+## Audit before baking
+
+`audit_pack.py` is the gate for every bake, and `rebake_everything.sh` runs it
+first. It opens all 1079 assets, decodes what it can, checks each model (indices,
+weights, joint range, UVs), each animation (unit quaternions) and each texture
+(declared size), then cross-checks the pieces that have no business disagreeing:
+the skeleton's joints against the meshes, the descriptor slots against the assets,
+and the pack against the item list a bake will walk.
+
+`DECODE_STATUS.md` is its output, written by `--md`, and it is the honest answer
+to "do we have everything": 583 assets with geometry, 187 textures, 41
+animations, 71 joints, and two named gaps - the 266 shape-override-only items
+(block 4 undecoded) and the 87 scalp-cap hairstyles that only work under a hat.
+Anything unexpected makes it exit non-zero and stops the bake; `SKIP_AUDIT=1`
+bypasses it, which is only for iterating on the bakers themselves.

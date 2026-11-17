@@ -15,6 +15,16 @@ cd "$(dirname "$0")"
 export PYTHONPATH="$PWD:${PYTHONPATH:-}"
 
 PACK="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/AvatarAssetPack.toc"
+# The gate. A bake is the expensive half of this project and the only thing it can
+# discover at the end is that something was missing; audit_pack.py opens every
+# asset and checks it in seconds, so a bake never starts on data that does not
+# agree with itself. Known limitations are reported and do not stop it.
+if [ "${SKIP_AUDIT:-0}" != "1" ]; then
+    python3 audit_pack.py "$PACK" --json pack_audit.json || {
+        echo "audit failed: fix the problems above before baking" >&2
+        exit 1
+    }
+fi
 CLIPS="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/Cheer.AvatarAnimation"
 CATEGORIES="10_body,15_face,16_face-paint,20_pants,30_shoes,40_shirt,45_facial-hair,46_gloves,50_hair,60_hat,70_glasses,75_earrings,76_rings,77_wristwear,80_dress,81_formal,82_coat,83_dress-formal"
 CLIP_ASSET="Animation Male Idle Shifts Weight"
