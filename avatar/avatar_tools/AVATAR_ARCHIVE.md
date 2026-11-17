@@ -322,3 +322,42 @@ One virtual call, slot 2. The decoding is polymorphic - which is consistent with
 `VBlendShape` being a class - so there is no direct `lzx_decompress` call to find
 from the pack loader. Any further progress on block 4 has to come from the concrete
 class behind that vtable, or from your save pair.
+
+## The 16-byte descriptor is a GUID, and the GUID is the key
+
+`0x140dc7000` settles what the block-4 header fields are. It reads a 16-byte
+descriptor the same way I recorded earlier (bswap the u32, `rol $8` the two u16s,
+then eight single bytes), formats it, and hashes the result:
+
+    lea    0x1d2396(%rip),%rax        # 0x140f9945f, the format
+    movq   $0x46,0x90(%rbp)           # 70 characters
+    call   0x140e496b0                # format it
+    movabs $0x100000001b3,%rcx        # FNV-1a prime
+    movabs $0xcbf29ce484222325,%r8    # FNV-1a offset basis
+    ...
+    and    0x78(%rsi),%r8             # mask by the table size -> bucket
+
+and the format at `0x140f9945f` is
+
+    {:08x}-{:04x}-{:04x}-{:02x}{:02x}-{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}
+
+That is a GUID string. So the 16 bytes are a Windows `GUID` - `{u32, u16, u16,
+u8[6]}` - with its words stored **big-endian**, which is why reading one needs a
+bswap plus two `rol $8`. It is not a size or an offset, and the pack is not
+describing geometry with it: it is naming a type.
+
+Everything lines up with what was measured before:
+
+* the record's component field and block 4's own header fields are the same kind of
+  value, and every one of them ends in the same 8 bytes - `c1c8f109a19cb2e0` - so
+  that tail is the family marker, not the identity;
+* `0x140dc7000` and `0x140dd7e60` both `movabs $0xe0b29ca109f1c8c1` and compare it
+  against descriptor `+0x8`, i.e. they test membership of that family rather than a
+  specific type;
+* the identity is the leading `u32, u16, u16`. Large Chin's block 4 carries
+  `01000000, 0200, 0300` under those rules; the 361 distinct record components are
+  361 distinct leading triples in the same family.
+
+So block 4's header is a GUID-keyed component record followed by its payload. The
+payload's framing is still the open question, and the save pair is still the fastest
+way to pin it.
