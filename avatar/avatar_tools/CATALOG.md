@@ -235,3 +235,29 @@ than around it - so its 3D set renders as a bald head. `Shaved Pattern (Hat)` is
 the same shape of asset (171 vertices, y 1.176-1.347). Avatar6400 wears one of
 these, so the editor's seed uses the stock `Left Parting` instead and this note
 is the record of why the seed differs from the descriptor.
+
+## The pose: an idle, not a cheer, and hands that come from the clip
+
+Every static bake used frame 0 of `Cheer.AvatarAnimation`, the one clip that ships
+as a file beside the pack. Frame 0 of a cheerleading clip is a cheer: arms out,
+fingers fanned. That is what "his hands don't look like that" was.
+
+The pack carries its own standing idles, so the bakes now pose frame 0 of
+`Animation Male Idle Shifts Weight` (242 frames), extracted from the pack by
+`pack_clip.py`. Both bakers take `--clip-asset "Animation Male Idle Shifts Weight"`.
+
+**The authored finger curl is gone, as a default.** `avatar_pose.py` used to add a
+hand-written curl on top of the clip, on the stated grounds that "the clip never
+bends a finger". That is not true: the finger joints are keyed and the idle moves
+them about 34 degrees off bind, and eyeballing the numbers showed the duplication -
+clip rotation plus a guessed curl - is what turned the hand into a rake of splayed
+fingers. With the curl off and only the clip's own finger motion, the hand hangs
+closed and relaxed, in both the plates and the 3D sets.
+
+The curl is kept behind `AVATAR_FINGER_POSE=1` so the two can be compared, and the
+curl/inward angles can be overridden with `AVATAR_FINGER_CURL` /
+`AVATAR_FINGER_INWARD` for the same reason: it is a look, and a look has to be
+chosen by looking, not by guessing numbers in a file.
+
+Also ruled out while looking: the clip's joint *scale* is not what stretched the
+hand (`AVATAR_IGNORE_SCALE=1` renders identically; the scales are 1.0).

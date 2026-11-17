@@ -29,6 +29,7 @@ import tempfile
 import numpy as np
 
 import bake_turntable as bt
+import pack_clip
 from bake_pack_thumbs import slug
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -87,6 +88,9 @@ def main():
                     help="also plate MaleBody/FemaleBody/Head, for a base layer "
                          "drawn in the same frame as the items")
     ap.add_argument("--force", action="store_true", help="rebake plates that exist")
+    ap.add_argument("--clip-asset", default="",
+                    help="pose from this animation asset inside the pack instead "
+                         "of the clip file (the idles give natural hands)")
     args = ap.parse_args()
 
     wanted = set(args.categories.split(","))
@@ -106,7 +110,11 @@ def main():
         items = items[:args.limit]
     print("%d plates to bake" % len(items))
 
-    centre, height = reference_frame(args.pack, args.clip, args.description)
+    clip = pack_clip.resolve(args.pack, args.clip, args.clip_asset, WORK)
+    if clip != args.clip:
+        print("posing from pack asset %r" % args.clip_asset)
+
+    centre, height = reference_frame(args.pack, clip, args.description)
     print("body frame: centre %s, height %.4f" % (np.round(centre, 4), height))
 
     baked = skipped = failed = 0
@@ -125,7 +133,7 @@ def main():
         if name in ("MaleBody", "FemaleBody"):
             parts.append("Head")
         try:
-            bake_obj(args.pack, args.clip, args.description, parts, obj)
+            bake_obj(args.pack, clip, args.description, parts, obj)
         except RuntimeError as exc:
             failed += 1
             print("  failed %s: %s" % (name, exc))
@@ -139,7 +147,7 @@ def main():
         # keeps only the hair that is actually in front of it.
         if category == "50_hair" and not occluder:
             head_obj = os.path.join(WORK, "occluder.obj")
-            bake_obj(args.pack, args.clip, args.description,
+            bake_obj(args.pack, clip, args.description,
                      ["MaleBody", "Head"], head_obj)
             overts, otris, _ = bt.read_obj(head_obj)
             occluder.append(((overts - centre) / height, otris))

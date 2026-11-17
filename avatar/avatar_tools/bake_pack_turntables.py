@@ -28,6 +28,7 @@ import math
 import os
 import subprocess
 import sys
+import tempfile
 
 import numpy as np
 
@@ -36,6 +37,7 @@ import bake_turntable as bt
 from bake_pack_thumbs import slug
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+WORK = tempfile.mkdtemp(prefix="pack_tt_")
 STOCK = {"shirts": "Jacket with Sweater",
          "pants": "Male Flower Print Flares",
          "shoes": "Grunge Trainers"}
@@ -68,7 +70,8 @@ def read_rgba(path):
 
 def bake_one(pack, clip, description, asset, kind, folder, frames, width, height,
              category=None):
-    obj = "/tmp/pack_tt_%s.obj" % slug(asset)
+    # Per process: two bakes at once were deleting each other's objects.
+    obj = os.path.join(WORK, slug(asset) + ".obj")
     if kind == "dress":
         worn = [STOCK["shoes"]]
     else:
@@ -126,6 +129,12 @@ def main():
     ap.add_argument("--width", type=int, default=192)
     ap.add_argument("--height", type=int, default=288)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--start", type=int, default=0,
+                    help="skip the first N items, to run a long rebake in chunks")
+    ap.add_argument("--force", action="store_true", help="rebake sets that exist")
+    ap.add_argument("--clip-asset", default="",
+                    help="pose from this animation asset inside the pack instead "
+                         "of the clip file (the idles give natural hands)")
     args = ap.parse_args()
 
     wanted = set(args.categories.split(","))
@@ -149,17 +158,28 @@ def main():
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
             items.append((record["name"], CATEGORY_KIND.get(category), category))
-    if args.limit:
-        items = items[:args.limit]
+    if args.start:
+        items = items[args.start:]
     print("%d items to bake" % len(items))
+
+    import pack_clip
+    clip = pack_clip.resolve(args.pack, args.clip, args.clip_asset, "/tmp")
+    if clip != args.clip:
+        print("posing from pack asset %r" % args.clip_asset)
 
     done = skipped = failed = 0
     for name, kind, category in items:
+        # --limit caps how many are *baked*, not how many are looked at: a run
+        # restarted after a timeout must still find work, and slicing the list
+        # first would only re-walk the sets that already exist.
+        if args.limit and done >= args.limit:
+            break
         folder = os.path.join(args.outdir, slug(name))
-        if os.path.isdir(folder) and any(f.startswith("frame_") for f in os.listdir(folder)):
+        if (not args.force and os.path.isdir(folder)
+                and any(f.startswith("frame_") for f in os.listdir(folder))):
             skipped += 1
             continue
-        error = bake_one(args.pack, args.clip, args.description, name, kind, folder,
+        error = bake_one(args.pack, clip, args.description, name, kind, folder,
                          args.frames, args.width, args.height, category=category)
         if error:
             failed += 1

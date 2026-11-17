@@ -66,6 +66,7 @@ cheer. `bake_avatar.py` uses that to assemble whole avatars.
 """
 import argparse
 import math
+import os
 
 import avatar_mesh as am
 import skeleton_nxe
@@ -75,6 +76,7 @@ MODE = "delta"
 CONJ = False
 MIRROR_Z = False
 BIND_CONJ = False
+IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 
 
 # ---------------------------------------------------------------- finger pose
@@ -91,8 +93,18 @@ BIND_CONJ = False
 # a loose curl through each phalanx, the thumb at half strength, and a small
 # inward yaw at the finger bases to close the fan into a rake-free hand. They
 # are deliberately modest - a full fist looks nothing like a standing avatar.
-FINGER_CURL_DEGREES = (11.0, 14.0, 9.0)    # per phalanx, base to tip
-FINGER_BASE_INWARD_DEGREES = 14.0          # closes the fanned-out spread
+# The numbers can be overridden from the environment so a hand can be compared
+# against another without editing the file between renders: the values are a
+# look, and a look has to be chosen by looking.
+#
+#   AVATAR_FINGER_CURL="20,28,16"
+#   AVATAR_FINGER_INWARD="6"
+#
+FINGER_CURL_DEGREES = tuple(
+    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "11,14,9").split(",")
+)                                            # per phalanx, base to tip
+FINGER_BASE_INWARD_DEGREES = float(
+    os.environ.get("AVATAR_FINGER_INWARD", "14"))  # closes the fanned-out spread
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
@@ -456,6 +468,12 @@ def posed_positions(batches, joints_rig, poses):
     for i in range(len(joints_rig)):
         if i < len(poses):
             p, q, sc = poses[i]
+            if IGNORE_SCALE:
+                # Diagnostic: the scale triplet is decoded from the same lattice as
+                # the translation, and a wrong lattice stretches whatever joint it
+                # lands on (the hands, when the wrist is the joint). Setting it to
+                # one shows whether that is what is happening.
+                sc = (1.0, 1.0, 1.0)
             delta = mat_trs(p, conj(q) if CONJ else q, sc)
             if MODE == "delta":
                 locals_.append(mat_mul(bind_local[i], delta))
@@ -468,7 +486,12 @@ def posed_positions(batches, joints_rig, poses):
 
     # The clip never bends a finger, so the relaxed hand is added here (see the
     # ART CHOICE note at the top of this file).
-    apply_finger_pose(joints_rig, bind, locals_)
+    # The authored curl is off by default. Clips do bend the finger joints (the
+    # idle moves them about 34 degrees off bind), so the hand that came from
+    # adding a guessed curl on top of that was a rake of splayed fingers, which is
+    # what the plates showed. `AVATAR_FINGER_POSE=1` brings it back for comparison.
+    if os.environ.get("AVATAR_FINGER_POSE") == "1":
+        apply_finger_pose(joints_rig, bind, locals_)
 
     worlds = []
     for i, joint in enumerate(joints_rig):
