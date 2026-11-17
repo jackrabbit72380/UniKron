@@ -643,3 +643,25 @@ first called: Angled Nose, which has no entries, stores exactly Head vertex 0
 (0.0121, 1.2473, 0.1458), and the value is not the centroid of the entries (3.6 cm
 off for Soft Nose, 15.8 cm for Elven Ears). Anchoring the shape to a vertex would
 explain both facts; that is a hypothesis, not something this evidence forces.
+
+## Applying a shape, and looking at the result
+
+`apply_shape.py` turns a decoded block 4 into geometry: it moves each entry's vertex
+to the position the shape gives, then reports what moved. Large Chin on Head:
+
+    entries 110, applied 110, skipped 0, largest move 0.0430 m
+    moved 110 vertices, mean move 0.01416 m, max 0.04302 m
+    region before: x -0.102..0.102  y 1.131..1.213  z -0.012..0.117
+    region after : x -0.109..0.109  y 1.120..1.213  z -0.012..0.119
+
+That is the jaw and chin band, and it widens and drops slightly - which is what a
+shape called Large Chin should do. Rendered with the bake tools' rasteriser at yaw
+180, with every triangle touching a moved vertex tinted red, the red covers the
+chin and both sides of the jaw up to the ears and nothing else: 172 of 846
+triangles, symmetric about x. That is the check that matters - the decoded data
+moves the anatomy the name claims, on the real mesh, without any hand-tuned
+mapping.
+
+The silhouette change is real but subtle (mean 14 mm on a head about 22 cm tall),
+so it reads as a variation rather than a caricature, which is what these sliders
+are for.
