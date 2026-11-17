@@ -191,6 +191,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--shapes", action="store_true",
                     help="also bake the block-4 facial shapes (chin, nose, ears)")
+    ap.add_argument("--shapes-only", action="store_true",
+                    help="with --shapes, bake only the overrides (for sliced runs)")
     ap.add_argument("--mouths", action="store_true",
                     help="also bake the mouth sheets, which have no category in the pack")
     ap.add_argument("--only", default="",
@@ -255,6 +257,12 @@ def main():
             every = json.load(fh)["assets"]
         items.extend((r["name"], "mouth", "mouth") for r in every
                      if r["name"].endswith(" Mouth"))
+    if args.shapes_only:
+        # --shapes appends the overrides to whatever --categories produced, so a
+        # sliced run would spend its first slices rebaking ordinary items and its
+        # last ones finding nothing. --shapes-only keeps just the overrides, which
+        # is what lets a long shape pass be split across parallel runs.
+        items = [it for it in items if it[1] == "shape"]
     if args.only:
         items = [it for it in items if args.only.lower() in it[0].lower()]
     if args.start:
