@@ -1136,3 +1136,26 @@ Rendered in context at 700x1000 and cropped, the fingers of `intro_pose05` hook 
 first knuckle and the thumb sits along the palm; the pack clip's own hand, rendered the
 same way, fans into a thin paddle. The remaining coarseness is the mesh: 523 triangles
 for the hand and no textures or normals in this renderer, not a data or pose fault.
+
+## The Avatar_Games.zip dump, and the Windows XNB framing
+
+The archive arrived as a 1.9 GB zip with 4,484 `.xnb` in it, of which **185 are
+avatar clips** under `Content/AvatarAnimation(s)/`: Miner Paintball 37, Laser Wars 2
+79, Warfare 39, Connection 25, Deluxe Blackjack 3, Air Wars 2. The 185 are kept in
+`src_archive/avatar-games/`; the rest of the zip is UI textures and the PC builds.
+
+The framing in these files is **not** the console one documented above. The platform
+byte is `x` (Windows) and the two size words are **little-endian**:
+
+    u32 @ 6    file size            (LE)
+    u32 @ 10   decompressed size    (LE)
+    @ 14       one byte
+    @ 15       LZX stream, 64 KiB window
+
+Decoding all 185 with that: **58 decode**, leaving the payload starting
+`01 6d 44 4e 41 2e 44 72 61 77 69 6e ...` - a length-prefixed
+`mDNA.Drawing.Animation.AnimationClip+Reader`, so the DNA clip layout already
+decoded here applies directly. **39 are uncompressed** (flags 0) and their payload
+begins at 10 with the same reader table. **88 still fail**, and they are the
+candidates for the version-4 framing: that is now a bounded difference to chase
+against 58 known-good streams rather than a cold start.
