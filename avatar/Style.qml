@@ -64,6 +64,7 @@ QtObject {
         "10_body": "Skin Color and Body",
         "12_eyebrows": "Eyebrows",
         "15_face": "Eyes",
+        "17_eye-shadow": "Eye Shadow",
         "20_pants": "Bottoms",
         "30_shoes": "Shoes",
         "40_shirt": "Tops",

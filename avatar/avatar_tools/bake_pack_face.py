@@ -49,6 +49,11 @@ FACE_ALTERNATE = "Sharp Eyes"
 # brow that differs in shape.
 EYEBROW_CATEGORY = "12_eyebrows"
 FACE_BROW_ALTERNATE = "Shaved Eyebrows"
+# The 45 eye-shadow sheets are split out of 50_hair for the same reason. Their
+# UV set was measured, not guessed: set 5 puts the sheet on the eyelid, wider
+# than the lash sheet (see DECAL_SETS in bake_pack_turntables).
+EYE_SHADOW_CATEGORY = "17_eye-shadow"
+EYE_SHADOW_SET = 5
 # A sheet's edge is antialiased, so the difference fades out rather than stopping.
 # Below LO is rounding noise and stays clear, above HI is paint at full alpha, and
 # in between the plate keeps a soft edge - a hard cutoff drew a faint rectangular
@@ -136,6 +141,12 @@ def main():
                 painted = render_head(args.pack, clip, args.description,
                                       "--face=Straight Eyebrows,%s,Smirk Mouth" % name,
                                       centre, height, args.width, args.height)
+            elif category == EYE_SHADOW_CATEGORY:
+                # Sheet 5 is the eyelid wash and carries its mask in alpha, which
+                # the renderer already multiplies.
+                painted = render_head(args.pack, clip, args.description, default_arg,
+                                      centre, height, args.width, args.height,
+                                      decal=(EYE_SHADOW_SET, True, category, name))
             elif category == EYEBROW_CATEGORY:
                 # The brow is the first mask of the three.
                 painted = render_head(args.pack, clip, args.description,

@@ -104,6 +104,7 @@ def read_metadata(payload):
 
 
 EYEBROW_SLOT = "12_eyebrows"
+EYE_SHADOW_SLOT = "17_eye-shadow"
 
 
 def refine_category(name, metadata):
@@ -115,12 +116,18 @@ def refine_category(name, metadata):
     button of its own for them (EyebrowsCreateButton), so they get their own
     folder and keep the pack's own category in `slot_category`.
     """
-    if not metadata or metadata.get("category") != "10_body":
+    if not metadata:
         return metadata
     low = name.lower()
-    if low.endswith("eyebrows") or low == "monobrow":
+    if metadata.get("category") == "10_body" and (low.endswith("eyebrows")
+                                                 or low == "monobrow"):
         metadata["slot_category"] = metadata["category"]
         metadata["category"] = EYEBROW_SLOT
+    # The 45 eye-shadow sheets are filed under 50_hair (the hair bit) although
+    # they paint the eyelid, and the retail editor has an Eye Shadow button.
+    elif metadata.get("category") == "50_hair" and low.startswith("eye shadow"):
+        metadata["slot_category"] = metadata["category"]
+        metadata["category"] = EYE_SHADOW_SLOT
     return metadata
 
 

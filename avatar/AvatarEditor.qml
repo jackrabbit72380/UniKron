@@ -682,7 +682,7 @@ Item {
     // both bodies, so the female avatar wears the male-baked brow plate.
     function isPackDecal(id) {
         return id === "12_eyebrows" || id === "15_face" || id === "16_face-paint"
-                || id === "45_facial-hair"
+                || id === "17_eye-shadow" || id === "45_facial-hair"
     }
 
     function plateFiles(categoryId) {

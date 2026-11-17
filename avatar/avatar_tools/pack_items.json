@@ -1571,6 +1571,548 @@
     "has_color_table": false
    }
   ],
+  "17_eye-shadow": [
+   {
+    "name": "Eye shadow 001",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11913940,
+    "size": 724,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 002",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11924248,
+    "size": 780,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 003",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11934464,
+    "size": 756,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 004",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11946444,
+    "size": 1124,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 005",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11957644,
+    "size": 704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 006",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11970668,
+    "size": 1052,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 007",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11981656,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 008",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 11990128,
+    "size": 1364,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 009",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12003644,
+    "size": 992,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 010",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12017216,
+    "size": 928,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 011",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12026680,
+    "size": 840,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 012",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12041580,
+    "size": 1044,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 013",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12052116,
+    "size": 912,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 014",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12065100,
+    "size": 1272,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 015",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12079192,
+    "size": 1120,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 016",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12092892,
+    "size": 956,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 017",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12105640,
+    "size": 2072,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 018",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12119284,
+    "size": 1476,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 019",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12131192,
+    "size": 960,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 020",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12142636,
+    "size": 1004,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 021",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12154752,
+    "size": 796,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 022",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12167120,
+    "size": 880,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 023",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12178480,
+    "size": 916,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 024",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12192228,
+    "size": 1156,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 025",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12205452,
+    "size": 860,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 026",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12218240,
+    "size": 1340,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 027",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12230196,
+    "size": 1704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 028",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12244768,
+    "size": 840,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 029",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12258276,
+    "size": 1296,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 030",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12271288,
+    "size": 1296,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 031",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12279440,
+    "size": 1340,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 032",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12285672,
+    "size": 704,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 033",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12296704,
+    "size": 1004,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 034",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12308708,
+    "size": 844,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 035",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12320200,
+    "size": 1052,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 036",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12331000,
+    "size": 864,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 037",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12343796,
+    "size": 1396,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 038",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12357020,
+    "size": 1072,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 039",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12368112,
+    "size": 1212,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 040",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12379532,
+    "size": 1212,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 041",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12393016,
+    "size": 960,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 042",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12408628,
+    "size": 1020,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 043",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12420072,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 044",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12431384,
+    "size": 888,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   },
+   {
+    "name": "Eye shadow 045",
+    "gender": "both",
+    "slots": [
+     "hair"
+    ],
+    "offset": 12443440,
+    "size": 1352,
+    "vertices": null,
+    "triangles": null,
+    "has_color_table": false
+   }
+  ],
   "20_pants": [
    {
     "name": "Male Cargo Pants",
@@ -6904,546 +7446,6 @@
     "size": 2232,
     "vertices": 85,
     "triangles": 118,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 001",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11913940,
-    "size": 724,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 002",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11924248,
-    "size": 780,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 003",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11934464,
-    "size": 756,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 004",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11946444,
-    "size": 1124,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 005",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11957644,
-    "size": 704,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 006",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11970668,
-    "size": 1052,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 007",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11981656,
-    "size": 888,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 008",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 11990128,
-    "size": 1364,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 009",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12003644,
-    "size": 992,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 010",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12017216,
-    "size": 928,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 011",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12026680,
-    "size": 840,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 012",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12041580,
-    "size": 1044,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 013",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12052116,
-    "size": 912,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 014",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12065100,
-    "size": 1272,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 015",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12079192,
-    "size": 1120,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 016",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12092892,
-    "size": 956,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 017",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12105640,
-    "size": 2072,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 018",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12119284,
-    "size": 1476,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 019",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12131192,
-    "size": 960,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 020",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12142636,
-    "size": 1004,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 021",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12154752,
-    "size": 796,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 022",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12167120,
-    "size": 880,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 023",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12178480,
-    "size": 916,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 024",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12192228,
-    "size": 1156,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 025",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12205452,
-    "size": 860,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 026",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12218240,
-    "size": 1340,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 027",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12230196,
-    "size": 1704,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 028",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12244768,
-    "size": 840,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 029",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12258276,
-    "size": 1296,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 030",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12271288,
-    "size": 1296,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 031",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12279440,
-    "size": 1340,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 032",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12285672,
-    "size": 704,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 033",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12296704,
-    "size": 1004,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 034",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12308708,
-    "size": 844,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 035",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12320200,
-    "size": 1052,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 036",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12331000,
-    "size": 864,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 037",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12343796,
-    "size": 1396,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 038",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12357020,
-    "size": 1072,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 039",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12368112,
-    "size": 1212,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 040",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12379532,
-    "size": 1212,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 041",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12393016,
-    "size": 960,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 042",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12408628,
-    "size": 1020,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 043",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12420072,
-    "size": 888,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 044",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12431384,
-    "size": 888,
-    "vertices": null,
-    "triangles": null,
-    "has_color_table": false
-   },
-   {
-    "name": "Eye shadow 045",
-    "gender": "both",
-    "slots": [
-     "hair"
-    ],
-    "offset": 12443440,
-    "size": 1352,
-    "vertices": null,
-    "triangles": null,
     "has_color_table": false
    },
    {

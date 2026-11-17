@@ -73,7 +73,7 @@ HAIR_COLOUR = "6e5326"
 # So eye shadow is set 5, and its sheet carries the mask in alpha (red is 1.0
 # everywhere), which the renderer already multiplies.
 DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False),
-              "eye-shadow": (5, True)}
+              "eye-shadow": (5, True), "17_eye-shadow": (5, True)}
 HAIR_TINT = (0x6E / 255.0, 0x53 / 255.0, 0x26 / 255.0)
 ART = os.path.join(os.path.dirname(HERE), "pack_art")
 BASE_ASSETS = {"MaleBody", "FemaleBody", "Head"}
@@ -93,7 +93,9 @@ CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  # 10_body is where the pack files them; asset_catalog.refine_
                  # category now splits them into 12_eyebrows, which keeps the same
                  # kind so a 3D set is baked for it the same way.
-                 "10_body": "brow", "12_eyebrows": "brow"}
+                 "10_body": "brow", "12_eyebrows": "brow",
+                 # Split out of 50_hair by asset_catalog.refine_category; set 5.
+                 "17_eye-shadow": "decal"}
 
 
 def read_rgba(path):

@@ -51,12 +51,13 @@ one for one, which is why the categories below reuse their names.
 | `12_eyebrows` | 27 | 0 | 0 | 27 |
 | `15_face` | 64 | 0 | 0 | 64 |
 | `16_face-paint` | 26 | 0 | 0 | 26 |
+| `17_eye-shadow` | 45 | 0 | 0 | 45 |
 | `20_pants` | 54 | 27 | 27 | 0 |
 | `30_shoes` | 36 | 18 | 18 | 0 |
 | `40_shirt` | 137 | 71 | 66 | 0 |
 | `45_facial-hair` | 17 | 17 | 0 | 0 |
 | `46_gloves` | 16 | 8 | 8 | 0 |
-| `50_hair` | 223 | 0 | 0 | 223 |
+| `50_hair` | 178 | 0 | 0 | 178 |
 | `60_hat` | 34 | 17 | 17 | 0 |
 | `70_glasses` | 34 | 17 | 17 | 0 |
 | `75_earrings` | 34 | 15 | 19 | 0 |
@@ -77,6 +78,13 @@ keeps the pack's category in `slot_category`. Their plates come from
 the head exactly as it does for the eye and face-paint sheets; the stock brow is
 compared against `Shaved Eyebrows` because a sheet compared with itself changes
 nothing.
+
+`17_eye-shadow` is split out the same way. Its 45 sheets carry the hair bit
+(0x0400) and so filed under `50_hair`, where they were listed as hairstyles; they
+paint the eyelid, and the retail editor has an `Eye Shadow` button. Their UV set
+was measured rather than guessed - set 5 brackets the eye band, wider than the
+lash sheet - so `bake_pack_face.py` renders them through that set (mask in
+alpha). 50_hair keeps its 178 real hairstyles.
 
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.

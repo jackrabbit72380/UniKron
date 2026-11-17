@@ -39,7 +39,7 @@ STAGE="${1:-all}"
 # back to the male sheet for the female avatar (AvatarEditor.qml, hasPlates).
 faces() {
   python3 bake_pack_face.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
-    --categories 12_eyebrows,15_face,16_face-paint,45_facial-hair \
+    --categories 12_eyebrows,15_face,16_face-paint,17_eye-shadow,45_facial-hair \
     --outdir ../pack_plates --force --clip-asset "$CLIP_ASSET"
   echo "face plates done"
 }
