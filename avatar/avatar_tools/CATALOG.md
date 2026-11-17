@@ -166,6 +166,28 @@ objects and the description entries, not a per-item id, and it cannot be used to
 match a shape to an item. The `u16 3` inside both headers does line up with the
 class byte (3 = ShapeOverrides).
 
+Ruled out since, by test:
+
+* **Not an LZX chain either.** Every 4-byte offset from 0 to 96 was tried with all
+  six orderings of the three header fields as (compressed, out offset, out size),
+  constrained only by the payload length, and not one decompressed. So the block is
+  not the chunked-and-compressed scheme the model blocks use.
+* **Not a byte-aligned array.** Every shape's payload length is odd (`Boxer's Nose`
+  1608, `Large Chin` 1613, `Sharp Chin` 1763) and there is no constant stride: after
+the 64-byte header the sizes are 1549, 1277, 1522, 1359, 1699 - none divisible by
+the head's 648 vertices, by 6 or by 12. An odd length after an even header means
+the data is **bit-packed**, like the animation stream, so the next thing to try is
+`BitStream` rather than `struct`.
+* **A constant footer.** All three shapes end `... 03fc0000 00000000`, and the first
+  word after the header is the same `36ed4402` in all of them - so the stream has a
+  fixed prologue and epilogue that a decoder can key on once the body is understood.
+
+What the header says, word for word (`Defined Nose`): `0, 0x13d4, 1, u16 2, u16 3,
+GUID, 0, 0` then the same shape again with `0x6c` and `0x8400` where the first had
+`0x13d4` and `1`. 0x6c is 108, 0x74 is 116, 0x6e is 110 - those track the payload
+size closely enough to be a byte count, and `0x8400` (33,792) is constant across all
+three, so it is a size for something the shape does not change.
+
 ## `.Avatar` descriptors: the avatars' own outfits
 
 The `descriptors/Avatar####.Avatar` files are 1,000-byte descriptions the games

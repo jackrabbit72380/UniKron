@@ -33,6 +33,13 @@ plates() {
         --outdir "$out" --start $((i * 50)) --limit 50 --force --clip-asset "$CLIP_ASSET" &
     done
     wait
+    # The body plate is the base layer every garment is drawn over, and its hands
+    # are the 2D avatar's hands. Without --include-base the body is skipped and
+    # that layer keeps whatever pose it was first baked with, which is exactly
+    # what happened: the plates were rebaked around a body plate from an older
+    # pose, and nothing in a directory listing showed it.
+    python3 bake_pack_plates.py "$PACK" "$CLIPS" "$desc" --categories 10_body --include-base $flags \
+      --outdir "$out" --force --clip-asset "$CLIP_ASSET"
     echo "plates $gender done"
   done
 }
