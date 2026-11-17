@@ -59,8 +59,10 @@ turntables() {
     echo "turntables $gender done"
   done
   # Anything a timeout left behind wears the previous pose and looks identical in
-  # a listing, so it is repaired by timestamp rather than by eye.
-  python3 rebake_stale.py --age 60 --workers "$JOBS"
+  # a listing, so it is repaired by timestamp rather than by eye. The age has to
+  # be longer than this stage takes: at 60 seconds every set baked above counts as
+  # stale and the whole sweep runs a second time.
+  python3 rebake_stale.py --age 3600 --workers "$JOBS"
 }
 
 animated() {
