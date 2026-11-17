@@ -645,3 +645,11 @@ places this stops: the encrypted 2010 `avatareditor.xex` and the third-party
 host binaries. The 2008 editor yields 1,986 functions of C; `ppc_disasm.py`
 still supplies the string-to-function map that the decompiler cannot see through
 the pointer tables.
+
+## Where the rest of the avatar data lives
+
+`AVATAR_ARCHIVE.md` inventories every avatar folder in the shipped hub: both
+editors, both asset packs, the nine clips, the manifests, and what the
+recompiled binaries name in their strings (the blend-shape system, the closet,
+and three pack formats). Read it before decoding anything else - it records what
+is present, what is not, and what the legacy V1 pack actually contains.
