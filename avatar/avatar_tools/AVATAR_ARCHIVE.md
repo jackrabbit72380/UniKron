@@ -1159,3 +1159,26 @@ decoded here applies directly. **39 are uncompressed** (flags 0) and their paylo
 begins at 10 with the same reader table. **88 still fail**, and they are the
 candidates for the version-4 framing: that is now a bounded difference to chase
 against 58 known-good streams rather than a cold start.
+
+### The 88 streams that will not open, and what is ruled out
+
+Of the 185 clips, 58 decode with the Windows framing and 54 walk cleanly to JSON.
+The remaining 88 are genuinely compressed - no reader name and no `Take 001`
+anywhere in the file in the clear - and these are ruled out by test, not by guessing:
+
+* **zlib** (wbits 15, -15, 31), **lzma** and **bz2** at offsets 8-23: only 1-8 byte
+  "decodes", i.e. coincidences.
+* **LZX** at every offset 12-25 with 32 KiB and 64 KiB windows: rejected.
+* A wrong output length is not it: 39,562 (declared), 39,682, 1 MiB and 107,824 all
+  fail identically.
+
+The one structural clue is where the error changes kind on `LMGShoulderWalk`:
+
+    off 14 (0x2c)  bad aligned table      off 16 (0x09)  out of input bytes (64 KiB)
+    off 15 (0xd2)  bad block type         off 17 (0x20)  bad block type
+
+Offset 16 is the only one the decoder accepts the block header at and then runs dry,
+so the next pass belongs in `lzx.py`'s header handling rather than in the offset.
+The good files carry **0xff at offset 14** and start at 15; these carry
+0x2c/0x5e/0x58/0x42/0x60 there, so the two groups differ systematically in exactly
+that byte.
