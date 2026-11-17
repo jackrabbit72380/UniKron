@@ -436,3 +436,51 @@ no avatar catalogue of its own, so it adds no category data.
 That closes every first-party binary in the dump: dashboard 39,611, runtime
 28,447, LivePack 8,072, GPU 4,848, editor DLL 10,550, editor XEX 3,095. What
 remains encrypted is the flash XUI (18 files) and the 2010 editor XEX.
+
+## The port's avatar engine is inside the 2010 PC build
+
+The 20,381-function corpus for `metro2010/avatareditor.exe` was searched for
+avatar strings only as ASCII category labels before, which found nothing. It is
+not a guest-facing shell: it is a rexglue build of the editor with the port's own
+avatar implementation compiled in, and its source paths name every part of it.
+
+    src/kernel/xam/avatars/asset_pack.cpp          LoadAssetPackFromMemoryV1/2/3
+    src/kernel/xam/avatars/model.cpp               rex::avatars::Model::Load
+    src/kernel/xam/avatars/texture.cpp             rex::avatars::Texture::Load
+    src/kernel/xam/avatars/skeleton.cpp            rex::avatars::Skeleton::Load
+    src/kernel/xam/avatars/closet.cpp              rex::avatars::Closet::Load
+    src/kernel/xam/avatars/blend_shape_apply.cpp   the shape application
+    src/kernel/xam/avatars/guest_load_asset.cpp    rex::avatars::LoadAssetsToGuest
+    src/kernel/xam/avatars/guest_load_animation.cpp
+    src/kernel/xam/xam_avatar.cpp, src/xui_hooks.cpp
+
+Three findings already fall out of the strings, before any body is read:
+
+* **The pack has three stored versions**, and the loader selects between them:
+  "avatar asset pack V1/V2/V3: cannot load file header / asset headers / asset #N,
+  buffer too small". So the 2010 retail pack whose 13.4 MB region is still
+  unread is a *versioned container*, not a bare record table, and the three
+  loaders are the specification for it.
+* **Hiding shapes are real, and attached two ways**: "failed to load embedded
+  hiding shape {} for closet item {}" and "failed to load hiding shape {} for
+  component {}". The port loads a hiding shape from the item's own payload and,
+  separately, one per body component - which matches block 4 naming covered body
+  vertices, and means a closet item can carry its own.
+* **The port fits old bodies to the new one by measurement**: "old-body candidate
+  does not match the legacy body either (tucks {:.1f}cm from legacy); falling
+  back to affine fit". `FUN_140dbf2e0` is that routine, 922 lines.
+
+The shape parser is readable enough to pin the record down. In `LoadAssetsToGuest`
+(`FUN_140dd7e60`, 3,005 lines) the payload is walked in 4-byte steps into
+`FUN_140dbe9d0`, and on success:
+
+    if (*(int *)(shape + 4)    == 0x02000000) *(u16 *)(shape + 8)    = 0;
+    if (*(int *)(shape + 0x34) == 0x02000000) *(u16 *)(shape + 0x38) = 0;
+
+Two type tags at +4 and +0x34, each followed at +8 and +0x38 by a u16 the port
+zeroes. That is the same nested two-header shape block 4 showed (the pack's own
+header repeats 32 bytes in), and the zeroed u16 is the count of what follows -
+so a shape record is `tag, tag-class, u16 count` and the port clears the count
+rather than the data. Reading `blend_shape_apply.cpp`'s two functions
+(`FUN_140dbf2e0`, `FUN_140dbf3b0`) to get the vertex update itself is the next
+step, and it is now a code-reading job rather than a format question.
