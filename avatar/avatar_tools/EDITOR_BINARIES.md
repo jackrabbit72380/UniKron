@@ -716,3 +716,30 @@ Their closet art is the head cropped out of those bakes, written to
 
 One naming trap: `slug()` keeps the apostrophe's consonant, so `Boxer's Nose` becomes
 `boxer-s-nose`, not `boxers-nose`.
+
+## The mouths, the third face mask
+
+The pack's feature sheets come in threes and the editor only offered one of them. Eye
+sheets were the 45 in `15_face`, eyebrows were the 29 filed under `10_body`, and the 26
+mouth sheets carried **no category at all**, so no `--categories` run could reach them and
+the closet had no plate or set for any of them.
+
+`bake_pack_turntables.py --mouths` picks them up by name (`" Mouth"`) and bakes them with
+the mouth slot of the three masks: `--face="Straight Eyebrows,Happy Eyes,<asset>"`. 26
+male and 26 female sets are in `assets/3d/turntable{, _female}/`, and `smirk-mouth`,
+`gentle-mouth`, `small-and-rounded-mouth` and `deep-lips-mouth` render as four different
+mouths at the same place on the face.
+
+Their closet art is the lower face cropped from those bakes into `pack_art/18_mouth/`, and
+`PackIndex.qml` now lists 20 folders. The numeric prefix is what orders the rail
+(`Style.layerOrder` reads it), so `17_face-shape` and `18_mouth` sort between face paint
+and pants without touching any QML.
+
+Feature coverage after this pass, all in both genders:
+
+| sheets | count |
+| --- | ---: |
+| eyebrows | 26 |
+| eyes | 45 |
+| mouths | 26 |
+| head shapes (chin, nose, ears) | 36 |

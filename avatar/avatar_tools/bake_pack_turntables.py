@@ -122,6 +122,8 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
         face_arg = "--face=Straight Eyebrows,%s,Smirk Mouth" % asset
     elif kind == "brow":
         face_arg = "--face=%s,Happy Eyes,Smirk Mouth" % asset
+    elif kind == "mouth":
+        face_arg = "--face=Straight Eyebrows,Happy Eyes,%s" % asset
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
          "--colours=" + description, "--hair=" + HAIR_COLOUR, face_arg] + shape_args + parts,
@@ -184,6 +186,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--shapes", action="store_true",
                     help="also bake the block-4 facial shapes (chin, nose, ears)")
+    ap.add_argument("--mouths", action="store_true",
+                    help="also bake the mouth sheets, which have no category in the pack")
     ap.add_argument("--only", default="",
                     help="bake only items whose retail name contains this, ignoring case")
     ap.add_argument("--start", type=int, default=0,
@@ -240,6 +244,12 @@ def main():
         faces = [n for n in audit
                  if not n.endswith("Template") and n.split()[-1] in ("Chin", "Nose", "Ears")]
         items.extend((n, "shape", "shape") for n in faces)
+    if args.mouths:
+        # The mouth sheets carry no category, so no --categories run reaches them.
+        with open(args.catalog, "r", encoding="utf-8") as fh:
+            every = json.load(fh)["assets"]
+        items.extend((r["name"], "mouth", "mouth") for r in every
+                     if r["name"].endswith(" Mouth"))
     if args.only:
         items = [it for it in items if args.only.lower() in it[0].lower()]
     if args.start:
@@ -257,8 +267,8 @@ def main():
         # says they paint the head instead.
         if category in DECAL_SETS and category != "45_facial-hair" and category != "16_face-paint":
             kind = "decal"
-        elif category == "shape":
-            kind = "shape"
+        elif category in ("shape", "mouth"):
+            kind = category
         # --limit caps how many are *baked*, not how many are looked at: a run
         # restarted after a timeout must still find work, and slicing the list
         # first would only re-walk the sets that already exist.
