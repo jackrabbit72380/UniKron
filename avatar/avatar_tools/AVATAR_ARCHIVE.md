@@ -537,3 +537,44 @@ clearly positions the stream past the block header, and the bound is probably th
 per-item count already measured in the header (`+0x20`: 110, 78, 46). That is the
 next thing to check, and it is a two-line change to the decoder rather than a new
 investigation.
+
+## The block-4 decoder, and what it does and does not prove
+
+`decode_shape.py` now parses block 4 the way the binary does: two sequential
+sections off one bitstream, both reading `count, u32, 16-byte record, base, width`.
+
+* **Section A** (`0x140dbe520`) emits `count` u32s, each `base + read(width)`.
+  Geometry overrides have count 0. Hiding templates do not: 330/258/364 entries at
+  12 bits each, and their descriptor reads `02000000-0100-0200` instead of the
+  geometry form `01000000-0200-0300`.
+* **Section B** (`0x140dbe760`) emits `count` entries on a 32-byte stride: a u32,
+  three quantised floats, then four more u32. Geometry: 110 entries for Large Chin
+  (16-bit first field, 14-bit floats), 46 for Elven Ears, 78 for Soft Nose.
+
+The strongest evidence so far: on Large Chin the parse starts its entries at bit
+914 and **finishes exactly on bit 12904 of 12904**. Soft Nose lands on 8948 of 8952,
+the three hiding templates on 7976/7966/6472 of 7976/7968/6472. The field set is
+therefore complete - nothing is being skipped.
+
+What the values say, and what they do not:
+
+* The three "offset" floats are per-shape and land in the right place: chin
+  (-0.109, 1.120, -0.012), nose (-0.025, 1.212, 0.130), ears (-0.146, 1.218,
+  -0.065), and for clothing (-0.256, 0.036, -0.062) at the torso instead. They
+  really are the affected region.
+* `b` is 7.071e-06 = sqrt(0.5)*1e-5 on **every** item checked, geometry and
+  clothing alike, so it is a fixed quantisation constant and not per-shape data.
+  With it, a 14-bit value spans about 0.23 m, which is a sane chin displacement.
+* The first field of an entry is not yet a vertex index: base 0 and width 16 give
+  values up to 64k against a 648-vertex Head. Either it is masked downstream or it
+  is not a mesh index.
+* The four trailing base/width pairs decode to nonsense on every item (base 78
+  million, two zero widths, a base near 2^32). Their widths happen to sum so the
+  payload is consumed exactly, but Angled Nose exposes the flaw: it has no entries,
+  so the parameter block alone must be 920 bits, and this parse stops 6 bits short
+  at 914. There is at least one more 6-bit field in the parameter block, and the
+  tail is not understood yet.
+
+So: section layout, descriptor, entry stride and region offsets are established;
+the entry's first field and the 51 trailing bits are not. No bake should claim
+shape overrides until those two are settled.
