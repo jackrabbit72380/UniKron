@@ -763,3 +763,34 @@ mesh, and apply_shape picks the one that fits the mesh it was handed.
 With that, 212 of the 215 items validate completely, up from 207, and the remaining
 three are the high heels - on FemaleBody with 190 of 198 entries inside tolerance,
 because a heel lifts a foot further than a face moves.
+
+## The trailing pairs, measured but not understood
+
+Each entry spends 51 bits (Large Chin) or 59 (Soft Nose) on four more fields, read
+with per-field bases and widths like the rest of the parameter block. Measured over
+whole shapes:
+
+    field 1   width 31-32   varies per entry: 69 distinct values of 110 on Large Chin
+    field 2   width 0       constant 255
+    field 3   width 0       constant 19
+    field 4   width 19-20   base near -329000, so the result straddles zero
+
+Fields 2 and 3 are constants, which is why their widths are zero - the loader writes
+255 and 19 as defaults. Field 1 varies per vertex but is not a float (0.0 and 6e6
+from the same field). Field 4's base of -328966 is 0.6274 x 2^19, which hints at a
+signed fixed-point range but nothing verifies that yet.
+
+So the block is decoded far enough to use and not far enough to explain: the vertex
+and its target position are established and validated against the meshes, and these
+51-59 bits per entry are not. They are not needed to apply a shape - apply_shape
+moves the vertex to the position and the mesh changes correctly - but they are
+recorded here as unread rather than assumed to be padding.
+
+## Five shapes, one picture
+
+Rendering the base head and five decoded shapes side by side, tinting every triangle
+that touches a moved vertex, puts each shape on the anatomy it is named after:
+Large Chin and Rounded Chin light up the jaw and chin, Thin Chin the lower jaw,
+Soft Nose the nose, Elven Ears the ear. Nothing else on the head moves. That is the
+end-to-end check: bitstream in, vertex positions out, correct anatomy, no manual
+mapping anywhere in between.
