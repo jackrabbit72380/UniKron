@@ -86,6 +86,25 @@ was measured rather than guessed - set 5 brackets the eye band, wider than the
 lash sheet - so `bake_pack_face.py` renders them through that set (mask in
 alpha). 50_hair keeps its 178 real hairstyles.
 
+### Face shape cannot be split yet, and why
+
+`17_face-shape` (36 items: noses, ears, chins) is the last category the retail
+editor splits and we do not (Nose, Ears, Head Shape). The split is a name-suffix
+job, but it is blocked on the art: these items are block-4 shape overrides with
+no geometry of their own, so their pictures are the per-item renders in
+`pack_art/17_face-shape/`, and those are **head close-ups framed on the item**
+(`large-chin.png` fills its canvas with a face) - not plates registered to the
+body frame the stage stacks. Used as a layer they cannot line up, and there are
+no `pack_plates/17_face-shape` plates to use instead.
+
+What a split needs first: a shape plate baker. `bake_avatar.py --shape=NAME`
+already applies a decoded override to `Head` and renders it, and
+`bake_pack_plates.reference_frame` gives the body frame the other plates use, so
+the missing piece is a pass that renders the shaped head in that frame - the
+difference trick `bake_pack_face.py` uses will not serve here, because a morph
+moves the silhouette in both directions and a difference plate can only add
+pixels, never remove the stock outline.
+
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.
 
