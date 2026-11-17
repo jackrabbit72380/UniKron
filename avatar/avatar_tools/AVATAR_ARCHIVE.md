@@ -736,3 +736,30 @@ Eight do not fit completely, and they are two different things:
   Tracksuit Pants, Female Trousers Bottom, Denim Jacket with Tee) land 0.28-0.59 m
   from every stock mesh. With two or three entries there is nothing to fit them
   against, so they stay unexplained rather than being forced to fit something.
+
+## A stride trap in my own code, not in the data
+
+Five 2-entry "Template" items had been left unexplained: their positions sat
+0.59 m from every stock mesh. Dumping them next to a healthy template showed the
+error was mine. Their offsets are 21600 and 46000, and this module was taking the
+gcd of the offsets - 400 - as the stride. 400 is a multiple of the real 40, so two
+entries that happen to share a factor sent every vertex to the wrong place:
+
+    stride 400 -> vertices  54, 115   mean 0.5883 m from every mesh
+    stride  40 -> vertices 540, 1150  mean 0.0000017 m from FemaleBody
+    stride  80 -> vertices 270, 575   mean 0.4024 m
+
+1.7 micrometres. The templates were always fine; the stride inference was not. A gcd
+is only trustworthy when there are enough offsets to constrain it, and these items
+have two or three.
+
+The fix is to stop inferring and start choosing: the strides in this pack are 52
+(Head) and 40 (the bodies), so those are the candidates, and whichever one puts the
+vertices in range *and* the positions millimetres from the mesh they claim is the
+right one - a wrong stride misses by hundreds of millimetres, so the choice is never
+close. decode_shape exposes the candidates, verify_shapes tries them against every
+mesh, and apply_shape picks the one that fits the mesh it was handed.
+
+With that, 212 of the 215 items validate completely, up from 207, and the remaining
+three are the high heels - on FemaleBody with 190 of 198 entries inside tolerance,
+because a heel lifts a foot further than a face moves.

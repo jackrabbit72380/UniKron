@@ -40,9 +40,9 @@ second header four bits early.
 
 All 266 decode and every payload is consumed to within a byte. For the
 facial shapes the positions land millimetres from the vertices they name and
-on the anatomy the item is called after. Two things are not read: the
+on the anatomy the item is called after. One thing is not read: the
 meaning of the four trailing pairs in each entry (lengths right, values
-not), and what the five 2-entry "Template" items mean.
+not).
 
 Each shape targets a stock mesh, and verify_shapes.py checks that rather
 than assuming it: 207 of the 215 items with entries put every entry within

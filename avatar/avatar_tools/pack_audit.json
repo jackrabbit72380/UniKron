@@ -34481,7 +34481,7 @@
      "decoded": true,
      "entries_a": 518,
      "entries_b": 2,
-     "stride": 400,
+     "stride": 40,
      "stride_multiples": 2,
      "vertices": 520,
      "spare_bits": 4
@@ -35909,7 +35909,7 @@
      "decoded": true,
      "entries_a": 496,
      "entries_b": 3,
-     "stride": 80,
+     "stride": 40,
      "stride_multiples": 3,
      "vertices": 499,
      "spare_bits": 1
@@ -40132,7 +40132,7 @@
      "decoded": true,
      "entries_a": 518,
      "entries_b": 2,
-     "stride": 400,
+     "stride": 40,
      "stride_multiples": 2,
      "vertices": 520,
      "spare_bits": 4
@@ -40160,7 +40160,7 @@
      "decoded": true,
      "entries_a": 518,
      "entries_b": 2,
-     "stride": 400,
+     "stride": 40,
      "stride_multiples": 2,
      "vertices": 520,
      "spare_bits": 4
@@ -40188,7 +40188,7 @@
      "decoded": true,
      "entries_a": 518,
      "entries_b": 2,
-     "stride": 400,
+     "stride": 40,
      "stride_multiples": 2,
      "vertices": 520,
      "spare_bits": 4

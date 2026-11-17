@@ -73,21 +73,20 @@ rather than assumed; see verify_shapes.py. Using the same offsets, the clothing
 templates give a mean distance of 0.51 m against MaleBody and 0.002 m against
 FemaleBody, which is how the target was pinned down.
 
-Across the 215 shape-only items that carry entries, 207 put every entry within 60 mm
-of the named vertex (mean 8 mm): 33 on Head, 84 on MaleBody, 90 on FemaleBody. Three
-more are on the right mesh with a few vertices further out - the high heels, which do
-lift a foot. Five 2-entry "Template" items do not fit any of the three and are still
-unexplained.
+Across the 215 shape-only items that carry entries, 212 put every entry within 60 mm
+of the named vertex (mean 8 mm): 33 on Head at stride 52, 85 on MaleBody and 94 on
+FemaleBody at stride 40. The remaining three are the high heels, on the right mesh
+with 190 of 198 entries inside tolerance because a heel lifts the foot.
 
 WHAT IS STILL UNVERIFIED:
   * b is 7.071e-06 (sqrt(0.5)*1e-5) on all five shapes checked, i.e. it does not
     vary per shape the way the offsets do. Either it is a fixed quantisation
     constant or the field is not b at all. With it a 14-bit value spans 0.23 m,
     which is the right order for a facial displacement.
-  * what the five 2-entry "Template" items (Chinos with Belt, Female Cargo Pants,
-    Female Tracksuit Pants, Female Trousers Bottom, Denim Jacket with Tee) mean.
-    Their entries land 0.28-0.59 m from every stock mesh, so with two or three
-    entries there is nothing to fit them against.
+  * nothing else: the five 2-entry "Template" items that once looked wrong were a
+    stride mistake in this module, not in the data. See the candidate-stride note
+    above - dividing 21600 by 400 misses by 588 mm, dividing by 40 lands on
+    FemaleBody to within 1.7 micrometres.
   * the three header floats are an anchor position, not the offsets they were
     called above. Angled Nose, which has no entries, stores exactly Head vertex 0
     (0.0121, 1.2473, 0.1458), which looks like a default when the shape is empty.
@@ -209,16 +208,29 @@ def decode_payload(payload, name=""):
             "extra": extra,
         })
 
-    stride = 0
-    for e in entries_b:
-        stride = math.gcd(stride, e["index"])
-    if stride > 1:
+    # The stride is the mesh's vertex size, and the two in the pack are 52 (Head:
+    # 32-byte base plus five 4-byte UV sets) and 40 (the bodies: 32 plus two). A gcd
+    # of the offsets is NOT a safe way to find it: "Chinos with Belt" has two
+    # offsets, 21600 and 46000, whose gcd is 400 - a multiple of the real 40 - and
+    # dividing by 400 put its positions 588 mm from every mesh while dividing by 40
+    # put them 1.7 micrometres from FemaleBody. So the candidates come from the
+    # known vertex sizes, and a caller with mesh knowledge picks between them.
+    offsets = [e["index"] for e in entries_b]
+    strides = [s for s in (52, 40) if offsets and all(o % s == 0 for o in offsets)]
+    if not strides:
+        gcd = 0
+        for o in offsets:
+            gcd = math.gcd(gcd, o)
+        strides = [gcd] if gcd > 1 else []
+    stride = min(strides) if strides else 0
+    if stride:
         for e in entries_b:
             if e["index"] % stride == 0:
                 e["vertex"] = e["index"] // stride
 
     out.update({
         "stride": stride,
+        "strides": strides,
         "section_a": {"count": count_a, "base": base_a, "width": width_a,
                       "value": value_a, "record": rec_a, "entries": entries_a},
         "section_b": {"count": count_b, "base": base0, "width": width0,

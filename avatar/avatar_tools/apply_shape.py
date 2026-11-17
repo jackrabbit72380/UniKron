@@ -42,21 +42,44 @@ def load_mesh(pack, index, name):
     return np.vstack(verts), np.vstack(tris)
 
 
-def apply_shape(verts, entries, stride=decode_shape.VERTEX_STRIDE):
-    """Move each entry's vertex to the position the shape gives it."""
+def apply_shape(verts, entries, strides=None):
+    """Move each entry's vertex to the position the shape gives it.
+
+    Which vertex an offset names depends on the stride, and the stride is a property
+    of the mesh rather than of the block, so the candidate that fits the mesh given
+    here wins: the vertices it produces must be in range and their existing positions
+    must be near the ones the shape asks for. A wrong stride misses by hundreds of
+    millimetres, so this is not a close call.
+    """
+    if not entries:
+        return verts.copy(), {"applied": 0, "skipped": 0, "worst": 0.0,
+                               "stride": None}
+    pos = np.asarray([e["xyz"] for e in entries], dtype=np.float64)
+    offsets = np.asarray([e["index"] for e in entries], dtype=np.int64)
+    best = None
+    for stride in strides or [decode_shape.VERTEX_STRIDE, 40]:
+        vertex = offsets // stride
+        if vertex.max() >= len(verts) or not np.all(offsets % stride == 0):
+            continue
+        mean = float(np.linalg.norm(verts[vertex] - pos, axis=1).mean())
+        if best is None or mean < best[0]:
+            best = (mean, stride, vertex)
+    if best is None:
+        return verts.copy(), {"applied": 0, "skipped": len(entries), "worst": 0.0,
+                               "stride": None}
+
+    _, stride, vertex = best
     moved = verts.copy()
     applied = skipped = 0
     worst = 0.0
-    for e in entries:
-        if e["vertex"] is None or e["vertex"] >= len(verts):
-            skipped += 1
-            continue
-        old = moved[e["vertex"]].copy()
+    for e, v in zip(entries, vertex):
+        old = moved[v].copy()
         new = np.asarray(e["xyz"], dtype=np.float64)
         worst = max(worst, float(np.linalg.norm(new - old)))
-        moved[e["vertex"]] = new
+        moved[v] = new
         applied += 1
-    return moved, {"applied": applied, "skipped": skipped, "worst": worst}
+    return moved, {"applied": applied, "skipped": skipped, "worst": worst,
+                   "stride": stride}
 
 
 def render_png(verts, tris, path, yaw=0.0, width=384, height=512):
@@ -93,8 +116,9 @@ def main(argv=None):
 
     print("%s on %s: %d vertices, %d triangles" % (args.shape, args.mesh,
                                                    len(verts), len(tris)))
-    print("  entries %d, applied %d, skipped %d, largest move %.4f m"
-          % (len(entries), stats["applied"], stats["skipped"], stats["worst"]))
+    print("  entries %d, applied %d, skipped %d, stride %s, largest move %.4f m"
+          % (len(entries), stats["applied"], stats["skipped"], stats["stride"],
+             stats["worst"]))
     if stats["applied"]:
         d = np.linalg.norm(moved - verts, axis=1)
         moving = d > 1e-6
