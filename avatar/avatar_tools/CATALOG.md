@@ -143,10 +143,36 @@ There is also a **body shape** control with five options
 (`bodyshape_normalthin`, `_normalnormal`, `_normalfat`, `_tallnormal`,
 `_smallnormal`), which `10_body` does not yet offer.
 
-Still unimplemented although the icons exist: `body_access`,
-`head_access`, the `nose`/`ears`/`faceshape` split, `facial` (Facial Features),
-`malecostume`/`femalecostume`, `loadoutfit`/`saveoutfit` (My Outfits, with
-`AvatarDeleteOutfitButtonOverride`), `takephoto`/`photobooth`.
+What is left of that list, with the reason each is where it is:
+
+* **`nose`, `ears` and `faceshape` are done** - the 36 shape overrides are now
+  `71_nose` (18), `72_ears` (9) and `73_head-shape` (9), labelled Nose, Ears and
+  Head Shape.
+* **`body_access`, `head_access`, `Carryables` and `Neckwear` have no content in
+  this pack.** Measured over all 585 records: no record carries an accessory,
+  carryable or neckwear category, and no name contains `accessor` or `carry` -
+  the only "neck" names are garments (`V Neck Tee`, `Open Neck Cardigan`). The
+  pack's accessories are the four slots already in the rail: gloves, rings,
+  wristwear, earrings. A button with no items behind it would be an empty screen,
+  so these are not built.
+* **`facial` (Facial Features)** is the hub the feature buttons live under; its
+  content is the shape and colour screens, covered above.
+* **`malecostume`/`femalecostume` (Costumes)** map onto the four formal
+  categories already in the rail. `81_formal` (5) and `82_coat` (4) have items;
+  `80_dress` and `83_dress-formal` are empty, which is the pack's coverage, not a
+  missing baker.
+* **`loadoutfit`/`saveoutfit` (My Outfits)** need somewhere to store an outfit.
+  `AvatarEditor.qml` emits `saveRequested(state)` and nothing in the port
+  consumes it, and there is no settings store in the theme; the retail strings
+  (`Save Outfit`, `My Outfits`, `You have no outfits.`, `Outfits storage is
+  full.`, `AvatarDeleteOutfitButtonOverride`) are read but the screen needs a
+  storage decision this port has not made.
+* **`takephoto`/`photobooth`** are the retail camera path; the port has its own
+  portrait grab (`AvatarEditorPage.portraitReady`) instead.
+* **The five body shapes** (`bodyshape_normalthin` ... `bodyshape_smallnormal`)
+  are a geometry control over the same body, not a list of items: they need the
+  body scale the retail editor applies, which is not yet located in the pack or
+  the descriptor.
 
 ## Thumbnails are renders, not restored art
 
