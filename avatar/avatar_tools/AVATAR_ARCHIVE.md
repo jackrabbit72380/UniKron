@@ -578,3 +578,25 @@ What the values say, and what they do not:
 So: section layout, descriptor, entry stride and region offsets are established;
 the entry's first field and the 51 trailing bits are not. No bake should claim
 shape overrides until those two are settled.
+
+### Correction: the spare bits are padding
+
+The last section claimed Angled Nose proved a missing 6-bit field in the parameter
+block. It does not. Decoding all 258 block-4 items gives this distribution of
+unconsumed bits:
+
+    spare 0-7 bits: 254 items      spare 10 bits: 4 items
+
+0-7 spare bits is byte padding - 914 bits of content in a 115-byte block is the
+clearest case, and Large Chin lands on 12904 of 12904 with none at all. So the
+parameter block is complete as parsed, and the "one more 6-bit field" was an
+inference from a single item that the whole pack contradicts.
+
+The four ten-bit outliers (Formal Shoes, Hiking Shoes, Rainbow Gloves and one more)
+are the only items where the parse is more than a byte out, and they are worth a
+look later, but they are 4 items in 258 rather than a structural fault.
+
+What remains genuinely unread is only the meaning of the four trailing base/width
+pairs inside each entry: 51 bits for Large Chin. Their lengths are right - that is
+what makes the payload totals come out - but the values they produce are not
+believable, so they are lengths that fit rather than fields that are understood.

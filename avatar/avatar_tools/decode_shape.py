@@ -51,11 +51,12 @@ from 0x140dbee70 being:
     out+0x18  base 3 + read(width 3)
     out+0x1c  base 4 + read(width 4)
 
-Run on Large Chin this decoder consumes the payload **exactly**: entries start at
-bit 914, there are 110 of them, and it finishes on bit 12904 of 12904. Soft Nose
-finishes on 8948 of 8952. That is the strongest structural check available without
-the retail applier, and it means the field set is complete - but three things are
-still unverified, and this tool reports them instead of hiding them:
+Run over all 258 block-4 items in the pack this decoder consumes every payload to
+within a byte: 254 of them leave 0-7 spare bits, which is padding (914 bits of
+content in a 115-byte block is the clearest case). Large Chin lands on bit 12904 of
+12904 exactly. That is the strongest structural check available without the retail
+applier, and it means the field set is complete - but three things are still
+unverified, and this tool reports them instead of hiding them:
 
   * the index field. With base 0 / width 16 the values run past 64k, but the Head
     mesh has 648 vertices, so the u32 at out+0x00 is either not a vertex index or
@@ -65,9 +66,9 @@ still unverified, and this tool reports them instead of hiding them:
     constant or the field is not b at all.
   * the last four base/width pairs decode to implausible values on every item
     checked (a base of 78 million, two zero widths, a base near 2^32). Their
-    widths do add up so the payload is consumed exactly, but that is arithmetic
-    agreeing with a coincidence, not proof: treat the final 51 bits of each entry
-    as unconfirmed.
+    widths do add up - 51 bits for Large Chin, which is what makes the payload
+    come out exact - so the *length* is right even though the *meaning* is not.
+    Treat the final 51 bits of each entry as unread.
 
 What IS solid: the section layout, the descriptor, the parameter block, the
 32-byte entry stride, and the offsets - which land at the affected region
