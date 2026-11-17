@@ -45,21 +45,21 @@ def hand_mesh(pack, asset, poses, joints, side):
     posed = ap.posed_positions([batch], joints, poses)[0]
     all_verts = np.array(posed["vertices"])
     wrist_at = np.array(ap.posed_joint_positions(joints, poses)[wrist])
-    keep = []
+    keep = set()
     for i, (js, ws) in enumerate(zip(batch["joints"], batch["weights"])):
-        # The palm is weighted to the wrist joint itself, not to a finger: keeping
-        # only vertices the fingers touch leaves the hand as a few loose strips.
-        rides_wrist = any(j == wrist and w > 0.5 for j, w in zip(js, ws))
-        if rides_wrist and np.linalg.norm(all_verts[i] - wrist_at) < 0.17:
-            keep.append(i)
+        # Selection has to be generous. Any vertex a finger touches, plus the palm
+        # that rides the wrist itself: keeping only strong finger weights left
+        # bands of the hand out, the triangles among them were dropped with it,
+        # and what rendered was a hole-punched fragment that read as mangled.
+        touches_finger = any(j in HAND_JOINTS and w > 0.0 for j, w in zip(js, ws))
+        rides_wrist = (any(j == wrist and w > 0.5 for j, w in zip(js, ws))
+                       and np.linalg.norm(all_verts[i] - wrist_at) < 0.17)
+        if not (touches_finger or rides_wrist):
             continue
-        for j, w in zip(js, ws):
-            if w > 0.15 and j in HAND_JOINTS:
-                # Split the two hands by which wrist the vertex rides.
-                if _nearest_wrist(batch, i, joints) == wrist:
-                    keep.append(i)
-                break
-    keep = np.array(sorted(set(keep)))
+        # Split the two hands by which wrist the vertex rides.
+        if _nearest_wrist(batch, i, joints) == wrist:
+            keep.add(i)
+    keep = np.array(sorted(keep))
     remap = {int(v): i for i, v in enumerate(keep)}
     sub = np.array([(remap[a], remap[b], remap[c]) for a, b, c in tris
                     if a in remap and b in remap and c in remap])
@@ -67,15 +67,22 @@ def hand_mesh(pack, asset, poses, joints, side):
 
 
 def _nearest_wrist(batch, index, joints):
+    """Which hand a vertex belongs to, by walking its joints up to a wrist.
+
+    The walk must follow `joints[node]["parent"]`. Walking the other way - looking
+    for joints whose parent is the node - descends into children instead, never
+    reaches a wrist for most vertices, and silently drops half of each hand: that
+    is what made the hand render as a hole-punched fragment.
+    """
     js, ws = batch["joints"][index], batch["weights"][index]
     best, weight = None, -1.0
     for j, w in zip(js, ws):
         node, guard = j, 0
         while node not in ap.WRIST_JOINTS and guard < 16:
-            parents = [k for k, info in enumerate(joints) if info["parent"] == node]
-            if not parents:
+            parent = joints[node]["parent"]
+            if parent == 255 or parent >= len(joints):
                 break
-            node = parents[0]
+            node = parent
             guard += 1
         if node in ap.WRIST_JOINTS and w > weight:
             best, weight = node, w
