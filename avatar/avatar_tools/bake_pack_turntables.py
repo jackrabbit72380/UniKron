@@ -90,7 +90,10 @@ CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  "50_hair": "hair",
                  # Brows are the first of the same three masks: the item replaces
                  # the brow sheet and the eye and mouth sheets stay stock.
-                 "10_body": "brow"}
+                 # 10_body is where the pack files them; asset_catalog.refine_
+                 # category now splits them into 12_eyebrows, which keeps the same
+                 # kind so a 3D set is baked for it the same way.
+                 "10_body": "brow", "12_eyebrows": "brow"}
 
 
 def read_rgba(path):

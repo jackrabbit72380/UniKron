@@ -62,6 +62,7 @@ QtObject {
     // borrowing a retail label that belongs to something else.
     readonly property var slotLabels: ({
         "10_body": "Skin Color and Body",
+        "12_eyebrows": "Eyebrows",
         "15_face": "Eyes",
         "20_pants": "Bottoms",
         "30_shoes": "Shoes",

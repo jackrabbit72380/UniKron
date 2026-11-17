@@ -47,7 +47,8 @@ one for one, which is why the categories below reuse their names.
 
 | category | items | male | female | both |
 | --- | --- | --- | --- | --- |
-| `10_body` | 38 | 1 | 1 | 36 |
+| `10_body` | 11 | 1 | 1 | 9 |
+| `12_eyebrows` | 27 | 0 | 0 | 27 |
 | `15_face` | 64 | 0 | 0 | 64 |
 | `16_face-paint` | 26 | 0 | 0 | 26 |
 | `20_pants` | 54 | 27 | 27 | 0 |
@@ -65,6 +66,17 @@ one for one, which is why the categories below reuse their names.
 | `81_formal` | 7 | 5 | 2 | 0 |
 | `82_coat` | 4 | 4 | 0 | 0 |
 | `83_dress-formal` | 1 | 0 | 1 | 0 |
+
+`12_eyebrows` is not one of the pack's own masks: the eyebrow sheets carry the
+body bit (0x0200), so they filed under `10_body` beside `MaleBody`/`FemaleBody`
+and were unreachable there, because the editor draws `10_body` as a single base
+plate. The retail editor gives them a button of their own
+(`EyebrowsCreateButton`), so `asset_catalog.refine_category` splits them out and
+keeps the pack's category in `slot_category`. Their plates come from
+`bake_pack_face.py --categories 12_eyebrows`, which paints the brow mask onto
+the head exactly as it does for the eye and face-paint sheets; the stock brow is
+compared against `Shaved Eyebrows` because a sheet compared with itself changes
+nothing.
 
 The other 307 assets have a zero slot mask: they are the 41 named animations plus
 hiding templates and other non-wearable records.

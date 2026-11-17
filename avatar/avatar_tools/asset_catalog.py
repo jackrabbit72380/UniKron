@@ -103,6 +103,27 @@ def read_metadata(payload):
     }
 
 
+EYEBROW_SLOT = "12_eyebrows"
+
+
+def refine_category(name, metadata):
+    """Split the eyebrow decals out of the body slot.
+
+    The pack masks every eyebrow sheet with the body bit (0x0200), so they file
+    under 10_body beside MaleBody/FemaleBody - and there they are unreachable,
+    because the editor draws 10_body as one base plate. The retail editor has a
+    button of its own for them (EyebrowsCreateButton), so they get their own
+    folder and keep the pack's own category in `slot_category`.
+    """
+    if not metadata or metadata.get("category") != "10_body":
+        return metadata
+    low = name.lower()
+    if low.endswith("eyebrows") or low == "monobrow":
+        metadata["slot_category"] = metadata["category"]
+        metadata["category"] = EYEBROW_SLOT
+    return metadata
+
+
 def bounds(batches):
     xs = [v[0] for b in batches for v in b["vertices"]]
     ys = [v[1] for b in batches for v in b["vertices"]]
@@ -168,7 +189,7 @@ def main():
                              "count": b[1], "entry": b[2], "bytes": len(b[3])} for b in blocks]
         meta = next((p for i, _, _, p in blocks if i == 8), None)
         if meta:
-            record["metadata"] = read_metadata(meta)
+            record["metadata"] = refine_category(name, read_metadata(meta))
         record["has_color_table"] = any(b[0] == 7 for b in blocks)
         models = [b for b in blocks if b[0] == 3]
         if not models:

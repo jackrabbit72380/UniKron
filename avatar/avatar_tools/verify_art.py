@@ -23,7 +23,7 @@ AVATAR = os.path.dirname(HERE)
 
 # Categories whose art is a UV sheet on the shared Head asset: the female avatar
 # deliberately reuses the male plate (AvatarEditor.qml, hasPlates/isPackDecal).
-SHARED_SHEETS = {"15_face", "16_face-paint", "45_facial-hair"}
+SHARED_SHEETS = {"12_eyebrows", "15_face", "16_face-paint", "45_facial-hair"}
 
 PLATES = {"male": os.path.join(AVATAR, "pack_plates"),
           "female": os.path.join(AVATAR, "pack_plates_female")}

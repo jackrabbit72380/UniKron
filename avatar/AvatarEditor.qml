@@ -676,8 +676,13 @@ Item {
     // for the same categories is real plate art (1024x1536), so this only
     // applies to pack mode. Where the sheets sit on the face is still unknown -
     // see avatar_tools/DECALS.md.
+    //
+    // 12_eyebrows belongs here for the same reason: its plates are the brow mask
+    // baked onto the head (bake_pack_face.py), and the head is one asset shared by
+    // both bodies, so the female avatar wears the male-baked brow plate.
     function isPackDecal(id) {
-        return id === "15_face" || id === "16_face-paint" || id === "45_facial-hair"
+        return id === "12_eyebrows" || id === "15_face" || id === "16_face-paint"
+                || id === "45_facial-hair"
     }
 
     function plateFiles(categoryId) {

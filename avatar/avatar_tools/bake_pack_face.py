@@ -43,6 +43,12 @@ FACE_DEFAULT = ("Straight Eyebrows", "Happy Eyes", "Smirk Mouth")
 # plate came out empty. It is compared against this other eye instead, which
 # differs only in the iris - exactly what that plate should carry.
 FACE_ALTERNATE = "Sharp Eyes"
+# The eyebrow sheets are the first of those three masks, split out of 10_body by
+# asset_catalog.refine_category. The stock brow has the same problem as the stock
+# eye: comparing it against itself changes nothing, so it is compared against a
+# brow that differs in shape.
+EYEBROW_CATEGORY = "12_eyebrows"
+FACE_BROW_ALTERNATE = "Shaved Eyebrows"
 # A sheet's edge is antialiased, so the difference fades out rather than stopping.
 # Below LO is rounding noise and stays clear, above HI is paint at full alpha, and
 # in between the plate keeps a soft edge - a hard cutoff drew a faint rectangular
@@ -130,6 +136,12 @@ def main():
                 painted = render_head(args.pack, clip, args.description,
                                       "--face=Straight Eyebrows,%s,Smirk Mouth" % name,
                                       centre, height, args.width, args.height)
+            elif category == EYEBROW_CATEGORY:
+                # The brow is the first mask of the three.
+                painted = render_head(args.pack, clip, args.description,
+                                      "--face=%s,%s,%s" % (name, FACE_DEFAULT[1],
+                                                           FACE_DEFAULT[2]),
+                                      centre, height, args.width, args.height)
             else:
                 decal_set, is_mask = DECAL_SETS[category]
                 painted = render_head(args.pack, clip, args.description, default_arg,
@@ -146,6 +158,11 @@ def main():
         if category == "15_face" and name == FACE_DEFAULT[1]:
             base = render_head(args.pack, clip, args.description,
                                "--face=%s,%s,%s" % (FACE_DEFAULT[0], FACE_ALTERNATE,
+                                                    FACE_DEFAULT[2]),
+                               centre, height, args.width, args.height)
+        elif category == EYEBROW_CATEGORY and name == FACE_DEFAULT[0]:
+            base = render_head(args.pack, clip, args.description,
+                               "--face=%s,%s,%s" % (FACE_BROW_ALTERNATE, FACE_DEFAULT[1],
                                                     FACE_DEFAULT[2]),
                                centre, height, args.width, args.height)
         diff = np.abs(painted[..., :3] - base[..., :3]).max(axis=2)
