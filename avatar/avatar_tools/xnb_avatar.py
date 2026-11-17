@@ -54,27 +54,32 @@ DEFAULT = "Content/Avatar Animations/Idle.xnb"
 def load(path):
     """File bytes, decompressed if the XNB carries an LZX stream.
 
-    Avatar Boogie's five custom dances are version 4 with flags 0x80, so after
-    the ten byte header comes the decompressed size, then the LZX stream. The
-    pack decoder's `lzx` takes them, and the result is an ordinary XNB payload.
+    A compressed XNB keeps the file size at 6 and the decompressed size at 10,
+    then the stream. Version 5 needs one byte skipped and a 64 KiB window: Avatar
+    Laser Wars 2's 195 compressed files all read that way, and the result begins
+    with an ordinary type-reader table. The 32 KiB window that the avatar pack
+    uses does not decode them, which is the trap here - same LZX, different window.
     """
     data = open(path, "rb").read()
-    if data[:4] != b"XNBx" and data[:4] != b"XNBw" and data[:4] != b"XNBm":
+    if data[:4] not in (b"XNBx", b"XNBw", b"XNBm"):
         raise ValueError("not an XNB: %r" % data[:4])
     if not data[5] & 0x80:
         return data
     size = struct.unpack_from("<I", data, 10)[0]
-    try:
-        raw = lzx.decompress(data[14:], size, 0x8000)
-    except lzx.LzxError as error:
-        # Avatar Boogie's five custom dances are exactly this case (version 4,
-        # flags 0x80) and the pack's LZX decoder does not read them: the stream
-        # fails at its first block header from every byte and bit offset tried,
-        # which means XNA's XCompress framing is not the kernel XMemCompress one.
-        raise ValueError("compressed XNB this decoder cannot read yet: %s" % error)
-    if len(raw) != size:
-        raise ValueError("decompressed %d of %d bytes" % (len(raw), size))
-    return raw
+    attempts = ((15, 0x10000), (14, 0x10000), (16, 0x10000),
+                (14, 0x8000), (15, 0x8000))
+    last = None
+    for start, window in attempts:
+        try:
+            raw = lzx.decompress(data[start:], size, window)
+        except lzx.LzxError as error:
+            last = error
+            continue
+        if len(raw) == size:
+            return raw
+    # Avatar Boogie's five dances and Avatar Avenue's three clips are version 4
+    # and still do not read: every offset above fails at the first block header.
+    raise ValueError("compressed XNB this decoder cannot read yet (%s)" % last)
 
 
 def _unpack_7bit(data, pos):
@@ -90,13 +95,19 @@ def _unpack_7bit(data, pos):
 
 
 def read_type_readers(data):
-    """The XNB type-reader table, as (name, version) pairs."""
-    if data[:4] != b"XNBx":
-        raise ValueError("not an Xbox 360 XNB: %r" % data[:4])
-    version = data[4]
-    flags = data[5]
-    size = struct.unpack_from("<I", data, 6)[0]
-    pos = 10
+    """The XNB type-reader table, as (name, version) pairs.
+
+    `load` strips the header when it decompresses, so a buffer without the magic
+    is read as a bare payload starting at the reader count.
+    """
+    if data[:4] in (b"XNBx", b"XNBw", b"XNBm"):
+        version = data[4]
+        flags = data[5]
+        size = struct.unpack_from("<I", data, 6)[0]
+        pos = 10
+    else:
+        version = flags = size = 0
+        pos = 0
     count, pos = _unpack_7bit(data, pos)
     readers = []
     for _ in range(count):

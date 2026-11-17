@@ -1011,3 +1011,52 @@ So XNA's XCompress framing is not the kernel XMemCompress framing that lzx.py
 implements for the avatar pack, and the five Boogie dances stay unread until that
 framing is worked out - most likely from `AvatarBoogie.exe`'s own decompressor, which
 ships with the game. Boogie's clips are dances in any case, not the resting hand.
+
+## Compressed XNB: the blocker, and what it was hiding
+
+Every earlier count was wrong in one specific way: a compressed XNB hides its type
+names, so the sweep that classified files by looking for `CustomAvatarAnimationData`
+in the first 8 KB silently filed them as "other". Avatar Laser Wars 2's whole
+`Content/AvatarAnimation/` folder - 79 files - was invisible that way.
+
+The format, settled by experiment on `Laser Wars 2/.../GenericIdle.xnb`:
+
+    u32 @ 6     file size
+    u32 @ 10    decompressed size
+    byte @ 14   skipped
+    @ 15        LZX stream, **64 KiB window**
+
+The 32 KiB window that `lzx.py` uses for the avatar pack does not decode it
+("bad block type"), which is why this looked unreadable for so long. With 64 KiB and
+one byte skipped the stream decodes exactly, and what comes out is an ordinary
+type-reader table - no XNB header, so `read_type_readers` now accepts a bare payload.
+
+Those clips are **not** the Hazzah format. Their root reader is
+`DNA.Drawing.Animation.AnimationClip+Reader`, a different engine (Digital DNA), so
+`read_clip` does not read them yet.
+
+### The corrected inventory
+
+Scanning all 609 animation-named `.xnb` in the archive with decompression in place:
+
+    Miner Paintball      37 Hazzah clips   + 2 unread
+    Survival Games       11 (of 24 files)
+    Warfare              51 DNA clips (25 names)  + 110 unread
+    Laser Wars 2         37 DNA clips       + 44 unread
+    Punch               192 compressed, unread - the game's whole content
+    Connection            1 DNA clip        + 24 unread
+    Bowling              13 unread,  Blackjack 3, Hangman 2, Golf 4
+    Avenue                2 unread,  Boogie 6 unread
+
+So the games hold at least **118 distinct avatar clip names**, not the 88 earlier
+counted, and 89 of those (`Warfare`, `Laser Wars 2`, `Connection`) are in the DNA
+format and still unparsed.
+
+### Still unread
+
+* **version 4 compressed** files - Avatar Avenue's 3 clips, Avatar Boogie's 5 dances,
+  Avatar Punch's 192 files. They do not decode at any of the offsets and windows
+  that work for version 5, so the v4 framing is a separate question.
+* **the DNA clip layout** - `DNA.Drawing.Animation.AnimationClip`. Its payload starts
+  with a byte, the name ("Take 001"), an i32, an i64, then 71, then per-bone records of
+  roughly 36-52 bytes. Not decoded yet, so no frames or joints come out of it.
