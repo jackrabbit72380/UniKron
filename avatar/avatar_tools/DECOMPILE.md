@@ -559,3 +559,36 @@ That also settles what the earlier note called "the 13.4 MB from 0x12fa42 that i
 not plain records". Every asset payload in this pack starts at a table-supplied
 offset and the chain ends exactly at EOF, so that region is not an undecoded
 stream at all: it is the assets themselves, each already located by the table.
+
+## The V2 record, field by field, and the name pool between table and payloads
+
+`LoadAssetPackFromMemoryV2` assembles a 0xD8-byte in-memory asset per record and
+copies from named offsets, which names the fields:
+
+    +0x00 u32   version, 2
+    +0x04 u8 x4 gender, class, ...        (MaleBody reads 01 01 01 00)
+    +0x07 145 B copied verbatim into the asset struct
+    +0x98 u32, +0x9C u32                  (byte-swapped, stored as one pair)
+    +0xA0 u64, +0xA8 u64, +0xB0 u64
+    +0xB8 u32
+    +0xC0 u32
+    +0xF0 u32   payload offset
+    +0xF4 u32   payload size
+
+Read against record 0 (`MaleBody`) those last fields are `+0xA0 = 0`,
+`+0xC0 = 317,976`, `+0xF0 = 539,596`, `+0xF4 = 33,088`. 317,976 is the exact end
+of the record table, and the first payload starts at 539,596 - so **the 221,620
+bytes between them are the name pool**, and `+0xA0` is an offset into it.
+
+The pool is **UTF-16 big-endian, NUL-terminated**, and it opens with:
+
+    MaleBody, FemaleBody, Head, Animation Generic Stand 0, Stand 1, Stand 2,
+    Animation Generic Clap, Animation Generic Wave, ...
+
+`MaleBody` sits at pool offset 0, which is why record 0's name offset is 0, and
+`+0xC0` holding the pool base is what makes that offset absolute.
+
+So the pack is, in order: 0x28 header, `count x 0xF8` records, the UTF-16BE name
+pool, then the payloads back to back ending exactly at EOF. Every asset's name,
+offset and size come from its own record, and nothing in the file is left
+unaccounted for.
