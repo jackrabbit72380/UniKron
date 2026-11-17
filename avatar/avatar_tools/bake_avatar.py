@@ -25,6 +25,7 @@ import sys
 import numpy as np
 
 import avatar_mesh as am
+import decode_shape
 import xpr0_export as xpr
 import avatar_pose as ap
 import skeleton_nxe as sk
@@ -196,6 +197,9 @@ def main():
     hair_args = [a for a in sys.argv if a.startswith("--hair=")]
     face_args = [a for a in sys.argv if a.startswith("--face")]
     tint_args = [a for a in sys.argv if a.startswith("--tint=")]
+    # --shape="Large Chin" reshapes the Head before skinning, from the decoded
+    # block 4. The vertices are the ones the block names, so nothing is guessed.
+    shape_args = [a for a in sys.argv if a.startswith("--shape=")]
     if len(args) < 5:
         print(__doc__)
         return 1
@@ -223,6 +227,14 @@ def main():
                                         int(hexv[4:6], 16))
 
     index = am.load_pack_index(pack)
+    shape_entries = None
+    shape_name = None
+    if shape_args:
+        shape_name = shape_args[0].split("=", 1)[1]
+        decoded = decode_shape.decode(shape_name, pack, 0)
+        shape_entries = decoded["section_b"]["entries"]
+        print("shape %s: %d vertices, stride %s"
+              % (shape_name, len(shape_entries), decoded["strides"]))
     records = am.record_indices(pack)
     joints = sk.read_skeleton()
     payload = [b for b in am.strb_blocks(open(clip, "rb").read()) if b[0] == 1]
@@ -261,6 +273,24 @@ def main():
             for batch in batches:
                 face_uvs.extend(face_triangle_uvs(batch))
                 face_uvex.extend(all_uv_sets(batch))
+        # A shape moves the head in bind pose, before the rig poses it, so the
+        # skinning carries the new geometry into the animation rather than the
+        # animation overriding it. Vertex numbers run across the batches in order.
+        if shape_entries and name == "Head":
+            offset = 0
+            moved = 0
+            for batch in batches:
+                v = np.asarray(batch["vertices"], dtype=np.float64).copy()
+                for e in shape_entries:
+                    if e["vertex"] is None:
+                        continue
+                    i = e["vertex"] - offset
+                    if 0 <= i < len(v):
+                        v[i] = e["xyz"]
+                        moved += 1
+                batch["vertices"] = v
+                offset += len(v)
+            print("  shaped %s: %d of %d vertices" % (name, moved, offset))
         for batch in ap.posed_positions(batches, joints, poses):
             base = written
             plain = rgb is None

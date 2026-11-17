@@ -794,3 +794,19 @@ Large Chin and Rounded Chin light up the jaw and chin, Thin Chin the lower jaw,
 Soft Nose the nose, Elven Ears the ear. Nothing else on the head moves. That is the
 end-to-end check: bitstream in, vertex positions out, correct anatomy, no manual
 mapping anywhere in between.
+
+## A shape through the real bake
+
+`bake_avatar.py --shape="Large Chin"` reshapes the head in bind pose, before the rig
+poses it, so skinning carries the new geometry into the animation instead of the
+animation overriding it. On the stock outfit, comparing the baked OBJ against the
+same bake without a shape:
+
+    3975 vertices in both
+    110 differ, mean 0.0142 m, max 0.0430 m
+    indices 1154..1778, and MaleBody ends at 1137 - so every changed vertex is Head
+    and nothing else in the figure moved
+
+That is the whole chain in one command: pack bytes, bit reader, quantised positions,
+vertex stride, bind-pose reshape, 71-joint skinning, OBJ, turntable frames. The
+frames render a complete posed figure, which is what AvatarStage3D plays.
