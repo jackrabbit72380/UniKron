@@ -34,17 +34,52 @@ def main():
     ap.add_argument("--wait", type=int, default=1200)
     ap.add_argument("--set", action="append", default=[], metavar="NAME=VALUE",
                     help="set a property on the AvatarEditor before grabbing, e.g. screen=closet")
+    ap.add_argument("--start", action="append", default=[], metavar="NAME=VALUE",
+                    help="start the editor with this property already set, e.g. gender=female; "
+                         "changing gender or usePackArt after load leaves the old seeds")
+    ap.add_argument("--screen", default="", help="open this screen on startup")
     ap.add_argument("--category", default="",
                     help="with screen=closet, select the category with this id")
     args = ap.parse_args()
 
+    source = os.path.abspath(args.qml)
+    temporary = ""
+    if args.start or args.screen:
+        # Some properties are read while the editor seeds itself, so setting them
+        # afterwards leaves the previous picks in `state` and the stage asks for
+        # art that belongs to the other gender or the other art set. This writes a
+        # throwaway wrapper that starts the editor with them already in place.
+        props = list(args.start)
+        if args.screen:
+            props.append("screen=" + args.screen)
+        qml = ["import QtQuick 2.15", "import QtQuick.Window 2.15", 'import ".."', "",
+               "Window {", "    width: %d" % args.width, "    height: %d" % args.height,
+               "    visible: true", '    color: "#0f1a05"',
+               '    Image {', '        anchors.fill: parent',
+               '        source: "../assets/_ui/background.png"',
+               "        fillMode: Image.PreserveAspectCrop", "    }",
+               "    AvatarEditor {", "        id: editor", "        anchors.fill: parent"]
+        for pair in props:
+            name, _, value = pair.partition("=")
+            if value in ("true", "false") or value.isdigit():
+                qml.append("        %s: %s" % (name, value))
+            else:
+                qml.append('        %s: "%s"' % (name, value))
+        qml += ["    }", "}"]
+        temporary = os.path.join(os.path.dirname(source), "_render_start.qml")
+        with open(temporary, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(qml) + "\n")
+        source = temporary
+
     app = QGuiApplication(sys.argv[:1])
     engine = QQmlEngine()
-    component = QQmlComponent(engine, QUrl.fromLocalFile(os.path.abspath(args.qml)))
+    component = QQmlComponent(engine, QUrl.fromLocalFile(source))
     obj = component.create()
     if component.isError():
         for err in component.errors():
             print("ERROR %s:%s: %s" % (err.url().toString(), err.line(), err.toString()))
+    if temporary:
+        os.remove(temporary)
     if obj is None:
         return 1
 

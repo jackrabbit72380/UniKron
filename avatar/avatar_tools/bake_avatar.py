@@ -201,6 +201,10 @@ def main():
     # --shape="Large Chin" reshapes the Head before skinning, from the decoded
     # block 4. The vertices are the ones the block names, so nothing is guessed.
     shape_args = [a for a in sys.argv if a.startswith("--shape=")]
+    # --hide="Hoodie Hiding Template" collapses the body vertices a garment
+    # covers, which is what the block-4 hiding templates are for. Without it the
+    # skin pokes through trousers and sleeves - visible at the thighs and armpits.
+    hide_args = [a for a in sys.argv if a.startswith("--hide=")]
     # --xnb=PATH[:FRAME] poses the whole avatar from an avatar game's clip
     # instead of the pack's .AvatarAnimation file. Those clips are the only
     # shipped poses that include a resting hand.
@@ -232,6 +236,19 @@ def main():
                                         int(hexv[4:6], 16))
 
     index = am.load_pack_index(pack)
+    hidden_by_batch = []
+    hide_entries = []
+    if hide_args:
+        for spec in hide_args:
+            for one in spec.split("=", 1)[1].split(","):
+                one = one.strip()
+                if not one:
+                    continue
+                decoded = decode_shape.decode(one, pack, 0)
+                hide_entries.extend(decoded["section_b"]["entries"])
+        print("hiding %d body vertices for %s"
+              % (len(hide_entries), ", ".join(a.split("=", 1)[1] for a in hide_args)))
+
     shape_entries = None
     shape_name = None
     if shape_args:
@@ -279,6 +296,9 @@ def main():
         face_textures = load_face_textures(pack, index, face_names)
 
     for name in assets:
+        # Vertex numbers restart with every asset, so the hidden set does too; kept
+        # across assets it deleted the same indices from the head and the clothes.
+        hidden_by_batch = []
         batches = []
         for block in am.strb_blocks(am.asset_bytes(pack, index, name)):
             if block[0] == 3:
@@ -313,7 +333,31 @@ def main():
                 batch["vertices"] = v
                 offset += len(v)
             print("  shaped %s: %d of %d vertices" % (name, moved, offset))
-        for batch in ap.posed_positions(batches, joints, poses):
+        # A hiding template names the body vertices its garment covers and gives
+        # their position; the vertices themselves are collapsed to one point, so
+        # the triangles under the cloth disappear instead of poking through it.
+        if hide_entries and name in ("MaleBody", "FemaleBody"):
+            # Collapsing the covered vertices to one point was tried and produced
+            # spikes: the triangles that survive stretch from that point out to the
+            # surface. Hiding means dropping every triangle that uses them, so the
+            # cloth is the only surface there.
+            offset = 0
+            hidden = 0
+            for batch in batches:
+                count = len(batch["vertices"])
+                inside = set()
+                for e in hide_entries:
+                    if e["vertex"] is None:
+                        continue
+                    i = e["vertex"] - offset
+                    if 0 <= i < count:
+                        inside.add(i)
+                hidden_by_batch.append(inside)
+                hidden += len(inside)
+                offset += count
+            print("  hiding %d of %d vertices on %s" % (hidden, offset, name))
+        skipped = 0
+        for batch_index, batch in enumerate(ap.posed_positions(batches, joints, poses)):
             base = written
             plain = rgb is None
             for v in batch["vertices"]:
@@ -323,11 +367,15 @@ def main():
                     lines.append("v %.6f %.6f %.6f %.3f %.3f %.3f" % (tuple(v) + rgb))
                 written += 1
             indices = batch["indices"]
+            gone = hidden_by_batch[batch_index] if batch_index < len(hidden_by_batch) else set()
             for t in range(0, len(indices), 3):
-                lines.append("f %d %d %d" % (
-                    indices[t] + base + 1, indices[t + 1] + base + 1, indices[t + 2] + base + 1))
+                tri = (indices[t], indices[t + 1], indices[t + 2])
+                if gone and (tri[0] in gone or tri[1] in gone or tri[2] in gone):
+                    skipped += 1
+                    continue
+                lines.append("f %d %d %d" % (tri[0] + base + 1, tri[1] + base + 1, tri[2] + base + 1))
                 face_total += 1
-        print("  posed %s" % name)
+        print("  posed %s%s" % (name, " (hid %d triangles)" % skipped if skipped else ""))
 
     if materials:
         mtl = out + ".mtl" if not out.endswith(".obj") else out[:-4] + ".mtl"

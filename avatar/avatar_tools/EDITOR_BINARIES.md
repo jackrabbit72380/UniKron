@@ -806,3 +806,34 @@ Formal - and `82_coat` comes back at index 18, which is the whole list.
 `avatar_preview_pack.qml` exists because setting `usePackArt` after load is not the same as
 starting in it: the theme's picks are already in `state`, so the stage asks `pack_art/` for
 `jeans_indigo.png` and other stems that only exist in the theme's art.
+
+## Hiding templates, and the poke-through they do not close
+
+`bake_avatar.py` now takes `--hide="Hoodie Hiding Template,..."`. The block-4 hiding
+templates decode with stride 40 - the body's - and name a list of body vertices, so the
+body triangles that use them are dropped and the cloth is the only surface there:
+
+    Sweater with Shirt Hiding Template      20 vertices
+    Formal Trouser Suit Hiding Template     38 vertices
+
+Two things that were tried and are wrong:
+
+* Collapsing those vertices to their mean point. It removes the triangles' area but leaves
+  spikes where the surviving triangles stretch from that point out to the surface - the
+  first render grew skin spikes through both shoulders.
+* Keeping one hidden set across assets. Vertex numbers restart with every asset, so the
+  same indices were being deleted from the head, the hair and every garment (the run
+  reported "hid 34" on the Head and "hid 72" on the hair).
+
+What it does **not** fix: the thighs still show skin through the formal trousers. Those
+vertices are not among the 38 the trousers name, so the template does not describe the
+whole covered region - or the trouser mesh itself is open there. Either way it is not
+something to paper over, and the sets are baked without `--hide` until that is settled.
+
+## The female default set
+
+`assets/3d/turntable_female/` had **no** `frame_NN.png` set of its own, only per-item
+folders, so female 3D fell back to whatever set was last probed. It now has 20 frames at
+448x672 of `FemaleBody`, `Shaved Pattern` hair and the stock female outfit
+(`Sweater with Shirt`, `Formal Trouser Suit`, `Female Jelly Clogs`), rotated by ten
+frames so index 0 is the front view, which is where the male set starts.
