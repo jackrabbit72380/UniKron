@@ -653,3 +653,25 @@ editors, both asset packs, the nine clips, the manifests, and what the
 recompiled binaries name in their strings (the blend-shape system, the closet,
 and three pack formats). Read it before decoding anything else - it records what
 is present, what is not, and what the legacy V1 pack actually contains.
+
+## Brows in 3D, and the eye shadow that is still open
+
+`bake_pack_turntables.py` now has a `brow` kind: the 27 eyebrow assets filed under
+`10_body` bake with `--face="<Brow>,Happy Eyes,Smirk Mouth"`, i.e. the item takes the
+brow mask of the three face masks and the eye and mouth sheets stay stock. 27 male and
+27 female sets are in `assets/3d/turntable{, _female}/`, and the three drawn brows
+(`huge-eyebrows`, `no-eyebrows`, `half-moon-eyebrows`) render as visibly different
+faces, checked side by side.
+
+That leaves **695 of the wardrobe's 743 items** with a 3D set. The 48 without one are
+not missing data:
+
+* 3 are the base layers - `MaleBody`, `FemaleBody`, `Head` - which are drawn into every
+  set rather than being stage variants.
+* 45 are the **eye-shadow** sheets, filed under `50_hair` but painting the head. They
+  are 128x64 masks like the beard sheet, and `probe_decal_render.py` was run on
+  `eye-shadow-001.png` across all six UV sets: set 1 puts them on the cheeks (that is
+  the beard set), sets 2/3/4 are the brow, eye and mouth masks, and set 5 draws arcs
+  just above the eyes that read like a second brow band rather than a shadow. No set
+  put the sheet around the eye where eye shadow belongs, so these 45 are left unbaked
+  rather than guessed - the stage falls back to the hairstyle set for them.

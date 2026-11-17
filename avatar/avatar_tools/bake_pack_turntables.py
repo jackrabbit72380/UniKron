@@ -55,6 +55,8 @@ HAIR_COLOUR = "6e5326"
 # Which head UV set a decal sheet is painted through, established by
 # probe_decal_render.py: facial hair on set 1 (and it is a tint mask, red marks
 # the hair), face paint on set 0 (its own colours). See DECALS.md.
+# Which UV set of the head each decal sheet paints through, and whether the sheet
+# is a mask tinted with the avatar's colour or a colour sheet used as drawn.
 DECAL_SETS = {"45_facial-hair": (1, True), "16_face-paint": (0, False)}
 HAIR_TINT = (0x6E / 255.0, 0x53 / 255.0, 0x26 / 255.0)
 ART = os.path.join(os.path.dirname(HERE), "pack_art")
@@ -69,7 +71,10 @@ CATEGORY_KIND = {"40_shirt": "shirts", "20_pants": "pants", "30_shoes": "shoes",
                  # shoes are kept underneath.
                  "80_dress": "dress", "81_formal": "dress", "83_dress-formal": "dress",
                  # Picking a hairstyle takes the stock one off.
-                 "50_hair": "hair"}
+                 "50_hair": "hair",
+                 # Brows are the first of the same three masks: the item replaces
+                 # the brow sheet and the eye and mouth sheets stay stock.
+                 "10_body": "brow"}
 
 
 def read_rgba(path):
@@ -92,6 +97,8 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
     face_arg = "--face"
     if kind == "eyes":
         face_arg = "--face=Straight Eyebrows,%s,Smirk Mouth" % asset
+    elif kind == "brow":
+        face_arg = "--face=%s,Happy Eyes,Smirk Mouth" % asset
     result = subprocess.run(
         [sys.executable, os.path.join(HERE, "bake_avatar.py"), pack, clip, "0", obj,
          "--colours=" + description, "--hair=" + HAIR_COLOUR, face_arg] + parts,
@@ -173,7 +180,12 @@ def main():
             # The nose sheets go somewhere else entirely; dropping one into the
             # eye slot would put a nose on each eyeball.
             continue
+        # 10_body holds the brow sheets next to the bodies; only a brow can take
+        # the brow slot of the three face masks.
+        if CATEGORY_KIND.get(category) == "brow" and "brow" not in record["name"].lower():
+            continue
         if category in wanted and (has_mesh or category in DECAL_SETS
+                                   or CATEGORY_KIND.get(category) in ("eyes", "brow")
                                    or category == "15_face"):
             # Categories outside the stock three (hats, hair, glasses) are worn on
             # top of the whole stock outfit rather than replacing part of it.
