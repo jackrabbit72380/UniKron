@@ -198,7 +198,7 @@ name it, and give its source file as `kernel/xam/avatars/asset_pack.cpp`. It
 validates the file header, then a table of **0xf8-byte asset headers**, then loads
 each asset with a size check ("avatar asset pack V2: cannot load asset #{}, buffer
 too small"). So the pack's index is richer than the name/offset pairs our
-`avatar-aaets.json` keeps: 248 bytes per asset, with room for block tables.
+`avatar-assets.json` keeps: 248 bytes per asset, with room for block tables.
 
 The blend-shape applier reads a component descriptor as
 
