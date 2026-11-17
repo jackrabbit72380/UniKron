@@ -589,17 +589,21 @@ Three limits in the data, each checked rather than assumed:
   search is in TEXTURES.md). That is also why skin shows through at the
   shoulders: garments hide body regions with `... Hiding Template` assets, and
   those carry no model block at all.
-- **The hands are modelled splayed - and are now posed shut.** `MaleBody` is
-  1,137 vertices and its hand is a flat palm with straight, separated fingers in
-  the bind pose. Forcing every hand joint (36, 44, 45, 46, 57, 34) back to its
-  bind delta changes nothing, so the fan is in the mesh, not in the clip or the
-  skinning. `avatar_pose.apply_finger_pose` therefore adds a **deliberate art
-  choice**: 11/14/9 degrees of curl per phalanx, a 14-degree inward swing at each
-  knuckle toward the hand's centreline, and the thumb at 22% curl, with bend and
-  swing directions and signs derived per hand from the palm plane and the thumb.
-  Measured effect: fingertip fan 14.4 cm to 9.2 cm, wrist-to-tip 17.9 cm to
-  17.3 cm. Nothing in the archive asks for this - it exists so the hand reads
-  like the reference avatar instead of a rake.
+- **The hands are modelled straight, and are curled by hand.** `MaleBody` is
+  1,137 vertices and its hand is a flat palm with straight fingers in the bind
+  pose; the idle clip rotates the finger joints 11-34° but almost all of that is
+  twist, so the hand stays flat. The fingers are joints 37-40 and 44-47 (each
+  with two phalanges under it); 41/42 and 48/49 are the thumbs, and 43/50 sit *on*
+  the wrist with a chain hanging off them - they are helpers, and an earlier test
+  that "forcing every hand joint back to bind changes nothing" was forcing those
+  helpers rather than the fingers, which is why it looked inert.
+`avatar_pose.apply_finger_pose` therefore adds a **deliberate art choice**:
+  8/10/6 degrees of curl per phalanx, the fan closed by each finger's own measured
+  fan angle (0.1-0.9°, so barely anything), and the thumb at 22% curl, with bend
+  and swing directions derived per hand from the palm plane. Measured with
+  `probe_hand.py`: knuckle bend goes from 6-12° (clip) to 16-25°, fingertips move
+  5 cm on a 1.47-unit body. Nothing in the archive asks for this - it exists so
+  the hand reads like the reference avatar instead of a rake of prongs.
 
   Rotating the knuckles alone left a notch where each finger met the palm: the
   pack weights a finger's base ring entirely to the finger, with no blend into

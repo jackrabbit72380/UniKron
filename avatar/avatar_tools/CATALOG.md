@@ -299,7 +299,7 @@ zero, so a sheet with white transparent pixels washed the whole face out. It is
 `art * cover + albedo * (1 - cover)` now, and the 43 face-paint and facial-hair
 sets were rebaked with it.
 
-## The pose: an idle, not a cheer, and hands that come from the clip
+## The pose: an idle, not a cheer, and hands that had to be curled by hand
 
 Every static bake used frame 0 of `Cheer.AvatarAnimation`, the one clip that ships
 as a file beside the pack. Frame 0 of a cheerleading clip is a cheer: arms out,
@@ -309,18 +309,32 @@ The pack carries its own standing idles, so the bakes now pose frame 0 of
 `Animation Male Idle Shifts Weight` (242 frames), extracted from the pack by
 `pack_clip.py`. Both bakers take `--clip-asset "Animation Male Idle Shifts Weight"`.
 
-**The authored finger curl is gone, as a default.** `avatar_pose.py` used to add a
-hand-written curl on top of the clip, on the stated grounds that "the clip never
-bends a finger". That is not true: the finger joints are keyed and the idle moves
-them about 34 degrees off bind, and eyeballing the numbers showed the duplication -
-clip rotation plus a guessed curl - is what turned the hand into a rake of splayed
-fingers. With the curl off and only the clip's own finger motion, the hand hangs
-closed and relaxed, in both the plates and the 3D sets.
+**The hands: measured, then fixed.** `probe_hand.py` renders a hand close-up and
+prints two numbers that settle the question: the clip's rotation of each finger
+joint, and the *geometric* bend at each knuckle (the angle between knuckle, middle
+and tip, which is what a viewer sees).
 
-The curl is kept behind `AVATAR_FINGER_POSE=1` so the two can be compared, and the
-curl/inward angles can be overridden with `AVATAR_FINGER_CURL` /
-`AVATAR_FINGER_INWARD` for the same reason: it is a look, and a look has to be
-chosen by looking, not by guessing numbers in a file.
+| | before | after |
+| --- | --- | --- |
+| knuckle bend, bind pose | 1-14° (straight) | - |
+| knuckle bend, idle clip | 6-12° | - |
+| knuckle bend, clip + curl | - | 16-25° |
+
+So the clip does key the finger joints (11-34° of rotation) but almost all of it
+is twist about the finger's own axis: the hand stays flat, which is the "prongs"
+look. Turning the authored curl back on alone did not fix it either, because two of
+the joints under each wrist (43 and 50) sit *on* the wrist - an offset of 0.01 on
+a 1.47-unit body - and hang a three-joint chain off it. They were being treated as
+fingers, so the fan correction swung a whole chain 36° from inside the palm and
+bowed the hand into a hook. `finger_bones` now drops any root within 0.03 of the
+wrist.
+
+With that gone the curl reads correctly: 8/10/6 degrees per phalanx, the fan
+correction taken per finger from its own measured fan angle (0.1-0.9° - the bind
+fingers are nearly parallel already, so only the thumb needed excluding), and
+fingertips travel 5 cm on a 1.47-unit body. Every plate, turntable and animated
+frame was rebaked with it. `AVATAR_FINGER_POSE=0` shows the clip's own hand for
+comparison, and `AVATAR_FINGER_CURL` / `AVATAR_FINGER_FAN` override the numbers.
 
 Also ruled out while looking: the clip's joint *scale* is not what stretched the
 hand (`AVATAR_IGNORE_SCALE=1` renders identically; the scales are 1.0).

@@ -101,10 +101,14 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 #   AVATAR_FINGER_INWARD="6"
 #
 FINGER_CURL_DEGREES = tuple(
-    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "11,14,9").split(",")
+    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "8,10,6").split(",")
 )                                            # per phalanx, base to tip
-FINGER_BASE_INWARD_DEGREES = float(
-    os.environ.get("AVATAR_FINGER_INWARD", "14"))  # closes the fanned-out spread
+# How much of each finger's own fan is taken out. 1.0 would leave every finger
+# pointing the way the middle one does; a little under that keeps the hand from
+# looking bound together. The angle itself is measured per finger from the mesh's
+# own knuckles (finger_bones), not guessed: one fixed angle for every finger
+# either leaves the outer ones splayed or drags them across each other.
+FINGER_FAN_CLOSE = float(os.environ.get("AVATAR_FINGER_FAN", "0.85"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
@@ -242,14 +246,28 @@ def finger_bones(joints_rig, bind):
             nxt = joints_rig[middle_children[0]]["position"]
             middle_dir = _normalise([nxt[i] - joints_rig[middle]["position"][i] for i in range(3)])
 
-        thumb_root = max(kids, key=lambda k: abs(mat_apply(mat_inverse_rigid(bind[wrist]),
-                                                          joints_rig[k]["position"])[1]))
+        # The thumb is the knuckle that sits furthest off the palm's own plane.
+        # The earlier test used |y| in wrist space, which put joints 43 and 50 on
+        # the wrong side of the line: they are the thumbs, and being treated as
+        # fingers they were swung 36 degrees by the fan correction.
+        def off_plane(k):
+            offset = [joints_rig[k]["position"][i] - palm_centre[i] for i in range(3)]
+            return abs(sum(offset[i] * normal[i] for i in range(3)))
+
+        thumb_root = max(kids, key=off_plane)
         # The thumb sits on the palm side, so the direction from the knuckle
         # centre to the thumb root is the direction a finger curls toward.
         palm_side = _normalise([joints_rig[thumb_root]["position"][i] - palm_centre[i]
                                 for i in range(3)])
 
         for root in kids:
+            # 43 and 50 sit on the wrist itself (local length ~0.01) with a
+            # three-joint chain hanging off them. Rotating one of those swings a
+            # whole chain from inside the palm, which bowed the baked hand into a
+            # hook; they are helpers, not fingers.
+            if _distance(mat_apply(mat_inverse_rigid(bind[wrist]),
+                                   joints_rig[root]["position"]), [0.0, 0.0, 0.0]) < 0.03:
+                continue
             chain = [root]
             while True:
                 children = [c for c, info in enumerate(joints_rig)
@@ -284,6 +302,23 @@ def finger_bones(joints_rig, bind):
             swung = _rotate_about(tip, here, mat_axis_angle(normal, 15.0))
             swing_sign = -1.0 if lateral(swung) < lateral(tip) else 1.0
 
+            # How far this finger fans away from the middle one, in the palm
+            # plane: that is the angle to take back out.
+            fan_deg = 0.0
+            if middle_dir is not None:
+                flat = [direction[i] - normal[i] * sum(direction[k] * normal[k]
+                                                       for k in range(3))
+                        for i in range(3)]
+                mid_flat = [middle_dir[i] - normal[i] * sum(middle_dir[k] * normal[k]
+                                                           for k in range(3))
+                            for i in range(3)]
+                if _distance(flat, [0, 0, 0]) > 1e-9 and _distance(mid_flat, [0, 0, 0]) > 1e-9:
+                    flat = _normalise(flat)
+                    mid_flat = _normalise(mid_flat)
+                    fan_deg = math.degrees(math.atan2(
+                        sum(_cross(flat, mid_flat)[i] * normal[i] for i in range(3)),
+                        sum(flat[i] * mid_flat[i] for i in range(3))))
+
             for depth, joint in enumerate(chain, 1):
                 joint_here = joints_rig[joint]["position"]
                 kids_here = [c for c, info in enumerate(joints_rig) if info["parent"] == joint]
@@ -297,7 +332,8 @@ def finger_bones(joints_rig, bind):
                 own_to_local = lambda v, m=own_rot: [sum(m[r][c] * v[r] for r in range(3))
                                                     for c in range(3)]
                 out.append((joint, own_to_local(own_bend), own_to_local(normal),
-                            depth, root == thumb_root, sign, swing_sign))
+                            depth, root == thumb_root, sign, swing_sign,
+                            fan_deg if depth == 1 else 0.0))
     return out
 
 
@@ -326,6 +362,94 @@ def _share_hand_weight(names, weights, blend):
     return names, weights
 
 
+def _smoothed_hand_weights(batches, joints_rig,
+                           # Off by default: the rings reach up the forearm and
+                           # the curl dragged the arm with it, and the tearing it
+                           # was meant to fix is not what the bakes showed.
+                           iterations=int(os.environ.get("AVATAR_HAND_SMOOTH", "0")),
+                           amount=float(os.environ.get("AVATAR_HAND_SMOOTH_AMOUNT", "0.35")),
+                           rings=2):
+    """Weights for every vertex, with the hand's own weights blurred.
+
+    The pack weights each finger's base ring entirely to that finger and its
+    neighbour to the palm, so a knuckle rotation tears the ring off the hand: the
+    baked hand had fingertips floating beside the palm. Averaging each hand
+    vertex's weights with its neighbours over the triangle graph removes the
+    step, and the bind pose is unaffected because every joint's transform is the
+    identity there.
+    """
+    fingers = set(WRIST_JOINTS)
+    for joint, info in enumerate(joints_rig):
+        if info["parent"] in WRIST_JOINTS:
+            fingers.add(joint)
+            for kid, kinfo in enumerate(joints_rig):
+                if kinfo["parent"] == joint:
+                    fingers.add(kid)
+
+    out = []
+    for batch in batches:
+        count = len(batch["vertices"])
+        maps = []
+        touched = set()
+        for index in range(count):
+            entry = {}
+            for joint, weight in zip(batch["joints"][index], batch["weights"][index]):
+                if weight > 0.0:
+                    entry[int(joint)] = float(weight)
+            if any(j in fingers for j in entry):
+                touched.add(index)
+            maps.append(entry)
+        if not touched:
+            out.append([dict(m) for m in maps])
+            continue
+
+        neighbours = [set() for _ in range(count)]
+        indices = batch["indices"]
+        for t in range(0, len(indices), 3):
+            a, b, c = int(indices[t]), int(indices[t + 1]), int(indices[t + 2])
+            for u, v in ((a, b), (b, c), (c, a)):
+                neighbours[u].add(v)
+                neighbours[v].add(u)
+
+        # Only the hand and the ring of vertices it meets: smoothing the whole
+        # model would drag the forearm into the wrist.
+        # Two rings out from the vertices that sit on a finger: enough to bridge
+        # the knuckle, not enough to reach the middle of the palm, which has to
+        # stay rigid or the whole hand curls into a hook.
+        region = set(touched)
+        for _ in range(rings):
+            edge = set(region)
+            for index in region:
+                edge |= neighbours[index]
+            region = edge
+
+        for _ in range(iterations):
+            updated = []
+            for index in range(count):
+                if index not in region:
+                    updated.append(maps[index])
+                    continue
+                acc = {j: w * (1.0 - amount) for j, w in maps[index].items()}
+                near = neighbours[index]
+                if near:
+                    share = amount / len(near)
+                    for other in near:
+                        for j, w in maps[other].items():
+                            acc[j] = acc.get(j, 0.0) + w * share
+                updated.append(acc)
+            maps = updated
+
+        cleaned = []
+        for entry in maps:
+            total = sum(entry.values())
+            if total <= 0.0:
+                cleaned.append(entry)
+            else:
+                cleaned.append({j: w / total for j, w in entry.items()})
+        out.append(cleaned)
+    return out
+
+
 def hand_weight_blend(joints_rig):
     """{finger root: wrist} for the joints whose base ring meets the palm.
 
@@ -346,18 +470,17 @@ def hand_weight_blend(joints_rig):
 
 def apply_finger_pose(joints_rig, bind, locals_):
     """Add the art-choice finger curl on top of the clip's pose, in place."""
-    for joint, bend, swing, depth, thumb, sign, swing_sign in finger_bones(joints_rig, bind):
+    for joint, bend, swing, depth, thumb, sign, swing_sign, fan in finger_bones(joints_rig, bind):
         if joint >= len(locals_):
             continue
         degrees = FINGER_CURL_DEGREES[min(depth, len(FINGER_CURL_DEGREES)) - 1]
         if thumb:
             degrees *= FINGER_THUMB_SCALE
         locals_[joint] = mat_mul(locals_[joint], mat_axis_angle(bend, sign * degrees))
-        if depth == 1:
-            # Swing the knuckles in about the palm normal, closing the fan the
-            # bind geometry was modelled with. The sign follows the same
-            # inward test the curl uses, so both hands close instead of opening.
-            inward = 0.0 if thumb else -FINGER_BASE_INWARD_DEGREES * swing_sign
+        if depth == 1 and not thumb:
+            # Close the fan the bind geometry was modelled with, by this finger's
+            # own measured angle rather than one angle for the whole hand.
+            inward = abs(fan) * FINGER_FAN_CLOSE * swing_sign
             locals_[joint] = mat_mul(locals_[joint], mat_axis_angle(swing, inward))
     return locals_
 
@@ -486,11 +609,12 @@ def posed_positions(batches, joints_rig, poses):
 
     # The clip never bends a finger, so the relaxed hand is added here (see the
     # ART CHOICE note at the top of this file).
-    # The authored curl is off by default. Clips do bend the finger joints (the
-    # idle moves them about 34 degrees off bind), so the hand that came from
-    # adding a guessed curl on top of that was a rake of splayed fingers, which is
-    # what the plates showed. `AVATAR_FINGER_POSE=1` brings it back for comparison.
-    if os.environ.get("AVATAR_FINGER_POSE") == "1":
+    # On by default. The pack models the hand open and fanned and the idle clip
+    # only moves the finger joints a few degrees, so without this every bake has
+    # flat, straight fingers - the hands that did not look right. Set
+    # `AVATAR_FINGER_POSE=0` to see the clip's own hand, and probe_hand.py to
+    # compare the two.
+    if os.environ.get("AVATAR_FINGER_POSE", "1") == "1":
         apply_finger_pose(joints_rig, bind, locals_)
 
     worlds = []
@@ -507,18 +631,15 @@ def posed_positions(batches, joints_rig, poses):
 
     skin = [mat_mul(worlds[i], mat_inverse_rigid(bind[i])) for i in range(len(joints_rig))]
 
-    hand_blend = hand_weight_blend(joints_rig)
+    smoothed = _smoothed_hand_weights(batches, joints_rig)
     out = []
-    for batch in batches:
+    for batch, weight_maps in zip(batches, smoothed):
         verts = []
         for index, pos in enumerate(batch["vertices"]):
-            names = batch["joints"][index]
-            weights = batch["weights"][index]
-            if hand_blend:
-                names, weights = _share_hand_weight(names, weights, hand_blend)
+            items = weight_maps[index].items()
             acc = [0.0, 0.0, 0.0]
             total = 0.0
-            for j, w in zip(names, weights):
+            for j, w in items:
                 if w <= 0.0 or j >= len(skin):
                     continue
                 p = mat_apply(skin[j], (pos[0], pos[1], -pos[2]) if MIRROR_Z else pos)
