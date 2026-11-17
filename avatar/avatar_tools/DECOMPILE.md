@@ -484,3 +484,46 @@ so a shape record is `tag, tag-class, u16 count` and the port clears the count
 rather than the data. Reading `blend_shape_apply.cpp`'s two functions
 (`FUN_140dbf2e0`, `FUN_140dbf3b0`) to get the vertex update itself is the next
 step, and it is now a code-reading job rather than a format question.
+
+## What a shape entry does, from `blend_shape_apply.cpp`
+
+`FUN_140dbf2e0` (922 lines) is the only function that names
+`blend_shape_apply.cpp`, so it is the applier, and its inner loop settles three
+things the format alone could not:
+
+    uVar17 = (ulonglong)(int)*puVar26;
+    uVar17 = uVar17 / *(uint *)(*(longlong *)(*local_118 + 0x28) + 0x28);   // / stride
+    puVar26[1] = (float)puVar26[1] - local_188[uVar17*3]      + *(float *)(local_1a8 + i*0xc);
+    puVar26[2] = (float)puVar26[2] - local_188[uVar17*3 + 1]  + *(float *)(local_1a8 + i*0xc + 4);
+    puVar26[3] = (float)puVar26[3] - local_188[uVar17*3 + 2]  + *(float *)(local_1a8 + i*0xc + 8);
+    puVar10 = puVar10 + 8;                                                  // 8 dwords = 32 bytes
+
+* **The stored number is a byte offset, not a vertex number.** The port divides
+  it by the model's stride, read from the model object at `+0x28`. Checked
+  against the pack: **9,870 entries across all 215 non-empty shapes, every one a
+  multiple of its stride** (40 for the body, 52 for the head), so the field is
+  `vertex * stride` and `decode_shape`'s `offset // stride` is the same rule.
+* **A vertex moves by `target - source`**, component by component. Applied to a
+  bind-pose model, where the source is the vertex's own bind position, that is
+  simply `vertex := target`, which is what `bake_avatar.py --shape` already does.
+  The C is the general form because the port also fits old-body assets whose
+  positions are not the new body's bind positions.
+* **The port's vertex is 32 bytes** (8 dwords: position at +4, +8, +12). The
+  pack's body stride is 40 and its head stride is 52, so the port is loading a
+  converted, position-plus-skin layout, not the pack's vertex verbatim - which is
+  why the two numbers are not the same and neither is a contradiction.
+
+The fitter around it is a tolerance test, not a heuristic guess: it measures the
+mean distance from each candidate position to the source shape and compares it
+with `DAT_140f7b2f4`, logging "tucks {:.1f}cm from legacy" and falling back to an
+affine fit when the candidate is not close enough. So a shape whose target
+positions do not correspond to the body it is applied to is detected, not applied
+blindly.
+
+Two consequences for this repo. `--hide` deletes the body triangles a hiding
+template names, which reaches the same picture the retail path does by *moving*
+those vertices to their target positions - but the retail path is the shape
+apply, and the 38 vertices the formal trousers name are all it moves, which is
+why the thighs still show. And a shape whose stride does not match the asset it is
+applied to should be refused rather than applied, which `--shape` does not check
+yet.
