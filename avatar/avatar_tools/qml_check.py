@@ -128,4 +128,32 @@ if obj.property("usePackArt") is not None:
                 if row.get("id") == "40_shirt":
                     print("  pack item %s -> plate url %s" % (plate[0], row.get("url")))
 
+    # Female mode: its own body, its own seeds, its own plate and set trees, and
+    # a strip without the male-only items.
+    obj.setProperty("gender", "female")
+    QTimer.singleShot(0, app.quit)
+    app.exec_()
+    st = obj.property("state")
+    st = st.toVariant() if hasattr(st, "toVariant") else st
+    print("  female: state %s" % (st,))
+    print("  female: plate folder %s" % obj.property("packPlateFolder").toLocalFile())
+    print("  female: turntable root %r" % obj.property("turntableRoot"))
+    cats = obj.property("categories")
+    cats = cats.toVariant() if hasattr(cats, "toVariant") else cats
+    male_only = ["malebody.png", "grunge-trainers.png", "jacket-with-sweater.png"]
+    seen = [f for c in (cats or []) for f in (c.get("files") or [])]
+    leaked = [f for f in male_only if f in seen]
+    if leaked:
+        problems.append("female strip still offers %s" % leaked)
+    print("  female: male-only items in the strip: %s" % (leaked or "none"))
+    for c in (cats or []):
+        if c.get("id") == "40_shirt":
+            print("  female: 40_shirt has %d items, first %r"
+                  % (len(c.get("files") or []), (c.get("files") or [None])[0]))
+    rows = obj.property("_layers")
+    rows = rows.toVariant() if hasattr(rows, "toVariant") else rows
+    for row in (rows or []):
+        print("    female layer %s -> %s" % (row.get("id"), row.get("url")))
+    print("  female: stageVariant %r" % obj.property("stageVariant"))
+
 sys.exit(1 if problems else 0)

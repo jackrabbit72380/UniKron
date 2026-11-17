@@ -26,6 +26,13 @@ Item {
     // avatar_tools/bake_pack_thumbs.py together with this index.
     PackIndex { id: packIndex }
     PackPlates { id: packPlates }
+    // The female half of the pack's art. Same categories, but every item baked on
+    // FemaleBody (bake_pack_plates.py / bake_pack_turntables.py --gender female),
+    // because a female garment drawn on a male body is not the same picture.
+    PackPlatesFemale { id: packPlatesFemale }
+    // Item slug -> the pack's own gender byte, so the strip can offer only what
+    // this avatar can wear.
+    PackGenders { id: packGenders }
 
     Style { id: style }
 
@@ -38,7 +45,45 @@ Item {
     // Aligned 2D plates for the pack's items, baked by bake_pack_plates.py: one
     // render per item through the body's own frame, so layers stack into a single
     // avatar instead of each item being framed on its own.
-    property url packPlateFolder: Qt.resolvedUrl("pack_plates/")
+    // Which body the avatar is. The pack stores this per item, and the two bodies
+    // have separate bakes, so this switches the art as well as the seed outfit.
+    property string gender: "male"
+    // Switching bodies drops the outfit that belonged to the other one: the body
+    // and the four seeded slots are cleared and reseeded, accessories stay unless
+    // the new body cannot wear them (pruneState decides that).
+    onGenderChanged: {
+        var next = {}
+        for (var key in state) {
+            if (key.indexOf("body") >= 0 || key.indexOf("shirt") >= 0
+                    || key.indexOf("pants") >= 0 || key.indexOf("shoes") >= 0
+                    || (key.indexOf("hair") >= 0 && key.indexOf("facial") < 0))
+                continue
+            next[key] = state[key]
+        }
+        state = next
+        rebuildCategories()
+        rebuildLayers()
+    }
+
+    // Read through functions, not bindings: a gender switch runs its rebuild
+    // inside the change handler, and a binding that has not been re-evaluated yet
+    // still answers with the old gender's art.
+    function platesIndex() {
+        return gender === "female" ? packPlatesFemale : packPlates
+    }
+
+    function plateFolder() {
+        return Qt.resolvedUrl(gender === "female" ? "pack_plates_female/" : "pack_plates/")
+    }
+
+    // The baked 3D sets follow the same split: assets/3d/turntable_female/.
+    function turntableFolder() {
+        return gender === "female" ? "turntable_female" : "turntable"
+    }
+
+    property url packPlateFolder: plateFolder()
+    readonly property string turntableRoot: turntableFolder()
+    readonly property var activePlates: platesIndex()
     property bool usePackArt: false
     property string gamerTag: "Player"
     // The original editor's own wording for this screen: the string table of
@@ -254,7 +299,7 @@ Item {
         // frame_00 and falls back to the default set when a folder is missing,
         // so naming one here is safe even for the categories not baked yet.
         if (usePackArt)
-            return "turntable/" + stem
+            return turntableFolder() + "/" + stem
         return ""
     }
 
@@ -276,7 +321,8 @@ Item {
         }
         // No trailing slash: the stage appends one, and "turntable//frame_00"
         // only works by luck of Qt normalising the path.
-        return hairVariant === "" ? "turntable" : "turntable/" + hairVariant
+        var root = turntableFolder()
+        return hairVariant === "" ? root : root + "/" + hairVariant
     }
 
     // The hairstyle seedOutfit fills in. bake_animated.py bakes the animated 3D
@@ -294,7 +340,7 @@ Item {
             // for the mode in use, or pack mode would compare the hair it seeded
             // against a drawn hairstyle and never match. Falling back to the
             // first file keeps this working if that art is ever removed.
-            var stem = (usePackArt ? packSeedPicks : seedPicks)["hair"]
+            var stem = (usePackArt ? packSeedPicksFor(gender) : seedPicks)["hair"]
             if (stem && c.files.indexOf(stem) >= 0)
                 return stem.replace(/\.png$/i, "")
             return c.files[0].replace(/\.png$/i, "")
@@ -364,7 +410,7 @@ Item {
                 if (hasPlates("10_body")) {
                     // Plate names have to be the ones the strip offers, or the
                     // chosen body is not in its own model and nothing highlights.
-                    folderPath = style.dirUrl(root.packPlateFolder, name)
+                    folderPath = style.dirUrl(root.plateFolder(), name)
                     folderFiles = plateFiles(name)
                 } else {
                     var drawn = drawnBodyFolder()
@@ -373,6 +419,18 @@ Item {
                         folderFiles = drawn.files
                     }
                 }
+            }
+            // Only what this avatar can wear: the pack marks every item male or
+            // female, and unmarked ones (the shared eye sheets, the hair the
+            // pack marks both) belong to either.
+            if (root.usePackArt) {
+                var wearable = []
+                for (var k = 0; k < folderFiles.length; ++k) {
+                    var tag = packGenders.items[String(folderFiles[k]).replace(/\.png$/i, "")]
+                    if (!tag || tag === root.gender || tag === "both")
+                        wearable.push(folderFiles[k])
+                }
+                folderFiles = wearable
             }
             list.push({
                 id: name,
@@ -386,6 +444,9 @@ Item {
         categories = list
         pruneState()
         seedOutfit()
+        // A gender switch prunes the other body away, so the empty body slot has
+        // to be refilled here as well as on load.
+        fillBodyIfEmpty()
         fillItems()
     }
 
@@ -440,15 +501,27 @@ Item {
     // Curls (Hat)`, but that asset is a 102-vertex shell that sits inside the
     // skull, so it renders as a bald head (see CATALOG.md). The stock style is
     // used instead until that asset draws properly.
-    readonly property var packSeedPicks: ({
-        "shirt": "jacket-with-sweater.png",
-        "pants": "male-flower-print-flares.png",
-        "shoes": "grunge-trainers.png",
-        "hair": "left-parting.png"
-    })
+    function packSeedPicksFor(which) {
+        return which === "female" ? ({
+            // Avatar6404's descriptor: Sweater with Shirt, Formal Trouser Suit,
+            // Female Jelly Clogs. The suit is a formal outfit (81_formal), not a
+            // 20_pants item, so the pants slot seeds from its own category.
+            "shirt": "sweater-with-shirt.png",
+            "pants": "formal-trouser-suit.png",
+            "shoes": "female-jelly-clogs.png",
+            "hair": "shaved-pattern.png"
+        }) : ({
+            "shirt": "jacket-with-sweater.png",
+            "pants": "male-flower-print-flares.png",
+            "shoes": "grunge-trainers.png",
+            "hair": "left-parting.png"
+        })
+    }
+
+    readonly property var packSeedPicks: packSeedPicksFor(gender)
 
     function seedOutfit() {
-        var picks = usePackArt ? packSeedPicks : seedPicks
+        var picks = usePackArt ? packSeedPicksFor(gender) : seedPicks
         var wanted = ["shirt", "pants", "shoes", "hair"]
         var next = {}
         var changed = false
@@ -556,10 +629,11 @@ Item {
         if (!bodyCategory || state[bodyCategory.id])
             return
         var files = bodyCategory.files || []
-        // Every baked plate and set is posed on the male body, so that is the one
-        // to open with when the body itself comes from a plate.
-        if (usePackArt && files.indexOf("malebody.png") >= 0) {
-            setItem(bodyCategory.id, "malebody.png")
+        // Each gender's plates are posed on its own body, so open with the body
+        // the current bake was made on.
+        var body = gender === "female" ? "femalebody.png" : "malebody.png"
+        if (usePackArt && files.indexOf(body) >= 0) {
+            setItem(bodyCategory.id, body)
             return
         }
         for (var i = 0; i < files.length; ++i) {
@@ -581,32 +655,47 @@ Item {
     }
 
     function plateFiles(categoryId) {
-        for (var i = 0; i < packPlates.folders.length; ++i) {
-            if (packPlates.folders[i].id === categoryId)
-                return packPlates.folders[i].files || []
+        var index = platesIndex()
+        for (var i = 0; i < index.folders.length; ++i) {
+            if (index.folders[i].id === categoryId)
+                return index.folders[i].files || []
         }
         return []
     }
 
     function hasPlates(categoryId) {
-        for (var i = 0; i < packPlates.folders.length; ++i) {
-            var f = packPlates.folders[i]
-            if (f.id === categoryId && (f.files || []).length > 0)
-                return true
-        }
+        if (fileInPlates(platesIndex(), categoryId, "") !== null)
+            return true
+        // Both bodies share the one `Head` asset, so a face sheet plate baked on
+        // the male head is the same picture on the female one.
+        if (gender === "female" && isPackDecal(categoryId))
+            return fileInPlates(packPlates, categoryId, "") !== null
         return false
+    }
+
+    // The file list for a category in an index, or null when it is not there.
+    function fileInPlates(index, categoryId, name) {
+        for (var i = 0; i < index.folders.length; ++i) {
+            var f = index.folders[i]
+            if (f.id !== categoryId)
+                continue
+            var files = f.files || []
+            if (name === "")
+                return files.length > 0 ? files : null
+            return files.indexOf(name) >= 0 ? files : null
+        }
+        return null
     }
 
     // A plate for this item, if one was baked. Empty means there is none, and the
     // strip's own art has to serve.
     function plateUrl(categoryId, name) {
-        for (var i = 0; i < packPlates.folders.length; ++i) {
-            if (packPlates.folders[i].id !== categoryId)
-                continue
-            if ((packPlates.folders[i].files || []).indexOf(name) >= 0)
-                return style.itemUrl(style.dirUrl(root.packPlateFolder, categoryId), name)
-            return ""
-        }
+        if (fileInPlates(platesIndex(), categoryId, name) !== null)
+            return style.itemUrl(style.dirUrl(plateFolder(), categoryId), name)
+        // Face sheets are drawn on the shared head, so their plates are too.
+        if (gender === "female" && isPackDecal(categoryId)
+                && fileInPlates(packPlates, categoryId, name) !== null)
+            return style.itemUrl(style.dirUrl(Qt.resolvedUrl("pack_plates/"), categoryId), name)
         return ""
     }
 
@@ -622,6 +711,10 @@ Item {
             // (bake_pack_face.py diffs the head with and without the sheet), so
             // they join the stack; without a plate they still cannot be drawn.
             if (usePackArt && isPackDecal(c.id) && !hasPlates(c.id))
+                continue
+            // A sheet with no plate for this item would draw its strip thumbnail
+            // over the whole avatar, so leave it out instead.
+            if (usePackArt && isPackDecal(c.id) && plateUrl(c.id, name) === "")
                 continue
             var url = style.itemUrl(c.path, name)
             if (usePackArt) {
@@ -1062,6 +1155,39 @@ Item {
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
             onClicked: root.toggleShadows()
+        }
+    }
+
+    // Male / female, as the console's editor offers it: the pack marks every
+    // item with one gender, and the two bodies have their own bakes.
+    Rectangle {
+        id: genderSwitch
+        visible: root.screen !== "choose"
+        anchors.right: modeSwitch.left
+        anchors.rightMargin: 8
+        y: 18
+        width: 92
+        height: 26
+        radius: 13
+        color: genderHover.containsMouse ? "#2b3a4e" : "#1b2634"
+        border.width: 1
+        border.color: root.gender === "female" ? root.accentColor : "#43546e"
+
+        Text {
+            anchors.centerIn: parent
+            text: root.gender === "female" ? "Female" : "Male"
+            color: root.gender === "female" ? root.accentColor : "#ffffff"
+            font.family: "Segoe UI"
+            font.pixelSize: 13
+            font.weight: Font.DemiBold
+        }
+
+        MouseArea {
+            id: genderHover
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.gender = root.gender === "female" ? "male" : "female"
         }
     }
 

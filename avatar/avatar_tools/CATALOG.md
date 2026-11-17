@@ -236,6 +236,38 @@ the same shape of asset (171 vertices, y 1.176-1.347). Avatar6400 wears one of
 these, so the editor's seed uses the stock `Left Parting` instead and this note
 is the record of why the seed differs from the descriptor.
 
+## Two avatars: the gender byte, and what it costs to bake both
+
+Every asset's metadata says which avatar it is for (`+1`: 1 male, 2 female, 3 both),
+so `avatar_tools/pack_genders.json` is a straight dump of that for all 585 models,
+and the bakers take `--gender`. A female item baked on `MaleBody` is simply the
+wrong picture, so the female half of the pack has its own trees:
+
+| tree | contents |
+| --- | --- |
+| `pack_plates_female/<category>/<slug>.png` | 384 plates, posed on FemaleBody |
+| `assets/3d/turntable_female/<slug>/` | the same 384 items, six frames each |
+| `PackGenders.qml` | item slug -> gender, so the strip only offers what fits |
+| `PackPlatesFemale.qml` | the female plate index |
+
+Both seeds are the pack's own descriptors: Avatar6400 dresses the male avatar
+(Jacket with Sweater, Male Flower Print Flares, Grunge Trainers) and Avatar6404 the
+female one (Sweater with Shirt, Formal Trouser Suit, Female Jelly Clogs). Two
+caveats, both data:
+
+- Avatar6404's legs item is `Formal Trouser Suit`, a formal outfit (`81_formal`),
+  not a `20_pants` item. The female seed names it anyway; since it is not in the
+  pants list the slot falls back to that category's first item.
+- The hair seeds are the stock styles (`Left Parting`, `Shaved Pattern`) rather
+  than the descriptors' `(Hat)` shells, which render bald for the reason given
+  further down.
+
+The female body shows small gaps at the hips under trousers (`formal-trouser-suit`,
+`female-baggy-jeans` and `twin-set` all do, so it is the body under cloth and not
+one garment). That is very likely what the 266 undecoded `ShapeOverrides` blocks
+are for - they are the only per-item block left that could move the body under
+clothing - so it is left as a defect rather than patched by hand.
+
 ## Face overlays in the 2D editor: a rendered difference, not a cutout
 
 The pack's face items are UV sheets, not body plates, so they cannot be baked like

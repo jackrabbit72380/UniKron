@@ -34,6 +34,8 @@ from bake_pack_thumbs import slug
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = {"MaleBody", "FemaleBody", "Head"}
+BODY_FOR = {"male": "MaleBody", "female": "FemaleBody"}
+GENDERS_JSON = os.path.join(HERE, "pack_genders.json")
 # Per process: two bakes running at once were deleting each other's objects when
 # this was a fixed name in /tmp.
 WORK = tempfile.mkdtemp(prefix="plate_")
@@ -52,14 +54,14 @@ def bake_obj(pack, clip, description, parts, out):
     return out
 
 
-def reference_frame(pack, clip, description):
+def reference_frame(pack, clip, description, body="MaleBody"):
     """The avatar's own normalisation: centre x/z, feet at zero, one unit tall.
 
     Measured on the body *with* its head. The pack keeps the head in a separate
     asset, so measuring the body alone puts the top of the frame at the neck and
     crops every plate that reaches above it.
     """
-    obj = bake_obj(pack, clip, description, ["MaleBody", "Head"],
+    obj = bake_obj(pack, clip, description, [body, "Head"],
                    os.path.join(WORK, "body.obj"))
     verts, _, _ = bt.read_obj(obj)
     os.remove(obj)
@@ -91,14 +93,23 @@ def main():
     ap.add_argument("--clip-asset", default="",
                     help="pose from this animation asset inside the pack instead "
                          "of the clip file (the idles give natural hands)")
+    ap.add_argument("--gender", choices=("male", "female"), default="male",
+                    help="frame and pose on this body, and only plate items the "
+                         "pack marks for it (pack_genders.json)")
     args = ap.parse_args()
 
     wanted = set(args.categories.split(","))
     with open(args.catalog, "r", encoding="utf-8") as fh:
         catalog = json.load(fh)["assets"]
+    with open(GENDERS_JSON, "r", encoding="utf-8") as fh:
+        genders = json.load(fh)
+
     items = []
     for record in catalog:
         category = (record.get("metadata") or {}).get("category")
+        tagged = (genders.get(record["name"]) or {}).get("gender", "both")
+        if tagged not in (args.gender, "both"):
+            continue
         if category not in wanted or not record.get("vertices"):
             continue
         if record["name"] in BASE and not args.include_base:
@@ -114,7 +125,8 @@ def main():
     if clip != args.clip:
         print("posing from pack asset %r" % args.clip_asset)
 
-    centre, height = reference_frame(args.pack, clip, args.description)
+    body = BODY_FOR[args.gender]
+    centre, height = reference_frame(args.pack, clip, args.description, body)
     print("body frame: centre %s, height %.4f" % (np.round(centre, 4), height))
 
     baked = skipped = failed = 0
@@ -148,7 +160,7 @@ def main():
         if category == "50_hair" and not occluder:
             head_obj = os.path.join(WORK, "occluder.obj")
             bake_obj(args.pack, clip, args.description,
-                     ["MaleBody", "Head"], head_obj)
+                     [body, "Head"], head_obj)
             overts, otris, _ = bt.read_obj(head_obj)
             occluder.append(((overts - centre) / height, otris))
         # Half a turn: the bake starts at the avatar's back.

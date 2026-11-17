@@ -38,10 +38,19 @@ from bake_pack_thumbs import slug
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = tempfile.mkdtemp(prefix="pack_tt_")
+# The two seeds are the two .Avatar descriptors: Avatar6400 (male) dresses in the
+# male seed below, Avatar6404 (female) in the female one. Both come from the
+# descriptor's look block, not from a guess (see CATALOG.md).
 STOCK = {"shirts": "Jacket with Sweater",
          "pants": "Male Flower Print Flares",
          "shoes": "Grunge Trainers"}
+STOCK_FEMALE = {"shirts": "Sweater with Shirt",
+                "pants": "Formal Trouser Suit",
+                "shoes": "Female Jelly Clogs"}
 HAIR = "Left Parting"
+HAIR_FEMALE = "Shaved Pattern"
+BODY_FOR = {"male": "MaleBody", "female": "FemaleBody"}
+GENDERS_JSON = os.path.join(HERE, "pack_genders.json")
 HAIR_COLOUR = "6e5326"
 # Which head UV set a decal sheet is painted through, established by
 # probe_decal_render.py: facial hair on set 1 (and it is a tint mask, red marks
@@ -69,14 +78,16 @@ def read_rgba(path):
 
 
 def bake_one(pack, clip, description, asset, kind, folder, frames, width, height,
-             category=None):
+             category=None, gender="male"):
     # Per process: two bakes at once were deleting each other's objects.
     obj = os.path.join(WORK, slug(asset) + ".obj")
+    stock = STOCK_FEMALE if gender == "female" else STOCK
+    hair = HAIR_FEMALE if gender == "female" else HAIR
     if kind == "dress":
-        worn = [STOCK["shoes"]]
+        worn = [stock["shoes"]]
     else:
-        worn = [STOCK[k] for k in ("shirts", "pants", "shoes") if k != kind]
-    head = ["MaleBody", "Head"] + ([] if kind == "hair" else [HAIR])
+        worn = [stock[k] for k in ("shirts", "pants", "shoes") if k != kind]
+    head = [BODY_FOR[gender], "Head"] + ([] if kind == "hair" else [hair])
     parts = head + [asset] + worn
     face_arg = "--face"
     if kind == "eyes":
@@ -135,15 +146,24 @@ def main():
     ap.add_argument("--clip-asset", default="",
                     help="pose from this animation asset inside the pack instead "
                          "of the clip file (the idles give natural hands)")
+    ap.add_argument("--gender", choices=("male", "female"), default="male",
+                    help="pose on this body and only bake items the pack marks "
+                         "for it (pack_genders.json; 'both' items are baked twice)")
     args = ap.parse_args()
 
     wanted = set(args.categories.split(","))
     with open(args.catalog, "r", encoding="utf-8") as fh:
         catalog = json.load(fh)["assets"]
 
+    with open(GENDERS_JSON, "r", encoding="utf-8") as fh:
+        genders = json.load(fh)
+
     items = []
     for record in catalog:
         category = (record.get("metadata") or {}).get("category")
+        tagged = (genders.get(record["name"]) or {}).get("gender", "both")
+        if tagged not in (args.gender, "both"):
+            continue
         # Decal and eye categories have a texture and no mesh, so they pass on
         # their own; the base body and head are never stage variants.
         has_mesh = bool(record.get("vertices"))
@@ -180,7 +200,8 @@ def main():
             skipped += 1
             continue
         error = bake_one(args.pack, clip, args.description, name, kind, folder,
-                         args.frames, args.width, args.height, category=category)
+                         args.frames, args.width, args.height, category=category,
+                         gender=args.gender)
         if error:
             failed += 1
             print("  failed %s: %s" % (name, error))

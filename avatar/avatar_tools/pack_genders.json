@@ -1,0 +1,2342 @@
+{
+ "50's Glasses": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "60's Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "70's Checked Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "70's Leather Platforms": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "70's Plaid Flares": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "A-line Bob": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "A-line Bob (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Afro": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Afro (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Babydoll Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Bald": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bald (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Ballet Flats": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Baseball Jersey": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Basin (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bedhead": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bedhead (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Beehive with Left Curl": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Beehive with Left Curl (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Beehive with Right Curl": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Beehive with Right Curl (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Biker Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Biker Jacket": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Black Hoodie": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Black Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Black Skinny Fit Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Black Trench Coat": {
+  "category": "82_coat",
+  "gender": "male"
+ },
+ "Black Tuxedo": {
+  "category": "82_coat",
+  "gender": "male"
+ },
+ "Black and Blue Fingerless Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Blue Bucket Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Blue Fingerless Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Blue Formal Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Blue Full-zip Hoodie": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Blue Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Blue Solidarity Band": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Blue Tuxedo": {
+  "category": "82_coat",
+  "gender": "male"
+ },
+ "Bob with Curls": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bob with Curls (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bob with Fringe": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bob with Fringe (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bowl Cut": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Braided Crown": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Braided Crown (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Brown Formal Shoes": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Brown Full-Zip Hoodie": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Bun": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Bun (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Buzz Cut": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Buzz Cut (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Camo Baseball Cap": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Cans Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Cardigan with Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Cargo Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Celtic Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Cheerleader Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Chino Shorts": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Chinos": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Chinos with Belt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Chopsticks Left Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Chopsticks Parted Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Chopsticks Right Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Chunky Beaded Bracelet": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Combed Back": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Combed Back (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Combed Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Combed Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Combed Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Combed Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Compact": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Compact (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Cork High Heels": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Cornrows": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Cornrows (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Cowboy Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Cowgirl Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Cowgirl Shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Crew Cut": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Crew Cut (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Crew Neck Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Crimped": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Crimped (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Crop Top with Sweat Bands": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Curtains": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Curtains (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Daisy Print Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Dark Purple Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Denim Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Denim Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Denim Skirt with Leggings": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Denim Surfer Shorts": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Digital Watch": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Dogtooth Pattern Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Dreadlocks": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Dreadlocks (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Dress with Sash": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Driving Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Dungarees": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Elegant Ball Gown": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Elegant Watch": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Embroidered Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Even Length": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Even Length (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Faded Jeans with Print": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Fauxhawk": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Fauxhawk (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Female 60's Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Austria Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Baggy Jeans": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Baseball Cap": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Belgium Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Black 60's Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Black 60's Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Boombox Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Camo Pants": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Cargo Pants": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Crew Neck Sweater": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Dayglo Zebra Print Pumps": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Denim Jacket": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Denim Shorts with Thread": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Denmark Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Diamante Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Diamond Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female England Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Finland Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Fitted Blazer": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Flares": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female France Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Full-zip Tracksuit": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Germany Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Glass Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Gold Heart Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Gold Hoop Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Gold Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Gold Wedding Band": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Female Goth Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Green Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Guest 1": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Guest 2": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Guest 3": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Italy Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Jelly Clogs": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Knit Pull-on with Bobble": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Knitted Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Large Hoop Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Left Beaded Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Left Feather Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Left Gold Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Left Silver Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Leopard Print Leggings": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Lips Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Little Black Dress": {
+  "category": "83_dress-formal",
+  "gender": "female"
+ },
+ "Female Neo Rave Pumps": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Netherlands Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Northern Ireland Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Norway Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Oval Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Oversized Jacket with Chains": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Pinstripe Blazer": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Platform Shoes": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Polo shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Portugal Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Power Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Punk Studs": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Rain Coat": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Rainy Day Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Rave Baseball Cap": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Red 60's Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Red Gem Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Red Heart Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Republic of Ireland Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Rhinestone Cowgirl Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Right Beaded Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Right Feather Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Right Gold Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Right Silver Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Rimless Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Sailor Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Scarlet Teardrop Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Scotland Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Short Shorts": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Silver Hoop Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Silver Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "female"
+ },
+ "Female Silver Wedding Band": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Female Snowboarding Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Snugg Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Spain Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Star Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Strappy High Heels": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Striped Knit Pull-on": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Female Studious Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Surfer Hotpants": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Surfer Shorts": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Sweden Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Switzerland Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female Tartan Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Tartan Skirt Re-textured": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Tennis Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Tiger Print Pumps": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Female Tortoiseshell Star Glasses": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Tracksuit Pants": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Female Two Button Babydoll Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Female Wales Sport Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Female White Dress Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Female White Heart Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Female Yellow Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "FemaleBody": {
+  "category": "10_body",
+  "gender": "female"
+ },
+ "Fingerless Heart Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Flame Beanie": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Flat Top": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Flat Top (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Flip Flops": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Flower Bobble Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Flower Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Formal Blouse": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Formal Shoes": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Formal Trouser Suit": {
+  "category": "81_formal",
+  "gender": "female"
+ },
+ "Full-zip Hoodie with Chain": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Funky Bumps": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Funky Bumps (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Gentle Waves": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Gentle Waves (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Gingham Shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Gold Bracelet": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Gold Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Gold Ring with Emeralds": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Goth Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Gothic Long Sleeved Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Green Bucket Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Green Chunky Ring": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Green Floral Baseball Cap": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Green Full-Zip Hoodie": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Green Skinny Fit Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Groovy Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Grunge Fingerless Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Grunge Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Grunge Trainers": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Hacking Jacket": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Head": {
+  "category": "15_face",
+  "gender": "both"
+ },
+ "High School Sports Hoodie": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "High Top Sneakers": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "High and Tight": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "High and Tight (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Hiking Shoes": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Hippy Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Hot Pink Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Jacket with Sweater": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Jacket with Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Jogger": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Jogging Pants": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Knit Pull-on": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Large Diamond Ring": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Layered Jacket": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Layered with Fringe": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Layered with Fringe (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Leather Biker Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Leather Strap Watch": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Left Comb Over": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Left Comb Over (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Left Curved Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Left Curved Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Left Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Left Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Long Flick": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Long Flick (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Long Sleeved Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Low Ponytail": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Low Ponytail (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Male 70's Full-zip Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Arthouse Glasses": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Male Austria Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Baseball Cap": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Belgium Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Black Cowboy Hat": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Black Trilby": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Male Bowler": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Bright Print Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Bright Sprite Hoodie": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male CSchool Jacket with Polo": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Camo Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Cargo Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Checked Jacket with Polo": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Chequered Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Chino Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Colorful Polo Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Cowboy hat": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Crew Neck Sweater": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Deer Stalker": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Denim Jacket with Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Denmark Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Diamond Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Dollar Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male England Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Finland Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Flower Print Flares": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Football Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Formal Suit": {
+  "category": "81_formal",
+  "gender": "male"
+ },
+ "Male France Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Germany Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Gold Heart Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Gold Hoop Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Gold Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Gold Wedding Band": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Male Green Xbox Sneakers": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Male Grunge Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Guest 1": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Guest 2": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Guest 3": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Italy Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Jam Jar Glasses": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Male Left Beaded Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Left Feather Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Left Gold Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Left Silver Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Netherlands Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Northern Ireland Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Norway Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Pilot Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Male Pixie Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Male Plimsolls": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Male Popper Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Portugal Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Power Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Punk Studs": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Punk Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Rave Baseball Cap": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Republic of Ireland Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Right Beaded Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Right Feather Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Right Gold Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Right Silver Hoop Earring": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male School Tie Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Scotland Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Male Silver Hoop Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Silver Stud Earrings": {
+  "category": "75_earrings",
+  "gender": "male"
+ },
+ "Male Silver Wedding Band": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Male Ski Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Male Snowboarding Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Male Snowboarding Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Soccer Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Spain Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Striped Jacket with Polo": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Stripped Visor Beanie": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Suit and Tie": {
+  "category": "81_formal",
+  "gender": "male"
+ },
+ "Male Surf Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Male Suspenders with High Pants": {
+  "category": "81_formal",
+  "gender": "male"
+ },
+ "Male Sweden Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Switzerland Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Tattoo Sweater": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male Top Hat": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Tortoise Shell Glasses": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Male Tweed Trilby": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Two Tone Beanie": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Male Wales Sport Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male White Dress Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Male White Vest": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Male White Xbox Sneakers": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "MaleBody": {
+  "category": "10_body",
+  "gender": "male"
+ },
+ "Maroon Knit Pull-on": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Metal Combats": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Metal Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Metallic Carbon Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Mint Sundress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Moccasins": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Mohawk": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Mohawk (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Moleskin Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Monacle": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Monkey Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Morning Suit": {
+  "category": "81_formal",
+  "gender": "male"
+ },
+ "Motocross Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Mullet": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Mullet (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Number One": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Number One (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Old Hair (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Open Neck Cardigan": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Open Neck Sweater": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Orange Solidarity Band": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Panama Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Parted Left and Slicked": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Parted Left and Slicked (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Parted Right and Slicked": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Parted Right and Slicked (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pastel Shirt with Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Pattern Knit Pull-on": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Peak": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Peak (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pencil Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Perm with Fringe": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Perm with Fringe (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pig Tails": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pig Tails (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pig Tails with Fringe": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pig Tails with Fringe (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pilot Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Pink Fingerless Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Pink Gem Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Pink Ski Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Pink Sweat Bands": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Pinstripe Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Pinup Curls": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pinup Curls (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pleated Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Polkadot Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Polo Shirt1": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Pompadour": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Pompadour (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Ponytail": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Ponytail (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Presenter Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Professional Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Punk Boots": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Punk Jacket and Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Punk Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Punk Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Quantum Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Quiff (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Rainbow Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Raised Front": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Raised Left Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Raised Left Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Raised Right Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Raised Right Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Rashguard": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Red Chunky Ring": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Red Formal Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Red Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Red Visor Beanie": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Retro Digital Watch": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Retro Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Retro Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Right Comb Over": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Right Curved Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Right Curved Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Right Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Ringlet Curls": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Ringlet Curls (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Rockabilly Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Rockabilly Top": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Rocker Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Rodeo Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Sandals": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Scarlet Pumps": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Shaggy": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaggy (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaped Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaped Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaped Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaped Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaved Pattern": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shaved Pattern (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shirt with Cummerbund": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Short Flick Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short Flick Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short Flick Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short Flick Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short Ties": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short Ties (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short and Spikey": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short and Spikey (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short with Left Curls": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short with Left Curls (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short with Right Curls": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Short with Right Curls (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shoulder Length": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Shoulder Length (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Silver Chain Bracelet": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Silver Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Silver Sapphire Ring": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Skateboard Tee": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Skinny Fit Jeans": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Skull Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Skull Wrist Band": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Slacks": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Slick Shades": {
+  "category": "70_glasses",
+  "gender": "female"
+ },
+ "Slick Watch": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Slicked": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Slicked (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Snowboarding Jacket": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Socks and Sandals": {
+  "category": "30_shoes",
+  "gender": "male"
+ },
+ "Sovereign Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Spiky on Top": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Spiky on Top (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Split Ring": {
+  "category": "76_rings",
+  "gender": "female"
+ },
+ "Sports Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Sports Trainers": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "Sports Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Sporty Sweat Bands": {
+  "category": "77_wristwear",
+  "gender": "female"
+ },
+ "Square Stones Ring": {
+  "category": "76_rings",
+  "gender": "male"
+ },
+ "Star Pattern Shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Straight Left Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Straight Left Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Straight Right Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Straight Right Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Strapless Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Straw Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Striped Sundress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Striped Sweater with Chain": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Studded Wrist Strap": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Studious Glasses": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Studious Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Studious Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Studious Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Studious Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Styled Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Styled Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Styled Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Styled Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Surfer Baseball Cap": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Surfer Bob": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Surfer Bob (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Surfer Dress": {
+  "category": "80_dress",
+  "gender": "female"
+ },
+ "Surfer Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Surfer Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Surfer Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Sweater with Shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Swept Back": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept Back (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept Back Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept Back Parting (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept from Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept from Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept from Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swept from Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Swim Shorts": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Tan Formal Suit": {
+  "category": "81_formal",
+  "gender": "male"
+ },
+ "Tartan Flat Cap": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "Teased Spikes": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Teased Spikes (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Tee with Belt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "The Captain Cut": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Thin on Top": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Thin on Top (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Thread Skirt": {
+  "category": "20_pants",
+  "gender": "female"
+ },
+ "Tied on Top Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Tied on Top Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Tied on Top Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Tied on Top Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Tight Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Titanium Sports Watch": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Track Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Tracksuit Pants": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Tropical Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Trucker Cap": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Turn Up Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Turtleneck Sweater": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Twin Buns": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Buns (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Plaits Left Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Plaits Parted Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Plaits Parted Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Plaits Right Parting": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Twin Set": {
+  "category": "81_formal",
+  "gender": "female"
+ },
+ "Two Tone Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Up and Over": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Up and Over (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "V Neck Tee": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "V Neck Top": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Vest with Straps": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Vibrant Sweat Bands": {
+  "category": "77_wristwear",
+  "gender": "male"
+ },
+ "Vintage Snowdrop Blouse": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Vintage Trilby": {
+  "category": "60_hat",
+  "gender": "male"
+ },
+ "Waistcoat and Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Waistcoat with Vest": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Western Duster": {
+  "category": "82_coat",
+  "gender": "male"
+ },
+ "White 60's Boots": {
+  "category": "30_shoes",
+  "gender": "female"
+ },
+ "White Cowgirl Hat": {
+  "category": "60_hat",
+  "gender": "female"
+ },
+ "White Shutter Shades": {
+  "category": "70_glasses",
+  "gender": "male"
+ },
+ "Wild from the Left": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Wild from the Left (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Wild from the Right": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Wild from the Right (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Winter Jacket": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Woolly Gloves": {
+  "category": "46_gloves",
+  "gender": "male"
+ },
+ "Work Shirt": {
+  "category": "40_shirt",
+  "gender": "male"
+ },
+ "Worn Jeans": {
+  "category": "20_pants",
+  "gender": "male"
+ },
+ "Wrap Shirt": {
+  "category": "40_shirt",
+  "gender": "female"
+ },
+ "Yellow Fingerless Gloves": {
+  "category": "46_gloves",
+  "gender": "female"
+ },
+ "Zigzag Fringe": {
+  "category": "50_hair",
+  "gender": "both"
+ },
+ "Zigzag Fringe (Hat)": {
+  "category": "50_hair",
+  "gender": "both"
+ }
+}
