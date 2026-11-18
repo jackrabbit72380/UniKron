@@ -55,23 +55,27 @@ def load(path):
     """File bytes, decompressed if the XNB carries an LZX stream.
 
     A compressed XNB keeps the file size at 6 and the decompressed size at 10,
-    then the stream. Version 5 needs one byte skipped and a 64 KiB window, which
-    is the arrangement the avatar pack's 32 KiB LZX does not decode - same codec,
-    different window.
+    then the stream. The stream is **XCompress framing, not a bare LZX stream**:
+    a run of 32 KiB output frames, each introduced by a 16-bit big-endian
+    compressed length, or by 0xFF, a 16-bit output length and a 16-bit compressed
+    length when the frame is short (the last one always is). Each frame restarts
+    the LZX bitstream at a byte boundary while the window and the repeated offsets
+    carry on, which is what MonoGame's `LzxDecoderStream` does by seeking back to
+    the frame start after every call. Stripping the prefixes and decoding frame by
+    frame (`lzx.decompress_frames`) reads every compressed file in the archive.
 
-    CORRECTION: an earlier version of this note claimed that arrangement read all
-    195 compressed files in Avatar Laser Wars 2. Measured over the whole archive,
-    **92 of the 185 `.xnb` files do not decode** - every compressed one. The 39
-    that do are all uncompressed (flags 0), and the failures are the interesting
-    clips: `Stand0`, `MaleIdleLookAround`, `MaleIdleShiftWeight`, `Wave`, `Clap`,
-    `Celebrate` and the whole of Avatar Connection, Warfare and Laser Wars 2.
-    Sweeping 12..79 bytes of start offset at 64 KiB and 32 KiB windows gives no
-    decode for any of them, and a bit-level scan of `Stand0` finds no LZX block
-    header that matches its 134,564-byte output, so the framing is not plain LZX
-    from some offset - it is something the retail XCompress wrapper adds and this
-    reader has not reconstructed. The clips that matter for a resting hand are in
-    the 39: `Idle.xnb` (Avatar Miner Paintball, 181 frames, 71 joints) is a full
-    standing idle authored on the same rig.
+    All 185 `.xnb` in `src_archive/avatar-games` now inflate: 39 uncompressed, 143
+    compressed version 5, 3 compressed version 4. An earlier note here said 92
+    failed and blamed the window size; that was this missing framing.
+
+    Reading the inflated clip is a separate matter, and 143 of the 185 still do not
+    read: they are `DNA.Drawing.Animation.AnimationClip+Reader` (DNA.Common) rather
+    than Hazzah's `CustomAvatarAnimationData`. That is a different record layout,
+    not a decode failure - `Stand0`'s 134,564 bytes open with the name `Stand0`, a
+    frames-a-second word (30), a TimeSpan duration (5.333 s), a joint count (71) and
+    a frame count (162), and the body's dominant byte stride is 16, where the Hazzah
+    clips store 76-byte (int, TimeSpan, matrix) keyframes. Until that layout is
+    read, the clips this module parses are the 42 Hazzah ones, `Idle.xnb` among them.
     """
     data = open(path, "rb").read()
     if data[:4] not in (b"XNBx", b"XNBw", b"XNBm"):
@@ -79,20 +83,68 @@ def load(path):
     if not data[5] & 0x80:
         return data
     size = struct.unpack_from("<I", data, 10)[0]
-    attempts = ((15, 0x10000), (14, 0x10000), (16, 0x10000),
-                (14, 0x8000), (15, 0x8000))
+    # The compressed body is XCompress framing, not a bare LZX stream: a sequence
+    # of 32 KiB output frames, each preceded by a 16-bit big-endian compressed
+    # length, or by 0xFF and then a 16-bit output length, a 16-bit compressed
+    # length when the frame is short (the last one always is). Each frame is its
+    # own LZX stream, so stripping the prefixes and joining the payloads gives one
+    # stream that decodes frame by frame - which is why every plain offset failed
+    # before: the first two bytes of a frame are a length, not a block header.
+    frames, produced = _deframe(data[14:])
     last = None
-    for start, window in attempts:
+    if produced == size:
+        for window in (0x10000, 0x8000):
+            try:
+                raw = lzx.decompress_frames(frames, window)
+            except lzx.LzxError as error:
+                last = error
+                continue
+            if len(raw) == size:
+                return raw
+    joined = b"".join(payload for payload, _ in frames)
+    for payload, window in ((joined, 0x10000), (data[15:], 0x10000),
+                            (data[14:], 0x10000), (data[15:], 0x8000)):
         try:
-            raw = lzx.decompress(data[start:], size, window)
+            raw = lzx.decompress(payload, size, window)
         except lzx.LzxError as error:
             last = error
             continue
         if len(raw) == size:
             return raw
-    # Avatar Boogie's five dances and Avatar Avenue's three clips are version 4
-    # and still do not read: every offset above fails at the first block header.
+    # The version 4 files (Avatar Boogie's five dances, Avatar Avenue's three
+    # clips) read through the same framing; nothing in the archive reaches here.
     raise ValueError("compressed XNB this decoder cannot read yet (%s)" % last)
+
+
+def _deframe(data):
+    """Split XCompress's frames: (payload, output size) pairs, and the total they claim.
+
+    A frame is a 16-bit big-endian compressed length and decodes to 0x8000 bytes,
+    unless the first byte is 0xFF: then the low byte just read is the high byte of
+    a 16-bit output length followed by a 16-bit compressed length. The last frame
+    is always short, so it always takes the 0xFF form.
+    """
+    frames = []
+    pos = 0
+    produced = 0
+    while pos + 2 <= len(data):
+        high, low = data[pos], data[pos + 1]
+        pos += 2
+        if high == 0xFF:
+            if pos + 3 > len(data):
+                break
+            output = (low << 8) | data[pos]
+            length = (data[pos + 1] << 8) | data[pos + 2]
+            pos += 3
+        else:
+            output = 0x8000
+            length = (high << 8) | low
+        if length == 0 or output == 0 or pos + length > len(data):
+            break
+        frames.append((data[pos:pos + length], output))
+        pos += length
+        produced += output
+    return frames, produced
 
 
 def _unpack_7bit(data, pos):

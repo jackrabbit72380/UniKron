@@ -270,6 +270,17 @@ class Decoder:
                 v = self._delta_len(lens, x, z)
                 x = self._set_len(lens, x, v)
 
+    def decode_frame(self, payload, output_size):
+        """One XCompress frame: its own bitstream, this decoder's state carried over.
+
+        XNB bodies are stored as 32 KiB output frames that each restart the
+        bitstream at a byte boundary, while the window, the repeated offsets and
+        the Huffman tables continue - MonoGame's LzxDecoderStream seeks back to
+        the frame start for exactly this reason."""
+        self.bits = Bits(payload)
+        self.length = self.offset + output_size
+        return self.decompress(bytes(output_size))
+
     def decompress(self, out):
         out = bytearray(out)
         out_bytes = len(out)
@@ -480,6 +491,18 @@ class Decoder:
         if out_bytes != 0:
             raise LzxError("bytes left to output")
         return bytes(out)
+
+
+def decompress_frames(frames, window_size=0x10000):
+    """Decode XCompress frames: (payload, output size) pairs, in order."""
+    if not frames:
+        raise LzxError("no frames")
+    total = sum(size for _, size in frames)
+    decoder = Decoder(b"", window_size.bit_length() - 1, total)
+    out = bytearray()
+    for payload, size in frames:
+        out += decoder.decode_frame(payload, size)
+    return bytes(out)
 
 
 def decompress(data, output_length, window_size=0x8000):
