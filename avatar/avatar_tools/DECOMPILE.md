@@ -641,6 +641,36 @@ pool, then the payloads back to back ending exactly at EOF. Every asset's name,
 offset and size come from its own record, and nothing in the file is left
 unaccounted for.
 
+### What the hiding templates do, measured
+
+Block 4's clothing templates are the retail mechanism for keeping skin out of the
+cloth, and the pack ships **230** of them. Checked against the catalogue, they
+pair with an item by name only for **180 of the 849** non-template assets:
+`Jacket with Sweater` -> `Jacket with Sweater Hiding Template`,
+`Male Flower Print Flares` -> `Flower Print Flares Hiding Template` (the gender
+prefix is dropped in the template's name), but `Male Power Tee` and `Chinos` have
+no template of their own at all. There is a second family - `Male Long Sleeved
+Top Template`, `Male Trousers Bottom Template` and the rest of the cut names -
+which hides by garment *cut* rather than by item.
+
+Neither family closes the visible fault. On the stock male outfit:
+
+| hidden by | vertices of `MaleBody` | effect on the render |
+| --- | ---: | --- |
+| the three item templates | 57 of 1,137 | no pixel changes |
+| the two cut templates | 45 of 1,137 | no pixel changes |
+| item + cut together | 70 of 1,137 | no pixel changes |
+
+Baking the same outfit with no body in the parts list shows what the specks are:
+they are `MaleBody` itself, through the sleeve at the shoulder and through the
+trouser at the ankle, because the two meshes are skinned independently and the
+body's surface crosses outside the garment's. So a template pass cannot dress an
+arbitrary item, and it does not stop the poke. `bake_avatar.py` therefore moves
+the offending body surface just inside the cloth - outside the garment and within
+2 cm of it, pushed along its own normal - which is **112 of 1,137** vertices on
+the stock outfit. The three rejected rules and why each failed are in
+`CATALOG.md`.
+
 ### The name field, partly pinned
 
 Read on more records, `+0xC0` is an **absolute file offset into the name pool**

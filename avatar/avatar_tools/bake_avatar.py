@@ -114,6 +114,153 @@ def asset_colour(name, record, colours, slots, clothing):
     return tuple(c / 255.0 for c in pick)
 
 
+def _ray_hits(points, tris, direction):
+    """How many triangles each ray from `points` along `direction` crosses.
+
+    Moller-Trumbore, vectorised over every triangle for a chunk of points. An odd
+    number of crossings means the point is inside the closed surface.
+    """
+    a = tris[:, 0, :]
+    e1 = tris[:, 1, :] - a
+    e2 = tris[:, 2, :] - a
+    d = np.asarray(direction, dtype=np.float64)
+    h = np.cross(d, e2)
+    det = np.einsum("ij,ij->i", e1, h)
+    keep = np.abs(det) > 1e-12
+    if not keep.any():
+        return np.zeros(len(points), dtype=np.int64)
+    a, e1, e2, h, inv = a[keep], e1[keep], e2[keep], h[keep], 1.0 / det[keep]
+    counts = np.zeros(len(points), dtype=np.int64)
+    for start in range(0, len(points), 128):
+        chunk = points[start:start + 128]
+        s = chunk[:, None, :] - a[None, :, :]
+        u = np.einsum("nmi,mi->nm", s, h) * inv
+        q = np.cross(s, e1[None, :, :])
+        v = np.einsum("nmi,i->nm", q, d) * inv
+        t = np.einsum("nmi,mi->nm", q, e2) * inv
+        cross = (u >= 0.0) & (u <= 1.0) & (v >= 0.0) & (u + v <= 1.0) & (t > 0.0)
+        counts[start:start + len(chunk)] = cross.sum(axis=1)
+    return counts
+
+
+def enclosed_by(points, tris):
+    """Which of `points` lie inside the closed surface `tris`.
+
+    Three axes, majority vote: one ray grazes an edge often enough that a single
+    parity test calls a surface vertex inside, and such a vertex would be left
+    where it is - outside the cloth, which is the fault being fixed.
+    """
+    points = np.asarray(points, dtype=np.float64)
+    if not len(points) or not len(tris):
+        return np.zeros(len(points), dtype=bool)
+    votes = np.zeros(len(points), dtype=np.int64)
+    for direction in ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0)):
+        votes += (_ray_hits(points, tris, direction) % 2).astype(np.int64)
+    return votes >= 2
+
+
+def _closest_on_triangles(points, tris):
+    """Exact distance from each point to the nearest triangle.
+
+    Vertex-vertex distance was tried first and is not good enough: on a coarse
+    garment mesh its nearest corner can be a whole sleeve radius from the surface,
+    so the body was pushed by centimetres and the wrist pinched where the cuff met
+    it. This is the standard barycentric clamp - project onto the triangle's plane
+    and fold the projection back onto the nearest edge when it falls outside.
+    """
+    a = tris[:, 0, :]
+    ab = tris[:, 1, :] - a
+    ac = tris[:, 2, :] - a
+    bc = tris[:, 2, :] - tris[:, 1, :]
+    d00 = np.einsum("mi,mi->m", ab, ab)
+    d01 = np.einsum("mi,mi->m", ab, ac)
+    d11 = np.einsum("mi,mi->m", ac, ac)
+    bc_len = np.einsum("mi,mi->m", bc, bc)
+    denom = d00 * d11 - d01 * d01
+    denom = np.where(np.abs(denom) < 1e-14, 1e-14, denom)
+    best = np.full(len(points), np.inf)
+    for start in range(0, len(points), 128):
+        chunk = np.asarray(points[start:start + 128], dtype=np.float64)
+        rel = chunk[:, None, :] - a[None, :, :]
+        d20 = np.einsum("nmi,mi->nm", rel, ab)
+        d21 = np.einsum("nmi,mi->nm", rel, ac)
+        v = (d11[None, :] * d20 - d01[None, :] * d21) / denom[None, :]
+        w = (d00[None, :] * d21 - d01[None, :] * d20) / denom[None, :]
+        u = 1.0 - v - w
+        inside = (u >= 0.0) & (v >= 0.0) & (w >= 0.0)
+        # Plane distance, valid where the projection landed inside the triangle.
+        plane = np.abs(u * (1.0 / np.maximum(denom, 1e-14)) *
+                       (d00[None, :] * d21 - d01[None, :] * d20) * 0.0)  # placeholder
+        # Fold onto the three edges for the rest, which is exact for the outside case.
+        t_ab = np.clip(d20 / np.maximum(d00, 1e-14)[None, :], 0.0, 1.0)
+        t_ac = np.clip(d21 / np.maximum(d11, 1e-14)[None, :], 0.0, 1.0)
+        bp = chunk[:, None, :] - tris[None, :, 1, :]
+        d_bc = np.einsum("nmi,mi->nm", bp, bc)
+        t_bc = np.clip(d_bc / np.maximum(bc_len, 1e-14)[None, :], 0.0, 1.0)
+        gap_ab = np.linalg.norm(chunk[:, None, :] - (a[None] + t_ab[..., None] * ab[None]), axis=2)
+        gap_ac = np.linalg.norm(chunk[:, None, :] - (a[None] + t_ac[..., None] * ac[None]), axis=2)
+        gap_bc = np.linalg.norm(chunk[:, None, :] - (tris[None, :, 1, :] + t_bc[..., None] * bc[None]), axis=2)
+        edge = np.minimum(np.minimum(gap_ab, gap_ac), gap_bc)
+        # Inside the triangle: the distance is the component of the offset along the
+        # plane normal.
+        n = np.cross(ab, ac)
+        n_len = np.linalg.norm(n, axis=1)
+        n_hat = n / np.maximum(n_len, 1e-14)[:, None]
+        flat = np.abs(np.einsum("nmi,mi->nm", rel, n_hat))
+        gap = np.where(inside, flat, edge)
+        best[start:start + len(chunk)] = gap.min(axis=1)
+    return best
+
+
+def vertex_normals(vertices, indices):
+    """Area-weighted vertex normals of one skinned batch."""
+    v = np.asarray(vertices, dtype=np.float64)
+    idx = np.asarray(indices, dtype=np.int64)
+    idx = idx[:len(idx) - len(idx) % 3].reshape(-1, 3)
+    tri = v[idx]
+    face = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    normals = np.zeros_like(v)
+    for corner in range(3):
+        np.add.at(normals, idx[:, corner], face)
+    length = np.linalg.norm(normals, axis=1)
+    length[length < 1e-12] = 1.0
+    return normals / length[:, None]
+
+
+def tuck_under_clothes(batches, tris, limit=0.02, margin=0.002):
+    """Push the parts of the body that stand outside a garment back inside it.
+
+    The body and the garment are skinned separately, so at the shoulder the body's
+    surface crosses outside the sleeve's and a tan patch shows in the middle of the
+    cloth. Deleting the covered body triangles was tried first: it does remove the
+    patch, but a garment is a shell with seams, and where a seam is the only thing
+    between the two surfaces the deletion opens a see-through sliver down the leg
+    and the side of the jacket. Moving the body in keeps the surface under the
+    cloth and leaves nothing to see through.
+
+    Two rules were tried and are wrong. Tucking every vertex within reach pulled
+    the forearm out to the sleeve it was already inside of; tucking everything
+    outside and within 5 cm caught the wrist hanging below the cuff and pinched the
+    hand onto the sleeve. What is left is the narrow band that matters: outside the
+    garment, and within 2 cm of it.
+    """
+    moved = 0
+    out = []
+    for batch in batches:
+        v = np.asarray(batch["vertices"], dtype=np.float64).copy()
+        if not len(tris):
+            out.append(batch)
+            continue
+        normals = vertex_normals(v, batch["indices"])
+        gap = _closest_on_triangles(v, tris)
+        hit = (~enclosed_by(v, tris)) & (gap > 0.0) & (gap < limit)
+        if hit.any():
+            v[hit] -= (gap[hit] + margin)[:, None] * normals[hit]
+            moved += int(hit.sum())
+        out.append(dict(batch, vertices=v))
+    return out, moved
+
+
 FACE_DEFAULT = ("Straight Eyebrows", "Happy Eyes", "Smirk Mouth")
 # Eyebrow, eye and mouth UV sets on the head (verified by drawing: swapping
 # the first two puts the eyes above the brows, which is backwards).
@@ -205,6 +352,11 @@ def main():
     # covers, which is what the block-4 hiding templates are for. Without it the
     # skin pokes through trousers and sleeves - visible at the thighs and armpits.
     hide_args = [a for a in sys.argv if a.startswith("--hide=")]
+    # --no-tuck turns off the cover pass below. It is on by default because
+    # otherwise the skin shows through every sleeve: the body and the garment are
+    # skinned separately, so at the shoulder the body's surface crosses outside the
+    # sleeve's and a tan patch appears in the middle of the cloth.
+    tuck_body = "--no-tuck" not in sys.argv
     # --xnb=PATH[:FRAME] poses the whole avatar from an avatar game's clip
     # instead of the pack's .AvatarAnimation file. Those clips are the only
     # shipped poses that include a resting hand.
@@ -295,6 +447,27 @@ def main():
     if face_args and colours is not None:
         face_textures = load_face_textures(pack, index, face_names)
 
+    # Garment triangles in posed space, for the cover test. They are posed once
+    # here, before the body is written, because the body is first in the parts
+    # list and its triangles have to be decided before they are emitted.
+    garment_tris = []
+    if tuck_body:
+        for garment in assets:
+            if garment in ("MaleBody", "FemaleBody", "Head"):
+                continue
+            gbatches = []
+            for block in am.strb_blocks(am.asset_bytes(pack, index, garment)):
+                if block[0] == 3:
+                    gbatches += am.read_model(am.decompress(block[3]))
+            if not gbatches:
+                continue
+            for gbatch in ap.posed_positions(gbatches, joints, poses):
+                v = np.asarray(gbatch["vertices"], dtype=np.float64)
+                idx = np.asarray(gbatch["indices"], dtype=np.int64)
+                if len(idx) >= 3:
+                    tri = idx[:len(idx) - len(idx) % 3].reshape(-1, 3)
+                    garment_tris.append(v[tri])
+
     for name in assets:
         # Vertex numbers restart with every asset, so the hidden set does too; kept
         # across assets it deleted the same indices from the head and the clothes.
@@ -336,6 +509,7 @@ def main():
         # A hiding template names the body vertices its garment covers and gives
         # their position; the vertices themselves are collapsed to one point, so
         # the triangles under the cloth disappear instead of poking through it.
+        hidden_by_batch = [set() for _ in batches]
         if hide_entries and name in ("MaleBody", "FemaleBody"):
             # Collapsing the covered vertices to one point was tried and produced
             # spikes: the triangles that survive stretch from that point out to the
@@ -343,7 +517,7 @@ def main():
             # cloth is the only surface there.
             offset = 0
             hidden = 0
-            for batch in batches:
+            for batch_index, batch in enumerate(batches):
                 count = len(batch["vertices"])
                 inside = set()
                 for e in hide_entries:
@@ -352,12 +526,17 @@ def main():
                     i = e["vertex"] - offset
                     if 0 <= i < count:
                         inside.add(i)
-                hidden_by_batch.append(inside)
+                hidden_by_batch[batch_index] |= inside
                 hidden += len(inside)
                 offset += count
             print("  hiding %d of %d vertices on %s" % (hidden, offset, name))
         skipped = 0
-        for batch_index, batch in enumerate(ap.posed_positions(batches, joints, poses)):
+        posed = ap.posed_positions(batches, joints, poses)
+        if tuck_body and garment_tris and name in ("MaleBody", "FemaleBody"):
+            posed, tucked = tuck_under_clothes(posed, np.concatenate(garment_tris))
+            print("  tucked %d body vertices under %d garment batch(es)"
+                  % (tucked, len(garment_tris)))
+        for batch_index, batch in enumerate(posed):
             base = written
             plain = rgb is None
             for v in batch["vertices"]:

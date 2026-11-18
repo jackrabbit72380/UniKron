@@ -516,6 +516,47 @@ and facial-hair plates are not expected: both bodies share the one `Head` asset 
 the editor falls back to the male sheet. And an item with no geometry cannot have
 a plate of its own, which is why the eyes are drawn by `bake_pack_face.py`.
 
+## The body under the clothes
+
+The 3D sets showed skin-coloured specks on the shoulders, the sleeve and the
+ankle of an otherwise fully dressed avatar. Three tests settled what they were,
+and the first two are recorded because they are the wrong answers:
+
+* They are **not** the garment's own colour. Hiding every garment vertex named by
+the stock outfit's block-4 hiding templates (`Jacket with Sweater Hiding
+Template`, `Flower Print Flares Hiding Template`, `Grunge Trainers Hiding
+Template`) removes 57 of `MaleBody`'s 1,137 vertices and changes no pixel.
+* They are **not** the cut templates either: `Male Long Sleeved Top Template` plus
+`Male Trousers Bottom Template` hide 45 vertices, and both together with the
+item templates hide 70. The specks stay.
+* They **are** `MaleBody`. Baking the same outfit without the body removes every
+one of them, and nothing else changes.
+
+So the body and the garment are skinned separately, and at the shoulder the
+body's surface crosses outside the sleeve's. `bake_avatar.py` now settles it from
+the garment's own geometry instead of from a template: a body vertex that is
+outside the worn garments but within 2 cm of one is pushed along its own normal
+until it sits just inside the cloth (`tuck_under_clothes`). On the stock male
+outfit that is **112 of 1,137** body vertices, and the count is printed per bake
+so a change in the meshes shows as a different number rather than as a silent
+regression. `--no-tuck` turns it off.
+
+Three simpler versions were tried and are recorded because each looked wrong in
+the render, not in theory:
+
+| rule | vertices moved | what it did |
+| --- | ---: | --- |
+| delete every enclosed body vertex | 504 | removed the specks and opened see-through slivers down the leg and the jacket's side, where a garment seam is the only surface |
+| push every vertex within 5 cm of a garment | 155 | pinched the wrists: a hand hanging below a cuff was caught and pulled onto it |
+| same, with a nearest-vertex distance | 638 | collapsed the forearm, because a coarse garment's nearest *corner* is a sleeve radius from its surface |
+
+What the templates are worth is a separate measurement: only **180 of the 849**
+catalog items ship a hiding template at all (the pack names one per wardrobe
+piece it offered; `Male Power Tee` and `Chinos` have none), and the templates
+that do exist name too few vertices to matter here - 57 for the whole stock
+outfit. So the cover pass is computed from whatever garment is actually worn, and
+the templates are not used by the bakers.
+
 That difference bake had one hole of its own. The stock face is `Straight
 Eyebrows, Happy Eyes, Smirk Mouth`, and the comparison starts from it, so the item
 that *is* that face differed from itself by nothing and was dropped as "the sheet

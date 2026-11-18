@@ -55,10 +55,23 @@ def load(path):
     """File bytes, decompressed if the XNB carries an LZX stream.
 
     A compressed XNB keeps the file size at 6 and the decompressed size at 10,
-    then the stream. Version 5 needs one byte skipped and a 64 KiB window: Avatar
-    Laser Wars 2's 195 compressed files all read that way, and the result begins
-    with an ordinary type-reader table. The 32 KiB window that the avatar pack
-    uses does not decode them, which is the trap here - same LZX, different window.
+    then the stream. Version 5 needs one byte skipped and a 64 KiB window, which
+    is the arrangement the avatar pack's 32 KiB LZX does not decode - same codec,
+    different window.
+
+    CORRECTION: an earlier version of this note claimed that arrangement read all
+    195 compressed files in Avatar Laser Wars 2. Measured over the whole archive,
+    **92 of the 185 `.xnb` files do not decode** - every compressed one. The 39
+    that do are all uncompressed (flags 0), and the failures are the interesting
+    clips: `Stand0`, `MaleIdleLookAround`, `MaleIdleShiftWeight`, `Wave`, `Clap`,
+    `Celebrate` and the whole of Avatar Connection, Warfare and Laser Wars 2.
+    Sweeping 12..79 bytes of start offset at 64 KiB and 32 KiB windows gives no
+    decode for any of them, and a bit-level scan of `Stand0` finds no LZX block
+    header that matches its 134,564-byte output, so the framing is not plain LZX
+    from some offset - it is something the retail XCompress wrapper adds and this
+    reader has not reconstructed. The clips that matter for a resting hand are in
+    the 39: `Idle.xnb` (Avatar Miner Paintball, 181 frames, 71 joints) is a full
+    standing idle authored on the same rig.
     """
     data = open(path, "rb").read()
     if data[:4] not in (b"XNBx", b"XNBw", b"XNBm"):

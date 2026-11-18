@@ -93,7 +93,7 @@ animated() {
   clip=$(python3 -c "import pack_clip; print(pack_clip.resolve('$PACK', '$CLIPS', '$CLIP_ASSET', '/tmp'))")
   python3 bake_animated.py "$PACK" "$clip" descriptors/Avatar6400.Avatar ../assets/3d/animated \
     --poses=10 --yaws=12
-  python3 bake_outfits.py "$PACK" "$clip" ../assets/3d
+  python3 bake_outfits.py "$PACK" "$clip" descriptors/Avatar6400.Avatar ../assets/3d
 }
 
 case "$STAGE" in
