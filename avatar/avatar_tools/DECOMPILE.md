@@ -316,6 +316,46 @@ embedded source paths (`C:/Users/vigln/dev/rexglue-sdk/src/ui/rex_app.cpp`) mark
 the host as a rexglue build, and it answers on `http://127.0.0.1:8080` for
 debugging.
 
+## The avatar-game clips: the framing, and the reader that is still closed
+
+The 185 `.xnb` under `src_archive/avatar-games` are 39 uncompressed and 146
+compressed. The compressed body is **not a bare LZX stream**: it is XCompress
+framing - a run of 32 KiB output frames, each introduced by a 16-bit big-endian
+compressed length, or by `0xFF`, a 16-bit output length and a 16-bit compressed
+length when the frame is short (the last one always is) - and each frame
+restarts the LZX bitstream at a byte boundary while the window and the repeated
+offsets carry on. MonoGame's `LzxDecoderStream` does exactly this by seeking back
+to the frame start after every call, and two independent format notes agree:
+libcna's ("an LZX block and an output frame coincide, one block per frame") and
+`vs-sr-dev/pc-infiniteundiscovery`'s `docs/formats/slz.md` ("this is the same
+framing XNB files use for LZX. It belongs to XCompress, not to LZX"). Handing
+those prefixes to the codec as block headers is why every compressed file failed
+before - the first two bytes of a frame are a length, not a header.
+`lzx.decompress_frames` reads **all 185**: 39 uncompressed, 143 compressed
+version 5, 3 version 4. (This replaces an earlier note here that blamed the
+window size and said 92 could not be read.)
+
+Reading the inflated clip is a separate matter, and **42 of the 185 parse**: the
+Hazzah `CustomAvatarAnimationData` reader. The other 143 are
+`DNA.Drawing.Animation.AnimationClip+Reader` (DNA.Common) and keep a layout of
+their own. Measured on `Stand0.xnb` (134,564 bytes, 5.333 s at 30 a second):
+
+- after the reader table: `01`, a 7-bit string (`Stand0`), `u32` 30 (frames a
+  second), a `TimeSpan` (53,333,846 ticks), `u32` 71 (joints), `u32` 162;
+- that last word is frames + 2 to + 4 on the 36 clips with a real name, and 1 on
+  the 107 named `Take 001`, so the two groups differ and its meaning is open;
+- the body is a mix of run types rather than one record: a run of 3-float
+  translation-shaped records whose values hold to 1e-5 over ~150 records
+  (`(0.0241, -0.0136, 0)`), then a run of 4-float unit quaternions
+  (`(0.0384, -0.0347, 0.0456, 0.9976)` repeated across frames);
+- bytes a frame differ per clip - 766 (`FemaleCry`) to 926 (`Clap`) - so
+  per-joint key counts are stored somewhere not yet found, and that is the whole
+  remaining problem;
+- no 3x3 or 4x4 matrix grid fits the body at any of the first 120 float offsets.
+
+The hand pose still comes from `Idle.xnb` (Hazzah, 181 frames, 71 joints), which
+parses byte-identically after the framing change.
+
 ## The brick walls
 
 1. **The XTL renderer's corpus has the same defect and its input is gone.**
