@@ -504,6 +504,31 @@ not applied by any baker.
 Anything unexpected makes it exit non-zero and stops the bake; `SKIP_AUDIT=1`
 bypasses it, which is only for iterating on the bakers themselves.
 
+## The hand
+
+The hand was the last thing in the avatar that was authored rather than measured:
+`avatar_pose.py` applied a loose curl (8/10/6 degrees per phalanx), a 0.85
+adduction and a -90 degree wrist roll, and said so in a note headed "ART CHOICE,
+not recovered data". Rendered at 300 px a hand is legible, so the three ways of
+posing it were put side by side (`artifacts/hand3.png`):
+
+| pose | what the hand looks like |
+| --- | --- |
+| editor idle + the authored curl | fingers turn inward, tips overlap, the wrist pinches - a claw |
+| editor idle alone | fingers straight and spread, four separate tubes - a rake |
+| the game `Idle.xnb`'s finger joints | fingers together and curled, thumb alongside - a hand |
+
+So neither of the editor's own options is the hand, and the authored angles were
+the wrong answer as well. The avatar games are authored on the same 71-joint rig,
+and their `Idle.xnb` (Avatar Miner Paintball, 181 frames) is a full standing idle
+that does pose the fingers. `bake_avatar.py` therefore takes the **30 finger
+joints** from it (`finger_bones`) and every other joint from the editor's own
+`Animation Male Idle Shifts Weight`: the stance is the editor's, the hand is
+measured. `AVATAR_FINGER_XNB` points at the clip and `rebake_everything.sh` sets
+it; a checkout without the avatar games bakes the editor's open hand and says so.
+The authored curl is still in the file behind `AVATAR_FINGER_POSE=1`, off by
+default, because it is what the comparison above was measured against.
+
 ## Verifying the art against the plan
 
 `verify_art.py` answers, without baking, whether the files on disk are the ones

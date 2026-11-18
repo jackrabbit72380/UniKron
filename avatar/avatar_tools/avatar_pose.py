@@ -81,7 +81,18 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 
 # ---------------------------------------------------------------- finger pose
 #
-# ART CHOICE, not recovered data. Stop and read this before "fixing" it.
+# ART CHOICE, not recovered data, and off by default now that the fingers come
+# from a clip (`AVATAR_FINGER_XNB` in bake_avatar.py). It is kept because the
+# comparison it was tuned against is worth being able to reproduce:
+#
+#   pack idle + this pose  -> the fingers turn inward and the wrist pinches; the
+#                             hand reads as a claw (artifacts/hand3.png, row 1)
+#   pack idle, no pose     -> straight splayed fingers, a rake (row 2)
+#   game Idle.xnb fingers  -> fingers together and slightly curled, which is a
+#                             hand (row 3), and is measured, not authored
+#
+# So AVATAR_FINGER_POSE defaults to 0 and AVATAR_WRIST_ROLL to 0: with the clip
+# supplying the fingers there is nothing left for either to do.
 #
 # The pack models the hand open and fanned, and nothing in the archive bends it:
 # the idle clip leaves every finger at its bind delta, and forcing the hand
@@ -114,10 +125,12 @@ FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.85"))
 # only so the two directions can be rendered side by side and the right one
 # chosen by looking at the hand rather than trusting a cross product.
 FINGER_SIGN = float(os.environ.get("AVATAR_FINGER_SIGN", "1"))
+# Off unless asked for - see the note above.
+FINGER_POSE = os.environ.get("AVATAR_FINGER_POSE", "0") == "1"
 # Forearm pronation, in degrees about the arm's own axis. The pack's idle clips
 # carry none, which leaves the palms facing sideways and the hand flat to the
 # camera; the retail editor shows them facing the thighs.
-WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "-90"))
+WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "0"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
@@ -703,7 +716,7 @@ def posed_positions(batches, joints_rig, poses):
     # ART CHOICE note at the top of this file). `AVATAR_FINGER_POSE=0` shows the
     # clip's own hand, and probe_hand.py / show_hand.py render either.
     apply_wrist_roll(joints_rig, locals_)
-    if os.environ.get("AVATAR_FINGER_POSE", "1") == "1":
+    if FINGER_POSE:
         apply_finger_pose(joints_rig, bind, locals_)
 
     worlds = []

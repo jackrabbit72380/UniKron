@@ -28,6 +28,10 @@ fi
 CLIPS="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/Cheer.AvatarAnimation"
 CATEGORIES="10_body,15_face,16_face-paint,20_pants,30_shoes,40_shirt,45_facial-hair,46_gloves,50_hair,60_hat,70_glasses,75_earrings,76_rings,77_wristwear,80_dress,81_formal,82_coat,83_dress-formal"
 CLIP_ASSET="Animation Male Idle Shifts Weight"
+# The fingers come from a game clip, because the pack's own idles do not pose them:
+# the hand this build draws was hand-authored until it was measured against this.
+# Missing file is not an error - bake_avatar says so and keeps the clip's hands.
+export AVATAR_FINGER_XNB="${AVATAR_FINGER_XNB:-$PWD/../../../src_archive/avatar-games/Avatar Games/Avatar Games1/Avatar Miner Paintball/Content/Avatar Animations/Idle.xnb}"
 JOBS="${JOBS:-8}"
 STAGE="${1:-all}"
 
