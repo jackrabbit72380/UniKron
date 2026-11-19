@@ -1,0 +1,99 @@
+# 0x98095858  376 bytes  94 decoded rows
+# unknown=5 scalar=86 call=2 branch=1 returns=0
+# calls: 0x980950a0 0x98095370
+# branches: 0x980959b8
+
+98095858  7d8802a6  mflr r12                               
+9809585c  9181fff8  stw r12, -8(r1)                        
+98095860  dbc1ffe8  stfd f30, -0x18(r1)                    
+98095864  dbe1fff0  stfd f31, -0x10(r1)                    
+98095868  9421ff70  stwu r1, -0x90(r1)                     
+9809586c  ffe00a10  fabs f31, f1                           
+98095870  3d609802  lis r11, -0x67fe                       
+98095874  d3e10050  stfs f31, 0x50(r1)                     
+98095878  c00b1400  lfs f0, 0x1400(r11)                    ; 3.75 
+9809587c  ff1f0000  fcmpu cr6, f31, f0                     
+98095880  40980068  bge cr6, 0x980958e8                    
+98095884  3d609802  lis r11, -0x67fe                       
+98095888  3d409802  lis r10, -0x67fe                       
+9809588c  3d209802  lis r9, -0x67fe                        
+98095890  3d009802  lis r8, -0x67fe                        
+98095894  3ce09802  lis r7, -0x67fe                        
+98095898  c00b13fc  lfs f0, 0x13fc(r11)                    ; 0.266667 
+9809589c  3d609802  lis r11, -0x67fe                       
+980958a0  ece10032  fmuls f7, f1, f0                       
+980958a4  c00a13f8  lfs f0, 0x13f8(r10)                    ; 0.0045813 
+980958a8  c1a913f4  lfs f13, 0x13f4(r9)                    ; 0.0360768 
+980958ac  3d409802  lis r10, -0x67fe                       
+980958b0  c18813f0  lfs f12, 0x13f0(r8)                    ; 0.265973 
+980958b4  3d209800  lis r9, -0x6800                        
+980958b8  c16713ec  lfs f11, 0x13ec(r7)                    ; 1.20675 
+980958bc  c14b13e8  lfs f10, 0x13e8(r11)                   ; 3.08994 
+980958c0  c12a13e4  lfs f9, 0x13e4(r10)                    ; 3.51562 
+980958c4  c109162c  lfs f8, 0x162c(r9)                     ; 1 
+980958c8  ece701f2  fmuls f7, f7, f7                       
+980958cc  ec07683a  fmadds f0, f7, f0, f13                 
+980958d0  ec0061fa  fmadds f0, f0, f7, f12                 
+980958d4  ec0059fa  fmadds f0, f0, f7, f11                 
+980958d8  ec0051fa  fmadds f0, f0, f7, f10                 
+980958dc  ec0049fa  fmadds f0, f0, f7, f9                  
+980958e0  ec2041fa  fmadds f1, f0, f7, f8                  
+980958e4  480000d4  b 0x980959b8                           
+980958e8  3d609800  lis r11, -0x6800                       
+980958ec  efc0f824  fdivs f30, f0, f31                     
+980958f0  39410054  addi r10, r1, 0x54                     
+980958f4  39210058  addi r9, r1, 0x58                      
+980958f8  39010050  addi r8, r1, 0x50                      
+980958fc  38e10058  addi r7, r1, 0x58                      
+98095900  c00b13e0  lfs f0, 0x13e0(r11)                    
+98095904  d0010054  stfs f0, 0x54(r1)                      
+98095908  13e05407  vcmpneb. v31, v0, v10                  
+9809590c  d0010058  stfs f0, 0x58(r1)                      
+98095910  13c04c07  vcmpneb. v30, v0, v9                   
+98095914  13a04407  vcmpneb. v29, v0, v8                   
+98095918  d0010058  stfs f0, 0x58(r1)                      
+9809591c  13803c07  vcmpneb. v28, v0, v7                   
+98095920  1ba4e7d5  VMX-6-p06(undecoded)                   
+98095924  1bc4ffd5  VMX-6-p06(undecoded)                   
+98095928  143deaf1  VMX-5-p05(undecoded)                   
+9809592c  1823f791  VMX-6-p06(undecoded)                   
+98095930  4bfff771  bl 0x980950a0                          
+98095934  39610060  addi r11, r1, 0x60                     
+98095938  fc20f890  fmr f1, f31                            
+9809593c  102059c3  VMX-p04(undecoded)                     
+98095940  4bfffa31  bl 0x98095370                          
+98095944  3d609802  lis r11, -0x67fe                       
+98095948  c0010060  lfs f0, 0x60(r1)                       
+9809594c  3d409802  lis r10, -0x67fe                       
+98095950  ece00824  fdivs f7, f0, f1                       
+98095954  3d209802  lis r9, -0x67fe                        
+98095958  3d009802  lis r8, -0x67fe                        
+9809595c  3ce09802  lis r7, -0x67fe                        
+98095960  c00b13e0  lfs f0, 0x13e0(r11)                    ; 0.00392377 
+98095964  3d609802  lis r11, -0x67fe                       
+98095968  c1aa13dc  lfs f13, 0x13dc(r10)                   ; 0.0164763 
+9809596c  3d409802  lis r10, -0x67fe                       
+98095970  ecde6838  fmsubs f6, f30, f0, f13                
+98095974  c00913d8  lfs f0, 0x13d8(r9)                     ; 0.0263554 
+98095978  c1a813d4  lfs f13, 0x13d4(r8)                    ; 0.0205771 
+9809597c  3d209802  lis r9, -0x67fe                        
+98095980  c18713d0  lfs f12, 0x13d0(r7)                    ; 0.00916281 
+98095984  3d009802  lis r8, -0x67fe                        
+98095988  c16b13cc  lfs f11, 0x13cc(r11)                   ; 0.00157565 
+9809598c  c14a13c8  lfs f10, 0x13c8(r10)                   ; 0.00225319 
+98095990  c12913c4  lfs f9, 0x13c4(r9)                     ; 0.0132859 
+98095994  c10813c0  lfs f8, 0x13c0(r8)                     ; 0.398942 
+98095998  ec0607ba  fmadds f0, f6, f30, f0                 
+9809599c  ec006fb8  fmsubs f0, f0, f30, f13                
+980959a0  ec0067ba  fmadds f0, f0, f30, f12                
+980959a4  ec005fb8  fmsubs f0, f0, f30, f11                
+980959a8  ec0057ba  fmadds f0, f0, f30, f10                
+980959ac  ec004fba  fmadds f0, f0, f30, f9                 
+980959b0  ec0047ba  fmadds f0, f0, f30, f8                 
+980959b4  ec270032  fmuls f1, f7, f0                       
+980959b8  38210090  addi r1, r1, 0x90                      
+980959bc  8181fff8  lwz r12, -8(r1)                        
+980959c0  7d8803a6  mtlr r12                               
+980959c4  cbc1ffe8  lfd f30, -0x18(r1)                     
+980959c8  cbe1fff0  lfd f31, -0x10(r1)                     
+980959cc  4e800020  blr                                    

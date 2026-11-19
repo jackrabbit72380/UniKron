@@ -1,0 +1,39 @@
+# 0x98065ca0  136 bytes  34 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=29 call=5 branch=0 returns=0
+# calls: 0x98061950 0x9805c738 0x9805c800 0x9806b008 0x9813b83c
+# branches: -
+
+98065ca0  7d8802a6  mflr r12                               
+98065ca4  9181fff8  stw r12, -8(r1)                        
+98065ca8  9421f500  stwu r1, -0xb00(r1)                    
+98065cac  38a00a40  li r5, 0xa40                           
+98065cb0  38800000  li r4, 0                               
+98065cb4  386100b0  addi r3, r1, 0xb0                      
+98065cb8  4bffbc99  bl 0x98061950                          
+98065cbc  39610060  addi r11, r1, 0x60                     
+98065cc0  39200000  li r9, 0                               
+98065cc4  3940000a  li r10, 0xa                            
+98065cc8  7d4903a6  mtctr r10                              
+98065ccc  f92b0000  std r9, 0(r11)                         
+98065cd0  396b0008  addi r11, r11, 8                       
+98065cd4  4200fff8  bdnz 0x98065ccc                        
+98065cd8  81410af8  lwz r10, 0xaf8(r1)                     
+98065cdc  3d60c000  lis r11, -0x4000                       
+98065ce0  39210060  addi r9, r1, 0x60                      
+98065ce4  616b000d  ori r11, r11, 0xd                      
+98065ce8  91210050  stw r9, 0x50(r1)                       
+98065cec  38600000  li r3, 0                               
+98065cf0  91610060  stw r11, 0x60(r1)                      
+98065cf4  9141006c  stw r10, 0x6c(r1)                      
+98065cf8  394100b0  addi r10, r1, 0xb0                     
+98065cfc  91410054  stw r10, 0x54(r1)                      
+98065d00  4bff6a39  bl 0x9805c738                          
+98065d04  38610050  addi r3, r1, 0x50                      
+98065d08  4bff6af9  bl 0x9805c800                          
+98065d0c  28030000  cmplwi r3, 0                           
+98065d10  4082000c  bne 0x98065d1c                         
+98065d14  38600002  li r3, 2                               
+98065d18  480052f1  bl 0x9806b008                          
+98065d1c  3860001e  li r3, 0x1e                            
+98065d20  480d5b1d  bl 0x9813b83c                          
+98065d24  00000000  nop-or-padding                         

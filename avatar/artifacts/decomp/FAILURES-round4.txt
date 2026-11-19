@@ -1,0 +1,150 @@
+# Functions that do not decompile, round four (project A11, PowerPC:BE:64:Xenon)
+#
+# Function set: 5,224 = Ghidra's own analysis (3,474, incl. 147 modelled import
+# trampolines) + 1,750 created at post-terminator starts (MakeRunFunctions).
+# 5,104 decompile clean (97.70%), 29 carry halt_baddata, 91 return no body.
+#
+# .text bytes 1,053,148: 1,040,376 decoded (98.79%), 12,772 undefined in 2,392 runs.
+# instructions 260,094: 246,092 inside a function (after TrimBackwardBodies), 14,002 orphan.
+#
+# Failures per 4 KB page (the first four pages are the shared-case-block cluster):
+#   0x98068000  21
+#   0x98069000  18
+#   0x9806c000  17
+#   0x98067000  13
+#   0x98114000  10
+#   0x98113000  5
+#   0x980df000  3
+#   0x980f8000  3
+#
+# NOTE: the same 120 entries fail after AddComputedJumps (559 computed-jump refs),
+# ClearMisaligned (one instruction) and TrimBackwardBodies (12 bodies, 36,980 bytes);
+# only the body extents of 12 entries changed. The colour dispatcher FUN_9804d2f8
+# (body 0x9804d2f8..0x9804d33b, 46-case table 0x98002980 base 0x9804c73c) is one of
+# the no-body entries below - see DECOMPILE.md "second correction".
+#
+# Every row: entry, name, body extent, statements, cause (multi-line message joined by ' | ')
+
+## 29 halt_baddata
+0x98041570 FUN_98041570                             body=98041570..980415a3 stmts=140 halt_baddata
+0x98046ef0 FUN_98046ef0                             body=98046ef0..98046f67 stmts=50 halt_baddata
+0x98055848 FUN_98055848                             body=98055848..9805587f stmts=37 halt_baddata
+0x98055930 FUN_98055930                             body=98055930..98055967 stmts=42 halt_baddata
+0x98056758 FUN_98056758                             body=98056758..980567cf stmts=62 halt_baddata
+0x98056cc8 FUN_98056cc8                             body=98056cc8..98056d2f stmts=69 halt_baddata
+0x98065ca0 FUN_98065ca0                             body=98065ca0..98065d23 stmts=17 halt_baddata
+0x9806b204 FUN_9806b204                             body=9806b204..9806b207 stmts=4 halt_baddata
+0x980ad248 FUN_980ad248                             body=980ad248..980ad2f3 stmts=15 halt_baddata
+0x980ad3b0 FUN_980ad3b0                             body=980ad3b0..980ad4ff stmts=18 halt_baddata
+0x980b9b20 FUN_980b9b20                             body=980b9b20..980b9b6f stmts=20 halt_baddata
+0x980b9c40 FUN_980b9c40                             body=980b9c40..980b9c93 stmts=5 halt_baddata
+0x980ded60 FUN_980ded60                             body=980ded60..980deff3 stmts=148 halt_baddata
+0x980deff4 FUN_980deff4                             body=980deff4..980df00f stmts=158 halt_baddata
+0x980df010 FUN_980df010                             body=980df010..980df027 stmts=158 halt_baddata
+0x980df028 FUN_980df028                             body=980df028..980df043 stmts=158 halt_baddata
+0x980df044 FUN_980df044                             body=980df044..980df0c3 stmts=160 halt_baddata
+0x980f8450 FUN_980f8450                             body=980f8450..980f8553 stmts=277 halt_baddata
+0x980f8554 FUN_980f8554                             body=980f8554..980f88fb stmts=269 halt_baddata
+0x980fc7f8 FUN_980fc7f8                             body=980fc7f8..980fc963 stmts=218 halt_baddata
+0x980fc964 FUN_980fc964                             body=980fc964..980fca77 stmts=209 halt_baddata
+0x980fca78 FUN_980fca78                             body=980fca78..980fcfd7 stmts=322 halt_baddata
+0x98101eb0 FUN_98101eb0                             body=98101eb0..9810203b stmts=164 halt_baddata
+0x9810203c FUN_9810203c                             body=9810203c..981023ff stmts=159 halt_baddata
+0x9810213c FUN_9810213c                             body=9810213c..981023e7 stmts=167 halt_baddata
+0x981022c0 FUN_981022c0                             body=981022c0..981023d7 stmts=133 halt_baddata
+0x98125240 FUN_98125240                             body=98125240..98125277 stmts=8 halt_baddata
+0x9812ae50 FUN_9812ae50                             body=9812ae50..9812af7f stmts=19 halt_baddata
+0x9813b1c8 FUN_9813b1c8                             body=9813b1c8..9813b1ff stmts=2 halt_baddata
+
+## 91 no body (Bad instruction count exceeded / overlap)
+0x9803f478 FUN_9803f478                             body=9803f478..9803f4fb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9803e922) overlaps instruction at (ram,0x9803e920) | 
+0x980447b0 FUN_980447b0                             body=980447b0..9804482f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98043c95
+0x9804d2f8 FUN_9804d2f8                             body=9804d2f8..9804d33b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x980528ae
+0x9804eca0 FUN_9804eca0                             body=9804eca0..9804ed6b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98054fcb
+0x9804f728 FUN_9804f728                             body=9804f728..9804f82b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98054fcb
+0x98067a50 FUN_98067a50                             body=98067a50..98067ba3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067ba4 FUN_98067ba4                             body=98067ba4..98067bc3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067bc4 FUN_98067bc4                             body=98067bc4..98067c13 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067c14 FUN_98067c14                             body=98067c14..98067c4f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067c50 FUN_98067c50                             body=98067c50..98067c57 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067c58 FUN_98067c58                             body=98067c58..98067c8f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067c90 FUN_98067c90                             body=98067c90..98067d73 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067d74 FUN_98067d74                             body=98067d74..98067da7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x980671d5) overlaps instruction at (ram,0x980671d4) | 
+0x98067da8 FUN_98067da8                             body=98067da8..98067e1f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067e20 FUN_98067e20                             body=98067e20..98067e9f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067ea0 FUN_98067ea0                             body=98067ea0..98067f77 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067f78 FUN_98067f78                             body=98067f78..98067fb3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98067fb4 FUN_98067fb4                             body=98067fb4..980680e7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x980680e8 FUN_980680e8                             body=980680e8..980680f3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x980680f4 FUN_980680f4                             body=980680f4..980680ff stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98068100 FUN_98068100                             body=98068100..9806812b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x9806812c FUN_9806812c                             body=9806812c..9806859b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067013) overlaps instruction at (ram,0x98067010) | 
+0x98068608 FUN_98068608                             body=98068608..9806875f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068760 FUN_98068760                             body=98068760..9806877f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068780 FUN_98068780                             body=98068780..980687cf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x980687d0 FUN_980687d0                             body=980687d0..9806880b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x9806880c FUN_9806880c                             body=9806880c..98068813 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068814 FUN_98068814                             body=98068814..9806884b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x9806884c FUN_9806884c                             body=9806884c..9806892f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068930 FUN_98068930                             body=98068930..98068963 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98067dc5
+0x98068964 FUN_98068964                             body=98068964..980689db stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x980689dc FUN_980689dc                             body=980689dc..98068a5b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068a5c FUN_98068a5c                             body=98068a5c..98068b33 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068b34 FUN_98068b34                             body=98068b34..98068b6f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068b70 FUN_98068b70                             body=98068b70..98068ca3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068ca4 FUN_98068ca4                             body=98068ca4..98068caf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068cb0 FUN_98068cb0                             body=98068cb0..98068cbb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068cbc FUN_98068cbc                             body=98068cbc..98068ce7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98068ce8 FUN_98068ce8                             body=98068ce8..98069167 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b96) overlaps instruction at (ram,0x98067b94) | 
+0x98069168 FUN_98069168                             body=98069168..9806938f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069390 FUN_98069390                             body=98069390..980693af stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980693b0 FUN_980693b0                             body=980693b0..980693ff stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069400 FUN_98069400                             body=98069400..9806944b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x9806944c FUN_9806944c                             body=9806944c..98069453 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069454 FUN_98069454                             body=98069454..9806948b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x9806948c FUN_9806948c                             body=9806948c..980695ab stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980695ac FUN_980695ac                             body=980695ac..980695df stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98074f2a
+0x980695e0 FUN_980695e0                             body=980695e0..9806964b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x9806964c FUN_9806964c                             body=9806964c..980696c7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980696c8 FUN_980696c8                             body=980696c8..9806977f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069780 FUN_98069780                             body=98069780..980697bb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980697bc FUN_980697bc                             body=980697bc..980698eb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980698ec FUN_980698ec                             body=980698ec..980698f7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x980698f8 FUN_980698f8                             body=980698f8..98069903 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069904 FUN_98069904                             body=98069904..98069933 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069934 FUN_98069934                             body=98069934..98069ab7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x98069ab8 FUN_98069ab8                             body=98069ab8..98069cdb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x98067b8e) overlaps instruction at (ram,0x98067b8c) | 
+0x9806c3e0 FUN_9806c3e0                             body=9806c3e0..9806c60b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c60c FUN_9806c60c                             body=9806c60c..9806c62b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c62c FUN_9806c62c                             body=9806c62c..9806c67b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c67c FUN_9806c67c                             body=9806c67c..9806c6c7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c6c8 FUN_9806c6c8                             body=9806c6c8..9806c6cf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c6d0 FUN_9806c6d0                             body=9806c6d0..9806c707 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c708 FUN_9806c708                             body=9806c708..9806c827 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c828 FUN_9806c828                             body=9806c828..9806c85b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x9806bccb
+0x9806c85c FUN_9806c85c                             body=9806c85c..9806c8c7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c8c8 FUN_9806c8c8                             body=9806c8c8..9806c943 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c944 FUN_9806c944                             body=9806c944..9806c9fb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806c9fc FUN_9806c9fc                             body=9806c9fc..9806ca37 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806ca38 FUN_9806ca38                             body=9806ca38..9806cb67 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806cb68 FUN_9806cb68                             body=9806cb68..9806cb73 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806cb74 FUN_9806cb74                             body=9806cb74..9806cb7f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806cb80 FUN_9806cb80                             body=9806cb80..9806cbaf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x9806cbb0 FUN_9806cbb0                             body=9806cbb0..9806cf6b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | Instruction at (ram,0x9806ba7e) overlaps instruction at (ram,0x9806ba7c) | 
+0x980aab58 FUN_980aab58                             body=980aab58..980dba03 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x980dae69
+0x980f83a8 FUN_980f83a8                             body=980f83a8..980f844f stmts=0 no_body Low-level Error: Trying to construct memory range beyond end of address space: ram
+0x98113560 FUN_98113560                             body=98113560..981139e7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x981139e8 FUN_981139e8                             body=981139e8..98113a07 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98113a08 FUN_98113a08                             body=98113a08..98113cff stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98113d00 FUN_98113d00                             body=98113d00..98113dff stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98113e00 FUN_98113e00                             body=98113e00..981140db stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x981140dc FUN_981140dc                             body=981140dc..9811412b stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x9811412c FUN_9811412c                             body=9811412c..981146d3 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114a6c FUN_98114a6c                             body=98114a6c..98114adf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114ae0 FUN_98114ae0                             body=98114ae0..98114b5f stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114b60 FUN_98114b60                             body=98114b60..98114bdf stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114be0 FUN_98114be0                             body=98114be0..98114c53 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114c54 FUN_98114c54                             body=98114c54..98114ccb stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114cec FUN_98114cec                             body=98114cec..98114d33 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114d70 FUN_98114d70                             body=98114d70..98114d87 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56
+0x98114d88 FUN_98114d88                             body=98114d88..98114dc7 stmts=0 no_body Low-level Error: Bad instruction count exceeded: | ... | No pcode could be generated at address: r0x98112e56

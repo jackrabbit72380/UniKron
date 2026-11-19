@@ -1,0 +1,7 @@
+# 0x9805c648  8 bytes  2 decoded rows
+# unknown=0 scalar=1 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x9813b47c
+
+9805c648  38800003  li r4, 3                               
+9805c64c  480dee30  b 0x9813b47c                           

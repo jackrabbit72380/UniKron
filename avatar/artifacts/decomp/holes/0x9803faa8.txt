@@ -1,0 +1,47 @@
+# 0x9803faa8  168 bytes  42 decoded rows
+# unknown=8 scalar=33 call=1 branch=0 returns=0
+# calls: 0x9803f920
+# branches: -
+
+9803faa8  7d8802a6  mflr r12                               
+9803faac  9181fff8  stw r12, -8(r1)                        
+9803fab0  fbe1fff0  std r31, -0x10(r1)                     
+9803fab4  9421ff50  stwu r1, -0xb0(r1)                     
+9803fab8  3d209800  lis r9, -0x6800                        
+9803fabc  d02100cc  stfs f1, 0xcc(r1)                      
+9803fac0  38e10050  addi r7, r1, 0x50                      
+9803fac4  d04100d4  stfs f2, 0xd4(r1)                      
+9803fac8  396100d4  addi r11, r1, 0xd4                     
+9803facc  d06100dc  stfs f3, 0xdc(r1)                      
+9803fad0  394100cc  addi r10, r1, 0xcc                     
+9803fad4  390100dc  addi r8, r1, 0xdc                      
+9803fad8  c00913e0  lfs f0, 0x13e0(r9)                     
+9803fadc  7c7f1b78  mr r31, r3                             
+9803fae0  d0010050  stfs f0, 0x50(r1)                      
+9803fae4  38610060  addi r3, r1, 0x60                      
+9803fae8  13a03c07  vcmpneb. v29, v0, v7                   
+9803faec  13e05c07  vcmpneb. v31, v0, v11                  
+9803faf0  13c05407  vcmpneb. v30, v0, v10                  
+9803faf4  1bc4ffd5  VMX-6-p06(undecoded)                   
+9803faf8  13e04407  vcmpneb. v31, v0, v8                   
+9803fafc  1be4efd5  VMX-6-p06(undecoded)                   
+9803fb00  143ef2f1  VMX-5-p05(undecoded)                   
+9803fb04  1823ff91  VMX-6-p06(undecoded)                   
+9803fb08  4bfffe19  bl 0x9803f920                          
+9803fb0c  39200010  li r9, 0x10                            
+9803fb10  39400020  li r10, 0x20                           
+9803fb14  13e018c7  vcmpequd v31, v0, v3                   
+9803fb18  39600030  li r11, 0x30                           
+9803fb1c  13e0f9c7  VMX-p04(undecoded)                     
+9803fb20  13c348c7  vcmpequd v30, v3, v9                   
+9803fb24  13a350c7  vcmpequd v29, v3, v10                  
+9803fb28  138358c7  vcmpequd v28, v3, v11                  
+9803fb2c  7fe3fb78  mr r3, r31                             
+9803fb30  13df49c7  VMX-p04(undecoded)                     
+9803fb34  13bf51c7  VMX-p04(undecoded)                     
+9803fb38  139f59c7  VMX-p04(undecoded)                     
+9803fb3c  382100b0  addi r1, r1, 0xb0                      
+9803fb40  8181fff8  lwz r12, -8(r1)                        
+9803fb44  7d8803a6  mtlr r12                               
+9803fb48  ebe1fff0  ld r31, -0x10(r1)                      
+9803fb4c  4e800020  blr                                    

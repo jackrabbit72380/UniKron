@@ -1,0 +1,47 @@
+# 0x980f83a8  168 bytes  42 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=41 call=1 branch=0 returns=0
+# calls: 0x980618ac
+# branches: -
+
+980f83a8  7d8802a6  mflr r12                               
+980f83ac  4bf69501  bl 0x980618ac                          
+980f83b0  9421ff50  stwu r1, -0xb0(r1)                     
+980f83b4  7c7f1b78  mr r31, r3                             
+980f83b8  2b1f0000  cmplwi cr6, r31, 0                     
+980f83bc  419a0394  beq cr6, 0x980f8750                    
+980f83c0  817f001c  lwz r11, 0x1c(r31)                     
+980f83c4  2b0b0000  cmplwi cr6, r11, 0                     
+980f83c8  419a0388  beq cr6, 0x980f8750                    
+980f83cc  815f0000  lwz r10, 0(r31)                        
+980f83d0  2b0a0000  cmplwi cr6, r10, 0                     
+980f83d4  419a037c  beq cr6, 0x980f8750                    
+980f83d8  3aa00000  li r21, 0                              
+980f83dc  2f040004  cmpwi cr6, r4, 4                       
+980f83e0  3ba0fffb  li r29, -5                             
+980f83e4  419a0008  beq cr6, 0x980f83ec                    
+980f83e8  7ebdab78  mr r29, r21                            
+980f83ec  80eb0000  lwz r7, 0(r11)                         
+980f83f0  3bc0fffb  li r30, -5                             
+980f83f4  2b07000d  cmplwi cr6, r7, 0xd                    
+980f83f8  41990358  bgt cr6, 0x980f8750                    
+980f83fc  3d609803  lis r11, -0x67fd                       
+980f8400  3d409803  lis r10, -0x67fd                       
+980f8404  3d209803  lis r9, -0x67fd                        
+980f8408  3d009803  lis r8, -0x67fd                        
+980f840c  3b80000d  li r28, 0xd                            
+980f8410  3b600005  li r27, 5                              
+980f8414  3ac0000c  li r22, 0xc                            
+980f8418  3b4bbda4  addi r26, r11, -0x425c                 
+980f841c  3b2abd8c  addi r25, r10, -0x4274                 
+980f8420  3b09bd78  addi r24, r9, -0x4288                  
+980f8424  3ae8bd5c  addi r23, r8, -0x42a4                  
+980f8428  3d809803  lis r12, -0x67fd                       
+980f842c  398cbd30  addi r12, r12, -0x42d0                 
+980f8430  54e0083c  slwi r0, r7, 1                         
+980f8434  7c0c022e  lhzx r0, r12, r0                       
+980f8438  3d80980f  lis r12, -0x67f1                       
+980f843c  398c7850  addi r12, r12, 0x7850                  
+980f8440  7d8c0214  add r12, r12, r0                       
+980f8444  7d8903a6  mtctr r12                              
+980f8448  60000000  nop                                    
+980f844c  4e800420  bctr                                   

@@ -1,0 +1,38 @@
+# 0x980df044  132 bytes  33 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=31 call=0 branch=2 returns=0
+# calls: -
+# branches: 0x980618e4 0x980df0b0
+
+980df044  2b1f0000  cmplwi cr6, r31, 0                     
+980df048  419a0018  beq cr6, 0x980df060                    
+980df04c  817e0000  lwz r11, 0(r30)                        
+980df050  816b0000  lwz r11, 0(r11)                        
+980df054  91610058  stw r11, 0x58(r1)                      
+980df058  c0010058  lfs f0, 0x58(r1)                       
+980df05c  d01f0008  stfs f0, 8(r31)                        
+980df060  39600004  li r11, 4                              
+980df064  815e0000  lwz r10, 0(r30)                        
+980df068  7d4a5a14  add r10, r10, r11                      
+980df06c  915e0000  stw r10, 0(r30)                        
+980df070  815c0000  lwz r10, 0(r28)                        
+980df074  7d6b5050  subf r11, r11, r10                     
+980df078  917c0000  stw r11, 0(r28)                        
+980df07c  81760000  lwz r11, 0(r22)                        
+980df080  3b5a0001  addi r26, r26, 1                       
+980df084  3ab50001  addi r21, r21, 1                       
+980df088  396b0001  addi r11, r11, 1                       
+980df08c  3b7b0010  addi r27, r27, 0x10                    
+980df090  91760000  stw r11, 0(r22)                        
+980df094  7f1ac040  cmplw cr6, r26, r24                    
+980df098  4198fde0  blt cr6, 0x980dee78                    
+980df09c  3a100001  addi r16, r16, 1                       
+980df0a0  3af70030  addi r23, r23, 0x30                    
+980df0a4  7f108840  cmplw cr6, r16, r17                    
+980df0a8  4198fd3c  blt cr6, 0x980dede4                    
+980df0ac  38600000  li r3, 0                               
+980df0b0  382100f0  addi r1, r1, 0xf0                      
+980df0b4  4bf82830  b 0x980618e4                           
+980df0b8  3c608007  lis r3, -0x7ff9                        
+980df0bc  6063000e  ori r3, r3, 0xe                        
+980df0c0  4bfffff0  b 0x980df0b0                           
+980df0c4  00000000  nop-or-padding                         

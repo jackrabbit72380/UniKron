@@ -86,6 +86,9 @@ def main():
     ap.add_argument("--start", type=int, default=0,
                     help="skip the first N items, so a long rebake can be run "
                          "in chunks")
+    ap.add_argument("--mask", action="store_true",
+                    help="bake tint masks (white albedo, alpha = the mesh's own "
+                         "silhouette) so the editor can colour them at run time")
     ap.add_argument("--include-base", action="store_true",
                     help="also plate MaleBody/FemaleBody/Head, for a base layer "
                          "drawn in the same frame as the items")
@@ -124,6 +127,13 @@ def main():
     clip = pack_clip.resolve(args.pack, args.clip, args.clip_asset, WORK)
     if clip != args.clip:
         print("posing from pack asset %r" % args.clip_asset)
+
+    # A mask is not a plate: it must not land on top of the coloured art, which is
+    # what happened the first time this flag existed (three hair plates were
+    # overwritten before anyone noticed).
+    if args.mask and os.path.abspath(args.outdir) == os.path.abspath(
+            os.path.join(os.path.dirname(HERE), "pack_plates")):
+        args.outdir = os.path.join(os.path.dirname(HERE), "pack_plates_mask")
 
     body = BODY_FOR[args.gender]
     centre, height = reference_frame(args.pack, clip, args.description, body)
@@ -166,7 +176,11 @@ def main():
         # Half a turn: the bake starts at the avatar's back.
         rgba = bt.render(verts, tris, colours, vnormals, math.pi,
                          args.width, args.height, face=face,
-                         occluders=occluder if category == "50_hair" else None)
+                         occluders=occluder if category == "50_hair" else None,
+                         # A mask is the item with a white albedo, so RGB is the light
+                         # rig and alpha the silhouette: the editor multiplies it by
+                         # a palette colour (COLOURS.md).
+                         coverage=args.mask, white=args.mask)
         os.makedirs(folder, exist_ok=True)
         bt.write_png(path, rgba)
         baked += 1

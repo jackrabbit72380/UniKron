@@ -169,10 +169,25 @@ What is left of that list, with the reason each is where it is:
   storage decision this port has not made.
 * **`takephoto`/`photobooth`** are the retail camera path; the port has its own
   portrait grab (`AvatarEditorPage.portraitReady`) instead.
-* **The five body shapes** (`bodyshape_normalthin` ... `bodyshape_smallnormal`)
-  are a geometry control over the same body, not a list of items: they need the
-  body scale the retail editor applies, which is not yet located in the pack or
-  the descriptor.
+* **The body shapes** (`bodyshape_normalthin` ... `bodyshape_smallnormal`) are a
+  geometry control over the same body, not a list of items. The control exists in
+  the 2008 build and **the scale it applies is not in any recovered data**. Measured,
+  because an earlier note here only said "not yet located":
+
+  | where it could be | what is actually there |
+  | --- | --- |
+  | the XUI | 24 media names - the nine thin/normal/fat x short/normal/tall pairs, each with `_selected`/`_unselected`/`_pressdisable`. Five are wired as icon bases: `bodyshape_tallnormal`, `_normalthin`, `_normalnormal`, `_normalfat`, `_smallnormal` (`editor_ui.json`, `icon_bases`). Names only, no numbers. |
+  | the asset pack | 1,079 records and exactly two body meshes: `MaleBody` 1,137 verts, `FemaleBody` 1,232. No thin/fat/tall/small body. |
+  | the legacy V1 pack | 44 assets: 41 animations, `MaleBody`, `FemaleBody`, `Head`. No variants. |
+  | the descriptors | `Avatar6400/6404/6411` carry six overrides each - ears, hiding templates, face paint or wrinkles, eye shadows - and no body record. The header words are `0, 0xbf/0, 0xbf, 0x1000`. |
+  | the code | `0` occurrences of `bodyshape` in the XEX strings and in the rebuilt ELF, so the name never reaches `.text`; the editor learns the shape as an enum and applies a scale table. |
+
+  So the buttons can be drawn, but each shape needs a per-axis scale this port
+  does not have. Inventing nine scales would put made-up geometry in the avatar.
+  What would settle it: a retail screenshot of one avatar at each of the nine
+  settings (front and side, same camera), from which the height/width ratio is
+  measurable, or a retail profile blob for an avatar saved with a non-default
+  shape. Until then the control stays out of the rail rather than guessing.
 
 ## Thumbnails are renders, not restored art
 

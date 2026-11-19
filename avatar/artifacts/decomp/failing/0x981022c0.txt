@@ -1,0 +1,85 @@
+# 0x981022c0  320 bytes  80 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=72 call=2 branch=6 returns=0
+# calls: 0x98102c18 0x98102c18
+# branches: 0x981022fc 0x9810233c 0x9810236c 0x980618fc 0x981023a8 0x9810239c
+
+981022c0  2b070000  cmplwi cr6, r7, 0                      
+981022c4  409a00b0  bne cr6, 0x98102374                    
+981022c8  811e002c  lwz r8, 0x2c(r30)                      
+981022cc  7f0b4040  cmplw cr6, r11, r8                     
+981022d0  409a0034  bne cr6, 0x98102304                    
+981022d4  815e0030  lwz r10, 0x30(r30)                     
+981022d8  813e0028  lwz r9, 0x28(r30)                      
+981022dc  7f095040  cmplw cr6, r9, r10                     
+981022e0  419a0024  beq cr6, 0x98102304                    
+981022e4  7d2b4b78  mr r11, r9                             
+981022e8  40980010  bge cr6, 0x981022f8                    
+981022ec  7d4b5050  subf r10, r11, r10                     
+981022f0  38eaffff  addi r7, r10, -1                       
+981022f4  48000008  b 0x981022fc                           
+981022f8  7ceb4050  subf r7, r11, r8                       
+981022fc  2b070000  cmplwi cr6, r7, 0                      
+98102300  409a0074  bne cr6, 0x98102374                    
+98102304  917e0034  stw r11, 0x34(r30)                     
+98102308  7fe4fb78  mr r4, r31                             
+9810230c  7fc3f378  mr r3, r30                             
+98102310  48000909  bl 0x98102c18                          
+98102314  817e0034  lwz r11, 0x34(r30)                     
+98102318  815e0030  lwz r10, 0x30(r30)                     
+9810231c  7c651b78  mr r5, r3                              
+98102320  7f0b5040  cmplw cr6, r11, r10                    
+98102324  40980010  bge cr6, 0x98102334                    
+98102328  7d2b5050  subf r9, r11, r10                      
+9810232c  38e9ffff  addi r7, r9, -1                        
+98102330  4800000c  b 0x9810233c                           
+98102334  813e002c  lwz r9, 0x2c(r30)                      
+98102338  7ceb4850  subf r7, r11, r9                       
+9810233c  811e002c  lwz r8, 0x2c(r30)                      
+98102340  7f0b4040  cmplw cr6, r11, r8                     
+98102344  409a0028  bne cr6, 0x9810236c                    
+98102348  813e0028  lwz r9, 0x28(r30)                      
+9810234c  7f095040  cmplw cr6, r9, r10                     
+98102350  419a001c  beq cr6, 0x9810236c                    
+98102354  7d2b4b78  mr r11, r9                             
+98102358  40980010  bge cr6, 0x98102368                    
+9810235c  7d4b5050  subf r10, r11, r10                     
+98102360  38eaffff  addi r7, r10, -1                       
+98102364  48000008  b 0x9810236c                           
+98102368  7ceb4050  subf r7, r11, r8                       
+9810236c  2b070000  cmplwi cr6, r7, 0                      
+98102370  419a002c  beq cr6, 0x9810239c                    
+98102374  815a0008  lwz r10, 8(r26)                        
+98102378  7ee5bb78  mr r5, r23                             
+9810237c  38e7ffff  addi r7, r7, -1                        
+98102380  994b0000  stb r10, 0(r11)                        
+98102384  396b0001  addi r11, r11, 1                       
+98102388  92fa0000  stw r23, 0(r26)                        
+9810238c  813a0000  lwz r9, 0(r26)                         
+98102390  2b090009  cmplwi cr6, r9, 9                      
+98102394  4099faf4  ble cr6, 0x98101e88                    
+98102398  38a0fffe  li r5, -2                              
+9810239c  937e0020  stw r27, 0x20(r30)                     
+981023a0  93be001c  stw r29, 0x1c(r30)                     
+981023a4  931f0004  stw r24, 4(r31)                        
+981023a8  815f0000  lwz r10, 0(r31)                        
+981023ac  7fe4fb78  mr r4, r31                             
+981023b0  813f0008  lwz r9, 8(r31)                         
+981023b4  7fc3f378  mr r3, r30                             
+981023b8  7d4ae050  subf r10, r10, r28                     
+981023bc  939f0000  stw r28, 0(r31)                        
+981023c0  7d4a4a14  add r10, r10, r9                       
+981023c4  915f0008  stw r10, 8(r31)                        
+981023c8  917e0034  stw r11, 0x34(r30)                     
+981023cc  4800084d  bl 0x98102c18                          
+981023d0  382100b0  addi r1, r1, 0xb0                      
+981023d4  4bf5f528  b 0x980618fc                           
+981023d8  937e0020  stw r27, 0x20(r30)                     
+981023dc  93be001c  stw r29, 0x1c(r30)                     
+981023e0  92ff0004  stw r23, 4(r31)                        
+981023e4  4bffffc4  b 0x981023a8                           
+981023e8  3d409803  lis r10, -0x67fd                       
+981023ec  394ac4fc  addi r10, r10, -0x3b04                 ; "invalid literal/length code" 
+981023f0  92ba0000  stw r21, 0(r26)                        
+981023f4  38a0fffd  li r5, -3                              
+981023f8  915f0018  stw r10, 0x18(r31)                     
+981023fc  4bffffa0  b 0x9810239c                           

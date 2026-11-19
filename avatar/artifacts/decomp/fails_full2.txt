@@ -1,0 +1,46 @@
+0x98046ef0 FUN_98046ef0                             body=98046ef0..98046f67 stmts=0 no_body Low-level Error: Bad instruction count exceeded:
+    ...
+    No pcode could be generated at address: r0x980488db
+0x9804d2f8 FUN_9804d2f8                             body=9804d2f8..9804d33b stmts=173 halt_baddata
+0x98055cd8 FUN_98055cd8                             body=98055cd8..98055eab stmts=108 halt_baddata
+0x98055ef8 FUN_98055ef8                             body=98055ef8..98055f2b stmts=108 halt_baddata
+0x98056cc8 FUN_98056cc8                             body=98056cc8..98056d2f stmts=0 no_body Low-level Error: Bad instruction count exceeded:
+    ...
+    No pcode could be generated at address: r0x98056146
+0x9805bd28 FUN_9805bd28                             body=9805bd28..9805bd2b stmts=1 halt_baddata
+0x98061940 thunk_FUN_98062658                       body=98061940..98061943 stmts=14 halt_baddata
+0x98062658 FUN_98062658                             body=98062658..98062717 stmts=14 halt_baddata
+0x98065ca0 FUN_98065ca0                             body=98065ca0..98065d23 stmts=18 halt_baddata
+0x98066e38 FUN_98066e38                             body=98066e38..980670eb stmts=56 halt_baddata
+0x98067ba4 FUN_98067ba4                             body=98067ba4..98067bc3 stmts=103 halt_baddata
+0x98067bc4 FUN_98067bc4                             body=98067bc4..98067c13 stmts=108 halt_baddata
+0x98067c50 FUN_98067c50                             body=98067c50..98067c57 stmts=103 halt_baddata
+0x98067c58 FUN_98067c58                             body=98067c58..98067c8f stmts=110 halt_baddata
+0x98067c90 FUN_98067c90                             body=98067c90..98067d13 stmts=114 halt_baddata
+0x98067d14 caseD_0                                  body=98067d14..98067d73 stmts=107 halt_baddata
+0x98067d74 FUN_98067d74                             body=980672a0..98067da7 stmts=238 halt_baddata
+0x98067da8 FUN_98067da8                             body=98067da8..98067e1f stmts=164 halt_baddata
+0x98067e20 FUN_98067e20                             body=98067e20..98067e9f stmts=197 halt_baddata
+0x98067ea0 FUN_98067ea0                             body=98067ea0..98067f77 stmts=202 halt_baddata
+0x98067f78 FUN_98067f78                             body=98067f78..98067fb3 stmts=111 halt_baddata
+0x98067fb4 FUN_98067fb4                             body=98067fb4..980680e7 stmts=219 halt_baddata
+0x980680e8 FUN_980680e8                             body=980680e8..980680f3 stmts=221 halt_baddata
+0x980680f4 FUN_980680f4                             body=980680f4..980680ff stmts=217 halt_baddata
+0x98068100 FUN_98068100                             body=98068100..9806812b stmts=225 halt_baddata
+0x9806812c FUN_9806812c                             body=9806812c..9806859b stmts=224 halt_baddata
+0x9806b204 FUN_9806b204                             body=9806b204..9806b207 stmts=4 halt_baddata
+0x980ad3b0 FUN_980ad3b0                             body=980ad3b0..980ad4ff stmts=67 halt_baddata
+0x980b9da0 FUN_980b9da0                             body=980b9da0..980b9e77 stmts=118 halt_baddata
+0x980f2ab8 FUN_980f2ab8                             body=980f2ab8..980f2aeb stmts=3 halt_baddata
+0x980f83a8 FUN_980f83a8                             body=980f83a8..980f844f stmts=0 no_body Low-level Error: Bad instruction count exceeded:
+    ...
+    No pcode could be generated at address: r0x980fe7c7
+0x980fc758 FUN_980fc758                             body=980fc758..980fc7f7 stmts=0 no_body Low-level Error: Bad instruction count exceeded:
+    ...
+    No pcode could be generated at address: r0x98102159
+0x98101e20 FUN_98101e20                             body=98101e20..98101eaf stmts=0 no_body Low-level Error: Bad instruction count exceeded:
+    ...
+    No pcode could be generated at address: r0x98108911
+0x98125240 FUN_98125240                             body=98125240..98125277 stmts=7 halt_baddata
+0x9812ae50 FUN_9812ae50                             body=9812ae50..9812af7f stmts=19 halt_baddata
+0x9813b1c8 FUN_9813b1c8                             body=9813b1c8..9813b1ff stmts=2 halt_baddata

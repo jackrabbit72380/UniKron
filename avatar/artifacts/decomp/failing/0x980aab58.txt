@@ -1,0 +1,7 @@
+# 0x980aab58  8 bytes  2 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=1 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x980db9a8
+
+980aab58  7ca32b78  mr r3, r5                              
+980aab5c  48030e4c  b 0x980db9a8                           

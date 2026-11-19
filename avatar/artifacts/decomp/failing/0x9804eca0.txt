@@ -1,0 +1,56 @@
+# 0x9804eca0  204 bytes  51 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=43 call=4 branch=4 returns=0
+# calls: 0x980618b8 0x98052540 0x98043128 0x98055ef8
+# branches: 0x9804f308 0x9804ed18 0x9804ed0c 0x9804ed30
+
+9804eca0  7d8802a6  mflr r12                               
+9804eca4  48012c15  bl 0x980618b8                          
+9804eca8  9421fb50  stwu r1, -0x4b0(r1)                    
+9804ecac  7c791b78  mr r25, r3                             
+9804ecb0  80790004  lwz r3, 4(r25)                         
+9804ecb4  4800388d  bl 0x98052540                          
+9804ecb8  7c6b0034  cntlzw r11, r3                         
+9804ecbc  81590008  lwz r10, 8(r25)                        
+9804ecc0  556bdffe  rlwinm r11, r11, 0x1b, 0x1f, 0x1f      
+9804ecc4  2f0affff  cmpwi cr6, r10, -1                     
+9804ecc8  99790019  stb r11, 0x19(r25)                     
+9804eccc  409a0018  bne cr6, 0x9804ece4                    
+9804ecd0  3d609814  lis r11, -0x67ec                       
+9804ecd4  38800002  li r4, 2                               
+9804ecd8  386b73b0  addi r3, r11, 0x73b0                   
+9804ecdc  4bff444d  bl 0x98043128                          
+9804ece0  48000628  b 0x9804f308                           
+9804ece4  556b063f  clrlwi. r11, r11, 0x18                 
+9804ece8  4182000c  beq 0x9804ecf4                         
+9804ecec  3b000000  li r24, 0                              
+9804ecf0  48000028  b 0x9804ed18                           
+9804ecf4  8179001c  lwz r11, 0x1c(r25)                     
+9804ecf8  2b0b0000  cmplwi cr6, r11, 0                     
+9804ecfc  419a000c  beq cr6, 0x9804ed08                    
+9804ed00  808b0000  lwz r4, 0(r11)                         
+9804ed04  48000008  b 0x9804ed0c                           
+9804ed08  38800000  li r4, 0                               
+9804ed0c  8079000c  lwz r3, 0xc(r25)                       
+9804ed10  480071e9  bl 0x98055ef8                          
+9804ed14  7c781b78  mr r24, r3                             
+9804ed18  8139001c  lwz r9, 0x1c(r25)                      
+9804ed1c  2b090000  cmplwi cr6, r9, 0                      
+9804ed20  419a000c  beq cr6, 0x9804ed2c                    
+9804ed24  81690000  lwz r11, 0(r9)                         
+9804ed28  48000008  b 0x9804ed30                           
+9804ed2c  39600000  li r11, 0                              
+9804ed30  396bfff7  addi r11, r11, -9                      
+9804ed34  3d409814  lis r10, -0x67ec                       
+9804ed38  2b0b0025  cmplwi cr6, r11, 0x25                  
+9804ed3c  3bea73b0  addi r31, r10, 0x73b0                  
+9804ed40  41990564  bgt cr6, 0x9804f2a4                    
+9804ed44  3d809800  lis r12, -0x6800                       
+9804ed48  398c29e8  addi r12, r12, 0x29e8                  
+9804ed4c  5560083c  slwi r0, r11, 1                        
+9804ed50  7c0c022e  lhzx r0, r12, r0                       
+9804ed54  3d809805  lis r12, -0x67fb                       
+9804ed58  398ce16c  addi r12, r12, -0x1e94                 
+9804ed5c  7d8c0214  add r12, r12, r0                       
+9804ed60  7d8903a6  mtctr r12                              
+9804ed64  60000000  nop                                    
+9804ed68  4e800420  bctr                                   

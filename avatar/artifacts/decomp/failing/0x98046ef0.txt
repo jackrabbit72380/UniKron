@@ -1,0 +1,35 @@
+# 0x98046ef0  120 bytes  30 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=29 call=1 branch=0 returns=0
+# calls: 0x980618a4
+# branches: -
+
+98046ef0  7d8802a6  mflr r12                               
+98046ef4  4801a9b1  bl 0x980618a4                          
+98046ef8  9421ff10  stwu r1, -0xf0(r1)                     
+98046efc  7c7f1b78  mr r31, r3                             
+98046f00  3d409814  lis r10, -0x67ec                       
+98046f04  3b000000  li r24, 0                              
+98046f08  3d000002  lis r8, 2                              
+98046f0c  3d209814  lis r9, -0x67ec                        
+98046f10  817f0000  lwz r11, 0(r31)                        
+98046f14  3ce00002  lis r7, 2                              
+98046f18  3cc00002  lis r6, 2                              
+98046f1c  6113c1a8  ori r19, r8, 0xc1a8                    
+98046f20  3b200001  li r25, 1                              
+98046f24  60f6c1b4  ori r22, r7, 0xc1b4                    
+98046f28  60d4c1b0  ori r20, r6, 0xc1b0                    
+98046f2c  7f15c378  mr r21, r24                            
+98046f30  2b0b0009  cmplwi cr6, r11, 9                     
+98046f34  3baa73b0  addi r29, r10, 0x73b0                  
+98046f38  3ae9c980  addi r23, r9, -0x3680                  
+98046f3c  41990798  bgt cr6, 0x980476d4                    
+98046f40  3d809800  lis r12, -0x6800                       
+98046f44  398c26b0  addi r12, r12, 0x26b0                  
+98046f48  5560083c  slwi r0, r11, 1                        
+98046f4c  7c0c022e  lhzx r0, r12, r0                       
+98046f50  3d809804  lis r12, -0x67fc                       
+98046f54  398c6368  addi r12, r12, 0x6368                  
+98046f58  7d8c0214  add r12, r12, r0                       
+98046f5c  7d8903a6  mtctr r12                              
+98046f60  60000000  nop                                    
+98046f64  4e800420  bctr                                   

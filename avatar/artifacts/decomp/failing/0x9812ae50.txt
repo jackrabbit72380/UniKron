@@ -1,0 +1,81 @@
+# 0x9812ae50  304 bytes  76 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=73 call=0 branch=3 returns=0
+# calls: -
+# branches: 0x9812aff4 0x9812af54 0x9812af54
+
+9812ae50  7d8802a6  mflr r12                               
+9812ae54  9181fff8  stw r12, -8(r1)                        
+9812ae58  fbc1ffe8  std r30, -0x18(r1)                     
+9812ae5c  fbe1fff0  std r31, -0x10(r1)                     
+9812ae60  9421ff90  stwu r1, -0x70(r1)                     
+9812ae64  7c7f1b78  mr r31, r3                             
+9812ae68  817f0004  lwz r11, 4(r31)                        
+9812ae6c  83df0008  lwz r30, 8(r31)                        
+9812ae70  7f1e5840  cmplw cr6, r30, r11                    
+9812ae74  4198000c  blt cr6, 0x9812ae80                    
+9812ae78  38600000  li r3, 0                               
+9812ae7c  48000178  b 0x9812aff4                           
+9812ae80  817f001c  lwz r11, 0x1c(r31)                     
+9812ae84  815f0018  lwz r10, 0x18(r31)                     
+9812ae88  7f0b5040  cmplw cr6, r11, r10                    
+9812ae8c  4098ffec  bge cr6, 0x9812ae78                    
+9812ae90  817f0050  lwz r11, 0x50(r31)                     
+9812ae94  2b0b0000  cmplwi cr6, r11, 0                     
+9812ae98  419a0144  beq cr6, 0x9812afdc                    
+9812ae9c  556b07be  clrlwi r11, r11, 0x1e                  
+9812aea0  2b0b0000  cmplwi cr6, r11, 0                     
+9812aea4  419a0130  beq cr6, 0x9812afd4                    
+9812aea8  815f0020  lwz r10, 0x20(r31)                     
+9812aeac  80ff0010  lwz r7, 0x10(r31)                      
+9812aeb0  7d485378  mr r8, r10                             
+9812aeb4  817f0054  lwz r11, 0x54(r31)                     
+9812aeb8  f9010050  std r8, 0x50(r1)                       
+9812aebc  c8010050  lfd f0, 0x50(r1)                       
+9812aec0  fd60069c  fcfid f11, f0                          
+9812aec4  556907fe  clrlwi r9, r11, 0x1f                   
+9812aec8  f8e10050  std r7, 0x50(r1)                       
+9812aecc  c9a10050  lfd f13, 0x50(r1)                      
+9812aed0  fd806e9c  fcfid f12, f13                         
+9812aed4  2b090000  cmplwi cr6, r9, 0                      
+9812aed8  fd406018  frsp f10, f12                          
+9812aedc  fd205818  frsp f9, f11                           
+9812aee0  ed0a4824  fdivs f8, f10, f9                      
+9812aee4  d11f002c  stfs f8, 0x2c(r31)                     
+9812aee8  419a0058  beq cr6, 0x9812af40                    
+9812aeec  54e8003e  slwi r8, r7, 0                         
+9812aef0  7f085040  cmplw cr6, r8, r10                     
+9812aef4  409a001c  bne cr6, 0x9812af10                    
+9812aef8  556b0630  rlwinm r11, r11, 0, 0x18, 0x18         
+9812aefc  214b0000  subfic r10, r11, 0                     
+9812af00  7d2a5110  subfe r9, r10, r10                     
+9812af04  552b07fa  rlwinm r11, r9, 0, 0x1f, 0x1d          
+9812af08  394b0004  addi r10, r11, 4                       
+9812af0c  48000048  b 0x9812af54                           
+9812af10  2b090000  cmplwi cr6, r9, 0                      
+9812af14  419a002c  beq cr6, 0x9812af40                    
+9812af18  813f0010  lwz r9, 0x10(r31)                      
+9812af1c  5528083c  slwi r8, r9, 1                         
+9812af20  7f085040  cmplw cr6, r8, r10                     
+9812af24  409a001c  bne cr6, 0x9812af40                    
+9812af28  556b0630  rlwinm r11, r11, 0, 0x18, 0x18         
+9812af2c  214b0000  subfic r10, r11, 0                     
+9812af30  7d2a5110  subfe r9, r10, r10                     
+9812af34  552b07fa  rlwinm r11, r9, 0, 0x1f, 0x1d          
+9812af38  394b0005  addi r10, r11, 5                       
+9812af3c  48000018  b 0x9812af54                           
+9812af40  556b0630  rlwinm r11, r11, 0, 0x18, 0x18         
+9812af44  214b0000  subfic r10, r11, 0                     
+9812af48  7d2a5110  subfe r9, r10, r10                     
+9812af4c  552b07fa  rlwinm r11, r9, 0, 0x1f, 0x1d          
+9812af50  394b0003  addi r10, r11, 3                       
+9812af54  897f000d  lbz r11, 0xd(r31)                      
+9812af58  891f000c  lbz r8, 0xc(r31)                       
+9812af5c  392bffff  addi r9, r11, -1                       
+9812af60  2b090005  cmplwi cr6, r9, 5                      
+9812af64  41990040  bgt cr6, 0x9812afa4                    
+9812af68  3d809813  lis r12, -0x67ed                       
+9812af6c  398ca380  addi r12, r12, -0x5c80                 
+9812af70  5520103a  slwi r0, r9, 2                         
+9812af74  7c0c002e  lwzx r0, r12, r0                       
+9812af78  7c0903a6  mtctr r0                               
+9812af7c  4e800420  bctr                                   

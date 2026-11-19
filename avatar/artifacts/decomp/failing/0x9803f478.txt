@@ -1,0 +1,18 @@
+# 0x9803f478  52 bytes  13 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=13 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+9803f478  3963fff7  addi r11, r3, -9                       
+9803f47c  2b0b000c  cmplwi cr6, r11, 0xc                   
+9803f480  41990074  bgt cr6, 0x9803f4f4                    
+9803f484  3d809800  lis r12, -0x6800                       
+9803f488  398c19c8  addi r12, r12, 0x19c8                  ; "08@HHHH" 
+9803f48c  7c0c58ae  lbzx r0, r12, r11                      
+9803f490  3d809804  lis r12, -0x67fc                       
+9803f494  398ce8ac  addi r12, r12, -0x1754                 
+9803f498  7d8c0214  add r12, r12, r0                       
+9803f49c  7d8903a6  mtctr r12                              
+9803f4a0  60000000  nop                                    
+9803f4a4  60000000  nop                                    
+9803f4a8  4e800420  bctr                                   

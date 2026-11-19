@@ -1,0 +1,37 @@
+# 0x980447b0  128 bytes  32 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=30 call=2 branch=0 returns=0
+# calls: 0x98046ef0 0x98043200
+# branches: -
+
+980447b0  7d8802a6  mflr r12                               
+980447b4  9181fff8  stw r12, -8(r1)                        
+980447b8  fbc1ffe8  std r30, -0x18(r1)                     
+980447bc  fbe1fff0  std r31, -0x10(r1)                     
+980447c0  9421ff90  stwu r1, -0x70(r1)                     
+980447c4  7c7f1b78  mr r31, r3                             
+980447c8  3bdf26a8  addi r30, r31, 0x26a8                  
+980447cc  7fc3f378  mr r3, r30                             
+980447d0  48002721  bl 0x98046ef0                          
+980447d4  817f1128  lwz r11, 0x1128(r31)                   
+980447d8  2f0b0036  cmpwi cr6, r11, 0x36                   
+980447dc  409a0020  bne cr6, 0x980447fc                    
+980447e0  817e0000  lwz r11, 0(r30)                        
+980447e4  2f0b0000  cmpwi cr6, r11, 0                      
+980447e8  419a0014  beq cr6, 0x980447fc                    
+980447ec  7fe3fb78  mr r3, r31                             
+980447f0  4bffea11  bl 0x98043200                          
+980447f4  3960ffff  li r11, -1                             
+980447f8  917f26ec  stw r11, 0x26ec(r31)                   
+980447fc  817e0000  lwz r11, 0(r30)                        
+98044800  2b0b0009  cmplwi cr6, r11, 9                     
+98044804  419900d0  bgt cr6, 0x980448d4                    
+98044808  3d809800  lis r12, -0x6800                       
+9804480c  398c2350  addi r12, r12, 0x2350                  
+98044810  7c0c58ae  lbzx r0, r12, r11                      
+98044814  3d809804  lis r12, -0x67fc                       
+98044818  398c3c30  addi r12, r12, 0x3c30                  
+9804481c  7d8c0214  add r12, r12, r0                       
+98044820  7d8903a6  mtctr r12                              
+98044824  60000000  nop                                    
+98044828  60000000  nop                                    
+9804482c  4e800420  bctr                                   

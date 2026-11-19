@@ -1,0 +1,69 @@
+# 0x9810203c  256 bytes  64 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=60 call=0 branch=4 returns=0
+# calls: -
+# branches: 0x98102068 0x981020d4 0x9810238c 0x981023f0
+
+9810203c  815a0008  lwz r10, 8(r26)                        
+98102040  48000028  b 0x98102068                           
+98102044  2b180000  cmplwi cr6, r24, 0                     
+98102048  419a0390  beq cr6, 0x981023d8                    
+9810204c  893c0000  lbz r9, 0(r28)                         
+98102050  7ee5bb78  mr r5, r23                             
+98102054  3b18ffff  addi r24, r24, -1                      
+98102058  7d29e830  slw r9, r9, r29                        
+9810205c  3bbd0008  addi r29, r29, 8                       
+98102060  7d3bdb78  or r27, r9, r27                        
+98102064  3b9c0001  addi r28, r28, 1                       
+98102068  7f1d5040  cmplw cr6, r29, r10                    
+9810206c  4198ffd8  blt cr6, 0x98102044                    
+98102070  5548103a  slwi r8, r10, 2                        
+98102074  813a0004  lwz r9, 4(r26)                         
+98102078  88da0011  lbz r6, 0x11(r26)                      
+9810207c  7faae850  subf r29, r10, r29                     
+98102080  807a0018  lwz r3, 0x18(r26)                      
+98102084  38800003  li r4, 3                               
+98102088  7d08b02e  lwzx r8, r8, r22                       
+9810208c  90da000c  stw r6, 0xc(r26)                       
+98102090  7d08d838  and r8, r8, r27                        
+98102094  907a0008  stw r3, 8(r26)                         
+98102098  7f7b5430  srw r27, r27, r10                      
+9810209c  909a0000  stw r4, 0(r26)                         
+981020a0  7d484a14  add r10, r8, r9                        
+981020a4  915a0004  stw r10, 4(r26)                        
+981020a8  815a000c  lwz r10, 0xc(r26)                      
+981020ac  48000028  b 0x981020d4                           
+981020b0  2b180000  cmplwi cr6, r24, 0                     
+981020b4  419a0324  beq cr6, 0x981023d8                    
+981020b8  893c0000  lbz r9, 0(r28)                         
+981020bc  7ee5bb78  mr r5, r23                             
+981020c0  3b18ffff  addi r24, r24, -1                      
+981020c4  7d29e830  slw r9, r9, r29                        
+981020c8  3bbd0008  addi r29, r29, 8                       
+981020cc  7d3bdb78  or r27, r9, r27                        
+981020d0  3b9c0001  addi r28, r28, 1                       
+981020d4  7f1d5040  cmplw cr6, r29, r10                    
+981020d8  4198ffd8  blt cr6, 0x981020b0                    
+981020dc  5549103a  slwi r9, r10, 2                        
+981020e0  815a0008  lwz r10, 8(r26)                        
+981020e4  7d29b02e  lwzx r9, r9, r22                       
+981020e8  7d29d838  and r9, r9, r27                        
+981020ec  55291838  slwi r9, r9, 3                         
+981020f0  7d495214  add r10, r9, r10                       
+981020f4  890a0001  lbz r8, 1(r10)                         
+981020f8  892a0000  lbz r9, 0(r10)                         
+981020fc  7f7b4430  srw r27, r27, r8                       
+98102100  552606f7  rlwinm. r6, r9, 0, 0x1b, 0x1b          
+98102104  7fa8e850  subf r29, r8, r29                      
+98102108  41820020  beq 0x98102128                         
+9810210c  5529073e  clrlwi r9, r9, 0x1c                    
+98102110  39000004  li r8, 4                               
+98102114  913a0008  stw r9, 8(r26)                         
+98102118  814a0004  lwz r10, 4(r10)                        
+9810211c  911a0000  stw r8, 0(r26)                         
+98102120  915a000c  stw r10, 0xc(r26)                      
+98102124  48000268  b 0x9810238c                           
+98102128  55280673  rlwinm. r8, r9, 0, 0x19, 0x19          
+9810212c  4182feec  beq 0x98102018                         
+98102130  3d409803  lis r10, -0x67fd                       
+98102134  394ac518  addi r10, r10, -0x3ae8                 ; "invalid distance code" 
+98102138  480002b8  b 0x981023f0                           

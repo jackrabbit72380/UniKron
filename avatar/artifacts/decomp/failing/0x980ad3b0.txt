@@ -1,0 +1,48 @@
+# 0x980ad3b0  172 bytes  43 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=43 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+980ad3b0  7c6b1b78  mr r11, r3                             
+980ad3b4  7c832378  mr r3, r4                              
+980ad3b8  2b0b0000  cmplwi cr6, r11, 0                     
+980ad3bc  419a0138  beq cr6, 0x980ad4f4                    
+980ad3c0  2b050000  cmplwi cr6, r5, 0                      
+980ad3c4  419a0130  beq cr6, 0x980ad4f4                    
+980ad3c8  2b070000  cmplwi cr6, r7, 0                      
+980ad3cc  419a0128  beq cr6, 0x980ad4f4                    
+980ad3d0  81250008  lwz r9, 8(r5)                          
+980ad3d4  81450024  lwz r10, 0x24(r5)                      
+980ad3d8  7d695a14  add r11, r9, r11                       
+980ad3dc  2b0a0000  cmplwi cr6, r10, 0                     
+980ad3e0  419a0014  beq cr6, 0x980ad3f4                    
+980ad3e4  7ce53b78  mr r5, r7                              
+980ad3e8  7cc43378  mr r4, r6                              
+980ad3ec  7d4903a6  mtctr r10                              
+980ad3f0  4e800420  bctr                                   
+980ad3f4  81450000  lwz r10, 0(r5)                         
+980ad3f8  554a07ff  clrlwi. r10, r10, 0x1f                 
+980ad3fc  41820010  beq 0x980ad40c                         
+980ad400  3c608030  lis r3, -0x7fd0                        
+980ad404  60630001  ori r3, r3, 1                          
+980ad408  4e800020  blr                                    
+980ad40c  81450014  lwz r10, 0x14(r5)                      
+980ad410  81270000  lwz r9, 0(r7)                          
+980ad414  7f095000  cmpw cr6, r9, r10                      
+980ad418  419a0010  beq cr6, 0x980ad428                    
+980ad41c  3c608030  lis r3, -0x7fd0                        
+980ad420  60630008  ori r3, r3, 8                          
+980ad424  4e800020  blr                                    
+980ad428  394affff  addi r10, r10, -1                      
+980ad42c  2b0a0007  cmplwi cr6, r10, 7                     
+980ad430  4199ffd0  bgt cr6, 0x980ad400                    
+980ad434  3d809802  lis r12, -0x67fe                       
+980ad438  398c7fe8  addi r12, r12, 0x7fe8                  
+980ad43c  7c0c50ae  lbzx r0, r12, r10                      
+980ad440  3d80980b  lis r12, -0x67f5                       
+980ad444  398cc800  addi r12, r12, -0x3800                 
+980ad448  7d8c0214  add r12, r12, r0                       
+980ad44c  7d8903a6  mtctr r12                              
+980ad450  60000000  nop                                    
+980ad454  60000000  nop                                    
+980ad458  4e800420  bctr                                   

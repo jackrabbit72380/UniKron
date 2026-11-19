@@ -1,0 +1,12 @@
+# 0x980df028  28 bytes  7 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=6 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x980df064
+
+980df028  2b1f0000  cmplwi cr6, r31, 0                     
+980df02c  419a0010  beq cr6, 0x980df03c                    
+980df030  817e0000  lwz r11, 0(r30)                        
+980df034  896b0000  lbz r11, 0(r11)                        
+980df038  917f0008  stw r11, 8(r31)                        
+980df03c  39600001  li r11, 1                              
+980df040  48000024  b 0x980df064                           

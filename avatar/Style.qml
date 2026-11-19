@@ -20,6 +20,29 @@ QtObject {
 
     readonly property string titleFamily: "Segoe UI"
 
+    // ---- the closet mirror, measured off the art and the bakes -------------
+    //
+    // Every plate and every turntable frame puts the soles at 0.932 of its own
+    // canvas and the top of a full figure at 0.073 (alpha bounding boxes:
+    // pack_plates/10_body/malebody.png is y 28..358 of 384, and
+    // assets/3d/turntable/frame_00.png is y 52..626 of 672 - the two bakes agree
+    // to a thousandth, which is what makes one set of numbers serve both stages).
+    readonly property real soleFraction: 0.932
+    readonly property real figureTopFraction: 0.073
+    // closet_mirror_border.png is 512x512 and its transparent opening runs
+    // y 65..446, i.e. 0.127..0.871 of the art. Both stages draw that art at
+    // 1.12x the holder (anchors.margins -frame.width * 0.06), so the opening
+    // lands at -0.06 + 0.127 * 1.12 = 0.082 and -0.06 + 0.871 * 1.12 = 0.915 here.
+    readonly property real mirrorTop: 0.082
+    readonly property real mirrorBottom: 0.915
+    // The figure spans 0.859 of its canvas and the opening only 0.833, which is
+    // why the head and the feet used to cross the frame rails: the avatar was
+    // drawn at its baked size instead of being fitted to the mirror it stands in.
+    // 98% of the opening leaves the head clear of the top rail and puts the soles
+    // on the bottom one.
+    readonly property real figureScale: Math.min(1.0,
+        (mirrorBottom - mirrorTop) * 0.98 / (soleFraction - figureTopFraction))
+
     // A filesystem path turned into something an Image can load.
     function fileUrl(path) {
         var p = String(path).replace(/\\/g, "/")

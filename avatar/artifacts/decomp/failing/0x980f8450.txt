@@ -1,0 +1,70 @@
+# 0x980f8450  260 bytes  65 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=61 call=0 branch=4 returns=0
+# calls: -
+# branches: 0x980f8738 0x980f8738 0x980f8738 0x980f8740
+
+980f8450  817f0004  lwz r11, 4(r31)                        
+980f8454  2b0b0000  cmplwi cr6, r11, 0                     
+980f8458  419a0304  beq cr6, 0x980f875c                    
+980f845c  394bffff  addi r10, r11, -1                      
+980f8460  817f0008  lwz r11, 8(r31)                        
+980f8464  813f0000  lwz r9, 0(r31)                         
+980f8468  7fbeeb78  mr r30, r29                            
+980f846c  811f001c  lwz r8, 0x1c(r31)                      
+980f8470  396b0001  addi r11, r11, 1                       
+980f8474  915f0004  stw r10, 4(r31)                        
+980f8478  917f0008  stw r11, 8(r31)                        
+980f847c  89690000  lbz r11, 0(r9)                         
+980f8480  91680004  stw r11, 4(r8)                         
+980f8484  817f001c  lwz r11, 0x1c(r31)                     
+980f8488  815f0000  lwz r10, 0(r31)                        
+980f848c  394a0001  addi r10, r10, 1                       
+980f8490  812b0004  lwz r9, 4(r11)                         
+980f8494  5529073e  clrlwi r9, r9, 0x1c                    
+980f8498  2b090008  cmplwi cr6, r9, 8                      
+980f849c  915f0000  stw r10, 0(r31)                        
+980f84a0  419a0010  beq cr6, 0x980f84b0                    
+980f84a4  938b0000  stw r28, 0(r11)                        
+980f84a8  92ff0018  stw r23, 0x18(r31)                     
+980f84ac  4800028c  b 0x980f8738                           
+980f84b0  814b0004  lwz r10, 4(r11)                        
+980f84b4  812b0010  lwz r9, 0x10(r11)                      
+980f84b8  554ae13e  srwi r10, r10, 4                       
+980f84bc  394a0008  addi r10, r10, 8                       
+980f84c0  7f0a4840  cmplw cr6, r10, r9                     
+980f84c4  40990010  ble cr6, 0x980f84d4                    
+980f84c8  938b0000  stw r28, 0(r11)                        
+980f84cc  931f0018  stw r24, 0x18(r31)                     
+980f84d0  48000268  b 0x980f8738                           
+980f84d4  39400001  li r10, 1                              
+980f84d8  914b0000  stw r10, 0(r11)                        
+980f84dc  815f0004  lwz r10, 4(r31)                        
+980f84e0  2b0a0000  cmplwi cr6, r10, 0                     
+980f84e4  419a0278  beq cr6, 0x980f875c                    
+980f84e8  394affff  addi r10, r10, -1                      
+980f84ec  813f0008  lwz r9, 8(r31)                         
+980f84f0  817f0000  lwz r11, 0(r31)                        
+980f84f4  3900001f  li r8, 0x1f                            
+980f84f8  915f0004  stw r10, 4(r31)                        
+980f84fc  39290001  addi r9, r9, 1                         
+980f8500  38eb0001  addi r7, r11, 1                        
+980f8504  815f001c  lwz r10, 0x1c(r31)                     
+980f8508  913f0008  stw r9, 8(r31)                         
+980f850c  7fbeeb78  mr r30, r29                            
+980f8510  896b0000  lbz r11, 0(r11)                        
+980f8514  90ff0000  stw r7, 0(r31)                         
+980f8518  812a0004  lwz r9, 4(r10)                         
+980f851c  5529402e  slwi r9, r9, 8                         
+980f8520  7d295a14  add r9, r9, r11                        
+980f8524  7d094396  divwu r8, r9, r8                       
+980f8528  1d08001f  mulli r8, r8, 0x1f                     
+980f852c  7d284851  subf. r9, r8, r9                       
+980f8530  41820010  beq 0x980f8540                         
+980f8534  938a0000  stw r28, 0(r10)                        
+980f8538  933f0018  stw r25, 0x18(r31)                     
+980f853c  480001fc  b 0x980f8738                           
+980f8540  556b06b5  rlwinm. r11, r11, 0, 0x1a, 0x1a        
+980f8544  40820220  bne 0x980f8764                         
+980f8548  39600007  li r11, 7                              
+980f854c  916a0000  stw r11, 0(r10)                        
+980f8550  480001f0  b 0x980f8740                           

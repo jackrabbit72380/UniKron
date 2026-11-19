@@ -37,7 +37,7 @@ Item {
         anchors.horizontalCenter: frame.horizontalCenter
         width: frame.width * 0.95
         height: width * 0.30
-        y: frame.y + frame.height * 0.925 - height / 2
+        y: frame.y + frame.height * style.mirrorBottom - height / 2
         fillMode: Image.PreserveAspectFit
         opacity: 0.85
     }
@@ -79,19 +79,54 @@ Item {
                 }
             ]
 
+            // The avatar, fitted to the mirror's own opening rather than drawn at
+            // its baked size: the plates' figure is 0.859 of their canvas while the
+            // opening is 0.833, so at 1:1 the head and feet crossed the rails.
+            // The sole line lands on the opening's bottom edge, which is also the
+            // line the shadow sits on.
+            Item {
+                id: figure
+                width: body.width * style.figureScale
+                height: body.height * style.figureScale
+                x: (body.width - width) / 2
+                y: body.height * style.mirrorBottom - height * style.soleFraction
+            }
+
             Repeater {
                 model: stage.layers
 
-                delegate: Image {
+                // A layer is either a baked plate or, when `tint` is set, a mask
+                // the chosen palette colour is applied to. The mask's RGB is its
+                // shading and alpha its coverage, so TintedMask.qml can colour it
+                // without a re-bake (see avatar_tools/COLOURS.md).
+                delegate: Item {
                     required property var modelData
 
-                    anchors.fill: parent
+                    anchors.fill: figure
                     z: modelData.z
-                    source: modelData.url
-                    fillMode: Image.PreserveAspectFit
-                    asynchronous: true
-                    smooth: true
-                    sourceSize.height: 1400
+
+                    Image {
+                        anchors.fill: parent
+                        visible: !modelData.tint
+                        source: modelData.tint ? "" : modelData.url
+                        fillMode: Image.PreserveAspectFit
+                        asynchronous: true
+                        smooth: true
+                        sourceSize.height: 1400
+                    }
+
+                    TintedMask {
+                        anchors.fill: parent
+                        // Smaller than the plates: a mask is a few pixels of brow or
+                        // lashes, so it does not need a 1400-pixel decode.
+                        visible: !!modelData.tint
+                        source: modelData.tint ? modelData.url : ""
+                        // Only the iris has a specular term; every other mask
+                        // leaves this empty and the shader's second sampler is
+                        // transparent (TintedMask.qml).
+                        specSource: modelData.spec ? modelData.spec : ""
+                        tint: modelData.tint ? modelData.tint : "#ffffff"
+                    }
                 }
             }
         }

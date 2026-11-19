@@ -1,0 +1,18 @@
+# 0x98041570  52 bytes  13 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=13 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+98041570  3964fff3  addi r11, r4, -0xd                     
+98041574  2b0b000a  cmplwi cr6, r11, 0xa                   
+98041578  4d990020  bgtlr cr6                              
+9804157c  3d809800  lis r12, -0x6800                       
+98041580  398c2340  addi r12, r12, 0x2340                  
+98041584  7c0c58ae  lbzx r0, r12, r11                      
+98041588  3d809804  lis r12, -0x67fc                       
+9804158c  398c09a4  addi r12, r12, 0x9a4                   
+98041590  7d8c0214  add r12, r12, r0                       
+98041594  7d8903a6  mtctr r12                              
+98041598  60000000  nop                                    
+9804159c  60000000  nop                                    
+980415a0  4e800420  bctr                                   

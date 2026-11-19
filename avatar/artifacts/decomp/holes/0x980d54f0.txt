@@ -1,0 +1,243 @@
+# 0x980d54f0  952 bytes  238 decoded rows
+# unknown=10 scalar=212 call=14 branch=2 returns=0
+# calls: 0x980618c4 0x980c3760 0x980c3820 0x980e8008 0x980f0958 0x980e7fe0 0x980f27a8 0x980d1e98 0x980cc1e0 0x980cbe68 0x980f1710 0x980e7fe0 0x980e7fb8 0x980e7ef0
+# branches: 0x980d570c 0x98061914
+
+980d54f0  7d8802a6  mflr r12                               
+980d54f4  4bf8c3d1  bl 0x980618c4                          
+980d54f8  dbc1ffc0  stfd f30, -0x40(r1)                    
+980d54fc  dbe1ffc8  stfd f31, -0x38(r1)                    
+980d5500  9421fe00  stwu r1, -0x200(r1)                    
+980d5504  7c9e2378  mr r30, r4                             
+980d5508  7c7f1b78  mr r31, r3                             
+980d550c  7cbc2b78  mr r28, r5                             
+980d5510  93c1021c  stw r30, 0x21c(r1)                     
+980d5514  388100e0  addi r4, r1, 0xe0                      
+980d5518  93e10214  stw r31, 0x214(r1)                     
+980d551c  93810224  stw r28, 0x224(r1)                     
+980d5520  7cdd3378  mr r29, r6                             
+980d5524  4bfee23d  bl 0x980c3760                          
+980d5528  388100a0  addi r4, r1, 0xa0                      
+980d552c  7fe3fb78  mr r3, r31                             
+980d5530  4bfee2f1  bl 0x980c3820                          
+980d5534  38810180  addi r4, r1, 0x180                     
+980d5538  807e0000  lwz r3, 0(r30)                         
+980d553c  48012acd  bl 0x980e8008                          
+980d5540  2b1d0000  cmplwi cr6, r29, 0                     
+980d5544  419a0088  beq cr6, 0x980d55cc                    
+980d5548  c01d0000  lfs f0, 0(r29)                         
+980d554c  c1bd0004  lfs f13, 4(r29)                        
+980d5550  c19d0008  lfs f12, 8(r29)                        
+980d5554  c17d000c  lfs f11, 0xc(r29)                      
+980d5558  c15d0010  lfs f10, 0x10(r29)                     
+980d555c  c13d0014  lfs f9, 0x14(r29)                      
+980d5560  c11d0018  lfs f8, 0x18(r29)                      
+980d5564  c0fd001c  lfs f7, 0x1c(r29)                      
+980d5568  c0dd0020  lfs f6, 0x20(r29)                      
+980d556c  c0bd0024  lfs f5, 0x24(r29)                      
+980d5570  c09d0028  lfs f4, 0x28(r29)                      
+980d5574  c07d002c  lfs f3, 0x2c(r29)                      
+980d5578  c05d0030  lfs f2, 0x30(r29)                      
+980d557c  c03d0034  lfs f1, 0x34(r29)                      
+980d5580  c3fd0038  lfs f31, 0x38(r29)                     
+980d5584  c3dd003c  lfs f30, 0x3c(r29)                     
+980d5588  d0010060  stfs f0, 0x60(r1)                      
+980d558c  d1a10064  stfs f13, 0x64(r1)                     
+980d5590  d1810068  stfs f12, 0x68(r1)                     
+980d5594  d161006c  stfs f11, 0x6c(r1)                     
+980d5598  d1410070  stfs f10, 0x70(r1)                     
+980d559c  d1210074  stfs f9, 0x74(r1)                      
+980d55a0  d1010078  stfs f8, 0x78(r1)                      
+980d55a4  d0e1007c  stfs f7, 0x7c(r1)                      
+980d55a8  d0c10080  stfs f6, 0x80(r1)                      
+980d55ac  d0a10084  stfs f5, 0x84(r1)                      
+980d55b0  d0810088  stfs f4, 0x88(r1)                      
+980d55b4  d061008c  stfs f3, 0x8c(r1)                      
+980d55b8  d0410090  stfs f2, 0x90(r1)                      
+980d55bc  d0210094  stfs f1, 0x94(r1)                      
+980d55c0  d3e10098  stfs f31, 0x98(r1)                     
+980d55c4  d3c1009c  stfs f30, 0x9c(r1)                     
+980d55c8  48000144  b 0x980d570c                           
+980d55cc  39610060  addi r11, r1, 0x60                     
+980d55d0  1be00774  VMX-6-p06(undecoded)                   
+980d55d4  39400008  li r10, 8                              
+980d55d8  91610054  stw r11, 0x54(r1)                      
+980d55dc  3960000c  li r11, 0xc                            
+980d55e0  91410050  stw r10, 0x50(r1)                      
+980d55e4  38e00010  li r7, 0x10                            
+980d55e8  80c10050  lwz r6, 0x50(r1)                       
+980d55ec  1b84fff5  VMX-6-p06(undecoded)                   
+980d55f0  81010054  lwz r8, 0x54(r1)                       
+980d55f4  39210060  addi r9, r1, 0x60                      
+980d55f8  91610054  stw r11, 0x54(r1)                      
+980d55fc  39610060  addi r11, r1, 0x60                     
+980d5600  80810054  lwz r4, 0x54(r1)                       
+980d5604  38a10060  addi r5, r1, 0x60                      
+980d5608  1beae3d5  VMX-6-p06(undecoded)                   
+980d560c  90e10054  stw r7, 0x54(r1)                       
+980d5610  1bdae355  VMX-6-p06(undecoded)                   
+980d5614  39410060  addi r10, r1, 0x60                     
+980d5618  38600004  li r3, 4                               
+980d561c  1baee355  VMX-6-p06(undecoded)                   
+980d5620  7c00584c  lvsr v0, 0, r11                        
+980d5624  54eb003e  slwi r11, r7, 0                        
+980d5628  17fff825  VMX-5-p05(undecoded)                   
+980d562c  38e10060  addi r7, r1, 0x60                      
+980d5630  91210050  stw r9, 0x50(r1)                       
+980d5634  17def025  VMX-5-p05(undecoded)                   
+980d5638  91410050  stw r10, 0x50(r1)                      
+980d563c  5529003e  slwi r9, r9, 0                         
+980d5640  90e10050  stw r7, 0x50(r1)                       
+980d5644  554a003e  slwi r10, r10, 0                       
+980d5648  83c10050  lwz r30, 0x50(r1)                      
+980d564c  38e00014  li r7, 0x14                            
+980d5650  3be10060  addi r31, r1, 0x60                     
+980d5654  17bde825  VMX-5-p05(undecoded)                   
+980d5658  3ba10060  addi r29, r1, 0x60                     
+980d565c  1b8be355  VMX-6-p06(undecoded)                   
+980d5660  13e02987  vcmpnezw v31, v0, v5                   
+980d5664  3b800018  li r28, 0x18                           
+980d5668  13fe1987  vcmpnezw v31, v30, v3                  
+980d566c  38a0001c  li r5, 0x1c                            
+980d5670  13e83187  vcmpnezw v31, v8, v6                   
+980d5674  3b610060  addi r27, r1, 0x60                     
+980d5678  38610060  addi r3, r1, 0x60                      
+980d567c  13e92187  vcmpnezw v31, v9, v4                   
+980d5680  39000020  li r8, 0x20                            
+980d5684  13ca5987  vcmpnezw v30, v10, v11                 
+980d5688  13df3987  vcmpnezw v30, v31, v7                  
+980d568c  39210060  addi r9, r1, 0x60                      
+980d5690  13dde187  vcmpnezw v30, v29, v28                 
+980d5694  38c00024  li r6, 0x24                            
+980d5698  13db2987  vcmpnezw v30, v27, v5                  
+980d569c  179ce025  VMX-5-p05(undecoded)                   
+980d56a0  39610060  addi r11, r1, 0x60                     
+980d56a4  39400028  li r10, 0x28                           
+980d56a8  13a34187  vcmpnezw v29, v3, v8                   
+980d56ac  38e10060  addi r7, r1, 0x60                      
+980d56b0  38a0002c  li r5, 0x2c                            
+980d56b4  13a93187  vcmpnezw v29, v9, v6                   
+980d56b8  38810060  addi r4, r1, 0x60                      
+980d56bc  39000030  li r8, 0x30                            
+980d56c0  13ab5187  vcmpnezw v29, v11, v10                 
+980d56c4  39210060  addi r9, r1, 0x60                      
+980d56c8  39600034  li r11, 0x34                           
+980d56cc  13a72987  vcmpnezw v29, v7, v5                   
+980d56d0  39410060  addi r10, r1, 0x60                     
+980d56d4  38e00038  li r7, 0x38                            
+980d56d8  13844187  vcmpnezw v28, v4, v8                   
+980d56dc  38c10060  addi r6, r1, 0x60                      
+980d56e0  3900003c  li r8, 0x3c                            
+980d56e4  13895987  vcmpnezw v28, v9, v11                  
+980d56e8  38a100a0  addi r5, r1, 0xa0                      
+980d56ec  38800000  li r4, 0                               
+980d56f0  138a3987  vcmpnezw v28, v10, v7                  
+980d56f4  38610060  addi r3, r1, 0x60                      
+980d56f8  13864187  vcmpnezw v28, v6, v8                   
+980d56fc  4801b25d  bl 0x980f0958                          
+980d5700  83e10214  lwz r31, 0x214(r1)                     
+980d5704  83810224  lwz r28, 0x224(r1)                     
+980d5708  83c1021c  lwz r30, 0x21c(r1)                     
+980d570c  38810060  addi r4, r1, 0x60                      
+980d5710  807e0000  lwz r3, 0(r30)                         
+980d5714  480128cd  bl 0x980e7fe0                          
+980d5718  7f84e378  mr r4, r28                             
+980d571c  807e0000  lwz r3, 0(r30)                         
+980d5720  4801d089  bl 0x980f27a8                          
+980d5724  2c030000  cmpwi r3, 0                            
+980d5728  41800170  blt 0x980d5898                         
+980d572c  39600000  li r11, 0                              
+980d5730  38c00000  li r6, 0                               
+980d5734  9161012c  stw r11, 0x12c(r1)                     
+980d5738  38a10120  addi r5, r1, 0x120                     
+980d573c  7fc4f378  mr r4, r30                             
+980d5740  7fe3fb78  mr r3, r31                             
+980d5744  4bffc755  bl 0x980d1e98                          
+980d5748  7fc4f378  mr r4, r30                             
+980d574c  7fe3fb78  mr r3, r31                             
+980d5750  4bff6a91  bl 0x980cc1e0                          
+980d5754  38a10120  addi r5, r1, 0x120                     
+980d5758  7fc4f378  mr r4, r30                             
+980d575c  7fe3fb78  mr r3, r31                             
+980d5760  4bff6709  bl 0x980cbe68                          
+980d5764  7f84e378  mr r4, r28                             
+980d5768  807e0000  lwz r3, 0(r30)                         
+980d576c  4801bfa5  bl 0x980f1710                          
+980d5770  38810180  addi r4, r1, 0x180                     
+980d5774  7c7d1b78  mr r29, r3                             
+980d5778  807e0000  lwz r3, 0(r30)                         
+980d577c  48012865  bl 0x980e7fe0                          
+980d5780  c00100e0  lfs f0, 0xe0(r1)                       
+980d5784  c1a100e4  lfs f13, 0xe4(r1)                      
+980d5788  807e0000  lwz r3, 0(r30)                         
+980d578c  d01f0060  stfs f0, 0x60(r31)                     
+980d5790  389f0060  addi r4, r31, 0x60                     
+980d5794  d1bf0064  stfs f13, 0x64(r31)                    
+980d5798  c18100e8  lfs f12, 0xe8(r1)                      
+980d579c  c16100ec  lfs f11, 0xec(r1)                      
+980d57a0  c14100f0  lfs f10, 0xf0(r1)                      
+980d57a4  c12100f4  lfs f9, 0xf4(r1)                       
+980d57a8  c10100f8  lfs f8, 0xf8(r1)                       
+980d57ac  c0e100fc  lfs f7, 0xfc(r1)                       
+980d57b0  c0c10100  lfs f6, 0x100(r1)                      
+980d57b4  c0a10104  lfs f5, 0x104(r1)                      
+980d57b8  c0810108  lfs f4, 0x108(r1)                      
+980d57bc  c061010c  lfs f3, 0x10c(r1)                      
+980d57c0  c0410110  lfs f2, 0x110(r1)                      
+980d57c4  c0210114  lfs f1, 0x114(r1)                      
+980d57c8  c3e10118  lfs f31, 0x118(r1)                     
+980d57cc  c3c1011c  lfs f30, 0x11c(r1)                     
+980d57d0  d19f0068  stfs f12, 0x68(r31)                    
+980d57d4  d17f006c  stfs f11, 0x6c(r31)                    
+980d57d8  d15f0070  stfs f10, 0x70(r31)                    
+980d57dc  d13f0074  stfs f9, 0x74(r31)                     
+980d57e0  d11f0078  stfs f8, 0x78(r31)                     
+980d57e4  d0ff007c  stfs f7, 0x7c(r31)                     
+980d57e8  d0df0080  stfs f6, 0x80(r31)                     
+980d57ec  d0bf0084  stfs f5, 0x84(r31)                     
+980d57f0  d09f0088  stfs f4, 0x88(r31)                     
+980d57f4  d07f008c  stfs f3, 0x8c(r31)                     
+980d57f8  d05f0090  stfs f2, 0x90(r31)                     
+980d57fc  d03f0094  stfs f1, 0x94(r31)                     
+980d5800  d3ff0098  stfs f31, 0x98(r31)                    
+980d5804  d3df009c  stfs f30, 0x9c(r31)                    
+980d5808  c00100a0  lfs f0, 0xa0(r1)                       
+980d580c  c1a100a4  lfs f13, 0xa4(r1)                      
+980d5810  c18100a8  lfs f12, 0xa8(r1)                      
+980d5814  c16100ac  lfs f11, 0xac(r1)                      
+980d5818  c14100b0  lfs f10, 0xb0(r1)                      
+980d581c  c12100b4  lfs f9, 0xb4(r1)                       
+980d5820  c10100b8  lfs f8, 0xb8(r1)                       
+980d5824  c0e100bc  lfs f7, 0xbc(r1)                       
+980d5828  c0c100c0  lfs f6, 0xc0(r1)                       
+980d582c  c0a100c4  lfs f5, 0xc4(r1)                       
+980d5830  c08100c8  lfs f4, 0xc8(r1)                       
+980d5834  c06100cc  lfs f3, 0xcc(r1)                       
+980d5838  d01f00a0  stfs f0, 0xa0(r31)                     
+980d583c  d1bf00a4  stfs f13, 0xa4(r31)                    
+980d5840  c00100d0  lfs f0, 0xd0(r1)                       
+980d5844  c1a100d4  lfs f13, 0xd4(r1)                      
+980d5848  d19f00a8  stfs f12, 0xa8(r31)                    
+980d584c  d17f00ac  stfs f11, 0xac(r31)                    
+980d5850  d15f00b0  stfs f10, 0xb0(r31)                    
+980d5854  d13f00b4  stfs f9, 0xb4(r31)                     
+980d5858  d11f00b8  stfs f8, 0xb8(r31)                     
+980d585c  d0ff00bc  stfs f7, 0xbc(r31)                     
+980d5860  d0df00c0  stfs f6, 0xc0(r31)                     
+980d5864  d0bf00c4  stfs f5, 0xc4(r31)                     
+980d5868  d09f00c8  stfs f4, 0xc8(r31)                     
+980d586c  d07f00cc  stfs f3, 0xcc(r31)                     
+980d5870  c18100d8  lfs f12, 0xd8(r1)                      
+980d5874  c16100dc  lfs f11, 0xdc(r1)                      
+980d5878  d01f00d0  stfs f0, 0xd0(r31)                     
+980d587c  d1bf00d4  stfs f13, 0xd4(r31)                    
+980d5880  d19f00d8  stfs f12, 0xd8(r31)                    
+980d5884  d17f00dc  stfs f11, 0xdc(r31)                    
+980d5888  48012731  bl 0x980e7fb8                          
+980d588c  807e0000  lwz r3, 0(r30)                         
+980d5890  48012661  bl 0x980e7ef0                          
+980d5894  7fa3eb78  mr r3, r29                             
+980d5898  38210200  addi r1, r1, 0x200                     
+980d589c  cbc1ffc0  lfd f30, -0x40(r1)                     
+980d58a0  cbe1ffc8  lfd f31, -0x38(r1)                     
+980d58a4  4bf8c070  b 0x98061914                           

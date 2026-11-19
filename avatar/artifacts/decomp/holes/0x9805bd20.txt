@@ -1,0 +1,21 @@
+# 0x9805bd20  64 bytes  16 decoded rows
+# unknown=0 scalar=12 call=1 branch=3 returns=0
+# calls: 0x9813b41c
+# branches: 0x9813b3cc 0x9813b3fc 0x9813b40c
+
+9805bd20  480df6ac  b 0x9813b3cc                           
+9805bd24  00000000  nop-or-padding                         
+9805bd28  480df6d4  b 0x9813b3fc                           
+9805bd2c  00000000  nop-or-padding                         
+9805bd30  480df6dc  b 0x9813b40c                           
+9805bd34  00000000  nop-or-padding                         
+9805bd38  7d8802a6  mflr r12                               
+9805bd3c  9181fff8  stw r12, -8(r1)                        
+9805bd40  9421ffa0  stwu r1, -0x60(r1)                     
+9805bd44  816100b4  lwz r11, 0xb4(r1)                      
+9805bd48  91610054  stw r11, 0x54(r1)                      
+9805bd4c  480df6d1  bl 0x9813b41c                          
+9805bd50  38210060  addi r1, r1, 0x60                      
+9805bd54  8181fff8  lwz r12, -8(r1)                        
+9805bd58  7d8803a6  mtlr r12                               
+9805bd5c  4e800020  blr                                    

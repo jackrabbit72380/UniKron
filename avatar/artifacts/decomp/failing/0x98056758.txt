@@ -1,0 +1,35 @@
+# 0x98056758  120 bytes  30 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=29 call=1 branch=0 returns=0
+# calls: 0x98071368
+# branches: -
+
+98056758  7d8802a6  mflr r12                               
+9805675c  9181fff8  stw r12, -8(r1)                        
+98056760  fbc1ffe8  std r30, -0x18(r1)                     
+98056764  fbe1fff0  std r31, -0x10(r1)                     
+98056768  9421ff90  stwu r1, -0x70(r1)                     
+9805676c  7c7e1b78  mr r30, r3                             
+98056770  38610050  addi r3, r1, 0x50                      
+98056774  7cbf2b78  mr r31, r5                             
+98056778  4801abf1  bl 0x98071368                          
+9805677c  2f1e0001  cmpwi cr6, r30, 1                      
+98056780  419a0144  beq cr6, 0x980568c4                    
+98056784  2f1e0002  cmpwi cr6, r30, 2                      
+98056788  419a00e8  beq cr6, 0x98056870                    
+9805678c  2f1e000b  cmpwi cr6, r30, 0xb                    
+98056790  409900c8  ble cr6, 0x98056858                    
+98056794  2f1e0016  cmpwi cr6, r30, 0x16                   
+98056798  419900c0  bgt cr6, 0x98056858                    
+9805679c  397effff  addi r11, r30, -1                      
+980567a0  2b0b0016  cmplwi cr6, r11, 0x16                  
+980567a4  4199008c  bgt cr6, 0x98056830                    
+980567a8  3d809800  lis r12, -0x6800                       
+980567ac  398c4e40  addi r12, r12, 0x4e40                  
+980567b0  7c0c58ae  lbzx r0, r12, r11                      
+980567b4  3d809805  lis r12, -0x67fb                       
+980567b8  398c5bd0  addi r12, r12, 0x5bd0                  
+980567bc  7d8c0214  add r12, r12, r0                       
+980567c0  7d8903a6  mtctr r12                              
+980567c4  60000000  nop                                    
+980567c8  60000000  nop                                    
+980567cc  4e800420  bctr                                   

@@ -1,0 +1,74 @@
+# 0x980fc964  276 bytes  69 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=63 call=2 branch=4 returns=0
+# calls: 0x98102c18 0x98062720
+# branches: 0x980fc9a8 0x980fc9ec 0x980fca1c 0x980fc94c
+
+980fc964  2b180000  cmplwi cr6, r24, 0                     
+980fc968  419a05ac  beq cr6, 0x980fcf14                    
+980fc96c  2b170000  cmplwi cr6, r23, 0                     
+980fc970  409a00b4  bne cr6, 0x980fca24                    
+980fc974  813f002c  lwz r9, 0x2c(r31)                      
+980fc978  7f1a4840  cmplw cr6, r26, r9                     
+980fc97c  409a0034  bne cr6, 0x980fc9b0                    
+980fc980  817f0030  lwz r11, 0x30(r31)                     
+980fc984  815f0028  lwz r10, 0x28(r31)                     
+980fc988  7f0a5840  cmplw cr6, r10, r11                    
+980fc98c  419a0024  beq cr6, 0x980fc9b0                    
+980fc990  7d5a5378  mr r26, r10                            
+980fc994  40980010  bge cr6, 0x980fc9a4                    
+980fc998  7d7a5850  subf r11, r26, r11                     
+980fc99c  3aebffff  addi r23, r11, -1                      
+980fc9a0  48000008  b 0x980fc9a8                           
+980fc9a4  7efa4850  subf r23, r26, r9                      
+980fc9a8  2b170000  cmplwi cr6, r23, 0                     
+980fc9ac  409a0078  bne cr6, 0x980fca24                    
+980fc9b0  935f0034  stw r26, 0x34(r31)                     
+980fc9b4  7ec5b378  mr r5, r22                             
+980fc9b8  7fc4f378  mr r4, r30                             
+980fc9bc  7fe3fb78  mr r3, r31                             
+980fc9c0  48006259  bl 0x98102c18                          
+980fc9c4  835f0034  lwz r26, 0x34(r31)                     
+980fc9c8  817f0030  lwz r11, 0x30(r31)                     
+980fc9cc  7c651b78  mr r5, r3                              
+980fc9d0  7f1a5840  cmplw cr6, r26, r11                    
+980fc9d4  40980010  bge cr6, 0x980fc9e4                    
+980fc9d8  7d5a5850  subf r10, r26, r11                     
+980fc9dc  3aeaffff  addi r23, r10, -1                      
+980fc9e0  4800000c  b 0x980fc9ec                           
+980fc9e4  815f002c  lwz r10, 0x2c(r31)                     
+980fc9e8  7efa5050  subf r23, r26, r10                     
+980fc9ec  813f002c  lwz r9, 0x2c(r31)                      
+980fc9f0  7f1a4840  cmplw cr6, r26, r9                     
+980fc9f4  409a0028  bne cr6, 0x980fca1c                    
+980fc9f8  815f0028  lwz r10, 0x28(r31)                     
+980fc9fc  7f0a5840  cmplw cr6, r10, r11                    
+980fca00  419a001c  beq cr6, 0x980fca1c                    
+980fca04  7d5a5378  mr r26, r10                            
+980fca08  40980010  bge cr6, 0x980fca18                    
+980fca0c  7d7a5850  subf r11, r26, r11                     
+980fca10  3aebffff  addi r23, r11, -1                      
+980fca14  48000008  b 0x980fca1c                           
+980fca18  7efa4850  subf r23, r26, r9                      
+980fca1c  2b170000  cmplwi cr6, r23, 0                     
+980fca20  419a0490  beq cr6, 0x980fceb0                    
+980fca24  833f0004  lwz r25, 4(r31)                        
+980fca28  7eb6ab78  mr r22, r21                            
+980fca2c  7f19c040  cmplw cr6, r25, r24                    
+980fca30  40990008  ble cr6, 0x980fca38                    
+980fca34  7f19c378  mr r25, r24                            
+980fca38  7f19b840  cmplw cr6, r25, r23                    
+980fca3c  40990008  ble cr6, 0x980fca44                    
+980fca40  7ef9bb78  mr r25, r23                            
+980fca44  7f25cb78  mr r5, r25                             
+980fca48  7fa4eb78  mr r4, r29                             
+980fca4c  7f43d378  mr r3, r26                             
+980fca50  4bf65cd1  bl 0x98062720                          
+980fca54  817f0004  lwz r11, 4(r31)                        
+980fca58  7fb9ea14  add r29, r25, r29                      
+980fca5c  7d795851  subf. r11, r25, r11                    
+980fca60  7f19c050  subf r24, r25, r24                     
+980fca64  7f59d214  add r26, r25, r26                      
+980fca68  917f0004  stw r11, 4(r31)                        
+980fca6c  7ef9b850  subf r23, r25, r23                     
+980fca70  40820430  bne 0x980fcea0                         
+980fca74  4bfffed8  b 0x980fc94c                           

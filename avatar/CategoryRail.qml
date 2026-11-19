@@ -49,11 +49,15 @@ Item {
 
             Behavior on color { ColorAnimation { duration: 120 } }
 
+            // "Skin Color and Body" is the longest label the retail scene has
+            // (CATEGORIES.md), and at 168 px - the rail's width at 960x720 - a
+            // 15 px label elided mid-word. 14 px with these margins fits it with
+            // room to spare, measured on the rendered closet.
             Text {
                 anchors.left: parent.left
-                anchors.leftMargin: 16
+                anchors.leftMargin: 12
                 anchors.right: parent.right
-                anchors.rightMargin: 12
+                anchors.rightMargin: 6
                 anchors.verticalCenter: parent.verticalCenter
                 text: pill.modelData ? pill.modelData.label : ""
                 // Literals, not style.*: inside a ListView delegate the Style
@@ -61,7 +65,7 @@ Item {
                 // Qt then logs "Unable to assign [undefined]" once per row.
                 color: index === rail.currentIndex ? "#1f2b0a" : "#ffffff"
                 font.family: "Segoe UI"
-                font.pixelSize: 15
+                font.pixelSize: 13
                 font.weight: index === rail.currentIndex ? Font.DemiBold : Font.Normal
                 elide: Text.ElideRight
             }

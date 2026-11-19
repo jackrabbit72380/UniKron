@@ -28,10 +28,15 @@ fi
 CLIPS="../../../src_archive/XBOX HUB/resources/editors/metro2010/assets/Cheer.AvatarAnimation"
 CATEGORIES="10_body,15_face,16_face-paint,20_pants,30_shoes,40_shirt,45_facial-hair,46_gloves,50_hair,60_hat,70_glasses,75_earrings,76_rings,77_wristwear,80_dress,81_formal,82_coat,83_dress-formal"
 CLIP_ASSET="Animation Male Idle Shifts Weight"
-# The fingers come from a game clip, because the pack's own idles do not pose them:
-# the hand this build draws was hand-authored until it was measured against this.
+# The fingers come from a game clip, because the editor's own idle fans the hand:
+# its finger deltas are 11-34 degrees and mostly twist, which spreads the four
+# fingers into a rake (the "claws" the bakes showed). The clip chosen is the
+# *same* idle the editor plays - Animation Male Idle Shifts Weight - as authored
+# for this skeleton by the console team and shipped in a game, so the fingers are
+# measured rather than invented. MaleIdleShiftWeight renders as a hand across the
+# whole turn; Miner Paintball's Idle.xnb was the previous pick and splays more.
 # Missing file is not an error - bake_avatar says so and keeps the clip's hands.
-export AVATAR_FINGER_XNB="${AVATAR_FINGER_XNB:-$PWD/../../../src_archive/avatar-games/Avatar Games/Avatar Games1/Avatar Miner Paintball/Content/Avatar Animations/Idle.xnb}"
+export AVATAR_FINGER_XNB="${AVATAR_FINGER_XNB:-$PWD/../../../src_archive/avatar-games/Avatar Games/Avatar Games2/Avatar Connection/Content/AvatarAnimation/MaleIdleShiftWeight.xnb}"
 JOBS="${JOBS:-8}"
 STAGE="${1:-all}"
 
@@ -46,6 +51,30 @@ faces() {
     --categories 12_eyebrows,15_face,16_face-paint,17_eye-shadow,45_facial-hair \
     --outdir ../pack_plates --force --clip-asset "$CLIP_ASSET"
   echo "face plates done"
+  # The tint masks the editor multiplies a palette colour by (COLOURS.md). They are
+  # a second bake of the same sheets, not a post-process of the plates: the plates
+  # isolate an item by differencing two tinted renders, and that difference moves
+  # when the tint does, so the masks have to come from the renderer's coverage.
+  python3 bake_pack_face.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
+    --categories 12_eyebrows,15_face,16_face-paint,17_eye-shadow,45_facial-hair \
+    --outdir ../pack_plates_mask --mask --force --clip-asset "$CLIP_ASSET"
+  # The mouths have names but no textures in the pack (the head's own face supplies
+  # the mouth), so this bake masks the one mouth the build draws. It is separate from
+  # the run above because it is one fixed item, not a wardrobe category.
+  python3 bake_pack_face.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
+    --categories 18_mouth --outdir ../pack_plates_mask --mask --force --clip-asset "$CLIP_ASSET"
+  # The iris masks: the eye sheet paints the iris and the sclera, and only the iris
+  # takes the eye colour, so it is split out here - two files per eye, the light and
+  # the specular term (make_eye_masks.py). It reads the 15_face coverage masks above.
+  python3 make_eye_masks.py
+  # The skin mask is the silhouette minus the feature masks baked just above, so it
+  # has to come after this function's two bakes and before the QML is generated.
+  python3 make_skin_mask.py
+  # The editor cannot read JSON at run time, so the masks and the colour tables it
+  # needs are generated into QML here - a rebuild that skipped this would leave the
+  # closet with no swatches and the stage with no masks to tint.
+  python3 make_colour_qml.py
+  echo "face masks done"
 }
 
 plates() {
@@ -69,6 +98,17 @@ plates() {
       --outdir "$out" --force --clip-asset "$CLIP_ASSET"
     echo "plates $gender done"
   done
+  # The hairstyle tint masks, in the male frame: a mask is the item with a white
+  # albedo (bake_pack_plates.py --mask), and pack_plates_mask holds the one frame
+  # the editor tints in. Faces bakes the head-sheet masks and then generates the
+  # indexes both of them need.
+  python3 bake_pack_plates.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
+    --categories 50_hair --mask --force --clip-asset "$CLIP_ASSET"
+  # The body silhouette the skin mask is cut from: one plate, the body with its
+  # head, white albedo like every other mask.
+  python3 bake_pack_plates.py "$PACK" "$CLIPS" descriptors/Avatar6400.Avatar \
+    --categories 10_body --mask --include-base --force --clip-asset "$CLIP_ASSET"
+  echo "hair masks done"
   faces
 }
 

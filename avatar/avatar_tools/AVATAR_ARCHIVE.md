@@ -1055,30 +1055,42 @@ format and still unparsed.
 ### Still unread
 
 * **version 4 compressed** files - Avatar Avenue's 3 clips, Avatar Boogie's 5 dances,
-  Avatar Punch's 192 files. They do not decode at any of the offsets and windows
-  that work for version 5, so the v4 framing is a separate question.
-* **the DNA clip layout** - `DNA.Drawing.Animation.AnimationClip`. Its payload starts
-  with a byte, the name ("Take 001"), an i32, an i64, then 71, then per-bone records of
-  roughly 36-52 bytes. Not decoded yet, so no frames or joints come out of it.
+  Avatar Punch's 192 files. **CORRECTION:** they do decode; the missing piece was
+  XCompress framing (a 16-bit big-endian length before each 32 KiB output frame), not
+  the version. All 185 avatar clips inflate - see `DECOMPILE.md`, "the framing, and the
+  reader".
+* **the DNA clip layout** - `DNA.Drawing.Animation.AnimationClip`. **CORRECTION:** this
+  is decoded now, and all 143 DNA clips walk to their last byte; the section below is
+  rewritten to the measured layout. The `i32` after the name is frames a second, not a
+  frame count.
 
 ## The DNA clip format, decoded
 
 `DNA.Drawing.Animation.AnimationClip` (the Digital DNA games) turned out to be simple
 once measured. Payload:
 
-    u8   flag, then u8 length + name ("Take 001")
-    i32  frame count   (30)
+    u8   1 (flag), then u8 length + name ("Take 001")
+    i32  frames a second (30)          CORRECTION: this is not a frame count
     i64  duration ticks (3,166,666 = 1/3 s)
     i32  bone count    (71)
-    per bone, three channels, each `i32 count` then that many elements:
+    per bone, the tracks in order, each `i32 count` then that many records:
         count x Vector3     (12 bytes)  translation
         count x Quaternion  (16 bytes)  rotation
-        count x Vector3     (12 bytes)  scale
+        count x Vector3     (12 bytes)  scale   - only in some clips, always (1,1,1)
 
-With one key per channel that is 52 bytes a bone, and `GenericIdle` is exactly
+With one key in every track that is 52 bytes a bone, and `GenericIdle` is exactly
 71 x 52 bytes from the header to the last byte - the walk ends on the file's final
 byte, which is how the layout was confirmed. Bone order matches the retail rig: the
 finger groups land on 37-40, 51-54, 58, 66-69, the same indices `finger_bones` finds.
+
+**The scale track is optional, and nothing in the file says so.** 118 clips (Avatar
+Laser Wars 2's 79, Avatar Warfare's 39) write three tracks a bone; all 25 of Avatar
+Connection's write two. Every one of the 8,378 scale tracks in the archive holds
+(1, 1, 1), so nothing is lost when it is absent - and the walk itself decides, because
+only one track set ends exactly on the last byte (measured on all 143, no file fit
+both). The first `i32` of the body is the root bone's translation count: `Stand0`
+stores 162 for 160 frames and `Tilt` stores 1 for 100, so it is a key count, not any
+sort of frame count.
 
 **The quaternions are used as stored - no sign flips.** An earlier pass negated y
 because that lowered the wrists, and it was wrong: all eight axis-sign variants were
@@ -1091,8 +1103,51 @@ distance from the wrist and the spread between fingertips. On `intro_pose05`:
 The flipped form fixes the arm height and fans the fingers. `dna_poses(flip_y=True)`
 is kept only so the wrong reading can be reproduced and seen.
 
-**82 clips decode** across Warfare (51 files), Laser Wars 2 (37) and Connection (1),
-every one landing exactly on its file size. Mean finger rotation spans 27.6 deg
+**All 143 DNA clips decode** - Laser Wars 2 79, Warfare 39, Connection 25 - every one
+landing exactly on its file size (`dna_probe.py` prints the walk for each). An earlier
+version of this note said 82 across "Warfare 51, Laser Wars 2 37, Connection 1": the
+counts were the compressed-file survey, not the DNA clips, and 82 was where the walk
+stopped before the two-track group was found.
+
+The 29 clips that carry a name (`read_dna` on each; frames are ticks x 30 a second):
+
+| game | clip | tracks | length | rot keys |
+| --- | --- | --- | --- | --- |
+| Connection | Celebrate | 2 | 3.367 s (101) | 5,681 |
+| Connection | Clap | 2 | 3.333 s (100) | 5,626 |
+| Connection | FemaleAngry | 2 | 5.667 s (170) | 9,305 |
+| Connection | FemaleConfused | 2 | 3.667 s (110) | 5,621 |
+| Connection | FemaleCry | 2 | 6.000 s (180) | 8,397 |
+| Connection | FemaleIdleCheckNails | 2 | 12.000 s (360) | 20,036 |
+| Connection | FemaleIdleFixShoe | 2 | 5.000 s (150) | 6,564 |
+| Connection | FemaleIdleLookAround | 2 | 5.000 s (150) | 7,772 |
+| Connection | FemaleIdleShiftWeight | 2 | 12.667 s (380) | 20,753 |
+| Connection | FemaleLaugh | 2 | 5.500 s (165) | 7,873 |
+| Connection | FemaleShocked | 2 | 3.833 s (115) | 6,219 |
+| Connection | FemaleYawn | 2 | 3.667 s (110) | 6,176 |
+| Connection | MaleAngry | 2 | 4.667 s (140) | 7,685 |
+| Connection | MaleConfused | 2 | 3.167 s (95) | 4,916 |
+| Connection | MaleCry | 2 | 6.333 s (190) | 10,194 |
+| Connection | MaleIdleCheckHand | 2 | 6.967 s (209) | 11,676 |
+| Connection | MaleIdleLookAround | 2 | 10.667 s (320) | 17,190 |
+| Connection | MaleIdleShiftWeight | 2 | 12.067 s (362) | 19,781 |
+| Connection | MaleIdleStretch | 2 | 9.467 s (284) | 15,229 |
+| Connection | MaleLaugh | 2 | 4.500 s (135) | 6,055 |
+| Connection | MaleSurprised | 2 | 4.333 s (130) | 6,621 |
+| Connection | MaleYawn | 2 | 5.467 s (164) | 8,816 |
+| Connection | Wave | 2 | 5.333 s (160) | 8,765 |
+| Laser Wars 2 | MaleIdleLookAround | 3 | 10.667 s (320) | 17,190 |
+| Laser Wars 2 | Stand0 | 3 | 5.333 s (160) | 8,121 |
+| Laser Wars 2 | Wave | 3 | 5.333 s (160) | 8,765 |
+| Warfare | MaleIdleLookAround | 3 | 10.667 s (320) | 17,190 |
+| Warfare | Stand0 | 3 | 5.333 s (160) | 8,121 |
+| Warfare | Wave | 3 | 5.333 s (160) | 8,765 |
+
+The other 114 are named `Take 001`, 46 of them a single key a bone - poses rather
+than motion. Laser Wars 2 and Warfare ship `/Stand0`, `/Wave` and
+`/MaleIdleLookAround` byte for byte (md5 `cc9d7421`, `90489b7e`, `e3ccf147`), so the
+same content is in two games; Connection's `Wave` and `MaleIdleLookAround` are its
+own two-track encodes (`b2fc6601`, `2b74d418`). Mean finger rotation spans 27.6 deg
 (`intro_pose05`, the most relaxed) to 58 deg (`Warfare/Idle`, a weapon grip).
 
 ### What the hands actually are

@@ -1,0 +1,59 @@
+# 0x9803ee60  216 bytes  54 decoded rows
+# unknown=10 scalar=39 call=4 branch=1 returns=0
+# calls: 0x980618b8 0x9803e930 0x9803e1b8 0x98087d38
+# branches: 0x98061908
+
+9803ee60  7d8802a6  mflr r12                               
+9803ee64  48022a55  bl 0x980618b8                          
+9803ee68  9421ff00  stwu r1, -0x100(r1)                    
+9803ee6c  1be00774  VMX-6-p06(undecoded)                   
+9803ee70  3ba10070  addi r29, r1, 0x70                     
+9803ee74  3b410080  addi r26, r1, 0x80                     
+9803ee78  3b210090  addi r25, r1, 0x90                     
+9803ee7c  3b0100a0  addi r24, r1, 0xa0                     
+9803ee80  1be4fff5  VMX-6-p06(undecoded)                   
+9803ee84  7cde3378  mr r30, r6                             
+9803ee88  38c10064  addi r6, r1, 0x64                      
+9803ee8c  39600000  li r11, 0                              
+9803ee90  7cbf2b78  mr r31, r5                             
+9803ee94  1bcafbd5  VMX-6-p06(undecoded)                   
+9803ee98  91610060  stw r11, 0x60(r1)                      
+9803ee9c  1bbafb55  VMX-6-p06(undecoded)                   
+9803eea0  3d2000ff  lis r9, 0xff                           
+9803eea4  1b8efb55  VMX-6-p06(undecoded)                   
+9803eea8  91660000  stw r11, 0(r6)                         
+9803eeac  1bebfb55  VMX-6-p06(undecoded)                   
+9803eeb0  91660004  stw r11, 4(r6)                         
+9803eeb4  91660008  stw r11, 8(r6)                         
+9803eeb8  7cfc3b78  mr r28, r7                             
+9803eebc  7d1b4378  mr r27, r8                             
+9803eec0  39410050  addi r10, r1, 0x50                     
+9803eec4  91610050  stw r11, 0x50(r1)                      
+9803eec8  13c0e9c7  VMX-p04(undecoded)                     
+9803eecc  6129ffff  ori r9, r9, 0xffff                     
+9803eed0  13a0d1c7  VMX-p04(undecoded)                     
+9803eed4  7fc8f378  mr r8, r30                             
+9803eed8  1380c9c7  VMX-p04(undecoded)                     
+9803eedc  7fe7fb78  mr r7, r31                             
+9803eee0  13e0c1c7  VMX-p04(undecoded)                     
+9803eee4  38c10070  addi r6, r1, 0x70                      
+9803eee8  38a00000  li r5, 0                               
+9803eeec  4bfffa45  bl 0x9803e930                          
+9803eef0  83410050  lwz r26, 0x50(r1)                      
+9803eef4  7c7d1b79  or. r29, r3, r3                        
+9803eef8  41800024  blt 0x9803ef1c                         
+9803eefc  93e10068  stw r31, 0x68(r1)                      
+9803ef00  7f66db78  mr r6, r27                             
+9803ef04  93c1006c  stw r30, 0x6c(r1)                      
+9803ef08  7f85e378  mr r5, r28                             
+9803ef0c  38810060  addi r4, r1, 0x60                      
+9803ef10  7f43d378  mr r3, r26                             
+9803ef14  4bfff2a5  bl 0x9803e1b8                          
+9803ef18  7c7d1b78  mr r29, r3                             
+9803ef1c  2b1a0000  cmplwi cr6, r26, 0                     
+9803ef20  419a000c  beq cr6, 0x9803ef2c                    
+9803ef24  7f43d378  mr r3, r26                             
+9803ef28  48048e11  bl 0x98087d38                          
+9803ef2c  7fa3eb78  mr r3, r29                             
+9803ef30  38210100  addi r1, r1, 0x100                     
+9803ef34  480229d4  b 0x98061908                           

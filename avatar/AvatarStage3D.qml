@@ -42,7 +42,13 @@ Item {
     property int yaw: 0
     property int pose: 0
     property bool available: false
-    property bool spinning: true
+    // The baked sets are one pose from twenty angles, and only frame 10 of the
+    // 20 (measured: see the contact sheet in research/shots/turntable_sheet.png)
+    // looks at the camera - frames 0-2 are the back, 3-6 the right profile,
+    // 7-9 the three-quarter. Spinning by default therefore opened the closet on
+    // the avatar's back or side, which read as a broken mirror. The stage now
+    // holds the front frame and turns only while you drag.
+    property bool spinning: false
     property bool showShadow: true
 
     onFolderChanged: reload()
@@ -71,12 +77,21 @@ Item {
             yaw = Math.floor(yawCount / 2)
             pose = 0
         } else if (frameCount > 1) {
-            frame = Math.floor(frameCount / 2)
+            frame = restFrame
         }
         holder.grabToImage(function (result) {
             callback(result)
         }, Qt.size(512, 768))
     }
+
+    // Which baked frame looks at the camera. The two static bakes do not start at
+    // the same angle, and measuring the sets themselves is the only way to know:
+    //   six-frame item sets   (bake_pack_turntables.py)  frame 00 is the front
+    //   twenty-frame outfits  (bake_outfits.py)          frame 10 is the front
+    // contact sheets: research/shots/item_sheet.png, research/shots/turntable_sheet.png.
+    // "Half the frames" was wrong for the item sets, which is why the closet opened
+    // on the avatar's back once the spin was taken out.
+    readonly property int restFrame: frameCount === 20 ? 10 : 0
 
     function padded(index) {
         return (index < 10 ? "0" : "") + index
@@ -169,9 +184,9 @@ Item {
                 stage.frameCount += 1
                 loadNext()
             } else if (status === Image.Error && stage.frameCount > 0) {
-                // Half a turn is the front: the bake starts at the avatar's back,
-                // the same convention the animated branch uses for its yaw.
-                stage.frame = Math.floor(stage.frameCount / 2)
+                // Open facing the player, from the measured rest frame for this
+                // bake shape (see restFrame above).
+                stage.frame = stage.restFrame
             } else if (status === Image.Error && stage.frameCount === 0
                        && stage.variant !== stage.defaultVariant) {
                 // Nothing baked for this look: show the stock set rather than
@@ -198,16 +213,17 @@ Item {
     }
 
     // Soft shadow on the floor, the same one the 2D stage draws. The bake puts
-    // the soles at 93.5% of the frame (bake_turntable's 0.86 fit plus the feet at
-    // y = 0), so the shadow's centre has to sit on that line; at 92.5% the avatar
-    // hovered a few pixels above its own shadow.
+    // the soles at 93.2% of the frame (bake_turntable's 0.86 fit plus the feet at
+    // y = 0) and the figure is fitted to the mirror opening below, so the shadow's
+    // centre sits on the opening's bottom rail - the line the soles land on.
+    // (The female bake puts them at 93.5%; the 0.3% is two pixels at stage size.)
     Image {
         visible: stage.showShadow && stage.available
         source: Qt.resolvedUrl("assets/_ui/shadow.png")
         anchors.horizontalCenter: holder.horizontalCenter
         width: holder.width * 0.95
         height: width * 0.30
-        y: holder.y + holder.height * 0.935 - height / 2
+        y: holder.y + holder.height * style.mirrorBottom - height / 2
         fillMode: Image.PreserveAspectFit
         opacity: 0.85
     }
@@ -220,12 +236,27 @@ Item {
         width: Math.min(stage.width, stage.height * 2 / 3)
         height: width * 3 / 2
 
-        Image {
-            anchors.fill: parent
-            source: stage.shown
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-            cache: true
+        // The frames, fitted to the mirror's opening the same way the 2D stage
+        // fits its plates (Style.qml holds the measured numbers): the baked frame
+        // puts the soles at 0.932 of its canvas, and the opening's bottom rail is
+        // at 0.915 of the holder, so the figure is scaled about its own sole line
+        // and moved until that line sits on the rail.
+        Item {
+            id: figure
+            width: holder.width * style.figureScale
+            height: holder.height * style.figureScale
+            // Child of holder: its coordinates are already in holder's space, so
+            // adding holder.x/y again would push the figure off the mirror.
+            x: (holder.width - width) / 2
+            y: holder.height * style.mirrorBottom - height * style.soleFraction
+
+            Image {
+                anchors.fill: parent
+                source: stage.shown
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                cache: true
+            }
         }
     }
 
@@ -282,7 +313,9 @@ Item {
                 stage.frame = ((pressFrame + delta) % stage.frameCount + stage.frameCount) % stage.frameCount
             }
         }
-        onReleased: stage.spinning = true
+        // Released: keep the angle the player chose. The original editor does
+        // not drift back to the front on its own either.
+        onReleased: stage.spinning = false
     }
 
     Rectangle {

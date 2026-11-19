@@ -1,0 +1,23 @@
+# 0x98114cec  72 bytes  18 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=15 call=0 branch=3 returns=0
+# calls: -
+# branches: 0x98114a84 0x98114a34 0x98114a34
+
+98114cec  554b043e  clrlwi r11, r10, 0x10                  
+98114cf0  38a8fffc  addi r5, r8, -4                        
+98114cf4  2b0b0031  cmplwi cr6, r11, 0x31                  
+98114cf8  41980014  blt cr6, 0x98114d0c                    
+98114cfc  2b0b0039  cmplwi cr6, r11, 0x39                  
+98114d00  4199000c  bgt cr6, 0x98114d0c                    
+98114d04  39600009  li r11, 9                              
+98114d08  4bfffd7c  b 0x98114a84                           
+98114d0c  2f0b002b  cmpwi cr6, r11, 0x2b                   
+98114d10  419a001c  beq cr6, 0x98114d2c                    
+98114d14  2f0b002d  cmpwi cr6, r11, 0x2d                   
+98114d18  419a0090  beq cr6, 0x98114da8                    
+98114d1c  2f0b0030  cmpwi cr6, r11, 0x30                   
+98114d20  409afe70  bne cr6, 0x98114b90                    
+98114d24  39600008  li r11, 8                              
+98114d28  4bfffd0c  b 0x98114a34                           
+98114d2c  39600007  li r11, 7                              
+98114d30  4bfffd04  b 0x98114a34                           

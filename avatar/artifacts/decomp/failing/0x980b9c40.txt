@@ -1,0 +1,26 @@
+# 0x980b9c40  84 bytes  21 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=21 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+980b9c40  7d8802a6  mflr r12                               
+980b9c44  9181fff8  stw r12, -8(r1)                        
+980b9c48  fbe1fff0  std r31, -0x10(r1)                     
+980b9c4c  9421ffa0  stwu r1, -0x60(r1)                     
+980b9c50  7c9f2378  mr r31, r4                             
+980b9c54  39400000  li r10, 0                              
+980b9c58  915f0000  stw r10, 0(r31)                        
+980b9c5c  81630000  lwz r11, 0(r3)                         
+980b9c60  396bffff  addi r11, r11, -1                      
+980b9c64  2b0b0008  cmplwi cr6, r11, 8                     
+980b9c68  41990084  bgt cr6, 0x980b9cec                    
+980b9c6c  3d809803  lis r12, -0x67fd                       
+980b9c70  398c8d80  addi r12, r12, -0x7280                 
+980b9c74  7c0c58ae  lbzx r0, r12, r11                      
+980b9c78  3d80980c  lis r12, -0x67f4                       
+980b9c7c  398c9094  addi r12, r12, -0x6f6c                 
+980b9c80  7d8c0214  add r12, r12, r0                       
+980b9c84  7d8903a6  mtctr r12                              
+980b9c88  60000000  nop                                    
+980b9c8c  60000000  nop                                    
+980b9c90  4e800420  bctr                                   

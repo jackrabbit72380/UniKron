@@ -1,0 +1,23 @@
+# .text decode coverage through round four (image: rebased PE at 0x98000000)
+#
+# Section: .text raw 0x39400, VA 0x9803a000, vsize 0x1011dc (1,053,148 bytes).
+# Measured with Coverage.java, which now tests instruction *containment* per byte
+# (the first version tested only instruction starts and reported 21.5%).
+#
+# stage                                                            bytes     pct   instr   in-func  orphan
+fresh PowerPC:BE:64:Xenon analysis (Ghidra)                       818,152  77.69  n/a      n/a      n/a
++ DisassembleRecords (disassemble from the 3,295 .pdata record starts)  907,064  86.13  226,767  199,421  27,346
++ MakeRunFunctions (function at every undecoded post-terminator start)  1,040,376  98.79  260,095  247,143  12,951
+#
+# MakeRunFunctions: 4,150 candidates, 1,750 created, 2,400 had no decodable code
+# (that is what most of the remaining 12,772 bytes are: bytes after a terminator
+# that do not decode as instructions at all).
+#
+# Function outcomes after the three stages (FailList.java):
+#   functions 5,224 | clean 5,104 (97.70%) | halt_baddata 29 | no body 91
+#   at the fresh-analysis stage only: 3,474 functions | clean 3,450 | halt 15 | no body 9
+#
+# After TrimBackwardBodies (12 bodies that began before their own entry, 36,980
+# bytes removed) nothing changed: instructions 260,094, in-function 246,092,
+# orphan 14,002, bytes decoded unchanged at 1,040,376 (98.79%), and FailList still
+# reported functions 5,224 | clean 5,104 | halt 29 | no body 91.

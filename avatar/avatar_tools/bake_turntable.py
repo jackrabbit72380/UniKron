@@ -372,11 +372,19 @@ def _occlude(depth, verts, tris, rot, k, w, h):
 
 
 def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=None,
-           occluders=None):
+           occluders=None, coverage=False, only=None, white=False):
     """One frame: yaw the model, project, rasterise with a z-buffer.
 
     Normals are interpolated across each triangle and lit per pixel, so curved
     surfaces stay smooth at any frame size.
+
+    `coverage=True` renders the head's sheets *alone* instead of over skin: RGB is
+    the sheet's own coverage times the light rig, alpha is that coverage, and the
+    result is **premultiplied**. A renderer composites it as
+    `dst = mask.rgb * tint + dst * (1 - mask.a)` and gets the same pixel the baker
+    would have produced for that tint - which is what makes a colour pickable at
+    run time without re-baking. Inferring the same mask by differencing two tinted
+    renders does not work: the difference's alpha moves with the tint (COLOURS.md).
     """
     w, h = width * ss, height * ss
     # Normalised space has the feet at y = 0 and the head at y = 1. An
@@ -393,6 +401,7 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
     colour = np.zeros((h, w, 3), dtype=np.float64)
     depth = np.full((h, w), np.inf)
     alpha = np.zeros((h, w), dtype=bool)
+    paint_buf = np.zeros((h, w), dtype=np.float64)
 
     for overts, otris in (occluders or []):
         _occlude(depth, overts, otris, rot, k, w, h)
@@ -426,6 +435,11 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
         inside = (w0 >= -1e-6) & (w1 >= -1e-6) & (w2 >= -1e-6)
         if not inside.any():
             continue
+        # How much of this pixel the face sheets paint, independent of which colour
+        # they are tinted with. With `white` the whole mesh is the paint, which is
+        # what a hair or body mask needs: its alpha is the silhouette.
+        paint = (np.ones(w0.shape + (1,), dtype=np.float64) if white
+                 else np.zeros(w0.shape + (1,), dtype=np.float64))
 
         # Barycentric interpolation of the vertex normals, then per-pixel light.
         n = (
@@ -451,8 +465,9 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
         # alpha over skin, then the same light rig as everything else: sampling
         # per triangle instead turned the smirk line and the eye art into a
         # mosaic of blocks, which is what made the face look wrong.
-        albedo = linear[t]
-        if face is not None and face["start"] <= t < face["start"] + len(face["uvs"]):
+        albedo = 1.0 if white else linear[t]
+        if (not white and face is not None
+                and face["start"] <= t < face["start"] + len(face["uvs"])):
             corners = face["uvs"][t - face["start"]]
             albedo = np.broadcast_to(linear[t], (w0.shape[0], w0.shape[1], 3)).copy()
             for m, layer in enumerate(face["layers"]):
@@ -463,17 +478,19 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                 # zone (brow hair, iris) and B the secondary one (sclera, lip
                 # line). Painting the raw channels drew red brows and a red
                 # iris, which is what made the face look wrong.
-                coverage = texel[..., 3:4]
+                sheet = texel[..., 3:4]
                 if layer["role"] == "eye":
                     sclera = np.array([0.90, 0.90, 0.93]) ** 2.2
-                    albedo = sclera * (coverage * texel[..., 2:3]) + albedo * (1.0 - coverage * texel[..., 2:3])
-                    iris = coverage * texel[..., 0:1]
+                    albedo = sclera * (sheet * texel[..., 2:3]) + albedo * (1.0 - sheet * texel[..., 2:3])
+                    iris = sheet * texel[..., 0:1]
                     albedo = layer["tint"] * iris + albedo * (1.0 - iris)
                 else:
-                    albedo = layer["tint"] * coverage + albedo * (1.0 - coverage)
+                    albedo = layer["tint"] * sheet + albedo * (1.0 - sheet)
+                if only is None or only == "layer%d" % m:
+                    paint = paint + (1.0 - paint) * np.clip(sheet, 0.0, 1.0)
             # Decal sheets (beard, face paint) are painted art rather than tint
             # masks: composite their colour over the skin by their own alpha.
-            for decal in face.get("decals") or []:
+            for j, decal in enumerate(face.get("decals") or []):
                 corners_d = decal["uvs"][t - face["start"]]
                 u = (w0 * corners_d[0][0] + w1 * corners_d[1][0]
                      + w2 * corners_d[2][0])
@@ -488,6 +505,8 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                     zone = texel[..., 0:1] * texel[..., 3:4]
                     cover = zone * decal.get("gain", 1.0)
                     albedo = decal["tint"] * cover + albedo * (1.0 - cover)
+                    if only is None or only == "decal%d" % j:
+                        paint = paint + (1.0 - paint) * np.clip(cover, 0.0, 1.0)
                 else:
                     art = np.power(np.clip(texel[..., :3], 0.0, 1.0), 2.2)
                     cover = texel[..., 3:4] * decal.get("gain", 1.0)
@@ -496,9 +515,16 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
                     # wash the whole face out - which is exactly what the face
                     # paint did before this line.
                     albedo = art * cover + albedo * (1.0 - cover)
-        shaded = np.power(
-            np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
-        )
+                    if only is None or only == "decal%d" % j:
+                        paint = paint + (1.0 - paint) * np.clip(cover, 0.0, 1.0)
+        if coverage:
+            # Straight alpha: RGB is the shading alone and alpha the coverage, so a
+            # shader can do `rgb * tint * a` and composite premultiplied.
+            shaded = np.power(np.clip(light, 0.0, 1.0), 1.0 / 2.2)
+        else:
+            shaded = np.power(
+                np.clip(albedo * light, 0.0, 1.0), 1.0 / 2.2
+            )
 
         zz = (
             w0 * (z[tris[t, 0]]) + w1 * (z[tris[t, 1]]) + w2 * (z[tris[t, 2]])
@@ -508,6 +534,7 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
         sub_depth = depth[miny : maxy + 1, minx : maxx + 1]
         sub_colour = colour[miny : maxy + 1, minx : maxx + 1]
         sub_alpha = alpha[miny : maxy + 1, minx : maxx + 1]
+        sub_paint = paint_buf[miny : maxy + 1, minx : maxx + 1]
         if sub_depth.shape != inside.shape:
             # A sliver clipped at the frame edge can leave an empty window.
             continue
@@ -515,14 +542,19 @@ def render(verts, tris, tri_colours, vnormals, yaw, width, height, ss=2, face=No
         sub_depth[nearer] = zz[nearer]
         sub_colour[nearer] = shaded[nearer]
         sub_alpha[nearer] = True
+        sub_paint[nearer] = paint[..., 0][nearer]
 
     if ss > 1:
         colour = colour.reshape(height, ss, width, ss, 3).mean(axis=(1, 3))
+        paint_buf = paint_buf.reshape(height, ss, width, ss).mean(axis=(1, 3))
         alpha = alpha.reshape(height, ss, width, ss).mean(axis=(1, 3)) > 0.5
 
     rgba = np.zeros((height, width, 4), dtype=np.uint8)
     rgba[..., :3] = np.clip(colour * 255.0, 0, 255).astype(np.uint8)
-    rgba[..., 3] = np.where(alpha, 255, 0).astype(np.uint8)
+    if coverage:
+        rgba[..., 3] = np.clip(paint_buf * 255.0, 0, 255).astype(np.uint8)
+    else:
+        rgba[..., 3] = np.where(alpha, 255, 0).astype(np.uint8)
     return rgba
 
 

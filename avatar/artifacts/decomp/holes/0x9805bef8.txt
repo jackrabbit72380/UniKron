@@ -1,0 +1,11 @@
+# 0x9805bef8  24 bytes  6 decoded rows
+# unknown=0 scalar=5 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x9813b46c
+
+9805bef8  7ce83b78  mr r8, r7                              
+9805befc  7cc73378  mr r7, r6                              
+9805bf00  7ca62b78  mr r6, r5                              
+9805bf04  7c852378  mr r5, r4                              
+9805bf08  38800000  li r4, 0                               
+9805bf0c  480df560  b 0x9813b46c                           

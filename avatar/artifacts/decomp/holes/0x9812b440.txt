@@ -1,0 +1,171 @@
+# 0x9812b440  664 bytes  166 decoded rows
+# unknown=40 scalar=123 call=2 branch=1 returns=0
+# calls: 0x980618b0 0x98061b40
+# branches: 0x98061900
+
+9812b440  7d8802a6  mflr r12                               
+9812b444  4bf3646d  bl 0x980618b0                          
+9812b448  9421ff30  stwu r1, -0xd0(r1)                     
+9812b44c  7cfa3b78  mr r26, r7                             
+9812b450  c01a0024  lfs f0, 0x24(r26)                      
+9812b454  d0010050  stfs f0, 0x50(r1)                      
+9812b458  7c001a2c  dcbt 0, r3                             
+9812b45c  3d609803  lis r11, -0x67fd                       
+9812b460  c1ba0028  lfs f13, 0x28(r26)                     
+9812b464  ed8d0028  fsubs f12, f13, f0                     
+9812b468  c17a002c  lfs f11, 0x2c(r26)                     
+9812b46c  39000004  li r8, 4                               
+9812b470  c15a0030  lfs f10, 0x30(r26)                     
+9812b474  38810058  addi r4, r1, 0x58                      
+9812b478  d1ba0024  stfs f13, 0x24(r26)                    
+9812b47c  7cca07b4  extsw r10, r6                          
+9812b480  f9410060  std r10, 0x60(r1)                      
+9812b484  c80b2600  lfd f0, 0x2600(r11)                    
+9812b488  3d209803  lis r9, -0x67fd                        
+9812b48c  fd2b0032  fmul f9, f11, f0                       
+9812b490  39410050  addi r10, r1, 0x50                     
+9812b494  38e9feb0  addi r7, r9, -0x150                    
+9812b498  fd0a0032  fmul f8, f10, f0                       
+9812b49c  1be00774  VMX-6-p06(undecoded)                   
+9812b4a0  39610068  addi r11, r1, 0x68                     
+9812b4a4  39210058  addi r9, r1, 0x58                      
+9812b4a8  1b610774  VMX-6-p06(undecoded)                   
+9812b4ac  3be10058  addi r31, r1, 0x58                     
+9812b4b0  13c05407  vcmpneb. v30, v0, v10                  
+9812b4b4  3b200000  li r25, 0                              
+9812b4b8  10e038c3  VMX-p04(undecoded)                     
+9812b4bc  3ce09800  lis r7, -0x6800                        
+9812b4c0  18a0f731  VMX-6-p06(undecoded)                   
+9812b4c4  157ffaf1  VMX-5-p05(undecoded)                   
+9812b4c8  159ffaf1  VMX-5-p05(undecoded)                   
+9812b4cc  3b80000c  li r28, 0xc                            
+9812b4d0  15bffaf1  VMX-5-p05(undecoded)                   
+9812b4d4  3ba0001c  li r29, 0x1c                           
+9812b4d8  fce04e5e  fctidz f7, f9                          
+9812b4dc  d8e10058  stfd f7, 0x58(r1)                      
+9812b4e0  eb610058  ld r27, 0x58(r1)                       
+9812b4e4  fcc0465e  fctidz f6, f8                          
+9812b4e8  fb610058  std r27, 0x58(r1)                      
+9812b4ec  d8c10050  stfd f6, 0x50(r1)                      
+9812b4f0  13482407  vcmpneb. v26, v8, v4                   
+9812b4f4  e9410050  ld r10, 0x50(r1)                       
+9812b4f8  c8a10060  lfd f5, 0x60(r1)                       
+9812b4fc  f9410068  std r10, 0x68(r1)                      
+9812b500  fc802e9c  fcfid f4, f5                           
+9812b504  1940d731  VMX-6-p06(undecoded)                   
+9812b508  13285c07  vcmpneb. v25, v8, v11                  
+9812b50c  141ffaf1  VMX-5-p05(undecoded)                   
+9812b510  c1a727d0  lfs f13, 0x27d0(r7)                    ; 4 
+9812b514  1900cf31  VMX-6-p06(undecoded)                   
+9812b518  179ffaf5  VMX-5-p05(undecoded)                   
+9812b51c  3bc00008  li r30, 8                              
+9812b520  112a5080  vadduwm v9, v10, v10                   
+9812b524  131f5134  VMX-p04(undecoded)                     
+9812b528  17bffaf5  VMX-5-p05(undecoded)                   
+9812b52c  38800014  li r4, 0x14                            
+9812b530  17dffaf5  VMX-5-p05(undecoded)                   
+9812b534  38e00010  li r7, 0x10                            
+9812b538  3ac00c00  li r22, 0xc00                          
+9812b53c  108a4880  vadduwm v4, v10, v9                    
+9812b540  12f84934  VMX-p04(undecoded)                     
+9812b544  10c94880  vadduwm v6, v9, v9                     
+9812b548  3ae00800  li r23, 0x800                          
+9812b54c  fc602018  frsp f3, f4                            
+9812b550  3b000400  li r24, 0x400                          
+9812b554  11572130  maddhd r10, r23, r4, r4                
+9812b558  110a4080  vadduwm v8, v10, v8                    
+9812b55c  ec0c1824  fdivs f0, f12, f3                      
+9812b560  d0010058  stfs f0, 0x58(r1)                      
+9812b564  12c04c07  vcmpneb. v22, v0, v9                   
+9812b568  1860b731  VMX-6-p06(undecoded)                   
+9812b56c  ec400372  fmuls f2, f0, f13                      
+9812b570  d0410058  stfs f2, 0x58(r1)                      
+9812b574  12a0fc07  vcmpneb. v21, v0, v31                  
+9812b578  112329ee  vmaddfp v9, v3, v7, v5                 
+9812b57c  1b40af35  VMX-6-p06(undecoded)                   
+9812b580  3be00018  li r31, 0x18                           
+9812b584  7d094378  mr r9, r8                              
+9812b588  794b0022  rldicl r11, r10, 0x20, 0x20            
+9812b58c  3529ffff  addic. r9, r9, -1                      
+9812b590  556b2036  slwi r11, r11, 4                       
+9812b594  7d5b5214  add r10, r27, r10                      
+9812b598  7d6b1a14  add r11, r11, r3                       
+9812b59c  128be407  vcmpneb. v20, v11, v28                 
+9812b5a0  126bec07  vcmpneb. v19, v11, v29                 
+9812b5a4  1000a111  VMX-p04(undecoded)                     
+9812b5a8  124bf407  vcmpneb. v18, v11, v30                 
+9812b5ac  13ff9935  VMX-p04(undecoded)                     
+9812b5b0  122bfc07  vcmpneb. v17, v11, v31                 
+9812b5b4  11ad9111  VMX-p04(undecoded)                     
+9812b5b8  120b4407  vcmpneb. v16, v11, v8                  
+9812b5bc  13de8935  VMX-p04(undecoded)                     
+9812b5c0  11eb2407  vcmpneb. v15, v11, v4                  
+9812b5c4  118c8111  VMX-p04(undecoded)                     
+9812b5c8  11c05c07  vcmpneb. v14, v0, v11                  
+9812b5cc  13bd7935  VMX-p04(undecoded)                     
+9812b5d0  11ab3c07  vcmpneb. v13, v11, v7                  
+9812b5d4  116b7111  VMX-p04(undecoded)                     
+9812b5d8  139c6935  VMX-p04(undecoded)                     
+9812b5dc  4082ffac  bne 0x9812b588                         
+9812b5e0  1988d9d5  VMX-6-p06(undecoded)                   
+9812b5e4  14ff0070  VMX-5-p05(undecoded)                   
+9812b5e8  14be6870  VMX-5-p05(undecoded)                   
+9812b5ec  794b0022  rldicl r11, r10, 0x20, 0x20            
+9812b5f0  149d6070  VMX-5-p05(undecoded)                   
+9812b5f4  794a0020  clrldi r10, r10, 0x20                  
+9812b5f8  147c5870  VMX-5-p05(undecoded)                   
+9812b5fc  556b2036  slwi r11, r11, 4                       
+9812b600  195f62f1  VMX-6-p06(undecoded)                   
+9812b604  7c6b1a14  add r3, r11, r3                        
+9812b608  7f291a78  xor r9, r25, r3                        
+9812b60c  552b0030  rlwinm r11, r9, 0, 0, 0x18             
+9812b610  2b0b0000  cmplwi cr6, r11, 0                     
+9812b614  104702ae  vmaddfp v2, v7, v10, v0                
+9812b618  10256aae  vmaddfp v1, v5, v10, v13               
+9812b61c  13e462ae  vmaddfp v31, v4, v10, v12              
+9812b620  13c35aae  vmaddfp v30, v3, v10, v11              
+9812b624  15624894  VMX-5-p05(undecoded)                   
+9812b628  15414894  VMX-5-p05(undecoded)                   
+9812b62c  153f4894  VMX-5-p05(undecoded)                   
+9812b630  151e4894  VMX-5-p05(undecoded)                   
+9812b634  1165b1c7  VMX-p04(undecoded)                     
+9812b638  1145b9c7  VMX-p04(undecoded)                     
+9812b63c  1125c1c7  VMX-p04(undecoded)                     
+9812b640  110029c7  VMX-p04(undecoded)                     
+9812b644  419a000c  beq cr6, 0x9812b650                    
+9812b648  39600080  li r11, 0x80                           
+9812b64c  7c0b1a2c  dcbt r11, r3                           
+9812b650  11083080  vadduwm v8, v8, v6                     
+9812b654  34c6fffc  addic. r6, r6, -4                      
+9812b658  7c791b78  mr r25, r3                             
+9812b65c  1529d011  VMX-5-p05(undecoded)                   
+9812b660  38a50010  addi r5, r5, 0x10                      
+9812b664  4181ff20  bgt 0x9812b584                         
+9812b668  897a000d  lbz r11, 0xd(r26)                      
+9812b66c  813a0000  lwz r9, 0(r26)                         
+9812b670  5568103e  rotlwi r8, r11, 2                      
+9812b674  817a0004  lwz r11, 4(r26)                        
+9812b678  7ce91850  subf r7, r9, r3                        
+9812b67c  0cc80000  twi 6, r8, 0                           
+9812b680  7d274396  divwu r9, r7, r8                       
+9812b684  7f095840  cmplw cr6, r9, r11                     
+9812b688  41980008  blt cr6, 0x9812b690                    
+9812b68c  7d695b78  mr r9, r11                             
+9812b690  817a0014  lwz r11, 0x14(r26)                     
+9812b694  913a0008  stw r9, 8(r26)                         
+9812b698  7d2b2850  subf r9, r11, r5                       
+9812b69c  817a0018  lwz r11, 0x18(r26)                     
+9812b6a0  5529f0be  srwi r9, r9, 2                         
+9812b6a4  7f095840  cmplw cr6, r9, r11                     
+9812b6a8  40980008  bge cr6, 0x9812b6b0                    
+9812b6ac  7d2b4b78  mr r11, r9                             
+9812b6b0  7d435378  mr r3, r10                             
+9812b6b4  917a001c  stw r11, 0x1c(r26)                     
+9812b6b8  4bf36489  bl 0x98061b40                          
+9812b6bc  3d609802  lis r11, -0x67fe                       
+9812b6c0  c80be7b8  lfd f0, -0x1848(r11)                   ; 0.117188 
+9812b6c4  fc010032  fmul f0, f1, f0                        
+9812b6c8  fda00018  frsp f13, f0                           
+9812b6cc  d1ba0030  stfs f13, 0x30(r26)                    
+9812b6d0  382100d0  addi r1, r1, 0xd0                      
+9812b6d4  4bf3622c  b 0x98061900                           

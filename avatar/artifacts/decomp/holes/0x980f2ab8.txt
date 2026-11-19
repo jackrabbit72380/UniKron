@@ -1,0 +1,19 @@
+# 0x980f2ab8  56 bytes  14 decoded rows
+# unknown=0 scalar=12 call=2 branch=0 returns=0
+# calls: 0x98111fb0
+# branches: -
+
+980f2ab8  7d8802a6  mflr r12                               
+980f2abc  9181fff8  stw r12, -8(r1)                        
+980f2ac0  fbe1fff0  std r31, -0x10(r1)                     
+980f2ac4  9421ffa0  stwu r1, -0x60(r1)                     
+980f2ac8  7c7f1b78  mr r31, r3                             
+980f2acc  817f0540  lwz r11, 0x540(r31)                    
+980f2ad0  2b0b0000  cmplwi cr6, r11, 0                     
+980f2ad4  419a000c  beq cr6, 0x980f2ae0                    
+980f2ad8  7d6903a6  mtctr r11                              
+980f2adc  4e800421  bctrl                                  
+980f2ae0  38800001  li r4, 1                               
+980f2ae4  7fe3fb78  mr r3, r31                             
+980f2ae8  4801f4c9  bl 0x98111fb0                          
+980f2aec  00000000  nop-or-padding                         

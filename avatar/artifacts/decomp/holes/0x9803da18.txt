@@ -1,0 +1,67 @@
+# 0x9803da18  248 bytes  62 decoded rows
+# unknown=13 scalar=49 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+9803da18  3d600124  lis r11, 0x124                         
+9803da1c  d021ffe0  stfs f1, -0x20(r1)                     
+9803da20  8141ffe0  lwz r10, -0x20(r1)                     
+9803da24  3d209800  lis r9, -0x6800                        
+9803da28  616b3f6d  ori r11, r11, 0x3f6d                   
+9803da2c  3d009800  lis r8, -0x6800                        
+9803da30  516af07e  rlwimi r10, r11, 0x1e, 1, 0x1f         
+9803da34  9141ffe0  stw r10, -0x20(r1)                     
+9803da38  c181ffe0  lfs f12, -0x20(r1)                     
+9803da3c  3d609800  lis r11, -0x6800                       
+9803da40  ed8c082a  fadds f12, f12, f1                     
+9803da44  c00918d8  lfs f0, 0x18d8(r9)                     ; 0.159155 
+9803da48  3941fff0  addi r10, r1, -0x10                    
+9803da4c  c1a818d4  lfs f13, 0x18d4(r8)                    ; 6.28319 
+9803da50  3921fff0  addi r9, r1, -0x10                     
+9803da54  38c1fff0  addi r6, r1, -0x10                     
+9803da58  3d009800  lis r8, -0x6800                        
+9803da5c  3ce09800  lis r7, -0x6800                        
+9803da60  390807a0  addi r8, r8, 0x7a0                     ; 2.75573e-06 
+9803da64  38e707b0  addi r7, r7, 0x7b0                     
+9803da68  ed8c0032  fmuls f12, f12, f0                     
+9803da6c  c00b162c  lfs f0, 0x162c(r11)                    ; 1 
+9803da70  d001fff0  stfs f0, -0x10(r1)                     
+9803da74  3d609800  lis r11, -0x6800                       
+9803da78  13a040c7  vcmpequd v29, v0, v8                   
+9803da7c  396b0790  addi r11, r11, 0x790                   ; 1 
+9803da80  138038c7  vcmpequd v28, v0, v7                   
+9803da84  13c058c7  vcmpequd v30, v0, v11                  
+9803da88  3961fff0  addi r11, r1, -0x10                    
+9803da8c  fc00601e  fctiwz f0, f12                         
+9803da90  d801ffe0  stfd f0, -0x20(r1)                     
+9803da94  e8a1ffe6  lwa r5, -0x1c(r1)                      
+9803da98  f8a1ffe0  std r5, -0x20(r1)                      
+9803da9c  c801ffe0  lfd f0, -0x20(r1)                      
+9803daa0  fc00069c  fcfid f0, f0                           
+9803daa4  fc000018  frsp f0, f0                            
+9803daa8  ec000b7c  fnmsubs f0, f0, f13, f1                
+9803daac  d001fff4  stfs f0, -0xc(r1)                      
+9803dab0  eda00032  fmuls f13, f0, f0                      
+9803dab4  d1a1fff8  stfs f13, -8(r1)                       
+9803dab8  ec0d0032  fmuls f0, f13, f0                      
+9803dabc  d001fffc  stfs f0, -4(r1)                        
+9803dac0  13e050c7  vcmpequd v31, v0, v10                  
+9803dac4  177ff8b5  VMX-5-p05(undecoded)                   
+9803dac8  1be1ff35  VMX-6-p06(undecoded)                   
+9803dacc  177bf8b5  VMX-5-p05(undecoded)                   
+9803dad0  1b43df35  VMX-6-p06(undecoded)                   
+9803dad4  17dbf1f5  VMX-5-p05(undecoded)                   
+9803dad8  17faf8b5  VMX-5-p05(undecoded)                   
+9803dadc  13c049c7  VMX-p04(undecoded)                     
+9803dae0  c001fff0  lfs f0, -0x10(r1)                      
+9803dae4  17dbf8b5  VMX-5-p05(undecoded)                   
+9803dae8  17fef8b5  VMX-5-p05(undecoded)                   
+9803daec  17dee9f5  VMX-5-p05(undecoded)                   
+9803daf0  17ffe1f5  VMX-5-p05(undecoded)                   
+9803daf4  13c059c7  VMX-p04(undecoded)                     
+9803daf8  c1a1fff0  lfs f13, -0x10(r1)                     
+9803dafc  13e031c7  VMX-p04(undecoded)                     
+9803db00  c181fff0  lfs f12, -0x10(r1)                     
+9803db04  edac682a  fadds f13, f12, f13                    
+9803db08  ec2d002a  fadds f1, f13, f0                      
+9803db0c  4e800020  blr                                    

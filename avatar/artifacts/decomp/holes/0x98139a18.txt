@@ -1,0 +1,147 @@
+# 0x98139a18  568 bytes  142 decoded rows
+# unknown=19 scalar=121 call=1 branch=1 returns=0
+# calls: 0x98134ff0
+# branches: 0x98139c38
+
+98139a18  7d8802a6  mflr r12                               
+98139a1c  9181fff8  stw r12, -8(r1)                        
+98139a20  fbc1ffe8  std r30, -0x18(r1)                     
+98139a24  fbe1fff0  std r31, -0x10(r1)                     
+98139a28  9421ff70  stwu r1, -0x90(r1)                     
+98139a2c  8163001c  lwz r11, 0x1c(r3)                      
+98139a30  81430018  lwz r10, 0x18(r3)                      
+98139a34  81230008  lwz r9, 8(r3)                          
+98139a38  5566103a  slwi r6, r11, 2                        
+98139a3c  8903000d  lbz r8, 0xd(r3)                        
+98139a40  7cab5050  subf r5, r11, r10                      
+98139a44  80830004  lwz r4, 4(r3)                          
+98139a48  7d4849d6  mullw r10, r8, r9                      
+98139a4c  81630000  lwz r11, 0(r3)                         
+98139a50  80e30014  lwz r7, 0x14(r3)                       
+98139a54  7cbf0e70  srawi r31, r5, 1                       
+98139a58  5548103a  slwi r8, r10, 2                        
+98139a5c  7d492050  subf r10, r9, r4                       
+98139a60  7d3f0194  addze r9, r31                          
+98139a64  7d685a14  add r11, r8, r11                       
+98139a68  7d063a14  add r8, r6, r7                         
+98139a6c  7f0a4800  cmpw cr6, r10, r9                      
+98139a70  40980008  bge cr6, 0x98139a78                    
+98139a74  7d495378  mr r9, r10                             
+98139a78  552a07be  clrlwi r10, r9, 0x1e                   
+98139a7c  7d474378  or r7, r10, r8                         
+98139a80  7ce65b78  or r6, r7, r11                         
+98139a84  54c4073e  clrlwi r4, r6, 0x1c                    
+98139a88  2f040000  cmpwi cr6, r4, 0                       
+98139a8c  419a000c  beq cr6, 0x98139a98                    
+98139a90  4bffb561  bl 0x98134ff0                          
+98139a94  480001a4  b 0x98139c38                           
+98139a98  5527103a  slwi r7, r9, 2                         
+98139a9c  39400000  li r10, 0                              
+98139aa0  38e7007f  addi r7, r7, 0x7f                      
+98139aa4  54e7c9fe  srwi r7, r7, 7                         
+98139aa8  2b070000  cmplwi cr6, r7, 0                      
+98139aac  419a0018  beq cr6, 0x98139ac4                    
+98139ab0  55463830  slwi r6, r10, 7                        
+98139ab4  7c065a2c  dcbt r6, r11                           
+98139ab8  394a0001  addi r10, r10, 1                       
+98139abc  7f0a3840  cmplw cr6, r10, r7                     
+98139ac0  4198fff0  blt cr6, 0x98139ab0                    
+98139ac4  7caa07b4  extsw r10, r5                          
+98139ac8  c0030024  lfs f0, 0x24(r3)                       
+98139acc  5527083c  slwi r7, r9, 1                         
+98139ad0  c1a30028  lfs f13, 0x28(r3)                      
+98139ad4  f9410060  std r10, 0x60(r1)                      
+98139ad8  c9810060  lfd f12, 0x60(r1)                      
+98139adc  7ce607b4  extsw r6, r7                           
+98139ae0  ed6d0028  fsubs f11, f13, f0                     
+98139ae4  3c809803  lis r4, -0x67fd                        
+98139ae8  d0010050  stfs f0, 0x50(r1)                      
+98139aec  f8c10060  std r6, 0x60(r1)                       
+98139af0  c9410060  lfd f10, 0x60(r1)                      
+98139af4  38e425f0  addi r7, r4, 0x25f0                    
+98139af8  c1230034  lfs f9, 0x34(r3)                       
+98139afc  38810050  addi r4, r1, 0x50                      
+98139b00  38a10050  addi r5, r1, 0x50                      
+98139b04  3d409803  lis r10, -0x67fd                       
+98139b08  3fe09800  lis r31, -0x6800                       
+98139b0c  38cafeb0  addi r6, r10, -0x150                   
+98139b10  13e02407  vcmpneb. v31, v0, v4                   
+98139b14  3d409803  lis r10, -0x67fd                       
+98139b18  1bc0ff35  VMX-6-p06(undecoded)                   
+98139b1c  38810060  addi r4, r1, 0x60                      
+98139b20  fd00669c  fcfid f8, f12                          
+98139b24  394a2630  addi r10, r10, 0x2630                  
+98139b28  fce0569c  fcfid f7, f10                          
+98139b2c  3bc10060  addi r30, r1, 0x60                     
+98139b30  c19f27f8  lfs f12, 0x27f8(r31)                   ; 8 
+98139b34  2f090000  cmpwi cr6, r9, 0                       
+98139b38  d121006c  stfs f9, 0x6c(r1)                      
+98139b3c  138050c7  vcmpequd v28, v0, v10                  
+98139b40  15bee0b1  VMX-5-p05(undecoded)                   
+98139b44  13c020c7  vcmpequd v30, v0, v4                   
+98139b48  fcc04018  frsp f6, f8                            
+98139b4c  fca03818  frsp f5, f7                            
+98139b50  edab3024  fdivs f13, f11, f6                     
+98139b54  d1a10050  stfs f13, 0x50(r1)                     
+98139b58  13602c07  vcmpneb. v27, v0, v5                   
+98139b5c  ec85037a  fmadds f4, f5, f13, f0                 
+98139b60  d0830024  stfs f4, 0x24(r3)                      
+98139b64  100038c3  VMX-p04(undecoded)                     
+98139b68  ec6d0332  fmuls f3, f13, f12                     
+98139b6c  116030c3  VMX-p04(undecoded)                     
+98139b70  d0610060  stfs f3, 0x60(r1)                      
+98139b74  1340f407  vcmpneb. v26, v0, v30                  
+98139b78  1b20d735  VMX-6-p06(undecoded)                   
+98139b7c  1b00df35  VMX-6-p06(undecoded)                   
+98139b80  17b9e0b5  VMX-5-p05(undecoded)                   
+98139b84  1598e0b1  VMX-5-p05(undecoded)                   
+98139b88  100c682e  vmaddfp v0, v12, v0, v13               
+98139b8c  11ac6aee  vmaddfp v13, v12, v11, v13             
+98139b90  40990054  ble cr6, 0x98139be4                    
+98139b94  3949ffff  addi r10, r9, -1                       
+98139b98  39200010  li r9, 0x10                            
+98139b9c  554af0be  srwi r10, r10, 2                       
+98139ba0  394a0001  addi r10, r10, 1                       
+98139ba4  13e058c7  vcmpequd v31, v0, v11                  
+98139ba8  354affff  addic. r10, r10, -1                    
+98139bac  12fefb35  VMX-p04(undecoded)                     
+98139bb0  17dffaf5  VMX-5-p05(undecoded)                   
+98139bb4  396b0010  addi r11, r11, 0x10                    
+98139bb8  16d7f835  VMX-5-p05(undecoded)                   
+98139bbc  1ab6fb25  VMX-6-p06(undecoded)                   
+98139bc0  1a96fb65  VMX-6-p06(undecoded)                   
+98139bc4  167568b4  VMX-5-p05(undecoded)                   
+98139bc8  165400b4  VMX-5-p05(undecoded)                   
+98139bcc  1400e811  VMX-5-p05(undecoded)                   
+98139bd0  15ade811  VMX-5-p05(undecoded)                   
+98139bd4  126041c7  VMX-p04(undecoded)                     
+98139bd8  124849c7  VMX-p04(undecoded)                     
+98139bdc  39080020  addi r8, r8, 0x20                      
+98139be0  4082ffc4  bne 0x98139ba4                         
+98139be4  c00bfffc  lfs f0, -4(r11)                        
+98139be8  d0030034  stfs f0, 0x34(r3)                      
+98139bec  81430000  lwz r10, 0(r3)                         
+98139bf0  7cca5850  subf r6, r10, r11                      
+98139bf4  81630004  lwz r11, 4(r3)                         
+98139bf8  8923000d  lbz r9, 0xd(r3)                        
+98139bfc  5527103e  rotlwi r7, r9, 2                       
+98139c00  7d463b96  divwu r10, r6, r7                      
+98139c04  0cc70000  twi 6, r7, 0                           
+98139c08  7f0a5840  cmplw cr6, r10, r11                    
+98139c0c  41980008  blt cr6, 0x98139c14                    
+98139c10  7d6a5b78  mr r10, r11                            
+98139c14  81630014  lwz r11, 0x14(r3)                      
+98139c18  91430008  stw r10, 8(r3)                         
+98139c1c  7d4b4050  subf r10, r11, r8                      
+98139c20  81630018  lwz r11, 0x18(r3)                      
+98139c24  554af0be  srwi r10, r10, 2                       
+98139c28  7f0a5840  cmplw cr6, r10, r11                    
+98139c2c  40980008  bge cr6, 0x98139c34                    
+98139c30  7d4b5378  mr r11, r10                            
+98139c34  9163001c  stw r11, 0x1c(r3)                      
+98139c38  38210090  addi r1, r1, 0x90                      
+98139c3c  8181fff8  lwz r12, -8(r1)                        
+98139c40  7d8803a6  mtlr r12                               
+98139c44  ebc1ffe8  ld r30, -0x18(r1)                      
+98139c48  ebe1fff0  ld r31, -0x10(r1)                      
+98139c4c  4e800020  blr                                    

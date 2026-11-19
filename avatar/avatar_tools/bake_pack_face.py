@@ -20,6 +20,7 @@ import json
 import math
 import os
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -54,11 +55,38 @@ FACE_BROW_ALTERNATE = "Shaved Eyebrows"
 # than the lash sheet (see DECAL_SETS in bake_pack_turntables).
 EYE_SHADOW_CATEGORY = "17_eye-shadow"
 EYE_SHADOW_SET = 5
+# The mouths are the third of the head's three sheets. 18_mouth has names in the
+# item list but no assets in the pack - the mouth drawn on the head is the one the
+# descriptor's face selects - so the only mouth that can be masked is that default.
+MOUTH_CATEGORY = "18_mouth"
 # A sheet's edge is antialiased, so the difference fades out rather than stopping.
 # Below LO is rounding noise and stays clear, above HI is paint at full alpha, and
 # in between the plate keeps a soft edge - a hard cutoff drew a faint rectangular
 # fringe around the eyes at the sheet's own border.
 LO, HI = 6.0 / 255.0, 24.0 / 255.0
+# --mask renders one sheet's coverage directly instead of differencing two tinted
+# heads, so the mask does not move when the tint does (see COLOURS.md).
+COVERAGE = False
+# Which sheet to isolate: "layer0/1/2" are the brow, eye and mouth sheets, "decal0"
+# is the added decal. The rest of the face is skipped, so a mask is one item's paint.
+COVER_ONLY = None
+
+
+def white_description(path):
+    """A copy of the `.Avatar` description with the three face tints set to white.
+
+    The nine slots at +0x0fc are, in order: skin, hair, mouth, eyes, eyebrows, eye
+    shadow, facial hair, feature 1, feature 2 (`bake_avatar.COLOUR_NAMES`). Slots 2
+    to 6 are the five the face sheets are tinted with; skin and hair are left alone,
+    so a mask still bakes on the same skin and the difference still cancels it.
+    """
+    blob = bytearray(open(path, "rb").read())
+    for slot in (2, 3, 4, 5, 6):
+        struct.pack_into(">I", blob, 0x0FC + 4 * slot, 0xFFFFFFFF)
+    out = os.path.join(WORK, "white.Avatar")
+    with open(out, "wb") as fh:
+        fh.write(blob)
+    return out
 
 
 def bake_head(pack, clip, description, face_arg, out):
@@ -85,7 +113,8 @@ def render_head(pack, clip, description, face_arg, centre, height, width, height
         face["decals"] = [spec]
     verts = (verts - centre) / height
     vnormals = bt.vertex_normals(verts, tris)
-    return bt.render(verts, tris, colours, vnormals, math.pi, width, height_px, face=face)
+    return bt.render(verts, tris, colours, vnormals, math.pi, width, height_px, face=face,
+                     coverage=COVERAGE, only=COVER_ONLY)
 
 
 def main():
@@ -101,7 +130,24 @@ def main():
     ap.add_argument("--clip-asset", default="")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--mask", action="store_true",
+                    help="bake tint masks instead of coloured plates: one sheet's "
+                         "coverage and lighting, which the editor multiplies by a "
+                         "palette colour at run time")
     args = ap.parse_args()
+
+    if args.mask:
+        # A mask is not a tinted plate: `coverage=True` keeps the sheet's coverage as
+        # alpha and the light rig as RGB, so the colours in play stop mattering. They
+        # are still forced white so a mask is identical whoever's palette is loaded,
+        # which is what makes it reusable for every index in its table.
+        globals()["HAIR_COLOUR"] = "ffffff"
+        globals()["HAIR_TINT"] = (255, 255, 255)
+        globals()["COVERAGE"] = True
+        args.description = white_description(args.description)
+        if os.path.abspath(args.outdir) == os.path.abspath(
+                os.path.join(os.path.dirname(HERE), "pack_plates")):
+            args.outdir = os.path.join(os.path.dirname(HERE), "pack_plates_mask")
 
     os.makedirs(WORK, exist_ok=True)
     clip = pack_clip.resolve(args.pack, args.clip, args.clip_asset, WORK)
@@ -114,6 +160,10 @@ def main():
         category = (record.get("metadata") or {}).get("category")
         if category in wanted:
             items.append((record["name"], category))
+    # No 18_mouth record exists in the pack, so the category contributes no items
+    # above; the mouth it shows is the descriptor's, which is what gets masked.
+    if MOUTH_CATEGORY in wanted and not any(c == MOUTH_CATEGORY for _, c in items):
+        items.append((FACE_DEFAULT[2], MOUTH_CATEGORY))
 
     # The frame every other plate is drawn in: the body with its head.
     import bake_pack_plates as bp
@@ -132,6 +182,18 @@ def main():
             continue
         if args.limit and baked >= args.limit:
             break
+        # A mask isolates the item's own sheet: the eye sheet is the second of the
+        # three the head composites, the brow is the first, and the eye shadow, face
+        # paint and facial hair all arrive as an added decal.
+        if category == "15_face":
+            globals()["COVER_ONLY"] = "layer1"
+        elif category == EYEBROW_CATEGORY:
+            globals()["COVER_ONLY"] = "layer0"
+        elif category == MOUTH_CATEGORY:
+            globals()["COVER_ONLY"] = "layer2"
+        else:
+            globals()["COVER_ONLY"] = "decal0"
+
         try:
             if category == "15_face":
                 if "nose" in name.lower():
@@ -153,6 +215,12 @@ def main():
                                       "--face=%s,%s,%s" % (name, FACE_DEFAULT[1],
                                                            FACE_DEFAULT[2]),
                                       centre, height, args.width, args.height)
+            elif category == MOUTH_CATEGORY:
+                # The mouth is the third: the brows and eyes stay stock.
+                painted = render_head(args.pack, clip, args.description,
+                                      "--face=%s,%s,%s" % (FACE_DEFAULT[0],
+                                                           FACE_DEFAULT[1], name),
+                                      centre, height, args.width, args.height)
             else:
                 decal_set, is_mask = DECAL_SETS[category]
                 painted = render_head(args.pack, clip, args.description, default_arg,
@@ -161,6 +229,17 @@ def main():
         except Exception as exc:                                # noqa: BLE001
             failed += 1
             print("  failed %s: %s" % (name, exc))
+            continue
+
+        if args.mask:
+            # The coverage render already *is* the mask: RGB is the sheet's paint
+            # times the light rig and alpha is its coverage, both premultiplied, so
+            # `mask.rgb * tint + dst * (1 - mask.a)` reproduces the tinted bake.
+            os.makedirs(folder, exist_ok=True)
+            bt.write_png(path, painted)
+            baked += 1
+            if baked % 10 == 0:
+                print("  %d baked" % baked)
             continue
 
         # Keep only what the item changed: same geometry, same frame, so the

@@ -1,0 +1,2270 @@
+{
+ "source": "src_archive/XBOX HUB/resources/editors/nxe2008/assets/avatareditor.xex",
+ "method": "UTF-16LE names inside the two XUIZ zones; offsets are file offsets",
+ "count": 451,
+ "unique": 321,
+ "palette": [
+  "\"colour_palette_skin_unselected.png",
+  "OptionColourSkinButton\"colour_palette_skin_unselected.png colour_palette_skin_selected.png",
+  "colour_palette_skin_selected.png",
+  "option_colour_selected.png",
+  "option_colour_unselected.png"
+ ],
+ "names": [
+  {
+   "zone": "zone1",
+   "offset": 1682848,
+   "name": "Legend_A.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1682881,
+   "name": "Legend_B.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1682914,
+   "name": "Legend_X.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1682947,
+   "name": "Legend_Y.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1682980,
+   "name": "Legend_Menu.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683019,
+   "name": "Legend_Highlight.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683068,
+   "name": "defaultbackground.jpg"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683119,
+   "name": "Aura_Horizon.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683160,
+   "name": "SphereHighlight.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683207,
+   "name": "xboxLive.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683240,
+   "name": "MobyChannelZero.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683287,
+   "name": "white.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1683314,
+   "name": "PanelShadow.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1769242,
+   "name": "defaultbackground.jpg"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1769874,
+   "name": "Aura_Horizon.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1770312,
+   "name": "white.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1771792,
+   "name": "Legend_Menu.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1771824,
+   "name": "glow1file://C:\\Users\\a-jamont\\Desktop\\centeredtext.jpg"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1771956,
+   "name": "SphereHighlight.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1772052,
+   "name": "xboxLive.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1792037,
+   "name": "MobyChannelZero.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1793571,
+   "name": "Legend_B.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1793631,
+   "name": "Legend_Highlight.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1793807,
+   "name": "Legend_A.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1793849,
+   "name": "Legend_X.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1793891,
+   "name": "Legend_Y.png"
+  },
+  {
+   "zone": "zone1",
+   "offset": 1798402,
+   "name": "PanelShadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2006709,
+   "name": "Abutton.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2006740,
+   "name": "arrow_downleft_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2006803,
+   "name": "arrow_downleft_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2006870,
+   "name": "arrow_downright_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2006935,
+   "name": "arrow_downright_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007004,
+   "name": "arrow_down_nofill.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007055,
+   "name": "arrow_graphic_pulse.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007110,
+   "name": "arrow_upleft_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007169,
+   "name": "arrow_upleft_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007232,
+   "name": "arrow_upright_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007293,
+   "name": "arrow_upright_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007358,
+   "name": "arrow_graphic.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007401,
+   "name": "avatar_selection_beam.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007458,
+   "name": "avatar_selection_beam_female.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007533,
+   "name": "background.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007570,
+   "name": "Bbutton.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007601,
+   "name": "bg_star.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007632,
+   "name": "body_access_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007689,
+   "name": "body_access_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007748,
+   "name": "bodyshape_normalfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007821,
+   "name": "\"bodyshape_normalfat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007898,
+   "name": "$bodyshape_normalfat_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2007979,
+   "name": "%bodyshape_normalnormal_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008062,
+   "name": "#bodyshape_normalnormal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008141,
+   "name": "!bodyshape_normalthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008216,
+   "name": "#bodyshape_normalthin_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008295,
+   "name": "%bodyshape_normalthin_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008380,
+   "name": "bodyshape_smallfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008449,
+   "name": "!bodyshape_smallfat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008524,
+   "name": "\"bodyshape_smallnormal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008601,
+   "name": "$bodyshape_smallnormal_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008682,
+   "name": "bodyshape_smallthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008755,
+   "name": "\"bodyshape_smallthin_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008832,
+   "name": "&bodyshape_smallnormal_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008919,
+   "name": "bodyshape_tallfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2008986,
+   "name": "bodyshape_tallfat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009059,
+   "name": "!bodyshape_tallnormal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009134,
+   "name": "#bodyshape_tallnormal_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009213,
+   "name": "%bodyshape_tallnormal_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009298,
+   "name": "bodyshape_tallthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009367,
+   "name": "!bodyshape_tallthin_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009444,
+   "name": "border_long_nofill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009513,
+   "name": "!border_long_nofill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009590,
+   "name": "border_nofill_fadeout.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009649,
+   "name": "border_nofill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009710,
+   "name": "border_nofill_tall_fadeout.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009779,
+   "name": "border_nofill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009842,
+   "name": "#button_long_horizontal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2009921,
+   "name": "%button_long_horizontal_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010004,
+   "name": "(border_long_nofill_vertical_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010093,
+   "name": "*border_long_nofill_vertical_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010186,
+   "name": "!button_long_vertical_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010261,
+   "name": "#button_long_vertical_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010342,
+   "name": "closet_background.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010393,
+   "name": "closet_mirror_sheen.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010446,
+   "name": "colour_palette_skin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010519,
+   "name": "\"colour_palette_skin_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010598,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010633,
+   "name": "body_icon.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010668,
+   "name": "body_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010711,
+   "name": "body_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010758,
+   "name": "border_nofill_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010807,
+   "name": "border_nofill_bgunselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010876,
+   "name": "bottoms_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010925,
+   "name": "bottoms_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2010978,
+   "name": "closet_mirror_border.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011035,
+   "name": "delete_item_x_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011096,
+   "name": "delete_item_x_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011161,
+   "name": "dummy_avatarlogo.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011210,
+   "name": "dummy_button_facial.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011265,
+   "name": "dummy_button_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011324,
+   "name": "dummy_button_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011387,
+   "name": "dummy_button_accessories.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011452,
+   "name": "dummy_button_carryables.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011515,
+   "name": "dummy_button_costumes.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011574,
+   "name": "dummy_button_formalcostume_.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011645,
+   "name": "dummy_button_headwear.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011704,
+   "name": "dummy_button_loadoutfits.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011769,
+   "name": "dummy_button_makeup.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011822,
+   "name": "&dummy_button_jumptocloset_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011907,
+   "name": "(dummy_button_jumptocloset_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2011996,
+   "name": "'dummy_button_jumptocreator_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012083,
+   "name": ")dummy_button_jumptocreator_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012176,
+   "name": "earring_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012239,
+   "name": "earring_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012306,
+   "name": "earring_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012355,
+   "name": "earring_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012408,
+   "name": "ears_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012451,
+   "name": "ears_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012498,
+   "name": "eyebrows_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012549,
+   "name": "eyebrows_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012604,
+   "name": "eyeshadow_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012671,
+   "name": "eyeshadow_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012742,
+   "name": "eyeshadow_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012795,
+   "name": "eyeshadow_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012852,
+   "name": "eyes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012895,
+   "name": "eyes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012942,
+   "name": "faceshape_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2012995,
+   "name": "faceshape_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013052,
+   "name": "facial_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013099,
+   "name": "facial_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013150,
+   "name": "facial_female_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013211,
+   "name": "facial_female_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013274,
+   "name": "$facial_hair_male_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013355,
+   "name": "&facial_hair_male_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013442,
+   "name": "facial_hair_male_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013509,
+   "name": "facial_hair_male_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013578,
+   "name": "$facial_skin_male_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013659,
+   "name": "&facial_skin_male_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013746,
+   "name": "facial_skin_male_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013813,
+   "name": "facial_skin_male_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013884,
+   "name": "femalecostume_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2013945,
+   "name": "femalecostume_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014010,
+   "name": "glasses_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014073,
+   "name": "glasses_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014140,
+   "name": "glasses_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014189,
+   "name": "glasses_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014242,
+   "name": "gloves_female_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014303,
+   "name": "gloves_female_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014368,
+   "name": "gloves_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014429,
+   "name": "gloves_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014494,
+   "name": "gloves_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014541,
+   "name": "gloves_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014592,
+   "name": "goto_closet_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014649,
+   "name": "goto_closet_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014710,
+   "name": "goto_creator_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014769,
+   "name": "goto_creator_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014832,
+   "name": "goto_saveandexit_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014899,
+   "name": "goto_saveandexit_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2014970,
+   "name": "goto_startover_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015033,
+   "name": "goto_startover_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015100,
+   "name": "grid_banner_bottom.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015153,
+   "name": "hair_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015196,
+   "name": "hair_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015243,
+   "name": "hat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015284,
+   "name": "hat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015329,
+   "name": "head_access_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015386,
+   "name": "head_access_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015447,
+   "name": "help_bar_background.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015502,
+   "name": "icon_buttonb_back_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015569,
+   "name": "icon_buttonb_back_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015644,
+   "name": "icon_innershadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015693,
+   "name": "icon_long_fill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015756,
+   "name": "icon_long_fill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015821,
+   "name": "$icon_long_fill_vertical_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015902,
+   "name": "&icon_long_fill_vertical_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2015989,
+   "name": "icon_long_innershadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016046,
+   "name": "\"icon_long_vertical_innershadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016125,
+   "name": "imdone_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016172,
+   "name": "imdone_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016223,
+   "name": "item_selected_tick.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016276,
+   "name": "Legend_A.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016309,
+   "name": "Legend_B.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016342,
+   "name": "Legend_Highlight.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016391,
+   "name": "legend_DPad.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016430,
+   "name": "legend_LB.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016465,
+   "name": "legend_LT.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016500,
+   "name": "legend_LThumbstick.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016553,
+   "name": "legend_RB.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016588,
+   "name": "legend_RT.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016623,
+   "name": "Legend_X.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016656,
+   "name": "Legend_Y.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016689,
+   "name": "lipstick_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016740,
+   "name": "lipstick_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016795,
+   "name": "loadoutfit_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016850,
+   "name": "loadoutfit_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016909,
+   "name": "main_bg_swirl.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016952,
+   "name": "makeup_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2016999,
+   "name": "makeup_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017050,
+   "name": "makeup_male_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017107,
+   "name": "makeup_male_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017168,
+   "name": "mouth_male_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017223,
+   "name": "mouth_male_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017282,
+   "name": "malecostume_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017339,
+   "name": "malecostume_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017400,
+   "name": "mouth_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017445,
+   "name": "mouth_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017494,
+   "name": "newitem.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017525,
+   "name": "nose_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017568,
+   "name": "nose_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017615,
+   "name": "option_arrowdown_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017682,
+   "name": "option_arrowdown_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017753,
+   "name": "option_arrowleft_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017820,
+   "name": "option_arrowleft_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017891,
+   "name": "option_arrowright_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2017960,
+   "name": "option_arrowright_unselecte.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018031,
+   "name": "option_arrowup_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018094,
+   "name": "option_arrowup_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018161,
+   "name": "option_colour_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018222,
+   "name": "option_colour_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018287,
+   "name": "option_dialog_no_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018354,
+   "name": "option_dialog_no_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018425,
+   "name": "option_dialog_yes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018492,
+   "name": "option_dialog_yes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018567,
+   "name": "option_minus_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018626,
+   "name": "option_minus_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018689,
+   "name": "option_plus_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018746,
+   "name": "option_plus_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018807,
+   "name": "option_rotateanticlock_unse.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018878,
+   "name": "option_rotateanticlock_sele.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2018947,
+   "name": "%option_rotateanticlock_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019032,
+   "name": "option_rotateclock_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019103,
+   "name": "option_rotateclock_unselect.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019172,
+   "name": "!option_rotateclock_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019249,
+   "name": "option_rotatescale_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019318,
+   "name": "!option_rotatescale_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019395,
+   "name": "parts_button_disable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019452,
+   "name": "parts_button_select.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019507,
+   "name": "parts_button_unselect.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019566,
+   "name": "photobooth_distance_close.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019633,
+   "name": "photobooth_distance_far.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019696,
+   "name": "photobooth_frame.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019745,
+   "name": "photobooth_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019808,
+   "name": "photobooth_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019863,
+   "name": "photobooth_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019922,
+   "name": "progress_graphic.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2019971,
+   "name": "ring_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020028,
+   "name": "ring_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020089,
+   "name": "ring_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020132,
+   "name": "ring_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020179,
+   "name": "saveoutfit_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020234,
+   "name": "saveoutfit_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020293,
+   "name": "saveoutfit_pressdisable.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020356,
+   "name": "shoes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020401,
+   "name": "shoes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020450,
+   "name": "takephoto_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020503,
+   "name": "takephoto_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020560,
+   "name": "tops_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020603,
+   "name": "tops_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020650,
+   "name": "watch_remove_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020709,
+   "name": "watch_remove_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020772,
+   "name": "watch_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020817,
+   "name": "watch_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020866,
+   "name": "Xbutton.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020897,
+   "name": "Ybutton.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020928,
+   "name": "AvatarShadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2020969,
+   "name": "button_x_undo_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021030,
+   "name": "button_x_undo_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021095,
+   "name": "button_x_undo_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021160,
+   "name": "dummy_button_formalcostume.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021229,
+   "name": "dummy_button_headaccessorie.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021300,
+   "name": "dummy_button_ring.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021351,
+   "name": "gamerpic_background_0.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021410,
+   "name": "gamerpic_background_s_0.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021473,
+   "name": "gamerpic_background_1.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021532,
+   "name": "gamerpic_background_s_1.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021595,
+   "name": "gamerpic_background_2.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021654,
+   "name": "gamerpic_background_s_2.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021717,
+   "name": "gamerpic_background_3.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021776,
+   "name": "gamerpic_background_s_3.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021839,
+   "name": "gamerpic_background_4.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021898,
+   "name": "gamerpic_background_s_4.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2021961,
+   "name": "gamerpic_background_5.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022020,
+   "name": "gamerpic_background_s_5.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022083,
+   "name": "gamerpic_background_6.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022142,
+   "name": "gamerpic_background_s_6.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022205,
+   "name": "gamerpic_background_7.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022264,
+   "name": "gamerpic_background_s_7.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022327,
+   "name": "gamerpic_background_8.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022386,
+   "name": "gamerpic_background_s_8.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022449,
+   "name": "gamerpic_background_9.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022508,
+   "name": "gamerpic_background_s_9.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022571,
+   "name": "gamerpic_background_10.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022632,
+   "name": "gamerpic_background_s_10.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022697,
+   "name": "gamerpic_background_11.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022758,
+   "name": "gamerpic_background_s_11.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022823,
+   "name": "gamerpic_background_12.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022884,
+   "name": "gamerpic_background_s_12.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2022949,
+   "name": "gamerpic_background_13.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023010,
+   "name": "gamerpic_background_s_13.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023075,
+   "name": "gamerpic_background_14.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023136,
+   "name": "gamerpic_background_s_14.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023201,
+   "name": "gamerpic_background_15.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023262,
+   "name": "gamerpic_background_s_15.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023327,
+   "name": "gamerpic_background_16.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023388,
+   "name": "gamerpic_background_s_16.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023453,
+   "name": "gamerpic_background_17.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023514,
+   "name": "gamerpic_background_s_17.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023579,
+   "name": "gamerpic_sheen.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2023624,
+   "name": "gamerpic_sheen_s.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2039561,
+   "name": "background.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2044143,
+   "name": "closet_mirror_sheen.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2044245,
+   "name": "closet_mirror_border.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2051544,
+   "name": "grid_banner_bottom.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2052704,
+   "name": "photobooth_frame.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2052936,
+   "name": "photobooth_distance_far.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2055500,
+   "name": "imdone_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2055562,
+   "name": "imdone_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2056740,
+   "name": "option_size_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2056794,
+   "name": "option_size_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2056882,
+   "name": "option_colour_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2056940,
+   "name": "option_colour_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057032,
+   "name": "option_rotate_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057090,
+   "name": "option_rotate_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057192,
+   "name": "OptionRotateLeftButton%option_rotateanticlock_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057314,
+   "name": "option_rotateanticlock_sele.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057378,
+   "name": "OptionRotateRightButtonJfile://D:\\AvatarAsset\\media\\avatareditor\\option_rotateclock_unselected.pngHfile://D:\\AvatarAsset\\media\\avatareditor\\option_rotateclock_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2057722,
+   "name": "OptionScaleSmallerButtonDfile://D:\\AvatarAsset\\media\\avatareditor\\option_minus_unselected.pngBfile://D:\\AvatarAsset\\media\\avatareditor\\option_minus_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2058044,
+   "name": "OptionScaleBiggerButtonCfile://D:\\AvatarAsset\\media\\avatareditor\\option_plus_unselected.pngAfile://D:\\AvatarAsset\\media\\avatareditor\\option_plus_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2058410,
+   "name": "OptionMoveDownButtonHfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowdown_unselected.pngFfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowdown_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2058740,
+   "name": "OptionMoveRightButtonHfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowright_unselecte.pngGfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowright_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2059074,
+   "name": "OptionMoveLeftButtonHfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowleft_unselected.pngFfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowleft_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2059404,
+   "name": "OptionMoveUpButtonFfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowup_unselected.pngDfile://D:\\AvatarAsset\\media\\avatareditor\\option_arrowup_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2059770,
+   "name": "OptionRotateDefaultButton!option_rotatescale_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2059890,
+   "name": "option_rotatescale_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060002,
+   "name": "avatar_selection_beam.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060082,
+   "name": "bg_star.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060316,
+   "name": "AvatarSelectButtonFemale avatar_selection_beam_female.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060536,
+   "name": "facial_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060580,
+   "name": "facial_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060772,
+   "name": "Legend_A.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060832,
+   "name": "Legend_Highlight.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2060898,
+   "name": "OptionBodyNormalButton%bodyshape_normalnormal.unselected.png#bodyshape_normalnormal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061128,
+   "name": "preview1!bodyshape_tallnormal.selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061214,
+   "name": "bodyshape_tallnormal.onbody.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061278,
+   "name": "OptionBodySmallFatButton!bodyshape_smallfat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061396,
+   "name": "bodyshape_smallfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061510,
+   "name": "OptionBodySmallThinButton\"bodyshape_smallthin_unselected.png bodyshape_smallthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061698,
+   "name": "OptionBodyTallThinButton!bodyshape_tallthin_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061816,
+   "name": "bodyshape_tallthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061880,
+   "name": "OptionBodyTallFatButton bodyshape_tallfat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2061994,
+   "name": "bodyshape_tallfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062234,
+   "name": "border_nofill_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062318,
+   "name": "border_nofill_bgunselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062438,
+   "name": "icon_innershadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062480,
+   "name": "border_nofill.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062516,
+   "name": "border_nofill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062642,
+   "name": "OptionWideTextButton%button_long_horizontal_unselected.png#button_long_horizontal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2062934,
+   "name": "border_nofill_fadeout.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063026,
+   "name": "arrow_graphic.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063098,
+   "name": "dummy_button_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063154,
+   "name": "dummy_button_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063252,
+   "name": "dummy_button_carryables.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063356,
+   "name": "dummy_button_accessories.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063456,
+   "name": "icon_long_fill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063512,
+   "name": "icon_long_fill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063572,
+   "name": "icon_long_innershadow.png!border_long_nofill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063692,
+   "name": "border_long_nofill_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063846,
+   "name": "Xbutton.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2063916,
+   "name": "OptionBackButton icon_buttonb_back_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064016,
+   "name": "icon_buttonb_back_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064138,
+   "name": "OptionColourSkinButton\"colour_palette_skin_unselected.png colour_palette_skin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064352,
+   "name": "arrow_graphic_pulse.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064438,
+   "name": "sharedres://disabled-Button.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064520,
+   "name": "Legend_B.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064632,
+   "name": "Legend_X.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064734,
+   "name": "Legend_Y.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064856,
+   "name": "makeup_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064900,
+   "name": "makeup_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2064996,
+   "name": "body_access_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065050,
+   "name": "body_access_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065156,
+   "name": "head_access_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065210,
+   "name": "head_access_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065302,
+   "name": "hat_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065340,
+   "name": "hat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065410,
+   "name": "shoes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065452,
+   "name": "shoes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065530,
+   "name": "bottoms_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065576,
+   "name": "bottoms_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065652,
+   "name": "tops_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065692,
+   "name": "tops_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065728,
+   "name": "OptionBodyTallButton#bodyshape_tallnormal.unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2065842,
+   "name": "OptionBodySmallButton$bodyshape_smallnormal_unselected.png\"bodyshape_smallnormal_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066030,
+   "name": "OptionBodyFatButton\"bodyshape_normalfat_unselected.png bodyshape_normalfat_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066206,
+   "name": "OptionBodyThinButton#bodyshape_normalthin_unselected.png!bodyshape_normalthin_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066430,
+   "name": "eyebrows_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066478,
+   "name": "eyebrows_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066556,
+   "name": "eyes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066596,
+   "name": "eyes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066668,
+   "name": "mouth_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066710,
+   "name": "mouth_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066824,
+   "name": "body_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066864,
+   "name": "body_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066934,
+   "name": "nose_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2066974,
+   "name": "nose_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067042,
+   "name": "ears_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067082,
+   "name": "ears_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067162,
+   "name": "faceshape_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067212,
+   "name": "faceshape_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067292,
+   "name": "hair_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067332,
+   "name": "hair_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067414,
+   "name": "dummy_button_loadoutfits.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067522,
+   "name": "dummy_button_formalcostume.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067688,
+   "name": "goto_closet_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067742,
+   "name": "goto_closet_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067844,
+   "name": "goto_creator_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067900,
+   "name": "goto_creator_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2067996,
+   "name": "goto_startover_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068180,
+   "name": "gloves_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068330,
+   "name": "watch_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068372,
+   "name": "watch_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068474,
+   "name": "ring_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068620,
+   "name": "earring_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068666,
+   "name": "earring_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068764,
+   "name": "eyeshadow_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068814,
+   "name": "eyeshadow_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2068914,
+   "name": "lipstick_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069076,
+   "name": "glasses_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069122,
+   "name": "glasses_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069484,
+   "name": "Grid1x3Button$icon_long_fill_vertical_selected.png&icon_long_fill_vertical_unselected.png\"icon_long_vertical_innershadow.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069850,
+   "name": "delete_item_x_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069944,
+   "name": "delete_item_x_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2069998,
+   "name": "DialogYesButton option_dialog_yes_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070096,
+   "name": "option_dialog_yes_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070188,
+   "name": "option_dialog_no_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070252,
+   "name": "option_dialog_no_selected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070446,
+   "name": "border_nofill_tall_fadeout.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070568,
+   "name": "legend_LT.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070616,
+   "name": "legend_RT.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2070664,
+   "name": "legend_LB.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2243101,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2252717,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2255235,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2255871,
+   "name": "border_nofill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2258835,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2261061,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2261123,
+   "name": "progress_graphic.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2263245,
+   "name": "dialog_bg.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2263779,
+   "name": "border_nofill_unselected.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2263917,
+   "name": "legend_RB.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2263957,
+   "name": "legend_DPad.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2264021,
+   "name": "legend_LThumbstick.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2264249,
+   "name": "legend_LT.png"
+  },
+  {
+   "zone": "zone2",
+   "offset": 2264297,
+   "name": "legend_RT.png"
+  }
+ ]
+}

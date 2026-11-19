@@ -1,0 +1,260 @@
+# 0x9806cb74  1020 bytes  255 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=229 call=10 branch=16 returns=0
+# calls: 0x9806c2b0 0x9806c348 0x9806c2b0 0x9806d190 0x9806c348 0x9806c348 0x9806c2b0 0x98065be8 0x9806d060 0x9810fcd8
+# branches: 0x9806cb84 0x9806cbc0 0x9806cc34 0x9806cc34 0x9806cc34 0x9806cc34 0x9806cc80 0x9806cc94 0x9806cd5c 0x9806cd80 0x9806cd5c 0x9806cea4 0x9806cea8 0x9806c588 0x9806cf64 0x980618e0
+
+9806cb74  3b200008  li r25, 8                              
+9806cb78  39600007  li r11, 7                              
+9806cb7c  48000008  b 0x9806cb84                           
+9806cb80  39600027  li r11, 0x27                           
+9806cb84  9161006c  stw r11, 0x6c(r1)                      
+9806cb88  576a0631  rlwinm. r10, r27, 0, 0x18, 0x18        
+9806cb8c  39000010  li r8, 0x10                            
+9806cb90  41820030  beq 0x9806cbc0                         
+9806cb94  396b0051  addi r11, r11, 0x51                    
+9806cb98  39400030  li r10, 0x30                           
+9806cb9c  39200002  li r9, 2                               
+9806cba0  99610059  stb r11, 0x59(r1)                      
+9806cba4  99410058  stb r10, 0x58(r1)                      
+9806cba8  9121005c  stw r9, 0x5c(r1)                       
+9806cbac  48000014  b 0x9806cbc0                           
+9806cbb0  576b0631  rlwinm. r11, r27, 0, 0x18, 0x18        
+9806cbb4  39000008  li r8, 8                               
+9806cbb8  41820008  beq 0x9806cbc0                         
+9806cbbc  637b0200  ori r27, r27, 0x200                    
+9806cbc0  576b0421  rlwinm. r11, r27, 0, 0x10, 0x10        
+9806cbc4  4082000c  bne 0x9806cbd0                         
+9806cbc8  576b04e7  rlwinm. r11, r27, 0, 0x13, 0x13        
+9806cbcc  41820018  beq 0x9806cbe4                         
+9806cbd0  397a0007  addi r11, r26, 7                       
+9806cbd4  556b0038  rlwinm r11, r11, 0, 0, 0x1c            
+9806cbd8  3b4b0008  addi r26, r11, 8                       
+9806cbdc  e96b0000  ld r11, 0(r11)                         
+9806cbe0  48000054  b 0x9806cc34                           
+9806cbe4  576b06b5  rlwinm. r11, r27, 0, 0x1a, 0x1a        
+9806cbe8  4182002c  beq 0x9806cc14                         
+9806cbec  576b0673  rlwinm. r11, r27, 0, 0x19, 0x19        
+9806cbf0  397a0007  addi r11, r26, 7                       
+9806cbf4  556b0038  rlwinm r11, r11, 0, 0, 0x1c            
+9806cbf8  3b4b0008  addi r26, r11, 8                       
+9806cbfc  816b0004  lwz r11, 4(r11)                        
+9806cc00  4182000c  beq 0x9806cc0c                         
+9806cc04  7d6b0734  extsh r11, r11                         
+9806cc08  4800002c  b 0x9806cc34                           
+9806cc0c  556b043e  clrlwi r11, r11, 0x10                  
+9806cc10  48000024  b 0x9806cc34                           
+9806cc14  576b0673  rlwinm. r11, r27, 0, 0x19, 0x19        
+9806cc18  397a0007  addi r11, r26, 7                       
+9806cc1c  556b0038  rlwinm r11, r11, 0, 0, 0x1c            
+9806cc20  3b4b0008  addi r26, r11, 8                       
+9806cc24  4182000c  beq 0x9806cc30                         
+9806cc28  e96b0006  lwa r11, 4(r11)                        
+9806cc2c  48000008  b 0x9806cc34                           
+9806cc30  816b0004  lwz r11, 4(r11)                        
+9806cc34  576a0673  rlwinm. r10, r27, 0, 0x19, 0x19        
+9806cc38  41820014  beq 0x9806cc4c                         
+9806cc3c  2f2b0000  cmpdi cr6, r11, 0                      
+9806cc40  4098000c  bge cr6, 0x9806cc4c                    
+9806cc44  7d6b00d0  neg r11, r11                           
+9806cc48  637b0100  ori r27, r27, 0x100                    
+9806cc4c  576a0421  rlwinm. r10, r27, 0, 0x10, 0x10        
+9806cc50  40820010  bne 0x9806cc60                         
+9806cc54  576a04e7  rlwinm. r10, r27, 0, 0x13, 0x13        
+9806cc58  40820008  bne 0x9806cc60                         
+9806cc5c  796b0020  clrldi r11, r11, 0x20                  
+9806cc60  2f190000  cmpwi cr6, r25, 0                      
+9806cc64  4098000c  bge cr6, 0x9806cc70                    
+9806cc68  3b200001  li r25, 1                              
+9806cc6c  48000014  b 0x9806cc80                           
+9806cc70  577b0776  rlwinm r27, r27, 0, 0x1d, 0x1b         
+9806cc74  2f190200  cmpwi cr6, r25, 0x200                  
+9806cc78  40990008  ble cr6, 0x9806cc80                    
+9806cc7c  3b200200  li r25, 0x200                          
+9806cc80  2b2b0000  cmpldi cr6, r11, 0                     
+9806cc84  409a000c  bne cr6, 0x9806cc90                    
+9806cc88  39400000  li r10, 0                              
+9806cc8c  9141005c  stw r10, 0x5c(r1)                      
+9806cc90  3921028f  addi r9, r1, 0x28f                     
+9806cc94  2f190000  cmpwi cr6, r25, 0                      
+9806cc98  3b39ffff  addi r25, r25, -1                      
+9806cc9c  4199000c  bgt cr6, 0x9806cca8                    
+9806cca0  2b2b0000  cmpldi cr6, r11, 0                     
+9806cca4  419a0048  beq cr6, 0x9806ccec                    
+9806cca8  7d0a07b4  extsw r10, r8                          
+9806ccac  7ceb5392  divdu r7, r11, r10                     
+9806ccb0  08ca0000  tdi 6, r10, 0                          
+9806ccb4  7ce751d2  mulld r7, r7, r10                      
+9806ccb8  7ce75850  subf r7, r7, r11                       
+9806ccbc  7d6b5392  divdu r11, r11, r10                    
+9806ccc0  08ca0000  tdi 6, r10, 0                          
+9806ccc4  54ea003e  slwi r10, r7, 0                        
+9806ccc8  394a0030  addi r10, r10, 0x30                    
+9806cccc  2f0a0039  cmpwi cr6, r10, 0x39                   
+9806ccd0  4099000c  ble cr6, 0x9806ccdc                    
+9806ccd4  80e1006c  lwz r7, 0x6c(r1)                       
+9806ccd8  7d4a3a14  add r10, r10, r7                       
+9806ccdc  7d4a0774  extsb r10, r10                         
+9806cce0  99490000  stb r10, 0(r9)                         
+9806cce4  3929ffff  addi r9, r9, -1                        
+9806cce8  4bffffac  b 0x9806cc94                           
+9806ccec  3961028f  addi r11, r1, 0x28f                    
+9806ccf0  576a05ad  rlwinm. r10, r27, 0, 0x16, 0x16        
+9806ccf4  7ce95850  subf r7, r9, r11                       
+9806ccf8  3b890001  addi r28, r9, 1                        
+9806ccfc  90e10054  stw r7, 0x54(r1)                       
+9806cd00  4182002c  beq 0x9806cd2c                         
+9806cd04  2f070000  cmpwi cr6, r7, 0                       
+9806cd08  419a0010  beq cr6, 0x9806cd18                    
+9806cd0c  897c0000  lbz r11, 0(r28)                        
+9806cd10  2b0b0030  cmplwi cr6, r11, 0x30                  
+9806cd14  419a0018  beq cr6, 0x9806cd2c                    
+9806cd18  3b9cffff  addi r28, r28, -1                      
+9806cd1c  39600030  li r11, 0x30                           
+9806cd20  38e70001  addi r7, r7, 1                         
+9806cd24  997c0000  stb r11, 0(r28)                        
+9806cd28  90e10054  stw r7, 0x54(r1)                       
+9806cd2c  81610068  lwz r11, 0x68(r1)                      
+9806cd30  2f0b0000  cmpwi cr6, r11, 0                      
+9806cd34  409a01b8  bne cr6, 0x9806ceec                    
+9806cd38  576b0673  rlwinm. r11, r27, 0, 0x19, 0x19        
+9806cd3c  41820040  beq 0x9806cd7c                         
+9806cd40  576b05ef  rlwinm. r11, r27, 0, 0x17, 0x17        
+9806cd44  4182000c  beq 0x9806cd50                         
+9806cd48  3960002d  li r11, 0x2d                           
+9806cd4c  48000010  b 0x9806cd5c                           
+9806cd50  576b07ff  clrlwi. r11, r27, 0x1f                 
+9806cd54  41820018  beq 0x9806cd6c                         
+9806cd58  3960002b  li r11, 0x2b                           
+9806cd5c  3bc00001  li r30, 1                              
+9806cd60  99610058  stb r11, 0x58(r1)                      
+9806cd64  93c1005c  stw r30, 0x5c(r1)                      
+9806cd68  48000018  b 0x9806cd80                           
+9806cd6c  576b07bd  rlwinm. r11, r27, 0, 0x1e, 0x1e        
+9806cd70  4182000c  beq 0x9806cd7c                         
+9806cd74  39600020  li r11, 0x20                           
+9806cd78  4bffffe4  b 0x9806cd5c                           
+9806cd7c  83c1005c  lwz r30, 0x5c(r1)                      
+9806cd80  81610060  lwz r11, 0x60(r1)                      
+9806cd84  576a073b  rlwinm. r10, r27, 0, 0x1c, 0x1d        
+9806cd88  7d675850  subf r11, r7, r11                      
+9806cd8c  7fbe5850  subf r29, r30, r11                     
+9806cd90  40820038  bne 0x9806cdc8                         
+9806cd94  7fbfeb78  mr r31, r29                            
+9806cd98  2f1d0000  cmpwi cr6, r29, 0                      
+9806cd9c  4099002c  ble cr6, 0x9806cdc8                    
+9806cda0  38a10050  addi r5, r1, 0x50                      
+9806cda4  7ee4bb78  mr r4, r23                             
+9806cda8  38600020  li r3, 0x20                            
+9806cdac  3bffffff  addi r31, r31, -1                      
+9806cdb0  4bfff501  bl 0x9806c2b0                          
+9806cdb4  81610050  lwz r11, 0x50(r1)                      
+9806cdb8  2f0bffff  cmpwi cr6, r11, -1                     
+9806cdbc  419a000c  beq cr6, 0x9806cdc8                    
+9806cdc0  2f1f0000  cmpwi cr6, r31, 0                      
+9806cdc4  4199ffdc  bgt cr6, 0x9806cda0                    
+9806cdc8  38c10050  addi r6, r1, 0x50                      
+9806cdcc  7ee5bb78  mr r5, r23                             
+9806cdd0  7fc4f378  mr r4, r30                             
+9806cdd4  38610058  addi r3, r1, 0x58                      
+9806cdd8  4bfff571  bl 0x9806c348                          
+9806cddc  576b0739  rlwinm. r11, r27, 0, 0x1c, 0x1c        
+9806cde0  41820040  beq 0x9806ce20                         
+9806cde4  576b077b  rlwinm. r11, r27, 0, 0x1d, 0x1d        
+9806cde8  40820038  bne 0x9806ce20                         
+9806cdec  7fbfeb78  mr r31, r29                            
+9806cdf0  2f1d0000  cmpwi cr6, r29, 0                      
+9806cdf4  4099002c  ble cr6, 0x9806ce20                    
+9806cdf8  38a10050  addi r5, r1, 0x50                      
+9806cdfc  7ee4bb78  mr r4, r23                             
+9806ce00  38600030  li r3, 0x30                            
+9806ce04  3bffffff  addi r31, r31, -1                      
+9806ce08  4bfff4a9  bl 0x9806c2b0                          
+9806ce0c  81610050  lwz r11, 0x50(r1)                      
+9806ce10  2f0bffff  cmpwi cr6, r11, -1                     
+9806ce14  419a000c  beq cr6, 0x9806ce20                    
+9806ce18  2f1f0000  cmpwi cr6, r31, 0                      
+9806ce1c  4199ffdc  bgt cr6, 0x9806cdf8                    
+9806ce20  80810054  lwz r4, 0x54(r1)                       
+9806ce24  2f100000  cmpwi cr6, r16, 0                      
+9806ce28  419a006c  beq cr6, 0x9806ce94                    
+9806ce2c  2f040000  cmpwi cr6, r4, 0                       
+9806ce30  40990064  ble cr6, 0x9806ce94                    
+9806ce34  7f9ee378  mr r30, r28                            
+9806ce38  7c9f2378  mr r31, r4                             
+9806ce3c  38a00006  li r5, 6                               
+9806ce40  a0de0000  lhz r6, 0(r30)                         
+9806ce44  38810074  addi r4, r1, 0x74                      
+9806ce48  38610070  addi r3, r1, 0x70                      
+9806ce4c  3bffffff  addi r31, r31, -1                      
+9806ce50  3bde0002  addi r30, r30, 2                       
+9806ce54  4800033d  bl 0x9806d190                          
+9806ce58  2c030000  cmpwi r3, 0                            
+9806ce5c  4082002c  bne 0x9806ce88                         
+9806ce60  80810070  lwz r4, 0x70(r1)                       
+9806ce64  2f040000  cmpwi cr6, r4, 0                       
+9806ce68  419a0020  beq cr6, 0x9806ce88                    
+9806ce6c  38c10050  addi r6, r1, 0x50                      
+9806ce70  7ee5bb78  mr r5, r23                             
+9806ce74  38610074  addi r3, r1, 0x74                      
+9806ce78  4bfff4d1  bl 0x9806c348                          
+9806ce7c  2f1f0000  cmpwi cr6, r31, 0                      
+9806ce80  409affbc  bne cr6, 0x9806ce3c                    
+9806ce84  48000020  b 0x9806cea4                           
+9806ce88  3b00ffff  li r24, -1                             
+9806ce8c  93010050  stw r24, 0x50(r1)                      
+9806ce90  48000018  b 0x9806cea8                           
+9806ce94  38c10050  addi r6, r1, 0x50                      
+9806ce98  7ee5bb78  mr r5, r23                             
+9806ce9c  7f83e378  mr r3, r28                             
+9806cea0  4bfff4a9  bl 0x9806c348                          
+9806cea4  83010050  lwz r24, 0x50(r1)                      
+9806cea8  2f180000  cmpwi cr6, r24, 0                      
+9806ceac  41980040  blt cr6, 0x9806ceec                    
+9806ceb0  576b077b  rlwinm. r11, r27, 0, 0x1d, 0x1d        
+9806ceb4  41820038  beq 0x9806ceec                         
+9806ceb8  7fbfeb78  mr r31, r29                            
+9806cebc  2f1d0000  cmpwi cr6, r29, 0                      
+9806cec0  4099002c  ble cr6, 0x9806ceec                    
+9806cec4  38a10050  addi r5, r1, 0x50                      
+9806cec8  7ee4bb78  mr r4, r23                             
+9806cecc  38600020  li r3, 0x20                            
+9806ced0  3bffffff  addi r31, r31, -1                      
+9806ced4  4bfff3dd  bl 0x9806c2b0                          
+9806ced8  83010050  lwz r24, 0x50(r1)                      
+9806cedc  2f18ffff  cmpwi cr6, r24, -1                     
+9806cee0  419a000c  beq cr6, 0x9806ceec                    
+9806cee4  2f1f0000  cmpwi cr6, r31, 0                      
+9806cee8  4199ffdc  bgt cr6, 0x9806cec4                    
+9806ceec  2b0f0000  cmplwi cr6, r15, 0                     
+9806cef0  419a0010  beq cr6, 0x9806cf00                    
+9806cef4  7de37b78  mr r3, r15                             
+9806cef8  4bff8cf1  bl 0x98065be8                          
+9806cefc  39e00000  li r15, 0                              
+9806cf00  8bb20000  lbz r29, 0(r18)                        
+9806cf04  7fa80775  extsb. r8, r29                         
+9806cf08  4182000c  beq 0x9806cf14                         
+9806cf0c  80e10054  lwz r7, 0x54(r1)                       
+9806cf10  4bfff678  b 0x9806c588                           
+9806cf14  81610064  lwz r11, 0x64(r1)                      
+9806cf18  2f0b0000  cmpwi cr6, r11, 0                      
+9806cf1c  419a000c  beq cr6, 0x9806cf28                    
+9806cf20  2f0b0007  cmpwi cr6, r11, 7                      
+9806cf24  409af4f8  bne cr6, 0x9806c41c                    
+9806cf28  7f03c378  mr r3, r24                             
+9806cf2c  48000038  b 0x9806cf64                           
+9806cf30  7f46d378  mr r6, r26                             
+9806cf34  7e459378  mr r5, r18                             
+9806cf38  38800200  li r4, 0x200                           
+9806cf3c  38610290  addi r3, r1, 0x290                     
+9806cf40  48000121  bl 0x9806d060                          
+9806cf44  7c7f1b78  mr r31, r3                             
+9806cf48  2f1fffff  cmpwi cr6, r31, -1                     
+9806cf4c  409a000c  bne cr6, 0x9806cf58                    
+9806cf50  3be001ff  li r31, 0x1ff                          
+9806cf54  9b61048f  stb r27, 0x48f(r1)                     
+9806cf58  38610290  addi r3, r1, 0x290                     
+9806cf5c  480a2d7d  bl 0x9810fcd8                          
+9806cf60  7fe3fb78  mr r3, r31                             
+9806cf64  38210530  addi r1, r1, 0x530                     
+9806cf68  4bff4978  b 0x980618e0                           
+9806cf6c  00000000  nop-or-padding                         

@@ -1,0 +1,35 @@
+# 0x980f0530  120 bytes  30 decoded rows
+# unknown=8 scalar=22 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+980f0530  39410024  addi r10, r1, 0x24                     
+980f0534  d0410024  stfs f2, 0x24(r1)                      
+980f0538  3901002c  addi r8, r1, 0x2c                      
+980f053c  d061002c  stfs f3, 0x2c(r1)                      
+980f0540  1be00774  VMX-6-p06(undecoded)                   
+980f0544  3961001c  addi r11, r1, 0x1c                     
+980f0548  d021001c  stfs f1, 0x1c(r1)                      
+980f054c  39200010  li r9, 0x10                            
+980f0550  13605407  vcmpneb. v27, v0, v10                  
+980f0554  39400020  li r10, 0x20                           
+980f0558  13404407  vcmpneb. v26, v0, v8                   
+980f055c  17dffaf5  VMX-5-p05(undecoded)                   
+980f0560  1ba4fff5  VMX-6-p06(undecoded)                   
+980f0564  13805c07  vcmpneb. v28, v0, v11                  
+980f0568  39600030  li r11, 0x30                           
+980f056c  39000040  li r8, 0x40                            
+980f0570  173ef2f5  VMX-5-p05(undecoded)                   
+980f0574  1b87f715  VMX-6-p06(undecoded)                   
+980f0578  1babeb55  VMX-6-p06(undecoded)                   
+980f057c  1b24dfd5  VMX-6-p06(undecoded)                   
+980f0580  13801d07  vcmpnezb. v28, v0, v3                  
+980f0584  1be2d795  VMX-6-p06(undecoded)                   
+980f0588  13834d47  vcmpnezh. v28, v3, v9                  
+980f058c  13234d07  vcmpnezb. v25, v3, v9                  
+980f0590  13235547  vcmpnezh. v25, v3, v10                 
+980f0594  13e35507  vcmpnezb. v31, v3, v10                 
+980f0598  13e35d47  vcmpnezh. v31, v3, v11                 
+980f059c  13a35d07  vcmpnezb. v29, v3, v11                 
+980f05a0  13a34547  vcmpnezh. v29, v3, v8                  
+980f05a4  4e800020  blr                                    

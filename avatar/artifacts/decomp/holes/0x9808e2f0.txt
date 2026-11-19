@@ -1,0 +1,27 @@
+# 0x9808e2f0  88 bytes  22 decoded rows
+# unknown=0 scalar=21 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x9808e328
+
+9808e2f0  3940ffff  li r10, -1                             
+9808e2f4  e9630000  ld r11, 0(r3)                          
+9808e2f8  794a0020  clrldi r10, r10, 0x20                  
+9808e2fc  7d0000a6  mfmsr r8                               
+9808e300  7da10164  mtmsrd r13, 1                          
+9808e304  7d2018a8  ldarx r9, 0, r3                        
+9808e308  7f295800  cmpd cr6, r9, r11                      
+9808e30c  409a0014  bne cr6, 0x9808e320                    
+9808e310  7d4019ad  stdcx. r10, 0, r3                      
+9808e314  7d010164  mtmsrd r8, 1                           
+9808e318  4082ffe4  bne 0x9808e2fc                         
+9808e31c  4800000c  b 0x9808e328                           
+9808e320  7d2019ad  stdcx. r9, 0, r3                       
+9808e324  7d010164  mtmsrd r8, 1                           
+9808e328  7d2a4b78  mr r10, r9                             
+9808e32c  7f2a5840  cmpld cr6, r10, r11                    
+9808e330  409affc0  bne cr6, 0x9808e2f0                    
+9808e334  7d6a5b78  mr r10, r11                            
+9808e338  796b0022  rldicl r11, r11, 0x20, 0x20            
+9808e33c  91440000  stw r10, 0(r4)                         
+9808e340  91650000  stw r11, 0(r5)                         
+9808e344  4e800020  blr                                    

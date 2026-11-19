@@ -1,0 +1,23 @@
+# 0x980f0ad8  72 bytes  18 decoded rows
+# unknown=9 scalar=9 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+980f0ad8  3960000c  li r11, 0xc                            
+980f0adc  13e02c07  vcmpneb. v31, v0, v5                   
+980f0ae0  13c02407  vcmpneb. v30, v0, v4                   
+980f0ae4  1bbf0774  VMX-6-p06(undecoded)                   
+980f0ae8  39400010  li r10, 0x10                           
+980f0aec  138b2447  vcmpneh. v28, v11, v4                  
+980f0af0  1bbde8f5  VMX-6-p06(undecoded)                   
+980f0af4  136b2c47  vcmpneh. v27, v11, v5                  
+980f0af8  139ce135  VMX-p04(undecoded)                     
+980f0afc  137bd935  VMX-p04(undecoded)                     
+980f0b00  17dee2f5  VMX-5-p05(undecoded)                   
+980f0b04  17ffdaf5  VMX-5-p05(undecoded)                   
+980f0b08  17def9b5  VMX-5-p05(undecoded)                   
+980f0b0c  17deeb35  VMX-5-p05(undecoded)                   
+980f0b10  1bceff15  VMX-6-p06(undecoded)                   
+980f0b14  13c01d07  vcmpnezb. v30, v0, v3                  
+980f0b18  13c35547  vcmpnezh. v30, v3, v10                 
+980f0b1c  4e800020  blr                                    

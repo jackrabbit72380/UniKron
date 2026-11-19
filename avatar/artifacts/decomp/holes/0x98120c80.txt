@@ -1,0 +1,33 @@
+# 0x98120c80  112 bytes  28 decoded rows
+# unknown=11 scalar=15 call=1 branch=1 returns=0
+# calls: 0x98063adc
+# branches: 0x980618e0
+
+98120c80  12de50c7  vcmpequd v22, v30, v10                 
+98120c84  16bec0b5  VMX-5-p05(undecoded)                   
+98120c88  129758c7  vcmpequd v20, v23, v11                 
+98120c8c  167eb0b5  VMX-5-p05(undecoded)                   
+98120c90  165ea0b5  VMX-5-p05(undecoded)                   
+98120c94  394a0020  addi r10, r10, 0x20                    
+98120c98  10a06a2e  vmaddfp v5, v0, v8, v13                
+98120c9c  396b0020  addi r11, r11, 0x20                    
+98120ca0  1080626e  vmaddfp v4, v0, v9, v12                
+98120ca4  106059ee  vmaddfp v3, v0, v7, v11                
+98120ca8  104051ae  vmaddfp v2, v0, v6, v10                
+98120cac  12e049c7  VMX-p04(undecoded)                     
+98120cb0  12a929c7  VMX-p04(undecoded)                     
+98120cb4  39290020  addi r9, r9, 0x20                      
+98120cb8  126041c7  VMX-p04(undecoded)                     
+98120cbc  124829c7  VMX-p04(undecoded)                     
+98120cc0  39080020  addi r8, r8, 0x20                      
+98120cc4  10a039c3  VMX-p04(undecoded)                     
+98120cc8  108729c3  VMX-p04(undecoded)                     
+98120ccc  38e70020  addi r7, r7, 0x20                      
+98120cd0  106031c3  VMX-p04(undecoded)                     
+98120cd4  104629c3  VMX-p04(undecoded)                     
+98120cd8  38c60020  addi r6, r6, 0x20                      
+98120cdc  4082ff64  bne 0x98120c40                         
+98120ce0  38214630  addi r1, r1, 0x4630                    
+98120ce4  3981ff68  addi r12, r1, -0x98                    
+98120ce8  4bf42df5  bl 0x98063adc                          
+98120cec  4bf40bf4  b 0x980618e0                           

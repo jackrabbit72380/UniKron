@@ -1,0 +1,7 @@
+# 0x9806b204  8 bytes  2 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=2 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+9806b204  9206a630  stw r16, -0x59d0(r6)                   
+9806b208  00000000  nop-or-padding                         

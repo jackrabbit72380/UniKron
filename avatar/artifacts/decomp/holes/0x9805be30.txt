@@ -1,0 +1,39 @@
+# 0x9805be30  136 bytes  34 decoded rows
+# unknown=0 scalar=31 call=0 branch=3 returns=0
+# calls: -
+# branches: 0x9813b45c 0x9805be7c 0x9805be94
+
+9805be30  480df62c  b 0x9813b45c                           
+9805be34  00000000  nop-or-padding                         
+9805be38  548b3032  slwi r11, r4, 6                        
+9805be3c  546a003e  slwi r10, r3, 0                        
+9805be40  396b103f  addi r11, r11, 0x103f                  
+9805be44  394a0fff  addi r10, r10, 0xfff                   
+9805be48  556b0824  rlwinm r11, r11, 1, 0, 0x12            
+9805be4c  554a0026  rlwinm r10, r10, 0, 0, 0x13            
+9805be50  392000aa  li r9, 0xaa                            
+9805be54  7d6b5214  add r11, r11, r10                      
+9805be58  5568a33e  srwi r8, r11, 0xc                      
+9805be5c  396800a9  addi r11, r8, 0xa9                     
+9805be60  7d6b4b96  divwu r11, r11, r9                     
+9805be64  2b0b0001  cmplwi cr6, r11, 1                     
+9805be68  40990010  ble cr6, 0x9805be78                    
+9805be6c  394b00a9  addi r10, r11, 0xa9                    
+9805be70  7d4a4b96  divwu r10, r10, r9                     
+9805be74  48000008  b 0x9805be7c                           
+9805be78  39400000  li r10, 0                              
+9805be7c  2b0a0001  cmplwi cr6, r10, 1                     
+9805be80  40990010  ble cr6, 0x9805be90                    
+9805be84  38ea00a9  addi r7, r10, 0xa9                     
+9805be88  7d274b96  divwu r9, r7, r9                       
+9805be8c  48000008  b 0x9805be94                           
+9805be90  39200000  li r9, 0                               
+9805be94  7d495214  add r10, r9, r10                       
+9805be98  7d6a5a14  add r11, r10, r11                      
+9805be9c  556b083c  slwi r11, r11, 1                       
+9805bea0  7d6b4214  add r11, r11, r8                       
+9805bea4  796b0020  clrldi r11, r11, 0x20                  
+9805bea8  396b001a  addi r11, r11, 0x1a                    
+9805beac  796364e4  sldi r3, r11, 0xc                      
+9805beb0  4e800020  blr                                    
+9805beb4  00000000  nop-or-padding                         

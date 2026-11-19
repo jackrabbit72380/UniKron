@@ -11,7 +11,7 @@ reading the files, not inferred.
 | `avatareditor.exe` | 8,651,264 | 17,567,232 |
 | `assets/avatareditor.xex` | 15,826,944 | 15,507,456 |
 | `rexruntime.dll` | 10,657,280 | 10,657,280 (`bin/`) |
-| `rexgpu-xenos.dll` | 2,822,144 | absent |
+| `rexgpu-xenos.dll` | 2,822,144 | 2,822,144 (staged, see below) |
 | `bin/dxcompiler.dll`, `bin/dxil.dll` | absent | 17,972,656 / 1,462,704 |
 | `msvcp140.dll`, `vcruntime140*.dll` | shared CRT | shared CRT |
 
@@ -22,8 +22,60 @@ Byte-identical between the two builds (SHA-1):
     msvcp140.dll, vcruntime140.dll, vcruntime140_1.dll, msvcp140_atomic_wait.dll
 
 So the 2008 and 2010 **asset data is the same data**. Only the executables,
-the guest `.xex` and the GPU module differ. Both `avatareditor.toml` files are
-identical apart from line endings.
+the guest `.xex` and the GPU module differ. Both `avatareditor.toml` files were
+identical apart from line endings until `gpu_plugin` was added to the 2010 one
+(see "The 2010 build's renderer" below).
+
+## The 2010 build's renderer, and why it did not start
+
+The 2010 `avatareditor.exe` is a ReXGlue build whose own banner reads
+`[rexglue-v0.10.0-dev.gc791019-Release]`. It reaches its renderer through a GPU
+plugin that it loads by name, and the folder it shipped in had no plugin at all.
+
+Measured in the executable:
+
+* `gpu_plugin` is registered as a cvar in `FUN_140dfb650` with a **three-letter
+default, `GPU`** - bytes `47 50 55` built at `local_1f0`/`uStack_1ee` with length
+3 at `local_1e0`. That is not the SDK's `xenos`, and no `rexgpu-GPU.dll` exists
+anywhere in the archive, so the default can never resolve.
+* `rex::ReXApp::SetupPresentation` (`FUN_140df5f80`) calls
+`rex::system::LoadGpuPlugin(<gpu_plugin value>, "any")` whenever that string is
+non-empty. When the call returns null it logs `Failed to load GPU plugin '{}'.
+See log for details.`, shows the modal `rex::ShowSimpleMessageBox`, and **returns
+0 before `rex::ui::Window::Create` is reached** - the process exits without ever
+opening a window.
+* The loader, `rex::system::LoadGpuPlugin` (`rexruntime.dll` RVA `0x28dbf0`, the
+export named in the exe's delay-load table), formats `"rexgpu-{}{}.dll"`, joins
+it onto `GetExecutableFolder()`, and rejects a plugin that does not export both
+`rex_gpu_abi_version` and `rex_gpu_create`, or whose ABI version is not 1
+(`if (local_d4 != 1)` logs `has ABI version {}, host expects {}`).
+
+So the DLL has to sit **beside `avatareditor.exe`**, and the cvar has to name it.
+The 2008 folder has shipped that plugin all along: `rexgpu-xenos.dll`, 2,822,144
+B, banner `rexglue-v0.10.0-dev.gc791019-win-amd64-Release` - the same SDK build
+as the 2010 exe - exporting `rex_gpu_abi_version` (RVA `0x1000`, `mov eax,1; ret`)
+and `rex_gpu_create` (RVA `0x1010`). It also binds against the newer runtime:
+all **107** of its `rexruntime.dll` imports (all by name) are exports of
+`metro2010/bin/rexruntime.dll`, none missing.
+
+The fix was staging, not a binary patch:
+
+    editors/metro2010/rexgpu-xenos.dll     copied from nxe2008, SHA-1
+                                           ca07bd0491569d8b0948ef8d5e818ee39b6db42c
+    editors/metro2010/avatareditor.toml    gpu_plugin = "xenos"
+
+`gpu_plugin` is an ordinary cvar, so the toml value overrides the compiled-in
+default, and the Hub's four-key rewrite (`avatar_closet_dir`, `content_root`,
+`user_name`, `fullscreen`) leaves the line alone. The 2008 build needs no change:
+it already has the plugin beside its exe.
+
+Not verified here: the editor was not launched, because this sandbox has no
+Windows and no D3D12 device. The check to run on the PC is the editor's own
+`avatareditor.log`, which must contain `GPU plugin 'xenos' loaded` and no
+`Failed to load GPU plugin`. The 2010 exe still carries its own D3D12 code path
+(`ae::gpu`, `dxcompiler.dll`/`dxil.dll` in `bin/`) for when `gpu_plugin` is
+empty; the SDK's own help text calls that "empty disables GPU emulation", which
+is why the plugin route is the one that was taken.
 
 ## Asset directory (both builds)
 

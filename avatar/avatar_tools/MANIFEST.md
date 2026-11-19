@@ -13,7 +13,9 @@ and resolves every record to an asset name.
     +0x00c  8 x 16   appearance slots: {u32 slot, u16 asset index, u16 kind, GUID}
     +0x08c  f32      1.0 on the stock male, 0.0 on both stock females
     +0x090  108      zero
-    +0x0fc  8 x u32  ARGB colours, alpha always 0xff
+    +0x0fc  9 x u32  ARGB colours, alpha always 0xff (0x0fc..0x11f; this said
+                     eight - the ninth word at 0x11c equals the eighth on all
+                     three shipped profiles, which is how it was missed)
     +0x120  32       body record + 3 zero words
     +0x140  32       head record + 3 zero words
     +0x160  13 x 32  worn items; a record is 16 bytes, then three zero words

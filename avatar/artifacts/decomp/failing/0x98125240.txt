@@ -1,0 +1,19 @@
+# 0x98125240  56 bytes  14 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=14 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+98125240  7d8802a6  mflr r12                               
+98125244  9181fff8  stw r12, -8(r1)                        
+98125248  fbe1fff0  std r31, -0x10(r1)                     
+9812524c  9421ff40  stwu r1, -0xc0(r1)                     
+98125250  7c7f1b78  mr r31, r3                             
+98125254  7cab2b78  mr r11, r5                             
+98125258  2b04000c  cmplwi cr6, r4, 0xc                    
+9812525c  419900f0  bgt cr6, 0x9812534c                    
+98125260  3d809812  lis r12, -0x67ee                       
+98125264  398c4678  addi r12, r12, 0x4678                  
+98125268  5480103a  slwi r0, r4, 2                         
+9812526c  7c0c002e  lwzx r0, r12, r0                       
+98125270  7c0903a6  mtctr r0                               
+98125274  4e800420  bctr                                   

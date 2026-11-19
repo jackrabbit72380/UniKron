@@ -1,0 +1,41 @@
+# 0x980f05a8  144 bytes  36 decoded rows
+# unknown=8 scalar=28 call=0 branch=0 returns=0
+# calls: -
+# branches: -
+
+980f05a8  1be00774  VMX-6-p06(undecoded)                   
+980f05ac  39610024  addi r11, r1, 0x24                     
+980f05b0  3941001c  addi r10, r1, 0x1c                     
+980f05b4  d021001c  stfs f1, 0x1c(r1)                      
+980f05b8  3d009800  lis r8, -0x6800                        
+980f05bc  d0410024  stfs f2, 0x24(r1)                      
+980f05c0  38e1002c  addi r7, r1, 0x2c                      
+980f05c4  d061002c  stfs f3, 0x2c(r1)                      
+980f05c8  1be4fff5  VMX-6-p06(undecoded)                   
+980f05cc  38c1fff0  addi r6, r1, -0x10                     
+980f05d0  13c05c07  vcmpneb. v30, v0, v11                  
+980f05d4  39200010  li r9, 0x10                            
+980f05d8  13a05407  vcmpneb. v29, v0, v10                  
+980f05dc  1ba4f7d5  VMX-6-p06(undecoded)                   
+980f05e0  1b8afbd5  VMX-6-p06(undecoded)                   
+980f05e4  c008162c  lfs f0, 0x162c(r8)                     ; 1 
+980f05e8  d001fff0  stfs f0, -0x10(r1)                     
+980f05ec  1b7afb55  VMX-6-p06(undecoded)                   
+980f05f0  13c03c07  vcmpneb. v30, v0, v7                   
+980f05f4  1beefb55  VMX-6-p06(undecoded)                   
+980f05f8  13403407  vcmpneb. v26, v0, v6                   
+980f05fc  1bc4d7d5  VMX-6-p06(undecoded)                   
+980f0600  39400020  li r10, 0x20                           
+980f0604  13801d07  vcmpnezb. v28, v0, v3                  
+980f0608  39600030  li r11, 0x30                           
+980f060c  13834d47  vcmpnezh. v28, v3, v9                  
+980f0610  1ba3f795  VMX-6-p06(undecoded)                   
+980f0614  39000040  li r8, 0x40                            
+980f0618  13634d07  vcmpnezb. v27, v3, v9                  
+980f061c  13635547  vcmpnezh. v27, v3, v10                 
+980f0620  13e35507  vcmpnezb. v31, v3, v10                 
+980f0624  13e35d47  vcmpnezh. v31, v3, v11                 
+980f0628  13a35d07  vcmpnezb. v29, v3, v11                 
+980f062c  13a34547  vcmpnezh. v29, v3, v8                  
+980f0630  4e800020  blr                                    
+980f0634  00000000  nop-or-padding                         

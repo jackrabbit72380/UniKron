@@ -1,0 +1,7 @@
+# 0x9805e060  8 bytes  2 decoded rows
+# unknown=0 scalar=1 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x9813b6bc
+
+9805e060  480dd65c  b 0x9813b6bc                           
+9805e064  00000000  nop-or-padding                         

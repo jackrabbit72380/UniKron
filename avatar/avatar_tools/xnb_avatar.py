@@ -68,14 +68,12 @@ def load(path):
     compressed version 5, 3 compressed version 4. An earlier note here said 92
     failed and blamed the window size; that was this missing framing.
 
-    Reading the inflated clip is a separate matter, and 143 of the 185 still do not
-    read: they are `DNA.Drawing.Animation.AnimationClip+Reader` (DNA.Common) rather
-    than Hazzah's `CustomAvatarAnimationData`. That is a different record layout,
-    not a decode failure - `Stand0`'s 134,564 bytes open with the name `Stand0`, a
-    frames-a-second word (30), a TimeSpan duration (5.333 s), a joint count (71) and
-    a frame count (162), and the body's dominant byte stride is 16, where the Hazzah
-    clips store 76-byte (int, TimeSpan, matrix) keyframes. Until that layout is
-    read, the clips this module parses are the 42 Hazzah ones, `Idle.xnb` among them.
+    Reading the inflated clip is a separate matter, and both layouts are now read:
+    42 clips are Hazzah's `CustomAvatarAnimationData` (`read_clip`) and 143 are
+    `DNA.Drawing.Animation.AnimationClip+Reader` (DNA.Common, `read_dna`). The DNA
+    body is a per-bone run of tracks rather than the Hazzah 76-byte keyframe, and
+    the archive splits cleanly: 118 clips carry translation, rotation and scale
+    per bone, 25 (all of Avatar Connection) carry translation and rotation only.
     """
     data = open(path, "rb").read()
     if data[:4] not in (b"XNBx", b"XNBw", b"XNBm"):
@@ -264,62 +262,95 @@ def read_clip(path):
                 end=at, size=len(data))
 
 
+_TRACKS_THREE = (("translation", 12), ("rotation", 16), ("scale", 12))
+_TRACKS_TWO = (("translation", 12), ("rotation", 16))
+
+
+def _dna_tracks(data, pos, bones, tracks):
+    """Walk `bones` bone blocks of `tracks`, or None if the body does not fit.
+
+    Each track is `i32 count` then that many records: 12 bytes for a Vector3
+    (translation, scale) and 16 for a Quaternion (rotation).
+    """
+    out = []
+    for _ in range(bones):
+        bone = {}
+        for name, stride in tracks:
+            if pos + 4 > len(data):
+                return None
+            count = struct.unpack_from("<i", data, pos)[0]
+            pos += 4
+            if not 0 <= count <= len(data) // stride or pos + stride * count > len(data):
+                return None
+            width = stride // 4
+            bone[name] = np.array(
+                struct.unpack_from("<%df" % (width * count), data, pos),
+                dtype=np.float64).reshape(-1, width)
+            pos += stride * count
+        out.append(bone)
+    return out, pos
+
+
 def read_dna(path):
     """Read a `DNA.Drawing.Animation.AnimationClip` (the Digital DNA games).
 
     Payload, little endian:
 
-        u8 flag, u8 name length + name
-        i32   30            - frame count seen in every clip so far
-        i64   duration ticks (3,166,666 = 1/3 s)
-        i32   bone count    (71)
-        then per bone, three channels, each `i32 count` followed by that many
-        elements:
-            count x Vector3  (12 bytes)  translation
-            count x Quaternion (16)      rotation
-            count x Vector3  (12)        scale
+        u8   1              - a byte, 1 in all 143 clips of this archive
+        u8   name length + the name, ASCII (`Stand0`, `Take 001`)
+        i32  frames a second (30 everywhere here)
+        i64  duration in TimeSpan ticks (53,333,334 = 5.333 s)
+        i32  bone count (71 everywhere)
+        then, per bone, the tracks in order `i32 count` + that many records:
+             count x Vector3     (12 bytes)  translation
+             count x Quaternion  (16 bytes)  rotation
+             count x Vector3     (12 bytes)  scale, only in some clips
 
-    That is 52 bytes a bone while every channel holds a single key, which is what
-    the small clips in this archive do: `GenericIdle` is 71 * 52 bytes exactly and
-    the walk ends on the last byte. A clip with real motion carries several keys
-    per channel, and the same walk still covers the file.
+    The first `i32` of the body is the root bone's translation count, not a frame
+    count: `Stand0` stores 162 there for 160 frames, `Tilt` 1 for 100. An earlier
+    note in `DECOMPILE.md` read it as frames + 2 because the root of the 36 named
+    clips carries two keys beyond the frames; `Tilt` disproves that.
+
+    **The track count differs by game and is not flagged anywhere in the file.**
+    The 118 clips from Avatar Laser Wars 2 and Avatar Warfare write three tracks a
+    bone; the 25 from Avatar Connection write two. Nothing else in the archive has
+    the shape, so the walk itself decides: the track count whose 71 bones end
+    exactly on the last byte is the one, and no clip fits both (measured on all
+    143). Where a scale track exists it is a no-op - all 8,378 of them in the
+    archive hold (1, 1, 1) - so the two groups decode the same.
+
+    Returns the bones in file order, each a dict of whichever tracks it has.
     """
     data = load(path)
     pos = read_type_readers(data)["payload"]
+    flag = data[pos]
     pos += 1
     length = data[pos]
     pos += 1
     name = data[pos:pos + length].decode("ascii", "replace")
     pos += length
-    frame_count = struct.unpack_from("<i", data, pos)[0]
+    fps = struct.unpack_from("<i", data, pos)[0]
     pos += 4
     ticks = struct.unpack_from("<q", data, pos)[0]
     pos += 8
     bone_count = struct.unpack_from("<i", data, pos)[0]
     pos += 4
+    start = pos
 
-    bones = []
-    for _ in range(bone_count):
-        count = struct.unpack_from("<i", data, pos)[0]
-        pos += 4
-        translation = np.array(struct.unpack_from("<%df" % (3 * count), data, pos),
-                               dtype=np.float64).reshape(-1, 3)
-        pos += 12 * count
-        count = struct.unpack_from("<i", data, pos)[0]
-        pos += 4
-        rotation = np.array(struct.unpack_from("<%df" % (4 * count), data, pos),
-                            dtype=np.float64).reshape(-1, 4)
-        pos += 16 * count
-        count = struct.unpack_from("<i", data, pos)[0]
-        pos += 4
-        scale = np.array(struct.unpack_from("<%df" % (3 * count), data, pos),
-                         dtype=np.float64).reshape(-1, 3)
-        pos += 12 * count
-        bones.append(dict(translation=translation, rotation=rotation, scale=scale))
+    for tracks in (_TRACKS_THREE, _TRACKS_TWO):
+        walked = _dna_tracks(data, start, bone_count, tracks)
+        if walked and walked[1] == len(data):
+            bones, pos = walked
+            break
+    else:
+        raise ValueError(
+            "%s: neither a 3-track nor a 2-track body of %d bones fits %d bytes"
+            % (path, bone_count, len(data) - start))
 
-    return dict(name=name, frame_count=frame_count, duration=ticks / 1e7,
-                bones=bones, joints=list(range(bone_count)), end=pos, size=len(data),
-                records=sum(len(b["rotation"]) for b in bones))
+    return dict(name=name, flag=flag, fps=fps, tracks=len(tracks),
+                duration=ticks / 1e7, bones=bones,
+                joints=list(range(bone_count)), end=pos, size=len(data),
+                records=sum(len(b.get("rotation", ())) for b in bones))
 
 
 def dna_poses(clip, frame=0, flip_y=False):
@@ -339,9 +370,17 @@ def dna_poses(clip, frame=0, flip_y=False):
     """
     out = []
     for bone in clip["bones"]:
-        index = min(frame, len(bone["rotation"]) - 1)
-        x, y, z, w = bone["rotation"][index]
-        position = bone["translation"][min(frame, len(bone["translation"]) - 1)]
+        rotation = bone.get("rotation")
+        translation = bone.get("translation")
+        if rotation is None or not len(rotation):
+            out.append(((0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0), (1.0, 1.0, 1.0)))
+            continue
+        index = min(frame, len(rotation) - 1)
+        x, y, z, w = rotation[index]
+        if translation is not None and len(translation):
+            position = translation[min(index, len(translation) - 1)]
+        else:
+            position = (0.0, 0.0, 0.0)
         if flip_y:
             y = -y
         out.append((tuple(float(v) for v in position),
@@ -420,6 +459,23 @@ def main():
     parser.add_argument("--joints", default="",
                         help="comma separated joint indices to report")
     args = parser.parse_args()
+
+    head = read_type_readers(load(args.clip))
+    if "DNA" in head["readers"][0][0]:
+        clip = read_dna(args.clip)
+        print("%s: %r, %.3f s at %d fps, %d joints, %d rotation keys, %d tracks"
+              % (args.clip, clip["name"], clip["duration"], clip["fps"],
+                 len(clip["bones"]), clip["records"], clip["tracks"]))
+        wanted = [int(v) for v in args.joints.split(",") if v.strip()]
+        for joint in wanted:
+            rotation = clip["bones"][joint].get("rotation")
+            if rotation is None or not len(rotation):
+                continue
+            angles = [float(np.degrees(2.0 * np.arccos(min(1.0, abs(q[3])))))
+                      for q in rotation]
+            print("  joint %2d: %5.1f deg mean, %5.1f max over %d keys"
+                  % (joint, sum(angles) / len(angles), max(angles), len(angles)))
+        return
 
     clip = read_clip(args.clip)
     frames = clip["frames"]

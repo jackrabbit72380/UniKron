@@ -1227,7 +1227,7 @@
  ],
  "descriptor_problems": [],
  "build_plan": {
-  "rows": 934,
+  "rows": 1024,
   "counts": {
    "male": {
     "30_shoes": 18,
@@ -1243,6 +1243,7 @@
     "76_rings": 8,
     "50_hair": 176,
     "15_face": 45,
+    "17_eye-shadow": 45,
     "45_facial-hair": 17,
     "16_face-paint": 26,
     "10_body": 1
@@ -1262,12 +1263,13 @@
     "76_rings": 8,
     "50_hair": 176,
     "15_face": 45,
+    "17_eye-shadow": 45,
     "45_facial-hair": 17,
     "16_face-paint": 26,
     "10_body": 1
    }
   },
-  "manifest_sha1": "25108f7aa2f52f1435e99d6c874081407bc54039",
+  "manifest_sha1": "5b448c990c347112940f1658d05f7430f2452ed3",
   "problems": [],
   "items": [
    [
@@ -4128,10 +4130,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 001",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Sharp Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 002",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4144,10 +4162,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 003",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Focussed Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 004",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4160,10 +4194,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 005",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Passive Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 006",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4176,10 +4226,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 007",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Surprised Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 008",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4192,10 +4258,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 009",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Restful Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 010",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4208,10 +4290,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 011",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Bold Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 012",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4224,10 +4322,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 013",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Funky Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 014",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4240,10 +4354,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 015",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Comforting Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 016",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4256,10 +4386,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 017",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Content Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 018",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4272,10 +4418,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 019",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Excited Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 020",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4288,10 +4450,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 021",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Polite Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 022",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4304,10 +4482,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 023",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Puppy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 024",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4320,10 +4514,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 025",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Strong Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 026",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4336,10 +4546,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 027",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Arc Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 028",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4352,10 +4578,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 029",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Tranquil Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 030",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4368,10 +4610,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 031",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Dot Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 032",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4384,10 +4642,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 033",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Delicate Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 034",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4400,10 +4674,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 035",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Wavy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 036",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4416,10 +4706,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 037",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Wide Awake Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 038",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4432,10 +4738,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 039",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Slender Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 040",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4448,10 +4770,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 041",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Drowsy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 042",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -4464,6 +4802,14 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 043",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Sunset Eyes",
     "eyes",
@@ -4472,10 +4818,26 @@
    ],
    [
     "male",
+    "17_eye-shadow",
+    "Eye shadow 044",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "male",
     "15_face",
     "Genial Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "male",
+    "17_eye-shadow",
+    "Eye shadow 045",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7816,10 +8178,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 001",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Sharp Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 002",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7832,10 +8210,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 003",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Focussed Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 004",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7848,10 +8242,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 005",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Passive Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 006",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7864,10 +8274,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 007",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Surprised Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 008",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7880,10 +8306,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 009",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Restful Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 010",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7896,10 +8338,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 011",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Bold Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 012",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7912,10 +8370,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 013",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Funky Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 014",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7928,10 +8402,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 015",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Comforting Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 016",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7944,10 +8434,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 017",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Content Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 018",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7960,10 +8466,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 019",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Excited Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 020",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7976,10 +8498,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 021",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Polite Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 022",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -7992,10 +8530,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 023",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Puppy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 024",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8008,10 +8562,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 025",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Strong Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 026",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8024,10 +8594,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 027",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Arc Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 028",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8040,10 +8626,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 029",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Tranquil Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 030",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8056,10 +8658,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 031",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Dot Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 032",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8072,10 +8690,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 033",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Delicate Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 034",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8088,10 +8722,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 035",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Wavy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 036",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8104,10 +8754,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 037",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Wide Awake Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 038",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8120,10 +8786,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 039",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Slender Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 040",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8136,10 +8818,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 041",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Drowsy Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 042",
+    "decal",
+    "sheet",
     ""
    ],
    [
@@ -8152,6 +8850,14 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 043",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Sunset Eyes",
     "eyes",
@@ -8160,10 +8866,26 @@
    ],
    [
     "female",
+    "17_eye-shadow",
+    "Eye shadow 044",
+    "decal",
+    "sheet",
+    ""
+   ],
+   [
+    "female",
     "15_face",
     "Genial Eyes",
     "eyes",
     "eyes",
+    ""
+   ],
+   [
+    "female",
+    "17_eye-shadow",
+    "Eye shadow 045",
+    "decal",
+    "sheet",
     ""
    ],
    [

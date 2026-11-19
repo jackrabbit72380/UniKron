@@ -91,8 +91,29 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 #   game Idle.xnb fingers  -> fingers together and slightly curled, which is a
 #                             hand (row 3), and is measured, not authored
 #
-# So AVATAR_FINGER_POSE defaults to 0 and AVATAR_WRIST_ROLL to 0: with the clip
-# supplying the fingers there is nothing left for either to do.
+# CORRECTION (2026-11-18): defaulting this to 0 left the shipped hand as a fan of
+# separated prongs - the baked frame showed four fingers with visible gaps
+# between them, which is the "claws" the hand has always read as. Rendering the
+# hand at four yaws in four settings (show_hand.py) showed the pack's bind hand
+# is modelled open and fanned and that the clip does not close it: the clip's own
+# finger deltas are 11-34 degrees and mostly twist, which fans it further. So the
+# pose is on now, tuned against the bake itself rather than the hand in isolation,
+# and the measurement that settled it is that the *editor's* clip fans the hand:
+# its finger deltas are 11-34 degrees and mostly twist, so each phalanx is spun
+# about its own axis and the four fingers spread into a rake - the claw the bakes
+# have always shown. Two changes fix it and both are data, not angles:
+#
+#   * the fingers come from a retail avatar idle (`MaleIdleShiftWeight.xnb`, read
+#     through bake_avatar's AVATAR_FINGER_XNB), so the editor's twist is replaced
+#     by a pose that was actually authored for this skeleton by the console team;
+#   * adduction 0.85 brings each finger across the palm by that fraction of the
+#     angle to the hand's midline, which closes the gaps without stacking the
+#     digits on top of each other (1.0 did, and the hand lumped).
+#
+# AVATAR_FINGER_CURL therefore defaults to 0,0,0: the authored curl is no longer
+# needed and was making the fingertips arc away from the palm. Comparison sheets:
+# hand_compare.png, hand_compare2.png, hand_final.png and hand_clip_adduct.png
+# (the last is this setting across the whole 20-frame turn).
 #
 # The pack models the hand open and fanned, and nothing in the archive bends it:
 # the idle clip leaves every finger at its bind delta, and forcing the hand
@@ -112,7 +133,7 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 #   AVATAR_FINGER_ADDUCT="0.6"
 #
 FINGER_CURL_DEGREES = tuple(
-    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "8,10,6").split(",")
+    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "12,18,12").split(",")
 )                                            # per phalanx, base to tip
 # How far each finger is brought across the palm, as a fraction of the angle
 # that would land its tip on the hand's midline. 1.0 stacks every finger on the
@@ -120,17 +141,22 @@ FINGER_CURL_DEGREES = tuple(
 # relaxed hand looks like. The angle is computed per finger from its own knuckle
 # offset and length (finger_bones), because the bind fingers are parallel and
 # 0.03 apart - there is no fan angle to take back, only a gap to close.
-FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.85"))
-# -1 curls the fingers toward the back of the hand instead of the palm. It exists
-# only so the two directions can be rendered side by side and the right one
-# chosen by looking at the hand rather than trusting a cross product.
-FINGER_SIGN = float(os.environ.get("AVATAR_FINGER_SIGN", "1"))
-# Off unless asked for - see the note above.
-FINGER_POSE = os.environ.get("AVATAR_FINGER_POSE", "0") == "1"
+FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "1.8"))
+# Which way the curl folds. Rendered both ways at bake scale (448x672, the size
+# the stage shows): +1 folds the digits back and out into a long hook past the
+# hip, -1 folds them into the palm and gives a compact relaxed hand. So -1. The
+# adduction direction is separate and unchanged by this sign.
+FINGER_SIGN = float(os.environ.get("AVATAR_FINGER_SIGN", "-1"))
+# On by default - see the note above.
+FINGER_POSE = os.environ.get("AVATAR_FINGER_POSE", "1") == "1"
 # Forearm pronation, in degrees about the arm's own axis. The pack's idle clips
 # carry none, which leaves the palms facing sideways and the hand flat to the
 # camera; the retail editor shows them facing the thighs.
-WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "0"))
+# 70 degrees, measured against the bake at 7x: at 0 the palm faces the camera and
+# the four digits read as separated prongs (the "claw"); at 70 the hand turns so
+# the fingers stack behind each other and the silhouette is a hand. The angle is
+# a look, tuned on the render, not recovered data.
+WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "70"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.

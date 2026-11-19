@@ -1,0 +1,19 @@
+# 0x9813b1c8  56 bytes  14 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=12 call=1 branch=1 returns=0
+# calls: 0x980f15f0
+# branches: 0x9813b1f4
+
+9813b1c8  7d8802a6  mflr r12                               
+9813b1cc  9181fff8  stw r12, -8(r1)                        
+9813b1d0  fbe1fff0  std r31, -0x10(r1)                     
+9813b1d4  9421ffa0  stwu r1, -0x60(r1)                     
+9813b1d8  3d609819  lis r11, -0x67e7                       
+9813b1dc  3beb30dc  addi r31, r11, 0x30dc                  
+9813b1e0  808b30dc  lwz r4, 0x30dc(r11)                    
+9813b1e4  48000010  b 0x9813b1f4                           
+9813b1e8  7fe3fb78  mr r3, r31                             
+9813b1ec  4bfb6405  bl 0x980f15f0                          
+9813b1f0  809f0000  lwz r4, 0(r31)                         
+9813b1f4  2b040000  cmplwi cr6, r4, 0                      
+9813b1f8  409afff0  bne cr6, 0x9813b1e8                    
+9813b1fc  38210060  addi r1, r1, 0x60                      

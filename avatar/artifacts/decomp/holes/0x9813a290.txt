@@ -1,0 +1,19 @@
+# 0x9813a290  56 bytes  14 decoded rows
+# unknown=0 scalar=13 call=0 branch=1 returns=0
+# calls: -
+# branches: 0x9813bcfc
+
+9813a290  38600002  li r3, 2                               
+9813a294  48001a68  b 0x9813bcfc                           
+9813a298  7c6b1b78  mr r11, r3                             
+9813a29c  39200004  li r9, 4                               
+9813a2a0  7c8807b4  extsw r8, r4                           
+9813a2a4  814b0200  lwz r10, 0x200(r11)                    
+9813a2a8  554a2036  slwi r10, r10, 4                       
+9813a2ac  7d4a5a14  add r10, r10, r11                      
+9813a2b0  912a0000  stw r9, 0(r10)                         
+9813a2b4  f90a0008  std r8, 8(r10)                         
+9813a2b8  806b0200  lwz r3, 0x200(r11)                     
+9813a2bc  39430001  addi r10, r3, 1                        
+9813a2c0  914b0200  stw r10, 0x200(r11)                    
+9813a2c4  4e800020  blr                                    

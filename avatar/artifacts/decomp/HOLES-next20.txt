@@ -1,0 +1,382 @@
+# next 20 unclassified live holes (20 of 50 live-unclassified)
+
+======================================================================
+`0x9803ee60`
+prologue: mflr r12 | bl 0x980618b8 | stwu r1, -0x100(r1) | VMX-6-p06(undecoded) | addi r29, r1, 0x70
+consts: -
+status: -
+callees: 0x980618b8(read) 0x9803e930 0x9803e1b8 0x98087d38(read)
+
+   13-  
+   14-  iVar4 = FUN_980618cc();
+   15-  uVar1 = FUN_98041230(iVar4,iVar4 + 0x13d8);
+   16-  uVar2 = FUN_98041018(iVar4,2,0);
+   17:  lVar3 = FUN_9803ee60(uVar1,uVar2,300,600,local_30,local_2c);
+   18-  if (-1 < lVar3) {
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9803ee60(void)
+   5-
+   ---
+
+======================================================================
+`0x9803f920`
+prologue: mflr r12 | stw r12, -8(r1) | std r31, -0x10(r1) | stwu r1, -0x80(r1) | VMX-6-p06(undecoded)
+consts: -
+status: -
+callees: 0x9803f540 0x9803f920(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9803f920(void)
+   5-
+   ---
+
+======================================================================
+`0x9803faa8`
+prologue: mflr r12 | stw r12, -8(r1) | std r31, -0x10(r1) | stwu r1, -0xb0(r1) | lis r9, -0x6800
+consts: -
+status: -
+callees: 0x9803f920(read)
+
+   3-
+   4-{
+   5-  undefined1 auStack_50 [64];
+   6-  
+   7:  FUN_9803faa8(param_2,param_1,auStack_50);
+   8-  return param_3;
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9803faa8(void)
+   5-
+   ---
+
+======================================================================
+`0x98042498`
+prologue: mflr r12 | bl 0x980618cc | stwu r1, -0xb0(r1) | mr r31, r3 | mr r11, r4
+consts: -
+status: -
+callees: 0x980618cc(read) 0x9808c820(read) 0x98085a58(read) 0x980831d0(read) 0x9808c398(read) 0x9808c650(read) 0x9808c178(read) 0x98083da8(read) 0x980836d8(read) 0x980836d8(read) 0x9808d798(read) 0x98083da8(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98042498(void)
+   5-
+   ---
+
+======================================================================
+`0x98043b70`
+prologue: mflr r12 | bl 0x980618b8 | stfd f30, -0x58(r1) | stfd f31, -0x50(r1) | li r12, -0x80
+consts: 1 6 0.02
+status: -
+callees: 0x980618b8(read) 0x98087d38(read) 0x98082e98(read) 0x98085c90(read) 0x980830f0(read) 0x98087d38(read) 0x98058050 0x98062720(read) 0x98042408 0x9808a118(read) 0x98088a80(read) 0x98088b50(read) 0x980836d8(read) 0x98083d68(read) 0x98083da8(read) 0x98083e10 0x98083e88 0x98083640(read) 0x98043978 0x9808a958(read) 0x98088b98(read) 0x98088af8(read) 0x98043030(read) 0x98063a30(read)
+
+   18-    piVar2 = piVar2 + 0x20;
+   19-  } while (uVar3 < 10);
+   20-  puVar4 = (undefined1 *)0x0;
+   21-LAB_98044d18:
+   22:  if ((puVar4 != (undefined1 *)0x0) && (cVar1 = FUN_98043b70(param_1,puVar4), cVar1 != '\0')) {
+   23-    *puVar4 = 0;
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98043b70(void)
+   5-
+   ---
+
+======================================================================
+`0x9804a010`
+prologue: mflr r12 | bl 0x980618cc | addi r12, r1, -0x20 | bl 0x98063abc | addi r12, r1, -0x60
+consts: 2.3927 1 5 -1 8
+status: -
+callees: 0x980618cc(read) 0x98063abc(read) 0x98062ec4(read) 0x980415d0(read) 0x98063180(read) 0x98063180(read) 0x98063180(read) 0x9803faa8(read) 0x98047ab0(read) 0x9806315c(read) 0x98063b08(read) 0x980489c0 0x98048448(read) 0x9804a010(read) 0x9805c5a0(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9804a010(void)
+   5-
+   ---
+
+======================================================================
+`0x9804d2f8`
+prologue: mflr r12 | bl 0x980618cc | stwu r1, -0xa0(r1) | addi r11, r4, -1 | mr r31, r3
+consts: ";>;"
+status: -
+callees: 0x980618cc(read) 0x98055570(read) 0x98056680(read) 0x9803f6e0(read) 0x98055ef8(read) 0x98055570(read) 0x9804d2f8(read) 0x98056680(read) 0x98056298(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:ulonglong FUN_9804d2f8(undefined8 param_1,ulonglong param_2,undefined4 *param_3,int param_4,
+   5-                      undefined8 param_5,ulonglong param_6,longlong param_7,ulonglong param_8)
+   ---
+
+======================================================================
+`0x98058268`
+prologue: mflr r12 | stw r12, -8(r1) | stwu r1, -0x70(r1) | VMX-5-p05(undecoded) | VMX-6-p06(undecoded)
+consts: -1 1.5708 1
+status: -
+callees: 0x98057c18 0x98063ac8(read) 0x98058268(read) 0x98058268(read) 0x98058268(read) 0x98058268(read) 0x98063b14(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98058268(void)
+   5-
+   ---
+
+======================================================================
+`0x9805be30`
+prologue: b 0x9813b45c | nop-or-padding | slwi r11, r4, 6 | slwi r10, r3, 0 | addi r11, r11, 0x103f
+consts: -
+status: -
+callees: -
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9805be30(void)
+   5-
+   ---
+   10-  if (*piVar1 == 0) {
+   11-    piVar1[0xb06a] = 0;
+   12-    piVar1[0xb06b] = 0;
+   13-    FUN_98061950(piVar1 + 0x1dd9,0,0x24a44);
+   14:    iVar2 = FUN_9805be30(DAT_98148400,0,1,0,99,auStack_30,piVar1 + 0xb06d);
+   15-    if ((iVar2 == 0) &&
+   ---
+
+======================================================================
+`0x9805bef8`
+prologue: mr r8, r7 | mr r7, r6 | mr r6, r5 | mr r5, r4 | li r4, 0
+consts: -
+status: -
+callees: -
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9805bef8(void)
+   5-
+   ---
+   12-    piVar1[0xb06b] = 0;
+   13-    FUN_98061950(piVar1 + 0x1dd9,0,0x24a44);
+   14-    iVar2 = FUN_9805be30(DAT_98148400,0,1,0,99,auStack_30,piVar1 + 0xb06d);
+   15-    if ((iVar2 == 0) &&
+   16:       ((iVar2 = FUN_9805bef8(piVar1[0xb06d],piVar1 + 0x12,0x771c,0,piVar1 + 2), iVar2 == 0 ||
+   17-        (iVar2 == 0x3e5)))) {
+   ---
+
+======================================================================
+`0x9805c648`
+prologue: li r4, 3 | b 0x9813b47c
+consts: -
+status: -
+callees: -
+
+   16-  *(undefined1 *)((int)param_1 + 0x13) = 0;
+   17-  param_1[5] = 0;
+   18-  *(undefined1 *)(param_1 + 7) = 1;
+   19-  FUN_9813b34c(1);
+   20:  uVar1 = FUN_9805c648(3);
+   21-  *param_1 = uVar1;
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9805c648(void)
+   5-
+   ---
+
+======================================================================
+`0x9805d154`
+prologue: std r30, -0x10(r1) | std r31, -8(r1) | li r6, -0x20 | li r7, -0x30 | VMX-p04(undecoded)
+consts: -
+status: -
+callees: -
+
+   23-    if ((param_2 & 0xf) == 0) {
+   24-      FUN_9805ce30(lVar3,param_2,uVar1);
+   25-    }
+   26-    else {
+   27:      FUN_9805d154();
+   28-    }
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9805d154(undefined8 param_1,longlong param_2,longlong param_3)
+   5-
+   ---
+
+======================================================================
+`0x98072978`
+prologue: lis r11, -0x6800 | addi r9, r1, -0x10 | addi r8, r1, -0xc | addi r7, r1, -0xc | addi r6, r1, -0x10
+consts: 1 1.5 1.9 1.4 1.8 1.6 2.2 0.6
+status: -
+callees: 0x9806189c(read) 0x98072978(read)
+
+   2-void FUN_98073348(undefined8 param_1,undefined8 param_2)
+   3-
+   4-{
+   5-                    /* WARNING: Subroutine does not return */
+   6:  FUN_98072978(param_1,param_2,param_1);
+   7-}
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98072978(void)
+   5-
+   ---
+
+======================================================================
+`0x98075890`
+prologue: mflr r12 | bl 0x980618c4 | stfd f29, -0x48(r1) | stfd f30, -0x40(r1) | stfd f31, -0x38(r1)
+consts: 1 1e-05
+status: -
+callees: 0x980618c4(read) 0x98075260(read) 0x980753f0(read) 0x98075260(read) 0x980753f0(read) 0x98058a48(read) 0x98058a48(read) 0x980618c8(read) 0x98075590 0x98075708(read) 0x98075590 0x98075708(read) 0x98058a48(read) 0x98058a48(read) 0x980618b4(read) 0x9807e4d8(read) 0x98075890(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98075890(undefined8 param_1,double param_2,undefined8 param_3,longlong param_4,
+   5-                 undefined8 param_5)
+   ---
+
+======================================================================
+`0x98078670`
+prologue: mflr r12 | bl 0x980618ac | stwu r1, -0x180(r1) | mr r25, r6 | vcmpequd v30, v0, v5
+consts: -
+status: -
+callees: 0x980618ac(read) 0x9808c178(read) 0x9808c178(read) 0x9808c338(read) 0x98083640(read) 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8 0x98085090(read) 0x98084ee8
+
+   11-  undefined4 local_44;
+   12-  undefined4 local_40;
+   13-  undefined4 uStack_3c;
+   14-  
+   15:  FUN_98078670();
+   16-  FUN_9808c338(param_3,0,local_50,1);
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_98078670(void)
+   5-
+   ---
+
+======================================================================
+`0x9807b318`
+prologue: mflr r12 | stw r12, -8(r1) | std r30, -0x18(r1) | std r31, -0x10(r1) | addi r12, r1, -0x18
+consts: 0.5
+status: -
+callees: 0x98063ac4(read) 0x98111258(read) 0x98111338(read) 0x98063b10(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9807b318(void)
+   5-
+   ---
+
+======================================================================
+`0x980813e8`
+prologue: mflr r12 | stw r12, -8(r1) | std r31, -0x10(r1) | stwu r1, -0xd0(r1) | mr r31, r3
+consts: 1
+status: -
+callees: 0x98062720(read) 0x980863f0(read) 0x980808e8(read) 0x9808a958(read) 0x9808f4f8(read) 0x98086340(read) 0x98085910(read) 0x98080dd8(read)
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_980813e8(int param_1)
+   5-
+   ---
+   26-  FUN_98083d68(*(undefined4 *)(iVar2 + 0x3c),0);
+   27-  FUN_98083da8(*(undefined4 *)(iVar2 + 0x3c),0);
+   28-  FUN_9803b738(iVar2);
+   29-  if (*piVar3 == 0) {
+   30:    FUN_980813e8(*(undefined4 *)(iVar2 + 0x3c));
+   31-  }
+   ---
+
+======================================================================
+`0x9808c178`
+prologue: std r31, -8(r1) | addi r10, r4, 0x78 | mr r11, r5 | slwi r10, r10, 4 | mr r9, r6
+consts: -
+status: -
+callees: -
+
+   13-  undefined4 uStack_3c;
+   14-  
+   15-  FUN_98078670();
+   16-  FUN_9808c338(param_3,0,local_50,1);
+   17:  FUN_9808c178(param_3,8,in_stack_00000064,4,0x2000000000000000);
+   18-  uVar1 = DAT_9801e390;
+   ---
+   
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9808c178(ulonglong *param_1,undefined8 param_2,longlong param_3,uint param_4,
+   5-                 ulonglong param_5)
+   ---
+
+======================================================================
+`0x9808c258`
+prologue: std r31, -8(r1) | addi r10, r4, 0x178 | mr r11, r5 | slwi r10, r10, 4 | mr r9, r6
+consts: -
+status: -
+callees: -
+
+   1-
+   2-undefined8 FUN_980f6148(int param_1)
+   3-
+   4-{
+   5:  FUN_9808c258(*(undefined4 *)(param_1 + 0xc));
+   6-  return 0;
+   ---
+   13-    uVar1 = 0xffffffff80004005;
+   14-  }
+   15-  else {
+   16-    uVar1 = (**(code **)(iRam00000000 + 8))();
+   17:    FUN_9808c258(uVar1,10,param_2,param_3,
+   18-                 (ulonglong)(-0x8000000000000000 >> (((param_3 + 9 & 0xffffffff) >> 2) - 2 & 0x7f))
+   ---
+
+======================================================================
+`0x9808e288`
+prologue: ld r11, 0(r3) | mr r10, r11 | cmplw cr6, r4, r10 | bge cr6, 0x9808e29c | mr r10, r4
+consts: -
+status: -
+callees: -
+
+   1-
+   2-/* WARNING: Control flow encountered bad instruction data */
+   3-
+   4:void FUN_9808e288(void)
+   5-
+   ---
+   104-      *(undefined4 *)(uVar9 + 0x2c) = 8;
+   105-      *(undefined4 **)(iVar7 + 0x30) = (undefined4 *)(uVar9 + 0x2c);
+   106-    }
+   107-    else {
+   108:      FUN_9808e288(iVar7 + 0x2e30,lVar14,lVar14 + param_8);
+   109-    }
+   ---
+

@@ -1,0 +1,71 @@
+# 0x9804f728  264 bytes  66 rows  (hand listing; the decompiler gave no body)
+# unknown=0 scalar=56 call=0 branch=10 returns=0
+# calls: -
+# branches: 0x9804f4c0 0x9804cbc0 0x9804f770 0x9804cc18 0x9804ebe0 0x9804eca0 0x9804cca8 0x9804cda0 0x9804cef8 0x9804cfb8
+
+9804f728  81640004  lwz r11, 4(r4)                         
+9804f72c  2b0b0013  cmplwi cr6, r11, 0x13                  
+9804f730  409a0010  bne cr6, 0x9804f740                    
+9804f734  38a40008  addi r5, r4, 8                         
+9804f738  80840010  lwz r4, 0x10(r4)                       
+9804f73c  4bfffd84  b 0x9804f4c0                           
+9804f740  2b0b000a  cmplwi cr6, r11, 0xa                   
+9804f744  409a0008  bne cr6, 0x9804f74c                    
+9804f748  4bffd478  b 0x9804cbc0                           
+9804f74c  2b0b0025  cmplwi cr6, r11, 0x25                  
+9804f750  409a0044  bne cr6, 0x9804f794                    
+9804f754  8163001c  lwz r11, 0x1c(r3)                      
+9804f758  81440010  lwz r10, 0x10(r4)                      
+9804f75c  2b0b0000  cmplwi cr6, r11, 0                     
+9804f760  419a000c  beq cr6, 0x9804f76c                    
+9804f764  816b0000  lwz r11, 0(r11)                        
+9804f768  48000008  b 0x9804f770                           
+9804f76c  39600000  li r11, 0                              
+9804f770  2f0b002e  cmpwi cr6, r11, 0x2e                   
+9804f774  409a0018  bne cr6, 0x9804f78c                    
+9804f778  816a0000  lwz r11, 0(r10)                        
+9804f77c  2b0b5804  cmplwi cr6, r11, 0x5804                
+9804f780  409a000c  bne cr6, 0x9804f78c                    
+9804f784  39605800  li r11, 0x5800                         
+9804f788  916a0000  stw r11, 0(r10)                        
+9804f78c  38600000  li r3, 0                               
+9804f790  4e800020  blr                                    
+9804f794  2b0b0024  cmplwi cr6, r11, 0x24                  
+9804f798  419affbc  beq cr6, 0x9804f754                    
+9804f79c  2b0b07e6  cmplwi cr6, r11, 0x7e6                 
+9804f7a0  409a0010  bne cr6, 0x9804f7b0                    
+9804f7a4  38a40008  addi r5, r4, 8                         
+9804f7a8  80840010  lwz r4, 0x10(r4)                       
+9804f7ac  4bffd46c  b 0x9804cc18                           
+9804f7b0  2b0b0027  cmplwi cr6, r11, 0x27                  
+9804f7b4  409a0010  bne cr6, 0x9804f7c4                    
+9804f7b8  38a40008  addi r5, r4, 8                         
+9804f7bc  80840010  lwz r4, 0x10(r4)                       
+9804f7c0  4bfff420  b 0x9804ebe0                           
+9804f7c4  2b0b07e5  cmplwi cr6, r11, 0x7e5                 
+9804f7c8  409a0010  bne cr6, 0x9804f7d8                    
+9804f7cc  38a40008  addi r5, r4, 8                         
+9804f7d0  80840010  lwz r4, 0x10(r4)                       
+9804f7d4  4bfff4cc  b 0x9804eca0                           
+9804f7d8  2b0b07df  cmplwi cr6, r11, 0x7df                 
+9804f7dc  409a0010  bne cr6, 0x9804f7ec                    
+9804f7e0  38a40008  addi r5, r4, 8                         
+9804f7e4  80840010  lwz r4, 0x10(r4)                       
+9804f7e8  4bffd4c0  b 0x9804cca8                           
+9804f7ec  2b0b07e1  cmplwi cr6, r11, 0x7e1                 
+9804f7f0  409a0010  bne cr6, 0x9804f800                    
+9804f7f4  38a40008  addi r5, r4, 8                         
+9804f7f8  80840010  lwz r4, 0x10(r4)                       
+9804f7fc  4bffd5a4  b 0x9804cda0                           
+9804f800  2b0b000c  cmplwi cr6, r11, 0xc                   
+9804f804  409a0014  bne cr6, 0x9804f818                    
+9804f808  81640010  lwz r11, 0x10(r4)                      
+9804f80c  38a40008  addi r5, r4, 8                         
+9804f810  808b0000  lwz r4, 0(r11)                         
+9804f814  4bffd6e4  b 0x9804cef8                           
+9804f818  2b0b0000  cmplwi cr6, r11, 0                     
+9804f81c  409aff70  bne cr6, 0x9804f78c                    
+9804f820  38a40008  addi r5, r4, 8                         
+9804f824  80840010  lwz r4, 0x10(r4)                       
+9804f828  4bffd790  b 0x9804cfb8                           
+9804f82c  00000000  nop-or-padding                         
