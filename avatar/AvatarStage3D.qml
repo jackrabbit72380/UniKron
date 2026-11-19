@@ -69,6 +69,8 @@ Item {
     // holds the front frame and turns only while you drag.
     property bool spinning: false
     property bool showShadow: true
+    // Holds the pose timer, for a host that needs two grabs of one pose.
+    property bool idle: true
 
     onFolderChanged: reload()
     onAnimatedFolderChanged: reload()
@@ -361,7 +363,7 @@ Item {
     // a standing clip, so this reads as weight shifting rather than an animation.
     Timer {
         interval: 200
-        running: stage.available && stage.animated && stage.poseCount > 1
+        running: stage.available && stage.animated && stage.poseCount > 1 && stage.idle
         repeat: true
         onTriggered: stage.pose = (stage.pose + 1) % stage.poseCount
     }

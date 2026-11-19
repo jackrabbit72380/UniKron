@@ -437,6 +437,9 @@ Item {
     // soft shadow the avatar stands on. Kept in api.memory so it survives a
     // reopen, the way the original keeps its config between starts.
     property bool modelShadows: true
+    // The avatar's idle motion (the 2D bob, the 3D pose timer). A host holds it
+    // still when it needs two paintings of the same pose.
+    property bool idleBob: true
 
     signal saveRequested(var state)
     signal portraitReady(var grabResult)
@@ -1013,18 +1016,26 @@ Item {
             var url = style.itemUrl(c.path, name)
             var tint = ""
             if (usePackArt) {
+                // In pack mode a layer is a plate or a tint mask, never the
+                // strip's own art: `pack_art` holds 160x108 cards for the tiles,
+                // and `c.path` points there for every category the plates did not
+                // cover. Drawing one painted the card across the avatar - measured
+                // on 18_mouth (`pack_art/18_mouth/curvy-mouth.png`), 71_nose,
+                // 72_ears and 73_head-shape, all untinted, one failed layer per
+                // pick. The mouths have no textures in the pack at all and the
+                // shapes are geometry morphs a layer stack cannot show; both are
+                // drawn elsewhere (the stock smirk mask tinted below, and the 3D
+                // sets) or not at all.
                 var slot = colourSlot(c.id)
-                if (slot !== "") {
-                    var mask = maskUrl(c.id, name)
-                    if (mask !== "") {
-                        url = mask
-                        tint = colourHex(slot)
-                    }
-                }
-                if (tint === "") {
+                var masked = slot === "" ? "" : maskUrl(c.id, name)
+                if (masked !== "") {
+                    url = masked
+                    tint = colourHex(slot)
+                } else {
                     var plate = plateUrl(c.id, name)
-                    if (plate !== "")
-                        url = plate
+                    if (plate === "")
+                        continue
+                    url = plate
                 }
             }
             out.push({ url: url, z: c.z, id: c.id, tint: tint })
@@ -1568,6 +1579,7 @@ Item {
 
     AvatarStage {
         id: stage
+        idle: root.idleBob
         // The avatar keeps the left half on the menu and moves right of the
         // rail in the closet, exactly where each screen puts it.
         x: root.screen === "closet" ? rail.x + rail.width + 14 : (root.screen === "features" ? 14 : 40)
@@ -1593,6 +1605,7 @@ Item {
         width: stage.width
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
+        idle: root.idleBob
         baseFolder: root.assetsFolder + "3d/"
         // bake_animated.py pictures the stock outfit and hairstyle, and set.json
         // in assets/3d/animated names the set folder that look resolves to

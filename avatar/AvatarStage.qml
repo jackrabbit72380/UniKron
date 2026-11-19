@@ -11,6 +11,9 @@ Item {
     property real bob: 0
     // avatareditor.toml's model_shadows: whether the avatar casts a shadow.
     property bool showShadow: true
+    // The idle bob. A host holds it still when it wants two paintings of the same
+    // pose - a portrait grab, or a check that compares two colours.
+    property bool idle: true
 
     onLayersChanged: pop.restart()
 
@@ -134,7 +137,7 @@ Item {
 
     // gentle idle bob, the way the dashboard avatars breathe
     SequentialAnimation {
-        running: true
+        running: stage.idle
         loops: Animation.Infinite
         NumberAnimation { target: stage; property: "bob"; to: -5; duration: 1900; easing.type: Easing.InOutSine }
         NumberAnimation { target: stage; property: "bob"; to: 0; duration: 1900; easing.type: Easing.InOutSine }

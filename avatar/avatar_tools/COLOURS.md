@@ -101,6 +101,18 @@ differ because the plate's alpha is a difference ramp and the mask's is real
 coverage). `artifacts/tinted_brows.png` is the same brow in four of the game's own
 eyebrow colours.
 
+**Not checked by any render here.** `TintedMask` is a `ShaderEffect`, and this
+project's harnesses run on `QT_QPA_PLATFORM=offscreen`, where nothing with a
+`ShaderEffect` in it draws: measured 2026-11-19, a `ShaderEffect` whose fragment
+shader returns solid lime leaves the background untouched, and `TintedMask` over a
+black rectangle leaves every sampled pixel at the background, with no message
+(`minimalegl` and `eglfs` do not start). Every screenshot in this repo is therefore
+plates only: no brow, eye-shadow, iris, lip or skin tint is in it. What is checked
+instead: `research/run_colour_check.py` - the mask exists for every mapped
+category and the layer's tint equals the palette entry, 17 checks - plus the offline
+arithmetic above, and `Colours.qml` compared entry by entry against
+`colour_palettes.json`.
+
 **On now:** eyebrows, eyes, eye shadow, facial hair, hairstyles (male), skin and lips.
 Two are left alone, on purpose:
 

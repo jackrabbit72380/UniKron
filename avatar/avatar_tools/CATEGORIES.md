@@ -162,3 +162,36 @@ eye-shadow pass had been looking for its sheets in `pack_art/50_hair` rather tha
 so a female run overwrote male sets. Both are fixed in
 `bake_pack_turntables.py`, the 98 polluted sets were rebaked, and brows, eye
 shadows and mouths now have 27/45/26 sets in each tree.
+
+**5. Four categories painted their strip cards over the avatar.** In pack mode a
+layer is supposed to be a plate or a tint mask, but `rebuildLayers` fell back to
+`c.path` when neither existed - and `c.path` in pack mode is `pack_art/<category>`,
+which holds the strip's own **160x108 cards**, not stage art. So picking a mouth
+painted `pack_art/18_mouth/curvy-mouth.png` across the avatar's chest, untinted;
+the same for `71_nose`, `72_ears` and `73_head-shape`, whose art is framed on the
+item (a nose fills its whole card) and which the pack gives no plates at all.
+
+Measured: `run_art_sweep.py` grew a rule - *no stage layer may point into
+`pack_art/`* - and immediately reported it for all four categories, once per pick,
+1,336 of 1,380 checks while a shape was selected. In pack mode the stack now draws
+only a mask (tinted) or a plate, and skips the category when neither exists; the
+mouth is still drawn, as the stock smirk mask tinted with the lips colour, and the
+shapes are still shown in 3D, where a geometry morph can be baked. Re-measured:
+**0 strip-art layers**, `missing art 0`.
+
+## What the harness cannot show: tinted layers
+
+Every 2D render this project's harnesses produce is missing its tint layers - the
+brows, eye shadow, iris, lips and skin tint. Measured 2026-11-19: a `ShaderEffect`
+whose fragment shader returns solid lime paints the *background* colour under
+`QT_QPA_PLATFORM=offscreen`, and `TintedMask` over a black rectangle leaves every
+sampled pixel at the background, with no warning. `minimalegl` and `eglfs` fail to
+start at all here, so there is no GL surface to render into.
+
+So the earlier screenshots in this project (`research/shots`, the render sweep, the
+portrait grabs) show plates only, and none of them is evidence about a colour. The
+colour path is checked two other ways: `run_colour_check.py` asserts per slot that
+the mask file exists and that the layer's tint equals the palette entry (17 checks),
+and `COLOURS.md` verifies the tint arithmetic offline against plates the baker
+produced in that colour. A machine with a real GL surface can settle the rendering
+itself; this one cannot.
