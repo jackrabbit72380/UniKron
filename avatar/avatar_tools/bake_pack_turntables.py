@@ -305,6 +305,14 @@ def main():
 
     print("baked %d, skipped %d, failed %d into %s"
           % (done, skipped, failed, args.outdir))
+    # The stage reads StageIndex.qml instead of probing frame_00, frame_01, ...
+    # until one is missing, so the index has to follow the bake.
+    try:
+        import make_stage_index
+        sets, frames = make_stage_index.refresh()
+        print("StageIndex.qml: %d sets, %d frames" % (sets, frames))
+    except Exception as error:              # a stale index only costs a probe
+        print("could not refresh StageIndex.qml: %s" % error)
     return 0
 
 

@@ -19,6 +19,9 @@ Item {
     id: stage
 
     Style { id: style }
+    // How many frames each baked set has and which one faces the camera, measured
+    // from the bakers' own yaw loops by avatar_tools/make_stage_index.py.
+    StageIndex { id: index }
 
     property string baseFolder: ""         // .../assets/3d/turntable/
     // Where the animated set lives, if one was baked. It is baked for the default
@@ -51,6 +54,13 @@ Item {
     property int yaw: 0
     property int pose: 0
     property bool available: false
+    // The frame that looks at the camera. StageIndex names it for every shipped
+    // set; a set baked after the index was last written is counted by `probe`
+    // instead and falls back to restFrame.
+    property int frontFrame: 0
+    // True once StageIndex answered for this variant, which is what stops the
+    // probe from counting the same set a second time and overwriting the count.
+    property bool indexed: false
     // The baked sets are one pose from twenty angles, and only frame 10 of the
     // 20 (measured: see the contact sheet in research/shots/turntable_sheet.png)
     // looks at the camera - frames 0-2 are the back, 3-6 the right profile,
@@ -71,8 +81,49 @@ Item {
         poseCount = 0
         yaw = 0
         pose = 0
+        frontFrame = 0
         available = false
-        animProbe.start()
+        indexed = false
+
+        // The shipped sets are all described by StageIndex.qml, so a switch is
+        // answered without touching the filesystem: no probe, no "Cannot open"
+        // line per switch, and - the reason this exists - no moment where the
+        // stage is still on frame 0 while the probe counts. For a whole-body
+        // turntable frame 0 is the avatar's back, so that moment was a visible
+        // flash of the back of its head on every item change.
+        //
+        // The animated set is a picture of one outfit, and set.json records which
+        // set folder that outfit is (`turntable/jacket-with-sweater`). It plays
+        // only while the player is wearing exactly that look; anything else uses
+        // the set baked for the item picked.
+        var anim = index.animated
+        if (animatedFolder !== "" && anim && anim.variant === activeVariant) {
+            animated = true
+            yawCount = anim.yaws
+            poseCount = anim.poses
+            yaw = Math.floor(yawCount / 2)
+            pose = 0
+            indexed = true
+            available = true
+            return
+        }
+        var entry = index.sets[activeVariant]
+        if (entry) {
+            frameCount = entry.frames
+            frontFrame = entry.front
+            frame = entry.front
+            indexed = true
+            available = true
+            return
+        }
+
+        // Not in the index: a set baked since it was last generated. Count it the
+        // old way, one image at a time. An animated folder with no set.json is the
+        // one case where its counts still have to be found by probing.
+        if (animatedFolder !== "" && !anim)
+            animProbe.start()
+        else
+            probe.loadNext()
     }
 
     // Same contract as AvatarStage: the portrait is grabbed from whatever the
@@ -86,18 +137,18 @@ Item {
             yaw = Math.floor(yawCount / 2)
             pose = 0
         } else if (frameCount > 1) {
-            frame = restFrame
+            frame = frontFrame
         }
         holder.grabToImage(function (result) {
             callback(result)
         }, Qt.size(512, 768))
     }
 
-    // Which baked frame looks at the camera. The two static bakes do not start at
-    // the same angle, and measuring the sets themselves is the only way to know:
-    //   six-frame item sets   (bake_pack_turntables.py)  frame 00 is the front
-    //   whole-body turntables (bake_turntable.py, 18+ frames)  frame 00 is the back
-    // Three sets read frame by frame on 2026-11-19:
+    // Where the front is, for a set StageIndex does not name (baked after the
+    // index was last written). The two bakers do not start at the same angle:
+    //   six-frame item sets   (bake_pack_turntables.py)  yaw starts at pi, frame 00 front
+    //   whole-body turntables (bake_turntable.py)        yaw starts at 0, frame 00 back
+    // Three sets read frame by frame on 2026-11-19 agree with that:
     //   turntable/jacket-with-sweater  6 frames  frame_00 front
     //   turntable/hair_long_blond     20 frames  frame_00 back, frame_10 front
     //   turntable/hair_bun_red        18 frames  frame_00 back, frame_09 front
@@ -105,7 +156,9 @@ Item {
     // on the avatar's back; keying on `frameCount === 20` then left the 18-frame
     // hair set opening on the back instead. The split is the bake shape: six-frame
     // item sets start at the front, anything longer is a whole-body turntable that
-    // starts at the back.
+    // starts at the back. For every shipped set the index states this outright
+    // (make_stage_index.py checks these three measurements before writing it), so
+    // this rule now only decides the first angle of a freshly baked set.
     readonly property int restFrame: frameCount > 6 ? Math.floor(frameCount / 2) : 0
 
     function padded(index) {
@@ -139,6 +192,8 @@ Item {
                 probe.loadNext()
                 return
             }
+            if (stage.indexed)
+                return
             phase = 0
             seen = 0
             source = stage.animPath(0, 0)
@@ -189,10 +244,14 @@ Item {
         // Set by hand, not bound: assigning a bound source from its own status
         // handler is a binding loop.
         function loadNext() {
+            // A set the index already described must not be counted again: the
+            // probe's own Ready would add to frameCount and break `shown`.
+            if (stage.indexed)
+                return
             if (stage.frameCount < 512)
                 source = stage.framePath(stage.frameCount)
         }
-        Component.onCompleted: if (stage.animatedFolder === "") loadNext()
+        Component.onCompleted: if (stage.animatedFolder === "" && !stage.indexed) loadNext()
         onStatusChanged: {
             if (status === Image.Ready) {
                 stage.available = true
@@ -201,7 +260,8 @@ Item {
             } else if (status === Image.Error && stage.frameCount > 0) {
                 // Open facing the player, from the measured rest frame for this
                 // bake shape (see restFrame above).
-                stage.frame = stage.restFrame
+                stage.frontFrame = stage.restFrame
+                stage.frame = stage.frontFrame
             } else if (status === Image.Error && stage.frameCount === 0
                        && !stage.fellBack && stage.defaultVariant !== "") {
                 // Nothing baked for this look: show the stock set rather than

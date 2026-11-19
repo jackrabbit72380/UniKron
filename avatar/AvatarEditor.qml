@@ -529,14 +529,21 @@ Item {
         // player is on *before* the list is replaced, then restore it by id and
         // clamp only when that id is gone.
         var keepId = currentCategory ? currentCategory.id : ""
+        // Fix the picks against the new list *before* `categories` is replaced.
+        // Assigning it notifies onCategoriesChanged, which rebuilds the 2D stack,
+        // and that build used to run with the previous mode's picks against the
+        // new mode's folders: switching the drawer to pack items asked the stage
+        // for assets/20_pants/male-flower-print-flares.png (drawn folder, pack
+        // name) and logged one failed load per seeded slot - measured 43 in a
+        // switch cycle, before the state was corrected a line later.
+        pruneState(list)
+        seedOutfit(list)
         categories = list
         var keepAt = keepId !== "" ? categoryIndexForId(keepId) : -1
         if (keepAt >= 0)
             categoryIndex = keepAt
         else if (categoryIndex >= categories.length)
             categoryIndex = Math.max(0, categories.length - 1)
-        pruneState()
-        seedOutfit()
         // A gender switch prunes the other body away, so the empty body slot has
         // to be refilled here as well as on load.
         fillBodyIfEmpty()
@@ -547,15 +554,19 @@ Item {
     // art ("hair_short_brown.png"), which would then be requested from
     // pack_art/ and fail. Drop those, but only where the category still exists,
     // so a wardrobe saved in one mode survives a round trip through the other.
-    function pruneState() {
+    function pruneState(list) {
+        // `list` is the category list being installed; rebuildCategories calls
+        // this before replacing `categories`, so the layers never see a pick that
+        // does not belong to the folder it is about to be drawn from.
+        var source = list || categories
         var next = {}
         var changed = false
         for (var key in state) {
             var keep = state[key]
-            for (var i = 0; i < categories.length; ++i) {
-                if (categories[i].id !== key)
+            for (var i = 0; i < source.length; ++i) {
+                if (source[i].id !== key)
                     continue
-                if ((categories[i].files || []).indexOf(keep) < 0)
+                if ((source[i].files || []).indexOf(keep) < 0)
                     keep = ""
                 break
             }
@@ -613,15 +624,18 @@ Item {
 
     readonly property var packSeedPicks: packSeedPicksFor(gender)
 
-    function seedOutfit() {
+    function seedOutfit(list) {
+        // Same reason as pruneState: the list being installed, not the one still
+        // on screen.
+        var source = list || categories
         var picks = usePackArt ? packSeedPicksFor(gender) : seedPicks
         var wanted = ["shirt", "pants", "shoes", "hair"]
         var next = {}
         var changed = false
         for (var held in state)
             next[held] = state[held]
-        for (var i = 0; i < categories.length; ++i) {
-            var c = categories[i]
+        for (var i = 0; i < source.length; ++i) {
+            var c = source[i]
             if (!c || !c.files || !c.files.length)
                 continue
             for (var w = 0; w < wanted.length; ++w) {
@@ -1580,10 +1594,14 @@ Item {
         height: stage.height
         visible: root.screen !== "choose" && root.renderMode === "3d"
         baseFolder: root.assetsFolder + "3d/"
-        // Baked for the stock outfit and default hairstyle only, so the animated
-        // set is only the right picture while both of those still match.
-        animatedFolder: (root.stageVariant === "turntable/" + root.defaultHairStem)
-                        ? root.assetsFolder + "3d/animated/" : ""
+        // bake_animated.py pictures the stock outfit and hairstyle, and set.json
+        // in assets/3d/animated names the set folder that look resolves to
+        // ("turntable/jacket-with-sweater"). The stage plays the animated frames
+        // only while the player is wearing exactly that, so no guard is needed
+        // here - the one this replaces compared against the default hairstyle's
+        // own turntable, which the stock outfit's set always outranks, so the
+        // animated bake was never shown in pack mode.
+        animatedFolder: root.assetsFolder + "3d/animated/"
         variant: root.stageVariant
         defaultVariant: "turntable"
     }

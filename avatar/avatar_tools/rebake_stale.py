@@ -103,6 +103,12 @@ def main():
             else:
                 print("  baked %s" % name)
     print("%d baked, %d failed" % (len(jobs) - failed, failed))
+    try:
+        import make_stage_index
+        sets, frames = make_stage_index.refresh()
+        print("StageIndex.qml: %d sets, %d frames" % (sets, frames))
+    except Exception as error:
+        print("could not refresh StageIndex.qml: %s" % error)
     return 1 if failed else 0
 
 

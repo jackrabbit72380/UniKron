@@ -35,11 +35,87 @@ INDEXES = [
 BLOCK = re.compile(r'\{\s*"id"\s*:\s*"([^"]+)"\s*,\s*"files"\s*:\s*\[(.*?)\]\s*\}', re.S)
 NAME = re.compile(r'"([^"]+)"')
 
+# The 3D stage's index has a different shape: one entry per baked frame set with
+# its frame count and which frame faces the camera (make_stage_index.py).
+STAGE_INDEX = "StageIndex.qml"
+STAGE_ROOT = os.path.join(ROOT, "assets", "3d")
+STAGE_ENTRY = re.compile(
+    r'"([^"]+)"\s*:\s*\{\s*"frames"\s*:\s*(\d+)\s*,\s*"front"\s*:\s*(\d+)\s*\}')
+STAGE_ANIMATED = re.compile(r'"yaws"\s*:\s*(\d+)\s*,\s*"poses"\s*:\s*(\d+)')
+FRAME_FILE = re.compile(r"^frame_(\d+)\.png$")
+ANIM_FILE = re.compile(r"^yaw_(\d+)_pose_(\d+)\.png$")
+
 
 def read_index(path):
     with open(path, "r", encoding="utf-8") as fh:
         text = fh.read()
     return [(m.group(1), NAME.findall(m.group(2))) for m in BLOCK.finditer(text)]
+
+
+def check_stage():
+    """Check StageIndex.qml against the frames on disk.
+
+    A set whose index entry disagrees with the folder is worse than no entry: the
+    stage trusts the index and would play a frame that is not there, or stop the
+    spin early. An unindexed set is only a warning - the stage falls back to
+    probing for it - so it is reported separately from a broken entry.
+    """
+    path = os.path.join(ROOT, STAGE_INDEX)
+    if not os.path.exists(path):
+        print(f"{STAGE_INDEX:22s} MISSING INDEX")
+        return 1
+    with open(path, "r", encoding="utf-8") as fh:
+        text = fh.read()
+
+    broken = 0
+    entries = {}
+    for key, frames, front in STAGE_ENTRY.findall(text):
+        frames, front = int(frames), int(front)
+        entries[key] = frames
+        folder = os.path.join(STAGE_ROOT, key)
+        have = sorted(int(FRAME_FILE.match(n).group(1)) for n in os.listdir(folder)
+                      if FRAME_FILE.match(n)) if os.path.isdir(folder) else []
+        if len(have) != frames:
+            print(f"    {key}: index says {frames} frames, disk has {len(have)}")
+            broken += 1
+        elif have != list(range(frames)):
+            print(f"    {key}: frames are not numbered 0..{frames - 1}")
+            broken += 1
+        if not 0 <= front < max(frames, 1):
+            print(f"    {key}: front {front} is outside 0..{frames - 1}")
+            broken += 1
+
+    # Sets on disk that the index does not name (a bake since the last run).
+    stale = []
+    for dirpath, _dirnames, filenames in os.walk(STAGE_ROOT):
+        if os.path.basename(dirpath) == "animated":
+            continue
+        if any(FRAME_FILE.match(n) for n in filenames):
+            rel = os.path.relpath(dirpath, STAGE_ROOT).replace(os.sep, "/")
+            if rel not in entries:
+                stale.append(rel)
+
+    animated = STAGE_ANIMATED.search(text)
+    anim_dirs = os.path.join(STAGE_ROOT, "animated")
+    if animated and os.path.isdir(anim_dirs):
+        yaws = poses = 0
+        for name in os.listdir(anim_dirs):
+            m = ANIM_FILE.match(name)
+            if m:
+                yaws = max(yaws, int(m.group(1)) + 1)
+                poses = max(poses, int(m.group(2)) + 1)
+        if (int(animated.group(1)), int(animated.group(2))) != (yaws, poses):
+            print(f"    animated: index says {animated.group(1)}x{animated.group(2)}, "
+                  f"disk has {yaws}x{poses}")
+            broken += 1
+
+    print(f"{STAGE_INDEX:22s} sets={len(entries):5d} frames={sum(entries.values()):5d} "
+          f"broken={broken} unindexed={len(stale)}")
+    for rel in stale[:10]:
+        print(f"    unindexed {rel}")
+    if len(stale) > 10:
+        print(f"    ... and {len(stale) - 10} more")
+    return broken
 
 
 def main(argv=None):
@@ -88,7 +164,9 @@ def main(argv=None):
             if orphans:
                 print(f"    {len(orphans)} file(s) on disk with no index entry, e.g. {orphans[:5]}")
 
-    print(f"VERIFY indexes={len(INDEXES)} entries={total} broken={bad}")
+    bad += check_stage()
+
+    print(f"VERIFY indexes={len(INDEXES) + 1} entries={total} broken={bad}")
     return 1 if bad else 0
 
 

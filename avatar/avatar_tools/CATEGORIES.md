@@ -121,5 +121,22 @@ by frame:
 sets start at the front, whole-body turntables start at the back.
 
 `research/rail_check.py` asserts all three, and `verify_qml_assets.py` checks that
-every name in the five generated indexes (`PackIndex`, `PackPlates`,
-`PackPlatesFemale`, `PackMasks`, `AssetIndex`, 2,242 entries) has a file behind it.
+every name in the six generated indexes (`PackIndex`, `PackPlates`,
+`PackPlatesFemale`, `PackMasks`, `AssetIndex` - 2,242 entries - plus `StageIndex`,
+983 sets / 6,290 frames) has a file behind it.
+
+**4. A drawer switch asked the 2D stage for files that cannot exist.**
+`rebuildCategories` assigned `categories` first and fixed the player's picks
+(`pruneState`, `seedOutfit`) afterwards, but assigning `categories` fires
+`onCategoriesChanged: rebuildLayers()` straight away. For that one rebuild the 2D
+stack held the previous mode's picks against the new mode's folders: switching to
+the pack asked for `assets/20_pants/male-flower-print-flares.png` - the drawn
+folder with the pack's file name - and every seeded slot logged a failed load.
+`pruneState(list)` and `seedOutfit(list)` now take the list being installed and run
+**before** it replaces `categories`, so the rebuild only ever sees picks that exist
+where they will be drawn from.
+
+Measured with `research/rail_check.py`, which now counts the editor's failed loads
+across a whole check cycle: **43 before, 1 after**. The one left is the 3D stage
+probing a set the index does not name (`turntable/skinny-fit-jeans/frame_00.png`,
+an item with no bake - how the stage falls back, see `assets/3d/README.md`).

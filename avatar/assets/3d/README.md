@@ -125,3 +125,74 @@ An earlier note in this folder put the remaining work at 1,243 sets in total wit
 426 still on the old hand pose. That was a count of run-log arithmetic, not of the
 pack: the selector yields 932 sets, all of them were rebaked with the current pose,
 and 1,243 was never a set count for either gender.
+
+## StageIndex.qml: the stage no longer counts frames (2026-11-19)
+
+`avatar_tools/make_stage_index.py` measures every baked set and writes
+`avatar/StageIndex.qml`, one entry per set with its frame count and the frame that
+faces the camera. Measured from the tree:
+
+```
+sets                983        466 turntable/<stem> + 470 turntable_female/<stem>
+                               + 40 drawn shirts/pants/shoes + 2 stock roots
+                               (turntable, turntable_female) + 5 at assets/3d
+                               (its own 20-frame set and four hair sets)
+frames              6,290
+sets by frame count 932 x 6        item bakes (bake_pack_turntables.bake_one)
+                    40 x 12        the drawn per-item sets (bake_turntable via bake_items)
+                    1 x 18         turntable/hair_bun_red
+                    10 x 20        whole-body turntables and the stock sets
+animated            12 yaws x 10 poses, 120 frames, set.json names its variant
+```
+
+**Why.** The stage used to request `frame_00.png`, `frame_01.png`, ... until one
+failed to load. That cost one failed load per set switch, and - the part that was
+visible - the count was only known after the last probe came back, so for the first
+frames of every switch the stage still showed frame 0. For a whole-body turntable
+frame 0 is the avatar's **back**, so switching items flashed the back of the
+avatar's head before the front frame came up.
+
+**Where `front` comes from.** Not from a guess about frame counts: each set was
+written by one of two bakers, and each one's first frame is fixed by its own render
+loop.
+
+| baker | yaw of frame *i* | front frame |
+| --- | --- | --- |
+| `bake_pack_turntables.bake_one` | `pi + 2*pi*i/frames` | 0 (a half turn) |
+| `bake_turntable.main` | `radians(start) + 2*pi*i/frames`, start 0 | `frames/2` (the back first) |
+
+Six-frame sets are the item bakes (`rebake_stale.py` also calls `bake_one` with
+frames=6); longer sets are whole-body turntables. The three sets read frame by
+frame - `turntable/jacket-with-sweater` 6/0, `turntable/hair_long_blond` 20/10,
+`turntable/hair_bun_red` 18/9 - are checked before the script writes anything, so
+if the rule ever stops matching them the index is not written. `--check` reports
+whether the file on disk still matches the tree; `bake_pack_turntables.py`,
+`rebake_stale.py` and `bake_animated.py` refresh it at the end of a run, so a bake
+and its index do not drift apart.
+
+**Measured effect.** `research/rail_check.py` counts the failed loads the editor
+produces across a full check cycle (both genders, a mode switch, four item
+switches): **43 before, 1 after**. The one left is the stage probing
+`turntable/skinny-fit-jeans/frame_00.png`, an item the pack marks wearable but
+which has no bake - the stage cannot tell "never baked" from "baked after the
+index was written" without asking.
+
+## The animated set was baked but never played
+
+`bake_animated.py` pictures the stock look: `MaleBody`, `Head`, `Left Parting`,
+`Jacket with Sweater`, `Male Flower Print Flares`, `Grunge Trainers` - the same
+outfit `Avatar6400.Avatar` wears and the same one the pack seeds a new avatar
+with. That look resolves to the set folder `turntable/jacket-with-sweater`.
+
+The stage only played the animated frames when the variant equaled
+`turntable/<default hairstyle>`, and the stock outfit's own set always outranks the
+hairstyle set, so the condition never held in pack mode: 120 baked frames that
+nothing showed. `assets/3d/animated/set.json` now records which set folder the bake
+is a picture of (`"variant": "turntable/jacket-with-sweater"`), `StageIndex.qml`
+carries it, and `AvatarStage3D` plays the animated frames while the worn look is
+that one - and only then.
+
+Measured after the change: `animated=true yaw=6/12 pose=4/10
+variant=turntable/jacket-with-sweater indexed=true`. `set.json` is written by the
+baker (`--metadata-only=1` rewrites just that file, so the 120 existing frames did
+not need re-rendering).
