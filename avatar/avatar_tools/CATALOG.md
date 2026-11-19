@@ -487,6 +487,34 @@ thighs, which stacks the fingers behind one another and reads as a hand.
 `apply_wrist_roll` turns each forearm about its own axis (`AVATAR_WRIST_ROLL`,
 default -90°); the two signs were rendered side by side and -90° chosen.
 
+**CORRECTION (2026-11-19): the wrist roll was never applied. Every "90° of
+pronation" above was really 1.2°.** `mat_axis_angle(axis, degrees)` converts its
+second argument with `math.radians` itself, and `apply_wrist_roll` passed it
+`math.radians(WRIST_ROLL_DEGREES)`. Measured directly: `mat_axis_angle((1,0,0),
+math.pi)` returns `[[1,0,0],[0,0.998,-0.055],[0,0.055,0.998]]` - a 3.1 degree
+rotation, not 180. That is why the knob never changed anything: rolling the wrist 0
+or 180 degrees moved the baked plate by 2,163 pixels out of 98,304, and the hand's
+span stayed at 72 px. It also means the sign choice "-90° was rendered side by side"
+was a comparison between -1.6° and +1.6°.
+
+The fix is one deleted `math.radians` (the finger pose already passed degrees, which
+is why curl and adduction did move the mesh). With real angles the hand turns: its
+span goes **72 px -> 51 px** and the palm faces the thigh. The angles were then
+chosen on a rendered grid (`artifacts/hand-grid.png`, `hand-adduct.png`):
+
+| knob | before | now | why |
+| --- | --- | --- | --- |
+| `AVATAR_WRIST_ROLL` | 70 (really 1.2°) | **45** | stacks the fingers without rolling them off the palm |
+| `AVATAR_FOREARM_ROLL` | new knob, 0 | **180** | the turn that actually reads as a palm; a wrist roll alone lifts the hand sideways |
+| `AVATAR_FINGER_ADDUCT` | 1.8 | **0.8** | 1.8 was tuned against the dead roll and over-closes once the hand is turned |
+| `AVATAR_FINGER_CURL` | 12,18,12 | 12,18,12 | unchanged |
+
+The 2D body plates were rebaked with it (`pack_plates/10_body`, `pack_plates_female/
+10_body`) together with the body mask and the skin mask it cuts (`19,394 px`, 97.2%
+of the silhouette). **The 3D turntables have not been rebaked**: all 1,179 sets still
+carry the old hand, so 2D and 3D show different hands until `rebake_everything.sh
+turntables` is run.
+
 Curl is 8/10/6 degrees per phalanx. `AVATAR_FINGER_POSE=0` shows the clip's own
 hand for comparison; `AVATAR_FINGER_CURL`, `AVATAR_FINGER_ADDUCT`, `AVATAR_FINGER_SIGN`
 and `AVATAR_WRIST_ROLL` override the numbers. `show_hand.py` draws one hand from

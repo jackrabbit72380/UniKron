@@ -141,7 +141,7 @@ FINGER_CURL_DEGREES = tuple(
 # relaxed hand looks like. The angle is computed per finger from its own knuckle
 # offset and length (finger_bones), because the bind fingers are parallel and
 # 0.03 apart - there is no fan angle to take back, only a gap to close.
-FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "1.8"))
+FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.8"))
 # Which way the curl folds. Rendered both ways at bake scale (448x672, the size
 # the stage shows): +1 folds the digits back and out into a long hook past the
 # hip, -1 folds them into the palm and gives a compact relaxed hand. So -1. The
@@ -156,7 +156,16 @@ FINGER_POSE = os.environ.get("AVATAR_FINGER_POSE", "1") == "1"
 # the four digits read as separated prongs (the "claw"); at 70 the hand turns so
 # the fingers stack behind each other and the silhouette is a hand. The angle is
 # a look, tuned on the render, not recovered data.
-WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "70"))
+WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "45"))
+# Forearm pronation, in degrees about the forearm's own axis. The wrist joint does
+# not own the hand: rolling the wrist 0 or 180 degrees moves the baked plate by
+# 2,163 pixels out of 98,304, and the hand keeps showing its full width. Turning
+# the forearm's parent joint instead is the rotation that works - measured on
+# MaleBody with the same clip (research/hand_axis_probe.py), the two hands' span
+# goes 0.75 -> 0.60 at 120 degrees and 0.50 at 180 degrees, with the hand's height
+# unchanged at 0.22, i.e. the palm turns toward the thigh and the hand keeps
+# hanging. Negative turns the palms the other way.
+FOREARM_ROLL_DEGREES = float(os.environ.get("AVATAR_FOREARM_ROLL", "180"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
@@ -540,14 +549,31 @@ def apply_wrist_roll(joints_rig, locals_):
     The rotation is about the forearm axis, which is the wrist joint's local X
     (the bind fingers run along X). Zero turns it off.
     """
-    if not WRIST_ROLL_DEGREES:
-        return locals_
+    if FOREARM_ROLL_DEGREES and os.environ.get("AVATAR_ROLL_DEBUG") == "1":
+        print("roll debug: %d joints, wrists %s, parents %s"
+              % (len(joints_rig), WRIST_JOINTS,
+                 [joints_rig[w]["parent"] for w in WRIST_JOINTS if w < len(joints_rig)]))
     for wrist in WRIST_JOINTS:
-        if wrist < len(locals_):
-            sign = -1.0 if wrist == WRIST_JOINTS[1] else 1.0
+        if wrist >= len(locals_):
+            continue
+        sign = -1.0 if wrist == WRIST_JOINTS[1] else 1.0
+        if WRIST_ROLL_DEGREES:
+            # mat_axis_angle takes degrees and converts internally. This call used
+            # to pass math.radians(...) into it, so every "70 degree" roll was
+            # really 1.2 degrees and the hand never turned: that is why rolling the
+            # wrist 0 or 180 moved the plate by nothing (CORRECTION, 2026-11-19).
             locals_[wrist] = mat_mul(locals_[wrist],
                                      mat_axis_angle((1.0, 0.0, 0.0),
-                                                    math.radians(WRIST_ROLL_DEGREES * sign)))
+                                                    WRIST_ROLL_DEGREES * sign))
+        if FOREARM_ROLL_DEGREES:
+            # The hand is skinned to the wrist and its knuckles, but the turn that
+            # reads as a palm is the forearm's: see FOREARM_ROLL_DEGREES above.
+            forearm = joints_rig[wrist]["parent"]
+            if forearm < len(locals_):
+                locals_[forearm] = mat_mul(
+                    locals_[forearm],
+                    mat_axis_angle((1.0, 0.0, 0.0),
+                                   FOREARM_ROLL_DEGREES * sign))
     return locals_
 
 
