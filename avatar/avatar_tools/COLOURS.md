@@ -101,17 +101,42 @@ differ because the plate's alpha is a difference ramp and the mask's is real
 coverage). `artifacts/tinted_brows.png` is the same brow in four of the game's own
 eyebrow colours.
 
-**Not checked by any render here.** `TintedMask` is a `ShaderEffect`, and this
-project's harnesses run on `QT_QPA_PLATFORM=offscreen`, where nothing with a
-`ShaderEffect` in it draws: measured 2026-11-19, a `ShaderEffect` whose fragment
-shader returns solid lime leaves the background untouched, and `TintedMask` over a
-black rectangle leaves every sampled pixel at the background, with no message
-(`minimalegl` and `eglfs` do not start). Every screenshot in this repo is therefore
-plates only: no brow, eye-shadow, iris, lip or skin tint is in it. What is checked
-instead: `research/run_colour_check.py` - the mask exists for every mapped
-category and the layer's tint equals the palette entry, 17 checks - plus the offline
-arithmetic above, and `Colours.qml` compared entry by entry against
-`colour_palettes.json`.
+**Now checked by a real render, and it was broken twice over.** Everything above was
+numpy arithmetic on the baked files; the tint itself never reached the screen, for two
+reasons that only showed up once a GL surface existed (Xvfb with Mesa `swrast`,
+`QT_QPA_PLATFORM=xcb`, 2026-11-19).
+
+1. **Qt 6 does not compile GLSL strings.** An inline `fragmentShader` string is read as
+a file name: `Failed to deserialize QShader ... In Qt 6 shaders must be preprocessed
+using the Qt Shader Tools infrastructure`. Every tint mask in the build drew nothing.
+The shader is now `shaders/tintedmask.frag` (Vulkan GLSL) baked to
+`shaders/tintedmask.frag.qsb` by `avatar_tools/make_shader.py`; the pack carries
+GLSL 100 es/120/150/330, HLSL 5.0, MSL 1.2 and SPIR-V.
+2. **Two Qt 6 traps in the new source.** The std140 block is shared with the default
+vertex shader, so it must start with `qt_Matrix` (offset 0) and `qt_Opacity` (offset
+64), custom members after them - with `colour` declared first it arrived as zero and
+the mask rendered black, silently. And Qt Quick hands sampler textures over
+*premultiplied*, so multiplying by coverage again squared the alpha: a 177/255
+eye-shadow came out at 76,65,26 where the plate is 110,94,38 (48 % instead of 69 %).
+The shader divides the coverage back out first.
+
+`research/run_tint_check.py` now renders each mask family over black at two palette
+colours and compares the frame with that arithmetic, 21 checks, 0 failures:
+
+| mask | palette colour | rendered | expected | worst channel |
+| --- | --- | --- | --- | --- |
+| brows | `#fffcb5` | 172,170,124 | 172,170,124 | 0 |
+| brows | `#4f463d` | 53,47,42 | 53,47,42 | 0 |
+| eye shadow (alpha 177) | `#e8c84f` | 110,94,38 | 110,94,38 | 0 |
+| eye shadow (alpha 177) | `#b24f7d` | 84,37,60 | 84,37,60 | 0 |
+| facial hair (alpha 252) | `#fffcb5` | 230,226,165 | 230,227,166 | 1 |
+| facial hair (alpha 252) | `#4f463d` | 71,63,56 | 71,63,56 | 0 |
+| iris + spec | `#92b2ca` | 124,133,146 | 124,133,146 | 0 |
+| iris + spec | `#ab0207` | 133,93,93 | 133,93,93 | 0 |
+
+`run_colour_check.py` still covers the wiring (mask exists for every mapped category,
+layer tint equals the palette entry, 17 checks), and `Colours.qml` is still compared
+entry by entry against `colour_palettes.json`.
 
 **On now:** eyebrows, eyes, eye shadow, facial hair, hairstyles (male), skin and lips.
 Two are left alone, on purpose:
@@ -519,13 +544,12 @@ Checked over the whole table (`UniKron/artifacts/eye_tint.png`: `#6381a7`, `#92b
 `#88b049`, `#ab0207`, `#212121`, `#82501d`) - the iris changes colour in every one and
 the whites, lashes and skin do not move.
 
-**Not verified on screen.** Qt Quick's software renderer has no GL surface here, so a
-`ShaderEffect` layer draws nothing in an offscreen grab. The layer stack was read out of
-the running editor instead (`15_face` plate at 15, `15_face_iris` at 15.5 with the
-table's colour and its `_spec` URL), and the shader's maths was checked against the
-plate in numpy. The GLSL itself has not been compiled in this workspace (`qsb` is not
-in the PySide6 wheel, no GL context is available), so the first run on a real GPU is the
-outstanding check.
+**Verified on screen, both terms.** With the shader compiled to `.qsb` and a real GL
+surface (`research/run_tint_check.py`), the iris at `#92b2ca` renders 124,133,146 and at
+`#ab0207` renders 133,93,93 - both exactly the two-term arithmetic, worst channel 0. A
+shader that dropped the specular sampler would miss those by 28/255 (the figure the
+numpy check measured for the lighting term alone), so the second sampler is bound and
+in use, not silently ignored.
 
 ### Eyeliner: a screen with nothing under it
 

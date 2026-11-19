@@ -185,19 +185,31 @@ mouth is still drawn, as the stock smirk mask tinted with the lips colour, and t
 shapes are still shown in 3D, where a geometry morph can be baked. Re-measured:
 **0 strip-art layers**, `missing art 0`.
 
-## What the harness cannot show: tinted layers
+## Tinted layers: they were not drawing at all (fixed 2026-11-19)
 
-Every 2D render this project's harnesses produce is missing its tint layers - the
-brows, eye shadow, iris, lips and skin tint. Measured 2026-11-19: a `ShaderEffect`
-whose fragment shader returns solid lime paints the *background* colour under
-`QT_QPA_PLATFORM=offscreen`, and `TintedMask` over a black rectangle leaves every
-sampled pixel at the background, with no warning. `minimalegl` and `eglfs` fail to
-start at all here, so there is no GL surface to render into.
+The offscreen harness cannot paint a `ShaderEffect`, which hid a real defect rather
+than merely limiting the screenshots. On a GL surface (Xvfb + Mesa `swrast`,
+`QT_QPA_PLATFORM=xcb`) `TintedMask` still drew nothing, and the message explained why:
+**Qt 6 refuses inline GLSL** and reads `fragmentShader` as a path -
+`Failed to deserialize QShader ... shaders must be preprocessed using the Qt Shader
+Tools infrastructure`. So no brow, eye-shadow, iris, lip or skin tint has ever been on
+screen in any Qt 6 run of this editor.
 
-So the earlier screenshots in this project (`research/shots`, the render sweep, the
-portrait grabs) show plates only, and none of them is evidence about a colour. The
-colour path is checked two other ways: `run_colour_check.py` asserts per slot that
-the mask file exists and that the layer's tint equals the palette entry (17 checks),
-and `COLOURS.md` verifies the tint arithmetic offline against plates the baker
-produced in that colour. A machine with a real GL surface can settle the rendering
-itself; this one cannot.
+Two more defects were behind that one. The std140 block must begin with `qt_Matrix`
+and `qt_Opacity` (offsets 0 and 64) or custom members arrive as zero - declaring
+`colour` first rendered black silently. And Qt Quick supplies sampler textures
+premultiplied, so multiplying by coverage again squared alpha: a 177/255 eye shadow
+rendered at 48 % of the plate instead of 69 %.
+
+Now: `shaders/tintedmask.frag` -> `shaders/tintedmask.frag.qsb` (built by
+`avatar_tools/make_shader.py`), `research/run_tint_check.py` renders four mask
+families at two palette colours each and compares every pixel with the shader
+arithmetic - **21 checks, 0 failures, worst channel off by 1** (table in
+`COLOURS.md`). The editor itself renders 8/8 screens on that surface with 0 warnings,
+and the 2D avatar now shows tinted brows, iris and lips.
+
+`QSG_RENDER_LOOP=basic` is needed under llvmpipe: the threaded loop deadlocks the first
+frame as soon as a `ShaderEffectSource` takes a snapshot. That is a property of the
+software driver, not of the editor. The offscreen harnesses (`run_colour_check.py`,
+`run_all_screens.py`, `rail_check.py`) still pass unchanged - they check wiring, not
+pixels.

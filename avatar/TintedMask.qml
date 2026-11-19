@@ -69,17 +69,12 @@ Item {
         // added there too, where the renderer adds it. The result is written
         // premultiplied, which is what a ShaderEffect's output is taken to be, so
         // the stage composites it over the skin with the usual source-over.
-        fragmentShader: "
-            varying highp vec2 qt_TexCoord0;
-            uniform sampler2D tex;
-            uniform sampler2D spec;
-            uniform lowp vec4 colour;
-            void main() {
-                lowp vec4 c = texture2D(tex, qt_TexCoord0);
-                lowp vec4 s = texture2D(spec, qt_TexCoord0);
-                lowp vec3 lin = pow(c.rgb, vec3(2.2)) * pow(colour.rgb, vec3(2.2))
-                                + pow(s.rgb, vec3(2.2));
-                gl_FragColor = vec4(pow(lin, vec3(1.0 / 2.2)) * c.a, c.a);
-            }"
+        //
+        // Qt 6 does not compile GLSL strings at run time. An inline `fragmentShader`
+        // string is read as a file name and fails with "Failed to deserialize QShader",
+        // so no tint was drawn at all until this pointed at a baked pack. The source
+        // is shaders/tintedmask.frag; `python3 avatar_tools/make_shader.py` rebuilds
+        // the .qsb beside it.
+        fragmentShader: "shaders/tintedmask.frag.qsb"
     }
 }
