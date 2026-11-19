@@ -36,7 +36,9 @@ CLIP_ASSET="Animation Male Idle Shifts Weight"
 # measured rather than invented. MaleIdleShiftWeight renders as a hand across the
 # whole turn; Miner Paintball's Idle.xnb was the previous pick and splays more.
 # Missing file is not an error - bake_avatar says so and keeps the clip's hands.
-export AVATAR_FINGER_XNB="${AVATAR_FINGER_XNB:-$PWD/../../../src_archive/avatar-games/Avatar Games/Avatar Games2/Avatar Connection/Content/AvatarAnimation/MaleIdleShiftWeight.xnb}"
+# No AVATAR_FINGER_XNB: the avatar-game clip it pointed at is the same animation
+# as the pack's idle, and grafting it changed nothing (2026-11-19). The hand comes
+# from the editor's own clip, aligned vertical in avatar_pose.py.
 JOBS="${JOBS:-8}"
 STAGE="${1:-all}"
 

@@ -81,9 +81,27 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 
 # ---------------------------------------------------------------- finger pose
 #
-# ART CHOICE, not recovered data, and off by default now that the fingers come
-# from a clip (`AVATAR_FINGER_XNB` in bake_avatar.py). It is kept because the
-# comparison it was tuned against is worth being able to reproduce:
+# CORRECTION (2026-11-19): the hand does not need a second animation clip, and
+# never had one. `MaleIdleShiftWeight.xnb` - the clip `bake_avatar.py` grafted
+# finger joints from - is the same animation as the pack's own "Animation Male
+# Idle Shifts Weight", re-exported for the avatar games: grafting its 30 finger
+# joints into the editor's pose changes 0 of the 256x384 plate's 98,304 pixels
+# (and 1 pixel, by one level, when the wrist roll is on). So the "measured" hand
+# was the editor's hand all along, and everything that made it look like a hand
+# was the authored pose below. Measured by `research/hand_variants.py`.
+#
+# The hand now comes from the clip, with one correction at the wrist that is
+# measured from the retail editor's own avatar (`ref_hands.png`): the fingers
+# hang vertically while the forearm above them runs down and slightly in, so
+# `align_hands_to_arms` rotates the wrist until the middle finger is vertical.
+# The clip leaves a 22-29 degree bend instead, which is what swung the hand out
+# and away from the leg. Rotating the wrist cannot change a finger's own angle.
+#
+# The fingers are then brought together (FINGER_ADDUCT) and not curled: the
+# reference's fingers are straight with only a slight bend at the tips, and the
+# 12/18/12 degree curl that shipped before folded them into a fist.
+#
+# Kept for reproducing the earlier comparison:
 #
 #   pack idle + this pose  -> the fingers turn inward and the wrist pinches; the
 #                             hand reads as a claw (artifacts/hand3.png, row 1)
@@ -133,7 +151,7 @@ IGNORE_SCALE = os.environ.get("AVATAR_IGNORE_SCALE") == "1"
 #   AVATAR_FINGER_ADDUCT="0.6"
 #
 FINGER_CURL_DEGREES = tuple(
-    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "12,18,12").split(",")
+    float(v) for v in os.environ.get("AVATAR_FINGER_CURL", "0,0,0").split(",")
 )                                            # per phalanx, base to tip
 # How far each finger is brought across the palm, as a fraction of the angle
 # that would land its tip on the hand's midline. 1.0 stacks every finger on the
@@ -141,7 +159,7 @@ FINGER_CURL_DEGREES = tuple(
 # relaxed hand looks like. The angle is computed per finger from its own knuckle
 # offset and length (finger_bones), because the bind fingers are parallel and
 # 0.03 apart - there is no fan angle to take back, only a gap to close.
-FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.8"))
+FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "1.4"))
 # Which way the curl folds. Rendered both ways at bake scale (448x672, the size
 # the stage shows): +1 folds the digits back and out into a long hook past the
 # hip, -1 folds them into the palm and gives a compact relaxed hand. So -1. The
@@ -149,14 +167,12 @@ FINGER_ADDUCT = float(os.environ.get("AVATAR_FINGER_ADDUCT", "0.8"))
 FINGER_SIGN = float(os.environ.get("AVATAR_FINGER_SIGN", "-1"))
 # On by default - see the note above.
 FINGER_POSE = os.environ.get("AVATAR_FINGER_POSE", "1") == "1"
-# Forearm pronation, in degrees about the arm's own axis. The pack's idle clips
-# carry none, which leaves the palms facing sideways and the hand flat to the
-# camera; the retail editor shows them facing the thighs.
-# 70 degrees, measured against the bake at 7x: at 0 the palm faces the camera and
-# the four digits read as separated prongs (the "claw"); at 70 the hand turns so
-# the fingers stack behind each other and the silhouette is a hand. The angle is
-# a look, tuned on the render, not recovered data.
-WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "45"))
+# Wrist and forearm roll, in degrees. Both default to 0 because both were an
+# invention that made the hand worse: rolling the wrist 45 and the forearm 180
+# turned the hand out to the side, and the reference's hand hangs straight down.
+# The vertical hang now comes from `align_hands_to_arms`, below, which measures
+# the angle instead of naming one.
+WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "0"))
 # Forearm pronation, in degrees about the forearm's own axis. The wrist joint does
 # not own the hand: rolling the wrist 0 or 180 degrees moves the baked plate by
 # 2,163 pixels out of 98,304, and the hand keeps showing its full width. Turning
@@ -165,11 +181,16 @@ WRIST_ROLL_DEGREES = float(os.environ.get("AVATAR_WRIST_ROLL", "45"))
 # goes 0.75 -> 0.60 at 120 degrees and 0.50 at 180 degrees, with the hand's height
 # unchanged at 0.22, i.e. the palm turns toward the thigh and the hand keeps
 # hanging. Negative turns the palms the other way.
-FOREARM_ROLL_DEGREES = float(os.environ.get("AVATAR_FOREARM_ROLL", "180"))
+FOREARM_ROLL_DEGREES = float(os.environ.get("AVATAR_FOREARM_ROLL", "0"))
 FINGER_THUMB_SCALE = 0.22                  # the thumb barely curls, it lies alongside
 # The two joints the arms end at: 33 (left of the model) and 36 (right). Each
 # owns seven finger bones, which own the middle and tip phalanges.
 WRIST_JOINTS = (33, 36)
+# Diagnostic only: joint indices whose clip delta is dropped, so they keep the
+# bind orientation. Used to find out whether the bend at the wrist is the clip's
+# doing or ours; never set in a shipped bake.
+ZERO_JOINTS = tuple(int(v) for v in os.environ.get("AVATAR_ZERO_JOINTS", "").split(",")
+                    if v.strip())
 
 
 # ---------------------------------------------------------------- small maths
@@ -577,8 +598,89 @@ def apply_wrist_roll(joints_rig, locals_):
     return locals_
 
 
+ALIGN_HAND = os.environ.get("AVATAR_ALIGN_HAND", "1") == "1"
+
+
+def _digits(joints_rig, wrist):
+    """Every chain that starts at a child of `wrist`, walked two joints down."""
+    chains = []
+    for root in [i for i, j in enumerate(joints_rig) if j["parent"] == wrist]:
+        chain = [root]
+        while True:
+            nxt = [c for c, j in enumerate(joints_rig) if j["parent"] == chain[-1]]
+            if not nxt or len(chain) >= 3:
+                break
+            chain.append(nxt[0])
+        chains.append(chain)
+    return chains
+
+
+def _middle_finger(joints_rig, wrist, at):
+    """The digit whose direction is the mean of the four fingers, and its tip.
+
+    The thumb's root sits back on the wrist (0.0099 out, against 0.10 or more
+    for every finger), so it is the one to leave out of the mean.
+    """
+    chains = _digits(joints_rig, wrist)
+    if len(chains) < 4:
+        return None
+    near = sorted(chains, key=lambda c: _distance(at[c[0]], at[wrist]))
+    thumb = near[0]
+    fingers = [c for c in chains if c is not thumb and len(c) >= 2] or chains
+    dirs = [_normalise([at[c[-1]][i] - at[wrist][i] for i in range(3)]) for c in fingers]
+    mean = _normalise([sum(d[i] for d in dirs) for i in range(3)])
+    best = max(range(len(dirs)), key=lambda i: sum(dirs[i][k] * mean[k] for k in range(3)))
+    return fingers[best], at[fingers[best][-1]]
+
+
+def align_hands_to_arms(joints_rig, locals_, worlds):
+    """Hang each hand straight down, as the retail editor's avatar does.
+
+    Measured on `ref_hands.png` (the retail editor, 3x): both hands hang with the
+    fingers vertical, while the forearm above them runs down and slightly inward
+    - the wrist bends, the hand does not follow the arm. The idle clip leaves a
+    22-29 degree wrist bend instead, which swings the hand out and fans the
+    fingers away from the body, and that is the whole of the "wrong hands": the
+    hand is not detached or mis-skinned, it is hanging at the wrong angle.
+
+    So the correction is the rotation that carries the middle finger onto
+    straight down, applied at the wrist. It is measured from the pose, not
+    chosen: the target is vertical because the reference's hands are vertical.
+    Rotating the wrist cannot change any finger's own angle.
+    """
+    target = (0.0, -1.0, 0.0)
+    for wrist in WRIST_JOINTS:
+        if wrist >= len(locals_):
+            continue
+        at = [(w[0][3], w[1][3], w[2][3]) for w in worlds]
+        found = _middle_finger(joints_rig, wrist, at)
+        if found is None:
+            continue
+        finger, tip = found
+        hand = _normalise([tip[i] - at[wrist][i] for i in range(3)])
+        bend = math.degrees(math.acos(max(-1.0, min(1.0, sum(
+            target[i] * hand[i] for i in range(3))))))
+        if bend <= 0.01:
+            continue
+        axis = _cross(hand, target)       # turns `hand` onto straight down
+        if math.sqrt(sum(c * c for c in axis)) < 1e-9:
+            continue
+        axis = _normalise(axis)
+        world = worlds[wrist]
+        # The wrist's own rotation maps a local axis into the world, so the
+        # world axis comes back through its transpose.
+        local_axis = [sum(world[r][c] * axis[r] for r in range(3)) for c in range(3)]
+        locals_[wrist] = mat_mul(locals_[wrist],
+                                 mat_axis_angle(local_axis, bend))
+    return locals_
+
+
 def apply_finger_pose(joints_rig, bind, locals_):
-    """Add the art-choice finger curl on top of the clip's pose, in place."""
+    """Close the fingers on top of the clip's pose, in place.
+
+    The curl is 0 by default (the reference's fingers are straight); what this
+    still does every bake is the adduction that brings the four digits together.
+    """
     for joint, bend, swing, depth, thumb, sign, swing_sign, adduct in finger_bones(joints_rig, bind):
         if joint >= len(locals_):
             continue
@@ -762,6 +864,11 @@ def posed_positions(batches, joints_rig, poses):
         else:
             locals_.append(bind_local[i] if MODE == "delta" else bind[i])
 
+    if ZERO_JOINTS:
+        for i in ZERO_JOINTS:
+            if i < len(locals_):
+                locals_[i] = bind_local[i] if MODE == "delta" else bind[i]
+
     # The pack models the hand open and straight, and the idle clip's 11-34
     # degrees on the finger joints is nearly all twist - the knuckle bend only
     # goes from 17.9 to 23 degrees - so the relaxed hand is added here (see the
@@ -771,17 +878,24 @@ def posed_positions(batches, joints_rig, poses):
     if FINGER_POSE:
         apply_finger_pose(joints_rig, bind, locals_)
 
-    worlds = []
-    for i, joint in enumerate(joints_rig):
-        parent = joint["parent"]
-        if MODE == "world":
-            # Some clips store joint transforms in model space; composing those
-            # through the hierarchy a second time stretches the figure into a spike.
-            worlds.append(locals_[i])
-        elif parent == 255 or parent >= i:
-            worlds.append(locals_[i])
-        else:
-            worlds.append(mat_mul(worlds[parent], locals_[i]))
+    def compose():
+        out = []
+        for i, joint in enumerate(joints_rig):
+            parent = joint["parent"]
+            if MODE == "world":
+                # Some clips store joint transforms in model space; composing those
+                # through the hierarchy a second time stretches the figure into a spike.
+                out.append(locals_[i])
+            elif parent == 255 or parent >= i:
+                out.append(locals_[i])
+            else:
+                out.append(mat_mul(out[parent], locals_[i]))
+        return out
+
+    worlds = compose()
+    if ALIGN_HAND:
+        align_hands_to_arms(joints_rig, locals_, worlds)
+        worlds = compose()
 
     skin = [mat_mul(worlds[i], mat_inverse_rigid(bind[i])) for i in range(len(joints_rig))]
 

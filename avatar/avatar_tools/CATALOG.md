@@ -497,35 +497,64 @@ or 180 degrees moved the baked plate by 2,163 pixels out of 98,304, and the hand
 span stayed at 72 px. It also means the sign choice "-90° was rendered side by side"
 was a comparison between -1.6° and +1.6°.
 
-The fix is one deleted `math.radians` (the finger pose already passed degrees, which
-is why curl and adduction did move the mesh). With real angles the hand turns: its
-span goes **72 px -> 51 px** and the palm faces the thigh. The angles were then
-chosen on a rendered grid (`artifacts/hand-grid.png`, `hand-adduct.png`):
+**CORRECTION (2026-11-19, second pass): the rolls and the curl were the claw, and
+the "measured" fingers were the editor's own.** The deleted `math.radians` was a real
+bug, but every number chosen after it was wrong. Four measurements replaced them
+(`research/hand_variants.py`, `hand_geometry.py`, `render_hand_big.py`,
+`hand_solidity.py`, `hand_solidity.py`'s reference crop):
 
-| knob | before | now | why |
+* **The finger graft was a no-op.** `MaleIdleShiftWeight.xnb` - the clip
+  `bake_avatar.py` took 30 finger joints from - is the *same animation* as the pack's
+  own "Animation Male Idle Shifts Weight", re-exported for the avatar games. Grafting
+  it changes **0 of the 98,304 pixels** of the 256x384 plate (1 pixel, by one level,
+  with the roll on), and the two crude plates differ by 10 pixels. So the hand the
+  notes called measured was the editor's own. The graft and its
+  `AVATAR_FINGER_XNB` export in `rebake_everything.sh` are removed.
+* **The reference hangs its hands vertically.** In `ref_hands.png` (the retail editor
+  at 3x) both hands point straight down while the forearm above them runs down and
+  slightly in: the wrist bends, the hand does not follow the arm. The clip leaves a
+  22-29 degree wrist bend instead, which is what swung the hand out. New
+  `align_hands_to_arms` rotates the wrist by exactly the angle that carries the
+  middle finger onto straight down - measured from the pose, not chosen. After it the
+  hand axis is (-0.011, -0.969, 0.246), **14.3 degrees from vertical**, almost all of
+  that in depth.
+* **The 45/180 roll turned the hand the wrong way** (out to the side, away from the
+  leg) and the 12/18/12 curl folded it into a fist. Both default to zero.
+
+| knob | before (9bb4014) | now | why |
 | --- | --- | --- | --- |
-| `AVATAR_WRIST_ROLL` | 70 (really 1.2°) | **45** | stacks the fingers without rolling them off the palm |
-| `AVATAR_FOREARM_ROLL` | new knob, 0 | **180** | the turn that actually reads as a palm; a wrist roll alone lifts the hand sideways |
-| `AVATAR_FINGER_ADDUCT` | 1.8 | **0.8** | 1.8 was tuned against the dead roll and over-closes once the hand is turned |
-| `AVATAR_FINGER_CURL` | 12,18,12 | 12,18,12 | unchanged |
+| `AVATAR_WRIST_ROLL` | 45 | **0** | the vertical hang is measured, not rolled |
+| `AVATAR_FOREARM_ROLL` | 180 | **0** | 180 pointed the hand outward |
+| `AVATAR_FINGER_CURL` | 12,18,12 | **0,0,0** | the reference's fingers are straight |
+| `AVATAR_FINGER_ADDUCT` | 0.8 | **1.4** | closes the clip's 31 degree finger fan |
+| `AVATAR_ALIGN_HAND` | none | **1** | new: hang measured vertical |
 
-The 2D body plates were rebaked with it (`pack_plates/10_body`, `pack_plates_female/
-10_body`) together with the body mask and the skin mask it cuts (`19,394 px`, 97.2%
-of the silhouette). **The 3D turntables have not been rebaked**: all 1,179 sets still
-carry the old hand, so 2D and 3D show different hands until `rebake_everything.sh
-turntables` is run.
+Rebaked with it: both body plates (`pack_plates/10_body`, `pack_plates_female/
+10_body`), the body mask, and the skin mask cut from it (`19,576 px`, 97.2% of the
+20,132 px silhouette). The hand in the new male plate is 10x54 px and hangs vertically;
+before it was rotated ~45 degrees outward. `artifacts/hand-final-vs-retail.png` puts
+it beside the reference.
 
-Curl is 8/10/6 degrees per phalanx. `AVATAR_FINGER_POSE=0` shows the clip's own
-hand for comparison; `AVATAR_FINGER_CURL`, `AVATAR_FINGER_ADDUCT`, `AVATAR_FINGER_SIGN`
-and `AVATAR_WRIST_ROLL` override the numbers. `show_hand.py` draws one hand from
-eight angles against the bind pose, and `probe_hand.py` prints joint and knuckle
-angles.
+**This is not yet a pixel-for-pixel clone, and the mesh is why.** The pack ships one
+body mesh per gender (1,137 vertices `MaleBody`, 1,232 `FemaleBody`) and no second
+LOD; its fingers are short against the palm (finger bones 0.082, geometry 0.120 from
+the knuckle), and a hand is 10 px wide in a 256x384 plate, so the grooves between the
+digits stay wider than the reference's. **The 3D turntables have still not been
+rebaked**: all 1,179 sets carry the pre-fix hand until `rebake_everything.sh
+turntables` runs (~20 minutes), so 2D and 3D show different hands until then.
 
-The hand is small: 69 vertices and 100 triangles, selected by skin weight (the palm
-rides the wrist joint, not a finger). Its finger bones cover the inner two thirds of
-the geometry - bones 0.082 long, geometry 0.120 from the knuckle - so the tips ride
-rigidly on the last joint. That is the mesh, not a decode error; both packs in the
-archive carry the same 1,137-vertex `MaleBody`.
+`AVATAR_FINGER_POSE=0` shows the clip's own hand; `AVATAR_FINGER_CURL`,
+`AVATAR_FINGER_ADDUCT`, `AVATAR_FINGER_SIGN`, `AVATAR_WRIST_ROLL`,
+`AVATAR_FOREARM_ROLL` and `AVATAR_ALIGN_HAND` override the behaviour. `show_hand.py`
+draws one hand from eight angles against the bind pose, `probe_hand.py` prints joint
+and knuckle angles, and `hand_geometry.py` prints the direction, palm facing, splay
+and curl.
+
+The hand selected by skin weight (`show_hand.py`) is 267 vertices and 523 triangles
+(the palm rides the wrist joint, not a finger). Its finger bones cover the inner two
+thirds of the geometry - bones 0.082 long, geometry 0.120 from the knuckle - so the
+tips ride rigidly on the last joint. That is the mesh, not a decode error; both packs
+in the archive carry the same 1,137-vertex `MaleBody`.
 
 Also ruled out while looking: the clip's joint *scale* is not what stretched the
 hand (`AVATAR_IGNORE_SCALE=1` renders identically; the scales are 1.0).

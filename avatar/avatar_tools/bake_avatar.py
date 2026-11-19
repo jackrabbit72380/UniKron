@@ -439,33 +439,12 @@ def main():
             print("dna %s: %d bones, static pose"
                   % (os.path.basename(path), len(game["bones"])))
 
-    # The fingers, from a clip that actually poses them. The pack's own idles leave
-    # every finger near its bind rotation - 11-34 degrees and nearly all of it
-    # twist - so the hand stands open and splayed, which is not what the console
-    # shows. A game clip on the same 71-joint rig does pose them
-    # (`Idle.xnb`: fingers curl to 0.33 of their bind reach), so those joints are
-    # taken from it and every other joint stays the pack's own pose. No angle here
-    # is authored: this is one clip's data over another's.
-    finger_xnb = os.environ.get("AVATAR_FINGER_XNB")
-    if finger_xnb and not os.path.exists(finger_xnb):
-        # A checkout without the avatar games still has to bake; the hand then
-        # keeps whatever the editor's own clip does, which is the open one.
-        print("no finger clip at %s, using the clip's own hands" % finger_xnb)
-        finger_xnb = ""
-    if finger_xnb:
-        try:
-            game = xnb_avatar.read_clip(finger_xnb)
-            gposes = xnb_avatar.poses(game, frame)
-        except ValueError:
-            game = xnb_avatar.read_dna(finger_xnb)
-            gposes = xnb_avatar.dna_poses(game, 0)
-        bind = [ap.mat_trs(j["position"], j["rotation"]) for j in joints]
-        fingers = {bone[0] for bone in ap.finger_bones(joints, bind)}
-        for joint_index in fingers:
-            if joint_index < len(poses) and joint_index < len(gposes):
-                poses[joint_index] = gposes[joint_index]
-        print("fingers from %s frame %d: %d joints"
-              % (os.path.basename(finger_xnb), frame, len(fingers)))
+    # There used to be a finger graft here, taking the 30 finger joints from an
+    # avatar game's clip (`AVATAR_FINGER_XNB`, MaleIdleShiftWeight.xnb). It was
+    # removed on measurement: that clip is the same animation as the pack's own
+    # "Animation Male Idle Shifts Weight", so grafting it changed no vertex of
+    # the plate by more than a rounding step (0 of 98,304 pixels differ with the
+    # wrist roll off). The hand is the editor's own, posed in avatar_pose.py.
 
     lines = []
     written = 0
