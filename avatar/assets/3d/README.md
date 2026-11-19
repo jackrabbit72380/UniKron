@@ -107,19 +107,20 @@ gender, named by the item's slug. Both packs were re-measured after the last ful
 rebake rather than counted from a run log:
 
 ```
-turntable/         466 dirs   462 expected from the pack   4 dirs with a second slug
-turntable_female/  470 dirs   470 expected                  0
-frames on disk     5,710      0 under 1 KB, 0 zero-length
-frames per set     932 x 6, 1 x 18, 3 x 20
+turntable/           564 dirs   466 pack items + 98 decal sets, + 20 stock frames
+turntable_female/    568 dirs   470 pack items + 98 decal sets, + 20 stock frames
+frames in the trees  6,886      0 under 1 KB, 0 zero-length
+frames per set       1,128 x 6, 1 x 18, 3 x 20
 ```
 
-The four male extras are the hand-drawn sets `hair_bun_red` (18 frames),
-`hair_long_blond`, `hair_short_brown` and `hair_spiky_black` (20 frames each) -
-they are not pack slugs at all, and they are the only sets in either directory that
-are not 6 frames. To re-measure, list the expected slugs the way the baker selects
-them (category, gender tag, mesh or decal, `BASE_ASSETS` and the nose exclusion)
-and diff that set against `os.listdir()` of each output directory; every expected
-slug had `frame_00.png`.
+The 98 decal sets per tree are the brows, eye shadows and mouths covered in the
+next section. Four sets in `turntable/` are not pack slugs at all - the hand-drawn
+`hair_bun_red` (18 frames), `hair_long_blond`, `hair_short_brown` and
+`hair_spiky_black` (20 frames each) - and they are the only sets in either tree
+that are not 6 frames. To re-measure, list the expected slugs the way the baker
+selects them (category, gender tag, mesh or decal, `BASE_ASSETS` and the nose
+exclusion) and diff that set against `os.listdir()` of each output directory;
+every expected slug had `frame_00.png`.
 
 An earlier note in this folder put the remaining work at 1,243 sets in total with
 426 still on the old hand pose. That was a count of run-log arithmetic, not of the
@@ -133,12 +134,12 @@ and 1,243 was never a set count for either gender.
 faces the camera. Measured from the tree:
 
 ```
-sets                983        466 turntable/<stem> + 470 turntable_female/<stem>
+sets                1,179      564 turntable/<stem> + 568 turntable_female/<stem>
                                + 40 drawn shirts/pants/shoes + 2 stock roots
                                (turntable, turntable_female) + 5 at assets/3d
                                (its own 20-frame set and four hair sets)
-frames              6,290
-sets by frame count 932 x 6        item bakes (bake_pack_turntables.bake_one)
+frames              7,466
+sets by frame count 1,128 x 6      item bakes (bake_pack_turntables.bake_one)
                     40 x 12        the drawn per-item sets (bake_turntable via bake_items)
                     1 x 18         turntable/hair_bun_red
                     10 x 20        whole-body turntables and the stock sets
@@ -196,3 +197,39 @@ Measured after the change: `animated=true yaw=6/12 pose=4/10
 variant=turntable/jacket-with-sweater indexed=true`. `set.json` is written by the
 baker (`--metadata-only=1` rewrites just that file, so the 120 existing frames did
 not need re-rendering).
+
+## Brows, eye shadows and mouths: the 196 items with no 3D set (2026-11-19)
+
+`research/run_art_sweep.py` drives every item the strip offers through the real
+editor - both bodies, both drawers, 1,380 item checks - and asks two questions per
+check: does every layer the 2D stage resolves exist on disk, and does the 3D stage
+have a set for the pick's *own* variant (before its fallback)? The 2D answer was
+clean from the first run. The 3D answer was not: 196 pack items had no set at all -
+all 27 eyebrows, all 45 eye shadows and all 26 mouths, for each body - so picking
+one in 3D fell back to the stock turntable and the change was invisible.
+
+Both causes were bugs in the baker, not missing data:
+
+* **The eye-shadow sheets were looked up in the wrong folder.** `bake_one` built
+  the sheet path as `pack_art/50_hair/<slug>.png`, which is where the sheets lived
+  before `asset_catalog.refine_category` split them into `17_eye-shadow`. Every set
+  in the pass failed with `no decal sheet for Eye shadow 001` - 45 of them, three
+  times over. The lookup now tries the item's own category folder first and
+  `50_hair` second.
+* **`--gender` did not choose the output tree.** `--outdir` defaulted to
+  `turntable/` for both bodies, so the female runs wrote into the male tree: 98
+  male sets were replaced with female-body renders. The default now follows
+  `--gender` (`turntable_female/` for female), and the 98 polluted folders were
+  deleted and rebaked rather than left in place.
+
+Measured after the rebake: 27/27 brows, 45/45 eye shadows, 26/26 mouths in both
+trees; `StageIndex.qml` 1,179 sets / 7,466 frames; the sweep reports **0 missing
+art** and 0 pack items without a set. The frames were also looked at: a brow set
+flattens the brow line, a mouth set paints the lips, an eye-shadow set darkens the
+lids, and `turntable_female/eye-shadow-012` renders the female body with the female
+stock hairstyle, so the two trees are not the same pictures.
+
+What the sweep still reports is the port's own fallback art, not retail content: 72
+drawn items (8 body plates, 1 drawn pair of jeans, 35 drawn hairstyles, 16 drawn
+hats, 12 drawn glasses) have no set of their own, so in 3D those picks show the
+stock turntable.

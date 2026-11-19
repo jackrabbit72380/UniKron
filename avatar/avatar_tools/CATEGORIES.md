@@ -140,3 +140,25 @@ Measured with `research/rail_check.py`, which now counts the editor's failed loa
 across a whole check cycle: **43 before, 1 after**. The one left is the 3D stage
 probing a set the index does not name (`turntable/skinny-fit-jeans/frame_00.png`,
 an item with no bake - how the stage falls back, see `assets/3d/README.md`).
+
+## Art coverage: every offered item resolves
+
+`research/run_art_sweep.py` drives every item the strip offers through the real
+editor - both bodies, both drawers - and checks the two things the indexes cannot:
+that every layer the 2D stage resolves exists on disk (plate, tint mask, skin mask,
+iris, mouth mask), and that the 3D stage has a set for the pick's own variant,
+before its fallback to the stock turntable.
+
+```
+item checks          1,380    (1,204 pack-mode, 176 drawn-mode)
+missing art          0
+pack items with no 3D set   0   (196 before; see assets/3d/README.md)
+drawn items with no 3D set  72  port fallback art, not retail content
+```
+
+The 196 pack items the sweep found without a set were fixed by rebaking them: the
+eye-shadow pass had been looking for its sheets in `pack_art/50_hair` rather than
+`pack_art/17_eye-shadow`, and the baker's `--gender` never chose the output tree,
+so a female run overwrote male sets. Both are fixed in
+`bake_pack_turntables.py`, the 98 polluted sets were rebaked, and brows, eye
+shadows and mouths now have 27/45/26 sets in each tree.

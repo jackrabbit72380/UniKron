@@ -140,12 +140,21 @@ def bake_one(pack, clip, description, asset, kind, folder, frames, width, height
     face = bt.load_face(obj)
     if kind == "decal" and face is not None and "uvsets" in face:
         decal_set, is_mask = DECAL_SETS[category]
-        # The sheet stays in the folder the pack files it in (50_hair for the eye
-        # shadows), so only the UV-set key is remapped.
-        sheet_category = "50_hair" if category == "eye-shadow" else category
-        sheet = os.path.join(ART, sheet_category, slug(asset) + ".png")
-        if not os.path.exists(sheet):
-            return "no decal sheet for " + asset
+        # The sheet lives in the pack's own category folder (pack_art/<category>).
+        # The eye shadows were filed under 50_hair before
+        # asset_catalog.refine_category split them into 17_eye-shadow, so both
+        # layouts are tried rather than one assumed - looking only in 50_hair was
+        # why a whole eye-shadow pass failed with "no decal sheet".
+        sheet_folders = ("50_hair", "17_eye-shadow") if category in ("eye-shadow", "17_eye-shadow") \
+            else (category,)
+        sheet = None
+        for sheet_category in sheet_folders:
+            candidate = os.path.join(ART, sheet_category, slug(asset) + ".png")
+            if os.path.exists(candidate):
+                sheet = candidate
+                break
+        if sheet is None:
+            return "no decal sheet for %s in %s" % (asset, ", ".join(sheet_folders))
         spec = {"uvs": face["uvsets"][:, :, decal_set, :], "texture": read_rgba(sheet)}
         if is_mask:
             tint = HAIR_TINT
@@ -184,7 +193,12 @@ def main():
     ap.add_argument("description")
     ap.add_argument("--categories", default="40_shirt,20_pants,30_shoes")
     ap.add_argument("--catalog", default=os.path.join(HERE, "asset_catalog.json"))
-    ap.add_argument("--outdir", default=os.path.join(os.path.dirname(HERE), "assets", "3d", "turntable"))
+    # The default follows --gender: the two bodies have separate trees, and a
+    # female run writing into turntable/ silently replaced male sets with female
+    # renders (98 of them, measured - see assets/3d/README.md).
+    ap.add_argument("--outdir", default=None,
+                    help="default: assets/3d/turntable for male, "
+                         "assets/3d/turntable_female for female")
     ap.add_argument("--frames", type=int, default=6)
     ap.add_argument("--width", type=int, default=192)
     ap.add_argument("--height", type=int, default=288)
@@ -207,6 +221,10 @@ def main():
                     help="pose on this body and only bake items the pack marks "
                          "for it (pack_genders.json; 'both' items are baked twice)")
     args = ap.parse_args()
+    if not args.outdir:
+        args.outdir = os.path.join(os.path.dirname(HERE), "assets", "3d",
+                                  "turntable_female" if args.gender == "female"
+                                  else "turntable")
 
     wanted = set(args.categories.split(","))
     with open(args.catalog, "r", encoding="utf-8") as fh:
