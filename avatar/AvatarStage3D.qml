@@ -31,7 +31,16 @@ Item {
     // What to play when variant has no frames at all - normally "turntable/",
     // the stock set, so a missing item bake never leaves an empty stage.
     property string defaultVariant: ""
-    readonly property string folder: baseFolder + (variant !== "" ? variant + "/" : "")
+    // Set when `variant` has no frames and the stock set is shown instead. It is
+    // a flag rather than an assignment to `variant`, because assigning to a
+    // bound property from here broke the parent's `variant: root.stageVariant`
+    // binding: after one item with no baked set, the stage ignored every later
+    // item and stayed blank for the rest of the session (measured: pick
+    // `skinny-fit-jeans`, then `worn-jeans`, and `variant` never changed again).
+    property bool fellBack: false
+    onVariantChanged: if (fellBack) fellBack = false
+    readonly property string activeVariant: fellBack ? defaultVariant : variant
+    readonly property string folder: baseFolder + (activeVariant !== "" ? activeVariant + "/" : "")
     // The static turntable: one pose, frameCount angles.
     property int frameCount: 0
     property int frame: 0
@@ -87,11 +96,17 @@ Item {
     // Which baked frame looks at the camera. The two static bakes do not start at
     // the same angle, and measuring the sets themselves is the only way to know:
     //   six-frame item sets   (bake_pack_turntables.py)  frame 00 is the front
-    //   twenty-frame outfits  (bake_outfits.py)          frame 10 is the front
-    // contact sheets: research/shots/item_sheet.png, research/shots/turntable_sheet.png.
+    //   whole-body turntables (bake_turntable.py, 18+ frames)  frame 00 is the back
+    // Three sets read frame by frame on 2026-11-19:
+    //   turntable/jacket-with-sweater  6 frames  frame_00 front
+    //   turntable/hair_long_blond     20 frames  frame_00 back, frame_10 front
+    //   turntable/hair_bun_red        18 frames  frame_00 back, frame_09 front
     // "Half the frames" was wrong for the item sets, which is why the closet opened
-    // on the avatar's back once the spin was taken out.
-    readonly property int restFrame: frameCount === 20 ? 10 : 0
+    // on the avatar's back; keying on `frameCount === 20` then left the 18-frame
+    // hair set opening on the back instead. The split is the bake shape: six-frame
+    // item sets start at the front, anything longer is a whole-body turntable that
+    // starts at the back.
+    readonly property int restFrame: frameCount > 6 ? Math.floor(frameCount / 2) : 0
 
     function padded(index) {
         return (index < 10 ? "0" : "") + index
@@ -188,10 +203,13 @@ Item {
                 // bake shape (see restFrame above).
                 stage.frame = stage.restFrame
             } else if (status === Image.Error && stage.frameCount === 0
-                       && stage.variant !== stage.defaultVariant) {
+                       && !stage.fellBack && stage.defaultVariant !== "") {
                 // Nothing baked for this look: show the stock set rather than
-                // an empty stage.
-                stage.variant = stage.defaultVariant
+                // an empty stage. Deferred, because changing the folder from
+                // inside this handler assigned the probe's own `source` while Qt
+                // was still delivering that source's status change, and the new
+                // load was dropped - the probe stayed on the missing file.
+                Qt.callLater(function () { stage.fellBack = true })
             }
         }
     }

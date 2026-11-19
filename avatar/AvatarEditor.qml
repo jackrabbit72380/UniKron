@@ -508,6 +508,13 @@ Item {
                 }
                 folderFiles = wearable
             }
+            // Nothing this avatar can wear gets no rail entry. The pack marks
+            // every dress female and the coats male, so 80_dress and
+            // 83_dress-formal are empty for a male avatar and 82_coat is empty
+            // for a female one: a pill that opens onto an empty strip is worse
+            // than no pill.
+            if (folderFiles.length === 0)
+                continue
             list.push({
                 id: name,
                 label: style.slotLabel(name),
@@ -517,7 +524,17 @@ Item {
             })
         }
         list.sort(function (a, b) { return a.z - b.z })
+        // Categories can drop out between genders (the dresses, the coats), so
+        // `categoryIndex` cannot be carried over as a number: read the pill the
+        // player is on *before* the list is replaced, then restore it by id and
+        // clamp only when that id is gone.
+        var keepId = currentCategory ? currentCategory.id : ""
         categories = list
+        var keepAt = keepId !== "" ? categoryIndexForId(keepId) : -1
+        if (keepAt >= 0)
+            categoryIndex = keepAt
+        else if (categoryIndex >= categories.length)
+            categoryIndex = Math.max(0, categories.length - 1)
         pruneState()
         seedOutfit()
         // A gender switch prunes the other body away, so the empty body slot has

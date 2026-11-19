@@ -68,3 +68,58 @@ combinations, each paired with a `bodyshape_*` icon.
   button plus the icon family; it is not read out of a parsed XUI structure.
 - `ClosetCostumesFemaleButton` and the bare `ClosetButton` have no icon
   recorded, because no png with a matching name exists near them.
+
+## Rail and 3D stage: three defects found by driving the component, 2026-11-19
+
+The render sweep only counts QML warnings, so all three of these passed it:
+
+**1. Empty rail pills.** The rail was built from every `PackIndex` category the
+gender filter left, empties included. The pack marks every dress female and the
+coats male, so a male avatar got `80_dress` and `83_dress-formal` pills that opened
+onto nothing, and a female avatar got an empty `82_coat`. Measured, per gender,
+counting the files that survive the `packGenders` filter:
+
+| gender | categories | empty |
+| --- | ---: | --- |
+| male | 24 before / **22 now** | `80_dress`, `83_dress-formal` |
+| female | 24 before / **23 now** | `82_coat` |
+
+`rebuildCategories` now drops a category with no wearable file, and restores the
+selected pill **by id** rather than by index, because the count differs per gender -
+the old index would have pointed at the category next door.
+
+**2. The 3D stage went blank and stayed blank.** Chosen an item with no baked set,
+the stage assigned `variant = defaultVariant` from the fake-Image probe's
+`onStatusChanged`. That is an assignment to a property the parent binds
+(`variant: root.stageVariant`), so it killed the binding: every later item was
+ignored. Measured before the fix, picking `20_pants/skinny-fit-jeans` (no baked set)
+and then `20_pants/worn-jeans` (a real six-frame set):
+
+```
+before: frames=0  available=false  variant=turntable            after both picks
+after:  frames=20 frame=10 available=true  variant=turntable    (stock fallback)
+        frames=6  frame=0  available=true  variant=turntable/worn-jeans
+```
+
+The fallback is a `fellBack` flag now (`activeVariant = fellBack ? defaultVariant :
+variant`), cleared when `variant` changes, and it is applied through `Qt.callLater`:
+assigning the folder from inside the probe's own status handler set that probe's
+`source` while Qt was delivering the change, and the new load was dropped.
+
+**3. The 18-frame sets opened on the avatar's back.** `restFrame` was
+`frameCount === 20 ? 10 : 0`, which was right for the six-frame item sets and the
+twenty-frame outfits but wrong for `turntable/hair_bun_red` (18 frames). Read frame
+by frame:
+
+| set | frames | front frame |
+| --- | ---: | ---: |
+| `turntable/jacket-with-sweater` | 6 | **00** |
+| `turntable/hair_long_blond` | 20 | **10** (frame 00 is the back) |
+| `turntable/hair_bun_red` | 18 | **09** (frame 00 is the back) |
+
+`restFrame` is now `frameCount > 6 ? frameCount / 2 : 0`, i.e. by bake shape: item
+sets start at the front, whole-body turntables start at the back.
+
+`research/rail_check.py` asserts all three, and `verify_qml_assets.py` checks that
+every name in the five generated indexes (`PackIndex`, `PackPlates`,
+`PackPlatesFemale`, `PackMasks`, `AssetIndex`, 2,242 entries) has a file behind it.
