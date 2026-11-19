@@ -344,10 +344,23 @@ Item {
     // idle already moves and sliding the whole image against a fixed shadow made
     // the avatar look like it was floating over its own feet.
 
+    // How long one frame of the turn lasts. Every bake is exactly one turn:
+    // bake_pack_turntables.py steps `yaw = pi + 2*pi*i/frames` and bake_turntable.py
+    // the same, so a six-frame item set is 60 degrees per frame and the 20-frame
+    // body turntable 18. A flat 90 ms per frame therefore spun the item sets - 1,128
+    // of the 1,179 baked sets, everything the closet shows - 3.3 times faster than
+    // the whole-body turn, and the animated set (12 yaws) had its own one-off 130.
+    // The rate kept here is the one the 20-frame turntable already ran at, 90 ms x
+    // 20 frames = 1.8 s per turn; the shorter sets get longer frames instead.
+    readonly property int turnMillis: 1800
+    readonly property int spinInterval: {
+        var steps = animated ? yawCount : frameCount
+        return steps > 1 ? Math.round(turnMillis / steps) : 0
+    }
+
     Timer {
-        // Fewer angles than the 20-frame turntable, so give each one longer.
-        interval: stage.animated ? 130 : 90
-        running: stage.available && stage.spinning
+        interval: Math.max(16, stage.spinInterval)
+        running: stage.available && stage.spinning && stage.spinInterval > 0
         repeat: true
         onTriggered: {
             if (stage.animated) {

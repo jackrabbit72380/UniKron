@@ -233,3 +233,49 @@ What the sweep still reports is the port's own fallback art, not retail content:
 drawn items (8 body plates, 1 drawn pair of jeans, 35 drawn hairstyles, 16 drawn
 hats, 12 drawn glasses) have no set of their own, so in 3D those picks show the
 stock turntable.
+
+## Every baked set, checked pixel by pixel (2026-11-19)
+
+`research/run_3d_sanity.py` asks a different question from the art sweep: not
+whether an item has a set, but whether the frames inside it are usable. Per set it
+reads the frames (every frame under eight, a stride of the 20-frame body turns),
+downscales them and measures alpha coverage, frame-to-frame difference, the
+declared front frame and frame sizes.
+
+```
+checked 1,179 set(s), 7,135 frame(s)
+short 0   blank 0   full 0   static 0   front 0   shape 0
+```
+
+So none of the 1,179 sets has a missing frame file, a frame that rendered nothing
+(coverage under 0.5 %), a frame with no transparent margin (over 98 %), a set whose
+yaw loop never moved, a front index outside the set, or frames of two sizes. The
+check was run against a deliberately broken copy as well (a blank frame and a
+repeated one) and both were reported, so a pass means something.
+
+## The turn rate did not depend on the set (fixed 2026-11-19)
+
+Both bakers sweep exactly one revolution: `bake_pack_turntables.py` steps
+`yaw = pi + 2*pi*i/frames` and `bake_turntable.py` the same. So a six-frame item
+set is 60 degrees per frame and the 20-frame body turntable 18 - and the stage
+advanced one frame per fixed 90 ms tick, which spun the item sets 3.3 times faster
+than the whole-body turn. That covers 1,128 of the 1,179 sets: everything the
+closet shows. The animated set had a third rate of its own (130 ms per yaw).
+
+`AvatarStage3D` now derives the interval from the set: one turn every 1,800 ms,
+which is the rate the 20-frame turntable already ran at (90 ms x 20), so the
+shorter sets get longer frames instead. `research/run_spin_check.py` loads both a
+six-frame and a 20-frame set, turns them and counts:
+
+| set | frames | turn |
+| --- | ---: | ---: |
+| `turntable/50-s-glasses` | 6 | **1.80 s** |
+| `hair_bun_red` | 20 | **1.78 s** |
+| same check, old fixed 90 ms | | |
+| `turntable/50-s-glasses` | 6 | 0.53 s |
+| `hair_bun_red` | 20 | 1.78 s |
+
+Note that nothing in the editor sets `spinning` - the closet turntable turns only
+while dragged, and a drag is already frame-count independent (it maps a drag across
+the stage width to one full turn). The timer is the path a host turns on, and
+`research/harness-shadow.qml` does.

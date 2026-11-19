@@ -156,6 +156,12 @@ pack items with no 3D set   0   (196 before; see assets/3d/README.md)
 drawn items with no 3D set  72  port fallback art, not retail content
 ```
 
+The 1,179 sets behind those checks are also read frame by frame -
+`research/run_3d_sanity.py`, 7,135 frames: no blank bake, no set whose turn never
+moved, no front frame outside its set, no mixed frame sizes. See
+`assets/3d/README.md`, which also records the turn rate the stage now keeps (one
+turn per 1.8 s whatever the set's frame count).
+
 The 196 pack items the sweep found without a set were fixed by rebaking them: the
 eye-shadow pass had been looking for its sheets in `pack_art/50_hair` rather than
 `pack_art/17_eye-shadow`, and the baker's `--gender` never chose the output tree,
